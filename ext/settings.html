@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Yomitan Settings</title>
+    <title>Sottaku-Yomitan Settings</title>
     <link rel="icon" type="image/png" href="/images/icon16.png" sizes="16x16">
     <link rel="icon" type="image/png" href="/images/icon19.png" sizes="19x19">
     <link rel="icon" type="image/png" href="/images/icon32.png" sizes="32x32">
@@ -25,7 +25,7 @@
     <div class="sidebar"><div class="sidebar-inner scrollbar">
         <div class="sidebar-body">
             <a href="#profile"          class="button outline-item"><span class="outline-item-left"><span class="outline-item-icon icon" data-icon="profile"></span></span><span class="outline-item-label">Profile</span></a>
-            <a href="#dictionaries"     class="button outline-item"><span class="outline-item-left"><span class="outline-item-icon icon" data-icon="book"></span><span class="outline-item-left-warning-badge no-dictionaries-enabled-warning" hidden><div class="badge warning-badge"><span class="icon" data-icon="exclamation-point-short"></span></div></span></span><span class="outline-item-label">Dictionaries</span></a>
+            <a href="#dictionaries"     class="button outline-item" hidden><span class="outline-item-left"><span class="outline-item-icon icon" data-icon="book"></span></span><span class="outline-item-label">Dictionaries</span></a>
             <a href="#general"          class="button outline-item"><span class="outline-item-left"><span class="outline-item-icon icon" data-icon="cog"></span></span><span class="outline-item-label">General</span></a>
             <a href="#sottaku"          class="button outline-item"><span class="outline-item-left"><span class="outline-item-icon icon" data-icon="lock"></span></span><span class="outline-item-label">Sottaku</span></a>
             <a href="#scanning"         class="button outline-item"><span class="outline-item-left"><span class="outline-item-icon icon" data-icon="scanning"></span></span><span class="outline-item-label">Scanning</span></a>
@@ -37,7 +37,7 @@
             <a href="#audio"            class="button outline-item"><span class="outline-item-left"><span class="outline-item-icon icon" data-icon="speaker"></span></span><span class="outline-item-label">Audio</span></a>
             <a href="#text-parsing"     class="button outline-item"><span class="outline-item-left"><span class="outline-item-icon icon" data-icon="text-parsing"></span></span><span class="outline-item-label">Text Parsing</span></a>
             <a href="#translation"      class="button outline-item advanced-only"><span class="outline-item-left"><span class="outline-item-icon icon" data-icon="translation"></span></span><span class="outline-item-label">Translation</span></a>
-            <a href="#anki"             class="button outline-item"><span class="outline-item-left"><span class="outline-item-icon icon" data-icon="note-card"></span></span><span class="outline-item-label">Anki</span></a>
+            <a href="#anki"             class="button outline-item" hidden><span class="outline-item-left"><span class="outline-item-icon icon" data-icon="note-card"></span></span><span class="outline-item-label">Anki</span></a>
             <a href="#clipboard"        class="button outline-item"><span class="outline-item-left"><span class="outline-item-icon icon" data-icon="clipboard"></span></span><span class="outline-item-label">Clipboard</span></a>
             <a href="#shortcuts"        class="button outline-item"><span class="outline-item-left"><span class="outline-item-icon icon" data-icon="keyboard"></span></span><span class="outline-item-label">Shortcuts</span></a>
             <a href="#backup"           class="button outline-item"><span class="outline-item-left"><span class="outline-item-icon icon" data-icon="backup"></span></span><span class="outline-item-label">Backup</span></a>
@@ -63,7 +63,7 @@
                     }'
                 ><span class="toggle-body"><span class="toggle-track"></span><span class="toggle-knob"></span></span></label>
             </span><span class="outline-item-label">Debug</span></label>
-            <a href="/info.html" class="button outline-item"><span class="outline-item-left"><span class="outline-item-icon icon" data-icon="question-mark"></span></span><span class="outline-item-label">About Yomitan</span></a>
+            <a href="/info.html" class="button outline-item"><span class="outline-item-left"><span class="outline-item-icon icon" data-icon="question-mark"></span></span><span class="outline-item-label">About Sottaku-Yomitan</span></a>
         </div>
     </div></div>
 </div>
@@ -71,7 +71,7 @@
 
     <span tabindex="-1" id="content-scroll-focus"></span>
 
-    <h1>Yomitan Settings</h1>
+    <h1>Sottaku-Yomitan Settings</h1>
 
     <!-- Notifications -->
     <div class="settings-group settings-group-top-margin page-loading-stalled-notification">
@@ -123,7 +123,7 @@
         <div class="settings-group">
             <div class="settings-item"><div class="settings-item-inner">
                 <div class="settings-item-left">
-                    <div class="settings-item-label">Enable Yomitan</div>
+                    <div class="settings-item-label">Enable Sottaku-Yomitan</div>
                 </div>
                 <div class="settings-item-right">
                     <label class="toggle"><input type="checkbox" data-setting="general.enable"><span class="toggle-body"><span class="toggle-track"></span><span class="toggle-knob"></span></span></label>
@@ -261,11 +261,11 @@
         </div>
 
     <!-- Dictionaries -->
-    <div class="heading-container">
+    <div class="heading-container" hidden>
         <div class="heading-container-icon"><span class="icon" data-icon="book"></span></div>
         <div class="heading-container-left"><h2 id="dictionaries"><a href="#dictionaries">Dictionaries</a> <span class="heading-sub-text no-wrap" data-modal-action="show,dictionaries">(<span id="dictionary-install-count">#</span> installed, <span id="dictionary-enabled-count">#</span> enabled)</span></h2></div>
     </div>
-    <div class="settings-group">
+    <div class="settings-group" hidden>
         <div class="settings-item settings-item-button" data-modal-action="show,dictionaries"><div class="settings-item-inner">
             <div class="settings-item-left">
                 <div class="settings-item-label">
@@ -383,7 +383,7 @@
                 </div>
             </div>
         </div>
-        <div class="settings-item advanced-only">
+        <div class="settings-item advanced-only" hidden>
             <div class="settings-item-inner">
                 <div class="settings-item-left">
                     <div class="settings-item-label">Persistent storage</div>
@@ -432,22 +432,13 @@
     <div class="settings-group">
         <div class="settings-item"><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-label">Use Sottaku online dictionaries</div>
+                <div class="settings-item-label">Sottaku integration</div>
                 <div class="settings-item-description">
-                    Route lookups, audio, and flashcard actions through your Sottaku account instead of local dictionaries.
+                    Lookups, audio, and flashcard actions always use your Sottaku account. Local dictionaries are not required.
                 </div>
             </div>
-            <div class="settings-item-right">
-                <label class="toggle"><input type="checkbox" data-setting="sottaku.enabled"
-                    data-transform='{
-                        "type": "setVisibility",
-                        "selector": "#sottaku-settings-body",
-                        "condition": {"op": "===", "value": true}
-                    }'
-                ><span class="toggle-body"><span class="toggle-track"></span><span class="toggle-knob"></span></span></label>
-            </div>
         </div></div>
-        <div id="sottaku-settings-body" hidden>
+        <div id="sottaku-settings-body">
             <div class="settings-item"><div class="settings-item-inner settings-item-inner-wrappable">
                 <div class="settings-item-left">
                     <div class="settings-item-label">API endpoint</div>
@@ -463,7 +454,7 @@
                 <div class="settings-item-left">
                     <div class="settings-item-label">Language routing</div>
                     <div class="settings-item-description">
-                        Choose how Yomitan selects the Sottaku language for lookups (Japanese and Korean are supported).
+                        Choose how Sottaku-Yomitan selects the Sottaku language for lookups (Japanese and Korean are supported).
                     </div>
                 </div>
                 <div class="settings-item-right">
@@ -475,27 +466,31 @@
                 </div>
             </div></div>
             <div class="settings-item"><div class="settings-item-inner settings-item-inner-wrappable">
-                <div class="settings-item-left">
-                    <div class="settings-item-label">Account</div>
-                    <div class="settings-item-description" id="sottaku-connection-status">Not connected</div>
-                    <div class="settings-item-description">
-                        Use username/password or sign in with Google in your browser, then pull the session into the extension.
-                    </div>
+            <div class="settings-item-left">
+                <div class="settings-item-label">Account</div>
+                <div class="settings-item-description" id="sottaku-connection-status">Not connected</div>
+                <div class="settings-item-description">
+                    Use username/password or sign in with Google in your browser, then pull the session into the extension.
                 </div>
-                <div class="settings-item-right">
-                    <div class="input-group">
+            </div>
+            <div class="settings-item-right settings-item-button-group-container">
+                <div class="sottaku-account-panel">
+                    <div class="sottaku-input-row" id="sottaku-auth-form">
                         <input type="text" id="sottaku-username" placeholder="Username or email" autocomplete="username">
                         <input type="password" id="sottaku-password" placeholder="Password" autocomplete="current-password">
+                        <div class="settings-item-button-group">
+                            <div class="settings-item-button-group-item"><button type="button" class="button" id="sottaku-login-button">Sign in</button></div>
+                            <div class="settings-item-button-group-item"><button type="button" class="button" id="sottaku-google-button">Sign in with Google (opens sottaku.app)</button></div>
+                            <div class="settings-item-button-group-item"><button type="button" class="button" id="sottaku-sync-cookie-button" title="Re-use your signed-in browser session">Use browser session</button></div>
+                        </div>
                     </div>
-                    <div class="sottaku-auth-buttons">
-                        <button type="button" class="button" id="sottaku-login-button">Sign in</button>
-                        <button type="button" class="button" id="sottaku-google-button">Sign in with Google (opens sottaku.app)</button>
-                        <button type="button" class="button" id="sottaku-sync-cookie-button" title="Re-use your signed-in browser session">Use browser session</button>
-                        <button type="button" class="button" id="sottaku-logout-button">Sign out</button>
+                    <div class="settings-item-button-group" id="sottaku-linked-actions" hidden>
+                        <div class="settings-item-button-group-item"><button type="button" class="button" id="sottaku-logout-button">Unlink account</button></div>
                     </div>
                 </div>
-            </div></div>
-        </div>
+            </div>
+        </div></div>
+    </div>
     </div>
 
     <!-- Scanning -->
@@ -1700,7 +1695,7 @@
     </div>
 
     <!-- Text Parsing -->
-    <div>
+    <div hidden>
         <div class="heading-container">
             <div class="heading-container-icon"><span class="icon" data-icon="text-parsing"></span></div>
             <div class="heading-container-left"><h2 id="text-parsing"><a href="#text-parsing">Text Parsing</a></h2></div>

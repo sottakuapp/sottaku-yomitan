@@ -92,7 +92,7 @@
                                 "properties": {
                                     "enabled": {
                                         "type": "boolean",
-                                        "default": false
+                                        "default": true
                                     },
                                     "apiBaseUrl": {
                                         "type": "string",

@@ -626,6 +626,27 @@ a.heading-link-light {
     gap: 8px;
     margin-top: 8px;
 }
+.sottaku-account-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+}
+.sottaku-account-panel .settings-item-button-group {
+    margin-right: 0;
+}
+.sottaku-account-panel .sottaku-input-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+}
+.sottaku-account-panel input[type=text],
+.sottaku-account-panel input[type=password] {
+    min-width: 220px;
+    flex: 1 1 220px;
+}
 .settings-item-children.settings-item-children-group {
     padding: 0 0 0 calc(var(--settings-group-inner-horizontal-padding) + var(--settings-group-inner-horizontal-padding));
 }

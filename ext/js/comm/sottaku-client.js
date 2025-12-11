@@ -51,7 +51,7 @@ export class SottakuClient {
     async loginWithPassword(username, password) {
         const data = await this._request('/login', {
             method: 'POST',
-            body: {username, password},
+            body: {username, email: username, password},
             auth: false,
         });
         if (typeof data?.token === 'string') {
@@ -76,6 +76,11 @@ export class SottakuClient {
             if (sessionValue) {
                 this._authToken = sessionValue;
                 return sessionValue;
+            }
+            const bearer = await this._getCookieValue('auth_token');
+            if (bearer) {
+                this._authToken = bearer;
+                return bearer;
             }
         } catch (e) {
             throw toError(e);

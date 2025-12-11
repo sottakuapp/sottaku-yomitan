@@ -37,6 +37,10 @@ export class SottakuController {
         this._logoutButton = querySelectorNotNull(document, '#sottaku-logout-button');
         /** @type {HTMLInputElement} */
         this._apiInput = querySelectorNotNull(document, 'input[data-setting="sottaku.apiBaseUrl"]');
+        /** @type {HTMLElement} */
+        this._authForm = querySelectorNotNull(document, '#sottaku-auth-form');
+        /** @type {HTMLElement} */
+        this._linkedActions = querySelectorNotNull(document, '#sottaku-linked-actions');
     }
 
     /** */
@@ -49,6 +53,9 @@ export class SottakuController {
         this._apiInput.addEventListener('change', this._onApiUrlChanged.bind(this), false);
         const options = await this._settingsController.getOptions();
         this._onOptionsChanged({options, optionsContext: this._settingsController.getOptionsContext()});
+        if (!options.sottaku.authToken) {
+            void this._syncFromBrowserSession(true);
+        }
     }
 
     // Private
@@ -58,6 +65,11 @@ export class SottakuController {
      */
     _onOptionsChanged({options}) {
         this._options = options;
+        if (!options.sottaku.enabled) {
+            void this._settingsController.modifySettings([
+                {action: 'set', scope: 'profile', path: 'sottaku.enabled', value: true},
+            ]);
+        }
         this._client.setConfig({
             apiBaseUrl: options.sottaku.apiBaseUrl,
             authToken: options.sottaku.authToken,
@@ -80,7 +92,7 @@ export class SottakuController {
             await this._applyAuthUpdate(data?.token ?? this._client.authToken, isObjectNotArray(data?.user) ? data.user : null);
             this._setStatus('Signed in to Sottaku', false);
         } catch (e2) {
-            this._setStatus(toError(e2).message, true);
+            this._setStatus(toError(e2).message || 'Unable to sign in', true);
         } finally {
             this._busy = false;
         }
@@ -102,33 +114,7 @@ export class SottakuController {
     /** */
     async _onSyncCookieClick(e) {
         e.preventDefault();
-        if (this._busy) { return; }
-        try {
-            this._busy = true;
-            this._setStatus('Checking browser session...', false);
-            const token = await this._client.syncTokenFromCookies();
-            if (!token) {
-                this._setStatus('No api_token cookie found on sottaku.app', true);
-                return;
-            }
-            let user = null;
-            try {
-                const profile = await this._client.getProfile();
-                if (profile && typeof profile === 'object' && isObjectNotArray(profile.user)) {
-                    // @ts-expect-error Allow loose shape from API
-                    user = profile.user;
-                }
-            } catch (e2) {
-                // Best-effort; status will still update
-                this._setStatus('Session detected; unable to load profile details (continuing)', false);
-            }
-            await this._applyAuthUpdate(token, user);
-            this._setStatus('Sottaku session linked from browser login', false);
-        } catch (e3) {
-            this._setStatus(toError(e3).message, true);
-        } finally {
-            this._busy = false;
-        }
+        await this._syncFromBrowserSession(false);
     }
 
     /** */
@@ -138,8 +124,8 @@ export class SottakuController {
         try {
             this._busy = true;
             await this._settingsController.modifySettings([
-                {action: 'set', path: 'sottaku.authToken', value: ''},
-                {action: 'set', path: 'sottaku.user', value: null},
+                {action: 'set', scope: 'profile', path: 'sottaku.authToken', value: ''},
+                {action: 'set', scope: 'profile', path: 'sottaku.user', value: null},
             ]);
             this._client.setConfig({authToken: ''});
             this._setStatus('Signed out of Sottaku', false);
@@ -154,7 +140,7 @@ export class SottakuController {
     async _onApiUrlChanged() {
         const origin = this._getOriginFromApiUrl();
         await this._settingsController.modifySettings([
-            {action: 'set', path: 'sottaku.cookieDomain', value: origin},
+            {action: 'set', scope: 'profile', path: 'sottaku.cookieDomain', value: origin},
         ]);
         this._client.setConfig({cookieDomain: origin});
     }
@@ -166,10 +152,10 @@ export class SottakuController {
     async _applyAuthUpdate(token, user) {
         const origin = this._getOriginFromApiUrl();
         const updates = [
-            {action: 'set', path: 'sottaku.authToken', value: token},
-            {action: 'set', path: 'sottaku.cookieDomain', value: origin},
-            {action: 'set', path: 'sottaku.enabled', value: true},
-            {action: 'set', path: 'sottaku.user', value: user ?? null},
+            {action: 'set', scope: 'profile', path: 'sottaku.authToken', value: token},
+            {action: 'set', scope: 'profile', path: 'sottaku.cookieDomain', value: origin},
+            {action: 'set', scope: 'profile', path: 'sottaku.enabled', value: true},
+            {action: 'set', scope: 'profile', path: 'sottaku.user', value: user ?? null},
         ];
         await this._settingsController.modifySettings(updates);
         this._client.setConfig({authToken: token, cookieDomain: origin});
@@ -181,12 +167,15 @@ export class SottakuController {
         if (!options) { return; }
         const {sottaku} = options;
         const {user, authToken, enabled} = sottaku;
+        const isLinked = Boolean(enabled && authToken);
         let message = 'Not connected';
-        if (enabled && authToken) {
+        if (isLinked) {
             const name = isObjectNotArray(user) ? (user.username || user.email || '') : '';
-            message = name ? `Connected as ${name}` : 'API token stored for Sottaku';
+            message = name ? `Linked to Sottaku as ${name}` : 'Linked to Sottaku';
         }
-        this._setStatus(message, false);
+        this._authForm.hidden = isLinked;
+        this._linkedActions.hidden = !isLinked;
+        this._setStatus(message, !isLinked && !authToken);
     }
 
     /**
@@ -206,6 +195,39 @@ export class SottakuController {
             return new URL(this._apiInput.value || this._client.apiBaseUrl).origin;
         } catch (e) {
             return 'https://sottaku.app';
+        }
+    }
+
+    /**
+     * @param {boolean} silent
+     */
+    async _syncFromBrowserSession(silent) {
+        if (this._busy) { return; }
+        const origin = this._getOriginFromApiUrl();
+        try {
+            this._busy = true;
+            if (!silent) { this._setStatus('Checking browser session...', false); }
+            const token = await this._client.syncTokenFromCookies();
+            if (!token) {
+                if (!silent) { this._setStatus('No api_token cookie found on sottaku.app', true); }
+                return;
+            }
+            let user = null;
+            try {
+                const profile = await this._client.getProfile();
+                if (profile && typeof profile === 'object' && isObjectNotArray(profile.user)) {
+                    // @ts-expect-error Allow loose shape from API
+                    user = profile.user;
+                }
+            } catch (e2) {
+                if (!silent) { this._setStatus('Session detected; unable to load profile details (continuing)', false); }
+            }
+            await this._applyAuthUpdate(token, user ?? {username: '', email: '', id: 0, isPro: false, cookieDomain: origin});
+            if (!silent) { this._setStatus('Sottaku session linked from browser login', false); }
+        } catch (e3) {
+            this._setStatus(toError(e3).message, true);
+        } finally {
+            this._busy = false;
         }
     }
 

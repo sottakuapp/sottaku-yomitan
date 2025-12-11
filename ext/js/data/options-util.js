@@ -1846,7 +1846,7 @@ export class OptionsUtil {
                 current.languageMode :
                 'auto';
             profile.options.sottaku = {
-                enabled: Boolean(current?.enabled),
+                enabled: true,
                 apiBaseUrl: typeof current?.apiBaseUrl === 'string' && current.apiBaseUrl.length > 0 ? current.apiBaseUrl : 'https://sottaku.app/api/v1',
                 authToken: typeof current?.authToken === 'string' ? current.authToken : '',
                 languageMode,

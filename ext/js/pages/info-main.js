@@ -61,19 +61,17 @@ function getOperatingSystemDisplayName(os) {
  * @param {import('../comm/api.js').API} api
  */
 async function showAnkiConnectInfo(api) {
+    const ankiVersionElement = /** @type {?HTMLElement} */ (document.querySelector('#anki-connect-version'));
+    const ankiVersionContainerElement = /** @type {?HTMLElement} */ (document.querySelector('#anki-connect-version-container'));
+    const ankiVersionUnknownElement = /** @type {?HTMLElement} */ (document.querySelector('#anki-connect-version-unknown-message'));
+    if (ankiVersionElement === null || ankiVersionContainerElement === null || ankiVersionUnknownElement === null) { return; }
+
     let ankiConnectVersion = null;
     try {
         ankiConnectVersion = await api.getAnkiConnectVersion();
     } catch (e) {
         // NOP
     }
-
-    /** @type {HTMLElement} */
-    const ankiVersionElement = querySelectorNotNull(document, '#anki-connect-version');
-    /** @type {HTMLElement} */
-    const ankiVersionContainerElement = querySelectorNotNull(document, '#anki-connect-version-container');
-    /** @type {HTMLElement} */
-    const ankiVersionUnknownElement = querySelectorNotNull(document, '#anki-connect-version-unknown-message');
 
     ankiVersionElement.textContent = (ankiConnectVersion !== null ? `${ankiConnectVersion}` : 'Unknown');
     ankiVersionContainerElement.dataset.hasError = `${ankiConnectVersion === null}`;
@@ -84,6 +82,12 @@ async function showAnkiConnectInfo(api) {
  * @param {import('../comm/api.js').API} api
  */
 async function showDictionaryInfo(api) {
+    /** @type {?HTMLElement} */
+    const noneElement = document.querySelector('#installed-dictionaries-none');
+    /** @type {?HTMLElement} */
+    const container = document.querySelector('#installed-dictionaries');
+    if (noneElement === null || container === null) { return; }
+
     let dictionaryInfos;
     try {
         dictionaryInfos = await api.getDictionaryInfo();
@@ -106,12 +110,7 @@ async function showDictionaryInfo(api) {
         fragment.appendChild(node);
     }
 
-    /** @type {HTMLElement} */
-    const noneElement = querySelectorNotNull(document, '#installed-dictionaries-none');
-
     noneElement.hidden = (dictionaryInfos.length > 0);
-    /** @type {HTMLElement} */
-    const container = querySelectorNotNull(document, '#installed-dictionaries');
     container.textContent = '';
     container.appendChild(fragment);
 }

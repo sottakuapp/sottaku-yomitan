@@ -1000,6 +1000,7 @@ export class DictionaryController {
      */
     _updateDictionariesEnabledWarnings(options) {
         const {dictionaries} = options;
+        const sottakuEnabled = options.sottaku?.enabled === true;
         let enabledDictionaryCountValid = 0;
         let enabledDictionaryCount = 0;
         const dictionaryCount = dictionaries.length;
@@ -1019,8 +1020,8 @@ export class DictionaryController {
             }
         }
 
-        const hasEnabledDictionary = (enabledDictionaryCountValid > 0);
-        if (hasEnabledDictionary) {
+        const hasEnabledDictionary = sottakuEnabled || (enabledDictionaryCountValid > 0);
+        if (hasEnabledDictionary || sottakuEnabled) {
             this._settingsController.trigger('dictionaryEnabled', {});
         }
         for (const node of /** @type {NodeListOf<HTMLElement>} */ (this._noDictionariesEnabledWarnings)) {
