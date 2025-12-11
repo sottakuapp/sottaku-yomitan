@@ -20,6 +20,7 @@ import {Frontend} from '../../app/frontend.js';
 import {ThemeController} from '../../app/theme-controller.js';
 import {createApiMap, invokeApiMapHandler} from '../../core/api-map.js';
 import {EventListenerCollection} from '../../core/event-listener-collection.js';
+import {isObjectNotArray} from '../../core/object-utilities.js';
 import {querySelectorNotNull} from '../../dom/query-selector.js';
 import {TextSourceRange} from '../../dom/text-source-range.js';
 import {isComposing} from '../../language/ime-utilities.js';
@@ -62,6 +63,10 @@ export class PopupPreviewFrame {
         this._languageSummaries = [];
         /** @type {ThemeController} */
         this._themeController = new ThemeController(document.documentElement);
+        /** @type {boolean} */
+        this._isSottakuLinked = false;
+        /** @type {?HTMLElement} */
+        this._debugNode = document.getElementById('popup-preview-debug');
 
         /* eslint-disable @stylistic/no-multi-spaces */
         /** @type {import('popup-preview-frame').ApiMap} */
@@ -94,6 +99,8 @@ export class PopupPreviewFrame {
 
         this._languageSummaries = await this._application.api.getLanguageSummaries();
         const options = await this._application.api.optionsGet({current: true});
+        this._updateSottakuLinkedFlag(options);
+        this._applyFrontendEnabledState();
         void this._setLanguageExampleText({language: options.general.language});
 
         // Overwrite frontend
@@ -112,7 +119,7 @@ export class PopupPreviewFrame {
         });
         this._frontend.setOptionsContextOverride(this._optionsContext);
         await this._frontend.prepare();
-        this._frontend.setDisabledOverride(true);
+        this._applyFrontendEnabledState();
         this._frontend.canClearSelection = false;
         const {popup} = this._frontend;
         if (popup !== null) {
@@ -131,6 +138,8 @@ export class PopupPreviewFrame {
      */
     async _apiOptionsGet(optionsContext) {
         const options = await /** @type {(optionsContext: import('settings').OptionsContext) => Promise<import('settings').ProfileOptions>} */ (this._apiOptionsGetOld)(optionsContext);
+        this._updateSottakuLinkedFlag(options);
+        this._applyFrontendEnabledState();
         options.general.enable = true;
         options.general.debugInfo = false;
         options.general.popupWidth = 400;
@@ -225,6 +234,12 @@ export class PopupPreviewFrame {
         const node = document.querySelector('.placeholder-info');
         if (node === null) { return; }
 
+        node.textContent = (
+            this._isSottakuLinked ?
+            'Popup preview is loading… If it does not appear, try reloading this page.' :
+            'Link your Sottaku account in the Sottaku section of settings to see the popup preview.'
+        );
+
         node.classList.toggle('placeholder-info-visible', visible);
     }
 
@@ -248,10 +263,13 @@ export class PopupPreviewFrame {
     async _updateOptionsContext(details) {
         const {optionsContext} = details;
         this._optionsContext = optionsContext;
+        await this._refreshSottakuLinked(optionsContext);
+        this._applyFrontendEnabledState();
         if (this._frontend === null) { return; }
         this._frontend.setOptionsContextOverride(optionsContext);
         await this._frontend.updateOptions();
         await this._updateSearch();
+        await this._updateSearch(); // Run twice to ensure preview refreshes after linkage changes
     }
 
     /** @type {import('popup-preview-frame').ApiHandler<'setLanguageExampleText'>} */
@@ -293,6 +311,14 @@ export class PopupPreviewFrame {
     /** */
     async _updateSearch() {
         if (this._exampleText === null) { return; }
+        if (!this._isSottakuLinked) {
+            await this._refreshSottakuLinked();
+        }
+        if (!this._isSottakuLinked) {
+            this._popupShown = false;
+            this._setInfoVisible(true);
+            return;
+        }
 
         const textNode = this._exampleText.firstChild;
         if (textNode === null) { return; }
@@ -314,9 +340,64 @@ export class PopupPreviewFrame {
         if (popup !== null && popup.isVisibleSync()) {
             this._popupShown = true;
         }
+        this._updateDebugStatus({
+            popupVisible: this._popupShown && popup !== null && popup.isVisibleSync(),
+        });
 
         this._setInfoVisible(!this._popupShown);
 
         this._themeController.updateTheme();
+    }
+
+    /**
+     * @param {import('settings').ProfileOptions} options
+     */
+    _updateSottakuLinkedFlag(options) {
+        const sottaku = options?.sottaku;
+        this._isSottakuLinked = Boolean(
+            sottaku?.enabled &&
+            (sottaku.authToken || sottaku.user),
+        );
+        const hasUser = isObjectNotArray(sottaku?.user);
+        const hasToken = typeof sottaku?.authToken === 'string' && sottaku.authToken.length > 0;
+        this._updateDebugStatus({
+            linked: this._isSottakuLinked,
+            hasToken,
+            hasUser,
+        });
+        this._applyFrontendEnabledState();
+    }
+
+    /**
+     * @param {?import('settings').OptionsContext} [optionsContext]
+     */
+    async _refreshSottakuLinked(optionsContext = this._optionsContext ?? {current: true}) {
+        const options = await this._application.api.optionsGet(optionsContext);
+        this._updateSottakuLinkedFlag(options);
+    }
+
+    /** */
+    _applyFrontendEnabledState() {
+        if (this._frontend === null) { return; }
+        this._frontend.setDisabledOverride(!this._isSottakuLinked);
+    }
+
+    /**
+     * @param {{linked: boolean, hasToken: boolean, hasUser: boolean}} status
+     */
+    _updateDebugStatus({linked, hasToken, hasUser}) {
+        if (this._debugNode === null) { return; }
+        const optionsContext = this._optionsContext ?? {current: true};
+        const contextSummary = optionsContext.current ?
+            'current profile' :
+            `index=${typeof optionsContext.index === 'number' ? optionsContext.index : 'auto'}`;
+        const lines = [
+            `Linked: ${linked ? 'yes' : 'no'}`,
+            `Token: ${hasToken ? 'present' : 'missing'}`,
+            `User: ${hasUser ? 'present' : 'missing'}`,
+            `Context: ${contextSummary}`,
+        ];
+        this._debugNode.textContent = lines.join(' | ');
+        this._debugNode.hidden = false;
     }
 }

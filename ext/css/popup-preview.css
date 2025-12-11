@@ -143,6 +143,12 @@ body {
     transition: opacity var(--animation-duration) linear 0s, visibility 0s linear 0s;
 }
 
+.preview-debug {
+    margin-top: 0.5em;
+    color: #808080;
+    font-size: 12px;
+}
+
 .theme-button {
     display: inline-block;
     margin-left: 0.5em;

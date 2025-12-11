@@ -312,7 +312,7 @@ const languageDescriptors = [
         iso: 'ja',
         iso639_3: 'jpn',
         name: 'Japanese',
-        exampleText: '読め',
+        exampleText: '啐啄',
         isTextLookupWorthy: isStringPartiallyJapanese,
         textPreprocessors: {
             convertHalfWidthCharacters,

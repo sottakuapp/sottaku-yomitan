@@ -140,6 +140,7 @@ export class SottakuController {
                 {action: 'set', scope: 'profile', path: 'sottaku.user', value: null},
             ]);
             this._client.setConfig({authToken: ''});
+            await this._settingsController.refresh();
             this._setStatus('Signed out of Sottaku', false);
         } catch (e2) {
             this._setStatus(toError(e2).message, true);
@@ -171,6 +172,7 @@ export class SottakuController {
         ];
         await this._settingsController.modifySettings(updates);
         this._client.setConfig({authToken: token, cookieDomain: origin});
+        await this._settingsController.refresh();
     }
 
     /** */
