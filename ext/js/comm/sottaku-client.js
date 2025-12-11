@@ -101,6 +101,32 @@ export class SottakuClient {
     }
 
     /**
+     * Optimized scan endpoint tailored for Yomitan lookups.
+     * @param {string} text
+     * @param {string} language
+     * @param {number} [maxResults]
+     * @returns {Promise<{results: any[], originalTextLength: number}>}
+     */
+    async scan(text, language, maxResults) {
+        /** @type {Record<string, any>} */
+        const body = {text, language};
+        if (Number.isFinite(maxResults)) {
+            body.maxResults = maxResults;
+        }
+        const data = await this._request('/dictionary/yomitan-scan', {
+            method: 'POST',
+            body,
+        });
+        const results = Array.isArray(data?.results) ? data.results : [];
+        const originalTextLength = (
+            typeof data?.original_text_length === 'number' && Number.isFinite(data.original_text_length)
+                ? data.original_text_length
+                : Math.max(0, (text || '').length)
+        );
+        return {results, originalTextLength};
+    }
+
+    /**
      * @param {number[]} wordIds
      * @param {string} language
      * @returns {Promise<Record<string, unknown>>}

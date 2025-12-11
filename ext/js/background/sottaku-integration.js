@@ -46,30 +46,27 @@ export class SottakuIntegration {
         }
 
         const apiOrigin = this._getOrigin(sottaku.apiBaseUrl);
-        const searchResultsRaw = await this._client.search(query, language);
-        const searchResults = Array.isArray(searchResultsRaw) ? searchResultsRaw : [];
-        const limitedResults = searchResults.slice(0, Math.max(1, general.maxResults || 32));
-        const ids = limitedResults
-            .map((item) => Number.parseInt(item?.id, 10))
-            .filter((id) => Number.isFinite(id) && id > 0);
-
-        /** @type {Record<string, unknown>} */
-        let wordInfo = {};
-        if (ids.length > 0) {
-            wordInfo = await this._client.getWordInfoBatch(ids, language);
-        }
+        const {results: scanResultsRaw, originalTextLength: scanOriginalLength} = await this._client.scan(
+            query,
+            language,
+            general.maxResults || 32,
+        );
+        const scanResults = Array.isArray(scanResultsRaw) ? scanResultsRaw : [];
+        const limitedResults = scanResults.slice(0, Math.max(1, general.maxResults || 32));
 
         /** @type {import('dictionary').TermDictionaryEntry[]} */
         const dictionaryEntries = [];
         for (let i = 0; i < limitedResults.length; ++i) {
             const result = limitedResults[i];
-            const id = Number.parseInt(result?.id, 10);
-            const info = wordInfo[`${id}`] ?? wordInfo[id];
-            const entry = this._createEntry(result, info, language, apiOrigin, query, i);
+            const entry = this._createEntry(result, result, language, apiOrigin, query, i);
             dictionaryEntries.push(entry);
         }
 
-        const originalTextLength = query.length || (dictionaryEntries[0]?.headwords?.[0]?.term?.length ?? 0);
+        const originalTextLength =
+            scanOriginalLength ||
+            dictionaryEntries[0]?.sottaku?.matchLength ||
+            dictionaryEntries[0]?.headwords?.[0]?.term?.length ||
+            query.length;
         return {dictionaryEntries, originalTextLength};
     }
 
@@ -88,6 +85,7 @@ export class SottakuIntegration {
         const questionId = Number.parseInt(normalizedResult.id ?? normalizedInfo.id, 10);
         const term = (normalizedInfo.kanji_representation || normalizedResult.kanji_representation || query || '').toString();
         const reading = (normalizedInfo.reading || normalizedResult.reading || term).toString();
+        const matchLength = Number.parseInt(normalizedResult.match_length ?? normalizedInfo.match_length, 10);
         const translation = (
             normalizedInfo.word_translation ||
             normalizedInfo.english_word ||
@@ -101,6 +99,7 @@ export class SottakuIntegration {
             (normalizedInfo.cloze_sentence || '').toString();
         const sentenceTranslation = (normalizedInfo.english_sentence || '').toString();
         const usageNotes = (normalizedInfo.usage_notes || '').toString();
+        const hasDefinition = Boolean(normalizedResult.has_definition ?? normalizedInfo.has_definition ?? translation || sentence);
 
         /** @type {import('dictionary').TermHeadword[]} */
         const headwords = [
@@ -152,6 +151,8 @@ export class SottakuIntegration {
                 word: audioWord,
                 sentence: audioSentence,
             },
+            matchLength: Number.isFinite(matchLength) ? matchLength : null,
+            hasDefinition,
             translation,
             sentence,
             sentenceTranslation,
