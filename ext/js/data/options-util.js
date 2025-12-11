@@ -586,6 +586,7 @@ export class OptionsUtil {
             this._updateVersion72,
             this._updateVersion73,
             this._updateVersion74,
+            this._updateVersion75,
         ];
         /* eslint-enable @typescript-eslint/unbound-method */
         if (typeof targetVersion === 'number' && targetVersion < result.length) {
@@ -1829,6 +1830,31 @@ export class OptionsUtil {
      */
     async _updateVersion74(options) {
         await this._applyAnkiFieldTemplatesPatch(options, '/data/templates/anki-field-templates-upgrade-v74.handlebars');
+    }
+
+    /**
+     *  - Added sottaku integration defaults
+     *  @type {import('options-util').UpdateFunction}
+     */
+    async _updateVersion75(options) {
+        for (const profile of options.profiles) {
+            const current = profile.options.sottaku;
+            const preferredLanguages = Array.isArray(current?.preferredLanguages) && current.preferredLanguages.length > 0 ?
+                current.preferredLanguages :
+                ['ja', 'ko'];
+            const languageMode = (current?.languageMode === 'ja' || current?.languageMode === 'ko' || current?.languageMode === 'auto') ?
+                current.languageMode :
+                'auto';
+            profile.options.sottaku = {
+                enabled: Boolean(current?.enabled),
+                apiBaseUrl: typeof current?.apiBaseUrl === 'string' && current.apiBaseUrl.length > 0 ? current.apiBaseUrl : 'https://sottaku.app/api/v1',
+                authToken: typeof current?.authToken === 'string' ? current.authToken : '',
+                languageMode,
+                preferredLanguages,
+                user: (typeof current?.user === 'object' || current?.user === null) ? (current?.user ?? null) : null,
+                cookieDomain: typeof current?.cookieDomain === 'string' && current.cookieDomain.length > 0 ? current.cookieDomain : 'https://sottaku.app',
+            };
+        }
     }
 
     /**

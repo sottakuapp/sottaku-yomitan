@@ -64,6 +64,7 @@
                         "type": "object",
                         "required": [
                             "general",
+                            "sottaku",
                             "popupWindow",
                             "audio",
                             "scanning",
@@ -77,6 +78,80 @@
                             "accessibility"
                         ],
                         "properties": {
+                            "sottaku": {
+                                "type": "object",
+                                "required": [
+                                    "enabled",
+                                    "apiBaseUrl",
+                                    "authToken",
+                                    "languageMode",
+                                    "preferredLanguages",
+                                    "user",
+                                    "cookieDomain"
+                                ],
+                                "properties": {
+                                    "enabled": {
+                                        "type": "boolean",
+                                        "default": false
+                                    },
+                                    "apiBaseUrl": {
+                                        "type": "string",
+                                        "default": "https://sottaku.app/api/v1"
+                                    },
+                                    "authToken": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "languageMode": {
+                                        "type": "string",
+                                        "enum": ["auto", "ja", "ko"],
+                                        "default": "auto"
+                                    },
+                                    "preferredLanguages": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "default": ["ja", "ko"]
+                                    },
+                                    "user": {
+                                        "anyOf": [
+                                            {
+                                                "type": "object",
+                                                "required": [
+                                                    "id",
+                                                    "username",
+                                                    "email",
+                                                    "isPro"
+                                                ],
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "username": {
+                                                        "type": ["string", "null"]
+                                                    },
+                                                    "email": {
+                                                        "type": ["string", "null"]
+                                                    },
+                                                    "isPro": {
+                                                        "type": "boolean",
+                                                        "default": false
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "null"
+                                            }
+                                        ],
+                                        "default": null
+                                    },
+                                    "cookieDomain": {
+                                        "type": "string",
+                                        "default": "https://sottaku.app"
+                                    }
+                                }
+                            },
                             "general": {
                                 "type": "object",
                                 "required": [

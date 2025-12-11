@@ -620,6 +620,12 @@ a.heading-link-light {
     padding: 0em var(--settings-group-inner-horizontal-padding-half) var(--settings-group-inner-vertical-padding) var(--settings-group-inner-horizontal-padding);
     margin-top: 0;
 }
+.sottaku-auth-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
 .settings-item-children.settings-item-children-group {
     padding: 0 0 0 calc(var(--settings-group-inner-horizontal-padding) + var(--settings-group-inner-horizontal-padding));
 }

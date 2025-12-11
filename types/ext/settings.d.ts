@@ -91,6 +91,7 @@ export type ProfileCondition = {
 
 export type ProfileOptions = {
     general: GeneralOptions;
+    sottaku: SottakuOptions;
     popupWindow: PopupWindowOptions;
     audio: AudioOptions;
     scanning: ScanningOptions;
@@ -154,6 +155,23 @@ export type GeneralOptions = {
     stickySearchHeader: boolean;
     enableYomitanApi: boolean;
     yomitanApiAllowCssSanitizationBypass: boolean;
+};
+
+export type SottakuOptions = {
+    enabled: boolean;
+    apiBaseUrl: string;
+    authToken: string;
+    languageMode: 'auto' | 'ja' | 'ko';
+    preferredLanguages: string[];
+    user: SottakuUser | null;
+    cookieDomain: string;
+};
+
+export type SottakuUser = {
+    id: number;
+    username: string | null;
+    email: string | null;
+    isPro: boolean;
 };
 
 export type PopupWindowOptions = {

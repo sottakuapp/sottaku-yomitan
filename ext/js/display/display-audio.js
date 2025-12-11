@@ -17,6 +17,7 @@
  */
 
 import {EventListenerCollection} from '../core/event-listener-collection.js';
+import {SottakuClient} from '../comm/sottaku-client.js';
 import {PopupMenu} from '../dom/popup-menu.js';
 import {querySelectorNotNull} from '../dom/query-selector.js';
 import {getRequiredAudioSourceList} from '../media/audio-downloader.js';
@@ -55,6 +56,8 @@ export class DisplayAudio {
         this._openMenus = new Set();
         /** @type {import('display-audio').AudioSource[]} */
         this._audioSources = [];
+        /** @type {?SottakuClient} */
+        this._sottakuClient = null;
         /** @type {Map<import('settings').AudioSourceType, string>} */
         this._audioSourceTypeNames = new Map([
             ['jpod101', 'JapanesePod101'],
@@ -424,6 +427,39 @@ export class DisplayAudio {
 
         const buttons = this._getAudioPlayButtons(dictionaryEntryIndex, headwordIndex);
 
+        const sottakuAudioUrl = await this._getSottakuAudioUrl(headword);
+        if (sottakuAudioUrl !== null) {
+            const progressIndicatorVisible = this._display.progressIndicatorVisible;
+            const overrideToken = progressIndicatorVisible.setOverride(true);
+            try {
+                const audio = await this._audioSystem.createAudio(sottakuAudioUrl, 'custom');
+                if (audio !== null) {
+                    this.stopAudio();
+                    const title = 'From Sottaku';
+                    const potentialAvailableAudioCount = 1;
+                    for (const button of buttons) {
+                        const titleDefault = button.dataset.titleDefault || '';
+                        button.title = `${titleDefault}\n${title}`;
+                        this._updateAudioPlayButtonBadge(button, potentialAvailableAudioCount);
+                    }
+                    audio.currentTime = 0;
+                    audio.volume = this._playbackVolume;
+                    const playPromise = audio.play();
+                    this._audioPlaying = audio;
+                    if (typeof playPromise !== 'undefined') {
+                        try {
+                            await playPromise;
+                        } catch (e) {
+                            // NOP
+                        }
+                    }
+                    return {audio, source: null, subIndex: 0, valid: true};
+                }
+            } finally {
+                progressIndicatorVisible.clearOverride(overrideToken);
+            }
+        }
+
         const {term, reading} = headword;
 
         const progressIndicatorVisible = this._display.progressIndicatorVisible;
@@ -707,6 +743,57 @@ export class DisplayAudio {
         if (headwordIndex < 0 || headwordIndex >= headwords.length) { return null; }
 
         return headwords[headwordIndex];
+    }
+
+    /**
+     * @param {?import('dictionary').TermHeadword} headword
+     * @returns {Promise<string|null>}
+     */
+    async _getSottakuAudioUrl(headword) {
+        if (!headword || typeof headword !== 'object') { return null; }
+        const metadata = /** @type {any} */ (headword).sottaku;
+        const options = this._display.getOptions();
+        if (!metadata || !options || !options.sottaku?.enabled) { return null; }
+        const {authToken, apiBaseUrl, cookieDomain} = options.sottaku;
+        if (!authToken) { return null; }
+        const existingAudio = metadata.audio || {};
+        const existingUrl = existingAudio.word || existingAudio.sentence;
+        if (existingUrl) { return existingUrl; }
+        if (!metadata.questionId) { return null; }
+        if (this._sottakuClient === null) {
+            this._sottakuClient = new SottakuClient({apiBaseUrl, authToken, cookieDomain});
+        } else {
+            this._sottakuClient.setConfig({apiBaseUrl, authToken, cookieDomain});
+        }
+        try {
+            const info = await this._sottakuClient.getWordInfo(metadata.questionId, metadata.language || options.general.language);
+            if (info && typeof info === 'object') {
+                const word = this._resolveSottakuAudioUrl(info.word_audio_file, apiBaseUrl);
+                const sentence = this._resolveSottakuAudioUrl(info.sentence_audio_file, apiBaseUrl);
+                metadata.audio = {
+                    word: word || metadata.audio?.word || null,
+                    sentence: sentence || metadata.audio?.sentence || null,
+                };
+                return metadata.audio.word || metadata.audio.sentence || null;
+            }
+        } catch (e) {
+            return null;
+        }
+        return null;
+    }
+
+    /**
+     * @param {unknown} value
+     * @param {string} base
+     * @returns {?string}
+     */
+    _resolveSottakuAudioUrl(value, base) {
+        if (!value) { return null; }
+        try {
+            return new URL(value.toString(), base).href;
+        } catch (e) {
+            return null;
+        }
     }
 
     /**

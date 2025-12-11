@@ -44,6 +44,7 @@ import {ClipboardReaderProxy, DictionaryDatabaseProxy, OffscreenProxy, Translato
 import {createSchema, normalizeContext} from './profile-conditions-util.js';
 import {RequestBuilder} from './request-builder.js';
 import {injectStylesheet} from './script-manager.js';
+import {SottakuIntegration} from './sottaku-integration.js';
 
 /**
  * This class controls the core logic of the extension, including API calls
@@ -107,6 +108,8 @@ export class Backend {
         this._optionsUtil = new OptionsUtil();
         /** @type {AccessibilityController} */
         this._accessibilityController = new AccessibilityController();
+        /** @type {SottakuIntegration} */
+        this._sottakuIntegration = new SottakuIntegration();
 
         /** @type {?number} */
         this._searchPopupTabId = null;
@@ -549,6 +552,12 @@ export class Backend {
     /** @type {import('api').ApiHandler<'termsFind'>} */
     async _onApiTermsFind({text, details, optionsContext}) {
         const options = this._getProfileOptions(optionsContext, false);
+        if (options?.sottaku?.enabled) {
+            this._sottakuIntegration.configure(options);
+            const sottakuResult = await this._sottakuIntegration.findTerms(text);
+            sottakuResult.dictionaryEntries.splice(options.general.maxResults);
+            return sottakuResult;
+        }
         const {general: {resultOutputMode: mode, maxResults}} = options;
         const findTermsOptions = this._getTranslatorFindTermsOptions(mode, details, options);
         const {dictionaryEntries, originalTextLength} = await this._translator.findTerms(mode, text, findTermsOptions);
