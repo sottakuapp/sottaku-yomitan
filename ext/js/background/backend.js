@@ -1912,10 +1912,10 @@ export class Backend {
                 text = '!';
                 color = '#f0ad4e';
                 status = 'Some settings require additional permissions';
-            } else if (!this._isAnyDictionaryEnabled(options)) {
+            } else if (!this._isSottakuLinked(options)) {
                 text = '!';
                 color = '#f0ad4e';
-                status = 'No dictionaries installed';
+                status = 'Sottaku account not linked';
             }
         }
 
@@ -1937,13 +1937,9 @@ export class Backend {
      * @param {import('settings').ProfileOptions} options
      * @returns {boolean}
      */
-    _isAnyDictionaryEnabled(options) {
-        for (const {enabled} of options.dictionaries) {
-            if (enabled) {
-                return true;
-            }
-        }
-        return false;
+    _isSottakuLinked(options) {
+        const sottaku = options?.sottaku;
+        return Boolean(sottaku?.enabled && sottaku.authToken);
     }
 
     /**

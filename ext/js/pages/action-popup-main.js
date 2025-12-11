@@ -323,29 +323,14 @@ class DisplayController {
     /**
      * @param {import('settings').ProfileOptions} options
      */
-    async _updateDictionariesEnabledWarnings(options) {
+    _updateDictionariesEnabledWarnings(options) {
         const tooltip = document.querySelectorAll('.tooltip');
-        const dictionaries = await this._api.getDictionaryInfo();
+        const isSottakuLinked = Boolean(options?.sottaku?.enabled && options.sottaku.authToken);
+        if (isSottakuLinked) { return; }
 
-        const enabledDictionaries = new Set();
-        for (const {name, enabled} of options.dictionaries) {
-            if (enabled) {
-                enabledDictionaries.add(name);
-            }
-        }
-
-        let enabledCount = 0;
-        for (const {title} of dictionaries) {
-            if (enabledDictionaries.has(title)) {
-                ++enabledCount;
-            }
-        }
-
-        if (enabledCount === 0) {
-            for (let i = 0; i < tooltip.length; i++) {
-                tooltip[i].innerHTML = 'No dictionary enabled';
-                tooltip[i].classList.add('enable-dictionary-tooltip');
-            }
+        for (let i = 0; i < tooltip.length; i++) {
+            tooltip[i].textContent = 'Link your Sottaku account to enable lookups';
+            tooltip[i].classList.add('enable-dictionary-tooltip');
         }
     }
 
