@@ -83,8 +83,11 @@ export class DisplaySottaku {
                 container.appendChild(addButton);
             } else {
                 const requestButton = this._createButton('Request dictionary entry', false);
+                requestButton.classList.add('sottaku-request-only');
                 this._eventListeners.addEventListener(requestButton, 'click', this._wrapAsync(() => this._requestWord(entry, requestButton)));
+                // Move to the end so it aligns right when alone
                 container.appendChild(requestButton);
+                container.style.justifyContent = 'flex-end';
             }
         }
     }

@@ -21,6 +21,7 @@ import {parseJson} from '../core/json.js';
 import {isObjectNotArray} from '../core/object-utilities.js';
 import {escapeRegExp} from '../core/utilities.js';
 import {TemplatePatcher} from '../templates/template-patcher.js';
+import {normalizeSottakuLanguages} from '../language/sottaku-languages.js';
 import {JsonSchema} from './json-schema.js';
 
 // Some type safety rules are disabled for this file since it deals with upgrading an older format
@@ -587,6 +588,7 @@ export class OptionsUtil {
             this._updateVersion73,
             this._updateVersion74,
             this._updateVersion75,
+            this._updateVersion76,
         ];
         /* eslint-enable @typescript-eslint/unbound-method */
         if (typeof targetVersion === 'number' && targetVersion < result.length) {
@@ -1842,7 +1844,7 @@ export class OptionsUtil {
             const preferredLanguages = Array.isArray(current?.preferredLanguages) && current.preferredLanguages.length > 0 ?
                 current.preferredLanguages :
                 ['ja', 'ko'];
-            const languageMode = (current?.languageMode === 'ja' || current?.languageMode === 'ko' || current?.languageMode === 'auto') ?
+            const languageMode = (current?.languageMode === 'ja' || current?.languageMode === 'ko' || current?.languageMode === 'auto' || current?.languageMode === 'mixed') ?
                 current.languageMode :
                 'auto';
             profile.options.sottaku = {
@@ -1854,6 +1856,27 @@ export class OptionsUtil {
                 user: (typeof current?.user === 'object' || current?.user === null) ? (current?.user ?? null) : null,
                 cookieDomain: typeof current?.cookieDomain === 'string' && current.cookieDomain.length > 0 ? current.cookieDomain : 'https://sottaku.app',
             };
+        }
+    }
+
+    /**
+     *  - Normalize Sottaku language settings and add mixed language mode.
+     *  @type {import('options-util').UpdateFunction}
+     */
+    async _updateVersion76(options) {
+        for (const profile of options.profiles) {
+            const {sottaku, general} = profile.options;
+            const preferredLanguages = normalizeSottakuLanguages(
+                /** @type {unknown} */ (sottaku?.preferredLanguages),
+                general?.language,
+            );
+            /** @type {'auto' | 'ja' | 'ko' | 'mixed'} */
+            const languageMode = (sottaku?.languageMode === 'ja' || sottaku?.languageMode === 'ko' || sottaku?.languageMode === 'auto' || sottaku?.languageMode === 'mixed') ?
+                sottaku.languageMode :
+                'auto';
+
+            profile.options.sottaku.preferredLanguages = preferredLanguages;
+            profile.options.sottaku.languageMode = languageMode;
         }
     }
 

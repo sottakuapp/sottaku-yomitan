@@ -649,6 +649,7 @@ button.sidebar-button.sidebar-button-highlight {
     display: flex;
     flex-flow: row nowrap;
     align-items: start;
+    justify-content: flex-start;
 }
 .action-button-container {
     display: flex;
@@ -760,6 +761,9 @@ button.action-button:active:not(:disabled) {
     color: #ffffff;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
     font-weight: 600;
+}
+.note-actions-container .sottaku-request-only {
+    margin-left: auto;
 }
 .note-actions-container button.sottaku-action:hover,
 .note-actions-container button.sottaku-action:focus {

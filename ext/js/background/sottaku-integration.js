@@ -1,9 +1,17 @@
 import {SottakuClient} from '../comm/sottaku-client.js';
 import {ExtensionError} from '../core/extension-error.js';
 import {toError} from '../core/to-error.js';
+import {getSottakuLanguageFlag, normalizeSottakuLanguages} from '../language/sottaku-languages.js';
 
 const JAPANESE_CHAR_PATTERN = /[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff]/;
 const HANGUL_CHAR_PATTERN = /[\u1100-\u11ff\u3130-\u318f\uac00-\ud7af]/;
+
+/**
+ * @typedef {object} SottakuLanguageResult
+ * @property {string} language
+ * @property {import('dictionary').TermDictionaryEntry[]} entries
+ * @property {number} originalTextLength
+ */
 
 export class SottakuIntegration {
     constructor() {
@@ -40,20 +48,44 @@ export class SottakuIntegration {
             throw new ExtensionError('Sign in to Sottaku from the settings page to enable remote lookups.');
         }
 
-        const language = this._resolveLanguage(text, sottaku, general.language);
         const query = (text || '').trim();
         if (!query) {
             return {dictionaryEntries: [], originalTextLength: 0};
         }
 
+        const languages = this._resolveLanguages(text, sottaku, general.language);
+        const maxResults = Math.max(1, general.maxResults || 32);
         const apiOrigin = this._getOrigin(sottaku.apiBaseUrl);
+
+        /** @type {SottakuLanguageResult[]} */
+        const languageResults = [];
+        for (const language of languages) {
+            const languageResult = await this._fetchLanguageEntries({
+                apiOrigin,
+                language,
+                maxResults,
+                query,
+            });
+            languageResults.push(languageResult);
+        }
+
+        const dictionaryEntries = this._interleaveLanguageEntries(languageResults, maxResults);
+        const originalTextLength = this._resolveOriginalTextLength(languageResults, dictionaryEntries, query);
+        return {dictionaryEntries, originalTextLength};
+    }
+
+    /**
+     * @param {{apiOrigin: string, language: string, maxResults: number, query: string}} options
+     * @returns {Promise<SottakuLanguageResult>}
+     */
+    async _fetchLanguageEntries({apiOrigin, language, maxResults, query}) {
         let scanResultsRaw = [];
         let scanOriginalLength = 0;
         try {
             const scanResult = await this._client.scan(
                 query,
                 language,
-                general.maxResults || 32,
+                maxResults,
             );
             scanResultsRaw = scanResult.results;
             scanOriginalLength = scanResult.originalTextLength;
@@ -65,8 +97,9 @@ export class SottakuIntegration {
             }
             throw e;
         }
+
         const scanResults = Array.isArray(scanResultsRaw) ? scanResultsRaw : [];
-        const limitedResults = scanResults.slice(0, Math.max(1, general.maxResults || 32));
+        const limitedResults = scanResults.slice(0, Math.max(1, maxResults));
 
         // Batch flashcard membership for accurate button state
         const questionIds = limitedResults
@@ -82,22 +115,110 @@ export class SottakuIntegration {
         }
 
         /** @type {import('dictionary').TermDictionaryEntry[]} */
-        const dictionaryEntries = [];
+        const entries = [];
         for (let i = 0; i < limitedResults.length; ++i) {
             const result = limitedResults[i];
             if (inFlashcards.has(Number.parseInt(result?.id, 10))) {
                 result.in_flashcards = true;
             }
-            const entry = this._createEntry(result, result, language, apiOrigin, query, i);
-            dictionaryEntries.push(entry);
+            entries.push(this._createEntry(result, result, language, apiOrigin, query, i));
         }
 
-        const originalTextLength =
-            scanOriginalLength ||
-            dictionaryEntries[0]?.sottaku?.matchLength ||
-            dictionaryEntries[0]?.headwords?.[0]?.term?.length ||
-            query.length;
-        return {dictionaryEntries, originalTextLength};
+        return {
+            language,
+            entries,
+            originalTextLength: scanOriginalLength,
+        };
+    }
+
+    /**
+     * @param {SottakuLanguageResult[]} languageResults
+     * @param {number} maxResults
+     * @returns {import('dictionary').TermDictionaryEntry[]}
+     */
+    _interleaveLanguageEntries(languageResults, maxResults) {
+        /** @type {import('dictionary').TermDictionaryEntry[]} */
+        const dictionaryEntries = [];
+        let index = 0;
+        let added = true;
+        while (dictionaryEntries.length < maxResults && added) {
+            added = false;
+            for (const {entries} of languageResults) {
+                if (index < entries.length) {
+                    dictionaryEntries.push(entries[index]);
+                    added = true;
+                    if (dictionaryEntries.length >= maxResults) { break; }
+                }
+            }
+            ++index;
+        }
+        return dictionaryEntries;
+    }
+
+    /**
+     * @param {SottakuLanguageResult[]} languageResults
+     * @param {import('dictionary').TermDictionaryEntry[]} dictionaryEntries
+     * @param {string} query
+     * @returns {number}
+     */
+    _resolveOriginalTextLength(languageResults, dictionaryEntries, query) {
+        let maxLength = 0;
+        for (const {originalTextLength} of languageResults) {
+            if (typeof originalTextLength === 'number' && Number.isFinite(originalTextLength)) {
+                maxLength = Math.max(maxLength, originalTextLength);
+            }
+        }
+        if (maxLength > 0) { return maxLength; }
+
+        for (const entry of dictionaryEntries) {
+            const metadata = entry && typeof entry === 'object' ? /** @type {any} */ (entry).sottaku : null;
+            if (metadata?.matchLength) {
+                maxLength = Math.max(maxLength, metadata.matchLength);
+                continue;
+            }
+            const headwordLength = entry?.headwords?.[0]?.term?.length;
+            if (typeof headwordLength === 'number' && Number.isFinite(headwordLength)) {
+                maxLength = Math.max(maxLength, headwordLength);
+            }
+        }
+
+        if (maxLength > 0) { return maxLength; }
+        return query.length;
+    }
+
+    /**
+     * @param {string} text
+     * @param {import('settings').SottakuOptions} sottakuOptions
+     * @param {string} defaultLanguage
+     * @returns {string[]}
+     */
+    _resolveLanguages(text, sottakuOptions, defaultLanguage) {
+        const preferredLanguages = normalizeSottakuLanguages(sottakuOptions.preferredLanguages, defaultLanguage);
+        switch (sottakuOptions.languageMode) {
+            case 'ja': return ['ja'];
+            case 'ko': return ['ko'];
+            case 'mixed': return preferredLanguages;
+        }
+        const detected = this._detectLanguageFromText(text);
+        if (detected) { return [detected]; }
+        if (preferredLanguages.length > 0) { return [preferredLanguages[0]]; }
+        if (defaultLanguage) { return [defaultLanguage]; }
+        return ['ja'];
+    }
+
+    /**
+     * @param {string} text
+     * @returns {?string}
+     */
+    _detectLanguageFromText(text) {
+        const trimmed = (text || '').trim();
+        if (HANGUL_CHAR_PATTERN.test(trimmed)) {
+            return 'ko';
+        }
+        if (JAPANESE_CHAR_PATTERN.test(trimmed)) {
+            return 'ja';
+        }
+        return null;
     }
 
     /**
@@ -131,6 +252,7 @@ export class SottakuIntegration {
         const sentenceTranslation = (normalizedInfo.english_sentence || '').toString();
         const usageNotes = (normalizedInfo.usage_notes || '').toString();
         const hasDefinition = Boolean((normalizedResult.has_definition ?? normalizedInfo.has_definition ?? null) || translation || sentence);
+        const dictionaryAlias = getSottakuLanguageFlag(language);
 
         /** @type {import('dictionary').TermHeadword[]} */
         const headwords = [
@@ -160,7 +282,7 @@ export class SottakuIntegration {
                 headwordIndices: [0],
                 dictionary: 'Sottaku',
                 dictionaryIndex: 0,
-                dictionaryAlias: 'Sottaku',
+                dictionaryAlias,
                 id: Number.isFinite(questionId) ? questionId : index,
                 score: Math.max(0, 100 - index),
                 frequencyOrder: index,
@@ -190,6 +312,7 @@ export class SottakuIntegration {
             usageNotes,
             reading,
             term,
+            languageFlag: dictionaryAlias,
         };
 
         /** @type {any} */ (headwords[0]).sottaku = metadata;
@@ -202,7 +325,7 @@ export class SottakuIntegration {
             score: Math.max(0, 100 - index),
             frequencyOrder: index,
             dictionaryIndex: 0,
-            dictionaryAlias: 'Sottaku',
+            dictionaryAlias,
             sourceTermExactMatchCount: query && term && query === term ? 1 : 0,
             matchPrimaryReading: query === reading,
             maxOriginalTextLength: Math.max(query.length, term.length, reading.length),
@@ -233,34 +356,6 @@ export class SottakuIntegration {
             entries.push('No Sottaku definition available yet.');
         }
         return entries;
-    }
-
-    /**
-     * @param {string} text
-     * @param {import('settings').SottakuOptions} sottakuOptions
-     * @param {string} defaultLanguage
-     * @returns {string}
-     */
-    _resolveLanguage(text, sottakuOptions, defaultLanguage) {
-        switch (sottakuOptions.languageMode) {
-            case 'ja': return 'ja';
-            case 'ko': return 'ko';
-        }
-        const trimmed = (text || '').trim();
-        if (HANGUL_CHAR_PATTERN.test(trimmed)) {
-            return 'ko';
-        }
-        if (JAPANESE_CHAR_PATTERN.test(trimmed)) {
-            return 'ja';
-        }
-        const preferred = Array.isArray(sottakuOptions.preferredLanguages) ? sottakuOptions.preferredLanguages : [];
-        if (preferred.includes(defaultLanguage)) {
-            return defaultLanguage;
-        }
-        if (preferred.length > 0) {
-            return preferred[0];
-        }
-        return defaultLanguage || 'ja';
     }
 
     /**

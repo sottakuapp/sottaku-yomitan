@@ -6,6 +6,7 @@ import {isObjectNotArray} from '../../core/object-utilities.js';
 import {toError} from '../../core/to-error.js';
 import {SottakuClient} from '../../comm/sottaku-client.js';
 import {querySelectorNotNull} from '../../dom/query-selector.js';
+import {getSottakuLanguageFlag, getSottakuLanguageName, normalizeSottakuLanguages, SOTTAKU_SUPPORTED_LANGUAGES} from '../../language/sottaku-languages.js';
 
 export class SottakuController {
     /**
@@ -41,6 +42,12 @@ export class SottakuController {
         this._authForm = querySelectorNotNull(document, '#sottaku-auth-form');
         /** @type {HTMLElement} */
         this._linkedActions = querySelectorNotNull(document, '#sottaku-linked-actions');
+        /** @type {HTMLElement} */
+        this._languageList = querySelectorNotNull(document, '#sottaku-language-list');
+        /** @type {HTMLSelectElement} */
+        this._languageAddSelect = querySelectorNotNull(document, '#sottaku-language-add-select');
+        /** @type {HTMLButtonElement} */
+        this._languageAddButton = querySelectorNotNull(document, '#sottaku-language-add-button');
     }
 
     /** */
@@ -51,6 +58,7 @@ export class SottakuController {
         this._syncCookieButton.addEventListener('click', this._onSyncCookieClick.bind(this), false);
         this._logoutButton.addEventListener('click', this._onLogoutClick.bind(this), false);
         this._apiInput.addEventListener('change', this._onApiUrlChanged.bind(this), false);
+        this._languageAddButton.addEventListener('click', this._onLanguageAdd.bind(this), false);
         const options = await this._settingsController.getOptions();
         this._onOptionsChanged({options, optionsContext: this._settingsController.getOptionsContext()});
         if (!options.sottaku.authToken) {
@@ -76,6 +84,7 @@ export class SottakuController {
             cookieDomain: options.sottaku.cookieDomain,
         });
         this._updateStatus();
+        this._renderLanguageList();
     }
 
     /** */
@@ -185,6 +194,125 @@ export class SottakuController {
     _setStatus(text, isError) {
         this._statusNode.textContent = text;
         this._statusNode.classList.toggle('danger-text', !!isError);
+    }
+
+    /** */
+    _renderLanguageList() {
+        if (!this._options) { return; }
+        const preferred = normalizeSottakuLanguages(this._options.sottaku.preferredLanguages, this._options.general.language);
+        this._languageList.textContent = '';
+        const total = preferred.length;
+        for (let i = 0; i < total; ++i) {
+            this._languageList.appendChild(this._createLanguageRow(preferred[i], i, total));
+        }
+        this._refreshLanguageAddOptions(preferred);
+    }
+
+    /**
+     * @param {string} language
+     * @param {number} index
+     * @param {number} total
+     * @returns {HTMLElement}
+     */
+    _createLanguageRow(language, index, total) {
+        const node = /** @type {HTMLElement} */ (this._settingsController.instantiateTemplate('sottaku-language-row'));
+        querySelectorNotNull(node, '.sottaku-language-flag').textContent = getSottakuLanguageFlag(language);
+        querySelectorNotNull(node, '.sottaku-language-name').textContent = this._getLanguageName(language);
+        querySelectorNotNull(node, '.sottaku-language-index').textContent = `${index + 1}`;
+
+        /** @type {HTMLButtonElement} */
+        const moveUpButton = querySelectorNotNull(node, '.sottaku-language-move-up');
+        moveUpButton.disabled = index === 0;
+        moveUpButton.addEventListener('click', () => { void this._moveLanguage(index, -1); }, false);
+
+        /** @type {HTMLButtonElement} */
+        const moveDownButton = querySelectorNotNull(node, '.sottaku-language-move-down');
+        moveDownButton.disabled = index >= total - 1;
+        moveDownButton.addEventListener('click', () => { void this._moveLanguage(index, 1); }, false);
+
+        /** @type {HTMLButtonElement} */
+        const removeButton = querySelectorNotNull(node, '.sottaku-language-remove');
+        removeButton.disabled = total <= 1;
+        removeButton.addEventListener('click', () => { void this._removeLanguage(index); }, false);
+
+        return node;
+    }
+
+    /**
+     * @param {string[]} selectedLanguages
+     */
+    _refreshLanguageAddOptions(selectedLanguages) {
+        const selected = new Set(selectedLanguages);
+        this._languageAddSelect.textContent = '';
+        const available = SOTTAKU_SUPPORTED_LANGUAGES.filter((language) => !selected.has(language));
+        for (const language of available) {
+            const option = document.createElement('option');
+            option.value = language;
+            option.textContent = `${getSottakuLanguageFlag(language)} ${this._getLanguageName(language)}`;
+            this._languageAddSelect.appendChild(option);
+        }
+        if (available.length > 0) {
+            this._languageAddSelect.selectedIndex = 0;
+        }
+        this._languageAddSelect.disabled = available.length === 0;
+        this._languageAddButton.disabled = available.length === 0;
+    }
+
+    /** @param {Event} e */
+    _onLanguageAdd(e) {
+        e.preventDefault();
+        if (!this._options || this._languageAddSelect.disabled) { return; }
+        const language = this._languageAddSelect.value;
+        if (!language) { return; }
+        const preferred = normalizeSottakuLanguages(this._options.sottaku.preferredLanguages, this._options.general.language);
+        if (preferred.includes(language)) { return; }
+        preferred.push(language);
+        void this._updatePreferredLanguages(preferred);
+    }
+
+    /**
+     * @param {number} index
+     * @param {number} delta
+     */
+    async _moveLanguage(index, delta) {
+        if (!this._options) { return; }
+        const preferred = normalizeSottakuLanguages(this._options.sottaku.preferredLanguages, this._options.general.language);
+        const newIndex = index + delta;
+        if (newIndex < 0 || newIndex >= preferred.length) { return; }
+        const [language] = preferred.splice(index, 1);
+        preferred.splice(newIndex, 0, language);
+        await this._updatePreferredLanguages(preferred);
+    }
+
+    /**
+     * @param {number} index
+     */
+    async _removeLanguage(index) {
+        if (!this._options) { return; }
+        const preferred = normalizeSottakuLanguages(this._options.sottaku.preferredLanguages, this._options.general.language);
+        if (index < 0 || index >= preferred.length) { return; }
+        preferred.splice(index, 1);
+        await this._updatePreferredLanguages(preferred);
+    }
+
+    /**
+     * @param {string[]} languages
+     */
+    async _updatePreferredLanguages(languages) {
+        if (!this._options) { return; }
+        const normalized = normalizeSottakuLanguages(languages, this._options.general.language);
+        await this._settingsController.modifySettings([
+            {action: 'set', scope: 'profile', path: 'sottaku.preferredLanguages', value: normalized},
+        ]);
+    }
+
+    /**
+     * @param {string} language
+     * @returns {string}
+     */
+    _getLanguageName(language) {
+        const name = getSottakuLanguageName(language);
+        return name || language;
     }
 
     /**

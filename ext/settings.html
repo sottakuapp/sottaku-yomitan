@@ -460,9 +460,29 @@
                 <div class="settings-item-right">
                     <select id="sottaku-language-mode" data-setting="sottaku.languageMode">
                         <option value="auto">Auto (detect per search)</option>
+                        <option value="mixed">Mixed (show preferred languages)</option>
                         <option value="ja">Japanese</option>
                         <option value="ko">Korean</option>
                     </select>
+                </div>
+            </div></div>
+            <div class="settings-item"><div class="settings-item-inner settings-item-inner-wrappable">
+                <div class="settings-item-left">
+                    <div class="settings-item-label">Language order</div>
+                    <div class="settings-item-description">
+                        Choose which Sottaku languages appear in the popup and their order (used for mixed mode and fallbacks).
+                    </div>
+                </div>
+                <div class="settings-item-right settings-item-right-stack">
+                    <div class="sottaku-language-editor">
+                        <div class="sottaku-language-panel">
+                            <div class="sottaku-language-list" id="sottaku-language-list"></div>
+                            <div class="sottaku-language-add-row">
+                                <select id="sottaku-language-add-select" class="sottaku-language-add-select"></select>
+                                <button type="button" class="button sottaku-language-add-button" id="sottaku-language-add-button">Add</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div></div>
             <div class="settings-item"><div class="settings-item-inner settings-item-inner-wrappable">

@@ -647,6 +647,87 @@ a.heading-link-light {
     min-width: 220px;
     flex: 1 1 220px;
 }
+.settings-item-right.settings-item-right-stack {
+    max-height: none;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-direction: column;
+}
+.sottaku-language-editor {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 440px;
+}
+.sottaku-language-panel {
+    display: flex;
+    flex-direction: column;
+    border: var(--thin-border-size) solid var(--separator-color2);
+    border-radius: var(--settings-group-border-radius);
+    background: var(--background-color-light);
+    overflow: hidden;
+}
+.sottaku-language-list {
+    display: flex;
+    flex-direction: column;
+}
+.sottaku-language-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 10px;
+    padding: 0.55em 0.75em;
+}
+.sottaku-language-row:not(:last-child) {
+    border-bottom: var(--thin-border-size) solid var(--separator-color2);
+}
+.sottaku-language-index {
+    width: 1.5em;
+    text-align: center;
+    color: var(--text-color-light2);
+    font-variant-numeric: tabular-nums;
+}
+.sottaku-language-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.35em 0.65em;
+    border-radius: 999px;
+    border: var(--thin-border-size) solid var(--separator-color2);
+    background: var(--input-background-color);
+    font-weight: 600;
+}
+.sottaku-language-flag {
+    font-size: 1.1em;
+    line-height: 1;
+}
+.sottaku-language-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+.sottaku-language-actions .icon-button {
+    --button-background-color: transparent;
+    --button-border-color: transparent;
+}
+.sottaku-language-add-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    padding: 0.55em 0.75em;
+    border-top: var(--thin-border-size) solid var(--separator-color2);
+    background: var(--background-color-light);
+}
+.sottaku-language-add-select {
+    min-width: 180px;
+    flex: 1 1 180px;
+}
+.sottaku-language-add-button {
+    flex: 0 0 auto;
+}
 .settings-item-children.settings-item-children-group {
     padding: 0 0 0 calc(var(--settings-group-inner-horizontal-padding) + var(--settings-group-inner-horizontal-padding));
 }
