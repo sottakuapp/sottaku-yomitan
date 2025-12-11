@@ -46,11 +46,23 @@ export class SottakuIntegration {
         }
 
         const apiOrigin = this._getOrigin(sottaku.apiBaseUrl);
-        const {results: scanResultsRaw, originalTextLength: scanOriginalLength} = await this._client.scan(
-            query,
-            language,
-            general.maxResults || 32,
-        );
+        let scanResultsRaw = [];
+        let scanOriginalLength = 0;
+        try {
+            const scanResult = await this._client.scan(
+                query,
+                language,
+                general.maxResults || 32,
+            );
+            scanResultsRaw = scanResult.results;
+            scanOriginalLength = scanResult.originalTextLength;
+        } catch (e) {
+            const message = toError(e).message || '';
+            if (message.toLowerCase().includes('402')) {
+                throw new ExtensionError('Upgrade required: https://sottaku.app/upgrade');
+            }
+            throw e;
+        }
         const scanResults = Array.isArray(scanResultsRaw) ? scanResultsRaw : [];
         const limitedResults = scanResults.slice(0, Math.max(1, general.maxResults || 32));
 
