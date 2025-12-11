@@ -21,6 +21,8 @@ export class SottakuController {
         this._options = null;
         /** @type {boolean} */
         this._busy = false;
+        /** @type {string[]} */
+        this._preferredLanguages = [];
 
         /** @type {HTMLElement} */
         this._statusNode = querySelectorNotNull(document, '#sottaku-connection-status');
@@ -73,6 +75,7 @@ export class SottakuController {
      */
     _onOptionsChanged({options}) {
         this._options = options;
+        this._preferredLanguages = normalizeSottakuLanguages(options.sottaku.preferredLanguages, options.general.language);
         if (!options.sottaku.enabled) {
             void this._settingsController.modifySettings([
                 {action: 'set', scope: 'profile', path: 'sottaku.enabled', value: true},
@@ -199,7 +202,7 @@ export class SottakuController {
     /** */
     _renderLanguageList() {
         if (!this._options) { return; }
-        const preferred = normalizeSottakuLanguages(this._options.sottaku.preferredLanguages, this._options.general.language);
+        const preferred = this._preferredLanguages;
         this._languageList.textContent = '';
         const total = preferred.length;
         for (let i = 0; i < total; ++i) {
@@ -264,9 +267,8 @@ export class SottakuController {
         if (!this._options || this._languageAddSelect.disabled) { return; }
         const language = this._languageAddSelect.value;
         if (!language) { return; }
-        const preferred = normalizeSottakuLanguages(this._options.sottaku.preferredLanguages, this._options.general.language);
-        if (preferred.includes(language)) { return; }
-        preferred.push(language);
+        if (this._preferredLanguages.includes(language)) { return; }
+        const preferred = [...this._preferredLanguages, language];
         void this._updatePreferredLanguages(preferred);
     }
 
@@ -276,7 +278,7 @@ export class SottakuController {
      */
     async _moveLanguage(index, delta) {
         if (!this._options) { return; }
-        const preferred = normalizeSottakuLanguages(this._options.sottaku.preferredLanguages, this._options.general.language);
+        const preferred = [...this._preferredLanguages];
         const newIndex = index + delta;
         if (newIndex < 0 || newIndex >= preferred.length) { return; }
         const [language] = preferred.splice(index, 1);
@@ -289,7 +291,7 @@ export class SottakuController {
      */
     async _removeLanguage(index) {
         if (!this._options) { return; }
-        const preferred = normalizeSottakuLanguages(this._options.sottaku.preferredLanguages, this._options.general.language);
+        const preferred = [...this._preferredLanguages];
         if (index < 0 || index >= preferred.length) { return; }
         preferred.splice(index, 1);
         await this._updatePreferredLanguages(preferred);
@@ -301,9 +303,17 @@ export class SottakuController {
     async _updatePreferredLanguages(languages) {
         if (!this._options) { return; }
         const normalized = normalizeSottakuLanguages(languages, this._options.general.language);
-        await this._settingsController.modifySettings([
-            {action: 'set', scope: 'profile', path: 'sottaku.preferredLanguages', value: normalized},
-        ]);
+        this._preferredLanguages = normalized;
+        this._renderLanguageList();
+        try {
+            await this._settingsController.modifySettings([
+                {action: 'set', scope: 'profile', path: 'sottaku.preferredLanguages', value: normalized},
+            ]);
+        } catch (e) {
+            this._setStatus(toError(e).message, true);
+            const options = await this._settingsController.getOptions();
+            this._onOptionsChanged({options, optionsContext: this._settingsController.getOptionsContext()});
+        }
     }
 
     /**
