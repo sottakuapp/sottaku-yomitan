@@ -689,10 +689,11 @@ button.action-button {
     cursor: pointer;
     display: block;
     opacity: 1;
-    border: 0;
-    margin: 0;
-    padding: var(--action-button-padding);
-    background: transparent;
+    border: 1px solid var(--popup-text-color);
+    border-radius: 6px;
+    margin: 0 4px;
+    padding: calc(var(--action-button-padding) * 1.25) calc(var(--action-button-padding) * 2);
+    background: color-mix(in srgb, var(--popup-background-color) 80%, var(--popup-text-color) 20%);
     font-size: inherit;
     box-shadow: none;
     position: relative;
@@ -702,7 +703,9 @@ button.action-button {
         visibility 0s linear 0s,
         filter var(--animation-duration) linear,
         -webkit-filter var(--animation-duration) linear,
-        background-color var(--animation-duration) linear;
+        background-color var(--animation-duration) linear,
+        border-color var(--animation-duration) linear,
+        color var(--animation-duration) linear;
 }
 button.action-button[hidden] {
     display: block;
@@ -730,15 +733,18 @@ button.action-button:disabled:not([hidden]) {
 }
 button.action-button:hover,
 button.action-button:focus {
-    background-color: transparent;
+    background: color-mix(in srgb, var(--popup-background-color) 65%, var(--popup-text-color) 35%);
+    border-color: var(--accent-color);
     box-shadow: none;
+    color: var(--popup-text-color);
 }
 button.action-button:focus-visible {
-    background-color: var(--action-button-hover-color);
+    background-color: color-mix(in srgb, var(--popup-background-color) 60%, var(--accent-color) 40%);
     box-shadow: none;
+    border-color: var(--accent-color);
 }
 button.action-button:active:not(:disabled) {
-    background-color: var(--action-button-active-color);
+    background-color: color-mix(in srgb, var(--popup-background-color) 55%, var(--accent-color) 45%);
     box-shadow: none;
 }
 

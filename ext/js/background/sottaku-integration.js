@@ -1,5 +1,6 @@
 import {SottakuClient} from '../comm/sottaku-client.js';
 import {ExtensionError} from '../core/extension-error.js';
+import {toError} from '../core/to-error.js';
 
 const JAPANESE_CHAR_PATTERN = /[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff]/;
 const HANGUL_CHAR_PATTERN = /[\u1100-\u11ff\u3130-\u318f\uac00-\ud7af]/;
@@ -58,7 +59,8 @@ export class SottakuIntegration {
             scanOriginalLength = scanResult.originalTextLength;
         } catch (e) {
             const message = toError(e).message || '';
-            if (message.toLowerCase().includes('402')) {
+            const lowered = message.toLowerCase();
+            if (lowered.includes('402') || lowered.includes('pro subscription') || lowered.includes('upgrade')) {
                 throw new ExtensionError('Upgrade required: https://sottaku.app/upgrade');
             }
             throw e;
@@ -97,7 +99,8 @@ export class SottakuIntegration {
         const questionId = Number.parseInt(normalizedResult.id ?? normalizedInfo.id, 10);
         const term = (normalizedInfo.kanji_representation || normalizedResult.kanji_representation || query || '').toString();
         const reading = (normalizedInfo.reading || normalizedResult.reading || term).toString();
-        const matchLength = Number.parseInt(normalizedResult.match_length ?? normalizedInfo.match_length, 10);
+        const matchLengthRaw = normalizedResult.match_length ?? normalizedInfo.match_length;
+        const matchLength = Number.parseInt(matchLengthRaw, 10);
         const translation = (
             normalizedInfo.word_translation ||
             normalizedInfo.english_word ||
@@ -111,7 +114,7 @@ export class SottakuIntegration {
             (normalizedInfo.cloze_sentence || '').toString();
         const sentenceTranslation = (normalizedInfo.english_sentence || '').toString();
         const usageNotes = (normalizedInfo.usage_notes || '').toString();
-        const hasDefinition = Boolean(normalizedResult.has_definition ?? normalizedInfo.has_definition ?? translation || sentence);
+        const hasDefinition = Boolean((normalizedResult.has_definition ?? normalizedInfo.has_definition ?? null) || translation || sentence);
 
         /** @type {import('dictionary').TermHeadword[]} */
         const headwords = [

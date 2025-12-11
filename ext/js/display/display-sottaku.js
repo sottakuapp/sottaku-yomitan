@@ -70,19 +70,22 @@ export class DisplaySottaku {
             const entry = entries[i];
             const metadata = this._getMetadata(entry);
             if (!metadata || !metadata.questionId) { continue; }
+            const hasDefinition = Boolean(metadata.hasDefinition);
             const node = nodes[i];
             if (!node) { continue; }
             const container = node.querySelector('.note-actions-container');
             if (!container) { continue; }
             this._removeOldButtons(container);
 
-            const addButton = this._createButton('Save to Sottaku', metadata.inFlashcards);
-            this._eventListeners.addEventListener(addButton, 'click', this._wrapAsync(() => this._addFlashcard(entry, addButton)));
-            container.appendChild(addButton);
-
-            const requestButton = this._createButton('Request translation', false);
-            this._eventListeners.addEventListener(requestButton, 'click', this._wrapAsync(() => this._requestWord(entry, requestButton)));
-            container.appendChild(requestButton);
+            if (hasDefinition) {
+                const addButton = this._createButton('Save to Sottaku', metadata.inFlashcards);
+                this._eventListeners.addEventListener(addButton, 'click', this._wrapAsync(() => this._addFlashcard(entry, addButton)));
+                container.appendChild(addButton);
+            } else {
+                const requestButton = this._createButton('Request dictionary entry', false);
+                this._eventListeners.addEventListener(requestButton, 'click', this._wrapAsync(() => this._requestWord(entry, requestButton)));
+                container.appendChild(requestButton);
+            }
         }
     }
 
