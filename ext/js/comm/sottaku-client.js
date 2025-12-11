@@ -127,6 +127,33 @@ export class SottakuClient {
     }
 
     /**
+     * Batch check flashcard membership.
+     * @param {number[]} questionIds
+     * @param {string} language
+     * @returns {Promise<Set<number>>}
+     */
+    async getFlashcardMembership(questionIds, language) {
+        const body = {questionIds, language};
+        const data = await this._request('/flashcards/exists', {
+            method: 'POST',
+            body,
+        });
+        const included = new Set();
+        if (data && typeof data === 'object' && Array.isArray(data.exists) && Array.isArray(data.question_ids)) {
+            const {exists, question_ids: ids} = /** @type {{exists: unknown[], question_ids: unknown[]}} */ (data);
+            for (let i = 0; i < Math.min(exists.length, ids.length); ++i) {
+                if (exists[i] === true) {
+                    const id = Number.parseInt(ids[i], 10);
+                    if (Number.isFinite(id)) {
+                        included.add(id);
+                    }
+                }
+            }
+        }
+        return included;
+    }
+
+    /**
      * @param {number[]} wordIds
      * @param {string} language
      * @returns {Promise<Record<string, unknown>>}

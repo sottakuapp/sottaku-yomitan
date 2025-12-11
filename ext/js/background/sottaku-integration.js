@@ -68,10 +68,26 @@ export class SottakuIntegration {
         const scanResults = Array.isArray(scanResultsRaw) ? scanResultsRaw : [];
         const limitedResults = scanResults.slice(0, Math.max(1, general.maxResults || 32));
 
+        // Batch flashcard membership for accurate button state
+        const questionIds = limitedResults
+            .map((item) => Number.parseInt(item?.id, 10))
+            .filter((id) => Number.isFinite(id) && id > 0);
+        let inFlashcards = new Set();
+        if (questionIds.length > 0 && this._client.authToken) {
+            try {
+                inFlashcards = await this._client.getFlashcardMembership(questionIds, language);
+            } catch (e) {
+                // NOP
+            }
+        }
+
         /** @type {import('dictionary').TermDictionaryEntry[]} */
         const dictionaryEntries = [];
         for (let i = 0; i < limitedResults.length; ++i) {
             const result = limitedResults[i];
+            if (inFlashcards.has(Number.parseInt(result?.id, 10))) {
+                result.in_flashcards = true;
+            }
             const entry = this._createEntry(result, result, language, apiOrigin, query, i);
             dictionaryEntries.push(entry);
         }

@@ -22,6 +22,8 @@ import {PopupMenu} from '../dom/popup-menu.js';
 import {querySelectorNotNull} from '../dom/query-selector.js';
 import {getRequiredAudioSourceList} from '../media/audio-downloader.js';
 import {AudioSystem} from '../media/audio-system.js';
+import {log} from '../core/log.js';
+import {toError} from '../core/to-error.js';
 
 export class DisplayAudio {
     /**
@@ -428,90 +430,35 @@ export class DisplayAudio {
 
         const buttons = this._getAudioPlayButtons(dictionaryEntryIndex, headwordIndex);
 
-        const sottakuAudioUrl = await this._getSottakuAudioUrl(headword);
-        if (sottakuAudioUrl !== null) {
+        const sottakuAudio = await this._getSottakuAudioUrls(headword);
+        if (sottakuAudio.word !== null || sottakuAudio.sentence !== null) {
+            const urls = [];
+            if (sottakuAudio.word) { urls.push(sottakuAudio.word); }
+            if (sottakuAudio.sentence) { urls.push(sottakuAudio.sentence); }
+
             const progressIndicatorVisible = this._display.progressIndicatorVisible;
             const overrideToken = progressIndicatorVisible.setOverride(true);
             try {
-                const audio = await this._audioSystem.createAudio(sottakuAudioUrl, 'custom');
-                if (audio !== null) {
-                    this.stopAudio();
-                    const title = 'From Sottaku';
-                    const potentialAvailableAudioCount = 1;
-                    for (const button of buttons) {
-                        const titleDefault = button.dataset.titleDefault || '';
-                        button.title = `${titleDefault}\n${title}`;
-                        this._updateAudioPlayButtonBadge(button, potentialAvailableAudioCount);
-                    }
-                    audio.currentTime = 0;
-                    audio.volume = this._playbackVolume;
-                    const playPromise = audio.play();
-                    this._audioPlaying = audio;
-                    if (typeof playPromise !== 'undefined') {
-                        try {
-                            await playPromise;
-                        } catch (e) {
-                            // NOP
-                        }
-                    }
-                    return {audio, source: null, subIndex: 0, valid: true};
+                const title = 'From Sottaku';
+                const potentialAvailableAudioCount = urls.length;
+                for (const button of buttons) {
+                    const titleDefault = button.dataset.titleDefault || '';
+                    button.title = `${titleDefault}\n${title}`;
+                    this._updateAudioPlayButtonBadge(button, potentialAvailableAudioCount);
                 }
+
+                const played = await this._playSottakuAudioSequence(urls);
+                if (played) {
+                    return {audio: this._audioPlaying, source: null, subIndex: 0, valid: true};
+                }
+                log.log('Sottaku audio: no audio played; urls=' + urls.join(','));
             } finally {
                 progressIndicatorVisible.clearOverride(overrideToken);
             }
         }
 
-        const {term, reading} = headword;
-
-        const progressIndicatorVisible = this._display.progressIndicatorVisible;
-        const overrideToken = progressIndicatorVisible.setOverride(true);
-        try {
-            // Create audio
-            let audio;
-            let title;
-            let source = null;
-            let subIndex = 0;
-            const info = await this._createTermAudio(term, reading, sources, audioInfoListIndex);
-            const valid = (info !== null);
-            if (valid) {
-                ({audio, source, subIndex} = info);
-                const sourceIndex = sources.indexOf(source);
-                title = `From source ${1 + sourceIndex}: ${source.name}`;
-            } else {
-                audio = this._audioSystem.getFallbackAudio(this._fallbackSoundType);
-                title = 'Could not find audio';
-            }
-
-            // Stop any currently playing audio
-            this.stopAudio();
-
-            // Update details
-            const potentialAvailableAudioCount = this._getPotentialAvailableAudioCount(term, reading);
-            for (const button of buttons) {
-                const titleDefault = button.dataset.titleDefault || '';
-                button.title = `${titleDefault}\n${title}`;
-                this._updateAudioPlayButtonBadge(button, potentialAvailableAudioCount);
-            }
-
-            // Play
-            audio.currentTime = 0;
-            audio.volume = this._playbackVolume;
-
-            const playPromise = audio.play();
-            this._audioPlaying = audio;
-
-            if (typeof playPromise !== 'undefined') {
-                try {
-                    await playPromise;
-                } catch (e) {
-                    // NOP
-                }
-            }
-
-            return {audio, source, subIndex, valid};
-        } finally {
-            progressIndicatorVisible.clearOverride(overrideToken);
-        }
+        // If we reach here, no Sottaku audio was available; do nothing.
+        return {audio: null, source: null, subIndex: 0, valid: false};
     }
 
     /**
@@ -520,19 +467,8 @@ export class DisplayAudio {
      * @param {?HTMLElement} item
      */
     async _playAudioFromSource(dictionaryEntryIndex, headwordIndex, item) {
-        if (item === null) { return; }
-        const {source, subIndex} = this._getMenuItemSourceInfo(item);
-        if (source === null) { return; }
-
-        try {
-            const token = this._entriesToken;
-            const {valid} = await this._playAudio(dictionaryEntryIndex, headwordIndex, [source], subIndex);
-            if (valid && token === this._entriesToken) {
-                this._setPrimaryAudio(dictionaryEntryIndex, headwordIndex, item, null, false);
-            }
-        } catch (e) {
-            // NOP
-        }
+        // Sottaku-only audio; disable alternate source playback.
+        return;
     }
 
     /**
@@ -750,13 +686,13 @@ export class DisplayAudio {
      * @param {?import('dictionary').TermHeadword} headword
      * @returns {Promise<string|null>}
      */
-    async _getSottakuAudioUrl(headword) {
-        if (!headword || typeof headword !== 'object') { return null; }
+    async _getSottakuAudioUrls(headword) {
+        if (!headword || typeof headword !== 'object') { return {word: null, sentence: null}; }
         const metadata = /** @type {any} */ (headword).sottaku;
         const options = this._display.getOptions();
-        if (!metadata || !options || !options.sottaku?.enabled) { return null; }
+        if (!metadata || !options || !options.sottaku?.enabled) { return {word: null, sentence: null}; }
         const {authToken, apiBaseUrl, cookieDomain} = options.sottaku;
-        if (!authToken) { return null; }
+        if (!authToken) { return {word: null, sentence: null}; }
         const existingAudio = metadata.audio || {};
         const existingUrl = existingAudio.word || existingAudio.sentence;
         const language = metadata.language || options.general.language;
@@ -766,28 +702,32 @@ export class DisplayAudio {
         } else {
             this._sottakuClient.setConfig({apiBaseUrl, authToken, cookieDomain});
         }
-        const playableExisting = await this._fetchSottakuAudio(existingUrl, language);
-        if (playableExisting) {
-            metadata.audio = {word: playableExisting, sentence: null};
-            return playableExisting;
+        if (existingUrl) {
+            metadata.audio = {
+                word: existingAudio.word || null,
+                sentence: existingAudio.sentence || null,
+            };
+            log.log('Sottaku audio (cached) word=' + (metadata.audio.word || 'none') + ' sentence=' + (metadata.audio.sentence || 'none'));
+            return metadata.audio;
         }
-        if (!metadata.questionId) { return null; }
+        if (!metadata.questionId) { return {word: null, sentence: null}; }
         try {
             const info = await this._sottakuClient.getWordInfo(metadata.questionId, language);
             if (info && typeof info === 'object') {
                 const word = this._resolveSottakuAudioUrl(info.word_audio_file, apiOrigin);
                 const sentence = this._resolveSottakuAudioUrl(info.sentence_audio_file, apiOrigin);
-                const playable = await this._fetchSottakuAudio(word || sentence, language);
                 metadata.audio = {
-                    word: playable || word || metadata.audio?.word || null,
-                    sentence: playable && !word ? playable : sentence || metadata.audio?.sentence || null,
+                    word: word || metadata.audio?.word || null,
+                    sentence: sentence || metadata.audio?.sentence || null,
                 };
-                return playable || metadata.audio.word || metadata.audio.sentence || null;
+                log.log('Sottaku audio resolved word=' + (metadata.audio.word || 'none') + ' sentence=' + (metadata.audio.sentence || 'none'));
+                return metadata.audio;
             }
         } catch (e) {
-            return null;
+            log.log('Sottaku audio metadata fetch failed: ' + toError(e).message);
+            return {word: null, sentence: null};
         }
-        return null;
+        return {word: null, sentence: null};
     }
 
     /**
@@ -802,6 +742,37 @@ export class DisplayAudio {
         } catch (e) {
             return null;
         }
+    }
+
+    /**
+     * @param {string[]} urls
+     */
+    async _playSottakuAudioSequence(urls) {
+        this.stopAudio();
+        let playedSomething = false;
+        for (const url of urls) {
+            try {
+                const audio = await this._audioSystem.createAudio(url, 'custom');
+                if (audio === null) { continue; }
+                audio.currentTime = 0;
+                audio.volume = this._playbackVolume;
+                this._audioPlaying = audio;
+                try {
+                    const playPromise = audio.play();
+                    if (typeof playPromise !== 'undefined') {
+                        await playPromise;
+                    }
+                    playedSomething = true;
+                    await new Promise((resolve) => audio.addEventListener('ended', resolve, {once: true}));
+                } catch (e) {
+                    log.log('Sottaku audio play failed: ' + toError(e).message);
+                }
+            } catch (e) {
+                log.log('Sottaku audio create failed: ' + toError(e).message + ' url=' + url);
+            }
+        }
+        this._audioPlaying = null;
+        return playedSomething;
     }
 
     /**
