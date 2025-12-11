@@ -1,11 +1,12 @@
 {
     "manifest": {
         "manifest_version": 3,
-        "name": "Yomitan Popup Dictionary",
+        "name": "Sottaku-Yomitan",
+        "short_name": "Sottaku-Yomitan",
         "version": "$YOMITAN_VERSION",
-        "description": "Popup dictionary for language learning",
+        "description": "Sottaku-connected popup dictionary (Japanese and Korean)",
         "author": {
-            "email": "themoeway@googlegroups.com"
+            "email": "hello@sottaku.app"
         },
         "icons": {
             "16": "images/icon16.png",
@@ -26,7 +27,7 @@
                 "64": "images/icon64.png",
                 "128": "images/icon128.png"
             },
-            "default_title": "Yomitan",
+            "default_title": "Sottaku-Yomitan",
             "default_popup": "action-popup.html"
         },
         "background": {
@@ -34,7 +35,12 @@
             "type": "module"
         },
         "omnibox": {
-            "keyword": "yomi"
+            "keyword": "sottaku"
+        },
+        "browser_specific_settings": {
+            "gecko": {
+                "id": "sottaku-yomitan@sottaku.app"
+            }
         },
         "content_scripts": [
             {
@@ -191,7 +197,9 @@
                     "path": [
                         "author"
                     ],
-                    "value": "Yomidevs"
+                    "value": {
+                        "email": "hello@sottaku.app"
+                    }
                 },
                 {
                     "action": "delete",
@@ -252,7 +260,7 @@
                     ],
                     "value": {
                         "gecko": {
-                            "id": "{6b733b82-9261-47ee-a595-2dda294a4d08}",
+                            "id": "sottaku-yomitan@sottaku.app",
                             "strict_min_version": "115.0"
                         },
                         "gecko_android": {
@@ -305,16 +313,7 @@
                         "gecko",
                         "id"
                     ],
-                    "value": "{2d13e145-294e-4ead-9bce-b4644b203a00}"
-                },
-                {
-                    "action": "set",
-                    "path": [
-                        "browser_specific_settings",
-                        "gecko",
-                        "update_url"
-                    ],
-                    "value": "https://raw.githubusercontent.com/yomidevs/yomitan/metadata/updates.json"
+                    "value": "sottaku-yomitan-dev@sottaku.app"
                 }
             ],
             "excludeFiles": [
@@ -337,7 +336,7 @@
                     "path": [
                         "author"
                     ],
-                    "value": "Yomidevs"
+                    "value": "Sottaku"
                 },
                 {
                     "action": "remove",
