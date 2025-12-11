@@ -155,6 +155,49 @@ export class SottakuClient {
     }
 
     /**
+     * Fetch audio (with auth) and return an object URL.
+     * @param {string} path
+     * @param {string} language
+     * @returns {Promise<string|null>}
+     */
+    async fetchAudioAsObjectUrl(path, language) {
+        const url = this._resolveUrl(path);
+        /** @type {RequestInit} */
+        const options = {
+            method: 'GET',
+            credentials: 'include',
+            headers: {},
+        };
+        if (this._authToken) {
+            options.headers = {
+                ...options.headers,
+                'Authorization': `Bearer ${this._authToken}`,
+            };
+        }
+        const response = await fetch(url, options);
+        if (!response.ok) {
+            return null;
+        }
+        const blob = await response.blob();
+        return URL.createObjectURL(blob);
+    }
+
+    /**
+     * Resolve a path or URL against the current API base.
+     * @param {string} path
+     * @returns {string}
+     */
+    _resolveUrl(path) {
+        try {
+            return new URL(path).href;
+        } catch (e) {
+            const origin = this._getOrigin(this._apiBaseUrl);
+            const trimmedPath = path.startsWith('/') ? path : `/${path}`;
+            return `${origin}${trimmedPath}`;
+        }
+    }
+
+    /**
      * @param {number} questionId
      * @param {string} language
      * @returns {Promise<unknown>}

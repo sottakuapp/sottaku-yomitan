@@ -215,6 +215,7 @@ export class DisplayAudio {
      * @param {import('display').EventArgument<'contentUpdateEntry'>} details
      */
     _onContentUpdateEntry({element}) {
+        this._hideUnavailableAudioButtons(element);
         const eventListeners = this._eventListeners;
         for (const button of element.querySelectorAll('.action-button[data-action=play-audio]')) {
             eventListeners.addEventListener(button, 'click', this._onAudioPlayButtonClickBind, false);
@@ -758,23 +759,30 @@ export class DisplayAudio {
         if (!authToken) { return null; }
         const existingAudio = metadata.audio || {};
         const existingUrl = existingAudio.word || existingAudio.sentence;
-        if (existingUrl) { return existingUrl; }
-        if (!metadata.questionId) { return null; }
+        const language = metadata.language || options.general.language;
+        const apiOrigin = this._getOrigin(apiBaseUrl);
         if (this._sottakuClient === null) {
             this._sottakuClient = new SottakuClient({apiBaseUrl, authToken, cookieDomain});
         } else {
             this._sottakuClient.setConfig({apiBaseUrl, authToken, cookieDomain});
         }
+        const playableExisting = await this._fetchSottakuAudio(existingUrl, language);
+        if (playableExisting) {
+            metadata.audio = {word: playableExisting, sentence: null};
+            return playableExisting;
+        }
+        if (!metadata.questionId) { return null; }
         try {
-            const info = await this._sottakuClient.getWordInfo(metadata.questionId, metadata.language || options.general.language);
+            const info = await this._sottakuClient.getWordInfo(metadata.questionId, language);
             if (info && typeof info === 'object') {
-                const word = this._resolveSottakuAudioUrl(info.word_audio_file, apiBaseUrl);
-                const sentence = this._resolveSottakuAudioUrl(info.sentence_audio_file, apiBaseUrl);
+                const word = this._resolveSottakuAudioUrl(info.word_audio_file, apiOrigin);
+                const sentence = this._resolveSottakuAudioUrl(info.sentence_audio_file, apiOrigin);
+                const playable = await this._fetchSottakuAudio(word || sentence, language);
                 metadata.audio = {
-                    word: word || metadata.audio?.word || null,
-                    sentence: sentence || metadata.audio?.sentence || null,
+                    word: playable || word || metadata.audio?.word || null,
+                    sentence: playable && !word ? playable : sentence || metadata.audio?.sentence || null,
                 };
-                return metadata.audio.word || metadata.audio.sentence || null;
+                return playable || metadata.audio.word || metadata.audio.sentence || null;
             }
         } catch (e) {
             return null;
@@ -791,6 +799,53 @@ export class DisplayAudio {
         if (!value) { return null; }
         try {
             return new URL(value.toString(), base).href;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    /**
+     * @param {string} value
+     * @returns {string}
+     */
+    _getOrigin(value) {
+        try {
+            return new URL(value).origin;
+        } catch (e) {
+            return 'https://sottaku.app';
+        }
+    }
+
+    /**
+     * Hide audio buttons for entries without definitions.
+     * @param {Element} element
+     */
+    _hideUnavailableAudioButtons(element) {
+        const {dictionaryEntries, dictionaryEntryNodes} = this._display;
+        const index = dictionaryEntryNodes.indexOf(element);
+        if (index === -1) { return; }
+        const entry = dictionaryEntries[index];
+        if (!entry || entry.type !== 'term') { return; }
+        const headword = entry.headwords?.[0];
+        /** @type {any} */
+        const metadata = headword && typeof headword === 'object' ? /** @type {any} */ (headword).sottaku : null;
+        const hasDefinition = Boolean(metadata?.hasDefinition);
+        if (!hasDefinition) {
+            for (const button of element.querySelectorAll('.action-button[data-action=play-audio]')) {
+                button.hidden = true;
+            }
+        }
+    }
+
+    /**
+     * @param {string|null|undefined} url
+     * @param {string} language
+     * @returns {Promise<string|null>}
+     */
+    async _fetchSottakuAudio(url, language) {
+        if (!url || this._sottakuClient === null) { return null; }
+        try {
+            return await this._sottakuClient.fetchAudioAsObjectUrl(url, language);
         } catch (e) {
             return null;
         }
