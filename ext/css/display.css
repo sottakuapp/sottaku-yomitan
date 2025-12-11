@@ -689,13 +689,15 @@ button.action-button {
     cursor: pointer;
     display: block;
     opacity: 1;
-    border: 1px solid var(--popup-text-color);
+    border: 1px solid var(--accent-color);
     border-radius: 6px;
     margin: 0 4px;
     padding: calc(var(--action-button-padding) * 1.25) calc(var(--action-button-padding) * 2);
-    background: color-mix(in srgb, var(--popup-background-color) 80%, var(--popup-text-color) 20%);
+    background: #1f1f1f; /* fallback for browsers without color-mix */
+    background: color-mix(in srgb, var(--popup-background-color) 80%, var(--accent-color) 20%);
+    color: var(--popup-text-color);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
     font-size: inherit;
-    box-shadow: none;
     position: relative;
     z-index: 1;
     transition:
@@ -705,7 +707,8 @@ button.action-button {
         -webkit-filter var(--animation-duration) linear,
         background-color var(--animation-duration) linear,
         border-color var(--animation-duration) linear,
-        color var(--animation-duration) linear;
+        color var(--animation-duration) linear,
+        box-shadow var(--animation-duration) linear;
 }
 button.action-button[hidden] {
     display: block;
@@ -733,19 +736,41 @@ button.action-button:disabled:not([hidden]) {
 }
 button.action-button:hover,
 button.action-button:focus {
-    background: color-mix(in srgb, var(--popup-background-color) 65%, var(--popup-text-color) 35%);
+    background: #2a2a2a; /* fallback */
+    background: color-mix(in srgb, var(--popup-background-color) 65%, var(--accent-color) 35%);
     border-color: var(--accent-color);
-    box-shadow: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
     color: var(--popup-text-color);
 }
 button.action-button:focus-visible {
-    background-color: color-mix(in srgb, var(--popup-background-color) 60%, var(--accent-color) 40%);
-    box-shadow: none;
-    border-color: var(--accent-color);
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
 }
 button.action-button:active:not(:disabled) {
+    background-color: #1c1c1c; /* fallback */
     background-color: color-mix(in srgb, var(--popup-background-color) 55%, var(--accent-color) 45%);
-    box-shadow: none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* Force explicit button styling for Sottaku actions to avoid theme overrides */
+.note-actions-container button.sottaku-action {
+    border: 1px solid var(--accent-color);
+    border-radius: 6px;
+    background-color: var(--accent-color);
+    color: #ffffff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    font-weight: 600;
+}
+.note-actions-container button.sottaku-action:hover,
+.note-actions-container button.sottaku-action:focus {
+    background-color: color-mix(in srgb, var(--accent-color) 85%, #000000 15%);
+    border-color: var(--accent-color);
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+.note-actions-container button.sottaku-action:active:not(:disabled) {
+    background-color: color-mix(in srgb, var(--accent-color) 70%, #000000 30%);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 
 .icon[data-icon=view-note] { background-image: url('/images/view-note.svg'); }
