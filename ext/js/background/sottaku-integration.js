@@ -90,19 +90,6 @@ export class SottakuIntegration {
         const normalizedText = (text || '').trim();
         /** @type {{query: string, sourceText: string, originalTextLength: number}[]} */
         const variants = [];
-        /** @type {Set<string>} */
-        const seenQueries = new Set();
-        const pushVariant = (query, sourceText, originalTextLength = null) => {
-            const normalizedQuery = (query || '').trim();
-            if (!normalizedQuery || seenQueries.has(normalizedQuery)) { return; }
-            seenQueries.add(normalizedQuery);
-            const normalizedSourceText = (sourceText || normalizedQuery).trim();
-            variants.push({
-                query: normalizedQuery,
-                sourceText: normalizedSourceText,
-                originalTextLength,
-            });
-        };
 
         if (this._translator && typeof this._translator.getDeinflectionTextVariants === 'function') {
             const deinflectionOptions = {
@@ -117,14 +104,24 @@ export class SottakuIntegration {
                 const fullLengthVariant = translatorVariants.find(({originalText}) => (originalText || '').trim().length === normalizedText.length);
                 if (fullLengthVariant) {
                     const {originalText, deinflectedText} = fullLengthVariant;
-                    pushVariant(deinflectedText, originalText, null);
+                    variants.push({
+                        query: (deinflectedText || '').trim(),
+                        sourceText: (originalText || '').trim(),
+                        originalTextLength: null,
+                    });
                 }
             } catch (e) {
                 // Ignore translator errors and fall back to the raw query.
             }
         }
 
-        pushVariant(normalizedText, normalizedText, null);
+        if (variants.length === 0) {
+            variants.push({
+                query: normalizedText,
+                sourceText: normalizedText,
+                originalTextLength: null,
+            });
+        }
 
         return variants;
     }
