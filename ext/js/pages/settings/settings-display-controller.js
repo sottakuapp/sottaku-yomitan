@@ -50,6 +50,7 @@ export class SettingsDisplayController {
     async prepare() {
         this._themeController.prepare();
         await this._setTheme();
+        this._removeObsoleteSidebarItems();
 
         const onFabButtonClick = this._onFabButtonClick.bind(this);
         for (const fabButton of /** @type {NodeListOf<HTMLElement>} */ (document.querySelectorAll('.fab-button'))) {
@@ -114,6 +115,22 @@ export class SettingsDisplayController {
     }
 
     // Private
+
+    /** */
+    _removeObsoleteSidebarItems() {
+        const sidebarBody = document.querySelector('.sidebar-body');
+        if (!sidebarBody) { return; }
+        const obsoleteSelectors = ['a[href="#anki"]'];
+        for (const selector of obsoleteSelectors) {
+            const node = sidebarBody.querySelector(selector);
+            if (node) { node.remove(); }
+        }
+        for (const node of /** @type {NodeListOf<HTMLElement>} */ (sidebarBody.querySelectorAll('.outline-item'))) {
+            if (!node.textContent || node.textContent.trim().length === 0) {
+                node.remove();
+            }
+        }
+    }
 
     /**
      * @param {Element} element

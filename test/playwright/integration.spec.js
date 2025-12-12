@@ -43,7 +43,8 @@ test('search clipboard', async ({page, extensionId}) => {
     await expect(page.locator('#search-textbox')).toHaveValue('あ');
 });
 
-test('anki add', async ({context, page, extensionId}) => {
+// Anki UI is removed in the Sottaku build, so this flow is kept for reference only.
+test.skip('anki add', async ({context, page, extensionId}) => {
     // Mock anki routes
     /** @type {import('core').DeferredPromiseDetails<Record<string, unknown>>} */
     const addNotePromiseDetails = deferPromise();

@@ -102,11 +102,15 @@ await Application.main(true, async (application) => {
     const popupPreviewController = new PopupPreviewController(settingsController);
     popupPreviewController.prepare();
 
-    const persistentStorageController = new PersistentStorageController(application);
-    preparePromises.push(persistentStorageController.prepare());
+    const persistentStorageCheckbox = document.querySelector('#storage-persistent-checkbox');
+    const storageRefreshButton = document.querySelector('#storage-refresh');
+    if (persistentStorageCheckbox !== null && storageRefreshButton !== null) {
+        const persistentStorageController = new PersistentStorageController(application);
+        preparePromises.push(persistentStorageController.prepare());
 
-    const storageController = new StorageController(persistentStorageController);
-    storageController.prepare();
+        const storageController = new StorageController(persistentStorageController);
+        storageController.prepare();
+    }
 
     const dictionaryController = new DictionaryController(settingsController, modalController, statusFooter);
     preparePromises.push(dictionaryController.prepare());
@@ -129,14 +133,16 @@ await Application.main(true, async (application) => {
     const settingsBackup = new BackupController(settingsController, modalController);
     preparePromises.push(settingsBackup.prepare());
 
-    const ankiController = new AnkiController(settingsController, application, modalController);
-    preparePromises.push(ankiController.prepare());
+    if (document.querySelector('#anki') !== null) {
+        const ankiController = new AnkiController(settingsController, application, modalController);
+        preparePromises.push(ankiController.prepare());
 
-    const ankiDeckGeneratorController = new AnkiDeckGeneratorController(application, settingsController, modalController, ankiController);
-    preparePromises.push(ankiDeckGeneratorController.prepare());
+        const ankiDeckGeneratorController = new AnkiDeckGeneratorController(application, settingsController, modalController, ankiController);
+        preparePromises.push(ankiDeckGeneratorController.prepare());
 
-    const ankiTemplatesController = new AnkiTemplatesController(application, settingsController, modalController, ankiController);
-    preparePromises.push(ankiTemplatesController.prepare());
+        const ankiTemplatesController = new AnkiTemplatesController(application, settingsController, modalController, ankiController);
+        preparePromises.push(ankiTemplatesController.prepare());
+    }
 
     const scanInputsController = new ScanInputsController(settingsController);
     preparePromises.push(scanInputsController.prepare());
@@ -180,8 +186,15 @@ await Application.main(true, async (application) => {
     const collapsibleDictionaryController = new CollapsibleDictionaryController(settingsController);
     preparePromises.push(collapsibleDictionaryController.prepare());
 
-    const sortFrequencyDictionaryController = new SortFrequencyDictionaryController(settingsController);
-    preparePromises.push(sortFrequencyDictionaryController.prepare());
+    if (
+        document.querySelector('#sort-frequency-dictionary') !== null &&
+        document.querySelector('#sort-frequency-dictionary-order') !== null &&
+        document.querySelector('#sort-frequency-dictionary-order-auto') !== null &&
+        document.querySelector('#sort-frequency-dictionary-order-container') !== null
+    ) {
+        const sortFrequencyDictionaryController = new SortFrequencyDictionaryController(settingsController);
+        preparePromises.push(sortFrequencyDictionaryController.prepare());
+    }
 
     const recommendedSettingsController = new RecommendedSettingsController(settingsController);
     preparePromises.push(recommendedSettingsController.prepare());
