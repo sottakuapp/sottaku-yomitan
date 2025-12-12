@@ -205,17 +205,19 @@ export class Translator {
                 [this._createDeinflection(text, text, text, 0, [], [])]
         );
 
-        /** @type {import('translation-internal').DeinflectionTextVariant[]} */
-        const variants = [];
-        /** @type {Set<string>} */
-        const seen = new Set();
+        /** @type {Map<string, import('translation-internal').DeinflectionTextVariant>} */
+        const bestByDeinflected = new Map();
         for (const {originalText, deinflectedText} of deinflections) {
             if (deinflectedText.length === 0) { continue; }
-            if (seen.has(deinflectedText)) { continue; }
-            seen.add(deinflectedText);
-            variants.push({originalText, deinflectedText});
+            const normalizedOriginal = (originalText || '').trim();
+            const normalizedDeinflected = (deinflectedText || '').trim();
+            if (!normalizedOriginal || !normalizedDeinflected) { continue; }
+            const existing = bestByDeinflected.get(normalizedDeinflected);
+            if (!existing || normalizedOriginal.length < existing.originalText.length) {
+                bestByDeinflected.set(normalizedDeinflected, {originalText: normalizedOriginal, deinflectedText: normalizedDeinflected});
+            }
         }
-        return variants;
+        return [...bestByDeinflected.values()];
     }
 
     /**

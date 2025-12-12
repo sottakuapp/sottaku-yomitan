@@ -87,11 +87,12 @@ export class SottakuIntegration {
      * @returns {Promise<{query: string, sourceText: string, originalTextLength: number}[]>}
      */
     async _buildQueryVariants(text, language, findTermsOptions) {
+        const normalizedText = (text || '').trim();
         /** @type {{query: string, sourceText: string, originalTextLength: number}[]} */
         const variants = [];
         /** @type {Set<string>} */
         const seenQueries = new Set();
-        const pushVariant = (query, sourceText) => {
+        const pushVariant = (query, sourceText, originalTextLength = null) => {
             const normalizedQuery = (query || '').trim();
             if (!normalizedQuery || seenQueries.has(normalizedQuery)) { return; }
             seenQueries.add(normalizedQuery);
@@ -99,7 +100,7 @@ export class SottakuIntegration {
             variants.push({
                 query: normalizedQuery,
                 sourceText: normalizedSourceText,
-                originalTextLength: normalizedSourceText.length,
+                originalTextLength,
             });
         };
 
@@ -112,16 +113,18 @@ export class SottakuIntegration {
                 removeNonJapaneseCharacters: findTermsOptions?.removeNonJapaneseCharacters ?? false,
             };
             try {
-                const translatorVariants = await this._translator.getDeinflectionTextVariants(text, {...deinflectionOptions, language});
-                for (const {originalText, deinflectedText} of translatorVariants) {
-                    pushVariant(deinflectedText, originalText);
+                const translatorVariants = await this._translator.getDeinflectionTextVariants(normalizedText, {...deinflectionOptions, language});
+                const fullLengthVariant = translatorVariants.find(({originalText}) => (originalText || '').trim().length === normalizedText.length);
+                if (fullLengthVariant) {
+                    const {originalText, deinflectedText} = fullLengthVariant;
+                    pushVariant(deinflectedText, originalText, null);
                 }
             } catch (e) {
                 // Ignore translator errors and fall back to the raw query.
             }
         }
 
-        pushVariant(text, text);
+        pushVariant(normalizedText, normalizedText, null);
 
         return variants;
     }
