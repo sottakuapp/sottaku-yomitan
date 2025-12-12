@@ -3,6 +3,24 @@ import {languageDescriptorMap} from './language-descriptors.js';
 export const SOTTAKU_SUPPORTED_LANGUAGES = ['ja', 'ko'];
 
 /**
+ * @param {unknown} supportedLanguages
+ * @returns {string[]}
+ */
+function normalizeSupportedLanguagesList(supportedLanguages) {
+    const normalized = [];
+    const seen = new Set();
+    const source = Array.isArray(supportedLanguages) ? supportedLanguages : SOTTAKU_SUPPORTED_LANGUAGES;
+    for (const language of source) {
+        if (typeof language !== 'string') { continue; }
+        const trimmed = language.trim();
+        if (!trimmed || seen.has(trimmed)) { continue; }
+        seen.add(trimmed);
+        normalized.push(trimmed);
+    }
+    return normalized.length > 0 ? normalized : [...SOTTAKU_SUPPORTED_LANGUAGES];
+}
+
+/**
  * @param {string} language
  * @returns {string}
  */
@@ -29,12 +47,14 @@ export function getSottakuLanguageName(language) {
 /**
  * @param {unknown} preferredLanguages
  * @param {string} defaultLanguage
+ * @param {unknown} [supportedLanguages]
  * @returns {string[]}
  */
-export function normalizeSottakuLanguages(preferredLanguages, defaultLanguage) {
+export function normalizeSottakuLanguages(preferredLanguages, defaultLanguage, supportedLanguages = SOTTAKU_SUPPORTED_LANGUAGES) {
     /** @type {string[]} */
     const normalized = [];
     const seen = new Set();
+    const normalizedSupported = normalizeSupportedLanguagesList(supportedLanguages);
 
     /**
      * @param {unknown} value
@@ -42,7 +62,7 @@ export function normalizeSottakuLanguages(preferredLanguages, defaultLanguage) {
     const addLanguage = (value) => {
         if (typeof value !== 'string') { return; }
         const iso = value.trim();
-        if (iso.length === 0 || seen.has(iso) || !SOTTAKU_SUPPORTED_LANGUAGES.includes(iso)) { return; }
+        if (iso.length === 0 || seen.has(iso) || !normalizedSupported.includes(iso)) { return; }
         seen.add(iso);
         normalized.push(iso);
     };
@@ -58,7 +78,7 @@ export function normalizeSottakuLanguages(preferredLanguages, defaultLanguage) {
     }
 
     if (normalized.length === 0) {
-        for (const language of SOTTAKU_SUPPORTED_LANGUAGES) {
+        for (const language of normalizedSupported) {
             addLanguage(language);
         }
     }

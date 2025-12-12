@@ -27,6 +27,8 @@ export class SottakuController {
         this._skipAutoSync = false;
         /** @type {string[]} */
         this._preferredLanguages = [];
+        /** @type {string[]} */
+        this._supportedLanguages = [...SOTTAKU_SUPPORTED_LANGUAGES];
 
         /** @type {HTMLElement} */
         this._statusNode = querySelectorNotNull(document, '#sottaku-connection-status');
@@ -77,7 +79,11 @@ export class SottakuController {
      */
     _onOptionsChanged({options}) {
         this._options = options;
-        this._preferredLanguages = normalizeSottakuLanguages(options.sottaku.preferredLanguages, options.general.language);
+        this._preferredLanguages = normalizeSottakuLanguages(
+            options.sottaku.preferredLanguages,
+            options.general.language,
+            this._supportedLanguages,
+        );
         if (!options.sottaku.enabled) {
             void this._settingsController.modifySettings([
                 {action: 'set', scope: 'profile', path: 'sottaku.enabled', value: true},
@@ -91,6 +97,7 @@ export class SottakuController {
         this._updateStatus();
         void this._ensureUserDetails();
         this._renderLanguageList();
+        void this._loadSupportedLanguages();
     }
 
     /** */
@@ -214,6 +221,35 @@ export class SottakuController {
             // Best-effort; ignore profile fetch errors for display purposes
         } finally {
             this._loadingUser = false;
+        }
+    }
+
+    /** */
+    async _loadSupportedLanguages() {
+        if (!this._options || !this._options.sottaku.authToken) { return; }
+        try {
+            const response = await this._client.getSupportedLanguages();
+            const languages = this._normalizeSupportedLanguagesResponse(response);
+            if (languages.length === 0) { return; }
+            const currentKey = this._supportedLanguages.join(',');
+            const nextKey = languages.join(',');
+            if (currentKey === nextKey) { return; }
+            this._supportedLanguages = languages;
+            const normalizedPreferred = normalizeSottakuLanguages(
+                this._preferredLanguages,
+                this._options.general.language,
+                this._supportedLanguages,
+            );
+            const preferredChanged = normalizedPreferred.join(',') !== this._preferredLanguages.join(',');
+            this._preferredLanguages = normalizedPreferred;
+            if (preferredChanged) {
+                await this._settingsController.modifySettings([
+                    {action: 'set', scope: 'profile', path: 'sottaku.preferredLanguages', value: normalizedPreferred},
+                ]);
+            }
+            this._renderLanguageList();
+        } catch (e) {
+            // Best-effort; ignore fetch errors and keep existing defaults.
         }
     }
 
@@ -366,7 +402,7 @@ export class SottakuController {
     _refreshLanguageAddOptions(selectedLanguages) {
         const selected = new Set(selectedLanguages);
         this._languageAddSelect.textContent = '';
-        const available = SOTTAKU_SUPPORTED_LANGUAGES.filter((language) => !selected.has(language));
+        const available = this._supportedLanguages.filter((language) => !selected.has(language));
         for (const language of available) {
             const option = document.createElement('option');
             option.value = language;
@@ -421,7 +457,11 @@ export class SottakuController {
      */
     async _updatePreferredLanguages(languages) {
         if (!this._options) { return; }
-        const normalized = normalizeSottakuLanguages(languages, this._options.general.language);
+        const normalized = normalizeSottakuLanguages(
+            languages,
+            this._options.general.language,
+            this._supportedLanguages,
+        );
         this._preferredLanguages = normalized;
         this._renderLanguageList();
         try {
@@ -442,6 +482,36 @@ export class SottakuController {
     _getLanguageName(language) {
         const name = getSottakuLanguageName(language);
         return name || language;
+    }
+
+    /**
+     * @param {unknown} response
+     * @returns {string[]}
+     */
+    _normalizeSupportedLanguagesResponse(response) {
+        const normalized = [];
+        const seen = new Set();
+        const data = (response && typeof response === 'object') ? /** @type {Record<string, unknown>} */ (response) : {};
+        const candidates = [];
+        if (Array.isArray(data.languages)) {
+            candidates.push(...data.languages);
+        }
+        if (Array.isArray(data.supported_languages)) {
+            candidates.push(...data.supported_languages);
+        }
+        if (Array.isArray(data.admin_only_languages)) {
+            candidates.push(...data.admin_only_languages);
+        }
+
+        for (const value of candidates) {
+            if (typeof value !== 'string') { continue; }
+            const trimmed = value.trim();
+            if (!trimmed || seen.has(trimmed)) { continue; }
+            seen.add(trimmed);
+            normalized.push(trimmed);
+        }
+
+        return normalized.length > 0 ? normalized : [...SOTTAKU_SUPPORTED_LANGUAGES];
     }
 
     /**

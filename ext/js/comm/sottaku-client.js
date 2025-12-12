@@ -256,6 +256,14 @@ export class SottakuClient {
     }
 
     /**
+     * Fetch supported study languages for the current user context.
+     * @returns {Promise<unknown>}
+     */
+    async getSupportedLanguages() {
+        return await this._request('/dictionary/supported-languages', {method: 'GET'});
+    }
+
+    /**
      * @param {string} path
      * @param {{method?: string, body?: unknown, auth?: boolean, language?: string}} [options]
      * @returns {Promise<any>}

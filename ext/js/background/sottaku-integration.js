@@ -1,7 +1,7 @@
 import {SottakuClient} from '../comm/sottaku-client.js';
 import {ExtensionError} from '../core/extension-error.js';
 import {toError} from '../core/to-error.js';
-import {getSottakuLanguageFlag, normalizeSottakuLanguages} from '../language/sottaku-languages.js';
+import {getSottakuLanguageFlag, normalizeSottakuLanguages, SOTTAKU_SUPPORTED_LANGUAGES} from '../language/sottaku-languages.js';
 
 const JAPANESE_CHAR_PATTERN = /[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff]/;
 const HANGUL_CHAR_PATTERN = /[\u1100-\u11ff\u3130-\u318f\uac00-\ud7af]/;
@@ -24,6 +24,10 @@ export class SottakuIntegration {
         this._translator = translator;
         /** @type {?import('settings').ProfileOptions} */
         this._options = null;
+        /** @type {string[]} */
+        this._supportedLanguages = [...SOTTAKU_SUPPORTED_LANGUAGES];
+        /** @type {?Promise<string[]>} */
+        this._supportedLanguagesPromise = null;
     }
 
     /**
@@ -37,6 +41,11 @@ export class SottakuIntegration {
             authToken: sottaku.authToken,
             cookieDomain: sottaku.cookieDomain,
         });
+        if (sottaku.authToken) {
+            void this._ensureSupportedLanguages();
+        } else {
+            this._supportedLanguages = [...SOTTAKU_SUPPORTED_LANGUAGES];
+        }
     }
 
     /**
@@ -54,6 +63,7 @@ export class SottakuIntegration {
             throw new ExtensionError('Sign in to Sottaku from the settings page to enable remote lookups.');
         }
 
+        await this._ensureSupportedLanguages();
         const query = (text || '').trim();
         if (!query) {
             return {dictionaryEntries: [], originalTextLength: 0};
@@ -297,7 +307,12 @@ export class SottakuIntegration {
      * @returns {string[]}
      */
     _resolveLanguages(text, sottakuOptions, defaultLanguage) {
-        const preferredLanguages = normalizeSottakuLanguages(sottakuOptions.preferredLanguages, defaultLanguage);
+        const supportedLanguages = this._supportedLanguages.length > 0 ? this._supportedLanguages : SOTTAKU_SUPPORTED_LANGUAGES;
+        const preferredLanguages = normalizeSottakuLanguages(
+            sottakuOptions.preferredLanguages,
+            defaultLanguage,
+            supportedLanguages,
+        );
         switch (sottakuOptions.languageMode) {
             case 'ja': return ['ja'];
             case 'ko': return ['ko'];
@@ -463,6 +478,71 @@ export class SottakuIntegration {
             entries.push('No Sottaku definition available yet.');
         }
         return entries;
+    }
+
+    /**
+     * @returns {Promise<string[]>}
+     */
+    async _ensureSupportedLanguages() {
+        if (!this._client.authToken) {
+            this._supportedLanguages = [...SOTTAKU_SUPPORTED_LANGUAGES];
+            return this._supportedLanguages;
+        }
+
+        if (this._supportedLanguagesPromise) {
+            try {
+                await this._supportedLanguagesPromise;
+            } catch (e) {
+                // Ignore fetch errors; fallback handled below.
+            }
+            return this._supportedLanguages;
+        }
+
+        this._supportedLanguagesPromise = this._client.getSupportedLanguages()
+            .then((response) => {
+                const normalized = this._normalizeSupportedLanguagesResponse(response);
+                this._supportedLanguages = normalized.length > 0 ? normalized : [...SOTTAKU_SUPPORTED_LANGUAGES];
+                return this._supportedLanguages;
+            })
+            .catch(() => {
+                this._supportedLanguages = this._supportedLanguages.length > 0 ? this._supportedLanguages : [...SOTTAKU_SUPPORTED_LANGUAGES];
+                return this._supportedLanguages;
+            })
+            .finally(() => {
+                this._supportedLanguagesPromise = null;
+            });
+
+        return await this._supportedLanguagesPromise;
+    }
+
+    /**
+     * @param {unknown} response
+     * @returns {string[]}
+     */
+    _normalizeSupportedLanguagesResponse(response) {
+        const normalized = [];
+        const seen = new Set();
+        const candidates = [];
+        const data = (response && typeof response === 'object') ? /** @type {Record<string, unknown>} */ (response) : {};
+        if (Array.isArray(data.languages)) {
+            candidates.push(...data.languages);
+        }
+        if (Array.isArray(data.supported_languages)) {
+            candidates.push(...data.supported_languages);
+        }
+        if (Array.isArray(data.admin_only_languages)) {
+            candidates.push(...data.admin_only_languages);
+        }
+
+        for (const value of candidates) {
+            if (typeof value !== 'string') { continue; }
+            const trimmed = value.trim();
+            if (!trimmed || seen.has(trimmed)) { continue; }
+            seen.add(trimmed);
+            normalized.push(trimmed);
+        }
+
+        return normalized;
     }
 
     /**
