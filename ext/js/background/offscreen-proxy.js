@@ -268,6 +268,23 @@ export class TranslatorProxy {
     }
 
     /**
+     * @param {string} text
+     * @param {import('translation').FindDeinflectionOptions} options
+     * @returns {Promise<import('translation-internal').DeinflectionTextVariant[]>}
+     */
+    async getDeinflectionTextVariants(text, options) {
+        const textReplacementsSerialized = options.textReplacements.map((group) => {
+            return group !== null ? group.map((opt) => ({...opt, pattern: opt.pattern.toString()})) : null;
+        });
+        /** @type {import('offscreen').FindDeinflectionOptionsOffscreen} */
+        const modifiedOptions = {
+            ...options,
+            textReplacements: textReplacementsSerialized,
+        };
+        return this._offscreen.sendMessagePromise({action: 'getDeinflectionTextVariantsOffscreen', params: {text, options: modifiedOptions}});
+    }
+
+    /**
      * @param {import('translator').TermReadingList} termReadingList
      * @param {string[]} dictionaries
      * @returns {Promise<import('translator').TermFrequencySimple[]>}

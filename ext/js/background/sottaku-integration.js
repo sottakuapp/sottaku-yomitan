@@ -14,9 +14,14 @@ const HANGUL_CHAR_PATTERN = /[\u1100-\u11ff\u3130-\u318f\uac00-\ud7af]/;
  */
 
 export class SottakuIntegration {
-    constructor() {
+    /**
+     * @param {import('../language/translator.js').Translator | import('./offscreen-proxy.js').TranslatorProxy} translator
+     */
+    constructor(translator) {
         /** @type {SottakuClient} */
         this._client = new SottakuClient();
+        /** @type {import('../language/translator.js').Translator | import('./offscreen-proxy.js').TranslatorProxy} */
+        this._translator = translator;
         /** @type {?import('settings').ProfileOptions} */
         this._options = null;
     }
@@ -36,9 +41,10 @@ export class SottakuIntegration {
 
     /**
      * @param {string} text
+     * @param {import('translation').FindDeinflectionOptions} [findTermsOptions]
      * @returns {Promise<{dictionaryEntries: import('dictionary').TermDictionaryEntry[], originalTextLength: number}>}
      */
-    async findTerms(text) {
+    async findTerms(text, findTermsOptions) {
         if (this._options === null) {
             throw new ExtensionError('Sottaku options not configured');
         }
@@ -53,18 +59,18 @@ export class SottakuIntegration {
             return {dictionaryEntries: [], originalTextLength: 0};
         }
 
-        const languages = this._resolveLanguages(text, sottaku, general.language);
+        const languages = this._resolveLanguages(query, sottaku, general.language);
         const maxResults = Math.max(1, general.maxResults || 32);
         const apiOrigin = this._getOrigin(sottaku.apiBaseUrl);
 
         /** @type {SottakuLanguageResult[]} */
         const languageResults = [];
         for (const language of languages) {
-            const languageResult = await this._fetchLanguageEntries({
+            const languageResult = await this._fetchLanguageEntriesWithVariants({
                 apiOrigin,
                 language,
                 maxResults,
-                query,
+                variants: await this._buildQueryVariants(query, language, findTermsOptions),
             });
             languageResults.push(languageResult);
         }
@@ -75,15 +81,102 @@ export class SottakuIntegration {
     }
 
     /**
-     * @param {{apiOrigin: string, language: string, maxResults: number, query: string}} options
+     * @param {string} text
+     * @param {string} language
+     * @param {import('translation').FindDeinflectionOptions} [findTermsOptions]
+     * @returns {Promise<{query: string, sourceText: string, originalTextLength: number}[]>}
+     */
+    async _buildQueryVariants(text, language, findTermsOptions) {
+        /** @type {{query: string, sourceText: string, originalTextLength: number}[]} */
+        const variants = [];
+        /** @type {Set<string>} */
+        const seenQueries = new Set();
+        const pushVariant = (query, sourceText) => {
+            const normalizedQuery = (query || '').trim();
+            if (!normalizedQuery || seenQueries.has(normalizedQuery)) { return; }
+            seenQueries.add(normalizedQuery);
+            const normalizedSourceText = (sourceText || normalizedQuery).trim();
+            variants.push({
+                query: normalizedQuery,
+                sourceText: normalizedSourceText,
+                originalTextLength: normalizedSourceText.length,
+            });
+        };
+
+        if (this._translator && typeof this._translator.getDeinflectionTextVariants === 'function') {
+            const deinflectionOptions = {
+                deinflect: findTermsOptions?.deinflect ?? true,
+                language,
+                searchResolution: findTermsOptions?.searchResolution ?? 'length',
+                textReplacements: findTermsOptions?.textReplacements ?? [null],
+                removeNonJapaneseCharacters: findTermsOptions?.removeNonJapaneseCharacters ?? false,
+            };
+            try {
+                const translatorVariants = await this._translator.getDeinflectionTextVariants(text, {...deinflectionOptions, language});
+                for (const {originalText, deinflectedText} of translatorVariants) {
+                    pushVariant(deinflectedText, originalText);
+                }
+            } catch (e) {
+                // Ignore translator errors and fall back to the raw query.
+            }
+        }
+
+        pushVariant(text, text);
+
+        return variants;
+    }
+
+    /**
+     * @param {{apiOrigin: string, language: string, maxResults: number, variants: {query: string, sourceText: string, originalTextLength: number}[]}} options
      * @returns {Promise<SottakuLanguageResult>}
      */
-    async _fetchLanguageEntries({apiOrigin, language, maxResults, query}) {
+    async _fetchLanguageEntriesWithVariants({apiOrigin, language, maxResults, variants}) {
+        const resolvedVariants = variants.length > 0 ? variants : [{query: '', sourceText: '', originalTextLength: 0}];
+        /** @type {SottakuLanguageResult | null} */
+        let fallbackResult = null;
+        for (const {query, sourceText, originalTextLength} of resolvedVariants) {
+            const languageResult = await this._fetchLanguageEntries({
+                apiOrigin,
+                language,
+                maxResults,
+                query,
+                sourceText,
+                originalTextLength,
+            });
+            if (languageResult.entries.length > 0) {
+                return languageResult;
+            }
+            if (fallbackResult === null) {
+                fallbackResult = languageResult;
+            }
+        }
+        return fallbackResult ?? {
+            language,
+            entries: [],
+            originalTextLength: resolvedVariants[0]?.originalTextLength ?? 0,
+        };
+    }
+
+    /**
+     * @param {{apiOrigin: string, language: string, maxResults: number, query: string, sourceText?: string, originalTextLength?: number}} options
+     * @returns {Promise<SottakuLanguageResult>}
+     */
+    async _fetchLanguageEntries({apiOrigin, language, maxResults, query, sourceText, originalTextLength}) {
+        const normalizedQuery = (query || '').trim();
+        const normalizedSource = (sourceText || normalizedQuery || '').trim();
+        if (!normalizedQuery) {
+            return {
+                language,
+                entries: [],
+                originalTextLength: normalizedSource.length || 0,
+            };
+        }
+
         let scanResultsRaw = [];
         let scanOriginalLength = 0;
         try {
             const scanResult = await this._client.scan(
-                query,
+                normalizedQuery,
                 language,
                 maxResults,
             );
@@ -121,13 +214,24 @@ export class SottakuIntegration {
             if (inFlashcards.has(Number.parseInt(result?.id, 10))) {
                 result.in_flashcards = true;
             }
-            entries.push(this._createEntry(result, result, language, apiOrigin, query, i));
+            entries.push(this._createEntry(
+                result,
+                result,
+                language,
+                apiOrigin,
+                normalizedQuery,
+                i,
+                normalizedSource,
+                originalTextLength,
+            ));
         }
 
         return {
             language,
             entries,
-            originalTextLength: scanOriginalLength,
+            originalTextLength: typeof originalTextLength === 'number' && Number.isFinite(originalTextLength) ?
+                originalTextLength :
+                scanOriginalLength,
         };
     }
 
@@ -228,15 +332,17 @@ export class SottakuIntegration {
      * @param {string} apiOrigin
      * @param {string} query
      * @param {number} index
+     * @param {string} [sourceText]
+     * @param {number} [matchLengthOverride]
      * @returns {import('dictionary').TermDictionaryEntry}
      */
-    _createEntry(result, info, language, apiOrigin, query, index) {
+    _createEntry(result, info, language, apiOrigin, query, index, sourceText, matchLengthOverride) {
         const normalizedResult = (typeof result === 'object' && result !== null) ? result : {};
         const normalizedInfo = (typeof info === 'object' && info !== null) ? info : {};
         const questionId = Number.parseInt(normalizedResult.id ?? normalizedInfo.id, 10);
         const term = (normalizedInfo.kanji_representation || normalizedResult.kanji_representation || query || '').toString();
         const reading = (normalizedInfo.reading || normalizedResult.reading || term).toString();
-        const matchLengthRaw = normalizedResult.match_length ?? normalizedInfo.match_length;
+        const matchLengthRaw = normalizedResult.match_length ?? normalizedInfo.match_length ?? matchLengthOverride;
         const matchLength = Number.parseInt(matchLengthRaw, 10);
         const translation = (
             normalizedInfo.word_translation ||
@@ -253,6 +359,7 @@ export class SottakuIntegration {
         const usageNotes = (normalizedInfo.usage_notes || '').toString();
         const hasDefinition = Boolean((normalizedResult.has_definition ?? normalizedInfo.has_definition ?? null) || translation || sentence);
         const dictionaryAlias = getSottakuLanguageFlag(language);
+        const resolvedSourceText = (sourceText || query || '').toString();
 
         /** @type {import('dictionary').TermHeadword[]} */
         const headwords = [
@@ -262,7 +369,7 @@ export class SottakuIntegration {
                 reading: reading,
                 sources: [
                     {
-                        originalText: query,
+                        originalText: resolvedSourceText,
                         transformedText: query,
                         deinflectedText: term || query,
                         matchType: 'exact',
@@ -328,7 +435,7 @@ export class SottakuIntegration {
             dictionaryAlias,
             sourceTermExactMatchCount: query && term && query === term ? 1 : 0,
             matchPrimaryReading: query === reading,
-            maxOriginalTextLength: Math.max(query.length, term.length, reading.length),
+            maxOriginalTextLength: Math.max(query.length, term.length, reading.length, resolvedSourceText.length),
             headwords,
             definitions,
             pronunciations: [],

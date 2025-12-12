@@ -64,6 +64,11 @@ export type DatabaseDeinflection = {
     databaseEntries: DictionaryDatabase.TermEntry[];
 };
 
+export type DeinflectionTextVariant = {
+    originalText: string;
+    deinflectedText: string;
+};
+
 export type DictionaryEntryGroup = {
     ids: Set<number>;
     dictionaryEntries: TermDictionaryEntry[];

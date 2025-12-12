@@ -20,6 +20,7 @@ import type * as DictionaryDatabase from './dictionary-database';
 import type * as DictionaryImporter from './dictionary-importer';
 import type * as Environment from './environment';
 import type * as Translation from './translation';
+import type * as TranslationInternal from './translation-internal';
 import type * as Translator from './translator';
 import type {
     ApiMap as BaseApiMap,
@@ -67,6 +68,13 @@ type ApiSurface = {
             options: FindTermsOptionsOffscreen;
         };
         return: Translator.FindTermsResult;
+    };
+    getDeinflectionTextVariantsOffscreen: {
+        params: {
+            text: string;
+            options: FindDeinflectionOptionsOffscreen;
+        };
+        return: TranslationInternal.DeinflectionTextVariant[];
     };
     getTermFrequenciesOffscreen: {
         params: {
@@ -128,6 +136,10 @@ export type FindTermsOptionsOffscreen = Omit<Translation.FindTermsOptions, 'enab
         options: Translation.FindTermDictionary,
     ][];
     excludeDictionaryDefinitions: string[] | null;
+    textReplacements: (FindTermsTextReplacementOffscreen[] | null)[];
+};
+
+export type FindDeinflectionOptionsOffscreen = Omit<Translation.FindDeinflectionOptions, 'textReplacements'> & {
     textReplacements: (FindTermsTextReplacementOffscreen[] | null)[];
 };
 

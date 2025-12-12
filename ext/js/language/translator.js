@@ -178,6 +178,47 @@ export class Translator {
     }
 
     /**
+     * Returns algorithmic deinflection variants without requiring dictionary entries.
+     * @param {string} text
+     * @param {import('translation').FindDeinflectionOptions} options
+     * @returns {Promise<import('translation-internal').DeinflectionTextVariant[]>}
+     */
+    async getDeinflectionTextVariants(text, options) {
+        const {
+            language,
+            removeNonJapaneseCharacters,
+            deinflect = true,
+            textReplacements = [null],
+            searchResolution = 'length',
+        } = options;
+
+        if (removeNonJapaneseCharacters && (['ja', 'zh', 'yue', 'ko'].includes(language))) {
+            text = this._getJapaneseChineseKoreanOnlyText(text);
+        }
+        if (text.length === 0) {
+            return [];
+        }
+
+        const deinflections = (
+            deinflect ?
+                this._getAlgorithmDeinflections(text, /** @type {import('translation').FindTermsOptions} */ ({...options, textReplacements, searchResolution})) :
+                [this._createDeinflection(text, text, text, 0, [], [])]
+        );
+
+        /** @type {import('translation-internal').DeinflectionTextVariant[]} */
+        const variants = [];
+        /** @type {Set<string>} */
+        const seen = new Set();
+        for (const {originalText, deinflectedText} of deinflections) {
+            if (deinflectedText.length === 0) { continue; }
+            if (seen.has(deinflectedText)) { continue; }
+            seen.add(deinflectedText);
+            variants.push({originalText, deinflectedText});
+        }
+        return variants;
+    }
+
+    /**
      * Gets a list of frequency information for a given list of term-reading pairs
      * and a list of dictionaries.
      * @param {import('translator').TermReadingList} termReadingList An array of `{term, reading}` pairs. If reading is null,

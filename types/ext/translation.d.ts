@@ -108,6 +108,18 @@ export type FindTermsOptions = {
 };
 
 /**
+ * Options for producing deinflection variants without dictionary lookups.
+ */
+export type FindDeinflectionOptions = Pick<
+    FindTermsOptions,
+    'deinflect' |
+    'language' |
+    'removeNonJapaneseCharacters' |
+    'searchResolution' |
+    'textReplacements'
+>;
+
+/**
  * The matching type for looking up terms.
  */
 export type FindTermsMatchType = Dictionary.TermSourceMatchType;

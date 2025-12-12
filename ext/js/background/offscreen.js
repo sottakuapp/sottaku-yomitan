@@ -60,6 +60,7 @@ export class Offscreen {
             ['translatorPrepareOffscreen',     this._prepareTranslatorHandler.bind(this)],
             ['findKanjiOffscreen',             this._findKanjiHandler.bind(this)],
             ['findTermsOffscreen',             this._findTermsHandler.bind(this)],
+            ['getDeinflectionTextVariantsOffscreen', this._getDeinflectionTextVariantsHandler.bind(this)],
             ['getTermFrequenciesOffscreen',    this._getTermFrequenciesHandler.bind(this)],
             ['clearDatabaseCachesOffscreen',   this._clearDatabaseCachesHandler.bind(this)],
             ['createAndRegisterPortOffscreen', this._createAndRegisterPort.bind(this)],
@@ -168,6 +169,24 @@ export class Offscreen {
             textReplacements,
         };
         return this._translator.findTerms(mode, text, modifiedOptions);
+    }
+
+    /** @type {import('offscreen').ApiHandler<'getDeinflectionTextVariantsOffscreen'>} */
+    async _getDeinflectionTextVariantsHandler({text, options}) {
+        const textReplacements = options.textReplacements.map((group) => {
+            if (group === null) { return null; }
+            return group.map((opt) => {
+                const match = opt.pattern.match(/\/(.*?)\/([a-z]*)?$/i);
+                const [, pattern, flags] = match !== null ? match : ['', '', ''];
+                return {...opt, pattern: new RegExp(pattern, flags ?? '')};
+            });
+        });
+        /** @type {import('translation').FindDeinflectionOptions} */
+        const modifiedOptions = {
+            ...options,
+            textReplacements,
+        };
+        return this._translator.getDeinflectionTextVariants(text, modifiedOptions);
     }
 
     /** @type {import('offscreen').ApiHandler<'getTermFrequenciesOffscreen'>} */

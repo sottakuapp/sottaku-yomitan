@@ -109,7 +109,7 @@ export class Backend {
         /** @type {AccessibilityController} */
         this._accessibilityController = new AccessibilityController();
         /** @type {SottakuIntegration} */
-        this._sottakuIntegration = new SottakuIntegration();
+        this._sottakuIntegration = new SottakuIntegration(this._translator);
 
         /** @type {?number} */
         this._searchPopupTabId = null;
@@ -552,14 +552,14 @@ export class Backend {
     /** @type {import('api').ApiHandler<'termsFind'>} */
     async _onApiTermsFind({text, details, optionsContext}) {
         const options = this._getProfileOptions(optionsContext, false);
-        if (options?.sottaku?.enabled) {
-            this._sottakuIntegration.configure(options);
-            const sottakuResult = await this._sottakuIntegration.findTerms(text);
-            sottakuResult.dictionaryEntries.splice(options.general.maxResults);
-            return sottakuResult;
-        }
         const {general: {resultOutputMode: mode, maxResults}} = options;
         const findTermsOptions = this._getTranslatorFindTermsOptions(mode, details, options);
+        if (options?.sottaku?.enabled) {
+            this._sottakuIntegration.configure(options);
+            const sottakuResult = await this._sottakuIntegration.findTerms(text, findTermsOptions);
+            sottakuResult.dictionaryEntries.splice(maxResults);
+            return sottakuResult;
+        }
         const {dictionaryEntries, originalTextLength} = await this._translator.findTerms(mode, text, findTermsOptions);
         dictionaryEntries.splice(maxResults);
         return {dictionaryEntries, originalTextLength};
