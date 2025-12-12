@@ -385,19 +385,9 @@ export class PopupPreviewFrame {
     /**
      * @param {{linked: boolean, hasToken: boolean, hasUser: boolean}} status
      */
-    _updateDebugStatus({linked, hasToken, hasUser}) {
+    _updateDebugStatus() {
         if (this._debugNode === null) { return; }
-        const optionsContext = this._optionsContext ?? {current: true};
-        const contextSummary = optionsContext.current ?
-            'current profile' :
-            `index=${typeof optionsContext.index === 'number' ? optionsContext.index : 'auto'}`;
-        const lines = [
-            `Linked: ${linked ? 'yes' : 'no'}`,
-            `Token: ${hasToken ? 'present' : 'missing'}`,
-            `User: ${hasUser ? 'present' : 'missing'}`,
-            `Context: ${contextSummary}`,
-        ];
-        this._debugNode.textContent = lines.join(' | ');
-        this._debugNode.hidden = false;
+        this._debugNode.textContent = '';
+        this._debugNode.hidden = true;
     }
 }

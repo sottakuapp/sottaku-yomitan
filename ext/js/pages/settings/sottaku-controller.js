@@ -21,6 +21,10 @@ export class SottakuController {
         this._options = null;
         /** @type {boolean} */
         this._busy = false;
+        /** @type {boolean} */
+        this._loadingUser = false;
+        /** @type {boolean} */
+        this._skipAutoSync = false;
         /** @type {string[]} */
         this._preferredLanguages = [];
 
@@ -38,8 +42,6 @@ export class SottakuController {
         this._syncCookieButton = querySelectorNotNull(document, '#sottaku-sync-cookie-button');
         /** @type {HTMLButtonElement} */
         this._logoutButton = querySelectorNotNull(document, '#sottaku-logout-button');
-        /** @type {HTMLInputElement} */
-        this._apiInput = querySelectorNotNull(document, 'input[data-setting="sottaku.apiBaseUrl"]');
         /** @type {HTMLElement} */
         this._authForm = querySelectorNotNull(document, '#sottaku-auth-form');
         /** @type {HTMLElement} */
@@ -59,11 +61,11 @@ export class SottakuController {
         this._googleButton.addEventListener('click', this._onGoogleClick.bind(this), false);
         this._syncCookieButton.addEventListener('click', this._onSyncCookieClick.bind(this), false);
         this._logoutButton.addEventListener('click', this._onLogoutClick.bind(this), false);
-        this._apiInput.addEventListener('change', this._onApiUrlChanged.bind(this), false);
         this._languageAddButton.addEventListener('click', this._onLanguageAdd.bind(this), false);
+        this._skipAutoSync = await this._loadSkipAutoSync();
         const options = await this._settingsController.getOptions();
         this._onOptionsChanged({options, optionsContext: this._settingsController.getOptionsContext()});
-        if (!options.sottaku.authToken) {
+        if (!options.sottaku.authToken && !this._skipAutoSync) {
             void this._syncFromBrowserSession(true);
         }
     }
@@ -87,6 +89,7 @@ export class SottakuController {
             cookieDomain: options.sottaku.cookieDomain,
         });
         this._updateStatus();
+        void this._ensureUserDetails();
         this._renderLanguageList();
     }
 
@@ -102,7 +105,6 @@ export class SottakuController {
             this._setStatus('Signing in...', false);
             const data = await this._client.loginWithPassword(username, password);
             await this._applyAuthUpdate(data?.token ?? this._client.authToken, isObjectNotArray(data?.user) ? data.user : null);
-            this._setStatus('Signed in to Sottaku', false);
         } catch (e2) {
             this._setStatus(toError(e2).message || 'Unable to sign in', true);
         } finally {
@@ -139,7 +141,9 @@ export class SottakuController {
                 {action: 'set', scope: 'profile', path: 'sottaku.authToken', value: ''},
                 {action: 'set', scope: 'profile', path: 'sottaku.user', value: null},
             ]);
+            await this._setSkipAutoSync(true);
             this._client.setConfig({authToken: ''});
+            this._updateStatus({authToken: '', user: null, enabled: false});
             await this._settingsController.refresh();
             this._setStatus('Signed out of Sottaku', false);
         } catch (e2) {
@@ -149,47 +153,160 @@ export class SottakuController {
         }
     }
 
-    /** */
-    async _onApiUrlChanged() {
-        const origin = this._getOriginFromApiUrl();
-        await this._settingsController.modifySettings([
-            {action: 'set', scope: 'profile', path: 'sottaku.cookieDomain', value: origin},
-        ]);
-        this._client.setConfig({cookieDomain: origin});
-    }
-
     /**
      * @param {string} token
      * @param {unknown} user
      */
     async _applyAuthUpdate(token, user) {
         const origin = this._getOriginFromApiUrl();
+        const normalizedUser = this._normalizeUser(user);
         const updates = [
             {action: 'set', scope: 'profile', path: 'sottaku.authToken', value: token},
             {action: 'set', scope: 'profile', path: 'sottaku.cookieDomain', value: origin},
             {action: 'set', scope: 'profile', path: 'sottaku.enabled', value: true},
-            {action: 'set', scope: 'profile', path: 'sottaku.user', value: user ?? null},
+            {action: 'set', scope: 'profile', path: 'sottaku.user', value: normalizedUser},
         ];
         await this._settingsController.modifySettings(updates);
+        await this._setSkipAutoSync(false);
         this._client.setConfig({authToken: token, cookieDomain: origin});
+        this._updateStatus({authToken: token, user: normalizedUser, enabled: true});
         await this._settingsController.refresh();
     }
 
-    /** */
-    _updateStatus() {
+    /**
+     * @param {{authToken?: string, user?: unknown, enabled?: boolean}|null} [override]
+     */
+    _updateStatus(override = null) {
         const options = this._options;
         if (!options) { return; }
         const {sottaku} = options;
-        const {user, authToken, enabled} = sottaku;
+        const authToken = override && 'authToken' in override ? override.authToken : sottaku.authToken;
+        const user = override && 'user' in override ? override.user : sottaku.user;
+        const enabled = override && 'enabled' in override ? override.enabled : sottaku.enabled;
         const isLinked = Boolean(enabled && authToken);
         let message = 'Not connected';
         if (isLinked) {
-            const name = isObjectNotArray(user) ? (user.username || user.email || '') : '';
-            message = name ? `Linked to Sottaku as ${name}` : 'Linked to Sottaku';
+            message = this._getSignedInStatusText(user);
         }
         this._authForm.hidden = isLinked;
         this._linkedActions.hidden = !isLinked;
         this._setStatus(message, !isLinked && !authToken);
+    }
+
+    /** */
+    async _ensureUserDetails() {
+        if (!this._options) { return; }
+        const {sottaku} = this._options;
+        if (!sottaku.enabled || !sottaku.authToken) { return; }
+        if (this._loadingUser) { return; }
+        if (this._getUserDisplayName(sottaku.user)) { return; }
+        this._loadingUser = true;
+        try {
+            const profile = await this._client.getProfile();
+            const normalizedUser = this._normalizeUser(profile?.user);
+            if (normalizedUser) {
+                await this._settingsController.modifySettings([
+                    {action: 'set', scope: 'profile', path: 'sottaku.user', value: normalizedUser},
+                ]);
+                this._updateStatus({authToken: sottaku.authToken, user: normalizedUser, enabled: true});
+            }
+        } catch (e) {
+            // Best-effort; ignore profile fetch errors for display purposes
+        } finally {
+            this._loadingUser = false;
+        }
+    }
+
+    /**
+     * @param {unknown} user
+     * @returns {string}
+     */
+    _getUserDisplayName(user) {
+        if (!isObjectNotArray(user)) { return ''; }
+        const {username, email, name} = /** @type {{username?: unknown, email?: unknown, name?: unknown}} */ (user);
+        const candidates = [username, email, name];
+        for (const candidate of candidates) {
+            if (typeof candidate === 'string') {
+                const trimmed = candidate.trim();
+                if (trimmed.length > 0) {
+                    return trimmed;
+                }
+            }
+        }
+        return '';
+    }
+
+    /**
+     * @param {unknown} user
+     * @returns {string}
+     */
+    _getSignedInStatusText(user) {
+        const name = this._getUserDisplayName(user);
+        return name ? `Signed in as ${name}` : 'Signed in';
+    }
+
+    /**
+     * @returns {Promise<boolean>}
+     */
+    _loadSkipAutoSync() {
+        return new Promise((resolve) => {
+            chrome.storage.local.get(['sottakuSkipAutoSync'], (result) => {
+                const error = chrome.runtime.lastError;
+                if (error) {
+                    resolve(false);
+                    return;
+                }
+                const value = result?.sottakuSkipAutoSync === true;
+                resolve(value);
+            });
+        });
+    }
+
+    /**
+     * @param {boolean} value
+     * @returns {Promise<void>}
+     */
+    async _setSkipAutoSync(value) {
+        this._skipAutoSync = value;
+        await new Promise((resolve) => {
+            chrome.storage.local.set({sottakuSkipAutoSync: value}, () => { resolve(); });
+        });
+    }
+
+    /**
+     * @param {unknown} user
+     * @returns {import('settings').SottakuUser|null}
+     */
+    _normalizeUser(user) {
+        if (!isObjectNotArray(user)) { return null; }
+        const idRaw = /** @type {{id?: unknown}} */ (user).id;
+        let id = 0;
+        if (typeof idRaw === 'number' && Number.isFinite(idRaw)) {
+            id = idRaw;
+        } else if (typeof idRaw === 'string') {
+            const parsed = Number.parseInt(idRaw, 10);
+            if (Number.isFinite(parsed)) {
+                id = parsed;
+            }
+        }
+        const normalized = /** @type {import('settings').SottakuUser} */ ({
+            id,
+            username: null,
+            email: null,
+            isPro: user.isPro === true || user.is_pro === true,
+        });
+        const username = /** @type {{username?: unknown, name?: unknown}} */ (user).username ?? /** @type {{username?: unknown, name?: unknown}} */ (user).name;
+        if (typeof username === 'string' || username === null) {
+            normalized.username = username;
+        }
+        const email = /** @type {{email?: unknown}} */ (user).email;
+        if (typeof email === 'string' || email === null) {
+            normalized.email = email;
+        }
+        if (typeof /** @type {{name?: unknown}} */ (user).name === 'string') {
+            /** @type {{name?: string}} */ (normalized).name = /** @type {string} */ (user.name);
+        }
+        return normalized;
     }
 
     /**
@@ -332,7 +449,7 @@ export class SottakuController {
      */
     _getOriginFromApiUrl() {
         try {
-            return new URL(this._apiInput.value || this._client.apiBaseUrl).origin;
+            return new URL(this._client.apiBaseUrl).origin;
         } catch (e) {
             return 'https://sottaku.app';
         }
@@ -362,8 +479,9 @@ export class SottakuController {
             } catch (e2) {
                 if (!silent) { this._setStatus('Session detected; unable to load profile details (continuing)', false); }
             }
-            await this._applyAuthUpdate(token, user ?? {username: '', email: '', id: 0, isPro: false, cookieDomain: origin});
-            if (!silent) { this._setStatus('Sottaku session linked from browser login', false); }
+            const linkedUser = user ?? {username: '', email: '', id: 0, isPro: false, cookieDomain: origin};
+            await this._applyAuthUpdate(token, linkedUser);
+            if (!silent) { this._setStatus(this._getSignedInStatusText(linkedUser), false); }
         } catch (e3) {
             this._setStatus(toError(e3).message, true);
         } finally {
