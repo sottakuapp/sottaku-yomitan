@@ -513,22 +513,9 @@ export class SottakuController {
         const normalized = [];
         const seen = new Set();
         const data = (response && typeof response === 'object') ? /** @type {Record<string, unknown>} */ (response) : {};
-        const candidates = [];
-        if (Array.isArray(data.languages)) {
-            for (const value of data.languages) {
-                candidates.push(value);
-            }
-        }
-        if (Array.isArray(data.supported_languages)) {
-            for (const value of data.supported_languages) {
-                candidates.push(value);
-            }
-        }
-        if (Array.isArray(data.admin_only_languages)) {
-            for (const value of data.admin_only_languages) {
-                candidates.push(value);
-            }
-        }
+        const candidates = Array.isArray(data.languages) ?
+            data.languages :
+            (Array.isArray(data.supported_languages) ? data.supported_languages : []);
 
         for (const value of candidates) {
             if (typeof value !== 'string') { continue; }
