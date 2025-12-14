@@ -1,6 +1,6 @@
 # Issues and Features
 
-Issues reported on [GitHub](https://github.com/yomidevs/yomitan/issues) should include information about:
+Issues reported on [GitHub](https://github.com/sottakuapp/sottaku-yomitan/issues) should include information about:
 
 - What the problem, question, or request is.
 - What browser is being used.
@@ -35,7 +35,7 @@ can be found in the [test](test) directory
 Steps to run [playwright](https://playwright.dev/) tests locally:
 
 1. Run `npx playwright install` to install the headless browsers
-2. Copy the dictionary test data located in the `dictionaries` branch to a directory named `dictionaries` via `git clone --branch dictionaries git@github.com:yomidevs/yomitan.git dictionaries` ([source](https://github.com/yomidevs/yomitan/blob/086e043856ad54cf13cb65f9ba4c63afe8a22cc3/.github/workflows/playwright.yml#L52-L57)).
+2. Copy the dictionary test data located in the `dictionaries` branch to a directory named `dictionaries` via `git clone --branch dictionaries git@github.com:sottakuapp/sottaku-yomitan.git dictionaries` ([source](https://github.com/sottakuapp/yomitan/blob/086e043856ad54cf13cb65f9ba4c63afe8a22cc3/.github/workflows/playwright.yml#L52-L57)).
 3. Now you can run `npx playwright test`. The first run might produce some benign errors complaining about `Error: A snapshot doesn't exist at ...writing actual.`, but subsequent runs should succeed.
 
 ## Building
@@ -85,7 +85,7 @@ After building, you can load the compiled extension into the Firefox browser.
 - Navigate to the Debugging page, type `about:debugging` into the url
 - Click on "This Firefox" on the left
 - Click on "Load Temporary Add-on" on the right
-- Navigate to the `yomitan-firefox-dev.zip` in your builds folder
+- Navigate to the `sottaku-yomitan-firefox-dev.zip` in your builds folder
 
 Immediately you should see the "Welcome" page!
 
@@ -102,11 +102,11 @@ Note: The "Load Temporary Add-on" option is temporary and the build will need to
 
 After building, you can load the compiled extension into the Edge browser.
 
-- Unpack the `yomitan-edge.zip`
+- Unpack the `sottaku-yomitan-edge.zip`
 - Navigate to the extension page using the "..." on the top right and clicking on "Manage extensions"
 - Turn on the toggle on the left that says "Developer Mode"
 - Click "Load unpacked" on the top right
-- Select the unpacked `yomitan-edge` folder
+- Select the unpacked `sottaku-yomitan-edge` folder
 
 Immediately you should see the "Welcome" page!
 
