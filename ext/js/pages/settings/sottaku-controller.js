@@ -1,5 +1,18 @@
 /*
- * Controller for Sottaku account and API settings.
+ * Copyright (C) 2025  Sottaku Inc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 import {isObjectNotArray} from '../../core/object-utilities.js';
@@ -100,7 +113,9 @@ export class SottakuController {
         void this._loadSupportedLanguages();
     }
 
-    /** */
+    /**
+     * @param {Event} e
+     */
     async _onLoginClick(e) {
         e.preventDefault();
         const username = this._usernameInput.value.trim();
@@ -112,14 +127,16 @@ export class SottakuController {
             this._setStatus('Signing in...', false);
             const data = await this._client.loginWithPassword(username, password);
             await this._applyAuthUpdate(data?.token ?? this._client.authToken, isObjectNotArray(data?.user) ? data.user : null);
-        } catch (e2) {
-            this._setStatus(toError(e2).message || 'Unable to sign in', true);
+        } catch (error) {
+            this._setStatus(toError(error).message || 'Unable to sign in', true);
         } finally {
             this._busy = false;
         }
     }
 
-    /** */
+    /**
+     * @param {Event} e
+     */
     async _onGoogleClick(e) {
         e.preventDefault();
         const origin = this._getOriginFromApiUrl();
@@ -127,18 +144,22 @@ export class SottakuController {
         try {
             await this._openTab(url);
             this._setStatus('Complete Google sign-in in the opened tab, then click "Use browser session".', false);
-        } catch (e2) {
-            this._setStatus(toError(e2).message, true);
+        } catch (error) {
+            this._setStatus(toError(error).message, true);
         }
     }
 
-    /** */
+    /**
+     * @param {Event} e
+     */
     async _onSyncCookieClick(e) {
         e.preventDefault();
         await this._syncFromBrowserSession(false);
     }
 
-    /** */
+    /**
+     * @param {Event} e
+     */
     async _onLogoutClick(e) {
         e.preventDefault();
         if (this._busy) { return; }
@@ -153,8 +174,8 @@ export class SottakuController {
             this._updateStatus({authToken: '', user: null, enabled: false});
             await this._settingsController.refresh();
             this._setStatus('Signed out of Sottaku', false);
-        } catch (e2) {
-            this._setStatus(toError(e2).message, true);
+        } catch (error) {
+            this._setStatus(toError(error).message, true);
         } finally {
             this._busy = false;
         }
@@ -494,13 +515,19 @@ export class SottakuController {
         const data = (response && typeof response === 'object') ? /** @type {Record<string, unknown>} */ (response) : {};
         const candidates = [];
         if (Array.isArray(data.languages)) {
-            candidates.push(...data.languages);
+            for (const value of data.languages) {
+                candidates.push(value);
+            }
         }
         if (Array.isArray(data.supported_languages)) {
-            candidates.push(...data.supported_languages);
+            for (const value of data.supported_languages) {
+                candidates.push(value);
+            }
         }
         if (Array.isArray(data.admin_only_languages)) {
-            candidates.push(...data.admin_only_languages);
+            for (const value of data.admin_only_languages) {
+                candidates.push(value);
+            }
         }
 
         for (const value of candidates) {
@@ -536,24 +563,59 @@ export class SottakuController {
             if (!silent) { this._setStatus('Checking browser session...', false); }
             const token = await this._client.syncTokenFromCookies();
             if (!token) {
-                if (!silent) { this._setStatus('No api_token cookie found on sottaku.app', true); }
+                if (!silent) {
+                    const loginUrl = `${origin}/login`;
+                    try {
+                        await this._openTab(loginUrl);
+                    } catch (error) {
+                        // NOP
+                    }
+                    this._setStatus('Sign in required. Complete login in the opened tab, then click "Use browser session".', true);
+                }
                 return;
             }
+            /** @type {unknown} */
             let user = null;
             try {
                 const profile = await this._client.getProfile();
                 if (profile && typeof profile === 'object' && isObjectNotArray(profile.user)) {
-                    // @ts-expect-error Allow loose shape from API
+                    // @ts-expect-error - Allow loose shape from API
                     user = profile.user;
                 }
-            } catch (e2) {
+            } catch (error) {
                 if (!silent) { this._setStatus('Session detected; unable to load profile details (continuing)', false); }
             }
-            const linkedUser = user ?? {username: '', email: '', id: 0, isPro: false, cookieDomain: origin};
-            await this._applyAuthUpdate(token, linkedUser);
-            if (!silent) { this._setStatus(this._getSignedInStatusText(linkedUser), false); }
-        } catch (e3) {
-            this._setStatus(toError(e3).message, true);
+            await this._applyAuthUpdate(token, user);
+
+            const proFlag = (
+                isObjectNotArray(user) && (
+                    (typeof /** @type {{isPro?: unknown}} */ (user).isPro === 'boolean') ||
+                    (typeof /** @type {{is_pro?: unknown}} */ (user).is_pro === 'boolean')
+                )
+            ) ?
+                (
+                    typeof /** @type {{isPro?: unknown}} */ (user).isPro === 'boolean' ?
+                        /** @type {{isPro: boolean}} */ (user).isPro :
+                        /** @type {{is_pro: boolean}} */ (user).is_pro
+                ) :
+                null;
+
+            if (proFlag === false) {
+                if (!silent) {
+                    const upgradeUrl = `${origin}/upgrade`;
+                    try {
+                        await this._openTab(upgradeUrl);
+                    } catch (error) {
+                        // NOP
+                    }
+                    this._setStatus(`Pro required. Upgrade at ${upgradeUrl}`, true);
+                }
+                return;
+            }
+
+            if (!silent) { this._setStatus(this._getSignedInStatusText(user), false); }
+        } catch (error) {
+            this._setStatus(toError(error).message, true);
         } finally {
             this._busy = false;
         }

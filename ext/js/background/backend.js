@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2023-2025  Yomitan Authors
  * Copyright (C) 2016-2022  Yomichan Authors
+ * Copyright (C) 2025  Sottaku Inc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,6 +21,7 @@ import {AnkiConnect} from '../comm/anki-connect.js';
 import {ClipboardMonitor} from '../comm/clipboard-monitor.js';
 import {ClipboardReader} from '../comm/clipboard-reader.js';
 import {Mecab} from '../comm/mecab.js';
+import {SottakuClient} from '../comm/sottaku-client.js';
 import {YomitanApi} from '../comm/yomitan-api.js';
 import {createApiMap, invokeApiMapHandler} from '../core/api-map.js';
 import {ExtensionError} from '../core/extension-error.js';
@@ -493,6 +495,10 @@ export class Backend {
     _onInstalled({reason}) {
         if (reason !== 'install') { return; }
         void this._requestPersistentStorage();
+        this._prepareCompletePromise.then(
+            () => { void this._autoLinkSottakuFromBrowserSession(); },
+            () => {}, // NOP
+        );
     }
 
     // Message handlers
@@ -1863,6 +1869,128 @@ export class Backend {
         if (typeof defaultTitle === 'undefined') { throw new Error('Failed to find default_title'); }
 
         return defaultTitle;
+    }
+
+    /**
+     * Best-effort: link Sottaku from existing browser session when the extension is installed.
+     * @returns {Promise<void>}
+     */
+    async _autoLinkSottakuFromBrowserSession() {
+        /** @type {import('settings').OptionsContext} */
+        const optionsContext = {current: true};
+        let options;
+        try {
+            options = this._getProfileOptions(optionsContext, false);
+        } catch (e) {
+            return;
+        }
+
+        const {sottaku} = options;
+        if (typeof sottaku?.authToken === 'string' && sottaku.authToken.length > 0) { return; }
+
+        const apiBaseUrl = typeof sottaku?.apiBaseUrl === 'string' && sottaku.apiBaseUrl.length > 0 ?
+            sottaku.apiBaseUrl :
+            'https://sottaku.app/api/v1';
+
+        let origin = 'https://sottaku.app';
+        try {
+            origin = new URL(apiBaseUrl).origin;
+        } catch (e) {
+            // NOP
+        }
+
+        const client = new SottakuClient({
+            apiBaseUrl,
+            cookieDomain: origin,
+        });
+
+        let token = null;
+        try {
+            token = await client.syncTokenFromCookies();
+        } catch (e) {
+            return;
+        }
+        if (!token) { return; }
+
+        /** @type {unknown} */
+        let user = null;
+        try {
+            const profile = await client.getProfile();
+            if (profile && typeof profile === 'object' && isObjectNotArray(profile.user)) {
+                // @ts-expect-error - Allow loose shape from API
+                user = profile.user;
+            }
+        } catch (e) {
+            // NOP
+        }
+
+        const proFlag = (
+            isObjectNotArray(user) && (
+                (typeof /** @type {{isPro?: unknown}} */ (user).isPro === 'boolean') ||
+                (typeof /** @type {{is_pro?: unknown}} */ (user).is_pro === 'boolean')
+            )
+        ) ?
+            (
+                typeof /** @type {{isPro?: unknown}} */ (user).isPro === 'boolean' ?
+                    /** @type {{isPro: boolean}} */ (user).isPro :
+                    /** @type {{is_pro: boolean}} */ (user).is_pro
+            ) :
+            null;
+
+        const normalizedUser = this._normalizeSottakuUser(user);
+        /** @type {import('settings-modifications').ScopedModificationSet[]} */
+        const updates = [
+            {action: 'set', scope: 'profile', optionsContext, path: 'sottaku.authToken', value: token},
+            {action: 'set', scope: 'profile', optionsContext, path: 'sottaku.cookieDomain', value: origin},
+            {action: 'set', scope: 'profile', optionsContext, path: 'sottaku.enabled', value: true},
+            {action: 'set', scope: 'profile', optionsContext, path: 'sottaku.user', value: normalizedUser},
+        ];
+        try {
+            await this._modifySettings(updates, 'backend');
+        } catch (e) {
+            return;
+        }
+
+        if (proFlag === false) {
+            try {
+                await this._createTab(`${origin}/upgrade`);
+            } catch (e) {
+                // NOP
+            }
+        }
+    }
+
+    /**
+     * @param {unknown} user
+     * @returns {import('settings').SottakuUser|null}
+     */
+    _normalizeSottakuUser(user) {
+        if (!isObjectNotArray(user)) { return null; }
+        const idRaw = /** @type {{id?: unknown}} */ (user).id;
+        let id = 0;
+        if (typeof idRaw === 'number' && Number.isFinite(idRaw)) {
+            id = idRaw;
+        } else if (typeof idRaw === 'string') {
+            const parsed = Number.parseInt(idRaw, 10);
+            if (Number.isFinite(parsed)) {
+                id = parsed;
+            }
+        }
+        const normalized = /** @type {import('settings').SottakuUser} */ ({
+            id,
+            username: null,
+            email: null,
+            isPro: /** @type {{isPro?: unknown, is_pro?: unknown}} */ (user).isPro === true || /** @type {{isPro?: unknown, is_pro?: unknown}} */ (user).is_pro === true,
+        });
+        const username = /** @type {{username?: unknown, name?: unknown}} */ (user).username ?? /** @type {{username?: unknown, name?: unknown}} */ (user).name;
+        if (typeof username === 'string' || username === null) {
+            normalized.username = username;
+        }
+        const email = /** @type {{email?: unknown}} */ (user).email;
+        if (typeof email === 'string' || email === null) {
+            normalized.email = email;
+        }
+        return normalized;
     }
 
     /**

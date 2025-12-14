@@ -313,17 +313,17 @@
                 <div class="settings-item-label">Account</div>
                 <div class="settings-item-description" id="sottaku-connection-status">Not connected</div>
                 <div class="settings-item-description">
-                    Use username/password or sign in with Google in your browser, then pull the session into the extension.
+                    Click "Use browser session" to link the account you are signed into at sottaku.app (Pro required).
                 </div>
             </div>
             <div class="settings-item-right settings-item-button-group-container">
                 <div class="sottaku-account-panel">
                     <div class="sottaku-input-row" id="sottaku-auth-form">
-                        <input type="text" id="sottaku-username" placeholder="Username or email" autocomplete="username">
-                        <input type="password" id="sottaku-password" placeholder="Password" autocomplete="current-password">
+                        <input hidden type="text" id="sottaku-username" placeholder="Username or email" autocomplete="username">
+                        <input hidden type="password" id="sottaku-password" placeholder="Password" autocomplete="current-password">
                         <div class="settings-item-button-group">
-                            <div class="settings-item-button-group-item"><button type="button" class="button" id="sottaku-login-button">Sign in</button></div>
-                            <div class="settings-item-button-group-item"><button type="button" class="button" id="sottaku-google-button">Sign in with Google (opens sottaku.app)</button></div>
+                            <div hidden class="settings-item-button-group-item"><button type="button" class="button" id="sottaku-login-button">Sign in</button></div>
+                            <div hidden class="settings-item-button-group-item"><button type="button" class="button" id="sottaku-google-button">Sign in with Google (opens sottaku.app)</button></div>
                             <div class="settings-item-button-group-item"><button type="button" class="button" id="sottaku-sync-cookie-button" title="Re-use your signed-in browser session">Use browser session</button></div>
                         </div>
                     </div>
