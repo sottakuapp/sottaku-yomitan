@@ -179,6 +179,10 @@ export class Display extends EventDispatcher {
         this._elementOverflowController = new ElementOverflowController(this);
         /** @type {boolean} */
         this._frameVisible = (pageType === 'search');
+        /** @type {?import('display').ContentDetails} */
+        this._lastNonClearContentDetails = null;
+        /** @type {number} */
+        this._lastUnexpectedClearRecoveryTime = 0;
         /** @type {HTMLElement} */
         this._menuContainer = querySelectorNotNull(document, '#popup-menus');
         /** @type {(event: MouseEvent) => void} */
@@ -506,6 +510,10 @@ export class Display extends EventDispatcher {
     setContent(details) {
         const {focus, params, state, content} = details;
         const historyMode = this._historyHasChanged ? details.historyMode : 'clear';
+        const type = params.type;
+        if (type === 'terms' || type === 'kanji') {
+            this._lastNonClearContentDetails = details;
+        }
 
         if (focus) {
             window.focus();
@@ -856,6 +864,7 @@ export class Display extends EventDispatcher {
                     this._setContentExtensionUnloaded();
                     break;
                 default:
+                    if (this._recoverFromUnexpectedClear()) { return; }
                     this._contentType = 'clear';
                     this._clearContent();
                     break;
@@ -1048,6 +1057,8 @@ export class Display extends EventDispatcher {
      * @param {WheelEvent} e
      */
     _onWheel(e) {
+        if (this._preventPopupScrollChaining(e)) { return; }
+        if (this._options === null) { return; }
         const scanningOptions = /** @type {import('settings').ProfileOptions} */ (this._options).scanning;
         if (e.altKey) {
             if (e.deltaY !== 0) {
@@ -1060,6 +1071,80 @@ export class Display extends EventDispatcher {
             this._scrollByPopupHeight(e.deltaY > 0 ? 1 : -1, scanningOptions.reducedMotionScrollingScale);
             e.preventDefault();
         }
+    }
+
+    /**
+     * Prevents fast scroll events from "escaping" to the host page when the popup is at its scroll boundary.
+     * This helps avoid situations where the popup content gets cleared due to unexpected navigation/frame resets.
+     * @param {WheelEvent} e
+     * @returns {boolean} `true` if the event was prevented.
+     */
+    _preventPopupScrollChaining(e) {
+        if (this._pageType !== 'popup' || this._options === null) { return false; }
+        if (e.altKey || e.shiftKey) { return false; }
+        if (/** @type {import('settings').ProfileOptions} */ (this._options).scanning.reducedMotionScrolling) { return false; }
+
+        const target = /** @type {?Node} */ (e.target);
+        const scrollElement = this._contentScrollElement;
+        if (target !== null && !scrollElement.contains(target)) { return false; }
+
+        const tolerance = 1;
+
+        const deltaY = e.deltaY;
+        if (deltaY !== 0) {
+            const maxY = scrollElement.scrollHeight - scrollElement.clientHeight;
+            if (maxY > 0) {
+                const scrollTop = scrollElement.scrollTop;
+                if ((deltaY < 0 && scrollTop <= tolerance) || (deltaY > 0 && scrollTop >= maxY - tolerance)) {
+                    if (e.cancelable) {
+                        e.preventDefault();
+                    }
+                    e.stopPropagation();
+                    return true;
+                }
+            }
+        }
+
+        const deltaX = e.deltaX;
+        if (deltaX !== 0) {
+            const maxX = scrollElement.scrollWidth - scrollElement.clientWidth;
+            if (maxX > 0) {
+                const scrollLeft = scrollElement.scrollLeft;
+                if ((deltaX < 0 && scrollLeft <= tolerance) || (deltaX > 0 && scrollLeft >= maxX - tolerance)) {
+                    if (e.cancelable) {
+                        e.preventDefault();
+                    }
+                    e.stopPropagation();
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Attempts to restore the previous content when the popup unexpectedly navigates to an invalid/empty state.
+     * @returns {boolean} `true` if a recovery was initiated.
+     */
+    _recoverFromUnexpectedClear() {
+        if (this._pageType !== 'popup' || !this._frameVisible || this._lastNonClearContentDetails === null) { return false; }
+
+        const now = Date.now();
+        if (now - this._lastUnexpectedClearRecoveryTime < 250) { return false; }
+        this._lastUnexpectedClearRecoveryTime = now;
+
+        const {params, state, content} = this._lastNonClearContentDetails;
+        /** @type {import('display').ContentDetails} */
+        const details = {
+            focus: false,
+            historyMode: 'clear',
+            params,
+            state,
+            content,
+        };
+        this.setContent(details);
+        return true;
     }
 
     /**
@@ -1378,7 +1463,6 @@ export class Display extends EventDispatcher {
     async _setContentTermsOrKanji(type, urlSearchParams, token) {
         const lookup = (urlSearchParams.get('lookup') !== 'false');
         const wildcardsEnabled = (urlSearchParams.get('wildcards') !== 'off');
-        const hasEnabledDictionaries = this._options ? this._options.dictionaries.some(({enabled}) => enabled) : false;
 
         // Set query
         safePerformance.mark('display:setQuery:start');
@@ -1416,6 +1500,16 @@ export class Display extends EventDispatcher {
             changeHistory = true;
         }
 
+        await this._setOptionsContextIfDifferent(optionsContext);
+        if (this._setContentToken !== token) { return; }
+
+        if (this._options === null) {
+            await this.updateOptions();
+            if (this._setContentToken !== token) { return; }
+        }
+
+        const hasEnabledDictionaries = this._options !== null && this._options.dictionaries.some(({enabled}) => enabled);
+
         let {dictionaryEntries} = content;
         if (!Array.isArray(dictionaryEntries)) {
             safePerformance.mark('display:findDictionaryEntries:start');
@@ -1442,14 +1536,6 @@ export class Display extends EventDispatcher {
         if (!contentOriginValid) {
             content.contentOrigin = this.getContentOrigin();
             changeHistory = true;
-        }
-
-        await this._setOptionsContextIfDifferent(optionsContext);
-        if (this._setContentToken !== token) { return; }
-
-        if (this._options === null) {
-            await this.updateOptions();
-            if (this._setContentToken !== token) { return; }
         }
 
         if (changeHistory) {

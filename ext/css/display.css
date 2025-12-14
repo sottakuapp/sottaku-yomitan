@@ -425,6 +425,9 @@ a:has(rt) {
 .contain-overscroll {
     overscroll-behavior: contain;
 }
+:root[data-page-type=popup] .contain-overscroll {
+    overscroll-behavior: none;
+}
 
 
 /* Sidebar layout */
@@ -930,6 +933,9 @@ button.action-button:active:not(:disabled) {
     position: relative;
     content-visibility: auto;
     contain-intrinsic-height: auto 500px;
+}
+:root[data-page-type=popup] .entry {
+    content-visibility: visible;
 }
 .entry+.entry {
     border-top: var(--thin-border-size) solid var(--light-border-color);

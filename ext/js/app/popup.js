@@ -117,6 +117,14 @@ export class Popup extends EventDispatcher {
         this._frame.style.height = '0';
         /** @type {boolean} */
         this._frameConnected = false;
+        /** @type {number} */
+        this._frameInjectionId = 0;
+        /** @type {number} */
+        this._frameInjectionIdWithContent = 0;
+        /** @type {boolean} */
+        this._hasShownContent = false;
+        /** @type {?import('display').ContentDetails} */
+        this._recoveryDisplayDetails = null;
         /** @type {boolean} */
         this._isPointerOverPopup = false;
 
@@ -343,9 +351,32 @@ export class Popup extends EventDispatcher {
 
         await this._show(sourceRects, writingMode);
 
+        if (!this._frameConnected) { return; }
+
         if (displayDetails !== null) {
+            this._cacheRecoveryDisplayDetails(displayDetails);
             safePerformance.mark('invokeDisplaySetContent:start');
-            void this._invokeSafe('displaySetContent', {details: displayDetails});
+            const promise = this._invokeSafe('displaySetContent', {details: displayDetails});
+            void promise.then(
+                () => {
+                    this._frameInjectionIdWithContent = this._frameInjectionId;
+                    this._hasShownContent = true;
+                },
+                () => {},
+            );
+        } else if (
+            this._hasShownContent &&
+            this._recoveryDisplayDetails !== null &&
+            this._frameInjectionIdWithContent !== this._frameInjectionId
+        ) {
+            safePerformance.mark('invokeDisplaySetContent:start');
+            const promise = this._invokeSafe('displaySetContent', {details: this._recoveryDisplayDetails});
+            void promise.then(
+                () => {
+                    this._frameInjectionIdWithContent = this._frameInjectionId;
+                },
+                () => {},
+            );
         }
     }
 
@@ -556,7 +587,9 @@ export class Popup extends EventDispatcher {
             }
             const url = chrome.runtime.getURL('/popup.html');
             if (useSecurePopupFrameUrl) {
-                contentDocument.location.href = url;
+                // Use `replace` so the popup doesn't keep an `about:blank` entry in its history.
+                // This helps avoid accidental navigation to an empty state via fast scroll/swipe gestures.
+                contentDocument.location.replace(url);
             } else {
                 frame.setAttribute('src', url);
             }
@@ -566,6 +599,7 @@ export class Popup extends EventDispatcher {
         this._frameClient = frameClient;
         await frameClient.connect(this._frame, this._targetOrigin, this._frameId, setupFrame);
         this._frameConnected = true;
+        this._frameInjectionId += 1;
 
         // Reattach mouse event listeners after frame injection
         const boundMouseOver = this._onFrameMouseOver.bind(this);
@@ -607,6 +641,7 @@ export class Popup extends EventDispatcher {
 
         this._frameClient = null;
         this._frameConnected = false;
+        this._frameInjectionIdWithContent = 0;
         this._injectPromise = null;
         this._injectPromiseComplete = false;
     }
@@ -634,6 +669,32 @@ export class Popup extends EventDispatcher {
         }
 
         await this._injectStyles();
+    }
+
+    /**
+     * Stores a copy of the most recent content update details for recovering after frame reinjection.
+     * This avoids caching potentially large `dictionaryEntries` payloads.
+     * @param {import('display').ContentDetails} displayDetails
+     */
+    _cacheRecoveryDisplayDetails(displayDetails) {
+        try {
+            // Avoid deep cloning; just store a lightweight copy that omits potentially large payloads.
+            // If recovery is needed, the display will re-run the lookup using params/state/optionsContext.
+            const {focus, historyMode, params, state, content} = displayDetails;
+            const content2 = (typeof content === 'object' && content !== null ? {...content} : content);
+            if (typeof content2 === 'object' && content2 !== null) {
+                delete content2.dictionaryEntries;
+            }
+            this._recoveryDisplayDetails = {
+                focus,
+                historyMode,
+                params: (typeof params === 'object' && params !== null ? {...params} : params),
+                state: (typeof state === 'object' && state !== null ? {...state} : state),
+                content: content2,
+            };
+        } catch (e) {
+            this._recoveryDisplayDetails = null;
+        }
     }
 
     /**
