@@ -1,0 +1,9 @@
+<svg width="200" height="300" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Black circle -->
+  <circle cx="100" cy="150" r="100" fill="black" />
+  
+  <!-- White pattern centered inside the circle -->
+  <g transform="translate(0,30)">
+    <path d="M100,60 L120,90 L140,60 L160,90 L140,120 L160,150 L140,180 L120,150 L100,180 L80,150 L60,180 L40,150 L60,120 L40,90 L60,60 L80,90 Z" fill="white" />
+  </g>
+</svg>

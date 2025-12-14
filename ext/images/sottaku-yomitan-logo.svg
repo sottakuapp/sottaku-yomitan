@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+     viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <!-- Smoother, scalable version of the original Yomitan gradient direction -->
+    <!-- Original (16x16) endpoints normalized: (11.876,4.073)->(4.014,11.935) -->
+    <linearGradient id="yomiGrad"
+      x1="0.74225" y1="0.25456"
+      x2="0.25088" y2="0.74594"
+      gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#bc00ff" stop-opacity="1"/>
+      <stop offset="1" stop-color="#00b9fe" stop-opacity="1"/>
+    </linearGradient>
+
+    <filter id="badgeShadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <!-- Full icon background: Yomitan gradient rounded square -->
+  <rect x="0" y="0" width="200" height="200" rx="20" ry="20" fill="url(#yomiGrad)"/>
+
+  <!-- Sottaku logo (dominant) -->
+  <circle cx="100" cy="100" r="90" fill="black"/>
+
+  <!-- Center the white motif inside the circle -->
+  <!-- The motif’s natural center is around (100,120); shift up by 20 to center at y=100 -->
+  <g transform="translate(0,-20)">
+    <path d="M100,60 L120,90 L140,60 L160,90 L140,120 L160,150 L140,180 L120,150 L100,180 L80,150 L60,180 L40,150 L60,120 L40,90 L60,60 L80,90 Z"
+          fill="white"/>
+  </g>
+
+  <!-- Yomitan “ヨミ” badge overlapping the circle (not clipped) -->
+  <g filter="url(#badgeShadow)">
+    <rect x="128" y="128" width="68" height="68" rx="14" ry="14" fill="url(#yomiGrad)"/>
+    <path d="M2 2v2h3v3H2v2h3v3H2v2h5V2Zm7 0v2h5V2Zm0 5v2h5V7Zm0 5v2h5v-2z"
+          fill="#fff"
+          shape-rendering="crispEdges"
+          transform="translate(128,128) scale(4.05) translate(1.05,1.05)"/>
+  </g>
+</svg>
