@@ -199,7 +199,59 @@ export class SottakuIntegration {
         }
 
         const scanResults = Array.isArray(scanResultsRaw) ? scanResultsRaw : [];
-        const limitedResults = scanResults.slice(0, Math.max(1, maxResults));
+        const matchLengthFallback = normalizedSource.length || normalizedQuery.length;
+        const resultMetadataCache = new Map();
+        /**
+         * @param {any} value
+         * @returns {{matchLength: number, hasDefinition: boolean}}
+         */
+        const getResultMetadata = (value) => {
+            if (resultMetadataCache.has(value)) { return resultMetadataCache.get(value); }
+            const normalizedValue = (typeof value === 'object' && value !== null) ? value : {};
+            const matchLengthRaw = normalizedValue.match_length ?? normalizedValue.matchLength;
+            const matchLengthParsed = Number.parseInt(matchLengthRaw, 10);
+            const matchLength = Number.isFinite(matchLengthParsed) ? Math.max(0, matchLengthParsed) : matchLengthFallback;
+            const translation = (
+                normalizedValue.word_translation ||
+                normalizedValue.english_word ||
+                ''
+            ).toString();
+            const sentenceTokens = Array.isArray(normalizedValue.cloze_sentence_tokens) ? normalizedValue.cloze_sentence_tokens : null;
+            const sentence = sentenceTokens && sentenceTokens.length > 0 ?
+                sentenceTokens.join('') :
+                (normalizedValue.cloze_sentence || '').toString();
+            const sentenceTranslation = (
+                normalizedValue.sentence_translation ||
+                normalizedValue.english_sentence ||
+                ''
+            ).toString();
+            const usageNotes = (normalizedValue.usage_notes || '').toString();
+            const hasDefinition = Boolean(
+                (normalizedValue.has_definition ?? null) ||
+                translation ||
+                sentence ||
+                sentenceTranslation ||
+                usageNotes,
+            );
+            const metadata = {matchLength, hasDefinition};
+            resultMetadataCache.set(value, metadata);
+            return metadata;
+        };
+
+        const scanResultsSorted = scanResults
+            .map((result, index) => ({result, index}))
+            .sort((a, b) => {
+                const aMetadata = getResultMetadata(a.result);
+                const bMetadata = getResultMetadata(b.result);
+                let i = bMetadata.matchLength - aMetadata.matchLength;
+                if (i !== 0) { return i; }
+                i = (bMetadata.hasDefinition ? 1 : 0) - (aMetadata.hasDefinition ? 1 : 0);
+                if (i !== 0) { return i; }
+                return a.index - b.index;
+            })
+            .map(({result}) => result);
+
+        const limitedResults = scanResultsSorted.slice(0, Math.max(1, maxResults));
 
         /** @type {import('dictionary').TermDictionaryEntry[]} */
         const entries = [];
