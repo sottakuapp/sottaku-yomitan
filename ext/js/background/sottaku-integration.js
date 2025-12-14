@@ -348,7 +348,13 @@ export class SottakuIntegration {
             (normalizedInfo.cloze_sentence || '').toString();
         const sentenceTranslation = (normalizedInfo.english_sentence || '').toString();
         const usageNotes = (normalizedInfo.usage_notes || '').toString();
-        const hasDefinition = Boolean((normalizedResult.has_definition ?? normalizedInfo.has_definition ?? null) || translation || sentence);
+        const hasDefinition = Boolean(
+            (normalizedResult.has_definition ?? normalizedInfo.has_definition ?? null) ||
+            translation ||
+            sentence ||
+            sentenceTranslation ||
+            usageNotes,
+        );
         const dictionaryAlias = getSottakuLanguageFlag(language);
         const resolvedSourceText = (sourceText || query || '').toString();
 
@@ -387,7 +393,7 @@ export class SottakuIntegration {
                 sequences: [Number.isFinite(questionId) ? questionId : -1],
                 isPrimary: true,
                 tags: [],
-                entries: this._createGlossaryEntries(translation, sentence, sentenceTranslation, usageNotes),
+                entries: this._createGlossaryEntries(translation, sentence, sentenceTranslation, usageNotes, language),
             },
         ];
 
@@ -441,19 +447,32 @@ export class SottakuIntegration {
      * @param {string} sentence
      * @param {string} sentenceTranslation
      * @param {string} usageNotes
+     * @param {string} language
      * @returns {import('dictionary-data').TermGlossaryContent[]}
      */
-    _createGlossaryEntries(translation, sentence, sentenceTranslation, usageNotes) {
-        /** @type {import('dictionary-data').TermGlossaryContent[]} */
-        const entries = [];
-        if (translation) { entries.push(translation); }
-        if (sentence) { entries.push(`Context: ${sentence}`); }
-        if (sentenceTranslation) { entries.push(`Translation: ${sentenceTranslation}`); }
-        if (usageNotes) { entries.push(`Usage: ${usageNotes}`); }
-        if (entries.length === 0) {
-            entries.push('No Sottaku definition available yet.');
-        }
-        return entries;
+    _createGlossaryEntries(translation, sentence, sentenceTranslation, usageNotes, language) {
+        const hasAnyContent = Boolean(translation || sentence || sentenceTranslation || usageNotes);
+
+        /** @type {import('structured-content').Content} */
+        const content = {
+            tag: 'div',
+            data: {sottakuLayout: 'glossary'},
+            content: [
+                translation ? {tag: 'div', data: {sottakuField: 'definition'}, lang: 'en', content: translation} : null,
+                (sentence || sentenceTranslation) ? {
+                    tag: 'div',
+                    data: {sottakuField: 'exampleGroup'},
+                    content: [
+                        sentence ? {tag: 'div', data: {sottakuField: 'example'}, lang: language, content: sentence} : null,
+                        sentenceTranslation ? {tag: 'div', data: {sottakuField: 'exampleTranslation'}, lang: 'en', content: sentenceTranslation} : null,
+                    ],
+                } : null,
+                usageNotes ? {tag: 'div', data: {sottakuField: 'usage'}, lang: 'en', content: usageNotes} : null,
+                hasAnyContent ? null : {tag: 'div', data: {sottakuField: 'empty'}, content: 'No Sottaku definition available yet.'},
+            ],
+        };
+
+        return [{type: 'structured-content', content}];
     }
 
     /**

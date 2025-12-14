@@ -1304,6 +1304,51 @@ button.action-button:active:not(:disabled) {
     transition: background-color var(--animation-duration) ease-in-out;
 }
 
+/* Sottaku glossary formatting */
+.definition-item[data-dictionary="Sottaku"] .gloss-list {
+    list-style: none;
+    padding-left: 0;
+}
+.definition-item[data-dictionary="Sottaku"] .gloss-item {
+    display: block;
+}
+.definition-item[data-dictionary="Sottaku"] .gloss-content.structured-content .gloss-sc-div[data-sc-sottaku-layout="glossary"] {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+}
+.definition-item[data-dictionary="Sottaku"] .gloss-content.structured-content [data-sc-sottaku-field="definition"] {
+    font-weight: 600;
+}
+.definition-item[data-dictionary="Sottaku"] .gloss-content.structured-content [data-sc-sottaku-field="exampleGroup"] {
+    padding: 0.5em 0.75em;
+    border-left: 0.25em solid var(--accent-color);
+    border-radius: 0.4em;
+    background-color: var(--background-color-dark1);
+}
+.definition-item[data-dictionary="Sottaku"] .gloss-content.structured-content [data-sc-sottaku-field="exampleTranslation"] {
+    margin-top: 0.25em;
+    color: var(--text-color-light3);
+    font-size: 0.95em;
+}
+.definition-item[data-dictionary="Sottaku"] .gloss-content.structured-content [data-sc-sottaku-field="usage"] {
+    color: var(--text-color-light3);
+    font-size: 0.95em;
+    font-style: italic;
+}
+.definition-item[data-dictionary="Sottaku"] .gloss-content.structured-content [data-sc-sottaku-field="empty"] {
+    color: var(--text-color-light3);
+    font-style: italic;
+}
+:root[data-glossary-layout-mode^=compact] .definition-item[data-dictionary="Sottaku"] .gloss-list,
+:root[data-glossary-layout-mode^=compact] .definition-item[data-dictionary="Sottaku"] .gloss-item,
+:root[data-glossary-layout-mode^=compact] .definition-item[data-dictionary="Sottaku"] .gloss-content {
+    display: block;
+}
+:root[data-glossary-layout-mode^=compact] .definition-item[data-dictionary="Sottaku"] .gloss-item::before {
+    content: none;
+}
+
 /* Collapse & Expand */
 button.expansion-button {
     --button-content-color: var(--text-color-light4);
