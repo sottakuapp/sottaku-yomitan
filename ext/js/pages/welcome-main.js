@@ -31,6 +31,7 @@ import {RecommendedSettingsController} from './settings/recommended-settings-con
 import {ScanInputsSimpleController} from './settings/scan-inputs-simple-controller.js';
 import {SettingsController} from './settings/settings-controller.js';
 import {SettingsDisplayController} from './settings/settings-display-controller.js';
+import {SottakuLocalesController} from './settings/sottaku-locales-controller.js';
 import {StatusFooter} from './settings/status-footer.js';
 
 /**
@@ -103,6 +104,9 @@ await Application.main(true, async (application) => {
 
     const recommendedPermissionsController = new RecommendedPermissionsController(settingsController);
     preparePromises.push(recommendedPermissionsController.prepare());
+
+    const sottakuLocalesController = new SottakuLocalesController(settingsController);
+    preparePromises.push(sottakuLocalesController.prepare());
 
     const languagesController = new LanguagesController(settingsController);
     preparePromises.push(languagesController.prepare());

@@ -44,6 +44,7 @@ import {RecommendedSettingsController} from './recommended-settings-controller.j
 import {ScanInputsController} from './scan-inputs-controller.js';
 import {ScanInputsSimpleController} from './scan-inputs-simple-controller.js';
 import {SottakuController} from './sottaku-controller.js';
+import {SottakuLocalesController} from './sottaku-locales-controller.js';
 import {SecondarySearchDictionaryController} from './secondary-search-dictionary-controller.js';
 import {SentenceTerminationCharactersController} from './sentence-termination-characters-controller.js';
 import {SettingsController} from './settings-controller.js';
@@ -120,6 +121,9 @@ await Application.main(true, async (application) => {
 
     const genericSettingController = new GenericSettingController(settingsController);
     preparePromises.push(setupGenericSettingController(genericSettingController));
+
+    const sottakuLocalesController = new SottakuLocalesController(settingsController);
+    preparePromises.push(sottakuLocalesController.prepare());
 
     const sottakuController = new SottakuController(settingsController);
     preparePromises.push(sottakuController.prepare());

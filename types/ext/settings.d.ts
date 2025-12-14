@@ -161,6 +161,7 @@ export type SottakuOptions = {
     enabled: boolean;
     apiBaseUrl: string;
     authToken: string;
+    locale: string;
     languageMode: 'auto' | 'ja' | 'ko' | 'mixed';
     preferredLanguages: string[];
     user: SottakuUser | null;

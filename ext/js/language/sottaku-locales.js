@@ -1,0 +1,20 @@
+export const SOTTAKU_SUPPORTED_LOCALES = [
+    {locale: 'en', name: 'English'},
+    {locale: 'zh_Hans_CN', name: '简体中文'},
+    {locale: 'zh_Hant_TW', name: '繁體中文'},
+    {locale: 'hi', name: 'हिन्दी'},
+    {locale: 'es', name: 'Español'},
+    {locale: 'ar', name: 'العربية'},
+    {locale: 'fr', name: 'Français'},
+    {locale: 'pt', name: 'Português'},
+    {locale: 'ru', name: 'Русский'},
+    {locale: 'id', name: 'Bahasa Indonesia'},
+    {locale: 'de', name: 'Deutsch'},
+    {locale: 'ja', name: '日本語'},
+    {locale: 'vi', name: 'Tiếng Việt'},
+    {locale: 'fil_PH', name: 'Tagalog'},
+    {locale: 'ko', name: '한국어'},
+    {locale: 'th', name: 'ไทย'},
+    {locale: 'it', name: 'Italiano'},
+];
+

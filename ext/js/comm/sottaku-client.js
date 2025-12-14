@@ -91,12 +91,13 @@ export class SottakuClient {
     /**
      * @param {string} query
      * @param {string} language
+     * @param {string} [locale]
      * @returns {Promise<unknown>}
      */
-    async search(query, language) {
+    async search(query, language, locale) {
         return await this._request('/dictionary/search', {
             method: 'POST',
-            body: {query, language},
+            body: {query, language, locale},
         });
     }
 
@@ -105,13 +106,20 @@ export class SottakuClient {
      * @param {string} text
      * @param {string} language
      * @param {number} [maxResults]
+     * @param {string} [locale]
      * @returns {Promise<{results: any[], originalTextLength: number}>}
      */
-    async scan(text, language, maxResults) {
+    async scan(text, language, maxResults, locale) {
         /** @type {Record<string, any>} */
         const body = {text, language};
         if (Number.isFinite(maxResults)) {
             body.maxResults = maxResults;
+        }
+        if (typeof locale === 'string') {
+            const trimmed = locale.trim();
+            if (trimmed) {
+                body.locale = trimmed;
+            }
         }
         const data = await this._request('/dictionary/yomitan-scan', {
             method: 'POST',
@@ -129,12 +137,13 @@ export class SottakuClient {
     /**
      * @param {number[]} wordIds
      * @param {string} language
+     * @param {string} [locale]
      * @returns {Promise<Record<string, unknown>>}
      */
-    async getWordInfoBatch(wordIds, language) {
+    async getWordInfoBatch(wordIds, language, locale) {
         const data = await this._request('/dictionary/word-info-batch', {
             method: 'POST',
-            body: {wordIds, language},
+            body: {wordIds, language, locale},
         });
         if (data && typeof data === 'object' && 'word_info' in data) {
             /** @type {Record<string, unknown>} */
@@ -147,11 +156,12 @@ export class SottakuClient {
     /**
      * @param {number} wordId
      * @param {string} language
+     * @param {string} [locale]
      * @returns {Promise<unknown>}
      */
-    async getWordInfo(wordId, language) {
+    async getWordInfo(wordId, language, locale) {
         const url = `/dictionary/word/${wordId}`;
-        return await this._request(url, {method: 'GET', language});
+        return await this._request(url, {method: 'GET', language, locale});
     }
 
     /**
@@ -237,8 +247,16 @@ export class SottakuClient {
     }
 
     /**
+     * Fetch supported UI locales (code + display name).
+     * @returns {Promise<unknown>}
+     */
+    async getSupportedLocales() {
+        return await this._request('/dictionary/supported-locales', {method: 'GET', auth: false});
+    }
+
+    /**
      * @param {string} path
-     * @param {{method?: string, body?: unknown, auth?: boolean, language?: string}} [options]
+     * @param {{method?: string, body?: unknown, auth?: boolean, language?: string, locale?: string}} [options]
      * @returns {Promise<any>}
      */
     async _request(path, options = {}) {
@@ -247,8 +265,9 @@ export class SottakuClient {
             body,
             auth = true,
             language = null,
+            locale = null,
         } = options;
-        const url = this._buildUrl(path, language);
+        const url = this._buildUrl(path, language, locale);
         /** @type {RequestInit} */
         const fetchOptions = {
             method,
@@ -290,14 +309,18 @@ export class SottakuClient {
     /**
      * @param {string} path
      * @param {string|null} language
+     * @param {string|null} locale
      * @returns {string}
      */
-    _buildUrl(path, language) {
+    _buildUrl(path, language, locale) {
         const trimmedBase = this._apiBaseUrl.replace(/\/+$/, '');
         const trimmedPath = path.startsWith('/') ? path : `/${path}`;
         const url = new URL(trimmedBase + trimmedPath);
         if (language && !url.searchParams.has('language')) {
             url.searchParams.set('language', language);
+        }
+        if (locale && !url.searchParams.has('locale')) {
+            url.searchParams.set('locale', locale);
         }
         return url.href;
     }

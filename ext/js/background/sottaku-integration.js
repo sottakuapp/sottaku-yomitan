@@ -5,6 +5,7 @@ import {getSottakuLanguageFlag, normalizeSottakuLanguages, SOTTAKU_SUPPORTED_LAN
 
 const JAPANESE_CHAR_PATTERN = /[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff]/;
 const HANGUL_CHAR_PATTERN = /[\u1100-\u11ff\u3130-\u318f\uac00-\ud7af]/;
+const SOTTAKU_UPGRADE_URL = 'https://sottaku.app/upgrade';
 
 /**
  * @typedef {object} SottakuLanguageResult
@@ -177,10 +178,12 @@ export class SottakuIntegration {
         let scanResultsRaw = [];
         let scanOriginalLength = 0;
         try {
+            const locale = typeof this._options?.sottaku?.locale === 'string' ? this._options.sottaku.locale.trim() : '';
             const scanResult = await this._client.scan(
                 normalizedQuery,
                 language,
                 maxResults,
+                locale,
             );
             scanResultsRaw = scanResult.results;
             scanOriginalLength = scanResult.originalTextLength;
@@ -188,7 +191,9 @@ export class SottakuIntegration {
             const message = toError(e).message || '';
             const lowered = message.toLowerCase();
             if (lowered.includes('402') || lowered.includes('pro subscription') || lowered.includes('upgrade')) {
-                throw new ExtensionError('Upgrade required: https://sottaku.app/upgrade');
+                const error = new ExtensionError(`Upgrade required: ${SOTTAKU_UPGRADE_URL}`);
+                error.data = {type: 'sottakuUpgradeRequired', upgradeUrl: SOTTAKU_UPGRADE_URL};
+                throw error;
             }
             throw e;
         }
@@ -346,7 +351,13 @@ export class SottakuIntegration {
         const sentence = sentenceTokens && sentenceTokens.length > 0 ?
             sentenceTokens.join('') :
             (normalizedInfo.cloze_sentence || '').toString();
-        const sentenceTranslation = (normalizedInfo.english_sentence || '').toString();
+        const sentenceTranslation = (
+            normalizedInfo.sentence_translation ||
+            normalizedInfo.english_sentence ||
+            normalizedResult.sentence_translation ||
+            normalizedResult.english_sentence ||
+            ''
+        ).toString();
         const usageNotes = (normalizedInfo.usage_notes || '').toString();
         const hasDefinition = Boolean(
             (normalizedResult.has_definition ?? normalizedInfo.has_definition ?? null) ||
@@ -452,22 +463,24 @@ export class SottakuIntegration {
      */
     _createGlossaryEntries(translation, sentence, sentenceTranslation, usageNotes, language) {
         const hasAnyContent = Boolean(translation || sentence || sentenceTranslation || usageNotes);
+        const locale = typeof this._options?.sottaku?.locale === 'string' ? this._options.sottaku.locale.trim() : '';
+        const localeLang = (locale || 'en').replace(/_/g, '-');
 
         /** @type {import('structured-content').Content} */
         const content = {
             tag: 'div',
             data: {sottakuLayout: 'glossary'},
             content: [
-                translation ? {tag: 'div', data: {sottakuField: 'definition'}, lang: 'en', content: translation} : null,
+                translation ? {tag: 'div', data: {sottakuField: 'definition'}, lang: localeLang, content: translation} : null,
                 (sentence || sentenceTranslation) ? {
                     tag: 'div',
                     data: {sottakuField: 'exampleGroup'},
                     content: [
                         sentence ? {tag: 'div', data: {sottakuField: 'example'}, lang: language, content: sentence} : null,
-                        sentenceTranslation ? {tag: 'div', data: {sottakuField: 'exampleTranslation'}, lang: 'en', content: sentenceTranslation} : null,
+                        sentenceTranslation ? {tag: 'div', data: {sottakuField: 'exampleTranslation'}, lang: localeLang, content: sentenceTranslation} : null,
                     ],
                 } : null,
-                usageNotes ? {tag: 'div', data: {sottakuField: 'usage'}, lang: 'en', content: usageNotes} : null,
+                usageNotes ? {tag: 'div', data: {sottakuField: 'usage'}, lang: localeLang, content: usageNotes} : null,
                 hasAnyContent ? null : {tag: 'div', data: {sottakuField: 'empty'}, content: 'No Sottaku definition available yet.'},
             ],
         };

@@ -1463,6 +1463,7 @@ export class Display extends EventDispatcher {
     async _setContentTermsOrKanji(type, urlSearchParams, token) {
         const lookup = (urlSearchParams.get('lookup') !== 'false');
         const wildcardsEnabled = (urlSearchParams.get('wildcards') !== 'off');
+        const urlSottakuError = urlSearchParams.get('sottaku_error');
 
         // Set query
         safePerformance.mark('display:setQuery:start');
@@ -1492,6 +1493,12 @@ export class Display extends EventDispatcher {
             changeHistory = true;
         }
 
+        const stateAny = /** @type {import('core').UnknownObject} */ (state);
+        let sottakuUpgradeRequired = (
+            urlSottakuError === 'upgrade_required' ||
+            (urlSottakuError === null && stateAny.sottakuError === 'upgrade_required')
+        );
+
         let {focusEntry, scrollX, scrollY, optionsContext} = state;
         if (typeof focusEntry !== 'number') { focusEntry = 0; }
         if (!(typeof optionsContext === 'object' && optionsContext !== null)) {
@@ -1513,7 +1520,26 @@ export class Display extends EventDispatcher {
         let {dictionaryEntries} = content;
         if (!Array.isArray(dictionaryEntries)) {
             safePerformance.mark('display:findDictionaryEntries:start');
-            dictionaryEntries = hasEnabledDictionaries && lookup && query.length > 0 ? await this._findDictionaryEntries(type === 'kanji', query, primaryReading, wildcardsEnabled, optionsContext) : [];
+            try {
+                dictionaryEntries = hasEnabledDictionaries && lookup && query.length > 0 ?
+                    await this._findDictionaryEntries(type === 'kanji', query, primaryReading, wildcardsEnabled, optionsContext) :
+                    [];
+                if (urlSottakuError === null && typeof stateAny.sottakuError === 'string') {
+                    delete stateAny.sottakuError;
+                    sottakuUpgradeRequired = false;
+                    changeHistory = true;
+                }
+            } catch (e) {
+                const error = toError(e);
+                if (lookup && this._isSottakuUpgradeRequiredError(error)) {
+                    sottakuUpgradeRequired = true;
+                    stateAny.sottakuError = 'upgrade_required';
+                    dictionaryEntries = [];
+                    changeHistory = true;
+                } else {
+                    throw e;
+                }
+            }
             safePerformance.mark('display:findDictionaryEntries:end');
             safePerformance.measure('display:findDictionaryEntries', 'display:findDictionaryEntries:start', 'display:findDictionaryEntries:end');
             if (this._setContentToken !== token) { return; }
@@ -1549,7 +1575,8 @@ export class Display extends EventDispatcher {
         safePerformance.mark('display:updateNavigationAuto:end');
         safePerformance.measure('display:updateNavigationAuto', 'display:updateNavigationAuto:start', 'display:updateNavigationAuto:end');
 
-        this._setNoContentVisible(hasEnabledDictionaries && dictionaryEntries.length === 0 && lookup);
+        this._setSottakuUpgradeRequiredVisible(lookup && sottakuUpgradeRequired);
+        this._setNoContentVisible(!sottakuUpgradeRequired && hasEnabledDictionaries && dictionaryEntries.length === 0 && lookup);
         this._setNoDictionariesVisible(!hasEnabledDictionaries);
 
         const container = this._container;
@@ -1628,6 +1655,7 @@ export class Display extends EventDispatcher {
         }
 
         this._updateNavigation(false, false);
+        this._setSottakuUpgradeRequiredVisible(false);
         this._setNoContentVisible(false);
         this._setNoDictionariesVisible(false);
         this._setQuery('', '', 0);
@@ -1640,6 +1668,7 @@ export class Display extends EventDispatcher {
     _clearContent() {
         this._container.textContent = '';
         this._updateNavigationAuto();
+        this._setSottakuUpgradeRequiredVisible(false);
         this._setQuery('', '', 0);
 
         this._triggerContentUpdateStart();
@@ -1655,6 +1684,18 @@ export class Display extends EventDispatcher {
 
         if (noResults !== null) {
             noResults.hidden = !visible;
+        }
+    }
+
+    /**
+     * @param {boolean} visible
+     */
+    _setSottakuUpgradeRequiredVisible(visible) {
+        /** @type {?HTMLElement} */
+        const upgradeRequired = document.querySelector('#sottaku-upgrade-required');
+
+        if (upgradeRequired !== null) {
+            upgradeRequired.hidden = !visible;
         }
     }
 
@@ -1722,6 +1763,22 @@ export class Display extends EventDispatcher {
             title = `${text}${separator}${title}`;
         }
         document.title = title;
+    }
+
+    /**
+     * @param {Error} error
+     * @returns {boolean}
+     */
+    _isSottakuUpgradeRequiredError(error) {
+        if (error instanceof ExtensionError) {
+            const {data} = error;
+            if (typeof data === 'object' && data !== null) {
+                const {type} = /** @type {import('core').UnknownObject} */ (data);
+                if (type === 'sottakuUpgradeRequired') { return true; }
+            }
+        }
+        const message = (error.message || '').toLowerCase();
+        return message.includes('upgrade') && message.includes('sottaku.app/upgrade');
     }
 
     /** */

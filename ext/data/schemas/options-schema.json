@@ -84,6 +84,7 @@
                                     "enabled",
                                     "apiBaseUrl",
                                     "authToken",
+                                    "locale",
                                     "languageMode",
                                     "preferredLanguages",
                                     "user",
@@ -99,6 +100,10 @@
                                         "default": "https://sottaku.app/api/v1"
                                     },
                                     "authToken": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "locale": {
                                         "type": "string",
                                         "default": ""
                                     },

@@ -589,6 +589,7 @@ export class OptionsUtil {
             this._updateVersion74,
             this._updateVersion75,
             this._updateVersion76,
+            this._updateVersion77,
         ];
         /* eslint-enable @typescript-eslint/unbound-method */
         if (typeof targetVersion === 'number' && targetVersion < result.length) {
@@ -1851,6 +1852,7 @@ export class OptionsUtil {
                 enabled: true,
                 apiBaseUrl: typeof current?.apiBaseUrl === 'string' && current.apiBaseUrl.length > 0 ? current.apiBaseUrl : 'https://sottaku.app/api/v1',
                 authToken: typeof current?.authToken === 'string' ? current.authToken : '',
+                locale: typeof current?.locale === 'string' ? current.locale : '',
                 languageMode,
                 preferredLanguages,
                 user: (typeof current?.user === 'object' || current?.user === null) ? (current?.user ?? null) : null,
@@ -1877,6 +1879,20 @@ export class OptionsUtil {
 
             profile.options.sottaku.preferredLanguages = preferredLanguages;
             profile.options.sottaku.languageMode = languageMode;
+        }
+    }
+
+    /**
+     * - Added sottaku.locale.
+     * @type {import('options-util').UpdateFunction}
+     */
+    async _updateVersion77(options) {
+        for (const profile of options.profiles) {
+            const sottaku = profile.options?.sottaku;
+            if (!sottaku || typeof sottaku !== 'object') { continue; }
+            if (typeof sottaku.locale !== 'string') {
+                sottaku.locale = '';
+            }
         }
     }
 

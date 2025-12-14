@@ -59,7 +59,7 @@
     </div>
 
     <!-- Content -->
-    <h2><strong>Language setup</strong></h2>
+    <h2><strong>Locale setup</strong></h2>
     <div class="settings-group">
         <div class="settings-item"><div class="settings-item-inner">
             <div class="settings-item-left">
@@ -69,10 +69,23 @@
         <div class="settings-item"><div class="settings-item-inner settings-item-inner-wrappable">
             <div class="settings-item-left">
                 <div class="settings-item-label">
-                    Language
+                    Locale
                 </div>
                 <div class="settings-item-description">
-                    Language of the text that is being looked up.
+                    Language used for translations returned by Sottaku.
+                </div>
+            </div>
+            <div class="settings-item-right">
+                <select id="locale-select" data-setting="sottaku.locale"></select>
+            </div>
+        </div></div>
+        <div class="settings-item" hidden><div class="settings-item-inner settings-item-inner-wrappable">
+            <div class="settings-item-left">
+                <div class="settings-item-label">
+                    Text language
+                </div>
+                <div class="settings-item-description">
+                    Used for offline dictionary features and preview tooling.
                 </div>
             </div>
             <div class="settings-item-right">

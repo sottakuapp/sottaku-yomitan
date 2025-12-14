@@ -27,6 +27,7 @@ import {TextSourceElement} from '../dom/text-source-element.js';
 import {TextSourceGenerator} from '../dom/text-source-generator.js';
 import {TextSourceRange} from '../dom/text-source-range.js';
 import {TextScanner} from '../language/text-scanner.js';
+import {ThemeController} from './theme-controller.js';
 
 /**
  * This is the main class responsible for scanning and handling webpage content.
@@ -409,14 +410,92 @@ export class Frontend {
     /**
      * @param {import('text-scanner').EventArgument<'searchError'>} details
      */
-    _onSearchError({error, textSource, inputInfo: {passive}}) {
+    _onSearchError({error, textSource, inputInfo}) {
+        const {passive, eventType, detail: inputInfoDetail} = inputInfo;
         if (this._application.webExtension.unloaded) {
             if (textSource !== null && !passive) {
                 this._showExtensionUnloaded(textSource);
             }
-        } else {
-            log.error(error);
+            return;
         }
+
+        if (textSource !== null && this._isSottakuUpgradeRequiredError(error)) {
+            this._stopClearSelectionDelayed();
+            this._textScanner.setCurrentTextSource(textSource);
+
+            let focus = (eventType === 'mouseMove');
+            if (typeof inputInfoDetail === 'object' && inputInfoDetail !== null) {
+                const focus2 = inputInfoDetail.focus;
+                if (typeof focus2 === 'boolean') { focus = focus2; }
+            }
+
+            const query = textSource.text();
+            const themeController = new ThemeController(document.documentElement);
+            const pageTheme = themeController.computeSiteTheme();
+
+            let url = window.location.href;
+            const documentTitle = document.title;
+            let optionsContext = this._optionsContextOverride;
+            if (optionsContext === null) {
+                optionsContext = {depth: this._depth, url};
+            } else {
+                url = optionsContext.url;
+            }
+
+            const {tabId, frameId} = this._application;
+
+            /** @type {import('display').ContentDetails} */
+            const details = {
+                focus,
+                historyMode: 'clear',
+                params: {
+                    type: 'terms',
+                    query,
+                    wildcards: 'off',
+                    sottaku_error: 'upgrade_required',
+                },
+                state: {
+                    focusEntry: 0,
+                    optionsContext,
+                    url,
+                    pageTheme,
+                    sentence: {text: '', offset: 0},
+                    documentTitle,
+                },
+                content: {
+                    dictionaryEntries: [],
+                    contentOrigin: {tabId, frameId},
+                },
+            };
+
+            if (textSource instanceof TextSourceElement && textSource.fullContent !== query) {
+                details.params.full = textSource.fullContent;
+                details.params['full-visible'] = 'true';
+            }
+
+            void this._showPopupContent(textSource, optionsContext, details);
+            return;
+        }
+
+        log.error(error);
+    }
+
+    /**
+     * @param {Error} error
+     * @returns {boolean}
+     */
+    _isSottakuUpgradeRequiredError(error) {
+        try {
+            const data = /** @type {import('core').UnknownObject} */ (/** @type {unknown} */ (error)).data;
+            if (typeof data === 'object' && data !== null) {
+                const {type} = /** @type {import('core').UnknownObject} */ (data);
+                if (type === 'sottakuUpgradeRequired') { return true; }
+            }
+        } catch (e) {
+            // NOP
+        }
+        const message = (error.message || '').toLowerCase();
+        return message.includes('upgrade') && message.includes('sottaku.app/upgrade');
     }
 
     /**
