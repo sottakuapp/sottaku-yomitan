@@ -149,6 +149,8 @@ export class DisplayGenerator {
 
         // Add definitions
         const dictionaryTag = this._createDictionaryTag('');
+        const hasSottakuDefinition = definitions.some(({dictionary}) => dictionary === 'Sottaku');
+        let movedInflectionRuleChains = false;
         for (let i = 0, ii = definitions.length; i < ii; ++i) {
             const definition = definitions[i];
             const {dictionary, dictionaryAlias} = definition;
@@ -186,6 +188,19 @@ export class DisplayGenerator {
 
             const node2 = this._createTermDefinition(definition, dictionaryTag, headwords, uniqueTerms, uniqueReadings);
             node2.dataset.index = `${i}`;
+
+            if (hasSottakuDefinition && !movedInflectionRuleChains && dictionary === 'Sottaku' && inflectionRuleChainCandidates.length > 0) {
+                const tagListContainer = this._querySelector(node2, '.definition-tag-list');
+                const parent = tagListContainer?.parentNode;
+                if (parent) {
+                    const headerRow = document.createElement('div');
+                    headerRow.classList.add('definition-header-row');
+                    parent.insertBefore(headerRow, tagListContainer);
+                    headerRow.appendChild(tagListContainer);
+                    headerRow.appendChild(inflectionRuleChainsContainer);
+                    movedInflectionRuleChains = true;
+                }
+            }
             definitionsContainer.appendChild(node2);
         }
         definitionsContainer.dataset.count = `${definitions.length}`;

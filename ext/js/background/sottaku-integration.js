@@ -180,7 +180,7 @@ export class SottakuIntegration {
         try {
             const locale = typeof this._options?.sottaku?.locale === 'string' ? this._options.sottaku.locale.trim() : '';
             const scanResult = await this._client.scan(
-                normalizedQuery,
+                normalizedSource,
                 language,
                 maxResults,
                 locale,
@@ -420,6 +420,21 @@ export class SottakuIntegration {
         );
         const dictionaryAlias = getSottakuLanguageFlag(language);
         const resolvedSourceText = (sourceText || query || '').toString();
+        const rawInflectionRules = normalizedResult.inflection_rules ?? normalizedInfo.inflection_rules;
+        const inflectionRuleNames = Array.isArray(rawInflectionRules) ?
+            rawInflectionRules
+                .map((value) => (value ?? '').toString().trim())
+                .filter((value) => value.length > 0) :
+            [];
+
+        /** @type {import('dictionary').InflectionRuleChainCandidate[]} */
+        const inflectionRuleChainCandidates = [];
+        if (inflectionRuleNames.length > 0) {
+            inflectionRuleChainCandidates.push({
+                source: 'algorithm',
+                inflectionRules: inflectionRuleNames.map((name) => ({name, description: ''})),
+            });
+        }
 
         /** @type {import('dictionary').TermHeadword[]} */
         const headwords = [
@@ -488,7 +503,7 @@ export class SottakuIntegration {
             type: 'term',
             isPrimary: true,
             textProcessorRuleChainCandidates: [],
-            inflectionRuleChainCandidates: [],
+            inflectionRuleChainCandidates,
             score: Math.max(0, 100 - index),
             frequencyOrder: index,
             dictionaryIndex: 0,
