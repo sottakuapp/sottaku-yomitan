@@ -1,6 +1,6 @@
-# Privacy Policy for Yomitan
+# Privacy Policy for Sottaku-Yomitan
 
-Yomitan data is stored locally on your device. Yomitan does not sell or externally collect any user data.
+Sottaku-Yomitan data is stored locally on your device. Sottaku-Yomitan does not sell or externally collect any user data.
 
 Some features require sending data to third party services. These features and what data is sent are detailed below.
 
@@ -28,22 +28,22 @@ Custom audio sources may be configured manually by users to access any URL. A di
 
 [Anki](https://apps.ankiweb.net/) connectivity is provided through [AnkiConnect](https://ankiweb.net/shared/info/2055492159).
 
-Anki actions may be triggered when a user performs a Yomitan search or interacts with an Anki feature within Yomitan.
+Anki actions may be triggered when a user performs a Sottaku-Yomitan search or interacts with an Anki feature within Sottaku-Yomitan.
 
-Yomitan may send **limited information about the current webpage, information contained in Yomitan dictionary entries, and/or relevant user settings**.
+Sottaku-Yomitan may send **limited information about the current webpage, information contained in Sottaku-Yomitan dictionary entries, and/or relevant user settings**.
 
 **Enabling Anki connectivity does not enable sending any webpage information unless explicitly configured to do so.** Only the minimum amount of data is sent and only what is specifically configured by the user.
 
 Webpage information that may be sent is limited to: the term being scanned, the sentence containing the scanned term, the webpage URL, the webpage title, and/or a screenshot of the page.
 
-## Yomitan API (disabled by default)
+## Sottaku-Yomitan API (disabled by default)
 
-Yomitan provides an option to expose data to other applications through an API.
+Sottaku-Yomitan provides an option to expose data to other applications through an API.
 
-Local applications may request data from Yomitan through the Yomitan API for external use. The Yomitan API is not accessible by other devices.
+Local applications may request data from Sottaku-Yomitan through the Sottaku-Yomitan API for external use. The Sottaku-Yomitan API is not accessible by other devices.
 
 ## Mecab (disabled by default)
 
-[Mecab](https://taku910.github.io/mecab/) connectivity is available for text parsing. Yomitan may send **search query text** to Mecab for parsing. Personally identifying information is never sent.
+[Mecab](https://taku910.github.io/mecab/) connectivity is available for text parsing. Sottaku-Yomitan may send **search query text** to Mecab for parsing. Personally identifying information is never sent.
 
 Mecab does not distribute any data; all data stays on your device.

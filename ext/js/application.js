@@ -87,7 +87,7 @@ function waitForDomContentLoaded() {
 }
 
 /**
- * The Yomitan class is a core component through which various APIs are handled and invoked.
+ * The Sottaku-Yomitan class is a core component through which various APIs are handled and invoked.
  * @augments EventDispatcher<import('application').Events>
  */
 export class Application extends EventDispatcher {

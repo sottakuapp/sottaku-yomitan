@@ -80,7 +80,7 @@
                         This page is taking longer than expected to load.
                     </p>
                     <p data-show-for-browser="safari">
-                        Due to a bug in Safari, it may be necessary to click the <img src="/images/yomitan-icon.svg" class="inline-icon" alt=""> <em>Yomitan</em>
+                        Due to a bug in Safari, it may be necessary to click the <img src="/images/yomitan-icon.svg" class="inline-icon" alt=""> <em>Sottaku-Yomitan</em>
                         button in the browser bar to fully load the page
                     </p>
                 </div>
@@ -169,7 +169,7 @@
             </div></div>
             <div class="settings-item advanced-only"><div class="settings-item-inner">
                 <div class="settings-item-left">
-                    <div class="settings-item-label">Show "Lookup in Yomitan" in right-click menu</div>
+                    <div class="settings-item-label">Show "Lookup in Sottaku-Yomitan" in right-click menu</div>
                 </div>
                 <div class="settings-item-right">
                     <label class="toggle"><input type="checkbox" data-setting="general.enableContextMenuScanSelected"><span class="toggle-body"><span class="toggle-track"></span><span class="toggle-knob"></span></span></label>
@@ -189,13 +189,13 @@
                     <div class="settings-item-left">
                         <div class="settings-item-invalid-indicator"></div>
                         <div class="settings-item-label">
-                            Enable Yomitan API
+                            Enable Sottaku-Yomitan API
                         </div>
                         <div class="settings-item-description">
-                            Enable support for sending local web requests to fetch data from Yomitan.
+                            Enable support for sending local web requests to fetch data from Sottaku-Yomitan.
                         </div>
                         <div class="settings-item-description">
-                            This option may send data outside of Yomitan to local applications that request it<span data-show-for-browser="firefox firefox-mobile"> (<a href="https://addons.mozilla.org/en-US/firefox/addon/yomitan/privacy/">Privacy Policy</a>)</span>.
+                            This option may send data outside of Sottaku-Yomitan to local applications that request it<span data-show-for-browser="firefox firefox-mobile"> (<a href="https://addons.mozilla.org/en-US/firefox/addon/yomitan/privacy/">Privacy Policy</a>)</span>.
                             <a tabindex="0" class="more-toggle more-only" data-parent-distance="4">More&hellip;</a>
                         </div>
                     </div>
@@ -211,7 +211,7 @@
                 </div>
                 <div class="settings-item-children more" hidden>
                     <p>
-                        To activate the Yomitan API, a native messaging component must be installed.
+                        To activate the Sottaku-Yomitan API, a native messaging component must be installed.
                         A setup guide can be found <a href="https://github.com/yomidevs/yomitan-api/blob/master/README.md" target="_blank" rel="noopener noreferrer">here</a>.
                     </p>
                     <div class="margin-above flex-row-nowrap">
@@ -232,7 +232,7 @@
                                 </div>
                                 <div class="settings-item-description">
                                     <p class="warning-text">
-                                        Only enable this option if you trust the authors of your dictionaries or will perform sanitization outside of Yomitan.
+                                        Only enable this option if you trust the authors of your dictionaries or will perform sanitization outside of Sottaku-Yomitan.
                                         Malicious dictionaries can send malformed CSS to allow Javascript execution if injected into a webview or browser.
                                         <a tabindex="0" class="more-toggle more-only" data-parent-distance="4">More&hellip;</a>
                                     </p>
@@ -240,22 +240,22 @@
                                 <div class="settings-item-description more" hidden>
                                     <p>
                                         A malicious dictionary which contains malicious CSS may try to execute Javascript.
-                                        For example, if the output of the Yomitan API is used in Anki, then the resulting Anki card may execute unintended Javascript.
+                                        For example, if the output of the Sottaku-Yomitan API is used in Anki, then the resulting Anki card may execute unintended Javascript.
                                         The risk in this case is similar to downloading a malicious Anki deck.
                                         Namely, in both cases, you are relying purely on Anki's sandbox to protect your machine and information from the malicious code.
                                         If the Anki sandbox works, card contents could be leaked (a minor confidential issue).
                                         If the sandbox fails, there is much more to worry about (actions being taken on your machine such as stealing credentials and sensitive information, or ransomware taking over your computer).
                                     </p>
                                     <p>
-                                        If you choose to disable the CSS sanitization, we recommend thinking end-to-end about where the Yomitan API output is used, and whether that destination is resilient to potentially malicious Javascript code being included, otherwise you are potentially risking the data and integrity of your system.
+                                        If you choose to disable the CSS sanitization, we recommend thinking end-to-end about where the Sottaku-Yomitan API output is used, and whether that destination is resilient to potentially malicious Javascript code being included, otherwise you are potentially risking the data and integrity of your system.
                                     </p>
                                     <p>
                                         Sanitization bypass will allow CSS that cannot be sanitized to pass through the sanitizer unchanged.
-                                        This ONLY applies to the Yomitan API, it will not make any other areas of Yomitan potentially vulnerable.
+                                        This ONLY applies to the Sottaku-Yomitan API, it will not make any other areas of Sottaku-Yomitan potentially vulnerable.
                                     </p>
                                     <p>
-                                        This can be required to retrieve CSS on some browsers which do not support the offscreen page necessary for full CSS sanitization in the Yomitan API on the backend.
-                                        Yomitan will attempt to fall back on basic sanitization but this will fail for dictionaries making use of complex CSS.
+                                        This can be required to retrieve CSS on some browsers which do not support the offscreen page necessary for full CSS sanitization in the Sottaku-Yomitan API on the backend.
+                                        Sottaku-Yomitan will attempt to fall back on basic sanitization but this will fail for dictionaries making use of complex CSS.
                                     </p>
                                     <p class="margin-above">
                                         <a tabindex="0" class="more-toggle" data-parent-distance="3">Less&hellip;</a>
@@ -758,7 +758,7 @@
         <div class="settings-item"><div class="settings-item-inner settings-item-inner-wrappable">
             <div class="settings-item-left">
                 <div class="settings-item-label">Theme</div>
-                <div class="settings-item-description">Adjust the style of Yomitan.</div>
+                <div class="settings-item-description">Adjust the style of Sottaku-Yomitan.</div>
             </div>
             <div class="settings-item-right">
                 <div class="settings-item-group">
@@ -817,7 +817,7 @@
                 <div class="settings-item-left">
                     <div class="settings-item-label">Font family</div>
                     <div class="settings-item-description">
-                        Change the font family used in Yomitan.
+                        Change the font family used in Sottaku-Yomitan.
                         <a tabindex="0" class="more-toggle more-only" data-parent-distance="4">More&hellip;</a>
                     </div>
                 </div>
@@ -1498,7 +1498,7 @@
                 <div class="settings-item-label">Enable audio playback for terms</div>
                 <div class="settings-item-description">Show a clickable speaker icon next to search results.</div>
                 <div class="settings-item-description">
-                    This option may send term, reading, and/or language outside of Yomitan to fetch audio<span data-show-for-browser="firefox firefox-mobile"> (<a href="https://addons.mozilla.org/en-US/firefox/addon/yomitan/privacy/">Privacy Policy</a>)</span>.
+                    This option may send term, reading, and/or language outside of Sottaku-Yomitan to fetch audio<span data-show-for-browser="firefox firefox-mobile"> (<a href="https://addons.mozilla.org/en-US/firefox/addon/yomitan/privacy/">Privacy Policy</a>)</span>.
                 </div>
             </div>
             <div class="settings-item-right">
@@ -1519,7 +1519,7 @@
                 <div class="settings-item-left">
                     <div class="settings-item-label">Audio fallback sound</div>
                     <div class="settings-item-description">
-                        The sound to play when Yomitan fails to fetch audio.
+                        The sound to play when Sottaku-Yomitan fails to fetch audio.
                     </div>
                 </div>
                 <div class="settings-item-right">
@@ -1559,7 +1559,7 @@
         </div>
         <div class="heading-description more" hidden>
             <p>
-                Yomitan is able to scan the sentence surrounding a term and parse individual words
+                Sottaku-Yomitan is able to scan the sentence surrounding a term and parse individual words
                 of the query on the <a href="/search.html" target="_blank" rel="noopener">search page</a>.
                 This information can also be added to Anki cards to provide additional context.
             </p>
@@ -1572,9 +1572,9 @@
         <div class="settings-item advanced-only">
             <div class="settings-item-inner">
                 <div class="settings-item-left">
-                    <div class="settings-item-label">Parse sentences using Yomitan's internal parser</div>
+                    <div class="settings-item-label">Parse sentences using Sottaku-Yomitan's internal parser</div>
                     <div class="settings-item-description">
-                        Sentence words are parsed using Yomitan's dictionaries.
+                        Sentence words are parsed using Sottaku-Yomitan's dictionaries.
                         <a tabindex="0" class="more-toggle more-only" data-parent-distance="4">More&hellip;</a>
                     </div>
                 </div>
@@ -1584,7 +1584,7 @@
             </div>
             <div class="settings-item-children more" hidden>
                 <p>
-                    Yomitan's internal parser is a simple algorithm which can parse sentences using the installed dictionaries.
+                    Sottaku-Yomitan's internal parser is a simple algorithm which can parse sentences using the installed dictionaries.
                     It works by repeatedly detecting the longest term at the start of the sentence and advancing until no text remains.
                     This provides decent results for the general case, but since grammatical structure is not taken into account,
                     it can sometimes yield incorrect segmentation.
@@ -1603,7 +1603,7 @@
                     </div>
                     <div class="settings-item-description">Sentence words are parsed using a third-party program. Japanese only.</div>
                     <div class="settings-item-description">
-                        This option may send search query data outside of Yomitan for parsing<span data-show-for-browser="firefox firefox-mobile"> (<a href="https://addons.mozilla.org/en-US/firefox/addon/yomitan/privacy/">Privacy Policy</a>)</span>.
+                        This option may send search query data outside of Sottaku-Yomitan for parsing<span data-show-for-browser="firefox firefox-mobile"> (<a href="https://addons.mozilla.org/en-US/firefox/addon/yomitan/privacy/">Privacy Policy</a>)</span>.
                         <a tabindex="0" class="more-toggle more-only" data-parent-distance="4">More&hellip;</a>
                     </div>
                 </div>
@@ -1614,10 +1614,10 @@
             <div class="settings-item-children more" hidden>
                 <p>
                     MeCab is a third-party program which uses its own dictionaries and parsing algorithm to decompose sentences into individual words.
-                    MeCab may provide more accurate parsing results than Yomitan's internal parser.
+                    MeCab may provide more accurate parsing results than Sottaku-Yomitan's internal parser.
                 </p>
                 <p>
-                    In order for Yomitan to use it, both MeCab and a native messaging component must be installed.
+                    In order for Sottaku-Yomitan to use it, both MeCab and a native messaging component must be installed.
                     A setup guide can be found <a href="https://github.com/yomidevs/yomitan-mecab-installer/blob/master/README.md" target="_blank" rel="noopener noreferrer">here</a>.
                 </p>
                 <div class="margin-above flex-row-nowrap">
@@ -1715,11 +1715,11 @@
         </div>
         <div class="heading-description more" hidden>
             <p>
-                Yomitan can watch the system clipboard and automatically search on the search page when text is copied.
-                This can be useful for using Yomitan to scan text from external applications.
+                Sottaku-Yomitan can watch the system clipboard and automatically search on the search page when text is copied.
+                This can be useful for using Sottaku-Yomitan to scan text from external applications.
             </p>
             <p>
-                This feature requires Yomitan to have clipboard reading permissions, and when this option is enabled,
+                This feature requires Sottaku-Yomitan to have clipboard reading permissions, and when this option is enabled,
                 the clipboard will be frequently checked for new text.
             </p>
             <p>
@@ -1792,12 +1792,12 @@
             <div class="settings-item-left">
                 <div class="settings-item-label">
                     <p>
-                        Yomitan has two categories of keyboard shortcuts:
+                        Sottaku-Yomitan has two categories of keyboard shortcuts:
                     </p>
                     <ul>
                         <li>
                             <strong>Standard</strong> keyboard shortcuts are controlled by the extension, and can be added, removed,
-                            and configured to work on webpages that Yomitan functions on.
+                            and configured to work on webpages that Sottaku-Yomitan functions on.
                         </li>
                         <li>
                             <strong>Native</strong> keyboard shortcuts are controlled by the web browser, and function globally
@@ -1834,7 +1834,7 @@
         <div class="settings-item"><div class="settings-item-inner">
             <div class="settings-item-left">
                 <div class="settings-item-label">
-                    Yomitan can import and export settings files which can be
+                    Sottaku-Yomitan can import and export settings files which can be
                     used to restore settings, share settings across devices,
                     and to help to debug problems. These files will only
                     contain settings.
@@ -1882,9 +1882,9 @@
                     Google Docs now uses
                     <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas" target="_blank" rel="noopener noreferrer">canvas-based</a>
                     rendering to display content<sup><a href="https://workspaceupdates.googleblog.com/2021/05/Google-Docs-Canvas-Based-Rendering-Update.html" target="_blank" rel="noopener noreferrer">[2]</a></sup>
-                    which prevents Yomitan from being able to scan text using the standard methods.
+                    which prevents Sottaku-Yomitan from being able to scan text using the standard methods.
                     Enabling this option will force Google Docs webpages to expose some additional text
-                    information which should allow Yomitan to still work.
+                    information which should allow Sottaku-Yomitan to still work.
                 </p>
                 <p class="warning-text">
                     If any profile has this setting enabled, compatibility mode will be activated;
@@ -1909,7 +1909,7 @@
     <div class="settings-group">
         <a href="/permissions.html" rel="noopener" class="settings-item settings-item-button"><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-label">Configure Yomitan Permissions</div>
+                <div class="settings-item-label">Configure Sottaku-Yomitan Permissions</div>
             </div>
             <div class="settings-item-right open-panel-button-container">
                 <button type="button" class="icon-button"><span class="icon-button-inner"><span class="icon" data-icon="material-right-arrow"></span></span></button>
@@ -1932,7 +1932,7 @@
                     On <a href="https://caniuse.com/shadowdomv1" target="_blank" rel="noopener noreferrer">supported browsers</a>,
                     a popup's <code>iframe</code> element will be embeded inside of a container with a closed <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM" target="_blank" rel="noopener noreferrer">shadow DOM</a>.
                     This container prevents scripts running on the underlying web page from being able to discover the <code>iframe</code>,
-                    which helps avoid situations where the web page might try to modify or use the Yomitan popup for an unintended purpose.
+                    which helps avoid situations where the web page might try to modify or use the Sottaku-Yomitan popup for an unintended purpose.
                 </p>
                 <p>
                     <a tabindex="0" class="more-toggle" data-parent-distance="3">Less&hellip;</a>
@@ -1957,7 +1957,7 @@
                     directly changing the location of the <code>iframe</code>'s internal document, rather than using
                     the <code>iframe</code>'s <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-src" target="_blank" rel="noopener noreferrer"><code>src</code></a>
                     attribute. This results in the extension URL not being exposed to the underling web page, and thus making it harder
-                    to detect the presence of Yomitan.
+                    to detect the presence of Sottaku-Yomitan.
                 </p>
                 <p>
                     <a tabindex="0" class="more-toggle" data-parent-distance="3">Less&hellip;</a>

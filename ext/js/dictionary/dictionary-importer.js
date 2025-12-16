@@ -445,9 +445,9 @@ export class DictionaryImporter {
         const {minimumYomitanVersion, author, url, description, attribution, frequencyMode, isUpdatable, sourceLanguage, targetLanguage} = index;
         if (typeof minimumYomitanVersion === 'string') {
             if (details.yomitanVersion === '0.0.0.0') {
-                // Running a development version of Yomitan
+                // Running a development version of Sottaku-Yomitan
             } else if (compareRevisions(details.yomitanVersion, minimumYomitanVersion)) {
-                throw new Error(`Dictionary is incompatible with this version of Yomitan (${details.yomitanVersion}; minimum required: ${minimumYomitanVersion})`);
+                throw new Error(`Dictionary is incompatible with this version of Sottaku-Yomitan (${details.yomitanVersion}; minimum required: ${minimumYomitanVersion})`);
             }
             summary.minimumYomitanVersion = minimumYomitanVersion;
         }

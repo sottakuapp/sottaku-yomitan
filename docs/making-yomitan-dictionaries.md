@@ -1,6 +1,6 @@
-# Making Yomitan Dictionaries　<!-- omit in toc -->
+# Making Sottaku-Yomitan Dictionaries　<!-- omit in toc -->
 
-This document provides an overview on how to create your own Yomitan dictionary.
+This document provides an overview on how to create your own Sottaku-Yomitan dictionary.
 
 - [Tools](#tools)
 - [Read the Schemas](#read-the-schemas)
@@ -18,9 +18,9 @@ This document provides an overview on how to create your own Yomitan dictionary.
 
 ## Read the Schemas
 
-Familiarity with the [Yomitan schemas](https://github.com/yomidevs/yomitan/tree/master/ext/data/schemas) is essential. These schemas define the structure of Yomitan dictionaries. Helpful resources for interpreting JSON schemas include [codebeautify](https://codebeautify.org/jsonviewer/), [json-schema-viewer](https://json-schema-viewer.vercel.app/), and [jsonhero](https://jsonhero.io/).
+Familiarity with the [Sottaku-Yomitan schemas](https://github.com/yomidevs/yomitan/tree/master/ext/data/schemas) is essential. These schemas define the structure of Sottaku-Yomitan dictionaries. Helpful resources for interpreting JSON schemas include [codebeautify](https://codebeautify.org/jsonviewer/), [json-schema-viewer](https://json-schema-viewer.vercel.app/), and [jsonhero](https://jsonhero.io/).
 
-Below is a list of Yomitan dictionary schemas, their expected filenames, and their usage:
+Below is a list of Sottaku-Yomitan dictionary schemas, their expected filenames, and their usage:
 
 | Schema                                                                                                                                                    | Expected Filename                | Usage                                                                                  |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- | -------------------------------------------------------------------------------------- |
@@ -33,7 +33,7 @@ Below is a list of Yomitan dictionary schemas, their expected filenames, and the
 
 ## Adding Custom CSS
 
-You can add custom CSS to a dictionary simply by adding a `styles.css` file to the root of the dictionary zip archive. This file will be loaded by Yomitan and applied to the dictionary viewer with the styles scoped to the dictionary. For example, observe the `styles.css` file in the [official test dictionary](https://github.com/yomidevs/yomitan/tree/master/test/data/dictionaries/valid-dictionary1).
+You can add custom CSS to a dictionary simply by adding a `styles.css` file to the root of the dictionary zip archive. This file will be loaded by Sottaku-Yomitan and applied to the dictionary viewer with the styles scoped to the dictionary. For example, observe the `styles.css` file in the [official test dictionary](https://github.com/yomidevs/yomitan/tree/master/test/data/dictionaries/valid-dictionary1).
 
 ## Packaging A Dictionary
 
@@ -41,7 +41,7 @@ A dictionary can contain various types of information within the zip file. After
 
 ## Examples
 
-- The [official test dictionary](https://github.com/yomidevs/yomitan/tree/master/test/data/dictionaries/valid-dictionary1) showcases the full range of features available in Yomitan dictionaries.
+- The [official test dictionary](https://github.com/yomidevs/yomitan/tree/master/test/data/dictionaries/valid-dictionary1) showcases the full range of features available in Sottaku-Yomitan dictionaries.
 
 ## Schema Validation
 
@@ -76,7 +76,7 @@ For VSCode validation, use the following settings JSON:
 
 ## Conjugation
 
-For Yomitan to conjugate Japanese terms, they need the appropriate part of speech tag. The part of speech labels are documented on the [official JMDict page](http://www.edrdg.org/jmdictdb/cgi-bin/edhelp.py?svc=jmdict&sid=#kw_pos). For other languages, find the part of speech tags in `ext/js/language/{language}/{language}-transforms.js` under the `conditions` label, for labels that aren't prefixed with "Intermediate".
+For Sottaku-Yomitan to conjugate Japanese terms, they need the appropriate part of speech tag. The part of speech labels are documented on the [official JMDict page](http://www.edrdg.org/jmdictdb/cgi-bin/edhelp.py?svc=jmdict&sid=#kw_pos). For other languages, find the part of speech tags in `ext/js/language/{language}/{language}-transforms.js` under the `conditions` label, for labels that aren't prefixed with "Intermediate".
 
 ## Tag Categories
 
@@ -98,4 +98,4 @@ You can view the tag colors [here](https://github.com/yomidevs/yomitan/blob/48f1
 
 # Community Contributions
 
-If you have any questions, need help, or want to share a new dictionary, feel free to pop in the [Yomitan Discord server](/README.md#yomitan). We're happy to help you get started!
+If you have any questions, need help, or want to share a new dictionary, feel free to pop in the [Sottaku-Yomitan Discord server](/README.md#yomitan). We're happy to help you get started!

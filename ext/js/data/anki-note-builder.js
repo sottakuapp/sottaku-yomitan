@@ -80,7 +80,7 @@ export class AnkiNoteBuilder {
             }
         }
 
-        // Make URL field blank if URL source is Yomitan
+        // Make URL field blank if URL source is Sottaku-Yomitan
         try {
             const url = new URL(context.url);
             if (url.protocol === new URL(import.meta.url).protocol) {

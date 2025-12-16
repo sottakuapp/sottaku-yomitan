@@ -102,7 +102,7 @@ export class SottakuClient {
     }
 
     /**
-     * Optimized scan endpoint tailored for Yomitan lookups.
+     * Optimized scan endpoint tailored for Sottaku-Yomitan lookups.
      * @param {string} text
      * @param {string} language
      * @param {number} [maxResults]

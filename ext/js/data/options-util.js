@@ -1782,7 +1782,7 @@ export class OptionsUtil {
     }
 
     /**
-     *  - Change default Yomitan API port to 19633
+     *  - Change default Sottaku-Yomitan API port to 19633
      *  @type {import('options-util').UpdateFunction}
      */
     async _updateVersion69(options) {

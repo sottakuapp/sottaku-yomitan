@@ -20,7 +20,7 @@ import {EventListenerCollection} from '../core/event-listener-collection.js';
 import {toError} from '../core/to-error.js';
 
 /**
- * This class is used to connect Yomitan to a native component that is
+ * This class is used to connect Sottaku-Yomitan to a native component that is
  * used to parse text into individual terms.
  */
 export class Mecab {
@@ -94,7 +94,7 @@ export class Mecab {
 
     /**
      * Gets the local API version being used.
-     * @returns {number} An integer representing the API version that Yomitan uses.
+     * @returns {number} An integer representing the API version that Sottaku-Yomitan uses.
      */
     getLocalVersion() {
         return this._version;
@@ -260,7 +260,7 @@ export class Mecab {
             }
             this._remoteVersion = version;
             if (version !== this._version) {
-                throw new Error(`Unsupported MeCab native messenger version ${version}. Yomitan supports version ${this._version}.`);
+                throw new Error(`Unsupported MeCab native messenger version ${version}. Sottaku-Yomitan supports version ${this._version}.`);
             }
         } catch (e) {
             if (this._port === port) {

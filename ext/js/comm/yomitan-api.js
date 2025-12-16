@@ -366,7 +366,7 @@ export class YomitanApi {
                     ankiFilename: ankiFilename,
                 });
             } catch (e) {
-                log.log('Yomitan API failed to download audio ' + toError(e).message);
+                log.log('Sottaku-Yomitan API failed to download audio ' + toError(e).message);
             }
         }
         return audioDatas;
@@ -525,7 +525,7 @@ export class YomitanApi {
      */
     async _updateRemoteVersion(url) {
         if (!url) {
-            throw new Error('Missing Yomitan API URL');
+            throw new Error('Missing Sottaku-Yomitan API URL');
         }
         try {
             const response = await fetch(url + '/serverVersion', {
@@ -547,7 +547,7 @@ export class YomitanApi {
     _onDisconnect() {
         if (this._port === null) { return; }
         const e = chrome.runtime.lastError;
-        const error = new Error(e ? e.message : 'Yomitan Api disconnected');
+        const error = new Error(e ? e.message : 'Sottaku-Yomitan API disconnected');
         log.error(error);
         this._clearPort();
     }
@@ -557,7 +557,7 @@ export class YomitanApi {
      */
     async _setupPortWrapper() {
         if (!this._enabled) {
-            throw new Error('Yomitan Api not enabled');
+            throw new Error('Sottaku-Yomitan API not enabled');
         }
         if (this._setupPortPromise === null) {
             this._setupPortPromise = this._setupPort();

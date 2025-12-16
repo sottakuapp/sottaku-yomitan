@@ -1043,7 +1043,7 @@ export class Backend {
     /** @type {import('api').ApiHandler<'testYomitanApi'>} */
     async _onApiTestYomitanApi({url}) {
         if (!this._yomitanApi.isEnabled()) {
-            throw new Error('Yomitan Api not enabled');
+            throw new Error('Sottaku-Yomitan API not enabled');
         }
 
         let permissionsOkay = false;
@@ -1060,12 +1060,12 @@ export class Backend {
         try {
             const version = await this._yomitanApi.getRemoteVersion(url);
             if (version === null) {
-                throw new Error('Could not connect to native Yomitan API component');
+                throw new Error('Could not connect to native Sottaku-Yomitan API component');
             }
 
             const localVersion = this._yomitanApi.getLocalVersion();
             if (version !== localVersion) {
-                throw new Error(`Yomitan API component version not supported: ${version}`);
+                throw new Error(`Sottaku-Yomitan API component version not supported: ${version}`);
             }
         } finally {
             // Disconnect if the connection was previously disconnected
@@ -1524,7 +1524,7 @@ export class Backend {
             if (options.general.enableContextMenuScanSelected) {
                 chrome.contextMenus.create({
                     id: 'yomitan_lookup',
-                    title: 'Lookup in Yomitan',
+                    title: 'Lookup in Sottaku-Yomitan',
                     contexts: ['selection'],
                 }, () => this._checkLastError(chrome.runtime.lastError));
                 chrome.contextMenus.onClicked.addListener((info) => {

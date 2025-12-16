@@ -2,7 +2,7 @@
 
 ## Helpers
 
-Yomitan supports several custom Handlebars helpers for rendering templates.
+Sottaku-Yomitan supports several custom Handlebars helpers for rendering templates.
 The source code for these templates can be found [here](../ext/js/templates/anki-template-renderer.js).
 
 ### `dumpObject`

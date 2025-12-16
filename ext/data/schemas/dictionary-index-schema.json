@@ -25,7 +25,7 @@
         },
         "minimumYomitanVersion": {
             "type": "string",
-            "description": "Minimum version of Yomitan that is compatible with this dictionary."
+            "description": "Minimum version of Sottaku-Yomitan that is compatible with this dictionary."
         },
         "sequenced": {
             "type": "boolean",

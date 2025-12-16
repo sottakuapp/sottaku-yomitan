@@ -1,6 +1,6 @@
 # Contributing to a Language
 
-Improving Yomitan's features for the language(s) you are interested in is pretty simple, and a great way to help yourself and others. This guide will help you get started.
+Improving Sottaku-Yomitan's features for the language(s) you are interested in is pretty simple, and a great way to help yourself and others. This guide will help you get started.
 
 ## Adding a Language
 
@@ -128,7 +128,7 @@ These have three options: off, direct, and inverse, and the `process` function m
 
 #### Removing Diacritics
 
-In some cases (e.g. German umlauts), diacritics are near-ubiquitous. However some languages (such as Latin, Arabic etc) do not commonly use diacritics, but only in specific kinds of texts (e.g dictionaries, texts for children or learners). In these cases, the dictionaries that Yomitan uses will likely not contain diacritics, but the text may contain them. To handle this, we use a diacritics removal preprocessor.
+In some cases (e.g. German umlauts), diacritics are near-ubiquitous. However some languages (such as Latin, Arabic etc) do not commonly use diacritics, but only in specific kinds of texts (e.g dictionaries, texts for children or learners). In these cases, the dictionaries that Sottaku-Yomitan uses will likely not contain diacritics, but the text may contain them. To handle this, we use a diacritics removal preprocessor.
 
 This kind of text processing is to a degree interdependent with the dictionaries available for the language.
 
@@ -317,7 +317,7 @@ The part we want to examine is the `test` array. The other things are common acr
 
 You can check that all the tests pass by running `npm run test:unit`.
 
-> This command runs all Yomitan unit test files. To only run a single test file, you can instead opt for `npx vitest <file-name>`.
+> This command runs all Sottaku-Yomitan unit test files. To only run a single test file, you can instead opt for `npx vitest <file-name>`.
 
 Now, we may want to verify that `boss` really does not deinflect to `bo`. You can add to the `tests` array:
 
@@ -425,4 +425,4 @@ In certain languages, dictionary entries may contain readings as a key to read w
 
 ## Stuck?
 
-If you have any questions, please feel free to open a Discussion on GitHub, or find us on the [Yomitan Discord](https://discord.gg/YkQrXW6TXF).
+If you have any questions, please feel free to open a Discussion on GitHub, or find us on the [Sottaku-Yomitan Discord](https://discord.gg/YkQrXW6TXF).

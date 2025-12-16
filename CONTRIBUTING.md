@@ -4,7 +4,7 @@ Issues reported on [GitHub](https://github.com/sottakuapp/sottaku-yomitan/issues
 
 - What the problem, question, or request is.
 - What browser is being used.
-- What version of Yomitan is being used.
+- What version of Sottaku-Yomitan is being used.
 - If applicable, an export of the settings file.
 
 # Development
@@ -21,7 +21,7 @@ Below are a few guidelines to ensure contributions have a good level of quality 
 
 ## Setup
 
-Yomitan uses [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) tools for building and testing.
+Sottaku-Yomitan uses [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) tools for building and testing.
 After installing these, the development environment can be set up by running `npm ci` and subsequently `npm run build`.
 
 ## Testing
@@ -76,7 +76,7 @@ After building, you can load the compiled extension into Chromium browsers.
 
 Immediately you should see the "Welcome" page!
 
-Note: Yomitan may or may not update when you make and save new code changes locally. It depends on what file you've changed. Yomitan runs as collection of two programs. There is the background process called the "service worker" and there is the frontend called the "content_script". The frontend will reload on save, but to update the backend you need to click on the update icon next to the extension in `chrome://extensions/`. If you make changes to the manifest you will need to rerun `npm run build` to regenerate the manifest file.
+Note: Sottaku-Yomitan may or may not update when you make and save new code changes locally. It depends on what file you've changed. Sottaku-Yomitan runs as collection of two programs. There is the background process called the "service worker" and there is the frontend called the "content_script". The frontend will reload on save, but to update the backend you need to click on the update icon next to the extension in `chrome://extensions/`. If you make changes to the manifest you will need to rerun `npm run build` to regenerate the manifest file.
 
 ### Loading a build into Firefox browser
 
