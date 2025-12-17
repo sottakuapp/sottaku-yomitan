@@ -133,7 +133,7 @@
         {
             "name": "chrome",
             "inherit": "base",
-            "fileName": "yomitan-chrome.zip",
+            "fileName": "sottaku-yomitan-chrome.zip",
             "excludeFiles": [
                 "background.html"
             ]
@@ -141,7 +141,7 @@
         {
             "name": "chrome-dev",
             "inherit": "chrome",
-            "fileName": "yomitan-chrome-dev.zip",
+            "fileName": "sottaku-yomitan-chrome-dev.zip",
             "modifications": [
                 {
                     "action": "replace",
@@ -166,7 +166,7 @@
         {
             "name": "chrome-playwright",
             "inherit": "chrome-dev",
-            "fileName": "yomitan-chrome-playwright.zip",
+            "fileName": "sottaku-yomitan-chrome-playwright.zip",
             "modifications": [
                 {
                     "action": "remove",
@@ -189,7 +189,7 @@
         {
             "name": "firefox",
             "inherit": "base",
-            "fileName": "yomitan-firefox.zip",
+            "fileName": "sottaku-yomitan-firefox.zip",
             "modifications": [
                 {
                     "action": "set",
@@ -285,7 +285,7 @@
         {
             "name": "firefox-dev",
             "inherit": "firefox",
-            "fileName": "yomitan-firefox-dev.zip",
+            "fileName": "sottaku-yomitan-firefox-dev.zip",
             "modifications": [
                 {
                     "action": "replace",
@@ -325,7 +325,7 @@
         {
             "name": "firefox-android",
             "inherit": "firefox",
-            "fileName": "yomitan-firefox-android"
+            "fileName": "sottaku-yomitan-firefox-android"
         },
         {
             "name": "safari",
@@ -383,7 +383,7 @@
         {
             "name": "edge",
             "inherit": "base",
-            "fileName": "yomitan-edge.zip",
+            "fileName": "sottaku-yomitan-edge.zip",
             "excludeFiles": [
                 "background.html"
             ]
