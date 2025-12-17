@@ -248,7 +248,7 @@ export async function main() {
         },
         version: {
             type: 'string',
-            default: '0.0.0.0',
+            default: '0.0.0.1',
         },
         target: {
             type: 'string',
