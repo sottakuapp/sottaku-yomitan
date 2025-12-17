@@ -60,6 +60,7 @@ export class DataTransmissionConsentController {
     /** */
     async _onDecline() {
         await this._settingsController.setGlobalSetting('global.dataTransmissionConsentShown', true);
+        await this._settingsController.setProfileSetting('sottaku.enabled', false);
         await this._settingsController.setProfileSetting('audio.enabled', false);
     }
 }

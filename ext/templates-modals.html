@@ -1671,14 +1671,19 @@
     <div id="firefox-data-transmission-consent-modal" data-show-for-browser="firefox firefox-mobile" class="modal force-interact" tabindex="-1" role="dialog" hidden><div class="modal-content">
         <div class="modal-header"><div class="modal-title">Data Transmission Consent</div></div>
         <div class="modal-body">
-            <p>To comply with <a href="https://extensionworkshop.com/documentation/publish/add-on-policies/">Firefox Add-On Policies</a>, Sottaku-Yomitan is required to get your verification that you are comfortable with any default data transmission the extension does.</p>
-            <p>Sottaku-Yomitan does very little data transmission, as Sottaku-Yomitan data is stored locally on your device. Sottaku-Yomitan does not sell or externally collect any user data.</p>
-            <p><b>The only place data transmission is done by default is when the audio icon in the Sottaku-Yomitan popup is clicked to play the audio for a term; in this case a request will be sent to the audio provider configured in your settings.</b></p>
-            <p>This request may contain the term, reading, and/or language for the given dictionary entry term. <b>Personally identifying information is never sent.</b></p>
-            <p>Full details on Sottaku-Yomitan's use of data transmission are provided in the <a href="https://addons.mozilla.org/en-US/firefox/addon/yomitan/privacy/">Sottaku-Yomitan Privacy Policy</a>.</p>        </div>
+            <p>To comply with <a href="https://extensionworkshop.com/documentation/publish/add-on-policies/" target="_blank" rel="noreferrer noopener">Firefox Add-On Policies</a>, Sottaku-Yomitan is required to get your verification that you are comfortable with the data transmission that happens by default when using the extension.</p>
+            <p><b>Sottaku-Yomitan requires communication with Sottaku servers (sottaku.app by default) to provide dictionary results, pronunciation audio, and account features like flashcards.</b></p>
+            <ul>
+                <li>When you look up text (scanning or search), the text you look up and your selected language/locale are sent to Sottaku to return definitions and related data.</li>
+                <li>If you sign in, requests are authenticated (e.g., cookies/token) so results and account features can be linked to your Sottaku account.</li>
+                <li>When you play audio or add a flashcard, additional requests are sent to Sottaku to retrieve audio and update your account.</li>
+            </ul>
+            <p>If you decline, Sottaku online features will be disabled, and the extension will only be able to use local dictionaries (if installed).</p>
+            <p>Full details are provided in the <a href="https://sottaku.app/privacy-policy" target="_blank" rel="noreferrer noopener">Sottaku Privacy Policy</a>.</p>
+        </div>
         <div class="modal-footer modal-footer-spaced">
-            <button type="button" class="danger low-emphasis" data-modal-action="hide" id="decline-data-transmission">Decline data transmission<br>(disable audio playback)</button>
-            <button type="button" class="low-emphasis" data-modal-action="hide" id="accept-data-transmission">Agree to data transmission<br>(enable audio playback)</button>
+            <button type="button" class="danger low-emphasis" data-modal-action="hide" id="decline-data-transmission">Decline data transmission<br>(disable Sottaku online features)</button>
+            <button type="button" class="low-emphasis" data-modal-action="hide" id="accept-data-transmission">Agree to data transmission<br>(continue using Sottaku online features)</button>
         </div>
     </div></div>
 </template>
