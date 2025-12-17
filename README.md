@@ -1,17 +1,14 @@
 # Sottaku-Yomitan
 
-Sottaku-Yomitan is a fork of popup browser extension Yomitan which is hooked up to Sottaku. Below is the README for the upstream project:
+Sottaku-Yomitan is a fork of popup browser extension Yomitan which is hooked up to Sottaku.
 
 [![Get Sottaku-Yomitan for Chrome](<https://img.shields.io/chrome-web-store/v/likgccmbimhjbgkjambclfkhldnlhbnn?logo=Google%20Chrome&style=for-the-badge&logoColor=lightblue&color=lightblue&label=get%20sottaku-yomitan%20for%20chrome%20(stable)>)](https://chrome.google.com/webstore/detail/sottaku-yomitan/likgccmbimhjbgkjambclfkhldnlhbnn)
 [![Get Sottaku-Yomitan for Firefox](<https://img.shields.io/amo/v/sottaku-yomitan?logo=Firefox&style=for-the-badge&color=orange&label=get%20sottaku-yomitan%20for%20firefox%20(stable)>)](https://addons.mozilla.org/en-US/firefox/addon/sottaku-yomitan/)
 [![Get Sottaku-Yomitan for Edge](https://img.shields.io/badge/dynamic/json?logo=puzzle&label=get%20sottaku-yomitan%20for%20edge&style=for-the-badge&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fidelnfbbmikgfiejhgmddlbkfgiifnnn)](https://microsoftedge.microsoft.com/addons/detail/sottaku-yomitan/idelnfbbmikgfiejhgmddlbkfgiifnnn)
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/sottakuapp/sottaku-yomitan/badge?style=for-the-badge)](https://securityscorecards.dev/viewer/?uri=github.com/sottakuapp/sottaku-yomitan)
-
-[![Discord](https://dcbadge.limes.pink/api/server/YkQrXW6TXF?style=for-the-badge)](https://discord.gg/YkQrXW6TXF)
 
 # Visit [https://sottaku.app/](https://sottaku.app/) to learn more!
 
-:wave: **Sottaku-Yomitan is [the successor](https://foosoft.net/posts/passing-the-torch-to-yomitan/) to Yomichan** ([migration guide](https://sottaku.app/)) which was [sunset](https://foosoft.net/posts/sunsetting-the-yomichan-project/) by its owner on Feb 26, 2023. We have made a number of foundational changes to ensure **the project stays alive, works on latest browser versions, and is easy to contribute to**.
+:wave: **Sottaku-Yomitan is a Sottaku-compatible fork of [the successor](https://foosoft.net/posts/passing-the-torch-to-yomitan/) to Yomichan** ([migration guide](https://sottaku.app/)) which was [sunset](https://foosoft.net/posts/sunsetting-the-yomichan-project/) by its owner on Feb 26, 2023. We have made a number of foundational changes to ensure **the project stays alive, works on latest browser versions, and is easy to contribute to**.
 
 📢 **New contributors [welcome](#contributing)!**
 
@@ -26,29 +23,17 @@ Sottaku-Yomitan provides powerful features not available in other browser-based 
 - 💬 Interactive popup definition window for displaying search results.
 - 🔊 Built-in native pronunciation audio with the ability to add your own [custom audio sources](https://sottaku.app/).
 - ✍️ Kanji stroke order diagrams are just a click away.
-- 📝 [Automatic flashcard creation](https://sottaku.app/) for the [Anki](https://apps.ankiweb.net/) flashcard program via the [AnkiConnect](https://foosoft.net/projects/anki-connect) plugin.
+- 📝 [Automatic flashcard creation](https://sottaku.app/) for Sottaku.
 - 🔍 Custom search page for easily executing custom search queries.
-- 📖 Support for multiple dictionary formats including [EPWING](https://ja.wikipedia.org/wiki/EPWING) via the [Sottaku-Yomitan Import](https://github.com/yomidevs/yomitan-import) tool.
 - ✨ Clean, modern code makes it easy for developers to [contribute](#contributing) new features and languages.
 
 [![Term definitions](img/ss-terms-thumb.png)](img/ss-terms.png)
 [![Kanji information](img/ss-kanji-thumb.png)](img/ss-kanji.png)
 [![Dictionary options](img/ss-dictionaries-thumb.png)](img/ss-dictionaries.png)
-[![Anki options](img/ss-anki-thumb.png)](img/ss-anki.png)
 
 ## Documentation/How To
 
 **Please visit [https://sottaku.app/](https://sottaku.app/) for the most up-to-date usage documentation.**
-
-### Developer Documentation
-
-- Dictionaries
-  - 🛠️ [Making Sottaku-Yomitan Dictionaries](./docs/making-yomitan-dictionaries.md)
-- Anki Integration
-  - 🔧 [Anki handlebar templates](./docs/templates.md)
-- Advanced Features
-- Troubleshooting
-  - 🕷️ [Known browser bugs](./docs/browser-bugs.md)
 
 ## Installation
 
