@@ -4,10 +4,8 @@
         "name": "Sottaku-Yomitan",
         "short_name": "Sottaku-Yomitan",
         "version": "$YOMITAN_VERSION",
-        "description": "Sottaku-connected popup dictionary (Japanese and Korean)",
-        "author": {
-            "email": "hello@sottaku.app"
-        },
+        "description": "Sottaku-connected popup dictionary for language learning.",
+        "author": "Sottaku Inc",
         "icons": {
             "16": "images/icon16.png",
             "19": "images/icon19.png",

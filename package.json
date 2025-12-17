@@ -1,7 +1,7 @@
 {
     "name": "sottaku-yomitan",
     "version": "0.0.0",
-    "description": "Sottaku-connected pop-up dictionary for Japanese and Korean.",
+    "description": "Sottaku-connected pop-up dictionary for language learning.",
     "directories": {
         "test": "test"
     },
