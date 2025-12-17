@@ -248,21 +248,27 @@
                     ],
                     "value": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; img-src blob: 'self'; style-src 'self' 'unsafe-inline'; media-src *; connect-src *"
                 },
-                {
-                    "action": "set",
-                    "path": [
-                        "browser_specific_settings"
-                    ],
-                    "value": {
-                        "gecko": {
-                            "id": "sottaku-yomitan@sottaku.app",
-                            "strict_min_version": "115.0"
-                        },
-                        "gecko_android": {
-                            "strict_min_version": "115.0"
-                        }
-                    }
-                },
+	                {
+	                    "action": "set",
+	                    "path": [
+	                        "browser_specific_settings"
+	                    ],
+	                    "value": {
+	                        "gecko": {
+	                            "id": "sottaku-yomitan@sottaku.app",
+	                            "strict_min_version": "115.0",
+	                            "data_collection_permissions": {
+	                                "required": [
+	                                    "websiteContent",
+	                                    "authenticationInfo"
+	                                ]
+	                            }
+	                        },
+	                        "gecko_android": {
+	                            "strict_min_version": "115.0"
+	                        }
+	                    }
+	                },
                 {
                     "action": "remove",
                     "path": [
