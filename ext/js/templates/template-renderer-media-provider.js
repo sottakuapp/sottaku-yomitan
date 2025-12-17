@@ -99,8 +99,6 @@ export class TemplateRendererMediaProvider {
         switch (type) {
             case 'audio': return this._getSimpleMediaData(media, 'audio');
             case 'screenshot': return this._getSimpleMediaData(media, 'screenshot');
-            case 'clipboardImage': return this._getSimpleMediaData(media, 'clipboardImage');
-            case 'clipboardText': return this._getSimpleMediaData(media, 'clipboardText');
             case 'popupSelectionText': return this._getSimpleMediaData(media, 'popupSelectionText');
             case 'textFurigana': return this._getTextFurigana(media, args[1], namedArgs, 'furiganaHtml');
             case 'textFuriganaPlain': return this._getTextFurigana(media, args[1], namedArgs, 'furiganaPlain');

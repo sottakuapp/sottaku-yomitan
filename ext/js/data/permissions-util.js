@@ -15,26 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
-import {getFieldMarkers} from './anki-util.js';
-
-/**
- * This function returns whether an Anki field marker might require clipboard permissions.
- * This is speculative and may not guarantee that the field marker actually does require the permission,
- * as the custom handlebars template is not deeply inspected.
- * @param {string} marker
- * @returns {boolean}
- */
-function ankiFieldMarkerMayUseClipboard(marker) {
-    switch (marker) {
-        case 'clipboard-image':
-        case 'clipboard-text':
-            return true;
-        default:
-            return false;
-    }
-}
-
 /**
  * @param {chrome.permissions.Permissions} permissions
  * @returns {Promise<boolean>}
@@ -103,13 +83,7 @@ export function getAllPermissions() {
  * @param {string} fieldValue
  * @returns {string[]}
  */
-export function getRequiredPermissionsForAnkiFieldValue(fieldValue) {
-    const markers = getFieldMarkers(fieldValue);
-    for (const marker of markers) {
-        if (ankiFieldMarkerMayUseClipboard(marker)) {
-            return ['clipboardRead'];
-        }
-    }
+export function getRequiredPermissionsForAnkiFieldValue(_fieldValue) {
     return [];
 }
 
@@ -128,18 +102,6 @@ export function hasRequiredPermissionsForOptions(permissions, options) {
     if (!permissionsSet.has('clipboardRead')) {
         if (options.clipboard.enableBackgroundMonitor || options.clipboard.enableSearchPageMonitor) {
             return false;
-        }
-        const fieldsList = options.anki.cardFormats.map((cardFormat) => cardFormat.fields);
-
-        for (const fields of fieldsList) {
-            for (const {value: fieldValue} of Object.values(fields)) {
-                const markers = getFieldMarkers(fieldValue);
-                for (const marker of markers) {
-                    if (ankiFieldMarkerMayUseClipboard(marker)) {
-                        return false;
-                    }
-                }
-            }
         }
     }
 

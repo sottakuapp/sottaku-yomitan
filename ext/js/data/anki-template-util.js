@@ -27,8 +27,6 @@ export function getStandardFieldMarkers(type, language = 'ja') {
         case 'term': {
             const markers = [
                 'audio',
-                'clipboard-image',
-                'clipboard-text',
                 'cloze-body',
                 'cloze-prefix',
                 'cloze-suffix',
@@ -79,8 +77,6 @@ export function getStandardFieldMarkers(type, language = 'ja') {
         case 'kanji':
             return [
                 'character',
-                'clipboard-image',
-                'clipboard-text',
                 'cloze-body',
                 'cloze-prefix',
                 'cloze-suffix',

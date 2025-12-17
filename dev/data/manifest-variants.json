@@ -67,16 +67,15 @@
                 "template-renderer.html"
             ]
         },
-        "permissions": [
-            "storage",
-            "clipboardWrite",
-            "unlimitedStorage",
-            "declarativeNetRequest",
-            "scripting",
-            "offscreen",
-            "contextMenus",
-            "cookies"
-        ],
+      "permissions": [
+        "storage",
+        "clipboardWrite",
+        "declarativeNetRequest",
+        "scripting",
+        "offscreen",
+        "contextMenus",
+        "cookies"
+      ],
         "optional_permissions": [
             "clipboardRead",
             "nativeMessaging"

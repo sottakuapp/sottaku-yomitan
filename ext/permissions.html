@@ -34,7 +34,7 @@
                 <div class="settings-item-label"><code>&lt;all_urls&gt;</code></div>
                 <div class="settings-item-description">
                     Sottaku-Yomitan requires access to all URLs in order to run scripts to scan text and show the definitions popup,
-                    request audio for playback and download, and connect with Anki.
+                    and communicate with Sottaku servers.
                 </div>
             </div>
             <div class="settings-item-right">
@@ -43,11 +43,9 @@
         </div></div>
         <div class="settings-item"><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-label"><code>storage</code> and <code>unlimitedStorage</code></div>
+                <div class="settings-item-label"><code>storage</code></div>
                 <div class="settings-item-description">
-                    Sottaku-Yomitan uses storage permissions in order to save extension settings and dictionary data.
-                    <code>unlimitedStorage</code> is used to help prevent web browsers from unexpectedly
-                    deleting dictionary data.
+                    Sottaku-Yomitan uses storage permissions in order to save extension settings.
                 </div>
             </div>
         </div></div>
@@ -160,16 +158,11 @@
                 <div class="settings-item-label">Persistent storage</div>
                 <div class="settings-item-description">
                     <p>
-                        Web browsers will sometimes clear stored data if the device is running low on storage space,
-                        which can result in the imported dictionaries being deleted unexpectedly.
-                        The persistent storage permission tells the browser that the data should not be deleted in those circumstances.
+                        Web browsers will sometimes clear stored extension data if the device is running low on storage space.
+                        The persistent storage permission tells the browser that the extension's data should not be deleted in those circumstances.
                     </p>
                     <p data-show-for-browser="firefox-mobile">
                         It may not be possible to enable this permission on Firefox for Android.
-                    </p>
-                    <p data-show-for-browser="chrome edge">
-                        Chromium-based browsers should not need to enable this setting since the Sottaku-Yomitan extension has
-                        the <code>unlimitedStorage</code> permission, which should prevent data deletion.<sup><a href="https://bugs.chromium.org/p/chromium/issues/detail?id=680392#c15" target="_blank" rel="noopener">[1]</a></sup>
                     </p>
                 </div>
             </div>
