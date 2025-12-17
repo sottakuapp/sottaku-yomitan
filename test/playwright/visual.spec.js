@@ -60,7 +60,7 @@ test.describe.skip('settings', () => {
         console.log('Load in jmdict_swedish.zip');
         await page.locator('.settings-item[data-modal-action="show,dictionaries"]').click();
         await page.locator('button[id="dictionary-import-button"]').click();
-        await page.locator('textarea[id="dictionary-import-url-text"]').fill('https://github.com/yomidevs/yomitan/raw/dictionaries/jmdict_swedish.zip');
+        await page.locator('textarea[id="dictionary-import-url-text"]').fill('https://github.com/sottakuapp/sottaku-yomitan/raw/dictionaries/jmdict_swedish.zip');
         await page.locator('button[id="dictionary-import-url-button"]').click();
         await expect(page.locator('id=dictionaries')).toHaveText('Dictionaries (1 installed, 1 enabled)', {timeout: 5 * 60 * 1000});
 

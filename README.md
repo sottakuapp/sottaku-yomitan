@@ -2,10 +2,10 @@
 
 Sottaku-Yomitan is a fork of popup browser extension Yomitan which is hooked up to Sottaku. Below is the README for the upstream project:
 
-[![Get Sottaku-Yomitan for Chrome](<https://img.shields.io/chrome-web-store/v/likgccmbimhjbgkjambclfkhldnlhbnn?logo=Google%20Chrome&style=for-the-badge&logoColor=lightblue&color=lightblue&label=get%20yomitan%20for%20chrome%20(stable)>)](https://chrome.google.com/webstore/detail/yomitan/likgccmbimhjbgkjambclfkhldnlhbnn)
-[![Get Sottaku-Yomitan for Firefox](<https://img.shields.io/amo/v/yomitan?logo=Firefox&style=for-the-badge&color=orange&label=get%20yomitan%20for%20firefox%20(stable)>)](https://addons.mozilla.org/en-US/firefox/addon/yomitan/)
-[![Get Sottaku-Yomitan for Edge](https://img.shields.io/badge/dynamic/json?logo=puzzle&label=get%20yomitan%20for%20edge&style=for-the-badge&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fidelnfbbmikgfiejhgmddlbkfgiifnnn)](https://microsoftedge.microsoft.com/addons/detail/yomitan/idelnfbbmikgfiejhgmddlbkfgiifnnn)
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/yomidevs/yomitan/badge?style=for-the-badge)](https://securityscorecards.dev/viewer/?uri=github.com/yomidevs/yomitan)
+[![Get Sottaku-Yomitan for Chrome](<https://img.shields.io/chrome-web-store/v/likgccmbimhjbgkjambclfkhldnlhbnn?logo=Google%20Chrome&style=for-the-badge&logoColor=lightblue&color=lightblue&label=get%20sottaku-yomitan%20for%20chrome%20(stable)>)](https://chrome.google.com/webstore/detail/sottaku-yomitan/likgccmbimhjbgkjambclfkhldnlhbnn)
+[![Get Sottaku-Yomitan for Firefox](<https://img.shields.io/amo/v/sottaku-yomitan?logo=Firefox&style=for-the-badge&color=orange&label=get%20sottaku-yomitan%20for%20firefox%20(stable)>)](https://addons.mozilla.org/en-US/firefox/addon/sottaku-yomitan/)
+[![Get Sottaku-Yomitan for Edge](https://img.shields.io/badge/dynamic/json?logo=puzzle&label=get%20sottaku-yomitan%20for%20edge&style=for-the-badge&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fidelnfbbmikgfiejhgmddlbkfgiifnnn)](https://microsoftedge.microsoft.com/addons/detail/sottaku-yomitan/idelnfbbmikgfiejhgmddlbkfgiifnnn)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/sottakuapp/sottaku-yomitan/badge?style=for-the-badge)](https://securityscorecards.dev/viewer/?uri=github.com/sottakuapp/sottaku-yomitan)
 
 [![Discord](https://dcbadge.limes.pink/api/server/YkQrXW6TXF?style=for-the-badge)](https://discord.gg/YkQrXW6TXF)
 
@@ -52,29 +52,29 @@ Sottaku-Yomitan provides powerful features not available in other browser-based 
 
 ## Installation
 
-Sottaku-Yomitan comes in two flavors: _stable_ and _testing_. New changes are initially introduced into the _testing_ version, and after some time spent ensuring that they are relatively bug free, they will be promoted to the _stable_ version. If you are technically savvy and don't mind [submitting issues](https://github.com/yomidevs/yomitan/issues/new/choose) on GitHub, try the _testing_ version; otherwise, the _stable_ version will be your best bet. Check [contributing](#contributing) for more information on how to help.
+Sottaku-Yomitan comes in two flavors: _stable_ and _testing_. New changes are initially introduced into the _testing_ version, and after some time spent ensuring that they are relatively bug free, they will be promoted to the _stable_ version. If you are technically savvy and don't mind [submitting issues](https://github.com/sottakuapp/sottaku-yomitan/issues/new/choose) on GitHub, try the _testing_ version; otherwise, the _stable_ version will be your best bet. Check [contributing](#contributing) for more information on how to help.
 
 - **Google Chrome**
 
-  - [stable](https://chrome.google.com/webstore/detail/yomitan/likgccmbimhjbgkjambclfkhldnlhbnn)
-  - [testing](https://chrome.google.com/webstore/detail/yomitan-development-build/glnaenfapkkecknnmginabpmgkenenml)
+  - [stable](https://chrome.google.com/webstore/detail/sottaku-yomitan/likgccmbimhjbgkjambclfkhldnlhbnn)
+  - [testing](https://chrome.google.com/webstore/detail/sottaku-yomitan-development-build/glnaenfapkkecknnmginabpmgkenenml)
 
 - **Mozilla Firefox**
 
-  - [stable](https://addons.mozilla.org/en-US/firefox/addon/yomitan/)
-  - [testing](https://github.com/yomidevs/yomitan/releases) ※
+  - [stable](https://addons.mozilla.org/en-US/firefox/addon/sottaku-yomitan/)
+  - [testing](https://github.com/sottakuapp/sottaku-yomitan/releases) ※
 
 - **Microsoft Edge**
-  - [stable](https://microsoftedge.microsoft.com/addons/detail/yomitan/idelnfbbmikgfiejhgmddlbkfgiifnnn)
+  - [stable](https://microsoftedge.microsoft.com/addons/detail/sottaku-yomitan/idelnfbbmikgfiejhgmddlbkfgiifnnn)
   - Testing: Coming soon
 
 ※ Unlike Chrome, Firefox does not allow extensions meant for testing to be hosted in the marketplace. You will have to download the desired version and side-load it yourself. You only need to do this once, and you will get updates automatically.
 
 ## Contributing
 
-🚀 **Dip your toes into contributing by looking at issues with the label [good first issue](https://github.com/yomidevs/yomitan/issues?q=is%3Aissue+is%3Aopen+label%3A%22gоοd+fіrst+іssսe%22).**
+🚀 **Dip your toes into contributing by looking at issues with the label [good first issue](https://github.com/sottakuapp/sottaku-yomitan/issues?q=is%3Aissue+is%3Aopen+label%3A%22gоοd+fіrst+іssսe%22).**
 
-Since this is a distributed effort, we **highly welcome new contributors**! Feel free to browse the [issue tracker](https://github.com/yomidevs/yomitan/issues), and read our [contributing guidelines](./CONTRIBUTING.md).
+Since this is a distributed effort, we **highly welcome new contributors**! Feel free to browse the [issue tracker](https://github.com/sottakuapp/sottaku-yomitan/issues), and read our [contributing guidelines](./CONTRIBUTING.md).
 
 Here are some ways anyone can help:
 
@@ -88,7 +88,7 @@ If you're looking to code, please let us know what you plan on working on before
 
 Some contributions we always appreciate:
 
-- Well-written tests covering different functionalities. This includes [playwright tests](https://github.com/yomidevs/yomitan/tree/master/test/playwright), [benchmark tests](https://github.com/yomidevs/yomitan/tree/master/benches), and unit tests.
+- Well-written tests covering different functionalities. This includes [playwright tests](https://github.com/sottakuapp/sottaku-yomitan/tree/master/test/playwright), [benchmark tests](https://github.com/sottakuapp/sottaku-yomitan/tree/master/benches), and unit tests.
 - Increasing our type coverage.
 - More and better documentation!
 
@@ -96,7 +96,7 @@ Information on how to setup and build the codebase can be found [here](./CONTRIB
 
 If you want to add or improve support for a language, read the documentation on [language features](./docs/development/language-features.md).
 
-Feel free to join us on the [Sottaku-Yomitan Discord](https://discord.gg/YkQrXW6TXF).
+Feel free to join us on the [Sottaku Chat](https://sottaku.app/chat).
 
 ## Building Sottaku-Yomitan
 

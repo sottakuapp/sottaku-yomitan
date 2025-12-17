@@ -6,7 +6,7 @@ Improving Sottaku-Yomitan's features for the language(s) you are interested in i
 
 <img align="right" src="../../img/language-dropdown.png">
 
-If your language is not already available in the Language dropdown, here is how you can add it with just a few lines. As an example, we'll use [PR #913](https://github.com/yomidevs/yomitan/pull/913/files), where a first-time contributor added Dutch.
+If your language is not already available in the Language dropdown, here is how you can add it with just a few lines. As an example, we'll use [PR #913](https://github.com/sottakuapp/sottaku-yomitan/pull/913/files), where a first-time contributor added Dutch.
 
 ```js
 // language-descriptors.js
@@ -40,7 +40,7 @@ That's it! Your language should now be selectable from the dropdown, and may wor
 ## Recommended Dictionaries
 
 If you want to suggest to the user some dictionaries to download, you can make a pull request similar to:
-https://github.com/yomidevs/yomitan/pull/1951/files
+https://github.com/sottakuapp/sottaku-yomitan/pull/1951/files
 
 Please make sure you have permission to distribute these dictionaries legally.
 
@@ -425,4 +425,4 @@ In certain languages, dictionary entries may contain readings as a key to read w
 
 ## Stuck?
 
-If you have any questions, please feel free to open a Discussion on GitHub, or find us on the [Sottaku-Yomitan Discord](https://discord.gg/YkQrXW6TXF).
+If you have any questions, please feel free to open a Discussion on GitHub, or find us on the [Sottaku Chat](https://sottaku.app/chat).
