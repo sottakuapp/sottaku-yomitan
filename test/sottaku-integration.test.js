@@ -54,4 +54,43 @@ describe('SottakuIntegration', () => {
         const ids = dictionaryEntries.map((entry) => entry.sottaku.questionId);
         expect(ids).toStrictEqual([5, 2, 3, 1, 4]);
     });
+
+    test('resolves automatic locale from Sottaku language settings', async () => {
+        const integration = new SottakuIntegration(null);
+        integration.configure({
+            general: {
+                language: 'ja',
+                maxResults: 32,
+            },
+            sottaku: {
+                enabled: true,
+                authToken: 'test-token',
+                apiBaseUrl: 'https://sottaku.app/api/v1',
+                cookieDomain: 'https://sottaku.app',
+                locale: '',
+                languageMode: 'ja',
+                preferredLanguages: [],
+            },
+        });
+
+        /** @type {string|null} */
+        let resolvedLocale = null;
+        integration['_client'].getLanguageSettings = async () => ({locale: 'es'});
+        integration['_client'].scan = async (_text, _language, _maxResults, locale) => {
+            resolvedLocale = locale;
+            return {
+                results: [
+                    {id: 1, kanji_representation: '猫', reading: 'ねこ', match_length: 2, has_definition: true, word_translation: 'gato'},
+                ],
+                originalTextLength: 2,
+            };
+        };
+
+        const {dictionaryEntries} = await integration.findTerms('ねこ');
+        expect(resolvedLocale).toBe('es');
+
+        const glossary = dictionaryEntries[0].definitions[0].entries[0];
+        expect(glossary.type).toBe('structured-content');
+        expect(glossary.content.content[0].lang).toBe('es');
+    });
 });

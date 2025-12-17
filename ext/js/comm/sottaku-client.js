@@ -239,6 +239,14 @@ export class SottakuClient {
     }
 
     /**
+     * Fetch the user's current language and locale preferences.
+     * @returns {Promise<unknown>}
+     */
+    async getLanguageSettings() {
+        return await this._request('/profile/language-settings', {method: 'GET'});
+    }
+
+    /**
      * Fetch supported study languages for the current user context.
      * @returns {Promise<unknown>}
      */

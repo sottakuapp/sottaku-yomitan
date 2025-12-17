@@ -27,6 +27,15 @@ export class SottakuIntegration {
         this._options = null;
         /** @type {string[]} */
         this._supportedLanguages = [...SOTTAKU_SUPPORTED_LANGUAGES];
+
+        /** @type {string} */
+        this._automaticLocaleCacheKey = '';
+        /** @type {string|null} */
+        this._automaticLocale = null;
+        /** @type {number} */
+        this._automaticLocaleTimestamp = 0;
+        /** @type {Promise<string>|null} */
+        this._automaticLocalePromise = null;
     }
 
     /**
@@ -40,6 +49,14 @@ export class SottakuIntegration {
             authToken: sottaku.authToken,
             cookieDomain: sottaku.cookieDomain,
         });
+
+        const automaticLocaleCacheKey = `${sottaku.apiBaseUrl}|${sottaku.authToken}`;
+        if (automaticLocaleCacheKey !== this._automaticLocaleCacheKey) {
+            this._automaticLocaleCacheKey = automaticLocaleCacheKey;
+            this._automaticLocale = null;
+            this._automaticLocaleTimestamp = 0;
+            this._automaticLocalePromise = null;
+        }
     }
 
     /**
@@ -62,9 +79,12 @@ export class SottakuIntegration {
             return {dictionaryEntries: [], originalTextLength: 0};
         }
 
+        const localePromise = this._resolveLocale();
         const languages = this._resolveLanguages(query, sottaku, general.language);
         const maxResults = Math.max(1, general.maxResults || 32);
         const apiOrigin = this._getOrigin(sottaku.apiBaseUrl);
+        const locale = await localePromise;
+        const localeLang = (locale || 'en').replace(/_/g, '-');
 
         /** @type {SottakuLanguageResult[]} */
         const languageResults = [];
@@ -74,6 +94,8 @@ export class SottakuIntegration {
                 language,
                 maxResults,
                 variants: await this._buildQueryVariants(query, language, findTermsOptions),
+                locale,
+                localeLang,
             });
             languageResults.push(languageResult);
         }
@@ -130,10 +152,10 @@ export class SottakuIntegration {
     }
 
     /**
-     * @param {{apiOrigin: string, language: string, maxResults: number, variants: {query: string, sourceText: string, originalTextLength: number}[]}} options
+     * @param {{apiOrigin: string, language: string, maxResults: number, variants: {query: string, sourceText: string, originalTextLength: number}[], locale: string, localeLang: string}} options
      * @returns {Promise<SottakuLanguageResult>}
      */
-    async _fetchLanguageEntriesWithVariants({apiOrigin, language, maxResults, variants}) {
+    async _fetchLanguageEntriesWithVariants({apiOrigin, language, maxResults, variants, locale, localeLang}) {
         const resolvedVariants = variants.length > 0 ? variants : [{query: '', sourceText: '', originalTextLength: 0}];
         /** @type {SottakuLanguageResult | null} */
         let fallbackResult = null;
@@ -145,6 +167,8 @@ export class SottakuIntegration {
                 query,
                 sourceText,
                 originalTextLength,
+                locale,
+                localeLang,
             });
             if (languageResult.entries.length > 0) {
                 return languageResult;
@@ -161,10 +185,10 @@ export class SottakuIntegration {
     }
 
     /**
-     * @param {{apiOrigin: string, language: string, maxResults: number, query: string, sourceText?: string, originalTextLength?: number}} options
+     * @param {{apiOrigin: string, language: string, maxResults: number, query: string, sourceText?: string, originalTextLength?: number, locale: string, localeLang: string}} options
      * @returns {Promise<SottakuLanguageResult>}
      */
-    async _fetchLanguageEntries({apiOrigin, language, maxResults, query, sourceText, originalTextLength}) {
+    async _fetchLanguageEntries({apiOrigin, language, maxResults, query, sourceText, originalTextLength, locale, localeLang}) {
         const normalizedQuery = (query || '').trim();
         const normalizedSource = (sourceText || normalizedQuery || '').trim();
         if (!normalizedQuery) {
@@ -178,7 +202,6 @@ export class SottakuIntegration {
         let scanResultsRaw = [];
         let scanOriginalLength = 0;
         try {
-            const locale = typeof this._options?.sottaku?.locale === 'string' ? this._options.sottaku.locale.trim() : '';
             const scanResult = await this._client.scan(
                 normalizedSource,
                 language,
@@ -266,6 +289,7 @@ export class SottakuIntegration {
                 i,
                 normalizedSource,
                 originalTextLength,
+                localeLang,
             ));
         }
 
@@ -382,9 +406,10 @@ export class SottakuIntegration {
      * @param {number} index
      * @param {string} [sourceText]
      * @param {number} [matchLengthOverride]
+     * @param {string} localeLang
      * @returns {import('dictionary').TermDictionaryEntry}
      */
-    _createEntry(result, info, language, apiOrigin, query, index, sourceText, matchLengthOverride) {
+    _createEntry(result, info, language, apiOrigin, query, index, sourceText, matchLengthOverride, localeLang) {
         const normalizedResult = (typeof result === 'object' && result !== null) ? result : {};
         const normalizedInfo = (typeof info === 'object' && info !== null) ? info : {};
         const questionId = Number.parseInt(normalizedResult.id ?? normalizedInfo.id, 10);
@@ -471,7 +496,7 @@ export class SottakuIntegration {
                 sequences: [Number.isFinite(questionId) ? questionId : -1],
                 isPrimary: true,
                 tags: [],
-                entries: this._createGlossaryEntries(translation, sentence, sentenceTranslation, usageNotes, language),
+                entries: this._createGlossaryEntries(translation, sentence, sentenceTranslation, usageNotes, language, localeLang),
             },
         ];
 
@@ -526,12 +551,11 @@ export class SottakuIntegration {
      * @param {string} sentenceTranslation
      * @param {string} usageNotes
      * @param {string} language
+     * @param {string} localeLang
      * @returns {import('dictionary-data').TermGlossaryContent[]}
      */
-    _createGlossaryEntries(translation, sentence, sentenceTranslation, usageNotes, language) {
+    _createGlossaryEntries(translation, sentence, sentenceTranslation, usageNotes, language, localeLang) {
         const hasAnyContent = Boolean(translation || sentence || sentenceTranslation || usageNotes);
-        const locale = typeof this._options?.sottaku?.locale === 'string' ? this._options.sottaku.locale.trim() : '';
-        const localeLang = (locale || 'en').replace(/_/g, '-');
 
         /** @type {import('structured-content').Content} */
         const content = {
@@ -553,6 +577,43 @@ export class SottakuIntegration {
         };
 
         return [{type: 'structured-content', content}];
+    }
+
+    /**
+     * Resolve the locale that should be sent to Sottaku when the extension is configured for
+     * "Automatic (use Sottaku account language)".
+     * @returns {Promise<string>}
+     */
+    async _resolveLocale() {
+        const configuredLocale = typeof this._options?.sottaku?.locale === 'string' ? this._options.sottaku.locale.trim() : '';
+        if (configuredLocale) { return configuredLocale; }
+
+        const ttlMs = 5 * 60 * 1000;
+        const now = Date.now();
+        if (this._automaticLocale !== null && (now - this._automaticLocaleTimestamp) <= ttlMs) {
+            return this._automaticLocale;
+        }
+        if (this._automaticLocalePromise !== null) {
+            return await this._automaticLocalePromise;
+        }
+
+        this._automaticLocalePromise = (async () => {
+            try {
+                const settings = await this._client.getLanguageSettings();
+                const locale = typeof settings?.locale === 'string' ? settings.locale.trim() : '';
+                this._automaticLocale = locale;
+                this._automaticLocaleTimestamp = Date.now();
+                return locale;
+            } catch (e) {
+                this._automaticLocale = '';
+                this._automaticLocaleTimestamp = Date.now();
+                return '';
+            } finally {
+                this._automaticLocalePromise = null;
+            }
+        })();
+
+        return await this._automaticLocalePromise;
     }
 
     /**
