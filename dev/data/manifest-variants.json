@@ -188,20 +188,18 @@
             "name": "firefox",
             "inherit": "base",
             "fileName": "sottaku-yomitan-firefox.zip",
-            "modifications": [
-                {
-                    "action": "set",
-                    "path": [
-                        "author"
-                    ],
-                    "value": {
-                        "email": "hello@sottaku.app"
-                    }
-                },
-                {
-                    "action": "delete",
-                    "path": [
-                        "background",
+	            "modifications": [
+	                {
+	                    "action": "set",
+	                    "path": [
+	                        "author"
+	                    ],
+	                    "value": "Sottaku Inc"
+	                },
+	                {
+	                    "action": "delete",
+	                    "path": [
+	                        "background",
                         "service_worker"
                     ]
                 },
