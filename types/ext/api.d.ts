@@ -312,6 +312,21 @@ type ApiSurface = {
         };
         return: Core.Response<SettingsModifications.ModificationResult>[];
     };
+    sottakuAuthTokenUpdate: {
+        params: {
+            apiBaseUrl: string;
+            oldToken: string;
+            newToken: string;
+        };
+        return: void;
+    };
+    sottakuAuthTokenInvalidate: {
+        params: {
+            apiBaseUrl: string;
+            oldToken: string;
+        };
+        return: void;
+    };
     getSettings: {
         params: {
             targets: SettingsModifications.ScopedRead[];

@@ -111,7 +111,10 @@ export class Backend {
         /** @type {AccessibilityController} */
         this._accessibilityController = new AccessibilityController();
         /** @type {SottakuIntegration} */
-        this._sottakuIntegration = new SottakuIntegration(this._translator);
+        this._sottakuIntegration = new SottakuIntegration(this._translator, {
+            onAuthTokenUpdated: ({apiBaseUrl, oldToken, newToken}) => this._handleSottakuAuthTokenUpdate(apiBaseUrl, oldToken, newToken),
+            onAuthTokenInvalidated: ({apiBaseUrl, oldToken}) => this._handleSottakuAuthTokenInvalidate(apiBaseUrl, oldToken),
+        });
 
         /** @type {?number} */
         this._searchPopupTabId = null;
@@ -143,6 +146,10 @@ export class Backend {
         this._permissions = null;
         /** @type {Map<string, (() => void)[]>} */
         this._applicationReadyHandlers = new Map();
+        /** @type {number} */
+        this._sottakuKeepAliveLastRun = 0;
+        /** @type {?Promise<void>} */
+        this._sottakuKeepAlivePromise = null;
 
         /* eslint-disable @stylistic/no-multi-spaces */
         /** @type {import('api').ApiMap} */
@@ -179,6 +186,8 @@ export class Backend {
             ['logGenericErrorBackend',       this._onApiLogGenericErrorBackend.bind(this)],
             ['logIndicatorClear',            this._onApiLogIndicatorClear.bind(this)],
             ['modifySettings',               this._onApiModifySettings.bind(this)],
+            ['sottakuAuthTokenUpdate',       this._onApiSottakuAuthTokenUpdate.bind(this)],
+            ['sottakuAuthTokenInvalidate',   this._onApiSottakuAuthTokenInvalidate.bind(this)],
             ['getSettings',                  this._onApiGetSettings.bind(this)],
             ['setAllSettings',               this._onApiSetAllSettings.bind(this)],
             ['getOrCreateSearchPopup',       this._onApiGetOrCreateSearchPopup.bind(this)],
@@ -954,6 +963,116 @@ export class Backend {
         return this._modifySettings(targets, source);
     }
 
+    /** @type {import('api').ApiHandler<'sottakuAuthTokenUpdate'>} */
+    async _onApiSottakuAuthTokenUpdate({apiBaseUrl, oldToken, newToken}) {
+        await this._handleSottakuAuthTokenUpdate(apiBaseUrl, oldToken, newToken);
+        return void 0;
+    }
+
+    /** @type {import('api').ApiHandler<'sottakuAuthTokenInvalidate'>} */
+    async _onApiSottakuAuthTokenInvalidate({apiBaseUrl, oldToken}) {
+        await this._handleSottakuAuthTokenInvalidate(apiBaseUrl, oldToken);
+        return void 0;
+    }
+
+    /**
+     * @param {string} apiBaseUrl
+     * @param {string} oldToken
+     * @param {string} newToken
+     * @returns {Promise<void>}
+     */
+    async _handleSottakuAuthTokenUpdate(apiBaseUrl, oldToken, newToken) {
+        if (!(typeof apiBaseUrl === 'string' && apiBaseUrl.length > 0)) { return; }
+        if (!(typeof oldToken === 'string' && oldToken.length > 0)) { return; }
+        if (!(typeof newToken === 'string' && newToken.length > 0)) { return; }
+        if (oldToken === newToken) { return; }
+
+        const normalizeBaseUrl = (value) => value.replace(/\/+$/, '');
+        const apiBaseUrlNormalized = normalizeBaseUrl(apiBaseUrl);
+
+        const optionsFull = this._getOptionsFull(false);
+        /** @type {import('settings-modifications').ScopedModificationSet[]} */
+        const updates = [];
+        for (let index = 0; index < optionsFull.profiles.length; ++index) {
+            const profile = optionsFull.profiles[index];
+            const sottaku = profile?.options?.sottaku;
+            if (!sottaku) { continue; }
+
+            const storedToken = typeof sottaku.authToken === 'string' ? sottaku.authToken : '';
+            if (storedToken !== oldToken) { continue; }
+
+            const storedBaseUrl = normalizeBaseUrl(
+                typeof sottaku.apiBaseUrl === 'string' && sottaku.apiBaseUrl.length > 0 ?
+                    sottaku.apiBaseUrl :
+                    'https://sottaku.app/api/v1',
+            );
+            if (storedBaseUrl !== apiBaseUrlNormalized) { continue; }
+
+            updates.push({
+                action: 'set',
+                scope: 'profile',
+                optionsContext: {index},
+                path: 'sottaku.authToken',
+                value: newToken,
+            });
+        }
+
+        if (updates.length === 0) { return; }
+        await this._modifySettings(updates, 'sottaku-client');
+    }
+
+    /**
+     * @param {string} apiBaseUrl
+     * @param {string} oldToken
+     * @returns {Promise<void>}
+     */
+    async _handleSottakuAuthTokenInvalidate(apiBaseUrl, oldToken) {
+        if (!(typeof apiBaseUrl === 'string' && apiBaseUrl.length > 0)) { return; }
+        if (!(typeof oldToken === 'string' && oldToken.length > 0)) { return; }
+
+        const normalizeBaseUrl = (value) => value.replace(/\/+$/, '');
+        const apiBaseUrlNormalized = normalizeBaseUrl(apiBaseUrl);
+
+        const optionsFull = this._getOptionsFull(false);
+        /** @type {import('settings-modifications').ScopedModificationSet[]} */
+        const updates = [];
+        for (let index = 0; index < optionsFull.profiles.length; ++index) {
+            const profile = optionsFull.profiles[index];
+            const sottaku = profile?.options?.sottaku;
+            if (!sottaku) { continue; }
+
+            const storedToken = typeof sottaku.authToken === 'string' ? sottaku.authToken : '';
+            if (storedToken !== oldToken) { continue; }
+
+            const storedBaseUrl = normalizeBaseUrl(
+                typeof sottaku.apiBaseUrl === 'string' && sottaku.apiBaseUrl.length > 0 ?
+                    sottaku.apiBaseUrl :
+                    'https://sottaku.app/api/v1',
+            );
+            if (storedBaseUrl !== apiBaseUrlNormalized) { continue; }
+
+            updates.push(
+                {
+                    action: 'set',
+                    scope: 'profile',
+                    optionsContext: {index},
+                    path: 'sottaku.authToken',
+                    value: '',
+                },
+                {
+                    action: 'set',
+                    scope: 'profile',
+                    optionsContext: {index},
+                    path: 'sottaku.user',
+                    value: null,
+                },
+            );
+        }
+
+        if (updates.length === 0) { return; }
+        await this._modifySettings(updates, 'sottaku-client');
+    }
+
     /** @type {import('api').ApiHandler<'getSettings'>} */
     _onApiGetSettings({targets}) {
         const results = [];
@@ -1151,6 +1270,7 @@ export class Backend {
 
     /** @type {import('api').ApiHandler<'heartbeat'>} */
     _onApiHeartbeat() {
+        this._maybeKeepAliveSottaku();
         return void 0;
     }
 
@@ -1163,6 +1283,59 @@ export class Backend {
             throw e;
         }
         return void 0;
+    }
+
+    /** */
+    _maybeKeepAliveSottaku() {
+        const now = Date.now();
+        const intervalMs = 7 * 24 * 60 * 60 * 1000;
+        if (this._sottakuKeepAlivePromise !== null) { return; }
+        if (this._sottakuKeepAliveLastRun > 0 && now - this._sottakuKeepAliveLastRun < intervalMs) { return; }
+
+        this._sottakuKeepAliveLastRun = now;
+        const promise = this._runSottakuKeepAlive();
+        this._sottakuKeepAlivePromise = promise;
+        void promise.catch((e) => { log.error(e); });
+        void promise.finally(() => { this._sottakuKeepAlivePromise = null; });
+    }
+
+    /**
+     * @returns {Promise<void>}
+     */
+    async _runSottakuKeepAlive() {
+        const optionsFull = this._getOptionsFull(false);
+        for (const profile of optionsFull.profiles) {
+            const sottaku = profile?.options?.sottaku;
+            if (!sottaku?.enabled) { continue; }
+            if (!(typeof sottaku.authToken === 'string' && sottaku.authToken.length > 0)) { continue; }
+
+            const apiBaseUrl = typeof sottaku.apiBaseUrl === 'string' && sottaku.apiBaseUrl.length > 0 ?
+                sottaku.apiBaseUrl :
+                'https://sottaku.app/api/v1';
+            const cookieDomain = typeof sottaku.cookieDomain === 'string' && sottaku.cookieDomain.length > 0 ?
+                sottaku.cookieDomain :
+                (() => {
+                    try {
+                        return new URL(apiBaseUrl).origin;
+                    } catch (e) {
+                        return 'https://sottaku.app';
+                    }
+                })();
+
+            const client = new SottakuClient({
+                apiBaseUrl,
+                authToken: sottaku.authToken,
+                cookieDomain,
+                onAuthTokenUpdated: ({apiBaseUrl: updatedBaseUrl, oldToken, newToken}) => this._handleSottakuAuthTokenUpdate(updatedBaseUrl, oldToken, newToken),
+                onAuthTokenInvalidated: ({apiBaseUrl: invalidatedBaseUrl, oldToken}) => this._handleSottakuAuthTokenInvalidate(invalidatedBaseUrl, oldToken),
+            });
+
+            try {
+                await client.getProfile();
+            } catch (e) {
+                // Best-effort only; invalid tokens will be handled by the SottakuClient itself.
+            }
+        }
     }
 
     // Command handlers

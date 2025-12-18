@@ -17,10 +17,11 @@ const SOTTAKU_UPGRADE_URL = 'https://sottaku.app/upgrade';
 export class SottakuIntegration {
     /**
      * @param {import('../language/translator.js').Translator | import('./offscreen-proxy.js').TranslatorProxy} translator
+     * @param {{onAuthTokenUpdated?: ((details: {apiBaseUrl: string, oldToken: string, newToken: string}) => (void|Promise<void>))|null, onAuthTokenInvalidated?: ((details: {apiBaseUrl: string, oldToken: string}) => (void|Promise<void>))|null}} [clientOptions]
      */
-    constructor(translator) {
+    constructor(translator, clientOptions = {}) {
         /** @type {SottakuClient} */
-        this._client = new SottakuClient();
+        this._client = new SottakuClient(clientOptions);
         /** @type {import('../language/translator.js').Translator | import('./offscreen-proxy.js').TranslatorProxy} */
         this._translator = translator;
         /** @type {?import('settings').ProfileOptions} */

@@ -5,9 +5,33 @@
 
 import {toError} from '../core/to-error.js';
 
+/**
+ * @param {unknown} message
+ * @returns {Promise<unknown>}
+ */
+function sendRuntimeMessagePromise(message) {
+    if (!(typeof chrome === 'object' && chrome !== null && chrome.runtime && typeof chrome.runtime.sendMessage === 'function')) {
+        return Promise.resolve(void 0);
+    }
+    return new Promise((resolve, reject) => {
+        try {
+            chrome.runtime.sendMessage(message, (response) => {
+                const error = chrome.runtime.lastError;
+                if (error) {
+                    reject(new Error(error.message));
+                } else {
+                    resolve(response);
+                }
+            });
+        } catch (e) {
+            reject(toError(e));
+        }
+    });
+}
+
 export class SottakuClient {
     /**
-     * @param {{apiBaseUrl?: string, authToken?: string, cookieDomain?: string}} [options]
+     * @param {{apiBaseUrl?: string, authToken?: string, cookieDomain?: string, onAuthTokenUpdated?: ((details: {apiBaseUrl: string, oldToken: string, newToken: string}) => (void|Promise<void>)), onAuthTokenInvalidated?: ((details: {apiBaseUrl: string, oldToken: string}) => (void|Promise<void>))}} [options]
      */
     constructor(options = {}) {
         /** @type {string} */
@@ -16,6 +40,10 @@ export class SottakuClient {
         this._authToken = options.authToken || '';
         /** @type {string} */
         this._cookieDomain = options.cookieDomain || this._getOrigin(this._apiBaseUrl);
+        /** @type {((details: {apiBaseUrl: string, oldToken: string, newToken: string}) => (void|Promise<void>))|null} */
+        this._onAuthTokenUpdated = typeof options.onAuthTokenUpdated === 'function' ? options.onAuthTokenUpdated : null;
+        /** @type {((details: {apiBaseUrl: string, oldToken: string}) => (void|Promise<void>))|null} */
+        this._onAuthTokenInvalidated = typeof options.onAuthTokenInvalidated === 'function' ? options.onAuthTokenInvalidated : null;
     }
 
     /** @returns {string} */
@@ -29,7 +57,7 @@ export class SottakuClient {
     }
 
     /**
-     * @param {{apiBaseUrl?: string, authToken?: string, cookieDomain?: string}} options
+     * @param {{apiBaseUrl?: string, authToken?: string, cookieDomain?: string, onAuthTokenUpdated?: ((details: {apiBaseUrl: string, oldToken: string, newToken: string}) => (void|Promise<void>))|null, onAuthTokenInvalidated?: ((details: {apiBaseUrl: string, oldToken: string}) => (void|Promise<void>))|null}} options
      */
     setConfig(options) {
         if (typeof options.apiBaseUrl === 'string' && options.apiBaseUrl.length > 0) {
@@ -40,6 +68,12 @@ export class SottakuClient {
         }
         if (typeof options.cookieDomain === 'string' && options.cookieDomain.length > 0) {
             this._cookieDomain = options.cookieDomain;
+        }
+        if ('onAuthTokenUpdated' in options) {
+            this._onAuthTokenUpdated = typeof options.onAuthTokenUpdated === 'function' ? options.onAuthTokenUpdated : null;
+        }
+        if ('onAuthTokenInvalidated' in options) {
+            this._onAuthTokenInvalidated = typeof options.onAuthTokenInvalidated === 'function' ? options.onAuthTokenInvalidated : null;
         }
     }
 
@@ -86,6 +120,51 @@ export class SottakuClient {
             throw toError(e);
         }
         return null;
+    }
+
+    /**
+     * @param {string} oldToken
+     * @param {string} newToken
+     * @returns {Promise<void>}
+     */
+    async _notifyAuthTokenUpdated(oldToken, newToken) {
+        if (!(typeof oldToken === 'string' && oldToken.length > 0 && typeof newToken === 'string' && newToken.length > 0 && oldToken !== newToken)) {
+            return;
+        }
+        if (this._onAuthTokenUpdated) {
+            await this._onAuthTokenUpdated({apiBaseUrl: this._apiBaseUrl, oldToken, newToken});
+            return;
+        }
+        try {
+            await sendRuntimeMessagePromise({
+                action: 'sottakuAuthTokenUpdate',
+                params: {apiBaseUrl: this._apiBaseUrl, oldToken, newToken},
+            });
+        } catch (e) {
+            // Best-effort only.
+        }
+    }
+
+    /**
+     * @param {string} oldToken
+     * @returns {Promise<void>}
+     */
+    async _notifyAuthTokenInvalidated(oldToken) {
+        if (!(typeof oldToken === 'string' && oldToken.length > 0)) {
+            return;
+        }
+        if (this._onAuthTokenInvalidated) {
+            await this._onAuthTokenInvalidated({apiBaseUrl: this._apiBaseUrl, oldToken});
+            return;
+        }
+        try {
+            await sendRuntimeMessagePromise({
+                action: 'sottakuAuthTokenInvalidate',
+                params: {apiBaseUrl: this._apiBaseUrl, oldToken},
+            });
+        } catch (e) {
+            // Best-effort only.
+        }
     }
 
     /**
@@ -264,7 +343,7 @@ export class SottakuClient {
 
     /**
      * @param {string} path
-     * @param {{method?: string, body?: unknown, auth?: boolean, language?: string, locale?: string}} [options]
+     * @param {{method?: string, body?: unknown, auth?: boolean, language?: string, locale?: string, _retryAuth?: boolean}} [options]
      * @returns {Promise<any>}
      */
     async _request(path, options = {}) {
@@ -274,6 +353,7 @@ export class SottakuClient {
             auth = true,
             language = null,
             locale = null,
+            _retryAuth = false,
         } = options;
         const url = this._buildUrl(path, language, locale);
         /** @type {RequestInit} */
@@ -299,6 +379,12 @@ export class SottakuClient {
         }
 
         const response = await fetch(url, fetchOptions);
+        const rotatedToken = response.headers.get('X-New-Token');
+        if (auth && rotatedToken && rotatedToken !== this._authToken) {
+            const oldToken = this._authToken;
+            this._authToken = rotatedToken;
+            await this._notifyAuthTokenUpdated(oldToken, rotatedToken);
+        }
         let json = null;
         try {
             json = await response.json();
@@ -306,8 +392,34 @@ export class SottakuClient {
             // NOP
         }
 
+        const message = (json && (json.error || json.message)) || response.statusText;
+
+        const isTokenExpired = (
+            response.status === 401 &&
+            auth &&
+            this._authToken &&
+            (
+                (json && (json.code === 'TOKEN_EXPIRED' || json.error === 'Invalid or expired token')) ||
+                (typeof message === 'string' && message.includes('Invalid or expired token'))
+            )
+        );
+        if (isTokenExpired && !_retryAuth) {
+            const oldToken = this._authToken;
+            let cookieToken = null;
+            try {
+                cookieToken = await this.syncTokenFromCookies();
+            } catch (e) {
+                cookieToken = null;
+            }
+            if (cookieToken && cookieToken !== oldToken) {
+                await this._notifyAuthTokenUpdated(oldToken, cookieToken);
+                return await this._request(path, {...options, _retryAuth: true});
+            }
+            this._authToken = '';
+            await this._notifyAuthTokenInvalidated(oldToken);
+        }
+
         if (!response.ok || (json && json.success === false)) {
-            const message = (json && (json.error || json.message)) || response.statusText;
             throw new Error(message || 'Request failed');
         }
 
