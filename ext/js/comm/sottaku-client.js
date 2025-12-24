@@ -251,24 +251,52 @@ export class SottakuClient {
      */
     async fetchAudioAsObjectUrl(path, language) {
         const url = this._resolveUrl(path);
-        /** @type {RequestInit} */
-        const options = {
-            method: 'GET',
-            credentials: 'include',
-            headers: {},
-        };
-        if (this._authToken) {
-            options.headers = {
-                ...options.headers,
-                'Authorization': `Bearer ${this._authToken}`,
+        let retriedAuth = false;
+        while (true) {
+            const tokenUsed = this._authToken;
+            /** @type {RequestInit} */
+            const options = {
+                method: 'GET',
+                credentials: 'include',
+                headers: {},
             };
+            if (tokenUsed) {
+                options.headers = {
+                    ...options.headers,
+                    'Authorization': `Bearer ${tokenUsed}`,
+                };
+            }
+            const response = await fetch(url, options);
+            const rotatedToken = response.headers.get('X-New-Token');
+            if (tokenUsed && rotatedToken && rotatedToken !== tokenUsed) {
+                this._authToken = rotatedToken;
+                await this._notifyAuthTokenUpdated(tokenUsed, rotatedToken);
+            }
+            if (response.status === 401 && tokenUsed && !retriedAuth) {
+                retriedAuth = true;
+                if (rotatedToken && rotatedToken !== tokenUsed) {
+                    continue;
+                }
+                let cookieToken = null;
+                try {
+                    cookieToken = await this.syncTokenFromCookies();
+                } catch (e) {
+                    cookieToken = null;
+                }
+                if (cookieToken && cookieToken !== tokenUsed) {
+                    await this._notifyAuthTokenUpdated(tokenUsed, cookieToken);
+                    continue;
+                }
+                this._authToken = '';
+                await this._notifyAuthTokenInvalidated(tokenUsed);
+                return null;
+            }
+            if (!response.ok) {
+                return null;
+            }
+            const blob = await response.blob();
+            return URL.createObjectURL(blob);
         }
-        const response = await fetch(url, options);
-        if (!response.ok) {
-            return null;
-        }
-        const blob = await response.blob();
-        return URL.createObjectURL(blob);
     }
 
     /**
