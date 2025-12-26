@@ -26,6 +26,114 @@ import {anyNodeMatchesSelector, everyNodeMatchesSelector, getActiveModifiers, ge
 import {TextSourceElement} from '../dom/text-source-element.js';
 
 const SCAN_RESOLUTION_EXCLUDED_LANGUAGES = new Set(['ja', 'zh', 'yue', 'ko']);
+const DOCUMENT_LANGUAGE_HINT_TTL_MS = 5 * 60 * 1000;
+const DOCUMENT_LANGUAGE_SAMPLE_MAX_CHARS = 2000;
+const HIRAGANA_RANGE = [0x3040, 0x309f];
+const KATAKANA_RANGES = [
+    [0x30a0, 0x30ff],
+    [0x31f0, 0x31ff],
+    [0xff65, 0xff9f],
+];
+const HANGUL_RANGES = [
+    [0x1100, 0x11ff],
+    [0x3130, 0x318f],
+    [0xa960, 0xa97f],
+    [0xac00, 0xd7af],
+    [0xd7b0, 0xd7ff],
+];
+const HAN_RANGES = [
+    [0x3400, 0x4dbf],
+    [0x4e00, 0x9fff],
+    [0xf900, 0xfaff],
+];
+
+/**
+ * @param {number} codePoint
+ * @param {number[][]} ranges
+ * @returns {boolean}
+ */
+function isCodePointInRanges(codePoint, ranges) {
+    for (const [min, max] of ranges) {
+        if (codePoint >= min && codePoint <= max) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
+ * @param {string} text
+ * @returns {{han: number, hiragana: number, katakana: number, hangul: number}}
+ */
+function getCjkScriptCounts(text) {
+    const counts = {han: 0, hiragana: 0, katakana: 0, hangul: 0};
+    if (typeof text !== 'string' || text.length === 0) { return counts; }
+    for (const char of text) {
+        const codePoint = char.codePointAt(0);
+        if (!codePoint) { continue; }
+        if (codePoint >= HIRAGANA_RANGE[0] && codePoint <= HIRAGANA_RANGE[1]) {
+            counts.hiragana += 1;
+            continue;
+        }
+        if (isCodePointInRanges(codePoint, KATAKANA_RANGES)) {
+            counts.katakana += 1;
+            continue;
+        }
+        if (isCodePointInRanges(codePoint, HANGUL_RANGES)) {
+            counts.hangul += 1;
+            continue;
+        }
+        if (isCodePointInRanges(codePoint, HAN_RANGES)) {
+            counts.han += 1;
+        }
+    }
+    return counts;
+}
+
+/**
+ * @param {Document} doc
+ * @returns {string}
+ */
+function getDocumentLanguageTag(doc) {
+    const raw = doc.documentElement?.lang || doc.body?.lang || '';
+    return typeof raw === 'string' ? raw.trim() : '';
+}
+
+/**
+ * @param {Document} doc
+ * @param {number} maxChars
+ * @returns {string}
+ */
+function collectDocumentTextSample(doc, maxChars) {
+    if (!doc || maxChars <= 0) { return ''; }
+    const root = doc.body || doc.documentElement;
+    if (!root) { return ''; }
+    const walker = doc.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode(node) {
+            if (!node || !node.parentElement) { return NodeFilter.FILTER_REJECT; }
+            const tagName = node.parentElement.tagName;
+            if (tagName === 'SCRIPT' || tagName === 'STYLE' || tagName === 'NOSCRIPT') {
+                return NodeFilter.FILTER_REJECT;
+            }
+            const value = node.nodeValue;
+            if (!value || !value.trim()) { return NodeFilter.FILTER_REJECT; }
+            return NodeFilter.FILTER_ACCEPT;
+        },
+    });
+    const chunks = [];
+    let remaining = maxChars;
+    let currentNode = walker.nextNode();
+    while (currentNode && remaining > 0) {
+        const value = currentNode.nodeValue || '';
+        const slice = value.length > remaining ? value.slice(0, remaining) : value;
+        if (slice) {
+            chunks.push(slice);
+            remaining -= slice.length;
+        }
+        currentNode = walker.nextNode();
+    }
+    return chunks.join('');
+}
 
 /**
  * @augments EventDispatcher<import('text-scanner').Events>
@@ -176,6 +284,11 @@ export class TextScanner extends EventDispatcher {
         this._userHasNotSelectedAnythingManually = true;
         /** @type {boolean} */
         this._isMouseOverText = false;
+
+        /** @type {?{documentLang?: string, documentScriptCounts?: {han?: number, hiragana?: number, katakana?: number, hangul?: number}}} */
+        this._documentLanguageHints = null;
+        /** @type {number} */
+        this._documentLanguageHintsTimestamp = 0;
     }
 
     /** @type {boolean} */
@@ -1244,6 +1357,30 @@ export class TextScanner extends EventDispatcher {
     }
 
     /**
+     * @returns {?{documentLang?: string, documentScriptCounts?: {han?: number, hiragana?: number, katakana?: number, hangul?: number}}}
+     */
+    _getDocumentLanguageHints() {
+        const now = Date.now();
+        if (this._documentLanguageHintsTimestamp > 0 && (now - this._documentLanguageHintsTimestamp) <= DOCUMENT_LANGUAGE_HINT_TTL_MS) {
+            return this._documentLanguageHints;
+        }
+
+        const documentLang = getDocumentLanguageTag(document);
+        const sampleText = collectDocumentTextSample(document, DOCUMENT_LANGUAGE_SAMPLE_MAX_CHARS);
+        const scriptCounts = getCjkScriptCounts(sampleText);
+        const hasCounts = scriptCounts.han > 0 || scriptCounts.hiragana > 0 || scriptCounts.katakana > 0 || scriptCounts.hangul > 0;
+
+        const hints = (documentLang || hasCounts) ? {
+            documentLang: documentLang || void 0,
+            documentScriptCounts: scriptCounts,
+        } : null;
+
+        this._documentLanguageHints = hints;
+        this._documentLanguageHintsTimestamp = now;
+        return hints;
+    }
+
+    /**
      * @param {import('text-source').TextSource} textSource
      * @param {import('settings').OptionsContext} optionsContext
      * @returns {Promise<?import('text-scanner').TermSearchResults>}
@@ -1261,6 +1398,10 @@ export class TextScanner extends EventDispatcher {
 
         /** @type {import('api').FindTermsDetails} */
         const details = {};
+        const languageHints = this._getDocumentLanguageHints();
+        if (languageHints) {
+            details.languageHints = languageHints;
+        }
         const {dictionaryEntries, originalTextLength} = await this._api.termsFind(searchText, details, optionsContext);
         if (dictionaryEntries.length === 0) { return null; }
 

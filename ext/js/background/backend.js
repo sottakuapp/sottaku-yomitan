@@ -571,7 +571,7 @@ export class Backend {
         const findTermsOptions = this._getTranslatorFindTermsOptions(mode, details, options);
         if (options?.sottaku?.enabled) {
             this._sottakuIntegration.configure(options);
-            const sottakuResult = await this._sottakuIntegration.findTerms(text, findTermsOptions);
+            const sottakuResult = await this._sottakuIntegration.findTerms(text, findTermsOptions, details);
             sottakuResult.dictionaryEntries.splice(maxResults);
             return sottakuResult;
         }

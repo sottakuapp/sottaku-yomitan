@@ -162,7 +162,7 @@ export type SottakuOptions = {
     apiBaseUrl: string;
     authToken: string;
     locale: string;
-    languageMode: 'auto' | 'ja' | 'ko' | 'mixed';
+    languageMode: 'auto' | 'ja' | 'ko' | 'zh' | 'mixed';
     preferredLanguages: string[];
     user: SottakuUser | null;
     cookieDomain: string;

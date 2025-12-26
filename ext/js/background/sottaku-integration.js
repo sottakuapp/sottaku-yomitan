@@ -3,9 +3,70 @@ import {ExtensionError} from '../core/extension-error.js';
 import {toError} from '../core/to-error.js';
 import {getSottakuLanguageFlag, normalizeSottakuLanguages, SOTTAKU_SUPPORTED_LANGUAGES} from '../language/sottaku-languages.js';
 
-const JAPANESE_CHAR_PATTERN = /[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff]/;
-const HANGUL_CHAR_PATTERN = /[\u1100-\u11ff\u3130-\u318f\uac00-\ud7af]/;
+const HIRAGANA_RANGE = [0x3040, 0x309f];
+const KATAKANA_RANGES = [
+    [0x30a0, 0x30ff],
+    [0x31f0, 0x31ff],
+    [0xff65, 0xff9f],
+];
+const HANGUL_RANGES = [
+    [0x1100, 0x11ff],
+    [0x3130, 0x318f],
+    [0xa960, 0xa97f],
+    [0xac00, 0xd7af],
+    [0xd7b0, 0xd7ff],
+];
+const HAN_RANGES = [
+    [0x3400, 0x4dbf],
+    [0x4e00, 0x9fff],
+    [0xf900, 0xfaff],
+];
+const LANGUAGE_HINT_MIN_COUNT = 3;
+const LANGUAGE_HINT_MIN_RATIO = 0.02;
 const SOTTAKU_UPGRADE_URL = 'https://sottaku.app/upgrade';
+
+/**
+ * @param {number} codePoint
+ * @param {number[][]} ranges
+ * @returns {boolean}
+ */
+function isCodePointInRanges(codePoint, ranges) {
+    for (const [min, max] of ranges) {
+        if (codePoint >= min && codePoint <= max) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
+ * @param {string} text
+ * @returns {{han: number, hiragana: number, katakana: number, hangul: number}}
+ */
+function getCjkScriptCounts(text) {
+    const counts = {han: 0, hiragana: 0, katakana: 0, hangul: 0};
+    if (typeof text !== 'string' || text.length === 0) { return counts; }
+    for (const char of text) {
+        const codePoint = char.codePointAt(0);
+        if (!codePoint) { continue; }
+        if (codePoint >= HIRAGANA_RANGE[0] && codePoint <= HIRAGANA_RANGE[1]) {
+            counts.hiragana += 1;
+            continue;
+        }
+        if (isCodePointInRanges(codePoint, KATAKANA_RANGES)) {
+            counts.katakana += 1;
+            continue;
+        }
+        if (isCodePointInRanges(codePoint, HANGUL_RANGES)) {
+            counts.hangul += 1;
+            continue;
+        }
+        if (isCodePointInRanges(codePoint, HAN_RANGES)) {
+            counts.han += 1;
+        }
+    }
+    return counts;
+}
 
 /**
  * @typedef {object} SottakuLanguageResult
@@ -63,9 +124,10 @@ export class SottakuIntegration {
     /**
      * @param {string} text
      * @param {import('translation').FindDeinflectionOptions} [findTermsOptions]
+     * @param {import('api').FindTermsDetails} [details]
      * @returns {Promise<{dictionaryEntries: import('dictionary').TermDictionaryEntry[], originalTextLength: number}>}
      */
-    async findTerms(text, findTermsOptions) {
+    async findTerms(text, findTermsOptions, details) {
         if (this._options === null) {
             throw new ExtensionError('Sottaku options not configured');
         }
@@ -81,7 +143,7 @@ export class SottakuIntegration {
         }
 
         const localePromise = this._resolveLocale();
-        const languages = this._resolveLanguages(query, sottaku, general.language);
+        const {languages, autoPick, hintLanguage} = this._resolveLanguages(query, sottaku, general.language, details);
         const maxResults = Math.max(1, general.maxResults || 32);
         const apiOrigin = this._getOrigin(sottaku.apiBaseUrl);
         const locale = await localePromise;
@@ -101,8 +163,15 @@ export class SottakuIntegration {
             languageResults.push(languageResult);
         }
 
-        const dictionaryEntries = this._interleaveLanguageEntries(languageResults, maxResults);
-        const originalTextLength = this._resolveOriginalTextLength(languageResults, dictionaryEntries, query);
+        let resolvedLanguageResults = languageResults;
+        if (autoPick) {
+            const bestResult = this._selectBestLanguageResult(languageResults, languages, hintLanguage);
+            if (bestResult) {
+                resolvedLanguageResults = [bestResult];
+            }
+        }
+        const dictionaryEntries = this._interleaveLanguageEntries(resolvedLanguageResults, maxResults);
+        const originalTextLength = this._resolveOriginalTextLength(resolvedLanguageResults, dictionaryEntries, query);
         return {dictionaryEntries, originalTextLength};
     }
 
@@ -359,12 +428,84 @@ export class SottakuIntegration {
     }
 
     /**
+     * @param {SottakuLanguageResult[]} languageResults
+     * @param {string[]} languageOrder
+     * @param {?string} hintLanguage
+     * @returns {?SottakuLanguageResult}
+     */
+    _selectBestLanguageResult(languageResults, languageOrder, hintLanguage) {
+        let bestResult = null;
+        let bestScore = null;
+        for (const languageResult of languageResults) {
+            const score = this._getLanguageResultScore(languageResult, languageOrder, hintLanguage);
+            if (bestScore === null || this._compareLanguageResultScores(score, bestScore) > 0) {
+                bestScore = score;
+                bestResult = languageResult;
+            }
+        }
+        return bestResult;
+    }
+
+    /**
+     * @param {SottakuLanguageResult} languageResult
+     * @param {string[]} languageOrder
+     * @param {?string} hintLanguage
+     * @returns {{matchLength: number, hasDefinition: boolean, entryCount: number, hintMatch: number, orderIndex: number}}
+     */
+    _getLanguageResultScore(languageResult, languageOrder, hintLanguage) {
+        let maxMatchLength = 0;
+        let hasDefinition = false;
+        for (const entry of languageResult.entries) {
+            const metadata = entry && typeof entry === 'object' ? /** @type {any} */ (entry).sottaku : null;
+            const matchLength = Number.parseInt(metadata?.matchLength, 10);
+            if (Number.isFinite(matchLength)) {
+                maxMatchLength = Math.max(maxMatchLength, matchLength);
+            } else if (typeof entry?.maxOriginalTextLength === 'number') {
+                maxMatchLength = Math.max(maxMatchLength, entry.maxOriginalTextLength);
+            }
+            if (metadata?.hasDefinition) {
+                hasDefinition = true;
+            }
+        }
+
+        if (maxMatchLength === 0 && languageResult.entries.length > 0) {
+            if (typeof languageResult.originalTextLength === 'number' && Number.isFinite(languageResult.originalTextLength)) {
+                maxMatchLength = Math.max(maxMatchLength, languageResult.originalTextLength);
+            }
+        }
+
+        const hintMatch = hintLanguage === languageResult.language ? 1 : 0;
+        const orderIndex = languageOrder.indexOf(languageResult.language);
+        return {
+            matchLength: maxMatchLength,
+            hasDefinition,
+            entryCount: languageResult.entries.length,
+            hintMatch,
+            orderIndex: orderIndex >= 0 ? orderIndex : languageOrder.length,
+        };
+    }
+
+    /**
+     * @param {{matchLength: number, hasDefinition: boolean, entryCount: number, hintMatch: number, orderIndex: number}} a
+     * @param {{matchLength: number, hasDefinition: boolean, entryCount: number, hintMatch: number, orderIndex: number}} b
+     * @returns {number}
+     */
+    _compareLanguageResultScores(a, b) {
+        if (a.matchLength !== b.matchLength) { return a.matchLength - b.matchLength; }
+        if (a.hintMatch !== b.hintMatch) { return a.hintMatch - b.hintMatch; }
+        if (a.hasDefinition !== b.hasDefinition) { return (a.hasDefinition ? 1 : 0) - (b.hasDefinition ? 1 : 0); }
+        if (a.entryCount !== b.entryCount) { return a.entryCount - b.entryCount; }
+        return b.orderIndex - a.orderIndex;
+    }
+
+    /**
      * @param {string} text
      * @param {import('settings').SottakuOptions} sottakuOptions
      * @param {string} defaultLanguage
-     * @returns {string[]}
+     * @param {import('api').FindTermsDetails} [details]
+     * @returns {{languages: string[], autoPick: boolean, hintLanguage: ?string}}
      */
-    _resolveLanguages(text, sottakuOptions, defaultLanguage) {
+    _resolveLanguages(text, sottakuOptions, defaultLanguage, details) {
         const supportedLanguages = this._supportedLanguages.length > 0 ? this._supportedLanguages : SOTTAKU_SUPPORTED_LANGUAGES;
         const preferredLanguages = normalizeSottakuLanguages(
             sottakuOptions.preferredLanguages,
@@ -372,29 +513,100 @@ export class SottakuIntegration {
             supportedLanguages,
         );
         switch (sottakuOptions.languageMode) {
-            case 'ja': return ['ja'];
-            case 'ko': return ['ko'];
-            case 'zh': return ['zh'];
-            case 'mixed': return preferredLanguages;
+            case 'ja': return {languages: ['ja'], autoPick: false, hintLanguage: null};
+            case 'ko': return {languages: ['ko'], autoPick: false, hintLanguage: null};
+            case 'zh': return {languages: ['zh'], autoPick: false, hintLanguage: null};
+            case 'mixed': return {languages: preferredLanguages, autoPick: false, hintLanguage: null};
         }
-        const detected = this._detectLanguageFromText(text);
-        if (detected) { return [detected]; }
-        if (preferredLanguages.length > 0) { return [preferredLanguages[0]]; }
-        if (defaultLanguage) { return [defaultLanguage]; }
-        return ['ja'];
+        const detected = this._detectLanguageFromText(text, details);
+        if (detected?.language && detected.confidence === 'strong') {
+            return {languages: [detected.language], autoPick: false, hintLanguage: null};
+        }
+
+        const candidates = preferredLanguages.length > 0 ? preferredLanguages : supportedLanguages;
+        const queryCounts = getCjkScriptCounts(text || '');
+        const hasHanOnly = queryCounts.han > 0 && (queryCounts.hiragana + queryCounts.katakana + queryCounts.hangul) === 0;
+        const shouldProbe = candidates.length > 1 && (hasHanOnly || detected?.confidence === 'weak');
+        if (shouldProbe) {
+            return {languages: candidates, autoPick: true, hintLanguage: detected?.language ?? null};
+        }
+
+        const fallbackLanguage = candidates[0] || defaultLanguage || 'ja';
+        return {languages: [fallbackLanguage], autoPick: false, hintLanguage: null};
     }
 
     /**
      * @param {string} text
-     * @returns {?string}
+     * @param {import('api').FindTermsDetails} [details]
+     * @returns {{language: string, confidence: 'strong' | 'weak'} | null}
      */
-    _detectLanguageFromText(text) {
+    _detectLanguageFromText(text, details) {
         const trimmed = (text || '').trim();
-        if (HANGUL_CHAR_PATTERN.test(trimmed)) {
-            return 'ko';
+        const counts = getCjkScriptCounts(trimmed);
+        if (counts.hangul > 0) {
+            return {language: 'ko', confidence: 'strong'};
         }
-        if (JAPANESE_CHAR_PATTERN.test(trimmed)) {
-            return 'ja';
+        if (counts.hiragana + counts.katakana > 0) {
+            return {language: 'ja', confidence: 'strong'};
+        }
+        return this._detectLanguageFromHints(details);
+    }
+
+    /**
+     * @param {import('api').FindTermsDetails} [details]
+     * @returns {{language: string, confidence: 'strong' | 'weak'} | null}
+     */
+    _detectLanguageFromHints(details) {
+        const languageHints = details?.languageHints;
+        if (!languageHints || typeof languageHints !== 'object') { return null; }
+        const documentLang = typeof languageHints.documentLang === 'string' ? languageHints.documentLang.trim().toLowerCase() : '';
+        if (documentLang.startsWith('ja')) { return {language: 'ja', confidence: 'strong'}; }
+        if (documentLang.startsWith('ko')) { return {language: 'ko', confidence: 'strong'}; }
+        if (documentLang.startsWith('zh')) { return {language: 'zh', confidence: 'strong'}; }
+
+        const counts = this._normalizeScriptCounts(languageHints.documentScriptCounts);
+        return this._resolveLanguageFromScriptCounts(counts);
+    }
+
+    /**
+     * @param {unknown} value
+     * @returns {{han: number, hiragana: number, katakana: number, hangul: number} | null}
+     */
+    _normalizeScriptCounts(value) {
+        if (!value || typeof value !== 'object') { return null; }
+        /** @type {any} */ const raw = value;
+        const parseCount = (count) => {
+            const parsed = Number.parseInt(count, 10);
+            return Number.isFinite(parsed) ? Math.max(0, parsed) : 0;
+        };
+        return {
+            han: parseCount(raw.han),
+            hiragana: parseCount(raw.hiragana),
+            katakana: parseCount(raw.katakana),
+            hangul: parseCount(raw.hangul),
+        };
+    }
+
+    /**
+     * @param {{han: number, hiragana: number, katakana: number, hangul: number} | null} counts
+     * @returns {{language: string, confidence: 'strong' | 'weak'} | null}
+     */
+    _resolveLanguageFromScriptCounts(counts) {
+        if (!counts) { return null; }
+        const kana = counts.hiragana + counts.katakana;
+        const total = counts.han + counts.hangul + kana;
+        if (total <= 0) { return null; }
+        const hangulRatio = counts.hangul / total;
+        const kanaRatio = kana / total;
+
+        if (counts.hangul >= LANGUAGE_HINT_MIN_COUNT || hangulRatio >= LANGUAGE_HINT_MIN_RATIO) {
+            return {language: 'ko', confidence: 'strong'};
+        }
+        if (kana >= LANGUAGE_HINT_MIN_COUNT || kanaRatio >= LANGUAGE_HINT_MIN_RATIO) {
+            return {language: 'ja', confidence: 'strong'};
+        }
+        if (counts.han > 0 && kana === 0 && counts.hangul === 0) {
+            return {language: 'zh', confidence: 'weak'};
         }
         return null;
     }

@@ -49,6 +49,15 @@ export type FindTermsDetails = {
     matchType?: Translation.FindTermsMatchType;
     deinflect?: boolean;
     primaryReading?: string;
+    languageHints?: {
+        documentLang?: string;
+        documentScriptCounts?: {
+            han?: number;
+            hiragana?: number;
+            katakana?: number;
+            hangul?: number;
+        };
+    };
 };
 
 export type ParseTextResultItem = {
