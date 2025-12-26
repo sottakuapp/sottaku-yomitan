@@ -23,6 +23,9 @@ const HAN_RANGES = [
 ];
 const LANGUAGE_HINT_MIN_COUNT = 3;
 const LANGUAGE_HINT_MIN_RATIO = 0.02;
+const SOTTAKU_SETTINGS_TTL_MS = 5 * 60 * 1000;
+const HANZI_DISPLAY_MODES = new Set(['traditional', 'simplified', 'both']);
+const CHINESE_READING_MODES = new Set(['pinyin', 'bopomofo']);
 const SOTTAKU_UPGRADE_URL = 'https://sottaku.app/upgrade';
 
 /**
@@ -98,6 +101,14 @@ export class SottakuIntegration {
         this._automaticLocaleTimestamp = 0;
         /** @type {Promise<string>|null} */
         this._automaticLocalePromise = null;
+        /** @type {string} */
+        this._automaticSettingsCacheKey = '';
+        /** @type {?{hanziDisplay: string, chineseReadingDisplay: string, chineseToneColors: boolean}} */
+        this._automaticSettings = null;
+        /** @type {number} */
+        this._automaticSettingsTimestamp = 0;
+        /** @type {Promise<?{hanziDisplay: string, chineseReadingDisplay: string, chineseToneColors: boolean}>|null} */
+        this._automaticSettingsPromise = null;
     }
 
     /**
@@ -112,12 +123,18 @@ export class SottakuIntegration {
             cookieDomain: sottaku.cookieDomain,
         });
 
-        const automaticLocaleCacheKey = `${sottaku.apiBaseUrl}|${sottaku.authToken}`;
-        if (automaticLocaleCacheKey !== this._automaticLocaleCacheKey) {
-            this._automaticLocaleCacheKey = automaticLocaleCacheKey;
+        const automaticCacheKey = `${sottaku.apiBaseUrl}|${sottaku.authToken}`;
+        if (automaticCacheKey !== this._automaticLocaleCacheKey) {
+            this._automaticLocaleCacheKey = automaticCacheKey;
             this._automaticLocale = null;
             this._automaticLocaleTimestamp = 0;
             this._automaticLocalePromise = null;
+        }
+        if (automaticCacheKey !== this._automaticSettingsCacheKey) {
+            this._automaticSettingsCacheKey = automaticCacheKey;
+            this._automaticSettings = null;
+            this._automaticSettingsTimestamp = 0;
+            this._automaticSettingsPromise = null;
         }
     }
 
@@ -142,11 +159,14 @@ export class SottakuIntegration {
             return {dictionaryEntries: [], originalTextLength: 0};
         }
 
-        const localePromise = this._resolveLocale();
         const {languages, autoPick, hintLanguage} = this._resolveLanguages(query, sottaku, general.language, details);
+        const localePromise = this._resolveLocale();
+        const displayPreferencesPromise = languages.some((language) => language.startsWith('zh')) ?
+            this._resolveDisplayPreferences() :
+            Promise.resolve(null);
         const maxResults = Math.max(1, general.maxResults || 32);
         const apiOrigin = this._getOrigin(sottaku.apiBaseUrl);
-        const locale = await localePromise;
+        const [locale, displayPreferences] = await Promise.all([localePromise, displayPreferencesPromise]);
         const localeLang = (locale || 'en').replace(/_/g, '-');
 
         /** @type {SottakuLanguageResult[]} */
@@ -159,6 +179,7 @@ export class SottakuIntegration {
                 variants: await this._buildQueryVariants(query, language, findTermsOptions),
                 locale,
                 localeLang,
+                displayPreferences: language.startsWith('zh') ? displayPreferences : null,
             });
             languageResults.push(languageResult);
         }
@@ -222,10 +243,10 @@ export class SottakuIntegration {
     }
 
     /**
-     * @param {{apiOrigin: string, language: string, maxResults: number, variants: {query: string, sourceText: string, originalTextLength: number}[], locale: string, localeLang: string}} options
+     * @param {{apiOrigin: string, language: string, maxResults: number, variants: {query: string, sourceText: string, originalTextLength: number}[], locale: string, localeLang: string, displayPreferences?: {hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean} | null}} options
      * @returns {Promise<SottakuLanguageResult>}
      */
-    async _fetchLanguageEntriesWithVariants({apiOrigin, language, maxResults, variants, locale, localeLang}) {
+    async _fetchLanguageEntriesWithVariants({apiOrigin, language, maxResults, variants, locale, localeLang, displayPreferences}) {
         const resolvedVariants = variants.length > 0 ? variants : [{query: '', sourceText: '', originalTextLength: 0}];
         /** @type {SottakuLanguageResult | null} */
         let fallbackResult = null;
@@ -239,6 +260,7 @@ export class SottakuIntegration {
                 originalTextLength,
                 locale,
                 localeLang,
+                displayPreferences,
             });
             if (languageResult.entries.length > 0) {
                 return languageResult;
@@ -255,10 +277,10 @@ export class SottakuIntegration {
     }
 
     /**
-     * @param {{apiOrigin: string, language: string, maxResults: number, query: string, sourceText?: string, originalTextLength?: number, locale: string, localeLang: string}} options
+     * @param {{apiOrigin: string, language: string, maxResults: number, query: string, sourceText?: string, originalTextLength?: number, locale: string, localeLang: string, displayPreferences?: {hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean} | null}} options
      * @returns {Promise<SottakuLanguageResult>}
      */
-    async _fetchLanguageEntries({apiOrigin, language, maxResults, query, sourceText, originalTextLength, locale, localeLang}) {
+    async _fetchLanguageEntries({apiOrigin, language, maxResults, query, sourceText, originalTextLength, locale, localeLang, displayPreferences}) {
         const normalizedQuery = (query || '').trim();
         const normalizedSource = (sourceText || normalizedQuery || '').trim();
         if (!normalizedQuery) {
@@ -277,6 +299,7 @@ export class SottakuIntegration {
                 language,
                 maxResults,
                 locale,
+                displayPreferences,
             );
             scanResultsRaw = scanResult.results;
             scanOriginalLength = scanResult.originalTextLength;
@@ -360,6 +383,7 @@ export class SottakuIntegration {
                 normalizedSource,
                 originalTextLength,
                 localeLang,
+                displayPreferences,
             ));
         }
 
@@ -621,9 +645,10 @@ export class SottakuIntegration {
      * @param {string} [sourceText]
      * @param {number} [matchLengthOverride]
      * @param {string} localeLang
+     * @param {{hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean} | null | undefined} displayPreferences
      * @returns {import('dictionary').TermDictionaryEntry}
      */
-    _createEntry(result, info, language, apiOrigin, query, index, sourceText, matchLengthOverride, localeLang) {
+    _createEntry(result, info, language, apiOrigin, query, index, sourceText, matchLengthOverride, localeLang, displayPreferences) {
         const normalizedResult = (typeof result === 'object' && result !== null) ? result : {};
         const normalizedInfo = (typeof info === 'object' && info !== null) ? info : {};
         const questionId = Number.parseInt(normalizedResult.id ?? normalizedInfo.id, 10);
@@ -735,6 +760,11 @@ export class SottakuIntegration {
             term,
             languageFlag: dictionaryAlias,
         };
+        if (language.startsWith('zh') && displayPreferences && typeof displayPreferences === 'object') {
+            metadata.hanziDisplay = displayPreferences.hanziDisplay;
+            metadata.chineseReadingDisplay = displayPreferences.chineseReadingDisplay;
+            metadata.toneColors = displayPreferences.chineseToneColors === true;
+        }
 
         /** @type {any} */ (headwords[0]).sottaku = metadata;
 
@@ -828,6 +858,55 @@ export class SottakuIntegration {
         })();
 
         return await this._automaticLocalePromise;
+    }
+
+    /**
+     * Resolve Chinese display preferences from the Sottaku account.
+     * @returns {Promise<?{hanziDisplay: string, chineseReadingDisplay: string, chineseToneColors: boolean}>}
+     */
+    async _resolveDisplayPreferences() {
+        const now = Date.now();
+        if (this._automaticSettings !== null && (now - this._automaticSettingsTimestamp) <= SOTTAKU_SETTINGS_TTL_MS) {
+            return this._automaticSettings;
+        }
+        if (this._automaticSettingsPromise !== null) {
+            return await this._automaticSettingsPromise;
+        }
+
+        this._automaticSettingsPromise = (async () => {
+            try {
+                const payload = await this._client.getSettings();
+                const settings = (payload && typeof payload === 'object') ? (payload.settings || payload) : null;
+                const hanziDisplayRaw = typeof settings?.hanzi_display === 'string' ?
+                    settings.hanzi_display :
+                    (typeof settings?.hanziDisplay === 'string' ? settings.hanziDisplay : '');
+                const chineseReadingRaw = typeof settings?.chinese_reading_display === 'string' ?
+                    settings.chinese_reading_display :
+                    (typeof settings?.chineseReadingDisplay === 'string' ? settings.chineseReadingDisplay : '');
+                const toneColorsRaw = (
+                    settings && typeof settings === 'object' && 'chinese_tone_colors' in settings
+                        ? settings.chinese_tone_colors
+                        : settings?.chineseToneColors
+                );
+                const hanziDisplayCandidate = hanziDisplayRaw ? hanziDisplayRaw.trim().toLowerCase() : '';
+                const chineseReadingCandidate = chineseReadingRaw ? chineseReadingRaw.trim().toLowerCase() : '';
+                const hanziDisplay = HANZI_DISPLAY_MODES.has(hanziDisplayCandidate) ? hanziDisplayCandidate : 'traditional';
+                const chineseReadingDisplay = CHINESE_READING_MODES.has(chineseReadingCandidate) ? chineseReadingCandidate : 'pinyin';
+                const chineseToneColors = typeof toneColorsRaw === 'boolean' ? toneColorsRaw : false;
+                const resolved = {hanziDisplay, chineseReadingDisplay, chineseToneColors};
+                this._automaticSettings = resolved;
+                this._automaticSettingsTimestamp = Date.now();
+                return resolved;
+            } catch (e) {
+                this._automaticSettings = null;
+                this._automaticSettingsTimestamp = Date.now();
+                return null;
+            } finally {
+                this._automaticSettingsPromise = null;
+            }
+        })();
+
+        return await this._automaticSettingsPromise;
     }
 
     /**

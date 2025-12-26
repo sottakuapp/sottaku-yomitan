@@ -25,6 +25,179 @@ import {getLanguageFromText} from '../language/text-utilities.js';
 import {PronunciationGenerator} from './pronunciation-generator.js';
 import {StructuredContentGenerator} from './structured-content-generator.js';
 
+const BOPOMOFO_RANGES = [
+    [0x3100, 0x312f],
+    [0x31a0, 0x31bf],
+];
+const PINYIN_LATIN_RANGES = [
+    [0x0041, 0x005a],
+    [0x0061, 0x007a],
+    [0x00c0, 0x024f],
+    [0x1e00, 0x1eff],
+];
+const BOPOMOFO_TONE_MARKS = new Map([
+    ['\u02c9', 1],
+    ['\u02ca', 2],
+    ['\u02c7', 3],
+    ['\u02cb', 4],
+    ['\u02d9', 5],
+]);
+const PINYIN_TONE_MARKS = new Map([
+    ['\u0101', 1],
+    ['\u00e1', 2],
+    ['\u01ce', 3],
+    ['\u00e0', 4],
+    ['\u0113', 1],
+    ['\u00e9', 2],
+    ['\u011b', 3],
+    ['\u00e8', 4],
+    ['\u012b', 1],
+    ['\u00ed', 2],
+    ['\u01d0', 3],
+    ['\u00ec', 4],
+    ['\u014d', 1],
+    ['\u00f3', 2],
+    ['\u01d2', 3],
+    ['\u00f2', 4],
+    ['\u016b', 1],
+    ['\u00fa', 2],
+    ['\u01d4', 3],
+    ['\u00f9', 4],
+    ['\u01d6', 1],
+    ['\u01d8', 2],
+    ['\u01da', 3],
+    ['\u01dc', 4],
+    ['\u0144', 2],
+    ['\u0148', 3],
+    ['\u01f9', 4],
+    ['\u1e3f', 2],
+]);
+
+/**
+ * @param {number} codePoint
+ * @param {number[][]} ranges
+ * @returns {boolean}
+ */
+function isCodePointInRanges(codePoint, ranges) {
+    for (const [min, max] of ranges) {
+        if (codePoint >= min && codePoint <= max) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
+ * @param {string} char
+ * @returns {boolean}
+ */
+function isReadingChar(char) {
+    if (!char) { return false; }
+    const codePoint = char.codePointAt(0);
+    if (!codePoint) { return false; }
+    if (codePoint >= 0x30 && codePoint <= 0x39) { return true; }
+    if (isCodePointInRanges(codePoint, PINYIN_LATIN_RANGES)) { return true; }
+    if (isCodePointInRanges(codePoint, BOPOMOFO_RANGES)) { return true; }
+    return BOPOMOFO_TONE_MARKS.has(char);
+}
+
+/**
+ * @param {string} value
+ * @returns {{text: string, isReading: boolean}[]}
+ */
+function splitReadingParts(value) {
+    const text = typeof value === 'string' ? value : '';
+    if (!text) { return []; }
+    /** @type {{text: string, isReading: boolean}[]} */
+    const parts = [];
+    let buffer = '';
+    let isReading = null;
+    for (const char of text) {
+        const charIsReading = isReadingChar(char);
+        if (isReading === null) {
+            isReading = charIsReading;
+            buffer = char;
+            continue;
+        }
+        if (charIsReading === isReading) {
+            buffer += char;
+            continue;
+        }
+        parts.push({text: buffer, isReading});
+        buffer = char;
+        isReading = charIsReading;
+    }
+    if (buffer) {
+        parts.push({text: buffer, isReading: Boolean(isReading)});
+    }
+    return parts;
+}
+
+/**
+ * @param {string} token
+ * @param {string} [modeHint]
+ * @returns {number|null}
+ */
+function getToneNumber(token, modeHint) {
+    if (!token) { return null; }
+    const lowered = token.toLowerCase();
+    let hasLatin = false;
+    let hasBopomofo = false;
+    let toneDigit = null;
+    let toneFromPinyin = null;
+    let toneFromBopomofo = null;
+
+    for (const char of lowered) {
+        const codePoint = char.codePointAt(0);
+        if (!codePoint) { continue; }
+        if (PINYIN_TONE_MARKS.has(char)) {
+            toneFromPinyin = PINYIN_TONE_MARKS.get(char);
+            hasLatin = true;
+            continue;
+        }
+        if (BOPOMOFO_TONE_MARKS.has(char)) {
+            toneFromBopomofo = BOPOMOFO_TONE_MARKS.get(char);
+            hasBopomofo = true;
+            continue;
+        }
+        if (char >= '1' && char <= '5') {
+            toneDigit = char;
+            continue;
+        }
+        if (isCodePointInRanges(codePoint, PINYIN_LATIN_RANGES)) {
+            hasLatin = true;
+            continue;
+        }
+        if (isCodePointInRanges(codePoint, BOPOMOFO_RANGES)) {
+            hasBopomofo = true;
+        }
+    }
+
+    let resolvedMode = null;
+    if (hasBopomofo) {
+        resolvedMode = 'bopomofo';
+    } else if (hasLatin) {
+        resolvedMode = 'pinyin';
+    } else if (modeHint === 'bopomofo' || modeHint === 'pinyin') {
+        resolvedMode = modeHint;
+    }
+
+    if (resolvedMode === 'bopomofo') {
+        if (toneFromBopomofo !== null) { return toneFromBopomofo; }
+        if (toneDigit !== null && hasBopomofo) { return Number.parseInt(toneDigit, 10); }
+        if (hasBopomofo) { return 5; }
+        return null;
+    }
+    if (resolvedMode === 'pinyin') {
+        if (toneFromPinyin !== null) { return toneFromPinyin; }
+        if (toneDigit !== null && hasLatin) { return Number.parseInt(toneDigit, 10); }
+        if (hasLatin) { return 5; }
+        return null;
+    }
+
+    return null;
+}
+
 export class DisplayGenerator {
     /**
      * @param {import('./display-content-manager.js').DisplayContentManager} contentManager
@@ -403,6 +576,7 @@ export class DisplayGenerator {
      */
     _createTermHeadword(headword, headwordIndex, pronunciations) {
         const {term, reading, tags, sources} = headword;
+        const metadata = headword && typeof headword === 'object' ? /** @type {any} */ (headword).sottaku : null;
 
         let isPrimaryAny = false;
         const matchTypes = new Set();
@@ -435,11 +609,46 @@ export class DisplayGenerator {
         }
 
         const headwordReading = this._querySelector(node, '.headword-reading');
-        this._setTextContent(headwordReading, reading);
+        const toneColorsEnabled = metadata?.toneColors === true && typeof reading === 'string' && reading.length > 0;
+        const readingLanguage = typeof metadata?.language === 'string' ? metadata.language : null;
+        if (toneColorsEnabled && readingLanguage && readingLanguage.startsWith('zh')) {
+            const modeHint = typeof metadata?.chineseReadingDisplay === 'string' ? metadata.chineseReadingDisplay : null;
+            this._appendToneColoredReading(headwordReading, reading, readingLanguage, modeHint);
+        } else {
+            this._setTextContent(headwordReading, reading);
+        }
 
         this._appendFurigana(termContainer, term, reading, this._appendKanjiLinks.bind(this));
 
         return node;
+    }
+
+    /**
+     * @param {HTMLElement} container
+     * @param {string} reading
+     * @param {string} language
+     * @param {string|null} modeHint
+     */
+    _appendToneColoredReading(container, reading, language, modeHint) {
+        this._setElementLanguage(container, language, reading);
+        container.textContent = '';
+        const parts = splitReadingParts(reading);
+        for (const part of parts) {
+            if (!part.text) { continue; }
+            if (!part.isReading) {
+                container.appendChild(document.createTextNode(part.text));
+                continue;
+            }
+            const tone = getToneNumber(part.text, modeHint || void 0);
+            if (tone === null) {
+                container.appendChild(document.createTextNode(part.text));
+                continue;
+            }
+            const span = document.createElement('span');
+            span.classList.add('tone', `tone-${tone}`);
+            span.textContent = part.text;
+            container.appendChild(span);
+        }
     }
 
     /**

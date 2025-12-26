@@ -186,9 +186,10 @@ export class SottakuClient {
      * @param {string} language
      * @param {number} [maxResults]
      * @param {string} [locale]
+     * @param {{hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean}} [displayPreferences]
      * @returns {Promise<{results: any[], originalTextLength: number}>}
      */
-    async scan(text, language, maxResults, locale) {
+    async scan(text, language, maxResults, locale, displayPreferences) {
         /** @type {Record<string, any>} */
         const body = {text, language};
         if (Number.isFinite(maxResults)) {
@@ -198,6 +199,18 @@ export class SottakuClient {
             const trimmed = locale.trim();
             if (trimmed) {
                 body.locale = trimmed;
+            }
+        }
+        if (displayPreferences && typeof displayPreferences === 'object') {
+            const {hanziDisplay, chineseReadingDisplay, chineseToneColors} = displayPreferences;
+            if (typeof hanziDisplay === 'string' && hanziDisplay.trim()) {
+                body.hanzi_display = hanziDisplay.trim();
+            }
+            if (typeof chineseReadingDisplay === 'string' && chineseReadingDisplay.trim()) {
+                body.chinese_reading_display = chineseReadingDisplay.trim();
+            }
+            if (typeof chineseToneColors === 'boolean') {
+                body.chinese_tone_colors = chineseToneColors;
             }
         }
         const data = await this._request('/dictionary/yomitan-scan', {
@@ -351,6 +364,14 @@ export class SottakuClient {
      */
     async getLanguageSettings() {
         return await this._request('/profile/language-settings', {method: 'GET'});
+    }
+
+    /**
+     * Fetch the user's profile settings (includes Chinese display preferences).
+     * @returns {Promise<unknown>}
+     */
+    async getSettings() {
+        return await this._request('/profile/settings', {method: 'GET'});
     }
 
     /**

@@ -130,6 +130,11 @@
     --headword-kanji-border-color: var(--dark-border-color);
     --headword-kanji-border-color-popular: var(--headword-kanji-border-color);
     --headword-kanji-border-color-rare: var(--headword-kanji-border-color);
+    --tone-1-color: #e30000;
+    --tone-2-color: #02b31c;
+    --tone-3-color: #1510f0;
+    --tone-4-color: #8900bf;
+    --tone-5-color: #777777;
 
     --kanji-glyph-table-cell-padding: 0.36em;
 
@@ -200,6 +205,8 @@
     --headword-reading-text-color-popular: var(--headword-furigana-text-color-popular);
     --headword-reading-text-color-rare: var(--headword-furigana-text-color-rare);
     --headword-kanji-border-color: var(--dark-border-color);
+    --tone-3-color: #7a95ff;
+    --tone-4-color: #c785ff;
 
     --light-border-color: #2f2f2f;
     --medium-border-color: #3f3f3f;
@@ -248,6 +255,30 @@
 
     --action-button-hover-color: #282828;
     --action-button-active-color: #444444;
+}
+
+.tone {
+    color: inherit;
+}
+
+.tone-1 {
+    color: var(--tone-1-color) !important;
+}
+
+.tone-2 {
+    color: var(--tone-2-color) !important;
+}
+
+.tone-3 {
+    color: var(--tone-3-color) !important;
+}
+
+.tone-4 {
+    color: var(--tone-4-color) !important;
+}
+
+.tone-5 {
+    color: var(--tone-5-color) !important;
 }
 
 
