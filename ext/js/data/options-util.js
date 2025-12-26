@@ -1845,7 +1845,7 @@ export class OptionsUtil {
             const preferredLanguages = Array.isArray(current?.preferredLanguages) && current.preferredLanguages.length > 0 ?
                 current.preferredLanguages :
                 ['ja', 'ko'];
-            const languageMode = (current?.languageMode === 'ja' || current?.languageMode === 'ko' || current?.languageMode === 'auto' || current?.languageMode === 'mixed') ?
+            const languageMode = (current?.languageMode === 'ja' || current?.languageMode === 'ko' || current?.languageMode === 'zh' || current?.languageMode === 'auto' || current?.languageMode === 'mixed') ?
                 current.languageMode :
                 'auto';
             profile.options.sottaku = {
@@ -1872,8 +1872,8 @@ export class OptionsUtil {
                 /** @type {unknown} */ (sottaku?.preferredLanguages),
                 general?.language,
             );
-            /** @type {'auto' | 'ja' | 'ko' | 'mixed'} */
-            const languageMode = (sottaku?.languageMode === 'ja' || sottaku?.languageMode === 'ko' || sottaku?.languageMode === 'auto' || sottaku?.languageMode === 'mixed') ?
+            /** @type {'auto' | 'ja' | 'ko' | 'zh' | 'mixed'} */
+            const languageMode = (sottaku?.languageMode === 'ja' || sottaku?.languageMode === 'ko' || sottaku?.languageMode === 'zh' || sottaku?.languageMode === 'auto' || sottaku?.languageMode === 'mixed') ?
                 sottaku.languageMode :
                 'auto';
 

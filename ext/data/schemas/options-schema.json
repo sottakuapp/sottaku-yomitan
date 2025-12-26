@@ -109,7 +109,7 @@
                                     },
                                     "languageMode": {
                                         "type": "string",
-                                        "enum": ["auto", "ja", "ko", "mixed"],
+                                        "enum": ["auto", "ja", "ko", "zh", "mixed"],
                                         "default": "auto"
                                     },
                                     "preferredLanguages": {

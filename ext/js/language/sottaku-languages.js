@@ -1,6 +1,6 @@
 import {languageDescriptorMap} from './language-descriptors.js';
 
-export const SOTTAKU_SUPPORTED_LANGUAGES = ['ja', 'ko'];
+export const SOTTAKU_SUPPORTED_LANGUAGES = ['ja', 'ko', 'zh'];
 
 /**
  * @param {unknown} supportedLanguages
@@ -28,6 +28,7 @@ export function getSottakuLanguageFlag(language) {
     switch (language) {
         case 'ja': return '\uD83C\uDDEF\uD83C\uDDF5'; // JP flag
         case 'ko': return '\uD83C\uDDF0\uD83C\uDDF7'; // KR flag
+        case 'zh': return '\uD83C\uDDE8\uD83C\uDDF3'; // CN flag
         default: return '\uD83C\uDF10'; // Globe
     }
 }

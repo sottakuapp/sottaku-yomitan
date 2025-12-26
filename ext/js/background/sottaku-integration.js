@@ -374,6 +374,7 @@ export class SottakuIntegration {
         switch (sottakuOptions.languageMode) {
             case 'ja': return ['ja'];
             case 'ko': return ['ko'];
+            case 'zh': return ['zh'];
             case 'mixed': return preferredLanguages;
         }
         const detected = this._detectLanguageFromText(text);
