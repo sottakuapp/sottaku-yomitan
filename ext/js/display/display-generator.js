@@ -90,6 +90,7 @@ const BOPOMOFO_READING_REGEX = /[\u3100-\u312f\u31a0-\u31bf]/;
 const BOPOMOFO_TONE_MARK_REGEX = /[\u02c9\u02ca\u02c7\u02cb\u02d9]/;
 const PINYIN_SYLLABLE_REGEX = /[A-Za-z\u00c0-\u024f\u1e00-\u1effvV:]+[0-5]?/g;
 const BOPOMOFO_SYLLABLE_REGEX = /\u02d9?[\u3100-\u312f\u31a0-\u31bf]+[\u02c9\u02ca\u02c7\u02cb]?/g;
+const HANZI_DISPLAY_SEPARATOR = ' / ';
 
 /**
  * @param {number} codePoint
@@ -970,6 +971,7 @@ export class DisplayGenerator {
         const toneColorsEnabled = metadata?.toneColors === true && typeof reading === 'string' && reading.length > 0;
         const readingLanguage = typeof metadata?.language === 'string' ? metadata.language : null;
         const modeHint = typeof metadata?.chineseReadingDisplay === 'string' ? metadata.chineseReadingDisplay : null;
+        const hanziDisplay = typeof metadata?.hanziDisplay === 'string' ? metadata.hanziDisplay : null;
         const readingTokens = Array.isArray(metadata?.readingTokens) ? metadata.readingTokens : null;
         if (toneColorsEnabled && readingLanguage && readingLanguage.startsWith('zh')) {
             this._appendToneColoredReading(headwordReading, reading, readingLanguage, modeHint, readingTokens);
@@ -978,7 +980,7 @@ export class DisplayGenerator {
         }
 
         if (toneColorsEnabled && readingLanguage && readingLanguage.startsWith('zh')) {
-            this._appendToneColoredFurigana(termContainer, term, reading, readingLanguage, modeHint, readingTokens);
+            this._appendToneColoredFurigana(termContainer, term, reading, readingLanguage, modeHint, readingTokens, hanziDisplay);
         } else {
             this._appendFurigana(termContainer, term, reading, this._appendKanjiLinks.bind(this));
         }
@@ -1588,8 +1590,24 @@ export class DisplayGenerator {
      * @param {HTMLElement} container
      * @param {string} text
      * @param {string} reading
+     * @param {string|null} [hanziDisplay]
      */
-    _appendToneColoredKanjiLinks(container, text, reading) {
+    _appendToneColoredKanjiLinks(container, text, reading, hanziDisplay) {
+        if (hanziDisplay === 'both' && reading && text.includes(HANZI_DISPLAY_SEPARATOR)) {
+            const parts = text.split(HANZI_DISPLAY_SEPARATOR);
+            const readingParts = reading.includes(HANZI_DISPLAY_SEPARATOR) ?
+                reading.split(HANZI_DISPLAY_SEPARATOR).map((part) => part.trim()) :
+                null;
+            const useReadingParts = Boolean(readingParts && readingParts.length === parts.length);
+            parts.forEach((part, index) => {
+                if (index > 0) {
+                    container.appendChild(document.createTextNode(HANZI_DISPLAY_SEPARATOR));
+                }
+                const partReading = useReadingParts ? /** @type {string[]} */ (readingParts)[index] : reading;
+                this._appendToneColoredKanjiLinks(container, part, partReading, hanziDisplay);
+            });
+            return;
+        }
         const toneByIndex = buildToneIndexMap(text, reading);
         if (toneByIndex === null) {
             this._appendKanjiLinks(container, text);
@@ -1706,8 +1724,9 @@ export class DisplayGenerator {
      * @param {string|null} language
      * @param {string|null} modeHint
      * @param {unknown} readingTokens
+     * @param {string|null} hanziDisplay
      */
-    _appendToneColoredFurigana(container, term, reading, language, modeHint, readingTokens) {
+    _appendToneColoredFurigana(container, term, reading, language, modeHint, readingTokens, hanziDisplay) {
         this._setElementLanguage(container, typeof language === 'string' ? language : undefined, term);
         container.textContent = '';
         const segments = distributeFurigana(term, reading);
@@ -1718,14 +1737,14 @@ export class DisplayGenerator {
             if (furigana) {
                 const ruby = document.createElement('ruby');
                 const rt = document.createElement('rt');
-                this._appendToneColoredKanjiLinks(ruby, text, furigana);
+                this._appendToneColoredKanjiLinks(ruby, text, furigana, hanziDisplay);
                 ruby.appendChild(rt);
                 this._setElementLanguage(rt, typeof language === 'string' ? language : undefined, furigana);
                 const rtTokens = useTokensForRuby ? usableTokens : null;
                 this._appendToneColoredReadingSegments(rt, furigana, modeHint, rtTokens);
                 container.appendChild(ruby);
             } else {
-                this._appendToneColoredKanjiLinks(container, text, '');
+                this._appendToneColoredKanjiLinks(container, text, '', hanziDisplay);
             }
         }
     }
