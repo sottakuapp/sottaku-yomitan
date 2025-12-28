@@ -25,6 +25,7 @@ const LANGUAGE_HINT_MIN_COUNT = 3;
 const LANGUAGE_HINT_MIN_RATIO = 0.02;
 const SOTTAKU_SETTINGS_TTL_MS = 5 * 60 * 1000;
 const HANZI_DISPLAY_MODES = new Set(['traditional', 'simplified', 'both']);
+const HANZI_DISPLAY_SEPARATOR = ' / ';
 const CHINESE_READING_MODES = new Set(['pinyin', 'bopomofo']);
 const SOTTAKU_UPGRADE_URL = 'https://sottaku.app/upgrade';
 
@@ -69,6 +70,33 @@ function getCjkScriptCounts(text) {
         }
     }
     return counts;
+}
+
+/**
+ * @param {string} preference
+ * @param {unknown} variants
+ * @param {string} fallbackText
+ * @returns {string}
+ */
+function resolveHanziDisplay(preference, variants, fallbackText) {
+    const normalized = typeof preference === 'string' ? preference.trim().toLowerCase() : '';
+    const resolved = (variants && typeof variants === 'object') ? /** @type {any} */ (variants) : null;
+    const traditional = typeof resolved?.traditional === 'string' ? resolved.traditional : '';
+    const simplified = typeof resolved?.simplified === 'string' ? resolved.simplified : '';
+    const fallback = typeof fallbackText === 'string' ? fallbackText : '';
+
+    if (normalized === 'simplified') {
+        return simplified || traditional || fallback;
+    }
+    if (normalized === 'both') {
+        const resolvedTraditional = traditional || fallback;
+        const resolvedSimplified = simplified || fallback;
+        if (resolvedTraditional && resolvedSimplified && resolvedTraditional !== resolvedSimplified) {
+            return `${resolvedTraditional}${HANZI_DISPLAY_SEPARATOR}${resolvedSimplified}`;
+        }
+        return resolvedTraditional || resolvedSimplified || fallback;
+    }
+    return traditional || simplified || fallback;
 }
 
 /**
@@ -652,8 +680,21 @@ export class SottakuIntegration {
         const normalizedResult = (typeof result === 'object' && result !== null) ? result : {};
         const normalizedInfo = (typeof info === 'object' && info !== null) ? info : {};
         const questionId = Number.parseInt(normalizedResult.id ?? normalizedInfo.id, 10);
-        const term = (normalizedInfo.kanji_representation || normalizedResult.kanji_representation || query || '').toString();
+        let term = (normalizedInfo.kanji_representation || normalizedResult.kanji_representation || query || '').toString();
         const reading = (normalizedInfo.reading || normalizedResult.reading || term).toString();
+        const hanziVariants = normalizedInfo.hanzi_variants ||
+            normalizedResult.hanzi_variants ||
+            normalizedInfo.hanziVariants ||
+            normalizedResult.hanziVariants;
+        const hanziDisplayMode = (
+            displayPreferences &&
+            typeof displayPreferences === 'object' &&
+            typeof displayPreferences.hanziDisplay === 'string' &&
+            HANZI_DISPLAY_MODES.has(displayPreferences.hanziDisplay)
+        ) ? displayPreferences.hanziDisplay : '';
+        if (language.startsWith('zh') && hanziDisplayMode && hanziVariants) {
+            term = resolveHanziDisplay(hanziDisplayMode, hanziVariants, term || query || '');
+        }
         const matchLengthRaw = normalizedResult.match_length ?? normalizedInfo.match_length ?? matchLengthOverride;
         const matchLength = Number.parseInt(matchLengthRaw, 10);
         const translation = (
@@ -888,11 +929,21 @@ export class SottakuIntegration {
                         ? settings.chinese_tone_colors
                         : settings?.chineseToneColors
                 );
+                const resolveToneColors = (value) => {
+                    if (typeof value === 'boolean') { return value; }
+                    if (typeof value === 'number') { return value !== 0; }
+                    if (typeof value === 'string') {
+                        const normalizedValue = value.trim().toLowerCase();
+                        if (!normalizedValue) { return false; }
+                        return ['1', 'true', 'yes', 'on', 'enabled'].includes(normalizedValue);
+                    }
+                    return false;
+                };
                 const hanziDisplayCandidate = hanziDisplayRaw ? hanziDisplayRaw.trim().toLowerCase() : '';
                 const chineseReadingCandidate = chineseReadingRaw ? chineseReadingRaw.trim().toLowerCase() : '';
                 const hanziDisplay = HANZI_DISPLAY_MODES.has(hanziDisplayCandidate) ? hanziDisplayCandidate : 'traditional';
                 const chineseReadingDisplay = CHINESE_READING_MODES.has(chineseReadingCandidate) ? chineseReadingCandidate : 'pinyin';
-                const chineseToneColors = typeof toneColorsRaw === 'boolean' ? toneColorsRaw : false;
+                const chineseToneColors = resolveToneColors(toneColorsRaw);
                 const resolved = {hanziDisplay, chineseReadingDisplay, chineseToneColors};
                 this._automaticSettings = resolved;
                 this._automaticSettingsTimestamp = Date.now();

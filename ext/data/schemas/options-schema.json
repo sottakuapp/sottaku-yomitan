@@ -117,7 +117,7 @@
                                         "items": {
                                             "type": "string"
                                         },
-                                        "default": ["ja", "ko"]
+                                        "default": ["ja", "ko", "zh"]
                                     },
                                     "user": {
                                         "anyOf": [

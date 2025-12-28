@@ -72,6 +72,8 @@ const PINYIN_TONE_MARKS = new Map([
     ['\u01f9', 4],
     ['\u1e3f', 2],
 ]);
+const PINYIN_SYLLABLE_REGEX = /[A-Za-z\u00c0-\u024f\u1e00-\u1effvV:]+[0-5]?/g;
+const BOPOMOFO_SYLLABLE_REGEX = /\u02d9?[\u3100-\u312f\u31a0-\u31bf]+[\u02c9\u02ca\u02c7\u02cb]?/g;
 
 /**
  * @param {number} codePoint
@@ -196,6 +198,135 @@ function getToneNumber(token, modeHint) {
     }
 
     return null;
+}
+
+/**
+ * @param {string} value
+ * @returns {{tones: string[], sawLetter: boolean}}
+ */
+function collectCompactPinyinTones(value) {
+    /** @type {string[]} */
+    const tones = [];
+    let sawLetter = false;
+    for (const char of value || '') {
+        const tone = PINYIN_TONE_MARKS.get(char);
+        if (tone) {
+            tones.push(`${tone}`);
+            sawLetter = true;
+            continue;
+        }
+        const codePoint = char.codePointAt(0);
+        if (codePoint && isCodePointInRanges(codePoint, PINYIN_LATIN_RANGES)) {
+            sawLetter = true;
+        }
+    }
+    return {tones, sawLetter};
+}
+
+/**
+ * @param {string} reading
+ * @param {number} expectedCount
+ * @returns {string[]}
+ */
+function extractToneDigits(reading, expectedCount) {
+    const raw = typeof reading === 'string' ? reading : String(reading || '');
+    const trimmed = raw.trim();
+    if (!trimmed) {
+        return [];
+    }
+
+    const isBopomofo = /[\u3100-\u312f\u31a0-\u31bf]/.test(trimmed) || /[\u02c9\u02ca\u02c7\u02cb\u02d9]/.test(trimmed);
+    const syllables = trimmed.match(isBopomofo ? BOPOMOFO_SYLLABLE_REGEX : PINYIN_SYLLABLE_REGEX) || [];
+    if (!syllables.length) {
+        return [];
+    }
+
+    const tones = syllables.map((syllable) => {
+        if (isBopomofo) {
+            if (syllable.includes('\u02d9')) { return '5'; }
+            if (syllable.includes('\u02c9')) { return '1'; }
+            if (syllable.includes('\u02ca')) { return '2'; }
+            if (syllable.includes('\u02c7')) { return '3'; }
+            if (syllable.includes('\u02cb')) { return '4'; }
+            return '1';
+        }
+        const markedTone = Array.from(syllable).map((char) => PINYIN_TONE_MARKS.get(char)).find(Boolean);
+        if (markedTone) {
+            return `${markedTone}`;
+        }
+        const match = syllable.match(/([0-5])$/);
+        if (!match) {
+            return '5';
+        }
+        return match[1] === '0' ? '5' : match[1];
+    });
+
+    if (tones.some((tone) => !tone)) {
+        return [];
+    }
+
+    const targetCount = Number.isFinite(expectedCount) && expectedCount > 0 ? expectedCount : null;
+    if (!isBopomofo && targetCount && tones.length !== targetCount) {
+        const {tones: compactTones, sawLetter} = collectCompactPinyinTones(trimmed);
+        if (compactTones.length) {
+            let adjustedTones = compactTones;
+            if (compactTones.length < targetCount) {
+                adjustedTones = compactTones.concat(Array(targetCount - compactTones.length).fill('5'));
+            }
+            if (adjustedTones.length === targetCount) {
+                return adjustedTones;
+            }
+        } else if (sawLetter) {
+            return Array(targetCount).fill('5');
+        }
+    }
+
+    return tones;
+}
+
+/**
+ * @param {string} term
+ * @param {string} reading
+ * @returns {?DocumentFragment}
+ */
+function buildToneColoredTermFragment(term, reading) {
+    const text = typeof term === 'string' ? term : '';
+    const readingText = typeof reading === 'string' ? reading : '';
+    if (!text || !readingText) {
+        return null;
+    }
+    const chars = Array.from(text);
+    const cjkIndices = [];
+    chars.forEach((char, idx) => {
+        const codePoint = char.codePointAt(0);
+        if (codePoint && isCodePointKanji(codePoint)) {
+            cjkIndices.push(idx);
+        }
+    });
+    if (!cjkIndices.length) {
+        return null;
+    }
+    const toneDigits = extractToneDigits(readingText, cjkIndices.length);
+    if (!toneDigits.length || toneDigits.length !== cjkIndices.length) {
+        return null;
+    }
+    const toneByIndex = new Map();
+    cjkIndices.forEach((idx, toneIdx) => {
+        toneByIndex.set(idx, toneDigits[toneIdx]);
+    });
+    const fragment = document.createDocumentFragment();
+    chars.forEach((char, idx) => {
+        const tone = toneByIndex.get(idx);
+        if (!tone) {
+            fragment.appendChild(document.createTextNode(char));
+            return;
+        }
+        const span = document.createElement('span');
+        span.classList.add('tone', `tone-${tone}`);
+        span.textContent = char;
+        fragment.appendChild(span);
+    });
+    return fragment;
 }
 
 export class DisplayGenerator {
@@ -618,7 +749,20 @@ export class DisplayGenerator {
             this._setTextContent(headwordReading, reading);
         }
 
-        this._appendFurigana(termContainer, term, reading, this._appendKanjiLinks.bind(this));
+        let usedToneTermMarkup = false;
+        if (toneColorsEnabled && readingLanguage && readingLanguage.startsWith('zh')) {
+            const toneTermFragment = buildToneColoredTermFragment(term, reading);
+            if (toneTermFragment) {
+                this._setElementLanguage(termContainer, readingLanguage, term);
+                termContainer.textContent = '';
+                termContainer.appendChild(toneTermFragment);
+                usedToneTermMarkup = true;
+            }
+        }
+
+        if (!usedToneTermMarkup) {
+            this._appendFurigana(termContainer, term, reading, this._appendKanjiLinks.bind(this));
+        }
 
         return node;
     }

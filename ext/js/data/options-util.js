@@ -1844,7 +1844,7 @@ export class OptionsUtil {
             const current = profile.options.sottaku;
             const preferredLanguages = Array.isArray(current?.preferredLanguages) && current.preferredLanguages.length > 0 ?
                 current.preferredLanguages :
-                ['ja', 'ko'];
+                ['ja', 'ko', 'zh'];
             const languageMode = (current?.languageMode === 'ja' || current?.languageMode === 'ko' || current?.languageMode === 'zh' || current?.languageMode === 'auto' || current?.languageMode === 'mixed') ?
                 current.languageMode :
                 'auto';
