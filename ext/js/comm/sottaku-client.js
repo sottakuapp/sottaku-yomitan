@@ -187,7 +187,7 @@ export class SottakuClient {
      * @param {number} [maxResults]
      * @param {string} [locale]
      * @param {{hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean}} [displayPreferences]
-     * @returns {Promise<{results: any[], originalTextLength: number}>}
+     * @returns {Promise<{results: any[], originalTextLength: number, displayPreferences: unknown | null}>}
      */
     async scan(text, language, maxResults, locale, displayPreferences) {
         /** @type {Record<string, any>} */
@@ -223,7 +223,12 @@ export class SottakuClient {
                 ? data.original_text_length
                 : Math.max(0, (text || '').length)
         );
-        return {results, originalTextLength};
+        const displayPreferencesResponse = (
+            data && typeof data === 'object'
+                ? (data.display_preferences || data.displayPreferences || null)
+                : null
+        );
+        return {results, originalTextLength, displayPreferences: displayPreferencesResponse};
     }
 
     /**

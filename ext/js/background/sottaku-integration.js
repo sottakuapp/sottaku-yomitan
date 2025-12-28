@@ -100,6 +100,60 @@ function resolveHanziDisplay(preference, variants, fallbackText) {
 }
 
 /**
+ * @param {unknown} value
+ * @returns {boolean}
+ */
+function resolveToneColorsPreference(value) {
+    if (typeof value === 'boolean') { return value; }
+    if (typeof value === 'number') { return value !== 0; }
+    if (typeof value === 'string') {
+        const normalizedValue = value.trim().toLowerCase();
+        if (!normalizedValue) { return false; }
+        return ['1', 'true', 'yes', 'on', 'enabled'].includes(normalizedValue);
+    }
+    return false;
+}
+
+/**
+ * @param {unknown} payload
+ * @returns {?{hanziDisplay: string, chineseReadingDisplay: string, chineseToneColors: boolean}}
+ */
+function normalizeDisplayPreferencesPayload(payload) {
+    const normalizedPayload = (payload && typeof payload === 'object') ? payload : null;
+    if (!normalizedPayload) { return null; }
+    const payloadData = (normalizedPayload.data && typeof normalizedPayload.data === 'object') ?
+        normalizedPayload.data :
+        normalizedPayload;
+    const settings = (payloadData.settings && typeof payloadData.settings === 'object') ?
+        payloadData.settings :
+        payloadData;
+    if (!settings || typeof settings !== 'object') { return null; }
+
+    const hanziDisplayRaw = typeof settings?.hanzi_display === 'string' ?
+        settings.hanzi_display :
+        (typeof settings?.hanziDisplay === 'string' ? settings.hanziDisplay : '');
+    const chineseReadingRaw = typeof settings?.chinese_reading_display === 'string' ?
+        settings.chinese_reading_display :
+        (typeof settings?.chineseReadingDisplay === 'string' ? settings.chineseReadingDisplay : '');
+    const toneColorsRaw = (
+        settings && typeof settings === 'object' && 'chinese_tone_colors' in settings
+            ? settings.chinese_tone_colors
+            : settings?.chineseToneColors
+    );
+    const hasHanziDisplay = typeof hanziDisplayRaw === 'string' && hanziDisplayRaw.trim().length > 0;
+    const hasChineseReading = typeof chineseReadingRaw === 'string' && chineseReadingRaw.trim().length > 0;
+    const hasToneColors = typeof toneColorsRaw !== 'undefined';
+    if (!hasHanziDisplay && !hasChineseReading && !hasToneColors) { return null; }
+
+    const hanziDisplayCandidate = hanziDisplayRaw ? hanziDisplayRaw.trim().toLowerCase() : '';
+    const chineseReadingCandidate = chineseReadingRaw ? chineseReadingRaw.trim().toLowerCase() : '';
+    const hanziDisplay = HANZI_DISPLAY_MODES.has(hanziDisplayCandidate) ? hanziDisplayCandidate : '';
+    const chineseReadingDisplay = CHINESE_READING_MODES.has(chineseReadingCandidate) ? chineseReadingCandidate : '';
+    const chineseToneColors = hasToneColors ? resolveToneColorsPreference(toneColorsRaw) : undefined;
+    return {hanziDisplay, chineseReadingDisplay, chineseToneColors};
+}
+
+/**
  * @typedef {object} SottakuLanguageResult
  * @property {string} language
  * @property {import('dictionary').TermDictionaryEntry[]} entries
@@ -189,9 +243,7 @@ export class SottakuIntegration {
 
         const {languages, autoPick, hintLanguage} = this._resolveLanguages(query, sottaku, general.language, details);
         const localePromise = this._resolveLocale();
-        const displayPreferencesPromise = languages.some((language) => language.startsWith('zh')) ?
-            this._resolveDisplayPreferences() :
-            Promise.resolve(null);
+        const displayPreferencesPromise = Promise.resolve(null);
         const maxResults = Math.max(1, general.maxResults || 32);
         const apiOrigin = this._getOrigin(sottaku.apiBaseUrl);
         const [locale, displayPreferences] = await Promise.all([localePromise, displayPreferencesPromise]);
@@ -321,16 +373,27 @@ export class SottakuIntegration {
 
         let scanResultsRaw = [];
         let scanOriginalLength = 0;
+        let resolvedDisplayPreferences = (
+            displayPreferences && typeof displayPreferences === 'object'
+                ? displayPreferences
+                : null
+        );
         try {
             const scanResult = await this._client.scan(
                 normalizedSource,
                 language,
                 maxResults,
                 locale,
-                displayPreferences,
+                null,
             );
             scanResultsRaw = scanResult.results;
             scanOriginalLength = scanResult.originalTextLength;
+            const scanDisplayPreferences = normalizeDisplayPreferencesPayload(scanResult.displayPreferences);
+            if (scanDisplayPreferences) {
+                resolvedDisplayPreferences = scanDisplayPreferences;
+                this._automaticSettings = scanDisplayPreferences;
+                this._automaticSettingsTimestamp = Date.now();
+            }
         } catch (e) {
             const message = toError(e).message || '';
             const lowered = message.toLowerCase();
@@ -340,6 +403,10 @@ export class SottakuIntegration {
                 throw error;
             }
             throw e;
+        }
+
+        if (!resolvedDisplayPreferences && language.startsWith('zh')) {
+            resolvedDisplayPreferences = await this._resolveDisplayPreferences();
         }
 
         const scanResults = Array.isArray(scanResultsRaw) ? scanResultsRaw : [];
@@ -411,7 +478,7 @@ export class SottakuIntegration {
                 normalizedSource,
                 originalTextLength,
                 localeLang,
-                displayPreferences,
+                resolvedDisplayPreferences,
             ));
         }
 
@@ -925,40 +992,7 @@ export class SottakuIntegration {
         this._automaticSettingsPromise = (async () => {
             try {
                 const payload = await this._client.getSettings();
-                const normalizedPayload = (payload && typeof payload === 'object') ? payload : {};
-                const payloadData = (normalizedPayload.data && typeof normalizedPayload.data === 'object') ?
-                    normalizedPayload.data :
-                    normalizedPayload;
-                const settings = (payloadData.settings && typeof payloadData.settings === 'object') ?
-                    payloadData.settings :
-                    payloadData;
-                const hanziDisplayRaw = typeof settings?.hanzi_display === 'string' ?
-                    settings.hanzi_display :
-                    (typeof settings?.hanziDisplay === 'string' ? settings.hanziDisplay : '');
-                const chineseReadingRaw = typeof settings?.chinese_reading_display === 'string' ?
-                    settings.chinese_reading_display :
-                    (typeof settings?.chineseReadingDisplay === 'string' ? settings.chineseReadingDisplay : '');
-                const toneColorsRaw = (
-                    settings && typeof settings === 'object' && 'chinese_tone_colors' in settings
-                        ? settings.chinese_tone_colors
-                        : settings?.chineseToneColors
-                );
-                const resolveToneColors = (value) => {
-                    if (typeof value === 'boolean') { return value; }
-                    if (typeof value === 'number') { return value !== 0; }
-                    if (typeof value === 'string') {
-                        const normalizedValue = value.trim().toLowerCase();
-                        if (!normalizedValue) { return false; }
-                        return ['1', 'true', 'yes', 'on', 'enabled'].includes(normalizedValue);
-                    }
-                    return false;
-                };
-                const hanziDisplayCandidate = hanziDisplayRaw ? hanziDisplayRaw.trim().toLowerCase() : '';
-                const chineseReadingCandidate = chineseReadingRaw ? chineseReadingRaw.trim().toLowerCase() : '';
-                const hanziDisplay = HANZI_DISPLAY_MODES.has(hanziDisplayCandidate) ? hanziDisplayCandidate : '';
-                const chineseReadingDisplay = CHINESE_READING_MODES.has(chineseReadingCandidate) ? chineseReadingCandidate : '';
-                const chineseToneColors = typeof toneColorsRaw !== 'undefined' ? resolveToneColors(toneColorsRaw) : undefined;
-                const resolved = {hanziDisplay, chineseReadingDisplay, chineseToneColors};
+                const resolved = normalizeDisplayPreferencesPayload(payload);
                 this._automaticSettings = resolved;
                 this._automaticSettingsTimestamp = Date.now();
                 return resolved;
