@@ -682,6 +682,13 @@ export class SottakuIntegration {
         const questionId = Number.parseInt(normalizedResult.id ?? normalizedInfo.id, 10);
         let term = (normalizedInfo.kanji_representation || normalizedResult.kanji_representation || query || '').toString();
         const reading = (normalizedInfo.reading || normalizedResult.reading || term).toString();
+        const readingTokensRaw = (
+            normalizedInfo.reading_tokens ??
+            normalizedResult.reading_tokens ??
+            normalizedInfo.readingTokens ??
+            normalizedResult.readingTokens
+        );
+        const readingTokens = Array.isArray(readingTokensRaw) ? readingTokensRaw : null;
         const hanziVariants = normalizedInfo.hanzi_variants ||
             normalizedResult.hanzi_variants ||
             normalizedInfo.hanziVariants ||
@@ -799,6 +806,7 @@ export class SottakuIntegration {
             usageNotes,
             reading,
             term,
+            readingTokens,
             languageFlag: dictionaryAlias,
         };
         if (language.startsWith('zh') && displayPreferences && typeof displayPreferences === 'object') {
@@ -917,7 +925,13 @@ export class SottakuIntegration {
         this._automaticSettingsPromise = (async () => {
             try {
                 const payload = await this._client.getSettings();
-                const settings = (payload && typeof payload === 'object') ? (payload.settings || payload) : null;
+                const normalizedPayload = (payload && typeof payload === 'object') ? payload : {};
+                const payloadData = (normalizedPayload.data && typeof normalizedPayload.data === 'object') ?
+                    normalizedPayload.data :
+                    normalizedPayload;
+                const settings = (payloadData.settings && typeof payloadData.settings === 'object') ?
+                    payloadData.settings :
+                    payloadData;
                 const hanziDisplayRaw = typeof settings?.hanzi_display === 'string' ?
                     settings.hanzi_display :
                     (typeof settings?.hanziDisplay === 'string' ? settings.hanziDisplay : '');
@@ -941,9 +955,9 @@ export class SottakuIntegration {
                 };
                 const hanziDisplayCandidate = hanziDisplayRaw ? hanziDisplayRaw.trim().toLowerCase() : '';
                 const chineseReadingCandidate = chineseReadingRaw ? chineseReadingRaw.trim().toLowerCase() : '';
-                const hanziDisplay = HANZI_DISPLAY_MODES.has(hanziDisplayCandidate) ? hanziDisplayCandidate : 'traditional';
-                const chineseReadingDisplay = CHINESE_READING_MODES.has(chineseReadingCandidate) ? chineseReadingCandidate : 'pinyin';
-                const chineseToneColors = resolveToneColors(toneColorsRaw);
+                const hanziDisplay = HANZI_DISPLAY_MODES.has(hanziDisplayCandidate) ? hanziDisplayCandidate : '';
+                const chineseReadingDisplay = CHINESE_READING_MODES.has(chineseReadingCandidate) ? chineseReadingCandidate : '';
+                const chineseToneColors = typeof toneColorsRaw !== 'undefined' ? resolveToneColors(toneColorsRaw) : undefined;
                 const resolved = {hanziDisplay, chineseReadingDisplay, chineseToneColors};
                 this._automaticSettings = resolved;
                 this._automaticSettingsTimestamp = Date.now();

@@ -25,10 +25,6 @@ import {getLanguageFromText} from '../language/text-utilities.js';
 import {PronunciationGenerator} from './pronunciation-generator.js';
 import {StructuredContentGenerator} from './structured-content-generator.js';
 
-const BOPOMOFO_RANGES = [
-    [0x3100, 0x312f],
-    [0x31a0, 0x31bf],
-];
 const PINYIN_LATIN_RANGES = [
     [0x0041, 0x005a],
     [0x0061, 0x007a],
@@ -72,6 +68,26 @@ const PINYIN_TONE_MARKS = new Map([
     ['\u01f9', 4],
     ['\u1e3f', 2],
 ]);
+const PINYIN_TONE_MARKS_BY_BASE = {
+    'a': ['\u0101', '\u00e1', '\u01ce', '\u00e0'],
+    'e': ['\u0113', '\u00e9', '\u011b', '\u00e8'],
+    'i': ['\u012b', '\u00ed', '\u01d0', '\u00ec'],
+    'o': ['\u014d', '\u00f3', '\u01d2', '\u00f2'],
+    'u': ['\u016b', '\u00fa', '\u01d4', '\u00f9'],
+    '\u00fc': ['\u01d6', '\u01d8', '\u01da', '\u01dc'],
+    'A': ['\u0100', '\u00c1', '\u01cd', '\u00c0'],
+    'E': ['\u0112', '\u00c9', '\u011a', '\u00c8'],
+    'I': ['\u012a', '\u00cd', '\u01cf', '\u00cc'],
+    'O': ['\u014c', '\u00d3', '\u01d1', '\u00d2'],
+    'U': ['\u016a', '\u00da', '\u01d3', '\u00d9'],
+    '\u00dc': ['\u01d5', '\u01d7', '\u01d9', '\u01db'],
+};
+const PINYIN_DISPLAY_VOWELS = new Set(['a', 'e', 'i', 'o', 'u', '\u00fc']);
+const PINYIN_DISPLAY_LETTER_REGEX = /[A-Za-z\u00fc\u00dcvV:\u0100\u0101\u00c1\u00e1\u01cd\u01ce\u00c0\u00e0\u0112\u0113\u00c9\u00e9\u011a\u011b\u00c8\u00e8\u012a\u012b\u00cd\u00ed\u01cf\u01d0\u00cc\u00ec\u014c\u014d\u00d3\u00f3\u01d1\u01d2\u00d2\u00f2\u016a\u016b\u00da\u00fa\u01d3\u01d4\u00d9\u00f9\u01d5\u01d6\u01d7\u01d8\u01d9\u01da\u01db\u01dc]/;
+const PINYIN_DISPLAY_TONE_MARK_REGEX = /[\u0101\u00e1\u01ce\u00e0\u0113\u00e9\u011b\u00e8\u012b\u00ed\u01d0\u00ec\u014d\u00f3\u01d2\u00f2\u016b\u00fa\u01d4\u00f9\u01d6\u01d8\u01da\u01dc\u0100\u00c1\u01cd\u00c0\u0112\u00c9\u011a\u00c8\u012a\u00cd\u01cf\u00cc\u014c\u00d3\u01d1\u00d2\u016a\u00da\u01d3\u00d9\u01d5\u01d7\u01d9\u01db]/;
+const PINYIN_DISPLAY_TOKEN_REGEX = /^([A-Za-z\u00fc\u00dcvV:\u0100\u0101\u00c1\u00e1\u01cd\u01ce\u00c0\u00e0\u0112\u0113\u00c9\u00e9\u011a\u011b\u00c8\u00e8\u012a\u012b\u00cd\u00ed\u01cf\u01d0\u00cc\u00ec\u014c\u014d\u00d3\u00f3\u01d1\u01d2\u00d2\u00f2\u016a\u016b\u00da\u00fa\u01d3\u01d4\u00d9\u00f9\u01d5\u01d6\u01d7\u01d8\u01d9\u01da\u01db\u01dc]+)([0-5])?$/;
+const BOPOMOFO_READING_REGEX = /[\u3100-\u312f\u31a0-\u31bf]/;
+const BOPOMOFO_TONE_MARK_REGEX = /[\u02c9\u02ca\u02c7\u02cb\u02d9]/;
 const PINYIN_SYLLABLE_REGEX = /[A-Za-z\u00c0-\u024f\u1e00-\u1effvV:]+[0-5]?/g;
 const BOPOMOFO_SYLLABLE_REGEX = /\u02d9?[\u3100-\u312f\u31a0-\u31bf]+[\u02c9\u02ca\u02c7\u02cb]?/g;
 
@@ -87,117 +103,6 @@ function isCodePointInRanges(codePoint, ranges) {
         }
     }
     return false;
-}
-
-/**
- * @param {string} char
- * @returns {boolean}
- */
-function isReadingChar(char) {
-    if (!char) { return false; }
-    const codePoint = char.codePointAt(0);
-    if (!codePoint) { return false; }
-    if (codePoint >= 0x30 && codePoint <= 0x39) { return true; }
-    if (isCodePointInRanges(codePoint, PINYIN_LATIN_RANGES)) { return true; }
-    if (isCodePointInRanges(codePoint, BOPOMOFO_RANGES)) { return true; }
-    return BOPOMOFO_TONE_MARKS.has(char);
-}
-
-/**
- * @param {string} value
- * @returns {{text: string, isReading: boolean}[]}
- */
-function splitReadingParts(value) {
-    const text = typeof value === 'string' ? value : '';
-    if (!text) { return []; }
-    /** @type {{text: string, isReading: boolean}[]} */
-    const parts = [];
-    let buffer = '';
-    let isReading = null;
-    for (const char of text) {
-        const charIsReading = isReadingChar(char);
-        if (isReading === null) {
-            isReading = charIsReading;
-            buffer = char;
-            continue;
-        }
-        if (charIsReading === isReading) {
-            buffer += char;
-            continue;
-        }
-        parts.push({text: buffer, isReading});
-        buffer = char;
-        isReading = charIsReading;
-    }
-    if (buffer) {
-        parts.push({text: buffer, isReading: Boolean(isReading)});
-    }
-    return parts;
-}
-
-/**
- * @param {string} token
- * @param {string} [modeHint]
- * @returns {number|null}
- */
-function getToneNumber(token, modeHint) {
-    if (!token) { return null; }
-    const lowered = token.toLowerCase();
-    let hasLatin = false;
-    let hasBopomofo = false;
-    let toneDigit = null;
-    let toneFromPinyin = null;
-    let toneFromBopomofo = null;
-
-    for (const char of lowered) {
-        const codePoint = char.codePointAt(0);
-        if (!codePoint) { continue; }
-        if (PINYIN_TONE_MARKS.has(char)) {
-            toneFromPinyin = PINYIN_TONE_MARKS.get(char);
-            hasLatin = true;
-            continue;
-        }
-        if (BOPOMOFO_TONE_MARKS.has(char)) {
-            toneFromBopomofo = BOPOMOFO_TONE_MARKS.get(char);
-            hasBopomofo = true;
-            continue;
-        }
-        if (char >= '1' && char <= '5') {
-            toneDigit = char;
-            continue;
-        }
-        if (isCodePointInRanges(codePoint, PINYIN_LATIN_RANGES)) {
-            hasLatin = true;
-            continue;
-        }
-        if (isCodePointInRanges(codePoint, BOPOMOFO_RANGES)) {
-            hasBopomofo = true;
-        }
-    }
-
-    let resolvedMode = null;
-    if (hasBopomofo) {
-        resolvedMode = 'bopomofo';
-    } else if (hasLatin) {
-        resolvedMode = 'pinyin';
-    } else if (modeHint === 'bopomofo' || modeHint === 'pinyin') {
-        resolvedMode = modeHint;
-    }
-
-    if (resolvedMode === 'bopomofo') {
-        if (toneFromBopomofo !== null) { return toneFromBopomofo; }
-        if (toneDigit !== null && hasBopomofo) { return Number.parseInt(toneDigit, 10); }
-        if (hasBopomofo) { return 5; }
-        return null;
-    }
-    if (resolvedMode === 'pinyin') {
-        if (toneFromPinyin !== null) { return toneFromPinyin; }
-        if (toneDigit !== null && hasLatin) { return Number.parseInt(toneDigit, 10); }
-        if (hasLatin) { return 5; }
-        return null;
-    }
-
-    return null;
 }
 
 /**
@@ -221,6 +126,340 @@ function collectCompactPinyinTones(value) {
         }
     }
     return {tones, sawLetter};
+}
+
+/**
+ * @param {string} value
+ * @returns {string}
+ */
+function normalizePinyinUmlaut(value) {
+    if (!value) { return value; }
+    return value
+        .replace(/u:/g, '\u00fc')
+        .replace(/U:/g, '\u00dc')
+        .replace(/v/g, '\u00fc')
+        .replace(/V/g, '\u00dc');
+}
+
+/**
+ * @param {string} value
+ * @returns {string[]}
+ */
+function splitPinyinSegments(value) {
+    /** @type {string[]} */
+    const tokens = [];
+    let buffer = '';
+    for (const char of value || '') {
+        if (char === '\'' || char === '\u2019') {
+            if (buffer) {
+                tokens.push(buffer);
+                buffer = '';
+            }
+            continue;
+        }
+        if (PINYIN_DISPLAY_LETTER_REGEX.test(char)) {
+            buffer += char;
+            continue;
+        }
+        if (/[0-5]/.test(char)) {
+            if (buffer) {
+                buffer += char;
+                tokens.push(buffer);
+                buffer = '';
+            } else {
+                tokens.push(char);
+            }
+            continue;
+        }
+        if (buffer) {
+            tokens.push(buffer);
+            buffer = '';
+        }
+        tokens.push(char);
+    }
+    if (buffer) {
+        tokens.push(buffer);
+    }
+    return tokens;
+}
+
+/**
+ * @param {string} value
+ * @returns {number}
+ */
+function findPinyinToneIndex(value) {
+    if (!value) { return -1; }
+    const lowered = value.toLowerCase();
+    if (lowered.includes('a')) { return lowered.indexOf('a'); }
+    if (lowered.includes('e')) { return lowered.indexOf('e'); }
+    if (lowered.includes('ou')) { return lowered.indexOf('o'); }
+    for (let idx = lowered.length - 1; idx >= 0; idx -= 1) {
+        if (PINYIN_DISPLAY_VOWELS.has(lowered[idx])) {
+            return idx;
+        }
+    }
+    return -1;
+}
+
+/**
+ * @param {string} value
+ * @param {string} toneDigit
+ * @returns {string}
+ */
+function applyPinyinToneMark(value, toneDigit) {
+    if (!value || !['1', '2', '3', '4'].includes(toneDigit)) {
+        return value;
+    }
+    const index = findPinyinToneIndex(value);
+    if (index < 0) {
+        return value;
+    }
+    const marks = PINYIN_TONE_MARKS_BY_BASE[value[index]];
+    if (!marks) {
+        return value;
+    }
+    const toneIndex = Number(toneDigit) - 1;
+    return `${value.slice(0, index)}${marks[toneIndex]}${value.slice(index + 1)}`;
+}
+
+/**
+ * @param {string} segment
+ * @param {string} [digitValue]
+ * @returns {string}
+ */
+function resolvePinyinToneDigit(segment, digitValue) {
+    if (digitValue) {
+        return digitValue === '0' ? '5' : digitValue;
+    }
+    const markedTone = Array.from(segment).map((char) => PINYIN_TONE_MARKS.get(char)).find(Boolean);
+    if (markedTone) {
+        return `${markedTone}`;
+    }
+    return '5';
+}
+
+/**
+ * @param {string} reading
+ * @param {string} [modeHint]
+ * @returns {string|null}
+ */
+function resolveReadingMode(reading, modeHint) {
+    const normalizedHint = typeof modeHint === 'string' ? modeHint.trim().toLowerCase() : '';
+    if (normalizedHint === 'pinyin' || normalizedHint === 'bopomofo') {
+        return normalizedHint;
+    }
+    const text = typeof reading === 'string' ? reading : '';
+    if (!text) { return null; }
+    if (BOPOMOFO_READING_REGEX.test(text) || BOPOMOFO_TONE_MARK_REGEX.test(text)) {
+        return 'bopomofo';
+    }
+    if (/[0-5]/.test(text) && PINYIN_DISPLAY_LETTER_REGEX.test(text)) {
+        return 'pinyin';
+    }
+    if (PINYIN_DISPLAY_TONE_MARK_REGEX.test(text)) {
+        return 'pinyin';
+    }
+    return null;
+}
+
+/**
+ * @param {string} token
+ * @returns {{text: string, tone?: string}}
+ */
+function formatPinyinTokenSegment(token) {
+    const raw = token === undefined || token === null ? '' : String(token);
+    if (!raw) {
+        return {text: ''};
+    }
+    const match = raw.match(PINYIN_DISPLAY_TOKEN_REGEX);
+    if (!match) {
+        return {text: raw};
+    }
+    const base = normalizePinyinUmlaut(match[1] || '');
+    if (!base) {
+        return {text: raw};
+    }
+    const toneDigit = resolvePinyinToneDigit(raw, match[2]);
+    const displayValue = match[2] ? applyPinyinToneMark(base, toneDigit) : base;
+    return {text: displayValue, tone: toneDigit};
+}
+
+/**
+ * @param {string} token
+ * @returns {{text: string, tone?: string}}
+ */
+function formatBopomofoTokenSegment(token) {
+    const raw = token === undefined || token === null ? '' : String(token);
+    if (!raw) {
+        return {text: ''};
+    }
+    let toneDigit = '1';
+    for (const [mark, digit] of BOPOMOFO_TONE_MARKS.entries()) {
+        if (raw.includes(mark)) {
+            toneDigit = `${digit}`;
+            break;
+        }
+    }
+    return {text: raw, tone: toneDigit};
+}
+
+/**
+ * @param {string} reading
+ * @param {boolean} includeSpaces
+ * @returns {Array<{text: string, tone?: string}>|null}
+ */
+function buildPinyinToneSegments(reading, includeSpaces) {
+    const source = reading ? String(reading) : '';
+    if (!source) {
+        return null;
+    }
+    const segments = splitPinyinSegments(source);
+    if (!segments.length) {
+        return null;
+    }
+    const output = [];
+    let hasMatch = false;
+    for (let idx = 0; idx < segments.length; idx += 1) {
+        const segment = segments[idx];
+        if (!segment) {
+            continue;
+        }
+        const match = segment.match(PINYIN_DISPLAY_TOKEN_REGEX);
+        if (!match) {
+            output.push({text: segment});
+            continue;
+        }
+        const raw = match[1] || '';
+        if (!raw) {
+            output.push({text: segment});
+            continue;
+        }
+        const toneDigit = resolvePinyinToneDigit(segment, match[2]);
+        const base = normalizePinyinUmlaut(raw);
+        const displayValue = match[2] ? applyPinyinToneMark(base, toneDigit) : base;
+        output.push({text: displayValue, tone: toneDigit});
+        hasMatch = true;
+        if (includeSpaces) {
+            const next = segments[idx + 1];
+            if (next && PINYIN_DISPLAY_TOKEN_REGEX.test(next)) {
+                output.push({text: ' '});
+            }
+        }
+    }
+    return hasMatch ? output : null;
+}
+
+/**
+ * @param {string} reading
+ * @param {boolean} includeSpaces
+ * @returns {Array<{text: string, tone?: string}>|null}
+ */
+function buildBopomofoToneSegments(reading, includeSpaces) {
+    const text = typeof reading === 'string' ? reading : String(reading || '');
+    if (!text) {
+        return null;
+    }
+    const segments = [];
+    let lastIndex = 0;
+    let hasMatch = false;
+    const matches = text.matchAll(BOPOMOFO_SYLLABLE_REGEX);
+    for (const match of matches) {
+        const syllable = match[0];
+        const index = match.index ?? -1;
+        if (!syllable || index < 0) {
+            continue;
+        }
+        if (index > lastIndex) {
+            segments.push({text: text.slice(lastIndex, index)});
+        } else if (includeSpaces && hasMatch) {
+            segments.push({text: ' '});
+        }
+        let toneDigit = '1';
+        for (const [mark, digit] of BOPOMOFO_TONE_MARKS.entries()) {
+            if (syllable.includes(mark)) {
+                toneDigit = `${digit}`;
+                break;
+            }
+        }
+        segments.push({text: syllable, tone: toneDigit});
+        lastIndex = index + syllable.length;
+        hasMatch = true;
+    }
+    segments.push({text: text.slice(lastIndex)});
+    return hasMatch ? segments : null;
+}
+
+/**
+ * @param {unknown} tokens
+ * @returns {string[]}
+ */
+function normalizeReadingTokens(tokens) {
+    if (!Array.isArray(tokens)) {
+        return [];
+    }
+    return tokens
+        .map((token) => {
+            if (token === undefined || token === null) { return ''; }
+            try { return String(token); } catch { return ''; }
+        })
+        .filter((token) => token !== '');
+}
+
+/**
+ * @param {unknown} tokens
+ * @param {string} [modeHint]
+ * @param {boolean} includeSpaces
+ * @returns {Array<{text: string, tone?: string}>|null}
+ */
+function buildToneReadingSegmentsFromTokens(tokens, modeHint, includeSpaces) {
+    const normalizedTokens = normalizeReadingTokens(tokens);
+    if (!normalizedTokens.length) {
+        return null;
+    }
+    const mode = resolveReadingMode(normalizedTokens.join(''), modeHint);
+    if (!mode) {
+        return null;
+    }
+    const output = [];
+    for (let idx = 0; idx < normalizedTokens.length; idx += 1) {
+        const token = normalizedTokens[idx];
+        if (mode === 'pinyin') {
+            output.push(formatPinyinTokenSegment(token));
+        } else if (mode === 'bopomofo') {
+            output.push(formatBopomofoTokenSegment(token));
+        } else {
+            output.push({text: token});
+        }
+        if (includeSpaces && idx < normalizedTokens.length - 1) {
+            output.push({text: ' '});
+        }
+    }
+    return output;
+}
+
+/**
+ * @param {string} reading
+ * @param {unknown} tokens
+ * @param {string} [modeHint]
+ * @param {boolean} includeSpaces
+ * @returns {Array<{text: string, tone?: string}>|null}
+ */
+function buildToneReadingSegments(reading, tokens, modeHint, includeSpaces) {
+    const fromTokens = buildToneReadingSegmentsFromTokens(tokens, modeHint, includeSpaces);
+    if (fromTokens) {
+        return fromTokens;
+    }
+    const mode = resolveReadingMode(reading, modeHint);
+    if (!mode) {
+        return null;
+    }
+    if (mode === 'pinyin') {
+        return buildPinyinToneSegments(reading, includeSpaces);
+    }
+    if (mode === 'bopomofo') {
+        return buildBopomofoToneSegments(reading, includeSpaces);
+    }
+    return null;
 }
 
 /**
@@ -287,9 +526,9 @@ function extractToneDigits(reading, expectedCount) {
 /**
  * @param {string} term
  * @param {string} reading
- * @returns {?DocumentFragment}
+ * @returns {?Map<number, string>}
  */
-function buildToneColoredTermFragment(term, reading) {
+function buildToneIndexMap(term, reading) {
     const text = typeof term === 'string' ? term : '';
     const readingText = typeof reading === 'string' ? reading : '';
     if (!text || !readingText) {
@@ -314,19 +553,7 @@ function buildToneColoredTermFragment(term, reading) {
     cjkIndices.forEach((idx, toneIdx) => {
         toneByIndex.set(idx, toneDigits[toneIdx]);
     });
-    const fragment = document.createDocumentFragment();
-    chars.forEach((char, idx) => {
-        const tone = toneByIndex.get(idx);
-        if (!tone) {
-            fragment.appendChild(document.createTextNode(char));
-            return;
-        }
-        const span = document.createElement('span');
-        span.classList.add('tone', `tone-${tone}`);
-        span.textContent = char;
-        fragment.appendChild(span);
-    });
-    return fragment;
+    return toneByIndex;
 }
 
 export class DisplayGenerator {
@@ -742,25 +969,17 @@ export class DisplayGenerator {
         const headwordReading = this._querySelector(node, '.headword-reading');
         const toneColorsEnabled = metadata?.toneColors === true && typeof reading === 'string' && reading.length > 0;
         const readingLanguage = typeof metadata?.language === 'string' ? metadata.language : null;
+        const modeHint = typeof metadata?.chineseReadingDisplay === 'string' ? metadata.chineseReadingDisplay : null;
+        const readingTokens = Array.isArray(metadata?.readingTokens) ? metadata.readingTokens : null;
         if (toneColorsEnabled && readingLanguage && readingLanguage.startsWith('zh')) {
-            const modeHint = typeof metadata?.chineseReadingDisplay === 'string' ? metadata.chineseReadingDisplay : null;
-            this._appendToneColoredReading(headwordReading, reading, readingLanguage, modeHint);
+            this._appendToneColoredReading(headwordReading, reading, readingLanguage, modeHint, readingTokens);
         } else {
             this._setTextContent(headwordReading, reading);
         }
 
-        let usedToneTermMarkup = false;
         if (toneColorsEnabled && readingLanguage && readingLanguage.startsWith('zh')) {
-            const toneTermFragment = buildToneColoredTermFragment(term, reading);
-            if (toneTermFragment) {
-                this._setElementLanguage(termContainer, readingLanguage, term);
-                termContainer.textContent = '';
-                termContainer.appendChild(toneTermFragment);
-                usedToneTermMarkup = true;
-            }
-        }
-
-        if (!usedToneTermMarkup) {
+            this._appendToneColoredFurigana(termContainer, term, reading, readingLanguage, modeHint, readingTokens);
+        } else {
             this._appendFurigana(termContainer, term, reading, this._appendKanjiLinks.bind(this));
         }
 
@@ -772,27 +991,12 @@ export class DisplayGenerator {
      * @param {string} reading
      * @param {string} language
      * @param {string|null} modeHint
+     * @param {unknown} readingTokens
      */
-    _appendToneColoredReading(container, reading, language, modeHint) {
+    _appendToneColoredReading(container, reading, language, modeHint, readingTokens) {
         this._setElementLanguage(container, language, reading);
         container.textContent = '';
-        const parts = splitReadingParts(reading);
-        for (const part of parts) {
-            if (!part.text) { continue; }
-            if (!part.isReading) {
-                container.appendChild(document.createTextNode(part.text));
-                continue;
-            }
-            const tone = getToneNumber(part.text, modeHint || void 0);
-            if (tone === null) {
-                container.appendChild(document.createTextNode(part.text));
-                continue;
-            }
-            const span = document.createElement('span');
-            span.classList.add('tone', `tone-${tone}`);
-            span.textContent = part.text;
-            container.appendChild(span);
-        }
+        this._appendToneColoredReadingSegments(container, reading, modeHint, readingTokens);
     }
 
     /**
@@ -1381,6 +1585,42 @@ export class DisplayGenerator {
     }
 
     /**
+     * @param {HTMLElement} container
+     * @param {string} text
+     * @param {string} reading
+     */
+    _appendToneColoredKanjiLinks(container, text, reading) {
+        const toneByIndex = buildToneIndexMap(text, reading);
+        if (toneByIndex === null) {
+            this._appendKanjiLinks(container, text);
+            return;
+        }
+
+        let part = '';
+        const chars = Array.from(text);
+        for (let i = 0; i < chars.length; i++) {
+            const c = chars[i];
+            if (isCodePointKanji(/** @type {number} */(c.codePointAt(0)))) {
+                if (part.length > 0) {
+                    container.appendChild(document.createTextNode(part));
+                    part = '';
+                }
+                const link = this._createKanjiLink(c);
+                const tone = toneByIndex.get(i);
+                if (tone) {
+                    link.classList.add('tone', `tone-${tone}`);
+                }
+                container.appendChild(link);
+            } else {
+                part += c;
+            }
+        }
+        if (part.length > 0) {
+            container.appendChild(document.createTextNode(part));
+        }
+    }
+
+    /**
      * @template [TItem=unknown]
      * @template [TExtraArg=void]
      * @param {HTMLElement} container
@@ -1428,6 +1668,64 @@ export class DisplayGenerator {
                 container.appendChild(ruby);
             } else {
                 addText(container, text);
+            }
+        }
+    }
+
+    /**
+     * @param {HTMLElement} container
+     * @param {string} reading
+     * @param {string|null} modeHint
+     * @param {unknown} readingTokens
+     */
+    _appendToneColoredReadingSegments(container, reading, modeHint, readingTokens) {
+        if (!reading) { return; }
+        const includeSpaces = Array.isArray(readingTokens) && readingTokens.length > 0;
+        const segments = buildToneReadingSegments(reading, readingTokens, modeHint || void 0, includeSpaces);
+        if (!segments) {
+            container.appendChild(document.createTextNode(reading));
+            return;
+        }
+        for (const segment of segments) {
+            if (!segment || !segment.text) { continue; }
+            if (!segment.tone) {
+                container.appendChild(document.createTextNode(segment.text));
+                continue;
+            }
+            const span = document.createElement('span');
+            span.classList.add('tone', `tone-${segment.tone}`);
+            span.textContent = segment.text;
+            container.appendChild(span);
+        }
+    }
+
+    /**
+     * @param {HTMLElement} container
+     * @param {string} term
+     * @param {string} reading
+     * @param {string|null} language
+     * @param {string|null} modeHint
+     * @param {unknown} readingTokens
+     */
+    _appendToneColoredFurigana(container, term, reading, language, modeHint, readingTokens) {
+        this._setElementLanguage(container, typeof language === 'string' ? language : undefined, term);
+        container.textContent = '';
+        const segments = distributeFurigana(term, reading);
+        const usableTokens = Array.isArray(readingTokens) ? readingTokens : null;
+        const rubySegmentCount = segments.reduce((count, segment) => (segment.reading ? count + 1 : count), 0);
+        const useTokensForRuby = Boolean(usableTokens && rubySegmentCount === 1);
+        for (const {text, reading: furigana} of segments) {
+            if (furigana) {
+                const ruby = document.createElement('ruby');
+                const rt = document.createElement('rt');
+                this._appendToneColoredKanjiLinks(ruby, text, furigana);
+                ruby.appendChild(rt);
+                this._setElementLanguage(rt, typeof language === 'string' ? language : undefined, furigana);
+                const rtTokens = useTokensForRuby ? usableTokens : null;
+                this._appendToneColoredReadingSegments(rt, furigana, modeHint, rtTokens);
+                container.appendChild(ruby);
+            } else {
+                this._appendToneColoredKanjiLinks(container, text, '');
             }
         }
     }
