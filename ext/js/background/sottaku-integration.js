@@ -251,17 +251,81 @@ export class SottakuIntegration {
 
         /** @type {SottakuLanguageResult[]} */
         const languageResults = [];
+        const variantsByLanguage = new Map();
         for (const language of languages) {
-            const languageResult = await this._fetchLanguageEntriesWithVariants({
-                apiOrigin,
-                language,
-                maxResults,
-                variants: await this._buildQueryVariants(query, language, findTermsOptions),
-                locale,
-                localeLang,
-                displayPreferences: language.startsWith('zh') ? displayPreferences : null,
-            });
-            languageResults.push(languageResult);
+            variantsByLanguage.set(language, await this._buildQueryVariants(query, language, findTermsOptions));
+        }
+
+        if (languages.length > 1) {
+            let scanResult;
+            try {
+                scanResult = await this._client.scan(
+                    query,
+                    languages,
+                    maxResults,
+                    locale,
+                    null,
+                );
+            } catch (e) {
+                const message = toError(e).message || '';
+                const lowered = message.toLowerCase();
+                if (lowered.includes('402') || lowered.includes('pro subscription') || lowered.includes('upgrade')) {
+                    const error = new ExtensionError(`Upgrade required: ${SOTTAKU_UPGRADE_URL}`);
+                    error.data = {type: 'sottakuUpgradeRequired', upgradeUrl: SOTTAKU_UPGRADE_URL};
+                    throw error;
+                }
+                throw e;
+            }
+
+            const scanResultsByLanguage = new Map();
+            if (Array.isArray(scanResult?.languageResults)) {
+                for (const entry of scanResult.languageResults) {
+                    const language = entry && typeof entry.language === 'string' ? entry.language : null;
+                    if (!language) { continue; }
+                    scanResultsByLanguage.set(language, entry);
+                }
+            }
+
+            for (const language of languages) {
+                const variants = variantsByLanguage.get(language) || [];
+                const primaryVariant = variants[0] || {query, sourceText: query, originalTextLength: null};
+                const scanEntry = scanResultsByLanguage.get(language);
+                const scanResultForLanguage = {
+                    results: Array.isArray(scanEntry?.results) ? scanEntry.results : [],
+                    originalTextLength: (
+                        typeof scanEntry?.originalTextLength === 'number' && Number.isFinite(scanEntry.originalTextLength)
+                            ? scanEntry.originalTextLength
+                            : Math.max(0, query.length)
+                    ),
+                    displayPreferences: scanResult?.displayPreferences ?? null,
+                };
+                const languageResult = await this._fetchLanguageEntries({
+                    apiOrigin,
+                    language,
+                    maxResults,
+                    query: primaryVariant.query,
+                    sourceText: primaryVariant.sourceText,
+                    originalTextLength: primaryVariant.originalTextLength,
+                    locale,
+                    localeLang,
+                    displayPreferences: language.startsWith('zh') ? displayPreferences : null,
+                    scanResult: scanResultForLanguage,
+                });
+                languageResults.push(languageResult);
+            }
+        } else {
+            for (const language of languages) {
+                const languageResult = await this._fetchLanguageEntriesWithVariants({
+                    apiOrigin,
+                    language,
+                    maxResults,
+                    variants: variantsByLanguage.get(language) || [],
+                    locale,
+                    localeLang,
+                    displayPreferences: language.startsWith('zh') ? displayPreferences : null,
+                });
+                languageResults.push(languageResult);
+            }
         }
 
         let resolvedLanguageResults = languageResults;
@@ -357,10 +421,10 @@ export class SottakuIntegration {
     }
 
     /**
-     * @param {{apiOrigin: string, language: string, maxResults: number, query: string, sourceText?: string, originalTextLength?: number, locale: string, localeLang: string, displayPreferences?: {hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean} | null}} options
+     * @param {{apiOrigin: string, language: string, maxResults: number, query: string, sourceText?: string, originalTextLength?: number, locale: string, localeLang: string, displayPreferences?: {hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean} | null, scanResult?: {results: unknown[], originalTextLength: number, displayPreferences?: unknown | null}}} options
      * @returns {Promise<SottakuLanguageResult>}
      */
-    async _fetchLanguageEntries({apiOrigin, language, maxResults, query, sourceText, originalTextLength, locale, localeLang, displayPreferences}) {
+    async _fetchLanguageEntries({apiOrigin, language, maxResults, query, sourceText, originalTextLength, locale, localeLang, displayPreferences, scanResult}) {
         const normalizedQuery = (query || '').trim();
         const normalizedSource = (sourceText || normalizedQuery || '').trim();
         if (!normalizedQuery) {
@@ -378,14 +442,7 @@ export class SottakuIntegration {
                 ? displayPreferences
                 : null
         );
-        try {
-            const scanResult = await this._client.scan(
-                normalizedSource,
-                language,
-                maxResults,
-                locale,
-                null,
-            );
+        if (scanResult) {
             scanResultsRaw = scanResult.results;
             scanOriginalLength = scanResult.originalTextLength;
             const scanDisplayPreferences = normalizeDisplayPreferencesPayload(scanResult.displayPreferences);
@@ -394,15 +451,33 @@ export class SottakuIntegration {
                 this._automaticSettings = scanDisplayPreferences;
                 this._automaticSettingsTimestamp = Date.now();
             }
-        } catch (e) {
-            const message = toError(e).message || '';
-            const lowered = message.toLowerCase();
-            if (lowered.includes('402') || lowered.includes('pro subscription') || lowered.includes('upgrade')) {
-                const error = new ExtensionError(`Upgrade required: ${SOTTAKU_UPGRADE_URL}`);
-                error.data = {type: 'sottakuUpgradeRequired', upgradeUrl: SOTTAKU_UPGRADE_URL};
-                throw error;
+        } else {
+            try {
+                const scanResultResponse = await this._client.scan(
+                    normalizedSource,
+                    language,
+                    maxResults,
+                    locale,
+                    null,
+                );
+                scanResultsRaw = scanResultResponse.results;
+                scanOriginalLength = scanResultResponse.originalTextLength;
+                const scanDisplayPreferences = normalizeDisplayPreferencesPayload(scanResultResponse.displayPreferences);
+                if (scanDisplayPreferences) {
+                    resolvedDisplayPreferences = scanDisplayPreferences;
+                    this._automaticSettings = scanDisplayPreferences;
+                    this._automaticSettingsTimestamp = Date.now();
+                }
+            } catch (e) {
+                const message = toError(e).message || '';
+                const lowered = message.toLowerCase();
+                if (lowered.includes('402') || lowered.includes('pro subscription') || lowered.includes('upgrade')) {
+                    const error = new ExtensionError(`Upgrade required: ${SOTTAKU_UPGRADE_URL}`);
+                    error.data = {type: 'sottakuUpgradeRequired', upgradeUrl: SOTTAKU_UPGRADE_URL};
+                    throw error;
+                }
+                throw e;
             }
-            throw e;
         }
 
         if (!resolvedDisplayPreferences && language.startsWith('zh')) {

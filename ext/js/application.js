@@ -163,6 +163,10 @@ export class Application extends EventDispatcher {
     prepare() {
         chrome.runtime.onMessage.addListener(this._onMessage.bind(this));
         log.on('logGenericError', this._onLogGenericError.bind(this));
+        this._webExtension.on('unloaded', this._onWebExtensionUnloaded.bind(this));
+        if (this._webExtension.unloaded) {
+            this._onWebExtensionUnloaded();
+        }
     }
 
     /**
@@ -172,7 +176,12 @@ export class Application extends EventDispatcher {
     ready() {
         if (this._isReady) { return; }
         this._isReady = true;
-        void this._webExtension.sendMessagePromise({action: 'applicationReady'});
+        if (this._webExtension.unloaded) { return; }
+        void this._webExtension.sendMessagePromise({action: 'applicationReady'}).catch((error) => {
+            if (!this._webExtension.unloaded) {
+                log.error(error);
+            }
+        });
     }
 
     /** */
@@ -216,15 +225,38 @@ export class Application extends EventDispatcher {
         mediaDrawingWorker?.postMessage({action: 'connectToDatabaseWorker'}, [mediaDrawingWorkerToBackendChannel.port2]);
 
         const api = new API(webExtension, mediaDrawingWorker, backendPort);
-        await waitForBackendReady(webExtension);
+        try {
+            await waitForBackendReady(webExtension);
+        } catch (error) {
+            if (!webExtension.unloaded) {
+                throw error;
+            }
+            return;
+        }
         if (mediaDrawingWorker !== null) {
             api.connectToDatabaseWorker(mediaDrawingWorkerToBackendChannel.port1);
         }
-        setInterval(() => {
-            void api.heartbeat();
+        const heartbeatInterval = setInterval(() => {
+            void api.heartbeat().catch((error) => {
+                if (!webExtension.unloaded) {
+                    log.error(error);
+                }
+            });
         }, 20 * 1000);
+        webExtension.on('unloaded', () => {
+            clearInterval(heartbeatInterval);
+        });
 
-        const {tabId, frameId} = await api.frameInformationGet();
+        let tabId;
+        let frameId;
+        try {
+            ({tabId, frameId} = await api.frameInformationGet());
+        } catch (error) {
+            if (!webExtension.unloaded) {
+                throw error;
+            }
+            return;
+        }
         const crossFrameApi = new CrossFrameAPI(api, tabId, frameId);
         crossFrameApi.prepare();
         const application = new Application(api, crossFrameApi);
@@ -233,7 +265,9 @@ export class Application extends EventDispatcher {
         try {
             await mainFunction(application);
         } catch (error) {
-            log.error(error);
+            if (!webExtension.unloaded) {
+                log.error(error);
+            }
         } finally {
             application.ready();
         }
@@ -278,6 +312,11 @@ export class Application extends EventDispatcher {
     /** @type {import('application').ApiHandler<'applicationZoomChanged'>} */
     _onMessageZoomChanged({oldZoomFactor, newZoomFactor}) {
         this.trigger('zoomChanged', {oldZoomFactor, newZoomFactor});
+    }
+
+    /** */
+    _onWebExtensionUnloaded() {
+        this.trigger('extensionUnloaded', {});
     }
 
     /**

@@ -169,7 +169,7 @@ export class SottakuClient {
 
     /**
      * @param {string} query
-     * @param {string} language
+     * @param {string|string[]} language
      * @param {string} [locale]
      * @returns {Promise<unknown>}
      */
@@ -187,11 +187,16 @@ export class SottakuClient {
      * @param {number} [maxResults]
      * @param {string} [locale]
      * @param {{hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean}} [displayPreferences]
-     * @returns {Promise<{results: any[], originalTextLength: number, displayPreferences: unknown | null}>}
+     * @returns {Promise<{results: any[], originalTextLength: number, displayPreferences: unknown | null, languageResults?: {language: string, results: any[], originalTextLength: number}[] | null}>}
      */
     async scan(text, language, maxResults, locale, displayPreferences) {
         /** @type {Record<string, any>} */
-        const body = {text, language};
+        const body = {text};
+        if (Array.isArray(language)) {
+            body.languages = language;
+        } else if (typeof language === 'string') {
+            body.language = language;
+        }
         if (Number.isFinite(maxResults)) {
             body.maxResults = maxResults;
         }
@@ -228,7 +233,31 @@ export class SottakuClient {
                 ? (data.display_preferences || data.displayPreferences || null)
                 : null
         );
-        return {results, originalTextLength, displayPreferences: displayPreferencesResponse};
+        const rawLanguageResults = (
+            data && typeof data === 'object' && Array.isArray(data.language_results) ? data.language_results :
+                (data && typeof data === 'object' && Array.isArray(data.languageResults) ? data.languageResults : null)
+        );
+        const languageResults = Array.isArray(rawLanguageResults) ? rawLanguageResults.reduce((acc, item) => {
+            const languageValue = item && typeof item === 'object' ? item.language : null;
+            if (typeof languageValue !== 'string' || languageValue.trim().length === 0) { return acc; }
+            const resultsValue = Array.isArray(item.results) ? item.results : [];
+            const originalTextLengthValue = (
+                typeof item.original_text_length === 'number' && Number.isFinite(item.original_text_length)
+                    ? item.original_text_length
+                    : (
+                        typeof item.originalTextLength === 'number' && Number.isFinite(item.originalTextLength)
+                            ? item.originalTextLength
+                            : Math.max(0, (text || '').length)
+                    )
+            );
+            acc.push({
+                language: languageValue,
+                results: resultsValue,
+                originalTextLength: originalTextLengthValue,
+            });
+            return acc;
+        }, /** @type {{language: string, results: any[], originalTextLength: number}[]} */ ([])) : null;
+        return {results, originalTextLength, displayPreferences: displayPreferencesResponse, languageResults};
     }
 
     /**
