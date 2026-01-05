@@ -20,10 +20,32 @@ import {log} from '../core/log.js';
 import {WebExtension} from '../extension/web-extension.js';
 import {Backend} from './backend.js';
 
+const EXTERNAL_MESSAGE_VERSION = 'version';
+
+function registerExternalVersionListener() {
+    const runtime = (typeof chrome === 'object' && chrome?.runtime)
+        ? chrome.runtime
+        : (typeof browser === 'object' && browser?.runtime)
+            ? browser.runtime
+            : null;
+    if (!runtime || typeof runtime.onMessageExternal?.addListener !== 'function') {
+        return;
+    }
+    runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
+        if (!request || request.message !== EXTERNAL_MESSAGE_VERSION) {
+            return false;
+        }
+        const manifest = runtime.getManifest?.();
+        sendResponse({ version: manifest?.version || null });
+        return true;
+    });
+}
+
 /** Entry point. */
 async function main() {
     const webExtension = new WebExtension();
     log.configure(webExtension.extensionName);
+    registerExternalVersionListener();
 
     const backend = new Backend(webExtension);
     await backend.prepare();
