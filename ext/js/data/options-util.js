@@ -1847,7 +1847,7 @@ export class OptionsUtil {
                 ['ja', 'ko', 'zh'];
             const languageMode = (current?.languageMode === 'ja' || current?.languageMode === 'ko' || current?.languageMode === 'zh' || current?.languageMode === 'auto' || current?.languageMode === 'mixed') ?
                 current.languageMode :
-                'auto';
+                'mixed';
             profile.options.sottaku = {
                 enabled: true,
                 apiBaseUrl: typeof current?.apiBaseUrl === 'string' && current.apiBaseUrl.length > 0 ? current.apiBaseUrl : 'https://sottaku.app/api/v1',
@@ -1875,7 +1875,7 @@ export class OptionsUtil {
             /** @type {'auto' | 'ja' | 'ko' | 'zh' | 'mixed'} */
             const languageMode = (sottaku?.languageMode === 'ja' || sottaku?.languageMode === 'ko' || sottaku?.languageMode === 'zh' || sottaku?.languageMode === 'auto' || sottaku?.languageMode === 'mixed') ?
                 sottaku.languageMode :
-                'auto';
+                'mixed';
 
             profile.options.sottaku.preferredLanguages = preferredLanguages;
             profile.options.sottaku.languageMode = languageMode;

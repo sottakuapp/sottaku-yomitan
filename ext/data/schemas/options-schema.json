@@ -110,7 +110,7 @@
                                     "languageMode": {
                                         "type": "string",
                                         "enum": ["auto", "ja", "ko", "zh", "mixed"],
-                                        "default": "auto"
+                                        "default": "mixed"
                                     },
                                     "preferredLanguages": {
                                         "type": "array",

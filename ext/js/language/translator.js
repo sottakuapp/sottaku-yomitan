@@ -143,6 +143,9 @@ export class Translator {
             text = this._getJapaneseChineseKoreanOnlyText(text);
         }
         const {enabledDictionaryMap} = options;
+        if (enabledDictionaryMap.size === 0) {
+            return [];
+        }
         /** @type {Set<string>} */
         const kanjiUnique = new Set();
         for (const c of text) {
@@ -497,6 +500,9 @@ export class Translator {
      * @param {import('dictionary').TermSourceMatchType} matchType
      */
     async _addEntriesToDeinflections(language, deinflections, enabledDictionaryMap, matchType) {
+        if (enabledDictionaryMap.size === 0) {
+            return;
+        }
         const uniqueDeinflectionsMap = this._groupDeinflectionsByTerm(deinflections);
         const uniqueDeinflectionArrays = [...uniqueDeinflectionsMap.values()];
         const uniqueDeinflectionTerms = [...uniqueDeinflectionsMap.keys()];

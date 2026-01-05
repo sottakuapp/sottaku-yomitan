@@ -557,6 +557,9 @@ export class Backend {
     /** @type {import('api').ApiHandler<'kanjiFind'>} */
     async _onApiKanjiFind({text, optionsContext}) {
         const options = this._getProfileOptions(optionsContext, false);
+        if (options?.sottaku?.enabled) {
+            return [];
+        }
         const {general: {maxResults}} = options;
         const findKanjiOptions = this._getTranslatorFindKanjiOptions(options);
         const dictionaryEntries = await this._translator.findKanji(text, findKanjiOptions);
@@ -932,7 +935,21 @@ export class Backend {
 
     /** @type {import('api').ApiHandler<'getDictionaryInfo'>} */
     async _onApiGetDictionaryInfo() {
-        return await this._dictionaryDatabase.getDictionaryInfo();
+        const options = this._options;
+        if (
+            options !== null &&
+            options.profileCurrent >= 0 &&
+            options.profileCurrent < options.profiles.length &&
+            options.profiles[options.profileCurrent]?.options?.sottaku?.enabled
+        ) {
+            return [];
+        }
+        try {
+            return await this._dictionaryDatabase.getDictionaryInfo();
+        } catch (e) {
+            log.error(e);
+            return [];
+        }
     }
 
     /** @type {import('api').ApiHandler<'purgeDatabase'>} */
