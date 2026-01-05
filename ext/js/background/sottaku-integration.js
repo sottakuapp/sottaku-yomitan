@@ -737,11 +737,14 @@ export class SottakuIntegration {
     _detectLanguageFromText(text, details) {
         const trimmed = (text || '').trim();
         const counts = getCjkScriptCounts(trimmed);
+        if (counts.hiragana + counts.katakana > 0) {
+            return {language: 'ja', confidence: 'strong'};
+        }
         if (counts.hangul > 0) {
             return {language: 'ko', confidence: 'strong'};
         }
-        if (counts.hiragana + counts.katakana > 0) {
-            return {language: 'ja', confidence: 'strong'};
+        if (counts.han > 0) {
+            return {language: 'zh', confidence: 'strong'};
         }
         return this._detectLanguageFromHints(details);
     }
