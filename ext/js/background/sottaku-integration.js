@@ -878,18 +878,38 @@ export class SottakuIntegration {
         const dictionaryAlias = getSottakuLanguageFlag(language);
         const resolvedSourceText = (sourceText || query || '').toString();
         const rawInflectionRules = normalizedResult.inflection_rules ?? normalizedInfo.inflection_rules;
+        const rawInflectionRuleKeys = normalizedResult.inflection_rule_keys ?? normalizedInfo.inflection_rule_keys;
         const inflectionRuleNames = Array.isArray(rawInflectionRules) ?
-            rawInflectionRules
-                .map((value) => (value ?? '').toString().trim())
-                .filter((value) => value.length > 0) :
+            rawInflectionRules.map((value) => (value ?? '').toString().trim()) :
             [];
+        const inflectionRuleKeys = Array.isArray(rawInflectionRuleKeys) ?
+            rawInflectionRuleKeys.map((value) => (value ?? '').toString().trim()) :
+            [];
+        const inflectionRulePairs = [];
+        for (let i = 0; i < inflectionRuleNames.length; i += 1) {
+            const name = inflectionRuleNames[i];
+            if (!name) { continue; }
+            inflectionRulePairs.push({
+                name,
+                reasonKey: inflectionRuleKeys[i] || '',
+            });
+        }
+        const grammarLanguage = (language || '').toString().toLowerCase();
 
         /** @type {import('dictionary').InflectionRuleChainCandidate[]} */
         const inflectionRuleChainCandidates = [];
-        if (inflectionRuleNames.length > 0) {
+        if (inflectionRulePairs.length > 0) {
             inflectionRuleChainCandidates.push({
                 source: 'algorithm',
-                inflectionRules: inflectionRuleNames.map((name) => ({name, description: ''})),
+                inflectionRules: inflectionRulePairs.map(({name, reasonKey}) => {
+                    const rule = {name, description: ''};
+                    if (reasonKey && grammarLanguage) {
+                        rule.reasonKey = reasonKey;
+                        rule.grammarLanguage = grammarLanguage;
+                        rule.grammarUrl = `https://sottaku.app/dictionary/grammar/${grammarLanguage}/${encodeURIComponent(reasonKey)}`;
+                    }
+                    return rule;
+                }),
             });
         }
 

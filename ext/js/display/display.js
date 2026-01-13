@@ -1238,6 +1238,15 @@ export class Display extends EventDispatcher {
      */
     _onInflectionClick(e) {
         const node = /** @type {HTMLElement} */ (e.currentTarget);
+        const grammarUrl = node.dataset.grammarUrl;
+        const reasonKey = node.dataset.reasonKey;
+        const grammarLanguage = node.dataset.grammarLanguage;
+        if (grammarUrl || (reasonKey && grammarLanguage)) {
+            const resolvedUrl = grammarUrl ||
+                `https://sottaku.app/dictionary/grammar/${grammarLanguage}/${encodeURIComponent(reasonKey)}`;
+            window.open(resolvedUrl, '_blank')?.focus();
+            return;
+        }
         this._showInflectionNotification(node);
     }
 

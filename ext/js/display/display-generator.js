@@ -1044,12 +1044,18 @@ export class DisplayGenerator {
      * @returns {DocumentFragment}
      */
     _createTermInflection(inflection) {
-        const {name, description} = inflection;
+        const {name, description, grammarUrl, reasonKey, grammarLanguage} = inflection;
         const fragment = this._templates.instantiateFragment('inflection');
         const node = this._querySelector(fragment, '.inflection');
         this._setTextContent(node, name);
         if (description) { node.title = description; }
         node.dataset.reason = name;
+        if (grammarUrl) {
+            node.dataset.grammarUrl = grammarUrl;
+        } else if (reasonKey && grammarLanguage) {
+            node.dataset.reasonKey = reasonKey;
+            node.dataset.grammarLanguage = grammarLanguage;
+        }
         return fragment;
     }
 

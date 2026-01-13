@@ -1018,6 +1018,11 @@ button.action-button:active:not(:disabled) {
 .inflection[title] {
     cursor: pointer;
 }
+.inflection[data-grammar-url],
+.inflection[data-reason-key][data-grammar-language] {
+    cursor: pointer;
+    text-decoration: underline;
+}
 
 
 /* Headwords */
