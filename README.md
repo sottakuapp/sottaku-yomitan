@@ -2,9 +2,8 @@
 
 Sottaku-Yomitan is a fork of popup browser extension Yomitan which is hooked up to Sottaku.
 
-[![Get Sottaku-Yomitan for Chrome](<https://img.shields.io/chrome-web-store/v/likgccmbimhjbgkjambclfkhldnlhbnn?logo=Google%20Chrome&style=for-the-badge&logoColor=lightblue&color=lightblue&label=get%20sottaku-yomitan%20for%20chrome%20(stable)>)](https://chrome.google.com/webstore/detail/sottaku-yomitan/likgccmbimhjbgkjambclfkhldnlhbnn)
+[![Get Sottaku-Yomitan for Chrome](<https://img.shields.io/chrome-web-store/v/likgccmbimhjbgkjambclfkhldnlhbnn?logo=Google%20Chrome&style=for-the-badge&logoColor=lightblue&color=lightblue&label=get%20sottaku-yomitan%20for%20chrome%20(stable)>)](https://chromewebstore.google.com/detail/sottaku-yomitan/eamdkaenfibhpkkhimnngkhccdepnljo)
 [![Get Sottaku-Yomitan for Firefox](<https://img.shields.io/amo/v/sottaku-yomitan?logo=Firefox&style=for-the-badge&color=orange&label=get%20sottaku-yomitan%20for%20firefox%20(stable)>)](https://addons.mozilla.org/en-US/firefox/addon/sottaku-yomitan/)
-[![Get Sottaku-Yomitan for Edge](https://img.shields.io/badge/dynamic/json?logo=puzzle&label=get%20sottaku-yomitan%20for%20edge&style=for-the-badge&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fidelnfbbmikgfiejhgmddlbkfgiifnnn)](https://microsoftedge.microsoft.com/addons/detail/sottaku-yomitan/idelnfbbmikgfiejhgmddlbkfgiifnnn)
 
 # Visit [https://sottaku.app/](https://sottaku.app/) to learn more!
 
