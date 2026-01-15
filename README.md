@@ -2,12 +2,12 @@
 
 Sottaku-Yomitan is a fork of popup browser extension Yomitan which is hooked up to Sottaku.
 
-[![Get Sottaku-Yomitan for Chrome](<https://img.shields.io/chrome-web-store/v/likgccmbimhjbgkjambclfkhldnlhbnn?logo=Google%20Chrome&style=for-the-badge&logoColor=lightblue&color=lightblue&label=get%20sottaku-yomitan%20for%20chrome%20(stable)>)](https://chromewebstore.google.com/detail/sottaku-yomitan/eamdkaenfibhpkkhimnngkhccdepnljo)
-[![Get Sottaku-Yomitan for Firefox](<https://img.shields.io/amo/v/sottaku-yomitan?logo=Firefox&style=for-the-badge&color=orange&label=get%20sottaku-yomitan%20for%20firefox%20(stable)>)](https://addons.mozilla.org/en-US/firefox/addon/sottaku-yomitan/)
+[![Get Sottaku-Yomitan for Chrome](<https://img.shields.io/chrome-web-store/v/eamdkaenfibhpkkhimnngkhccdepnljo?logo=Google%20Chrome&style=for-the-badge&logoColor=lightblue&color=lightblue&label=get%20sottaku-yomitan%20for%20chrome%20(stable)>)](https://chromewebstore.google.com/detail/sottaku-yomitan/eamdkaenfibhpkkhimnngkhccdepnljo)
+[![Get Sottaku-Yomitan for Firefox](<https://img.shields.io/amo/v/sottaku-yomitan?logo=Firefox&style=for-the-badge&color=orange&label=get%20sottaku-yomitan%20for%20firefox%20(stable)>)](https://addons.mozilla.org/en-US/firefox/addon/sottaku-yomitan/) (coming soon)
 
 # Visit [https://sottaku.app/](https://sottaku.app/) to learn more!
 
-:wave: **Sottaku-Yomitan is a Sottaku-compatible fork of [the successor](https://foosoft.net/posts/passing-the-torch-to-yomitan/) to Yomichan** ([migration guide](https://sottaku.app/)) which was [sunset](https://foosoft.net/posts/sunsetting-the-yomichan-project/) by its owner on Feb 26, 2023. We have made a number of foundational changes to ensure **the project stays alive, works on latest browser versions, and is easy to contribute to**.
+:wave: \*\*Sottaku-Yomitan is a Sottaku-compatible fork of Yomitan, a popular browser extension for language learning. Sottaku-Yomitan is connected with your Sottaku account, which makes setup and management of flashcards much easier.
 
 📢 **New contributors [welcome](#contributing)!**
 
@@ -36,23 +36,13 @@ Sottaku-Yomitan provides powerful features not available in other browser-based 
 
 ## Installation
 
-Sottaku-Yomitan comes in two flavors: _stable_ and _testing_. New changes are initially introduced into the _testing_ version, and after some time spent ensuring that they are relatively bug free, they will be promoted to the _stable_ version. If you are technically savvy and don't mind [submitting issues](https://github.com/sottakuapp/sottaku-yomitan/issues/new/choose) on GitHub, try the _testing_ version; otherwise, the _stable_ version will be your best bet. Check [contributing](#contributing) for more information on how to help.
-
 - **Google Chrome**
 
   - [stable](https://chrome.google.com/webstore/detail/sottaku-yomitan/likgccmbimhjbgkjambclfkhldnlhbnn)
-  - [testing](https://chrome.google.com/webstore/detail/sottaku-yomitan-development-build/glnaenfapkkecknnmginabpmgkenenml)
 
-- **Mozilla Firefox**
+- **Mozilla Firefox** (coming soon)
 
   - [stable](https://addons.mozilla.org/en-US/firefox/addon/sottaku-yomitan/)
-  - [testing](https://github.com/sottakuapp/sottaku-yomitan/releases) ※
-
-- **Microsoft Edge**
-  - [stable](https://microsoftedge.microsoft.com/addons/detail/sottaku-yomitan/idelnfbbmikgfiejhgmddlbkfgiifnnn)
-  - Testing: Coming soon
-
-※ Unlike Chrome, Firefox does not allow extensions meant for testing to be hosted in the marketplace. You will have to download the desired version and side-load it yourself. You only need to do this once, and you will get updates automatically.
 
 ## Contributing
 
