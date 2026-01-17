@@ -1,4 +1,5 @@
 /*
+ * Copyright (C) 2025-2026  Sottaku Inc
  * Copyright (C) 2023-2025  Yomitan Authors
  * Copyright (C) 2020-2022  Yomichan Authors
  *
@@ -248,7 +249,7 @@ export async function main() {
         },
         version: {
             type: 'string',
-            default: '2026.1.13.0',
+            default: '2026.1.18.0',
         },
         target: {
             type: 'string',
