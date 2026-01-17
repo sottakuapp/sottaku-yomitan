@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Sottaku-Yomitan Permissions</title>
+    <title data-i18n="page_permissions_title">Sottaku-Yomitan Permissions</title>
     <link rel="icon" type="image/png" href="/images/icon16.png" sizes="16x16">
     <link rel="icon" type="image/png" href="/images/icon19.png" sizes="19x19">
     <link rel="icon" type="image/png" href="/images/icon32.png" sizes="32x32">
@@ -25,14 +25,14 @@
 
     <span tabindex="-1" id="content-scroll-focus"></span>
 
-    <h1>Sottaku-Yomitan Permissions</h1>
+    <h1 data-i18n="permissions_heading">Sottaku-Yomitan Permissions</h1>
 
     <h2 id="permissions"></h2>
     <div class="settings-group">
         <div class="settings-item"><div class="settings-item-inner">
             <div class="settings-item-left">
                 <div class="settings-item-label"><code>&lt;all_urls&gt;</code></div>
-                <div class="settings-item-description">
+                <div class="settings-item-description" data-i18n="permissions_all_urls_description">
                     Sottaku-Yomitan requires access to all URLs in order to run scripts to scan text and show the definitions popup,
                     and communicate with Sottaku servers.
                 </div>
@@ -44,7 +44,7 @@
         <div class="settings-item"><div class="settings-item-inner">
             <div class="settings-item-left">
                 <div class="settings-item-label"><code>storage</code></div>
-                <div class="settings-item-description">
+                <div class="settings-item-description" data-i18n="permissions_storage_description">
                     Sottaku-Yomitan uses storage permissions in order to save extension settings.
                 </div>
             </div>
@@ -53,12 +53,12 @@
             <div class="settings-item-left">
                 <div class="settings-item-label"><code>declarativeNetRequest</code></div>
                 <div class="settings-item-description">
-                    <p>
+                    <p data-i18n-html="permissions_declarative_net_request_description">
                         Sottaku-Yomitan uses this permission to ensure certain requests have valid and secure headers.
                         This sometimes involves removing or changing the <code>Origin</code> request header,
                         as this can be used to fingerprint browser configuration.
                     </p>
-                    <p>
+                    <p data-i18n-html="permissions_declarative_net_request_example">
                         Example: <code>Origin: <span class="extension-id-example"></span></code>
                     </p>
                 </div>
@@ -67,7 +67,7 @@
         <div class="settings-item"><div class="settings-item-inner">
             <div class="settings-item-left">
                 <div class="settings-item-label"><code>scripting</code></div>
-                <div class="settings-item-description">
+                <div class="settings-item-description" data-i18n="permissions_scripting_description">
                     Sottaku-Yomitan needs to inject content scripts and stylesheets into webpages in order to
                     properly display the search popup.
                 </div>
@@ -76,7 +76,7 @@
         <div class="settings-item"><div class="settings-item-inner">
             <div class="settings-item-left">
                 <div class="settings-item-label"><code>contextMenus</code></div>
-                <div class="settings-item-description">
+                <div class="settings-item-description" data-i18n="permissions_context_menu_description">
                     Sottaku-Yomitan adds a context menu interface that lets you look up highlighted words.
                 </div>
             </div>
@@ -84,7 +84,7 @@
         <div class="settings-item"><div class="settings-item-inner">
             <div class="settings-item-left">
                 <div class="settings-item-label"><code>clipboardWrite</code></div>
-                <div class="settings-item-description">
+                <div class="settings-item-description" data-i18n-html="permissions_clipboard_write_description">
                     Sottaku-Yomitan supports simulating the <code>Ctrl+C</code> (copy to clipboard) keyboard shortcut
                     when a definitions popup is open and focused.
                 </div>
@@ -92,8 +92,8 @@
         </div></div>
         <div class="settings-item"><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-label"><code>clipboardRead</code> <span class="light">(optional)</span></div>
-                <div class="settings-item-description">
+                <div class="settings-item-label" data-i18n-html="permissions_clipboard_read_label"><code>clipboardRead</code> <span class="light">(optional)</span></div>
+                <div class="settings-item-description" data-i18n="permissions_clipboard_read_description">
                     Sottaku-Yomitan supports automatically opening a search window when text is copied to the clipboard
                     while the browser is running, depending on how certain settings are configured.
                     This allows Sottaku-Yomitan to support scanning text from external applications, provided there is a way
@@ -106,8 +106,8 @@
         </div></div>
         <div class="settings-item" data-hide-for-browser="firefox-mobile"><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-label"><code>nativeMessaging</code> <span class="light">(optional)</span></div>
-                <div class="settings-item-description">
+                <div class="settings-item-label" data-i18n-html="permissions_native_messaging_label"><code>nativeMessaging</code> <span class="light">(optional)</span></div>
+                <div class="settings-item-description" data-i18n-html="permissions_native_messaging_description">
                     Sottaku-Yomitan has the ability to communicate with an optional native messaging component in order to support
                     parsing large blocks of Japanese text using
                     <a href="https://en.wikipedia.org/wiki/MeCab" target="_blank" rel="noopener noreferrer">MeCab</a>.
@@ -120,15 +120,15 @@
         </div></div>
         <div class="settings-item"><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-label">Allow in private windows <span class="light">(optional)</span></div>
+                <div class="settings-item-label" data-i18n-html="permissions_private_windows_label">Allow in private windows <span class="light">(optional)</span></div>
                 <div class="settings-item-description">
-                    <p>
+                    <p data-i18n="permissions_private_windows_description">
                         When enabled, Sottaku-Yomitan is able to scan text and show definitions in private/incognito web browser windows.
                     </p>
-                    <p data-hide-for-browser="firefox firefox-mobile">
+                    <p data-hide-for-browser="firefox firefox-mobile" data-i18n-html="permissions_private_windows_chrome">
                         This option can be configured from the web browser's <a tabindex="0" class="extension-settings-link" data-special-url="chrome://extensions/?id={id}">extension settings pages</a>.
                     </p>
-                    <p data-show-for-browser="firefox firefox-mobile">
+                    <p data-show-for-browser="firefox firefox-mobile" data-i18n-html="permissions_private_windows_firefox">
                         This option can be configured from the web browser's extension settings pages. From your browser's address bar, go to <code>about:addons</code> and navigate to the settings for Sottaku-Yomitan.
                     </p>
                 </div>
@@ -139,12 +139,12 @@
         </div></div>
         <div class="settings-item"><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-label">Allow access to file URLs <span class="light">(optional)</span></div>
+                <div class="settings-item-label" data-i18n-html="permissions_file_urls_label">Allow access to file URLs <span class="light">(optional)</span></div>
                 <div class="settings-item-description">
-                    <p>
+                    <p data-i18n-html="permissions_file_urls_description">
                         When enabled, Sottaku-Yomitan is able to scan text and show definitions on local HTML files located using the <code>file://*</code> scheme.
                     </p>
-                    <p data-show-for-browser="chrome edge">
+                    <p data-show-for-browser="chrome edge" data-i18n-html="permissions_file_urls_chrome">
                         This option can be configured from the web browser's <a tabindex="0" class="extension-settings-link" data-special-url="chrome://extensions/?id={id}">extension settings pages</a>.
                     </p>
                 </div>
@@ -155,13 +155,13 @@
         </div></div>
         <div class="settings-item"><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-label">Persistent storage</div>
+                <div class="settings-item-label" data-i18n="permissions_persistent_storage_label">Persistent storage</div>
                 <div class="settings-item-description">
-                    <p>
+                    <p data-i18n="permissions_persistent_storage_description">
                         Web browsers will sometimes clear stored extension data if the device is running low on storage space.
                         The persistent storage permission tells the browser that the extension's data should not be deleted in those circumstances.
                     </p>
-                    <p data-show-for-browser="firefox-mobile">
+                    <p data-show-for-browser="firefox-mobile" data-i18n="permissions_persistent_storage_firefox_note">
                         It may not be possible to enable this permission on Firefox for Android.
                     </p>
                 </div>
@@ -172,7 +172,7 @@
         </div></div>
         <div class="settings-item settings-item-button" data-modal-action="show,origins"><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-label">Configure allowed origins&hellip;</div>
+                <div class="settings-item-label" data-i18n="permissions_configure_allowed_origins">Configure allowed origins&hellip;</div>
             </div>
             <div class="settings-item-right open-panel-button-container">
                 <button type="button" class="icon-button"><span class="icon-button-inner"><span class="icon" data-icon="material-right-arrow"></span></span></button>
@@ -194,7 +194,7 @@
 <!-- Keyboard shortcuts templates -->
 <div id="origins-modal" class="modal" tabindex="-1" role="dialog" hidden><div class="modal-content">
     <div class="modal-header">
-        <div class="modal-title">Allowed Origins</div>
+        <div class="modal-title" data-i18n="permissions_allowed_origins_title">Allowed Origins</div>
         <div class="modal-header-button-container">
             <div class="modal-header-button-group">
                 <button type="button" class="icon-button modal-header-button" data-modal-action="expand"><span class="icon-button-inner"><span class="icon" data-icon="expand"></span></span></button>
@@ -205,7 +205,7 @@
     <div class="modal-body">
         <div class="settings-item"><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-label">Allow access to all URLs</div>
+                <div class="settings-item-label" data-i18n="permissions_allow_all_urls_label">Allow access to all URLs</div>
             </div>
             <div class="settings-item-right">
                 <label class="toggle"><input type="checkbox" class="permissions-origin-toggle" data-origin="&lt;all_urls&gt;"><span class="toggle-body"><span class="toggle-track"></span><span class="toggle-knob"></span></span></label>
@@ -214,24 +214,24 @@
         <div class="settings-item">
             <div class="settings-item-inner">
                 <div class="settings-item-left">
-                    <div class="settings-item-label">Additional origins</div>
+                    <div class="settings-item-label" data-i18n="permissions_additional_origins_label">Additional origins</div>
                 </div>
             </div>
             <div class="settings-item-children">
                 <div id="permissions-origin-list" class="generic-list">
                     <div class="permissions-origin-index generic-list-index-prefix"></div>
                     <input type="text" class="permissions-origin-input horizontal-flex-fill" autocomplete="off" spellcheck="false" id="permissions-origin-new-input">
-                    <button type="button" class="low-emphasis permissions-origin-button" id="permissions-origin-add">Add</button>
+                    <button type="button" class="low-emphasis permissions-origin-button" id="permissions-origin-add" data-i18n="permissions_add_origin_button">Add</button>
                 </div>
                 <div id="permissions-origin-list-empty" class="margin-above">
-                    No additional origins specified.
+                    <span data-i18n="permissions_no_additional_origins">No additional origins specified.</span>
                 </div>
                 <div id="permissions-origin-list-error" class="margin-above danger-text" hidden></div>
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="low-emphasis" data-modal-action="hide">Close</button>
+        <button type="button" class="low-emphasis" data-modal-action="hide" data-i18n="permissions_modal_close">Close</button>
     </div>
 </div></div>
 

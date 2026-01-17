@@ -17,8 +17,11 @@
 
 import {ThemeController} from '../app/theme-controller.js';
 import {Application} from '../application.js';
+import {localizeElement} from '../dom/i18n.js';
 import {LocaleDirectionController} from '../dom/locale-direction-controller.js';
 import {SettingsController} from './settings/settings-controller.js';
+
+localizeElement(document);
 
 await Application.main(true, async (application) => {
     const settingsController = new SettingsController(application);

@@ -20,6 +20,7 @@ import {ThemeController} from '../app/theme-controller.js';
 import {Application} from '../application.js';
 import {promiseTimeout} from '../core/utilities.js';
 import {DocumentFocusController} from '../dom/document-focus-controller.js';
+import {getMessage, localizeElement} from '../dom/i18n.js';
 import {LocaleDirectionController} from '../dom/locale-direction-controller.js';
 import {querySelectorNotNull} from '../dom/query-selector.js';
 import {BackupController} from './settings/backup-controller.js';
@@ -31,12 +32,12 @@ import {SettingsController} from './settings/settings-controller.js';
  */
 function getBrowserDisplayName(browser) {
     switch (browser) {
-        case 'chrome': return 'Chrome';
-        case 'firefox': return 'Firefox';
-        case 'firefox-mobile': return 'Firefox for Android';
-        case 'edge': return 'Edge';
-        case 'edge-legacy': return 'Edge Legacy';
-        case 'safari': return 'Safari';
+        case 'chrome': return getMessage('browser_chrome') || 'Chrome';
+        case 'firefox': return getMessage('browser_firefox') || 'Firefox';
+        case 'firefox-mobile': return getMessage('browser_firefox_android') || 'Firefox for Android';
+        case 'edge': return getMessage('browser_edge') || 'Edge';
+        case 'edge-legacy': return getMessage('browser_edge_legacy') || 'Edge Legacy';
+        case 'safari': return getMessage('browser_safari') || 'Safari';
         default: return `${browser}`;
     }
 }
@@ -47,13 +48,13 @@ function getBrowserDisplayName(browser) {
  */
 function getOperatingSystemDisplayName(os) {
     switch (os) {
-        case 'mac': return 'Mac OS';
-        case 'win': return 'Windows';
-        case 'android': return 'Android';
-        case 'cros': return 'Chrome OS';
-        case 'linux': return 'Linux';
-        case 'openbsd': return 'Open BSD';
-        case 'unknown': return 'Unknown';
+        case 'mac': return getMessage('os_mac') || 'Mac OS';
+        case 'win': return getMessage('os_windows') || 'Windows';
+        case 'android': return getMessage('os_android') || 'Android';
+        case 'cros': return getMessage('os_chrome_os') || 'Chrome OS';
+        case 'linux': return getMessage('os_linux') || 'Linux';
+        case 'openbsd': return getMessage('os_openbsd') || 'Open BSD';
+        case 'unknown': return getMessage('os_unknown') || 'Unknown';
         default: return `${os}`;
     }
 }
@@ -74,7 +75,7 @@ async function showAnkiConnectInfo(api) {
         // NOP
     }
 
-    ankiVersionElement.textContent = (ankiConnectVersion !== null ? `${ankiConnectVersion}` : 'Unknown');
+    ankiVersionElement.textContent = (ankiConnectVersion !== null ? `${ankiConnectVersion}` : (getMessage('info_anki_version_unknown') || 'Unknown'));
     ankiVersionContainerElement.dataset.hasError = `${ankiConnectVersion === null}`;
     ankiVersionUnknownElement.hidden = (ankiConnectVersion !== null);
 }
@@ -115,6 +116,8 @@ async function showDictionaryInfo(api) {
     container.textContent = '';
     container.appendChild(fragment);
 }
+
+localizeElement(document);
 
 await Application.main(true, async (application) => {
     const settingsController = new SettingsController(application);

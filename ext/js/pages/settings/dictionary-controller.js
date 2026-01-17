@@ -23,6 +23,7 @@ import {log} from '../../core/log.js';
 import {deferPromise} from '../../core/utilities.js';
 import {compareRevisions} from '../../dictionary/dictionary-data-util.js';
 import {DictionaryWorker} from '../../dictionary/dictionary-worker.js';
+import {getMessage} from '../../dom/i18n.js';
 import {querySelectorNotNull} from '../../dom/query-selector.js';
 
 const ajvSchemas = /** @type {import('dictionary-importer').CompiledSchemaValidators} */ (/** @type {unknown} */ (ajvSchemas0));
@@ -344,19 +345,19 @@ class DictionaryEntry {
     _setupDetails(detailsTable) {
         /** @type {Partial<Record<keyof (typeof this._dictionaryInfo & typeof this._dictionaryInfo.counts), string>>} */
         const targets = {
-            author: 'Author',
-            url: 'URL',
-            description: 'Description',
-            attribution: 'Attribution',
-            sourceLanguage: 'Source Language',
-            targetLanguage: 'Target Language',
-            terms: 'Term Count',
-            termMeta: 'Term Meta Count',
-            kanji: 'Kanji Count',
-            kanjiMeta: 'Kanji Meta Count',
-            tagMeta: 'Tag Count',
-            media: 'Media Count',
-            importSuccess: 'Import Success',
+            author: getMessage('dictionary_details_author'),
+            url: getMessage('dictionary_details_url'),
+            description: getMessage('dictionary_details_description'),
+            attribution: getMessage('dictionary_details_attribution'),
+            sourceLanguage: getMessage('dictionary_details_source_language'),
+            targetLanguage: getMessage('dictionary_details_target_language'),
+            terms: getMessage('dictionary_details_term_count'),
+            termMeta: getMessage('dictionary_details_term_meta_count'),
+            kanji: getMessage('dictionary_details_kanji_count'),
+            kanjiMeta: getMessage('dictionary_details_kanji_meta_count'),
+            tagMeta: getMessage('dictionary_details_tag_meta_count'),
+            media: getMessage('dictionary_details_media_count'),
+            importSuccess: getMessage('dictionary_details_import_success'),
         };
 
         const dictionaryInfo = {...this._dictionaryInfo, ...this._dictionaryInfo.counts};
@@ -384,7 +385,10 @@ class DictionaryEntry {
 
             labelElement.textContent = `${label}:`;
             if (this._databaseCounts && this._databaseCounts[key]) {
-                displayText = 'Expected: ' + displayText + ' (Database: ' + this._databaseCounts[key] + ')';
+                displayText = getMessage('dictionary_details_expected_database', [
+                    displayText,
+                    String(this._databaseCounts[key]),
+                ]);
             }
             infoElement.textContent = displayText;
             fragment.appendChild(details);
@@ -538,12 +542,12 @@ class DictionaryExtraInfo {
     _setupDetails(detailsTable) {
         /** @type {Partial<Record<keyof (typeof this._totalCounts), string>>} */
         const targets = {
-            terms: 'Term Count',
-            termMeta: 'Term Meta Count',
-            kanji: 'Kanji Count',
-            kanjiMeta: 'Kanji Meta Count',
-            tagMeta: 'Tag Count',
-            media: 'Media Count',
+            terms: getMessage('dictionary_details_term_count'),
+            termMeta: getMessage('dictionary_details_term_meta_count'),
+            kanji: getMessage('dictionary_details_kanji_count'),
+            kanjiMeta: getMessage('dictionary_details_kanji_meta_count'),
+            tagMeta: getMessage('dictionary_details_tag_meta_count'),
+            media: getMessage('dictionary_details_media_count'),
         };
 
         const fragment = document.createDocumentFragment();
@@ -577,7 +581,11 @@ class DictionaryExtraInfo {
      */
     _setTitle(node) {
         if (node === null) { return; }
-        node.textContent = `${this._totalRemainder} item${this._totalRemainder !== 1 ? 's' : ''}`;
+        if (this._totalRemainder === 1) {
+            node.textContent = getMessage('dictionary_extra_data_item_singular', [String(this._totalRemainder)]);
+        } else {
+            node.textContent = getMessage('dictionary_extra_data_item_plural', [String(this._totalRemainder)]);
+        }
     }
 }
 
@@ -1157,7 +1165,7 @@ export class DictionaryController {
             let option = document.createElement('option');
             option.className = 'text-muted';
             option.value = '';
-            option.textContent = 'Not selected';
+            option.textContent = getMessage('dictionary_main_not_selected');
             fragment.appendChild(option);
 
             for (const {title, sequenced} of dictionaries) {
@@ -1185,7 +1193,15 @@ export class DictionaryController {
             const updateCount = (await Promise.all(updateChecks)).reduce((sum, value) => (sum + (value ? 1 : 0)), 0);
             if (this._checkUpdatesButton !== null) {
                 hasUpdates = !!updateCount;
-                this._checkUpdatesButton.textContent = hasUpdates ? `${updateCount} update${updateCount > 1 ? 's' : ''}` : 'No updates';
+            if (hasUpdates) {
+                this._checkUpdatesButton.textContent = (
+                    updateCount === 1 ?
+                    getMessage('dictionary_updates_count_singular', [String(updateCount)]) :
+                    getMessage('dictionary_updates_count_plural', [String(updateCount)])
+                );
+            } else {
+                this._checkUpdatesButton.textContent = getMessage('dictionary_updates_none');
+            }
             }
         } finally {
             this._setButtonsEnabled(true);
@@ -1343,7 +1359,7 @@ export class DictionaryController {
             onProgress({processed: 0, count: 1, storeCount: 1, storesProcesed: 0});
 
             for (const progress of progressContainers) { progress.hidden = false; }
-            for (const label of infoLabels) { label.textContent = 'Deleting dictionary...'; }
+            for (const label of infoLabels) { label.textContent = getMessage('dictionary_deleting_label'); }
             if (statusFooter !== null) { statusFooter.setTaskActive(progressSelector, true); }
 
             await this._deleteDictionaryInternal(dictionaryTitle, onProgress);

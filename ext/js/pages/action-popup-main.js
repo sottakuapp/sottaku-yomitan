@@ -19,9 +19,12 @@
 import {ThemeController} from '../app/theme-controller.js';
 import {Application} from '../application.js';
 import {getAllPermissions, hasRequiredPermissionsForOptions} from '../data/permissions-util.js';
+import {getMessage, localizeElement} from '../dom/i18n.js';
 import {LocaleDirectionController} from '../dom/locale-direction-controller.js';
 import {HotkeyHelpController} from '../input/hotkey-help-controller.js';
 import {HotkeyUtil} from '../input/hotkey-util.js';
+
+localizeElement(document);
 
 class DisplayController {
     /**
@@ -332,7 +335,7 @@ class DisplayController {
         if (isSottakuLinked) { return; }
 
         for (let i = 0; i < tooltip.length; i++) {
-            tooltip[i].textContent = 'Link your Sottaku account to enable lookups';
+            tooltip[i].textContent = getMessage('action_popup_link_account_tooltip') || 'Link your Sottaku account to enable lookups';
             tooltip[i].classList.add('enable-dictionary-tooltip');
         }
     }

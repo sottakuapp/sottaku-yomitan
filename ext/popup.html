@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Sottaku-Yomitan Search</title>
+    <title data-i18n="page_popup_title">Sottaku-Yomitan Search</title>
     <link rel="icon" type="image/png" href="/images/icon16.png" sizes="16x16">
     <link rel="icon" type="image/png" href="/images/icon19.png" sizes="19x19">
     <link rel="icon" type="image/png" href="/images/icon32.png" sizes="32x32">
@@ -41,22 +41,22 @@
 
                     <div id="sottaku-upgrade-required" hidden>
                         <div class="entry">
-                            <h1>Sottaku Pro required</h1>
-                            <p>The popup dictionary requires a Sottaku Pro subscription.</p>
-                            <p><a href="https://sottaku.app/upgrade" target="_blank" rel="noopener noreferrer">Upgrade at sottaku.app/upgrade</a></p>
+                            <h1 data-i18n="popup_pro_required_title">Sottaku Pro required</h1>
+                            <p data-i18n="popup_pro_required_body">The popup dictionary requires a Sottaku Pro subscription.</p>
+                            <p><a href="https://sottaku.app/upgrade" target="_blank" rel="noopener noreferrer" data-i18n="popup_pro_required_link">Upgrade at sottaku.app/upgrade</a></p>
                         </div>
                     </div>
 
                     <div id="no-results" hidden>
                         <div class="entry">
-                            <p>No results found.</p>
+                            <p data-i18n="popup_no_results">No results found.</p>
                         </div>
                     </div>
 
                     <div id="error-extension-unloaded" hidden>
                         <div class="entry">
-                            <h1>Sottaku-Yomitan Updated!</h1>
-                            <p>
+                            <h1 data-i18n="popup_updated_title">Sottaku-Yomitan Updated!</h1>
+                            <p data-i18n="popup_updated_body">
                                 The Sottaku-Yomitan extension has been updated to a new version! In order to continue
                                 viewing definitions on this page, you must reload this tab or restart your browser.
                             </p>
@@ -70,7 +70,7 @@
         <div class="overlay-panel-container">
             <div class="overlay-panel scrollbar" id="profile-panel" hidden>
                 <div class="overlay-panel-inner">
-                    <h3>Default Profile</h3>
+                    <h3 data-i18n="popup_default_profile_title">Default Profile</h3>
                     <div class="profile-list" id="profile-list"></div>
                 </div>
             </div>
@@ -79,11 +79,11 @@
     <div class="content-sidebar scrollbar" id="content-sidebar">
         <div class="content-sidebar-inner">
             <div class="content-sidebar-top-pre">
-                <button type="button" class="sidebar-button danger" id="close-button" title="Close popup" data-hotkey='["close","title","Close popup ({0})"]'><span class="sidebar-button-icon icon" data-icon="cross"></span></button>
+                <button type="button" class="sidebar-button danger" id="close-button" data-i18n-attr="title:popup_close_title" title="Close popup" data-hotkey='["close","title",{"i18n":"popup_hotkey_close"}]'><span class="sidebar-button-icon icon" data-icon="cross"></span></button>
             </div>
             <div class="content-sidebar-top">
-                <button type="button" class="sidebar-button" disabled id="navigate-previous-button" title="Previous definition" data-hotkey='["historyBackward","title","Previous definition ({0})"]'><span class="sidebar-button-icon icon" data-icon="left-chevron"></span></button>
-                <button type="button" class="sidebar-button" disabled id="navigate-next-button" title="Next definition" data-hotkey='["historyForward","title","Next definition ({0})"]'><span class="sidebar-button-icon icon" data-icon="right-chevron"></span></button>
+                <button type="button" class="sidebar-button" disabled id="navigate-previous-button" data-i18n-attr="title:popup_previous_definition_title" title="Previous definition" data-hotkey='["historyBackward","title",{"i18n":"popup_hotkey_previous_definition"}]'><span class="sidebar-button-icon icon" data-icon="left-chevron"></span></button>
+                <button type="button" class="sidebar-button" disabled id="navigate-next-button" data-i18n-attr="title:popup_next_definition_title" title="Next definition" data-hotkey='["historyForward","title",{"i18n":"popup_hotkey_next_definition"}]'><span class="sidebar-button-icon icon" data-icon="right-chevron"></span></button>
             </div>
             <div class="content-sidebar-bottom">
                 <p id="profile-name"></p>

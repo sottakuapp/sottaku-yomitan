@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Welcome to Sottaku-Yomitan!</title>
+    <title data-i18n="page_welcome_title">Welcome to Sottaku-Yomitan!</title>
     <link rel="icon" type="image/png" href="/images/icon16.png" sizes="16x16">
     <link rel="icon" type="image/png" href="/images/icon19.png" sizes="19x19">
     <link rel="icon" type="image/png" href="/images/icon32.png" sizes="32x32">
@@ -24,14 +24,14 @@
 <div class="content-center">
     <span tabindex="-1" id="content-scroll-focus"></span>
 
-    <h1>Welcome to Sottaku-Yomitan!</h1>
+    <h1 data-i18n="welcome_heading">Welcome to Sottaku-Yomitan!</h1>
 
-    <h2><strong>Recommended Permissions &#40;Important&#41;</strong></h2>
+    <h2><strong data-i18n="welcome_recommended_permissions_heading">Recommended Permissions &#40;Important&#41;</strong></h2>
     <div class="settings-group">
         <div class="settings-item"><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-label">Enable recommended permissions</div>
-                <div class="settings-item-description">This allows Sottaku-Yomitan to scan text from most sites.</div>
+                <div class="settings-item-label" data-i18n="welcome_permissions_enable_recommended_label">Enable recommended permissions</div>
+                <div class="settings-item-description" data-i18n="welcome_permissions_enable_recommended_description">This allows Sottaku-Yomitan to scan text from most sites.</div>
             </div>
             <div class="settings-item-right">
                 <label class="toggle"><input type="checkbox" id="recommended-permissions-toggle" data-origin="&lt;all_urls&gt;"><span class="toggle-body"><span class="toggle-track"></span><span class="toggle-knob"></span></span></label>
@@ -39,8 +39,8 @@
         </div></div>
         <div class="settings-item"><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-label">Enable optional permissions</div>
-                <div class="settings-item-description">This allows Sottaku-Yomitan to read the clipboard and communicate with external programs.</div>
+                <div class="settings-item-label" data-i18n="welcome_permissions_enable_optional_label">Enable optional permissions</div>
+                <div class="settings-item-description" data-i18n="welcome_permissions_enable_optional_description">This allows Sottaku-Yomitan to read the clipboard and communicate with external programs.</div>
             </div>
             <div class="settings-item-right">
                 <label class="toggle"><input type="checkbox" id="optional-permissions-toggle" data-origin="&lt;all_urls&gt;"><span class="toggle-body"><span class="toggle-track"></span><span class="toggle-knob"></span></span></label>
@@ -48,30 +48,30 @@
         </div></div>
         <div class="settings-item"><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-description" data-hide-for-browser="firefox firefox-mobile">Further configuration is available on the <a href="/permissions.html" rel="noopener">Permissions page</a> and the web browser's <a tabindex="0" class="extension-settings-link" data-special-url="chrome://extensions/?id={id}">extension settings page</a>.</div>
-                <div class="settings-item-description" data-show-for-browser="firefox firefox-mobile">Further configuration is available on the <a href="/permissions.html" rel="noopener">Permissions page</a> and the web browser's extension settings page.</div>
-                <div class="danger-text margin-above" id="permissions-disabled" hidden><strong>Sottaku-Yomitan features will be limited if the recommended permissions are not enabled.</strong></div>
-                <div class="success-text margin-above" id="recommended-permissions-enabled" hidden><strong>Essential Sottaku-Yomitan features are available.</strong></div>
-                <div class="success-text margin-above" id="full-permissions-enabled" hidden><strong>All Sottaku-Yomitan features are available.</strong></div>
+                <div class="settings-item-description" data-hide-for-browser="firefox firefox-mobile" data-i18n-html="welcome_permissions_more_info_chrome">Further configuration is available on the <a href="/permissions.html" rel="noopener">Permissions page</a> and the web browser's <a tabindex="0" class="extension-settings-link" data-special-url="chrome://extensions/?id={id}">extension settings page</a>.</div>
+                <div class="settings-item-description" data-show-for-browser="firefox firefox-mobile" data-i18n-html="welcome_permissions_more_info_firefox">Further configuration is available on the <a href="/permissions.html" rel="noopener">Permissions page</a> and the web browser's extension settings page.</div>
+                <div class="danger-text margin-above" id="permissions-disabled" hidden><strong data-i18n="welcome_permissions_disabled_warning">Sottaku-Yomitan features will be limited if the recommended permissions are not enabled.</strong></div>
+                <div class="success-text margin-above" id="recommended-permissions-enabled" hidden><strong data-i18n="welcome_permissions_recommended_enabled">Essential Sottaku-Yomitan features are available.</strong></div>
+                <div class="success-text margin-above" id="full-permissions-enabled" hidden><strong data-i18n="welcome_permissions_full_enabled">All Sottaku-Yomitan features are available.</strong></div>
                 <div id="recommended-permissions-error" class="margin-above danger-text" hidden></div>
             </div>
         </div></div>
     </div>
 
     <!-- Content -->
-    <h2><strong>Locale setup</strong></h2>
+    <h2><strong data-i18n="welcome_locale_setup_heading">Locale setup</strong></h2>
     <div class="settings-group">
         <div class="settings-item"><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-description">Sottaku already provides Japanese and Korean lookups through your account; import additional dictionaries if you want offline access or other languages.</div>
+                <div class="settings-item-description" data-i18n="welcome_locale_setup_description">Sottaku already provides Japanese and Korean lookups through your account; import additional dictionaries if you want offline access or other languages.</div>
             </div>
         </div></div>
         <div class="settings-item"><div class="settings-item-inner settings-item-inner-wrappable">
             <div class="settings-item-left">
-                <div class="settings-item-label">
+                <div class="settings-item-label" data-i18n="welcome_locale_label">
                     Locale
                 </div>
-                <div class="settings-item-description">
+                <div class="settings-item-description" data-i18n="welcome_locale_description">
                     Language used for translations returned by Sottaku.
                 </div>
             </div>
@@ -81,10 +81,10 @@
         </div></div>
         <div class="settings-item" hidden><div class="settings-item-inner settings-item-inner-wrappable">
             <div class="settings-item-left">
-                <div class="settings-item-label">
+                <div class="settings-item-label" data-i18n="welcome_text_language_label">
                     Text language
                 </div>
-                <div class="settings-item-description">
+                <div class="settings-item-description" data-i18n="welcome_text_language_description">
                     Used for offline dictionary features and preview tooling.
                 </div>
             </div>
@@ -95,13 +95,13 @@
     </div>
 
     <!-- Data Transmission -->
-    <h2><strong>Data Transmission</strong></h2>
+    <h2><strong data-i18n="welcome_data_transmission_heading">Data Transmission</strong></h2>
     <div class="settings-group">
         <div class="settings-item"><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-label">Enable audio playback for terms</div>
-                <div class="settings-item-description">Show a clickable speaker icon next to search results.</div>
-                <div class="settings-item-description">
+                <div class="settings-item-label" data-i18n="welcome_audio_enable_label">Enable audio playback for terms</div>
+                <div class="settings-item-description" data-i18n="welcome_audio_enable_description">Show a clickable speaker icon next to search results.</div>
+                <div class="settings-item-description" data-i18n-html="welcome_audio_enable_disclaimer">
                     This option may send term, reading, and/or language outside of Sottaku-Yomitan to fetch audio when the speaker icon is clicked<span data-show-for-browser="firefox firefox-mobile"> (<a href="https://sottaku.app/privacy-policy" target="_blank" rel="noreferrer noopener">Privacy Policy</a>)</span>.
                     <div data-show-for-browser="firefox firefox-mobile">Disabling this option will disallow pronunciation audio playback for any terms searched.</div>
                 </div>
@@ -112,11 +112,11 @@
         </div></div>
     </div>
 
-    <h2>Here are some basics to get started</h2>
+    <h2 data-i18n="welcome_get_started_heading">Here are some basics to get started</h2>
     <div class="settings-group">
         <a href="https://sottaku.app" rel="noopener noreferrer" class="settings-item settings-item-button"><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-label outer-link"><strong>New to Sottaku-Yomitan? Visit sottaku.app for news and tips.</strong></div>
+                <div class="settings-item-label outer-link"><strong data-i18n="welcome_get_started_news_link">New to Sottaku-Yomitan? Visit sottaku.app for news and tips.</strong></div>
             </div>
             <div class="settings-item-right open-panel-button-container">
                 <button type="button" class="icon-button"><span class="icon-button-inner"><span class="icon" data-icon="material-right-arrow"></span></span></button>
@@ -124,7 +124,7 @@
         </div></a>
         <a href="/quick-start-guide.html" rel="noopener" class="settings-item settings-item-button"><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-label">Sottaku-Yomitan Quick Start Guide</div>
+                <div class="settings-item-label" data-i18n="welcome_get_started_quick_start">Sottaku-Yomitan Quick Start Guide</div>
             </div>
             <div class="settings-item-right open-panel-button-container">
                 <button type="button" class="icon-button"><span class="icon-button-inner"><span class="icon" data-icon="material-right-arrow"></span></span></button>
@@ -132,7 +132,7 @@
         </div></a>
         <a href="/settings.html#sottaku" rel="noopener" class="settings-item settings-item-button"><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-label">Connect your Sottaku account to sync dictionaries, audio, and flashcards</div>
+                <div class="settings-item-label" data-i18n="welcome_get_started_connect_account">Connect your Sottaku account to sync dictionaries, audio, and flashcards</div>
             </div>
             <div class="settings-item-right open-panel-button-container">
                 <button type="button" class="icon-button"><span class="icon-button-inner"><span class="icon" data-icon="material-right-arrow"></span></span></button>
@@ -140,11 +140,11 @@
         </div></a>
     </div>
 
-    <h2>Basic customization</h2>
+    <h2 data-i18n="welcome_basic_customization_heading">Basic customization</h2>
     <div class="settings-group">
         <div class="settings-item"><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-label">Show this welcome guide on browser startup</div>
+                <div class="settings-item-label" data-i18n="welcome_show_guide_label">Show this welcome guide on browser startup</div>
             </div>
             <div class="settings-item-right">
                 <label class="toggle"><input type="checkbox" data-setting="general.showGuide"><span class="toggle-body"><span class="toggle-track"></span><span class="toggle-knob"></span></span></label>
@@ -153,8 +153,8 @@
         <div class="settings-item">
             <div class="settings-item-inner settings-item-inner-wrappable">
                 <div class="settings-item-left">
-                    <div class="settings-item-label">Scan modifier key</div>
-                    <div class="settings-item-description">Hold a key while moving the cursor to scan text.</div>
+                    <div class="settings-item-label" data-i18n="welcome_scan_modifier_label">Scan modifier key</div>
+                    <div class="settings-item-description" data-i18n="welcome_scan_modifier_description">Hold a key while moving the cursor to scan text.</div>
                 </div>
                 <div class="settings-item-right">
                     <select id="main-scan-modifier-key"></select>
@@ -163,8 +163,8 @@
         </div>
         <div class="settings-item"><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-label">Scan using middle mouse button</div>
-                <div class="settings-item-description">Hold the middle mouse button while moving the cursor to scan text.</div>
+                <div class="settings-item-label" data-i18n="welcome_scan_middle_mouse_label">Scan using middle mouse button</div>
+                <div class="settings-item-description" data-i18n="welcome_scan_middle_mouse_description">Hold the middle mouse button while moving the cursor to scan text.</div>
             </div>
             <div class="settings-item-right">
                 <label class="toggle"><input type="checkbox" id="middle-mouse-button-scan"><span class="toggle-body"><span class="toggle-track"></span><span class="toggle-knob"></span></span></label>
@@ -172,21 +172,21 @@
         </div></div>
         <div class="settings-item"><div class="settings-item-inner settings-item-inner-wrappable">
             <div class="settings-item-left">
-                <div class="settings-item-label">Theme</div>
-                <div class="settings-item-description">Adjust the style of Sottaku-Yomitan.</div>
+                <div class="settings-item-label" data-i18n="welcome_theme_label">Theme</div>
+                <div class="settings-item-description" data-i18n="welcome_theme_description">Adjust the style of Sottaku-Yomitan.</div>
             </div>
             <div class="settings-item-right">
                 <select data-setting="general.popupTheme" class="short-width">
-                    <option value="site">Auto</option>
-                    <option value="light">Light</option>
-                    <option value="dark">Dark</option>
-                    <option value="browser">Browser</option>
+                    <option value="site" data-i18n="theme_option_auto">Auto</option>
+                    <option value="light" data-i18n="theme_option_light">Light</option>
+                    <option value="dark" data-i18n="theme_option_dark">Dark</option>
+                    <option value="browser" data-i18n="theme_option_browser">Browser</option>
                 </select>
             </div>
         </div></div>
         <a href="/settings.html" rel="noopener" class="settings-item settings-item-button"><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-label">More customization options are available on the Settings page</div>
+                <div class="settings-item-label" data-i18n="welcome_more_customization_link">More customization options are available on the Settings page</div>
             </div>
             <div class="settings-item-right open-panel-button-container">
                 <button type="button" class="icon-button"><span class="icon-button-inner"><span class="icon" data-icon="material-right-arrow"></span></span></button>
@@ -204,7 +204,7 @@
 <!-- Auxiliary content -->
 <div class="status-footer-container" hidden><div class="status-footer-container2">
     <div class="status-footer">
-        <div class="status-footer-header"><div class="status-footer-header-label">Tasks in progress:</div><a tabindex="0" class="status-footer-header-close">Close</a></div>
+        <div class="status-footer-header"><div class="status-footer-header-label" data-i18n="status_footer_tasks_in_progress">Tasks in progress:</div><a tabindex="0" class="status-footer-header-close" data-i18n="status_footer_close">Close</a></div>
         <div class="status-footer-item dictionary-delete-progress" hidden>
             <div class="progress-labels"><div class="progress-info"></div><div class="progress-status"></div></div>
             <div class="progress-bar-track"><div class="progress-bar danger"></div></div>

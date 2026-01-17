@@ -1,4 +1,5 @@
 import {SottakuClient} from '../../comm/sottaku-client.js';
+import {getMessage} from '../../dom/i18n.js';
 import {querySelectorNotNull} from '../../dom/query-selector.js';
 import {SOTTAKU_SUPPORTED_LOCALES} from '../../language/sottaku-locales.js';
 
@@ -58,7 +59,8 @@ export class SottakuLocalesController {
 
         const autoOption = document.createElement('option');
         autoOption.value = '';
-        autoOption.text = 'Automatic (use Sottaku account language)';
+        autoOption.dataset.i18n = 'sottaku_locale_automatic';
+        autoOption.text = getMessage('sottaku_locale_automatic') || 'Automatic (use Sottaku account language)';
         this._localeSelect.appendChild(autoOption);
 
         for (const {locale, name} of supportedLocales) {
@@ -104,4 +106,3 @@ export class SottakuLocalesController {
         return [...SOTTAKU_SUPPORTED_LOCALES];
     }
 }
-

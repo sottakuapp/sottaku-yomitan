@@ -18,6 +18,7 @@
 
 import {parseJson} from '../core/json.js';
 import {isObjectNotArray} from '../core/object-utilities.js';
+import {getMessage} from '../dom/i18n.js';
 import {HotkeyUtil} from './hotkey-util.js';
 
 export class HotkeyHelpController {
@@ -63,14 +64,15 @@ export class HotkeyHelpController {
             const info = this._getNodeInfo(node2);
             if (info === null) { continue; }
             const {action, global, attributes, values, defaultAttributeValues} = info;
-            const multipleValues = Array.isArray(values);
+            const resolvedValues = this._resolveI18nValues(values);
+            const multipleValues = Array.isArray(resolvedValues);
             const hotkey = (global ? this._globalActionHotkeys : this._localActionHotkeys).get(action);
             for (let i = 0, ii = attributes.length; i < ii; ++i) {
                 const attribute = attributes[i];
                 /** @type {unknown} */
                 let value;
                 if (typeof hotkey !== 'undefined') {
-                    value = multipleValues ? values[i] : values;
+                    value = multipleValues ? resolvedValues[i] : resolvedValues;
                     if (typeof value === 'string') {
                         value = value.replace(replacementPattern, hotkey);
                     }
@@ -88,6 +90,31 @@ export class HotkeyHelpController {
     }
 
     // Private
+
+    /**
+     * @param {unknown} value
+     * @returns {unknown}
+     */
+    _resolveI18nValue(value) {
+        if (!value || typeof value !== 'object' || Array.isArray(value)) { return value; }
+        const i18nValue = /** @type {{i18n?: unknown}} */ (value).i18n;
+        if (typeof i18nValue === 'string' && i18nValue.length > 0) {
+            const message = getMessage(i18nValue);
+            if (message) { return message; }
+        }
+        return value;
+    }
+
+    /**
+     * @param {unknown} value
+     * @returns {unknown}
+     */
+    _resolveI18nValues(value) {
+        if (Array.isArray(value)) {
+            return value.map((item) => this._resolveI18nValue(item));
+        }
+        return this._resolveI18nValue(value);
+    }
 
     /**
      * @returns {Promise<chrome.commands.Command[]>}

@@ -19,6 +19,7 @@
 import {EventDispatcher} from '../core/event-dispatcher.js';
 import {log} from '../core/log.js';
 import {trimTrailingWhitespacePlusSpace} from '../data/string-util.js';
+import {getMessage} from '../dom/i18n.js';
 import {querySelectorNotNull} from '../dom/query-selector.js';
 import {convertHiraganaToKatakana, convertKatakanaToHiragana, isStringEntirelyKana} from '../language/ja/japanese.js';
 import {TextScanner} from '../language/text-scanner.js';
@@ -272,13 +273,13 @@ export class QueryParser extends EventDispatcher {
             option.value = parseResult.id;
             switch (parseResult.source) {
                 case 'scanning-parser':
-                    option.textContent = 'Scanning parser';
+                    option.textContent = getMessage('query_parser_scanning');
                     break;
                 case 'mecab':
-                    option.textContent = `MeCab: ${parseResult.dictionary}`;
+                    option.textContent = getMessage('query_parser_mecab', [parseResult.dictionary]);
                     break;
                 default:
-                    option.textContent = `Unknown source: ${parseResult.source}`;
+                    option.textContent = getMessage('query_parser_unknown_source', [parseResult.source]);
                     break;
             }
             fragment.appendChild(option);

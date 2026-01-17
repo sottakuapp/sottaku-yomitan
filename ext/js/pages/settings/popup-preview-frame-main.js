@@ -18,8 +18,11 @@
 
 import {PopupFactory} from '../../app/popup-factory.js';
 import {Application} from '../../application.js';
+import {localizeElement} from '../../dom/i18n.js';
 import {HotkeyHandler} from '../../input/hotkey-handler.js';
 import {PopupPreviewFrame} from './popup-preview-frame.js';
+
+localizeElement(document);
 
 await Application.main(true, async (application) => {
     const hotkeyHandler = new HotkeyHandler();

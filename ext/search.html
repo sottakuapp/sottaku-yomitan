@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Sottaku-Yomitan Search</title>
+    <title data-i18n="page_search_title">Sottaku-Yomitan Search</title>
     <link rel="icon" type="image/png" href="/images/icon16.png" sizes="16x16">
     <link rel="icon" type="image/png" href="/images/icon19.png" sizes="19x19">
     <link rel="icon" type="image/png" href="/images/icon32.png" sizes="32x32">
@@ -29,19 +29,19 @@
                 <div class="search-header-wrapper">
                     <div class="search-header">
                         <div id="intro">
-                            <h1>Sottaku-Yomitan Search</h1>
+                            <h1 data-i18n="search_header_title">Sottaku-Yomitan Search</h1>
                         </div>
 
                         <div class="scan-disable">
                             <div class="search-options">
                                 <div class="search-option" id="search-option-profile-select">
                                     <span class="profile-select-container"><select class="profile-select" id="profile-select">
-                                        <optgroup label="Default Profile" id="profile-select-option-group"></optgroup>
+                                        <optgroup label="Default Profile" id="profile-select-option-group" data-i18n-attr="label:search_default_profile_label"></optgroup>
                                     </select></span>
                                 </div>
                                 <label class="search-option" id="search-option-clipboard-monitor-container">
                                     <label class="toggle"><input type="checkbox" id="clipboard-monitor-enable"><span class="toggle-body"><span class="toggle-track"></span><span class="toggle-knob"></span></span></label>
-                                    <span class="search-option-label">Clipboard monitor</span>
+                                    <span class="search-option-label" data-i18n="search_clipboard_monitor_label">Clipboard monitor</span>
                                 </label>
                                 <div class="search-options-right">
                                     <div class="search-option" id="search-settings-button" data-modal-action="show,search-settings"><span class="icon" data-icon="cog"></span></div>
@@ -54,7 +54,7 @@
             <div class="search-header-wrapper" id="sticky-search-header">
                 <div class="search-header">
                     <div class="search-textbox-container">
-                        <textarea id="search-textbox" class="scrollbar" placeholder="Input a term, expression, sentence, or block of text" autocomplete="off" lang="ja" autocapitalize="off" autofocus></textarea>
+                        <textarea id="search-textbox" class="scrollbar" placeholder="Input a term, expression, sentence, or block of text" data-i18n-attr="placeholder:search_textbox_placeholder" autocomplete="off" lang="ja" autocapitalize="off" autofocus></textarea>
                         <button type="button" id="clear-button" class="clear-button"><span class="icon" data-icon="cross"></span></button>
                         <button type="button" id="search-back-button" class="search-button" hidden><span class="icon" data-icon="left-chevron"></span></button>
                         <button type="button" id="search-button" class="search-button"><span class="icon" data-icon="magnifying-glass"></span></button>
@@ -73,15 +73,15 @@
 
                     <div id="sottaku-upgrade-required" hidden>
                         <div class="entry">
-                            <h1>Sottaku Pro required</h1>
-                            <p>The popup dictionary requires a Sottaku Pro subscription.</p>
-                            <p><a href="https://sottaku.app/upgrade" target="_blank" rel="noopener noreferrer">Upgrade at sottaku.app/upgrade</a></p>
+                            <h1 data-i18n="popup_pro_required_title">Sottaku Pro required</h1>
+                            <p data-i18n="popup_pro_required_body">The popup dictionary requires a Sottaku Pro subscription.</p>
+                            <p><a href="https://sottaku.app/upgrade" target="_blank" rel="noopener noreferrer" data-i18n="popup_pro_required_link">Upgrade at sottaku.app/upgrade</a></p>
                         </div>
                     </div>
 
                     <div id="no-results" hidden>
                         <div class="entry">
-                            <p>No results found.</p>
+                            <p data-i18n="popup_no_results">No results found.</p>
                         </div>
                     </div>
 
@@ -98,12 +98,12 @@
 <!-- Search settings modal -->
 <div id="search-settings-modal" class="modal" tabindex="-1" role="dialog" hidden><div class="modal-content">
     <div class="modal-header">
-        <div class="modal-title">Search Settings</div>
+        <div class="modal-title" data-i18n="search_settings_title">Search Settings</div>
     </div>
     <div class="modal-body">
         <div class="settings-item" id="query-parser-mode-container" hidden><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-label">
+                <div class="settings-item-label" data-i18n="search_settings_parser_label">
                     Parser
                 </div>
             </div>
@@ -114,7 +114,7 @@
 
         <div class="settings-item" id="search-option-wanakana"><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-label">
+                <div class="settings-item-label" data-i18n="search_settings_auto_kana_label">
                     Automatic kana conversion
                 </div>
             </div>
@@ -126,10 +126,10 @@
 
         <div class="settings-item"><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-label">
+                <div class="settings-item-label" data-i18n="search_settings_sticky_header_label">
                     Sticky search header
                 </div>
-                <div class="settings-item-description">
+                <div class="settings-item-description" data-i18n="search_settings_sticky_header_description">
                     Search header stays on the page when scrolling down.
                 </div>
             </div>
@@ -139,7 +139,7 @@
         </div></div>
     </div>
     <div class="modal-footer">
-        <button type="button" data-modal-action="hide">Close</button>
+        <button type="button" data-modal-action="hide" data-i18n="search_settings_close_button">Close</button>
     </div>
 </div></div>
 

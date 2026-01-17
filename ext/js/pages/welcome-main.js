@@ -18,6 +18,7 @@
 
 import {Application} from '../application.js';
 import {DocumentFocusController} from '../dom/document-focus-controller.js';
+import {localizeElement} from '../dom/i18n.js';
 import {LocaleDirectionController} from '../dom/locale-direction-controller.js';
 import {querySelectorNotNull} from '../dom/query-selector.js';
 import {ExtensionContentController} from './common/extension-content-controller.js';
@@ -62,6 +63,8 @@ async function checkNeedsCustomTemplatesWarning() {
     document.documentElement.dataset.warnCustomTemplates = 'true';
     await chrome.storage.session.remove([key]);
 }
+
+localizeElement(document);
 
 await Application.main(true, async (application) => {
     const modalController = new ModalController(['shared-modals', 'settings-modals']);

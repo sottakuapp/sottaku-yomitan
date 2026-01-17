@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Sottaku-Yomitan Action Popup</title>
+    <title data-i18n="page_action_popup_title">Sottaku-Yomitan Action Popup</title>
     <link rel="icon" type="image/png" href="/images/icon16.png" sizes="16x16">
     <link rel="icon" type="image/png" href="/images/icon19.png" sizes="19x19">
     <link rel="icon" type="image/png" href="/images/icon32.png" sizes="32x32">
@@ -16,13 +16,13 @@
     <script src="/js/pages/action-popup-main.js" type="module"></script>
 </head>
 <body>
-    <div id="loading">
+    <div id="loading" data-i18n="action_popup_loading">
         Loading...
     </div>
     <div id="action-popup">
         <div class="action-container action-select-profile" hidden>
             <div class="action-item-left">
-                <h2 class="action-title">Profile</h2>
+                <h2 class="action-title" data-i18n="action_popup_profile_title">Profile</h2>
             </div>
             <div class="action-item-right">
                 <select tabindex="0"  class="profile-select" id="profile-select">
@@ -34,26 +34,26 @@
                 <label class="toggle">
                     <input tabindex="0" type="checkbox" class="enable-search">
                     <div class="toggle-group">
-                        <span class="toggle-on">On</span>
-                        <span class="toggle-off">Off</span>
+                        <span class="toggle-on" data-i18n="action_popup_toggle_on">On</span>
+                        <span class="toggle-off" data-i18n="action_popup_toggle_off">Off</span>
                         <span class="toggle-handle"></span>
                     </div>
                 </label>
-                <p class="tooltip">Hover over text to scan</p>
+                <p class="tooltip" data-i18n="action_popup_tooltip_scan">Hover over text to scan</p>
             </div>
         </div>
         <div class="action-container action-buttons">
-            <button tabindex="0" type="button" class="low-emphasis action-open-settings" title="Settings" data-hotkey='["global:openSettingsPage","title","Settings ({0})"]'>
+            <button tabindex="0" type="button" class="low-emphasis action-open-settings" data-i18n-attr="title:action_popup_button_settings_title" title="Settings" data-hotkey='["global:openSettingsPage","title",{"i18n":"action_popup_hotkey_settings"}]'>
                 <div class="action-icon">
                     <span class="icon" data-icon="cog"></span>
                 </div>
             </button>
-            <button tabindex="0" type="button" class="low-emphasis action-open-search" title="Search&#010;Shift+click to open here" data-hotkey='["global:openSearchPage","title","Search ({0})\nShift+click to open here"]'>
+            <button tabindex="0" type="button" class="low-emphasis action-open-search" data-i18n-attr="title:action_popup_button_search_title" title="Search&#010;Shift+click to open here" data-hotkey='["global:openSearchPage","title",{"i18n":"action_popup_hotkey_search"}]'>
                 <div class="action-icon">
                     <span class="icon" data-icon="magnifying-glass"></span>
                 </div>
             </button>
-            <button tabindex="0" type="button" class="low-emphasis action-open-info" title="Information" data-hotkey='["global:openInfoPage","title","Information ({0})"]'>
+            <button tabindex="0" type="button" class="low-emphasis action-open-info" data-i18n-attr="title:action_popup_button_info_title" title="Information" data-hotkey='["global:openInfoPage","title",{"i18n":"action_popup_hotkey_info"}]'>
                 <div class="action-icon">
                     <span class="icon" data-icon="question-mark-circle"></span>
                 </div>

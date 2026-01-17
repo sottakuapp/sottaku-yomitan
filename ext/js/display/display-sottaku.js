@@ -5,6 +5,7 @@
 import {SottakuClient} from '../comm/sottaku-client.js';
 import {EventListenerCollection} from '../core/event-listener-collection.js';
 import {toError} from '../core/to-error.js';
+import {getMessage} from '../dom/i18n.js';
 
 export class DisplaySottaku {
     /**
@@ -78,11 +79,11 @@ export class DisplaySottaku {
             this._removeOldButtons(container);
 
             if (hasDefinition) {
-                const addButton = this._createButton('Save to Sottaku', metadata.inFlashcards);
+                const addButton = this._createButton(getMessage('sottaku_save_button') || 'Save to Sottaku', metadata.inFlashcards);
                 this._eventListeners.addEventListener(addButton, 'click', this._wrapAsync(() => this._addFlashcard(entry, addButton)));
                 container.appendChild(addButton);
             } else {
-                const requestButton = this._createButton('Request dictionary entry', false);
+                const requestButton = this._createButton(getMessage('sottaku_request_button') || 'Request dictionary entry', false);
                 requestButton.classList.add('sottaku-request-only');
                 this._eventListeners.addEventListener(requestButton, 'click', this._wrapAsync(() => this._requestWord(entry, requestButton)));
                 // Move to the end so it aligns right when alone
@@ -104,7 +105,7 @@ export class DisplaySottaku {
         button.classList.add('action-button', 'sottaku-action');
         button.disabled = disabled;
         if (disabled) {
-            button.title = 'Already saved to Sottaku';
+            button.title = getMessage('sottaku_save_button_title_already_saved') || 'Already saved to Sottaku';
         }
         return button;
     }
@@ -133,24 +134,24 @@ export class DisplaySottaku {
      */
     async _addFlashcard(entry, button) {
         if (!this._options || !this._enabled) {
-            button.title = 'Sign in to Sottaku first';
+            button.title = getMessage('sottaku_action_title_sign_in') || 'Sign in to Sottaku first';
             return;
         }
         const metadata = this._getMetadata(entry);
         if (!metadata?.questionId) {
-            button.title = 'Missing Sottaku question id';
+            button.title = getMessage('sottaku_action_title_missing_id') || 'Missing Sottaku question id';
             return;
         }
         button.disabled = true;
-        button.textContent = 'Saving...';
+        button.textContent = getMessage('sottaku_save_button_saving') || 'Saving...';
         try {
             await this._client.addFlashcard(metadata.questionId, metadata.language || this._options.general.language);
             metadata.inFlashcards = true;
-            button.textContent = 'Saved';
-            button.title = 'Added to your Sottaku flashcards';
+            button.textContent = getMessage('sottaku_save_button_saved') || 'Saved';
+            button.title = getMessage('sottaku_save_button_title_saved') || 'Added to your Sottaku flashcards';
         } catch (e) {
             button.disabled = false;
-            button.textContent = 'Save to Sottaku';
+            button.textContent = getMessage('sottaku_save_button') || 'Save to Sottaku';
             button.title = toError(e).message;
         }
     }
@@ -161,23 +162,23 @@ export class DisplaySottaku {
      */
     async _requestWord(entry, button) {
         if (!this._options || !this._enabled) {
-            button.title = 'Sign in to Sottaku first';
+            button.title = getMessage('sottaku_action_title_sign_in') || 'Sign in to Sottaku first';
             return;
         }
         const metadata = this._getMetadata(entry);
         if (!metadata?.questionId) {
-            button.title = 'Missing Sottaku question id';
+            button.title = getMessage('sottaku_action_title_missing_id') || 'Missing Sottaku question id';
             return;
         }
         button.disabled = true;
-        button.textContent = 'Requesting...';
+        button.textContent = getMessage('sottaku_request_button_requesting') || 'Requesting...';
         try {
             await this._client.submitWordRequest(metadata.questionId, metadata.language || this._options.general.language);
-            button.textContent = 'Requested';
-            button.title = 'Request submitted to Sottaku';
+            button.textContent = getMessage('sottaku_request_button_requested') || 'Requested';
+            button.title = getMessage('sottaku_request_button_title_submitted') || 'Request submitted to Sottaku';
         } catch (e) {
             button.disabled = false;
-            button.textContent = 'Request translation';
+            button.textContent = getMessage('sottaku_request_button_retry') || 'Request translation';
             button.title = toError(e).message;
         }
     }

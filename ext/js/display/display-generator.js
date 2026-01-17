@@ -20,6 +20,7 @@ import {ExtensionError} from '../core/extension-error.js';
 import {safePerformance} from '../core/safe-performance.js';
 import {getDisambiguations, getGroupedPronunciations, getTermFrequency, groupKanjiFrequencies, groupTermFrequencies, groupTermTags, isNonNounVerbOrAdjective} from '../dictionary/dictionary-data-util.js';
 import {HtmlTemplateCollection} from '../dom/html-template-collection.js';
+import {getMessage} from '../dom/i18n.js';
 import {distributeFurigana, getKanaMorae, getPitchCategory, isCodePointKanji} from '../language/ja/japanese.js';
 import {getLanguageFromText} from '../language/text-utilities.js';
 import {PronunciationGenerator} from './pronunciation-generator.js';
@@ -700,18 +701,18 @@ export class DisplayGenerator {
                     const dictionaryContentArray = [];
                     dictionaryContentArray.push(currentDictionaryInfo.title);
                     if (currentDictionaryInfo.author) {
-                        dictionaryContentArray.push('Author: ' + currentDictionaryInfo.author);
+                        dictionaryContentArray.push(getMessage('display_dictionary_author', [currentDictionaryInfo.author]));
                     }
                     if (currentDictionaryInfo.description) {
-                        dictionaryContentArray.push('Description: ' + currentDictionaryInfo.description);
+                        dictionaryContentArray.push(getMessage('display_dictionary_description', [currentDictionaryInfo.description]));
                     }
                     if (currentDictionaryInfo.url) {
-                        dictionaryContentArray.push('URL: ' + currentDictionaryInfo.url);
+                        dictionaryContentArray.push(getMessage('display_dictionary_url', [currentDictionaryInfo.url]));
                     }
 
                     const totalTerms = currentDictionaryInfo?.counts?.terms?.total;
                     if (!!totalTerms && totalTerms > 0) {
-                        dictionaryContentArray.push('Term Count: ' + totalTerms.toString());
+                        dictionaryContentArray.push(getMessage('display_dictionary_term_count', [totalTerms.toString()]));
                     }
 
                     dictionaryTag.content = dictionaryContentArray;
@@ -772,18 +773,18 @@ export class DisplayGenerator {
             const dictionaryContentArray = [];
             dictionaryContentArray.push(currentDictionaryInfo.title);
             if (currentDictionaryInfo.author) {
-                dictionaryContentArray.push('Author: ' + currentDictionaryInfo.author);
+                dictionaryContentArray.push(getMessage('display_dictionary_author', [currentDictionaryInfo.author]));
             }
             if (currentDictionaryInfo.description) {
-                dictionaryContentArray.push('Description: ' + currentDictionaryInfo.description);
+                dictionaryContentArray.push(getMessage('display_dictionary_description', [currentDictionaryInfo.description]));
             }
             if (currentDictionaryInfo.url) {
-                dictionaryContentArray.push('URL: ' + currentDictionaryInfo.url);
+                dictionaryContentArray.push(getMessage('display_dictionary_url', [currentDictionaryInfo.url]));
             }
 
             const totalKanji = currentDictionaryInfo?.counts?.kanji?.total;
             if (!!totalKanji && totalKanji > 0) {
-                dictionaryContentArray.push('Kanji Count: ' + totalKanji.toString());
+                dictionaryContentArray.push(getMessage('display_dictionary_kanji_count', [totalKanji.toString()]));
             }
 
             dictionaryTag.content = dictionaryContentArray;
@@ -869,7 +870,10 @@ export class DisplayGenerator {
         const content = this._instantiate('footer-notification-anki-errors-content');
 
         const header = this._querySelector(content, '.anki-note-error-header');
-        this._setTextContent(header, (errors.length === 1 ? 'An error occurred:' : `${errors.length} errors occurred:`), 'en');
+        const errorHeader = (errors.length === 1)
+            ? getMessage('display_anki_error_singular')
+            : getMessage('display_anki_error_plural', [String(errors.length)]);
+        this._setTextContent(header, errorHeader, 'en');
 
         const list = this._querySelector(content, '.anki-note-error-list');
         for (const error of errors) {
@@ -890,7 +894,7 @@ export class DisplayGenerator {
                         link.href = referenceUrl;
                         link.target = '_blank';
                         link.rel = 'noreferrer noopener';
-                        link.textContent = 'More info';
+                        link.textContent = getMessage('display_more_info');
                     }
                 }
                 this._setTextContent(div, message);
@@ -1028,13 +1032,13 @@ export class DisplayGenerator {
         icon.dataset.inflectionSource = source;
         switch (source) {
             case 'dictionary':
-                icon.title = 'Dictionary Deinflection';
+                icon.title = getMessage('display_inflection_dictionary');
                 return icon;
             case 'algorithm':
-                icon.title = 'Algorithm Deinflection';
+                icon.title = getMessage('display_inflection_algorithm');
                 return icon;
             case 'both':
-                icon.title = 'Dictionary and Algorithm Deinflection';
+                icon.title = getMessage('display_inflection_both');
                 return icon;
         }
     }
@@ -1468,7 +1472,10 @@ export class DisplayGenerator {
         body.dataset.count = `${ii}`;
         node.dataset.count = `${ii}`;
         node.dataset.details = dictionary;
-        tag.dataset.details = dictionary + '\nDictionary size: ' + freqCount?.toString() + (kanji ? ' kanji' : ' terms');
+        const sizeLabel = kanji
+            ? getMessage('display_dictionary_size_kanji', [String(freqCount ?? '')])
+            : getMessage('display_dictionary_size_terms', [String(freqCount ?? '')]);
+        tag.dataset.details = `${dictionary}\n${sizeLabel}`;
         return node;
     }
 
@@ -1501,7 +1508,7 @@ export class DisplayGenerator {
         node.dataset.readingIsSame = `${reading === term}`;
         node.dataset.dictionary = dictionary;
         node.dataset.details = dictionary;
-        tag.dataset.details = dictionary + '\nDictionary size: ' + freqCount + ' terms';
+        tag.dataset.details = `${dictionary}\n${getMessage('display_dictionary_size_terms', [String(freqCount)])}`;
         return node;
     }
 
@@ -1525,7 +1532,7 @@ export class DisplayGenerator {
         node.dataset.character = character;
         node.dataset.dictionary = dictionary;
         node.dataset.details = dictionary;
-        tag.dataset.details = dictionary + '\nDictionary size: ' + freqCount + ' kanji';
+        tag.dataset.details = `${dictionary}\n${getMessage('display_dictionary_size_kanji', [String(freqCount)])}`;
 
         return node;
     }

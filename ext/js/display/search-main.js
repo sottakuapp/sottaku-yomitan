@@ -18,6 +18,7 @@
 
 import {Application} from '../application.js';
 import {DocumentFocusController} from '../dom/document-focus-controller.js';
+import {localizeElement} from '../dom/i18n.js';
 import {LocaleDirectionController} from '../dom/locale-direction-controller.js';
 import {HotkeyHandler} from '../input/hotkey-handler.js';
 import {ModalController} from '../pages/settings/modal-controller.js';
@@ -30,6 +31,8 @@ import {Display} from './display.js';
 import {SearchActionPopupController} from './search-action-popup-controller.js';
 import {SearchDisplayController} from './search-display-controller.js';
 import {SearchPersistentStateController} from './search-persistent-state-controller.js';
+
+localizeElement(document);
 
 await Application.main(true, async (application) => {
     const documentFocusController = new DocumentFocusController('#search-textbox');

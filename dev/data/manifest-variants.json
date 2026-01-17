@@ -1,10 +1,11 @@
 {
     "manifest": {
         "manifest_version": 3,
-        "name": "Sottaku-Yomitan",
-        "short_name": "Sottaku-Yomitan",
+        "name": "__MSG_extension_name__",
+        "short_name": "__MSG_extension_short_name__",
         "version": "$YOMITAN_VERSION",
-        "description": "Sottaku-connected popup dictionary for language learning.",
+        "description": "__MSG_extension_description__",
+        "default_locale": "en",
         "author": "Sottaku Inc",
         "icons": {
             "16": "images/icon16.png",
@@ -25,7 +26,7 @@
                 "64": "images/icon64.png",
                 "128": "images/icon128.png"
             },
-            "default_title": "Sottaku-Yomitan",
+            "default_title": "__MSG_action_default_title__",
             "default_popup": "action-popup.html"
         },
         "background": {
@@ -94,22 +95,22 @@
                 "suggested_key": {
                     "default": "Alt+Delete"
                 },
-                "description": "Toggle text scanning on/off"
+                "description": "__MSG_command_toggle_text_scanning__"
             },
             "openInfoPage": {
-                "description": "Open the info page"
+                "description": "__MSG_command_open_info_page__"
             },
             "openSettingsPage": {
-                "description": "Open the settings page"
+                "description": "__MSG_command_open_settings_page__"
             },
             "openSearchPage": {
                 "suggested_key": {
                     "default": "Alt+Insert"
                 },
-                "description": "Open the search page"
+                "description": "__MSG_command_open_search_page__"
             },
             "openPopupWindow": {
-                "description": "Open the popup window"
+                "description": "__MSG_command_open_popup_window__"
             }
         },
         "web_accessible_resources": [
@@ -150,22 +151,18 @@
             "fileName": "sottaku-yomitan-chrome-dev.zip",
             "modifications": [
                 {
-                    "action": "replace",
+                    "action": "set",
                     "path": [
                         "name"
                     ],
-                    "pattern": "^.*$",
-                    "patternFlags": "",
-                    "replacement": "$& (development build)"
+                    "value": "__MSG_extension_name_dev__"
                 },
                 {
-                    "action": "replace",
+                    "action": "set",
                     "path": [
                         "description"
                     ],
-                    "pattern": "^(.*)(?:\\.\\s*)?$",
-                    "patternFlags": "",
-                    "replacement": "$1. This is a development build."
+                    "value": "__MSG_extension_description_dev__"
                 }
             ]
         },
@@ -298,22 +295,18 @@
             "fileName": "sottaku-yomitan-firefox-dev.zip",
             "modifications": [
                 {
-                    "action": "replace",
+                    "action": "set",
                     "path": [
                         "name"
                     ],
-                    "pattern": "^.*$",
-                    "patternFlags": "",
-                    "replacement": "$& (development build)"
+                    "value": "__MSG_extension_name_dev__"
                 },
                 {
-                    "action": "replace",
+                    "action": "set",
                     "path": [
                         "description"
                     ],
-                    "pattern": "^(.*)(?:\\.\\s*)?$",
-                    "patternFlags": "",
-                    "replacement": "$1. This is a development build."
+                    "value": "__MSG_extension_description_dev__"
                 },
                 {
                     "action": "set",

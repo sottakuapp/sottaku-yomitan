@@ -17,6 +17,7 @@
  */
 
 import {fetchText} from '../core/fetch-utilities.js';
+import {localizeElement} from './i18n.js';
 
 export class HtmlTemplateCollection {
     constructor() {
@@ -41,6 +42,7 @@ export class HtmlTemplateCollection {
      */
     load(source) {
         const pattern = /^([\w\W]+)-template$/;
+        localizeElement(source);
         for (const template of source.querySelectorAll('template')) {
             const match = pattern.exec(template.id);
             if (match === null) { continue; }

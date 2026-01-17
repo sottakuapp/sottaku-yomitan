@@ -18,6 +18,7 @@
 import {isObjectNotArray} from '../../core/object-utilities.js';
 import {toError} from '../../core/to-error.js';
 import {SottakuClient} from '../../comm/sottaku-client.js';
+import {getMessage} from '../../dom/i18n.js';
 import {querySelectorNotNull} from '../../dom/query-selector.js';
 import {getSottakuLanguageFlag, getSottakuLanguageName, normalizeSottakuLanguages, SOTTAKU_SUPPORTED_LANGUAGES} from '../../language/sottaku-languages.js';
 
@@ -173,7 +174,7 @@ export class SottakuController {
             this._client.setConfig({authToken: ''});
             this._updateStatus({authToken: '', user: null, enabled: false});
             await this._settingsController.refresh();
-            this._setStatus('Signed out of Sottaku', false);
+            this._setStatus(getMessage('settings_sottaku_status_signed_out') || 'Signed out of Sottaku', false);
         } catch (error) {
             this._setStatus(toError(error).message, true);
         } finally {
@@ -212,7 +213,7 @@ export class SottakuController {
         const user = override && 'user' in override ? override.user : sottaku.user;
         const enabled = override && 'enabled' in override ? override.enabled : sottaku.enabled;
         const isLinked = Boolean(enabled && authToken);
-        let message = 'Not connected';
+        let message = getMessage('settings_sottaku_status_not_connected') || 'Not connected';
         if (isLinked) {
             message = this._getSignedInStatusText(user);
         }
@@ -299,7 +300,10 @@ export class SottakuController {
      */
     _getSignedInStatusText(user) {
         const name = this._getUserDisplayName(user);
-        return name ? `Signed in as ${name}` : 'Signed in';
+        if (name) {
+            return getMessage('settings_sottaku_status_signed_in_as', [name]) || `Signed in as ${name}`;
+        }
+        return getMessage('settings_sottaku_status_signed_in') || 'Signed in';
     }
 
     /**
@@ -557,7 +561,7 @@ export class SottakuController {
                     } catch (error) {
                         // NOP
                     }
-                    this._setStatus('Sign in required. Complete login in the opened tab, then click "Use browser session".', true);
+                    this._setStatus(getMessage('settings_sottaku_status_sign_in_required') || 'Sign in required. Complete login in the opened tab, then click "Use browser session".', true);
                 }
                 return;
             }

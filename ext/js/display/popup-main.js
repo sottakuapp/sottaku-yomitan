@@ -18,6 +18,7 @@
 
 import {Application} from '../application.js';
 import {DocumentFocusController} from '../dom/document-focus-controller.js';
+import {localizeElement} from '../dom/i18n.js';
 import {HotkeyHandler} from '../input/hotkey-handler.js';
 import {DisplayAnki} from './display-anki.js';
 import {DisplayAudio} from './display-audio.js';
@@ -25,6 +26,8 @@ import {DisplayProfileSelection} from './display-profile-selection.js';
 import {DisplayResizer} from './display-resizer.js';
 import {DisplaySottaku} from './display-sottaku.js';
 import {Display} from './display.js';
+
+localizeElement(document);
 
 await Application.main(true, async (application) => {
     const documentFocusController = new DocumentFocusController();

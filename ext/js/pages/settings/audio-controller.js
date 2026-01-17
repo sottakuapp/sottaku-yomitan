@@ -18,6 +18,7 @@
 
 import {EventDispatcher} from '../../core/event-dispatcher.js';
 import {EventListenerCollection} from '../../core/event-listener-collection.js';
+import {getMessage} from '../../dom/i18n.js';
 import {querySelectorNotNull} from '../../dom/query-selector.js';
 import {AudioSystem} from '../../media/audio-system.js';
 
@@ -407,7 +408,7 @@ class AudioSourceEntry {
 
         let option = document.createElement('option');
         option.value = '';
-        option.textContent = 'None';
+        option.textContent = getMessage('common_none');
         fragment.appendChild(option);
 
         for (const {voice} of voices) {

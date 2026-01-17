@@ -1,9 +1,9 @@
-<!DOCTYPE html><html><head><title>Templates</title></head><body>
+<!DOCTYPE html><html><head><title data-i18n="templates_modals_title">Templates</title></head><body>
 
 <template id="shared-modals-template">
     <div id="dictionaries-modal" class="modal" tabindex="-1" role="dialog" hidden><div class="modal-content">
     <div class="modal-header">
-            <div class="modal-title">Dictionaries</div>
+            <div class="modal-title" data-i18n="modal_dictionaries_title">Dictionaries</div>
             <div class="modal-header-button-container">
                 <div class="modal-header-button-group">
                     <button type="button" class="icon-button modal-header-button" data-modal-action="expand"><span class="icon-button-inner"><span class="icon" data-icon="expand"></span></span></button>
@@ -15,7 +15,7 @@
             <div class="settings-item">
                 <div class="settings-item-inner">
                     <div class="settings-item-left">
-                        <div class="settings-item-label">
+                        <div class="settings-item-label" data-i18n-html="modal_dictionaries_prefix_wildcard_label">
                             Enable support for prefix wildcard searches
                             <a tabindex="0" class="more-toggle more-only" data-parent-distance="4">(?)</a>
                         </div>
@@ -25,22 +25,22 @@
                     </div>
                 </div>
                 <div class="settings-item-children more" hidden>
-                    <p>
+                    <p data-i18n="modal_dictionaries_prefix_wildcard_more_1">
                         In order for dictionaries to support searches using prefix wildcards on the search page,
                         some additional data must be stored in the database.
                         Enabling this option will include this extra data for any new dictionaries that are imported.
                     </p>
-                    <p class="warning-text">
+                    <p class="warning-text" data-i18n="modal_dictionaries_prefix_wildcard_warning">
                         This option will not change any dictionaries that are already imported;
                         they must be re-imported for the option to take effect.
                     </p>
                     <p>
-                        <a tabindex="0" class="more-toggle" data-parent-distance="3">Hide&hellip;</a>
+                        <a tabindex="0" class="more-toggle" data-parent-distance="3" data-i18n="common_hide">Hide&hellip;</a>
                     </p>
                 </div>
             </div>
 
-            <div class="warning-text margin-above no-dictionaries-installed-warning" hidden>
+            <div class="warning-text margin-above no-dictionaries-installed-warning" hidden data-i18n-html="modal_dictionaries_none_installed">
                 No dictionaries have been installed yet.
                 Visit the <a href="https://github.com/sottakuapp/sottaku-yomitan/blob/master/docs/dictionaries.md#dictionaries" target="_blank" rel="noopener noreferrer">Sottaku-Yomitan homepage</a>
                 for a list of free dictionaries or click the <em>Import</em> button below to select a dictionary file to import.
@@ -49,7 +49,7 @@
             <div id="dictionary-list" class="dictionary-list generic-list" data-count="0">
                 <div class="dictionary-item-top"></div>
                 <label class="dictionary-item-top toggle dictionary-item-enabled-toggle-container"><input type="checkbox" id="all-dictionaries-enabled"><span class="toggle-body"><span class="toggle-track"></span><span class="toggle-knob"></span></span></label>
-                <div class="dictionary-item-top dictionary-item-title-container">All</div>
+                <div class="dictionary-item-top dictionary-item-title-container" data-i18n="common_all">All</div>
                 <div class="dictionary-item-top dictionary-item-button-height"></div>
                 <div class="dictionary-item-top dictionary-item-button-height"></div>
                 <div class="dictionary-item-top dictionary-item-button-height"></div>
@@ -66,89 +66,89 @@
             <div class="progress-bar-track"><div class="progress-bar"></div></div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="low-emphasis danger dictionary-database-mutating-input" id="dictionary-delete-all-button">Delete All</button>
-            <button type="button" class="low-emphasis dictionary-database-mutating-input advanced-only" id="dictionary-check-integrity">Check Integrity</button>
-            <button type="button" class="low-emphasis dictionary-database-mutating-input" id="dictionary-check-updates">Check for Updates</button>
-            <button type="button" class="low-emphasis dictionary-database-mutating-input" id="dictionary-import-button">Import</button>
-            <button type="button" data-modal-action="hide">Close</button>
+            <button type="button" class="low-emphasis danger dictionary-database-mutating-input" id="dictionary-delete-all-button" data-i18n="modal_dictionaries_delete_all">Delete All</button>
+            <button type="button" class="low-emphasis dictionary-database-mutating-input advanced-only" id="dictionary-check-integrity" data-i18n="modal_dictionaries_check_integrity">Check Integrity</button>
+            <button type="button" class="low-emphasis dictionary-database-mutating-input" id="dictionary-check-updates" data-i18n="modal_dictionaries_check_updates">Check for Updates</button>
+            <button type="button" class="low-emphasis dictionary-database-mutating-input" id="dictionary-import-button" data-i18n="common_import">Import</button>
+            <button type="button" data-modal-action="hide" data-i18n="common_close">Close</button>
         </div>
     </div></div>
 
     <div id="dictionary-import-modal" class="modal" tabindex="-1" role="dialog" hidden><div class="modal-content modal-content-medium">
-        <div class="modal-header"><div class="modal-title">Import Dictionaries</div></div>
+        <div class="modal-header"><div class="modal-title" data-i18n="modal_dictionary_import_title">Import Dictionaries</div></div>
         <div class="modal-body">
             <div id="dictionary-drop-file-zone">
                 <div id="dictionary-drag-drop-text">
                     <span class="icon" data-icon="book"></span>
-                    <h1>Drag and drop dictionaries (.zip)</h1>
-                    <h5>or click here to upload</h5>
+                    <h1 data-i18n="modal_dictionary_import_drop">Drag and drop dictionaries (.zip)</h1>
+                    <h5 data-i18n="modal_dictionary_import_click">or click here to upload</h5>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" data-modal-action="hide" class="basic-only">Close</button>
+            <button type="button" data-modal-action="hide" class="basic-only" data-i18n="common_close">Close</button>
         </div>
         <div class="modal-body advanced-only">
-            <p>Import dictionaries from URLs:</p>
+            <p data-i18n="modal_dictionary_import_urls_label">Import dictionaries from URLs:</p>
             <textarea type="text" id="dictionary-import-url-text"></textarea>
         </div>
         <div class="modal-footer advanced-only">
-            <button type="button" data-modal-action="hide" class="low-emphasis dictionary-database-mutating-input" id="dictionary-import-url-button">Import from URLs</button>
-            <button type="button" data-modal-action="hide">Close</button>
+            <button type="button" data-modal-action="hide" class="low-emphasis dictionary-database-mutating-input" id="dictionary-import-url-button" data-i18n="modal_dictionary_import_urls_button">Import from URLs</button>
+            <button type="button" data-modal-action="hide" data-i18n="common_close">Close</button>
         </div>
     </div></div>
 
     <div id="dictionary-confirm-delete-modal" class="modal" tabindex="-1" role="dialog" hidden><div class="modal-content modal-content-small">
-        <div class="modal-header"><div class="modal-title">Confirm Dictionary Deletion</div></div>
+        <div class="modal-header"><div class="modal-title" data-i18n="modal_dictionary_confirm_delete_title">Confirm Dictionary Deletion</div></div>
         <div class="modal-body">
-            <p>Are you sure you want to delete the dictionary:</p>
+            <p data-i18n="modal_dictionary_confirm_delete_prompt">Are you sure you want to delete the dictionary:</p>
             <p><strong id="dictionary-confirm-delete-name"></strong>?</p>
-            <p id="dictionary-confirm-delete-used-profiles-text">This dictionary is currently used by the following profiles:</p>
+            <p id="dictionary-confirm-delete-used-profiles-text" data-i18n="modal_dictionary_confirm_delete_profiles">This dictionary is currently used by the following profiles:</p>
             <ul id="dictionary-confirm-delete-used-profiles"></ul>
-            <p class="danger-text">This action cannot be undone.</p>
+            <p class="danger-text" data-i18n="common_action_cannot_undo">This action cannot be undone.</p>
         </div>
         <div class="modal-footer">
-            <button type="button" class="low-emphasis" data-modal-action="hide">Cancel</button>
-            <button type="button" class="danger" data-modal-action="hide" id="dictionary-confirm-delete-button">Delete</button>
+            <button type="button" class="low-emphasis" data-modal-action="hide" data-i18n="common_cancel">Cancel</button>
+            <button type="button" class="danger" data-modal-action="hide" id="dictionary-confirm-delete-button" data-i18n="common_delete">Delete</button>
         </div>
     </div></div>
 
     <div id="dictionary-confirm-delete-all-modal" class="modal" tabindex="-1" role="dialog" hidden><div class="modal-content modal-content-small">
-        <div class="modal-header"><div class="modal-title">Confirm Dictionary Deletion</div></div>
+        <div class="modal-header"><div class="modal-title" data-i18n="modal_dictionary_confirm_delete_all_title">Confirm Dictionary Deletion</div></div>
         <div class="modal-body">
-            <p>Are you sure you want to delete <strong>all dictionaries</strong>?</p>
-            <p class="danger-text">This action cannot be undone.</p>
+            <p data-i18n-html="modal_dictionary_confirm_delete_all_prompt">Are you sure you want to delete <strong>all dictionaries</strong>?</p>
+            <p class="danger-text" data-i18n="common_action_cannot_undo">This action cannot be undone.</p>
         </div>
         <div class="modal-footer">
-            <button type="button" class="low-emphasis" data-modal-action="hide">Cancel</button>
-            <button type="button" class="danger" data-modal-action="hide" id="dictionary-confirm-delete-all-button">Delete</button>
+            <button type="button" class="low-emphasis" data-modal-action="hide" data-i18n="common_cancel">Cancel</button>
+            <button type="button" class="danger" data-modal-action="hide" id="dictionary-confirm-delete-all-button" data-i18n="common_delete">Delete</button>
         </div>
     </div></div>
 
     <div id="dictionary-confirm-update-modal" class="modal" tabindex="-1" role="dialog" hidden><div class="modal-content modal-content-small">
-        <div class="modal-header"><div class="modal-title">Confirm Dictionary Update</div></div>
+        <div class="modal-header"><div class="modal-title" data-i18n="modal_dictionary_confirm_update_title">Confirm Dictionary Update</div></div>
         <div class="modal-body">
-            <p>Are you sure you want to update the dictionary:</p>
+            <p data-i18n="modal_dictionary_confirm_update_prompt">Are you sure you want to update the dictionary:</p>
             <p><strong id="dictionary-confirm-update-name"></strong>?</p>
             <section>
-                Updating a dictionary involves:
+                <div data-i18n="modal_dictionary_confirm_update_steps_label">Updating a dictionary involves:</div>
                 <ul>
-                    <li>Deleting the installed version</li>
-                    <li>Downloading the latest version </li>
-                    <li>Importing the latest version</li>
+                    <li data-i18n="modal_dictionary_confirm_update_step_delete">Deleting the installed version</li>
+                    <li data-i18n="modal_dictionary_confirm_update_step_download">Downloading the latest version </li>
+                    <li data-i18n="modal_dictionary_confirm_update_step_import">Importing the latest version</li>
                 </ul>
-                <p class="warning-text">Especially for large dictionaries, this process can take a while, and downloading will use your network.</p>
+                <p class="warning-text" data-i18n="modal_dictionary_confirm_update_warning">Especially for large dictionaries, this process can take a while, and downloading will use your network.</p>
             </section>
         </div>
         <div class="modal-footer">
-            <button type="button" class="low-emphasis" data-modal-action="hide">Cancel</button>
-            <button type="button" class="danger" data-modal-action="hide" id="dictionary-confirm-update-button">Update</button>
+            <button type="button" class="low-emphasis" data-modal-action="hide" data-i18n="common_cancel">Cancel</button>
+            <button type="button" class="danger" data-modal-action="hide" id="dictionary-confirm-update-button" data-i18n="common_update">Update</button>
         </div>
     </div></div>
 
     <div id="secondary-search-dictionaries-modal" class="modal" tabindex="-1" role="dialog" hidden><div class="modal-content">
         <div class="modal-header">
-            <div class="modal-title">Secondary Search Dictionaries</div>
+            <div class="modal-title" data-i18n="modal_secondary_search_title">Secondary Search Dictionaries</div>
             <div class="modal-header-button-container">
                 <div class="modal-header-button-group">
                     <button type="button" class="icon-button modal-header-button" data-modal-action="expand"><span class="icon-button-inner"><span class="icon" data-icon="expand"></span></span></button>
@@ -157,14 +157,14 @@
             </div>
         </div>
         <div class="modal-body">
-            <p>
+            <p data-i18n-html="modal_secondary_search_description">
                 These dictionaries will be used to search for definitions of the related terms when the grouping mode is
                 <em>Group related terms</em>.
             </p>
             <div id="secondary-search-dictionary-list" class="secondary-search-dictionary-list"></div>
         </div>
         <div class="modal-footer">
-            <button type="button" data-modal-action="hide">Close</button>
+            <button type="button" data-modal-action="hide" data-i18n="common_close">Close</button>
         </div>
     </div></div>
 
@@ -173,14 +173,14 @@
             <div class="modal-title"><strong class="dictionary-title"></strong> <span class="light dictionary-revision"></span></div>
         </div>
         <div class="modal-body">
-            <div class="settings-item dictionary-outdated-notification" hidden><div class="settings-item-children danger-text">
+            <div class="settings-item dictionary-outdated-notification" hidden><div class="settings-item-children danger-text" data-i18n="modal_dictionary_details_outdated">
                 This dictionary is outdated and may not support new extension features.
                 Re-import the dictionary to enable support for the latest features.
             </div></div>
             <div class="settings-item">
                 <div class="settings-item-inner">
                     <div class="settings-item-left">
-                        <div class="settings-item-label">
+                        <div class="settings-item-label" data-i18n-html="modal_dictionary_details_prefix_label">
                             Prefix wildcard searches supported
                             <a tabindex="0" class="more-toggle more-only" data-parent-distance="4">(?)</a>
                         </div>
@@ -190,16 +190,16 @@
                     </div>
                 </div>
                 <div class="settings-item-children more" hidden>
-                    <p class="warning-text">
+                    <p class="warning-text" data-i18n="modal_dictionary_details_prefix_warning">
                         Changing this value requires the dictionary to be re-imported.
                     </p>
-                    <p><a tabindex="0" class="more-toggle" data-parent-distance="3">Hide&hellip;</a></p>
+                    <p><a tabindex="0" class="more-toggle" data-parent-distance="3" data-i18n="common_hide">Hide&hellip;</a></p>
                 </div>
             </div>
             <div class="settings-item dictionary-parts-of-speech-filter-setting" hidden>
                 <div class="settings-item-inner">
                     <div class="settings-item-left">
-                        <div class="settings-item-label">
+                        <div class="settings-item-label" data-i18n-html="modal_dictionary_details_pos_label">
                             Part of speech filtering
                             <a tabindex="0" class="more-toggle more-only" data-parent-distance="4">(?)</a>
                         </div>
@@ -209,14 +209,14 @@
                     </div>
                 </div>
                 <div class="settings-item-children more" hidden>
-                    When deinflecting words, only dictionary entries whose POS matches that expected by the deinflector will be shown.
-                    <p><a tabindex="0" class="more-toggle" data-parent-distance="3">Hide&hellip;</a></p>
+                    <div data-i18n="modal_dictionary_details_pos_description">When deinflecting words, only dictionary entries whose POS matches that expected by the deinflector will be shown.</div>
+                    <p><a tabindex="0" class="more-toggle" data-parent-distance="3" data-i18n="common_hide">Hide&hellip;</a></p>
                 </div>
             </div>
             <div class="settings-item dictionary-use-deinflections-setting" hidden>
                 <div class="settings-item-inner">
                     <div class="settings-item-left">
-                        <div class="settings-item-label">
+                        <div class="settings-item-label" data-i18n-html="modal_dictionary_details_deinflections_label">
                             Use deinflections
                             <a tabindex="0" class="more-toggle more-only" data-parent-distance="4">(?)</a>
                         </div>
@@ -226,8 +226,8 @@
                     </div>
                 </div>
                 <div class="settings-item-children more" hidden>
-                    Deinflections from this dictionary will be used.
-                    <p><a tabindex="0" class="more-toggle" data-parent-distance="3">Hide&hellip;</a></p>
+                    <div data-i18n="modal_dictionary_details_deinflections_description">Deinflections from this dictionary will be used.</div>
+                    <p><a tabindex="0" class="more-toggle" data-parent-distance="3" data-i18n="common_hide">Hide&hellip;</a></p>
                 </div>
             </div>
             <hr>
@@ -236,18 +236,18 @@
             </div></div>
         </div>
         <div class="modal-footer">
-            <button type="button" data-modal-action="hide">Close</button>
+            <button type="button" data-modal-action="hide" data-i18n="common_close">Close</button>
         </div>
     </div></div>
 
     <div id="dictionary-extra-data-modal" class="modal" tabindex="-1" role="dialog" hidden><div class="modal-content">
         <div class="modal-header">
             <div class="modal-title">
-                <strong class="dictionary-title">Unassociated Data</strong> <span class="light dictionary-total-count"></span>
+                <strong class="dictionary-title" data-i18n="template_dictionary_unassociated_data">Unassociated Data</strong> <span class="light dictionary-total-count"></span>
             </div>
         </div>
         <div class="modal-body">
-            <p class="warning-text">
+            <p class="warning-text" data-i18n="modal_dictionary_extra_data_warning">
                 The database contains extra data which is not associated with any installed dictionary.
                 Purging the database can fix this issue.
             </p>
@@ -256,42 +256,42 @@
             </div></div>
         </div>
         <div class="modal-footer">
-            <button type="button" data-modal-action="hide">Close</button>
+            <button type="button" data-modal-action="hide" data-i18n="common_close">Close</button>
         </div>
     </div></div>
 
     <div id="dictionary-move-location-modal" class="modal" tabindex="-1" role="dialog" hidden><div class="modal-content modal-content-small">
-        <div class="modal-header"><div class="modal-title">Move Dictionary Options</div></div>
+        <div class="modal-header"><div class="modal-title" data-i18n="modal_dictionary_move_title">Move Dictionary Options</div></div>
         <div class="modal-body">
-            <p>Input the location the dictionary <strong class="dictionary-title"></strong> should be moved to:</p>
+            <p data-i18n-html="modal_dictionary_move_prompt">Input the location the dictionary <strong class="dictionary-title"></strong> should be moved to:</p>
             <div class="margin-above">
                 <input type="number" id="dictionary-move-location" min="1" step="1">
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="low-emphasis" data-modal-action="hide">Cancel</button>
-            <button type="button" data-modal-action="hide" id="dictionary-move-button">Move</button>
+            <button type="button" class="low-emphasis" data-modal-action="hide" data-i18n="common_cancel">Cancel</button>
+            <button type="button" data-modal-action="hide" id="dictionary-move-button" data-i18n="common_move">Move</button>
         </div>
     </div></div>
 
     <div id="dictionary-set-alias-modal" class="modal" tabindex="-1" role="dialog" hidden><div class="modal-content modal-content-small">
-        <div class="modal-header"><div class="modal-title">Rename</div></div>
+        <div class="modal-header"><div class="modal-title" data-i18n="common_rename">Rename</div></div>
         <div class="modal-body">
-            <p>Input the display name for <strong class="dictionary-title"></strong> dictionary:</p>
+            <p data-i18n-html="modal_dictionary_rename_prompt">Input the display name for <strong class="dictionary-title"></strong> dictionary:</p>
             <div class="margin-above">
                 <input type="text" id="dictionary-alias-input">
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="low-emphasis" id="dictionary-reset-alias-button">Reset</button>
-            <button type="button" class="low-emphasis" data-modal-action="hide">Cancel</button>
-            <button type="button" data-modal-action="hide" id="dictionary-set-alias-button">Save</button>
+            <button type="button" class="low-emphasis" id="dictionary-reset-alias-button" data-i18n="common_reset">Reset</button>
+            <button type="button" class="low-emphasis" data-modal-action="hide" data-i18n="common_cancel">Cancel</button>
+            <button type="button" data-modal-action="hide" id="dictionary-set-alias-button" data-i18n="common_save">Save</button>
         </div>
     </div></div>
 
     <div id="recommended-dictionaries-modal" class="modal" tabindex="-1" role="dialog" hidden><div class="modal-content">
         <div class="modal-header">
-            <div class="modal-title">Recommended Dictionaries</div>
+            <div class="modal-title" data-i18n="modal_recommended_dictionaries_title">Recommended Dictionaries</div>
             <div class="modal-header-button-container">
                 <div class="modal-header-button-group">
                     <button type="button" class="icon-button modal-header-button" data-modal-action="expand"><span class="icon-button-inner"><span class="icon" data-icon="expand"></span></span></button>
@@ -300,28 +300,28 @@
             </div>
         </div>
         <div class="modal-body">
-            <p>
+            <p data-i18n-html="modal_recommended_dictionaries_description">
                 For non-English dictionaries, please refer to the list of available
                 <a href="https://yomidevs.github.io/kaikki-to-yomitan/" target="_blank"> Kaikki dictionaries</a>.
             </p>
             <div id="recommended-term-dictionaries" hidden>
-                <h1 class="modal-title">Term Dictionaries</h1>
+                <h1 class="modal-title" data-i18n="modal_recommended_terms_title">Term Dictionaries</h1>
                 <div class="recommended-dictionary-list"></div>
             </div>
             <div id="recommended-kanji-dictionaries" hidden>
-                <h1 class="modal-title">Kanji Dictionaries</h1>
+                <h1 class="modal-title" data-i18n="modal_recommended_kanji_title">Kanji Dictionaries</h1>
                 <div class="recommended-dictionary-list"></div>
             </div>
             <div id="recommended-frequency-dictionaries" hidden>
-                <h1 class="modal-title">Frequency Dictionaries</h1>
+                <h1 class="modal-title" data-i18n="modal_recommended_frequency_title">Frequency Dictionaries</h1>
                 <div class="recommended-dictionary-list"></div>
             </div>
             <div id="recommended-grammar-dictionaries" hidden>
-                <h1 class="modal-title">Grammar Dictionaries</h1>
+                <h1 class="modal-title" data-i18n="modal_recommended_grammar_title">Grammar Dictionaries</h1>
                 <div class="recommended-dictionary-list"></div>
             </div>
             <div id="recommended-pronunciation-dictionaries" hidden>
-                <h1 class="modal-title">Pronunciation Dictionaries</h1>
+                <h1 class="modal-title" data-i18n="modal_recommended_pronunciation_title">Pronunciation Dictionaries</h1>
                 <div class="recommended-dictionary-list"></div>
             </div>
         </div>
@@ -334,22 +334,22 @@
             <div class="progress-bar-track"><div class="progress-bar"></div></div>
         </div>
         <div class="modal-footer">
-            <button type="button" data-modal-action="hide">Close</button>
+            <button type="button" data-modal-action="hide" data-i18n="common_close">Close</button>
         </div>
     </div></div>
 
     <!-- Recommended settings modal -->
     <div id="recommended-settings-modal" class="modal" tabindex="-1" role="dialog" hidden><div class="modal-content">
         <div class="modal-header">
-            <div class="modal-title">Recommended settings</div>
+            <div class="modal-title" data-i18n="modal_recommended_settings_title">Recommended settings</div>
         </div>
         <div class="modal-body">
-            <span>We recommend the following settings for your selected language</span>
+            <span data-i18n="modal_recommended_settings_subtitle">We recommend the following settings for your selected language</span>
             <div id="recommended-settings-body">
                 <div class="settings-item">
                     <div class="settings-item-inner">
                         <div class="settings-item-left">
-                            <div class="settings-item-label"><strong>Recommendations</strong></div>
+                            <div class="settings-item-label"><strong data-i18n="modal_recommended_settings_section">Recommendations</strong></div>
                         </div>
                     </div>
                 </div>
@@ -357,8 +357,8 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="low-emphasis" data-modal-action="hide">Cancel</button>
-            <button type="button" id="recommended-settings-apply-button">Apply</button>
+            <button type="button" class="low-emphasis" data-modal-action="hide" data-i18n="common_cancel">Cancel</button>
+            <button type="button" id="recommended-settings-apply-button" data-i18n="common_apply">Apply</button>
         </div>
     </div></div>
 </template>
@@ -366,7 +366,7 @@
 <template id="settings-modals-template">
     <div id="profiles-modal" class="modal" tabindex="-1" role="dialog" hidden><div class="modal-content">
         <div class="modal-header">
-            <div class="modal-title">Profiles</div>
+            <div class="modal-title" data-i18n="modal_profiles_title">Profiles</div>
             <div class="modal-header-button-container">
                 <div class="modal-header-button-group">
                     <button type="button" class="icon-button modal-header-button" data-modal-action="expand"><span class="icon-button-inner"><span class="icon" data-icon="expand"></span></span></button>
@@ -377,24 +377,24 @@
         <div class="modal-body">
             <div class="profile-entry-header">
                 <div class="profile-entry-cell"></div>
-                <div class="profile-entry-cell"><span class="profile-entry-header-text">Default</span></div>
-                <div class="profile-entry-cell"><span class="profile-entry-header-text">Name</span></div>
-                <div class="profile-entry-cell"><span class="profile-entry-header-text">Conditions</span></div>
+                <div class="profile-entry-cell"><span class="profile-entry-header-text" data-i18n="modal_profiles_header_default">Default</span></div>
+                <div class="profile-entry-cell"><span class="profile-entry-header-text" data-i18n="modal_profiles_header_name">Name</span></div>
+                <div class="profile-entry-cell"><span class="profile-entry-header-text" data-i18n="modal_profiles_header_conditions">Conditions</span></div>
                 <div class="profile-entry-cell"></div>
             </div>
             <div class="profile-entry-list generic-list" id="profile-entry-list"></div>
             <div class="profile-add-button-container">
-                <button type="button" class="low-emphasis" id="profile-add-button">Add</button>
+                <button type="button" class="low-emphasis" id="profile-add-button" data-i18n="common_add">Add</button>
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" data-modal-action="hide">Close</button>
+            <button type="button" data-modal-action="hide" data-i18n="common_close">Close</button>
         </div>
     </div></div>
 
     <div id="profile-conditions-modal" class="modal" tabindex="-1" role="dialog" hidden><div class="modal-content">
         <div class="modal-header">
-            <div class="modal-title">Profile Conditions</div>
+            <div class="modal-title" data-i18n="modal_profile_conditions_title">Profile Conditions</div>
             <div class="modal-header-button-container">
                 <div class="modal-header-button-group">
                     <button type="button" class="icon-button modal-header-button" data-modal-action="expand"><span class="icon-button-inner"><span class="icon" data-icon="expand"></span></span></button>
@@ -406,50 +406,50 @@
             <div class="settings-item">
                 <div class="settings-item-inner">
                     <div class="settings-item-left">
-                        <div class="settings-item-label">
+                        <div class="settings-item-label" data-i18n-html="modal_profile_conditions_label">
                             Conditions for profile <em id="profile-conditions-profile-name"></em>:
                         </div>
                     </div>
                     <div class="settings-item-right">
-                        <a tabindex="0" class="more-toggle more-only" data-parent-distance="3">Info&hellip;</a>
+                        <a tabindex="0" class="more-toggle more-only" data-parent-distance="3" data-i18n="common_info">Info&hellip;</a>
                     </div>
                 </div>
                 <div class="settings-item-children more" hidden>
-                    <p>
+                    <p data-i18n="modal_profile_conditions_info_1">
                         Profile usage conditions are used to automatically select certain profiles based on context.
                         For example, different profiles can be used depending on the nested level of the popup, or based on the website's URL.
                     </p>
-                    <p>
+                    <p data-i18n="modal_profile_conditions_info_2">
                         Conditions are organized into groups corresponding to the order in which they are checked.
                         If all of the conditions in any group of a profile are met, then that profile will be used for that context.
                     </p>
-                    <p>
+                    <p data-i18n="modal_profile_conditions_info_3">
                         If no conditions are specified, the profile will only be used if it is selected as the default profile.
                     </p>
-                    <p>
+                    <p data-i18n-html="modal_profile_conditions_info_4">
                         When using the Flags condition, <code>clipboard</code> is the only valid input.
                         This lets the search page apply another profile’s settings when text is copied, provided <code>Enable search page clipboard text monitoring</code> is enabled.
                     </p>
                     <p>
-                        <a tabindex="0" class="more-toggle" data-parent-distance="3">Hide&hellip;</a>
+                        <a tabindex="0" class="more-toggle" data-parent-distance="3" data-i18n="common_hide">Hide&hellip;</a>
                     </p>
                 </div>
             </div>
             <div class="profile-condition-groups" id="profile-condition-groups"></div>
             <div class="profile-condition-group-list-info">
-                <div class="profile-condition-groups-empty-info"><em>No conditions set up.</em></div>
+                <div class="profile-condition-groups-empty-info"><em data-i18n="modal_profile_conditions_empty">No conditions set up.</em></div>
                 <div class="profile-condition-group-list-info-space"></div>
-                <button type="button" class="low-emphasis" id="profile-add-condition-group">Add Group</button>
+                <button type="button" class="low-emphasis" id="profile-add-condition-group" data-i18n="modal_profile_conditions_add_group">Add Group</button>
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" data-modal-action="hide">Close</button>
+            <button type="button" data-modal-action="hide" data-i18n="common_close">Close</button>
         </div>
     </div></div>
 
     <div id="profile-copy-modal" class="modal" tabindex="-1" role="dialog" hidden><div class="modal-content modal-content-small">
         <div class="modal-header">
-            <div class="modal-title">Copy Profile</div>
+            <div class="modal-title" data-i18n="modal_profile_copy_title">Copy Profile</div>
             <div class="modal-header-button-container">
                 <div class="modal-header-button-group">
                     <button type="button" class="icon-button modal-header-button" data-modal-action="expand"><span class="icon-button-inner"><span class="icon" data-icon="expand"></span></span></button>
@@ -458,44 +458,44 @@
             </div>
         </div>
         <div class="modal-body">
-            <p>Select which profile to copy options from:</p>
+            <p data-i18n="modal_profile_copy_prompt">Select which profile to copy options from:</p>
             <select class="form-control" id="profile-copy-source-select"></select>
         </div>
         <div class="modal-footer">
-            <button type="button" class="low-emphasis" data-modal-action="hide">Cancel</button>
-            <button type="button" id="profile-copy-confirm-button">Copy Profile</button>
+            <button type="button" class="low-emphasis" data-modal-action="hide" data-i18n="common_cancel">Cancel</button>
+            <button type="button" id="profile-copy-confirm-button" data-i18n="modal_profile_copy_confirm">Copy Profile</button>
         </div>
     </div></div>
 
     <div id="profile-reset-modal" class="modal" tabindex="-1" role="dialog" hidden><div class="modal-content modal-content-small">
-        <div class="modal-header"><div class="modal-title">Confirm Profile Reset</div></div>
+        <div class="modal-header"><div class="modal-title" data-i18n="modal_profile_reset_title">Confirm Profile Reset</div></div>
         <div class="modal-body">
             <p>
-                Are you sure you want to reset the profile <em id="profile-reset-name"></em> to default?
+                <span data-i18n-html="modal_profile_reset_prompt">Are you sure you want to reset the profile <em id="profile-reset-name"></em> to default?</span>
             </p>
         </div>
         <div class="modal-footer">
-            <button type="button" class="low-emphasis" data-modal-action="hide">Cancel</button>
-            <button type="button" class="danger" id="profile-reset-confirm-button">Reset Profile</button>
+            <button type="button" class="low-emphasis" data-modal-action="hide" data-i18n="common_cancel">Cancel</button>
+            <button type="button" class="danger" id="profile-reset-confirm-button" data-i18n="modal_profile_reset_confirm">Reset Profile</button>
         </div>
     </div></div>
 
     <div id="profile-remove-modal" class="modal" tabindex="-1" role="dialog" hidden><div class="modal-content modal-content-small">
-        <div class="modal-header"><div class="modal-title">Confirm Profile Deletion</div></div>
+        <div class="modal-header"><div class="modal-title" data-i18n="modal_profile_delete_title">Confirm Profile Deletion</div></div>
         <div class="modal-body">
             <p>
-                Are you sure you want to delete the profile <em id="profile-remove-name"></em>?
+                <span data-i18n-html="modal_profile_delete_prompt">Are you sure you want to delete the profile <em id="profile-remove-name"></em>?</span>
             </p>
         </div>
         <div class="modal-footer">
-            <button type="button" class="low-emphasis" data-modal-action="hide">Cancel</button>
-            <button type="button" class="danger" id="profile-remove-confirm-button">Remove Profile</button>
+            <button type="button" class="low-emphasis" data-modal-action="hide" data-i18n="common_cancel">Cancel</button>
+            <button type="button" class="danger" id="profile-remove-confirm-button" data-i18n="modal_profile_delete_confirm">Remove Profile</button>
         </div>
     </div></div>
 
     <div id="collapsible-dictionaries-modal" class="modal" tabindex="-1" role="dialog" hidden><div class="modal-content">
         <div class="modal-header">
-            <div class="modal-title">Collapsible Dictionaries</div>
+            <div class="modal-title" data-i18n="modal_collapsible_dictionaries_title">Collapsible Dictionaries</div>
             <div class="modal-header-button-container">
                 <div class="modal-header-button-group">
                     <button type="button" class="icon-button modal-header-button" data-modal-action="expand"><span class="icon-button-inner"><span class="icon" data-icon="expand"></span></span></button>
@@ -504,7 +504,7 @@
             </div>
         </div>
         <div class="modal-body-addon">
-            <p>
+            <p data-i18n-html="modal_collapsible_dictionaries_description">
                 Dictionary definitions can be collapsed if they exceed a certain line count,
                 which may be useful for dictionaries with long definitions.
                 The appearance can be customized using custom CSS.
@@ -515,7 +515,7 @@
             <div id="collapsible-dictionary-list" class="collapsible-dictionary-list"></div>
         </div>
         <div class="modal-footer">
-            <button type="button" data-modal-action="hide">Close</button>
+            <button type="button" data-modal-action="hide" data-i18n="common_close">Close</button>
         </div>
     </div></div>
 

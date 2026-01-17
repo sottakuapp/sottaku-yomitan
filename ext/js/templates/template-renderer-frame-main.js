@@ -16,15 +16,33 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import {Application} from '../application.js';
+import {localizeElement} from '../dom/i18n.js';
+import {LocaleDirectionController} from '../dom/locale-direction-controller.js';
+import {SettingsController} from '../pages/settings/settings-controller.js';
 import {AnkiTemplateRenderer} from './anki-template-renderer.js';
 import {TemplateRendererFrameApi} from './template-renderer-frame-api.js';
 
 /** Entry point. */
-async function main() {
+async function main(application) {
+    const settingsController = new SettingsController(application);
+    await settingsController.prepare();
+    const localeDirectionController = new LocaleDirectionController();
+    settingsController.on('optionsChanged', ({options}) => {
+        void localeDirectionController.applyFromOptions(options);
+    });
+    void settingsController.getOptions().then((options) => {
+        void localeDirectionController.applyFromOptions(options);
+    });
+
     const ankiTemplateRenderer = new AnkiTemplateRenderer(document, window);
     await ankiTemplateRenderer.prepare();
     const templateRendererFrameApi = new TemplateRendererFrameApi(ankiTemplateRenderer.templateRenderer);
     templateRendererFrameApi.prepare();
 }
 
-await main();
+localizeElement(document);
+
+await Application.main(true, async (application) => {
+    await main(application);
+});

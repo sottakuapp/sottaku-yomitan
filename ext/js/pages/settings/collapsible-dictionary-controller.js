@@ -17,6 +17,7 @@
  */
 
 import {EventListenerCollection} from '../../core/event-listener-collection.js';
+import {getMessage} from '../../dom/i18n.js';
 import {querySelectorNotNull} from '../../dom/query-selector.js';
 
 export class CollapsibleDictionaryController {
@@ -127,11 +128,11 @@ export class CollapsibleDictionaryController {
      * @param {import('settings').ProfileOptions} options
      */
     _setupAllSelect(fragment, options) {
-        const select = this._addSelect(fragment, 'All', '');
+        const select = this._addSelect(fragment, getMessage('common_all'), '');
 
         const option = document.createElement('option');
         option.value = 'varies';
-        option.textContent = 'Varies';
+        option.textContent = getMessage('settings_collapsible_varies');
         option.disabled = true;
         select.appendChild(option);
 

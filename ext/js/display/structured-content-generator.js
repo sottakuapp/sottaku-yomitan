@@ -17,6 +17,7 @@
  */
 
 import {DisplayContentManager} from '../display/display-content-manager.js';
+import {getMessage} from '../dom/i18n.js';
 import {getLanguageFromText} from '../language/text-utilities.js';
 import {AnkiTemplateRendererContentManager} from '../templates/anki-template-renderer-content-manager.js';
 
@@ -111,7 +112,7 @@ export class StructuredContentGenerator {
         imageContainer.appendChild(overlay);
 
         const linkText = this._createElement('span', 'gloss-image-link-text');
-        linkText.textContent = 'Image';
+        linkText.textContent = getMessage('display_image_label');
         node.appendChild(linkText);
 
         if (this._contentManager instanceof DisplayContentManager) {
