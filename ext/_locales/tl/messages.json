@@ -75,7 +75,7 @@
     "message": "Palagi"
   },
   "common_auto": {
-    "message": "Auto"
+    "message": "Awtomatiko"
   },
   "common_bottom": {
     "message": "Ibaba"
@@ -93,13 +93,13 @@
     "message": "Madilim"
   },
   "common_default": {
-    "message": "Default"
+    "message": "Pamantayan"
   },
   "common_height": {
     "message": "Taas"
   },
   "common_info": {
-    "message": "Info…"
+    "message": "Impormasyon…"
   },
   "common_left": {
     "message": "Kaliwa"
@@ -114,7 +114,7 @@
     "message": "Manwal"
   },
   "common_mode": {
-    "message": "Mode"
+    "message": "Paraan"
   },
   "common_move_down": {
     "message": "Ilipat pababa"
@@ -126,10 +126,10 @@
     "message": "Wala"
   },
   "common_normal": {
-    "message": "Normal"
+    "message": "Karaniwan"
   },
   "common_operator": {
-    "message": "Operator"
+    "message": "Operador"
   },
   "common_remove": {
     "message": "Alisin"
@@ -210,7 +210,7 @@
     "message": "$1 update"
   },
   "dictionary_updates_count_singular": {
-    "message": "$1 update"
+    "message": "$1 pag-update"
   },
   "dictionary_updates_none": {
     "message": "Walang update"
@@ -345,7 +345,7 @@
     "message": "Plataporma: <span id=\"platform\"></span>"
   },
   "info_general_user_agent": {
-    "message": "User agent: <span id=\"user-agent\"></span>"
+    "message": "Ahente ng gumagamit: <span id=\"user-agent\"></span>"
   },
   "info_heading": {
     "message": "Impormasyon ng Sottaku-Yomitan"
@@ -369,7 +369,7 @@
     "message": "Mga tala ng bersyon: <a data-href-format=\"https://github.com/sottakuapp/sottaku-yomitan/releases/tag/{version}\" href=\"https://github.com/sottakuapp/sottaku-yomitan/releases\" id=\"release-notes-this-version-link\" rel=\"noreferrer noopener\">Bersyong ito</a> | <a href=\"https://github.com/sottakuapp/sottaku-yomitan/releases\" rel=\"noreferrer noopener\">Lahat ng bersyon</a>"
   },
   "info_links_source_code": {
-    "message": "Source code: <a href=\"https://github.com/sottakuapp/sottaku-yomitan\" rel=\"noreferrer noopener\">GitHub</a>"
+    "message": "Kodigo ng pinagmulan: <a href=\"https://github.com/sottakuapp/sottaku-yomitan\" rel=\"noreferrer noopener\">GitHub</a>"
   },
   "info_links_user_guide": {
     "message": "Impormasyon at gabay ng user: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">Homepage</a>"
@@ -1053,7 +1053,7 @@
     "message": "I-update lamang ang query"
   },
   "settings_collapsible_varies": {
-    "message": "Varies"
+    "message": "Nag-iiba"
   },
   "settings_general_api_css_bypass_label": {
     "message": "Pahintulutan ang pag-bypass ng CSS sanitization"
@@ -1188,160 +1188,160 @@
     "message": "Pagsasalin"
   },
   "settings_popup_auto_hide_description": {
-    "message": "When an existing popup is present, upon scanning again, hide the existing popup even if no definitions are found when scanning again."
+    "message": "Kapag may umiiral na popup, sa muling pag-scan, itago ang umiiral na popup kahit walang nahanap na mga kahulugan."
   },
   "settings_popup_auto_hide_label": {
-    "message": "Auto-hide search popup"
+    "message": "Awtomatikong itago ang popup ng paghahanap"
   },
   "settings_popup_delay_label": {
-    "message": "Delay <span class=\"light\">(in milliseconds)</span>"
+    "message": "Antala <span class=\"light\">(sa milisegundo)</span>"
   },
   "settings_popup_heading": {
-    "message": "Popup Behavior"
+    "message": "Pag-uugali ng popup"
   },
   "settings_popup_hide_on_exit_description": {
-    "message": "When the cursor exits the popup, the popup will be hidden."
+    "message": "Kapag lumabas ang cursor sa popup, itatago ang popup."
   },
   "settings_popup_hide_on_exit_label": {
-    "message": "Hide popup on cursor exit"
+    "message": "Itago ang popup kapag lumabas ang cursor"
   },
   "settings_popup_max_children_description": {
-    "message": "Change the limit on the number of popups that may be generated."
+    "message": "Baguhin ang limitasyon sa bilang ng popup na maaaring mabuo."
   },
   "settings_popup_max_children_label": {
-    "message": "Maximum number of child popups"
+    "message": "Pinakamataas na bilang ng child popup"
   },
   "settings_popup_reduced_motion_description": {
-    "message": "Scrolls by a configurable height (similar to pagination), reducing animations. Useful on e-readers and e-ink screens."
+    "message": "Nag-i-scroll gamit ang naiaangkop na taas (katulad ng pagination), binabawasan ang animasyon. Kapaki-pakinabang sa mga e-reader at e-ink na screen."
   },
   "settings_popup_reduced_motion_label": {
-    "message": "Reduced motion scrolling"
+    "message": "Pag-scroll na may bawas na galaw"
   },
   "settings_popup_reduced_motion_scale_description": {
-    "message": "Percentage of the popup's height scrolled per step."
+    "message": "Porsyento ng taas ng popup na na-i-scroll bawat hakbang."
   },
   "settings_popup_reduced_motion_scale_label": {
-    "message": "Scale"
+    "message": "Iskala"
   },
   "settings_popup_reduced_motion_swipe_description": {
-    "message": "Minimum distance on touch devices for a swipe to be recognized as scrolling. Lower values can feel more responsive but increase the chance for misinputs."
+    "message": "Pinakamababang layo sa touch device para makilala ang swipe bilang pag-scroll. Mas mababang halaga ay mas responsive ngunit mas tumataas ang tsansa ng maling input."
   },
   "settings_popup_reduced_motion_swipe_label": {
-    "message": "Swipe threshold"
+    "message": "Threshold ng swipe"
   },
   "settings_popup_reduced_motion_swipe_unit": {
     "message": "px"
   },
   "settings_popup_scan_popup_description": {
-    "message": "Text inside of popups can be scanned for definitions, which will open a new popup."
+    "message": "Maaaring i-scan ang tekstong nasa loob ng mga popup para sa mga kahulugan, na magbubukas ng bagong popup."
   },
   "settings_popup_scan_popup_label": {
-    "message": "Allow scanning popup content"
+    "message": "Payagan ang pag-scan ng laman ng popup"
   },
   "settings_popup_scan_search_description": {
-    "message": "Text on the <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">search page</a> can be scanned for definitions, which will open a popup."
+    "message": "Maaaring i-scan ang teksto sa <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">pahina ng paghahanap</a> para sa mga kahulugan, na magbubukas ng popup."
   },
   "settings_popup_scan_search_label": {
-    "message": "Allow scanning search page content"
+    "message": "Payagan ang pag-scan ng laman ng pahina ng paghahanap"
   },
   "settings_popup_scan_source_terms_label": {
-    "message": "Allow scanning popup source terms"
+    "message": "Payagan ang pag-scan ng mga source term ng popup"
   },
   "settings_popup_search_from_results_label": {
-    "message": "Search terms when clicking text from the results list"
+    "message": "Maghanap ng mga termino kapag nag-click ng teksto mula sa listahan ng resulta"
   },
   "settings_popup_show_iframe_label": {
-    "message": "Show iframe popups in the root frame\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "Ipakita ang mga iframe popup sa root frame\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "settings_popup_show_iframe_more_1": {
-    "message": "By default, scanning text inside of an embeded <code>&lt;iframe&gt;</code> element will open\n                    a new popup inside of that frame, which can sometimes be limiting due to the frame's size.\n                    When this option is enabled, the popup will be created in the root of the page, if possible."
+    "message": "Bilang default, ang pag-scan ng teksto sa loob ng naka-embed na <code>&lt;iframe&gt;</code> ay magbubukas\n                    ng bagong popup sa loob ng frame na iyon, na maaaring maging limitado dahil sa laki ng frame.\n                    Kapag naka-enable ang opsyong ito, gagawin ang popup sa root ng pahina kung posible."
   },
   "settings_popup_show_iframe_more_2": {
-    "message": "Note that when this option is enabled, there is a possibility that the extension can interfere with the underlying webpage, since it must send messages to the webpage in order to determine the correct position of the popup. This typically does not cause issues, but if anything unexpected happens, this option could be the cause."
+    "message": "Tandaan na kapag naka-enable ang opsyong ito, may posibilidad na makialam ang extension sa pinagbabatayang webpage dahil kailangan nitong magpadala ng mga mensahe sa webpage upang matukoy ang tamang posisyon ng popup. Karaniwan itong hindi nagdudulot ng problema, ngunit kung may hindi inaasahang mangyari, maaaring ito ang sanhi."
   },
   "settings_popup_size_auto_scale_label": {
-    "message": "Auto-scale\n                                <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "Awtomatikong scale\n                                <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "settings_popup_size_auto_scale_more": {
-    "message": "Auto-scaling will scale the popup automatically based on the browser's zoom levels\n                            in order to keep the popup at a constant physical size, regardless of the zoom level.\n                            <em>Zoom level</em> uses the zoom level that is typically used on desktop browsers,\n                            and <em>Viewport</em> uses the zoom level that is typically used on mobile browsers."
+    "message": "Awtomatikong isasakale ang popup batay sa mga antas ng zoom ng browser\n                            upang mapanatiling pare-pareho ang pisikal na laki, anuman ang antas ng zoom.\n                            Gumagamit ang <em>Zoom level</em> ng zoom na karaniwang ginagamit sa desktop browser,\n                            at ang <em>Viewport</em> ay gumagamit ng zoom na karaniwang ginagamit sa mobile browser."
   },
   "settings_popup_size_auto_scale_viewport": {
-    "message": "Viewport"
+    "message": "Tanawing lugar"
   },
   "settings_popup_size_auto_scale_zoom": {
-    "message": "Zoom level"
+    "message": "Antas ng zoom"
   },
   "settings_popup_size_display_full_width": {
-    "message": "Full width"
+    "message": "Buong lapad"
   },
   "settings_popup_size_display_mode_description": {
-    "message": "Change the layout of the popup.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "Baguhin ang layout ng popup.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">Higit pa…</a>"
   },
   "settings_popup_size_display_mode_label": {
-    "message": "Display mode"
+    "message": "Mode ng pagpapakita"
   },
   "settings_popup_size_display_mode_more": {
-    "message": "The <em>Default</em> mode will position the popup relative to the scanned text.\n                    The <em>Full Width</em> mode will anchor the popup to the top or bottom of the screen and take up\n                    the full width of the screen, which can be useful on devices with touch screens."
+    "message": "Ilalagay ng <em>Default</em> mode ang popup kaugnay ng na-scan na teksto.\n                    Ang <em>Full Width</em> mode ay ia-ankla ang popup sa itaas o ibaba ng screen at kukuha ng\n                    buong lapad ng screen, na maaaring maging kapaki-pakinabang sa mga device na may touch screen."
   },
   "settings_popup_size_heading": {
-    "message": "Popup Position & Size"
+    "message": "Posisyon at Sukat ng Popup"
   },
   "settings_popup_size_horizontal_offset_description": {
-    "message": "Change the distance the popup is placed relative to horizontal text."
+    "message": "Baguhin ang distansya ng pagkakalagay ng popup kaugnay ng pahalang na teksto."
   },
   "settings_popup_size_horizontal_offset_label": {
-    "message": "Horizontal text offset"
+    "message": "Offset ng pahalang na teksto"
   },
   "settings_popup_size_horizontal_position_description": {
-    "message": "Change where the popup is positioned relative to horizontal text."
+    "message": "Baguhin kung saan inilalagay ang popup kaugnay ng pahalang na teksto."
   },
   "settings_popup_size_horizontal_position_label": {
-    "message": "Horizontal text positioning"
+    "message": "Posisyon ng pahalang na teksto"
   },
   "settings_popup_size_position_above": {
-    "message": "Above text"
+    "message": "Sa itaas ng teksto"
   },
   "settings_popup_size_position_below": {
-    "message": "Below text"
+    "message": "Sa ibaba ng teksto"
   },
   "settings_popup_size_scale_description": {
-    "message": "Control the scaling factor of the popup."
+    "message": "Kontrolin ang scaling factor ng popup."
   },
   "settings_popup_size_scale_label": {
-    "message": "Scale"
+    "message": "Iskala"
   },
   "settings_popup_size_size_description": {
-    "message": "Control the size of the popup, in pixels."
+    "message": "Kontrolin ang laki ng popup, sa pixels."
   },
   "settings_popup_size_size_label": {
-    "message": "Size"
+    "message": "Sukat"
   },
   "settings_popup_size_vertical_after": {
-    "message": "After reading direction"
+    "message": "Pagkatapos ng direksyon ng pagbasa"
   },
   "settings_popup_size_vertical_before": {
-    "message": "Before reading direction"
+    "message": "Bago ang direksyon ng pagbasa"
   },
   "settings_popup_size_vertical_left": {
-    "message": "Left of text"
+    "message": "Sa kaliwa ng teksto"
   },
   "settings_popup_size_vertical_offset_description": {
-    "message": "Change the distance the popup is placed relative to vertical text."
+    "message": "Baguhin ang distansya ng pagkakalagay ng popup kaugnay ng patayong teksto."
   },
   "settings_popup_size_vertical_offset_label": {
-    "message": "Vertical text offset"
+    "message": "Offset ng patayong teksto"
   },
   "settings_popup_size_vertical_position_description": {
-    "message": "Change where the popup is positioned relative to vertical text."
+    "message": "Baguhin kung saan inilalagay ang popup kaugnay ng patayong teksto."
   },
   "settings_popup_size_vertical_position_label": {
-    "message": "Vertical text positioning"
+    "message": "Posisyon ng patayong teksto"
   },
   "settings_popup_size_vertical_right": {
-    "message": "Right of text"
+    "message": "Sa kanan ng teksto"
   },
   "settings_popup_size_vertical_same_as_horizontal": {
-    "message": "Same as horizontal text"
+    "message": "Kapareho ng pahalang na teksto"
   },
   "settings_profile_active_description": {
     "message": "Lumipat sa aktibong profile na ginagamit para sa pag-scan."
@@ -1356,49 +1356,49 @@
     "message": "Profile"
   },
   "settings_result_average_frequencies_description": {
-    "message": "Compress frequency tags into one \"Average\" frequency tag based on the harmonic mean."
+    "message": "I-compress ang mga frequency tag sa iisang frequency tag na \"Karaniwan\" batay sa harmonic mean."
   },
   "settings_result_average_frequencies_label": {
-    "message": "Average frequencies"
+    "message": "Mga average na dalas"
   },
   "settings_result_display_heading": {
-    "message": "Result Display"
+    "message": "Pagpapakita ng resulta"
   },
   "settings_result_grouping_description": {
-    "message": "Change how related results are grouped.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "Baguhin kung paano pinagsasama ang mga kaugnay na resulta.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">Higit pa…</a>"
   },
   "settings_result_grouping_label": {
-    "message": "Result grouping mode"
+    "message": "Mode ng pag-group ng resulta"
   },
   "settings_result_grouping_more_none": {
-    "message": "<strong>No grouping</strong> -\n                        Every definition will be listed as a separate entry."
+    "message": "<strong>Walang pag-group</strong> -\n                        Bawat kahulugan ay ililista bilang hiwalay na entry."
   },
   "settings_result_grouping_more_related_1": {
-    "message": "<strong>Group related terms</strong> -\n                            Related terms that share the same definitions will be grouped together."
+    "message": "<strong>Pag-group ng mga kaugnay na termino</strong> -\n                            Ang mga kaugnay na termino na may parehong kahulugan ay pagsasamahin."
   },
   "settings_result_grouping_more_related_2": {
-    "message": "The <em>Primary dictionary</em> option should be assigned to a dictionary which contains related term information,\n                            and configuring the <em>Secondary dictionaries</em> will allow definitions for the related terms to be\n                            included from other dictionaries."
+    "message": "Ang opsyong <em>Pangunahing diksyunaryo</em> ay dapat italaga sa diksyunaryong may impormasyon ng mga kaugnay na termino, at ang pag-configure ng <em>Pangalawang mga diksyunaryo</em> ay magpapahintulot na maisama ang mga kahulugan ng mga kaugnay na termino mula sa ibang diksyunaryo."
   },
   "settings_result_grouping_more_related_warning": {
-    "message": "Not all dictionaries are able to be selected as the <em>Primary dictionary</em>."
+    "message": "Hindi lahat ng diksyunaryo ay maaaring piliin bilang <em>Pangunahing diksyunaryo</em>."
   },
   "settings_result_grouping_more_term_reading": {
-    "message": "<strong>Group term-reading pairs</strong> -\n                        Definitions for the same term with the same reading will be grouped together."
+    "message": "<strong>Pag-group ng mga pares na termino-pagbigkas</strong> -\n                        Ang mga kahulugan para sa parehong termino na may parehong pagbigkas ay pagsasamahin."
   },
   "settings_result_grouping_none": {
-    "message": "No grouping"
+    "message": "Walang pag-group"
   },
   "settings_result_grouping_primary_dictionary": {
-    "message": "Primary dictionary"
+    "message": "Pangunahing diksyunaryo"
   },
   "settings_result_grouping_related": {
-    "message": "Group related terms"
+    "message": "Pag-group ng mga kaugnay na termino"
   },
   "settings_result_grouping_secondary_dictionaries": {
-    "message": "Secondary dictionaries…"
+    "message": "Pangalawang mga diksyunaryo…"
   },
   "settings_result_grouping_term_reading": {
-    "message": "Group term-reading pairs"
+    "message": "Pag-group ng mga pares na termino-pagbigkas"
   },
   "settings_scanning_advanced_inputs_label": {
     "message": "I-configure ang mga advanced na scanning input… <span class=\"light no-wrap\">(<span class=\"scanning-input-count\">#</span> naitakda)</span>"
@@ -1512,55 +1512,55 @@
     "message": "Walang epekto ang setting na ito sa Firefox dahil hindi nito ipinapatupad ang katangiang <code>zoom</code>."
   },
   "settings_search_window_heading": {
-    "message": "Search Window"
+    "message": "Window ng paghahanap"
   },
   "settings_search_window_left_description": {
-    "message": "Control the left position of the window, in pixels."
+    "message": "Kontrolin ang posisyon sa kaliwa ng window, sa pixels."
   },
   "settings_search_window_left_label": {
-    "message": "Left position"
+    "message": "Posisyon sa kaliwa"
   },
   "settings_search_window_native_window_label": {
-    "message": "Use a native browser window instead of an embedded popup\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "Gumamit ng native na window ng browser sa halip na embedded na popup\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "settings_search_window_native_window_more": {
-    "message": "Instead of showing definitions in a popup embedded into the webpage, a native browser window containing the popup content will be opened instead. This window will be shared across all tabs."
+    "message": "Sa halip na magpakita ng mga kahulugan sa popup na naka-embed sa webpage, magbubukas ng native na window ng browser na may laman ng popup. Ang window na ito ay ibabahagi sa lahat ng tab."
   },
   "settings_search_window_open_link": {
-    "message": "Open…"
+    "message": "Buksan…"
   },
   "settings_search_window_size_description": {
-    "message": "Control the size of the window, in pixels."
+    "message": "Kontrolin ang laki ng window, sa pixels."
   },
   "settings_search_window_size_label": {
-    "message": "Size"
+    "message": "Sukat"
   },
   "settings_search_window_state_fullscreen": {
-    "message": "Fullscreen"
+    "message": "Buong screen"
   },
   "settings_search_window_state_maximized": {
-    "message": "Maximized"
+    "message": "Naka-maximize"
   },
   "settings_search_window_sticky_header_description": {
-    "message": "Search header stays on the page when scrolling down."
+    "message": "Nanatili ang header ng paghahanap sa page kapag nag-scroll pababa."
   },
   "settings_search_window_sticky_header_label": {
-    "message": "Sticky search header"
+    "message": "Naka-sticky na header ng paghahanap"
   },
   "settings_search_window_style_description": {
-    "message": "Change the appearance of the window."
+    "message": "Baguhin ang itsura ng window."
   },
   "settings_search_window_style_label": {
-    "message": "Window style"
+    "message": "Estilo ng window"
   },
   "settings_search_window_top_description": {
-    "message": "Control the top position of the window, in pixels."
+    "message": "Kontrolin ang posisyon sa itaas ng window, sa pixels."
   },
   "settings_search_window_top_label": {
-    "message": "Top position"
+    "message": "Puwesto sa itaas"
   },
   "settings_search_window_type_popup": {
-    "message": "Popup"
+    "message": "Pop-up"
   },
   "settings_security_heading": {
     "message": "Seguridad"
@@ -1614,13 +1614,13 @@
     "message": "Idagdag"
   },
   "settings_sottaku_language_chinese": {
-    "message": "Chinese"
+    "message": "Tsino"
   },
   "settings_sottaku_language_japanese": {
-    "message": "Japanese"
+    "message": "Hapones"
   },
   "settings_sottaku_language_korean": {
-    "message": "Korean"
+    "message": "Koreano"
   },
   "settings_sottaku_language_order_description": {
     "message": "Piliin kung aling mga wikang Sottaku ang lalabas sa popup at ang kanilang ayos (ginagamit para sa mixed mode at fallback)."
@@ -1659,7 +1659,7 @@
     "message": "Naka-sign in"
   },
   "settings_sottaku_status_signed_in_as": {
-    "message": "Naka-sign in bilang {0}"
+    "message": "Naka-sign in bilang $1"
   },
   "settings_sottaku_status_signed_out": {
     "message": "Naka-sign out sa Sottaku"
@@ -1677,58 +1677,58 @@
     "message": "Username o email"
   },
   "settings_status_tasks_in_progress": {
-    "message": "Tasks in progress:"
+    "message": "Mga gawaing isinasagawa:"
   },
   "settings_text_parsing_heading": {
-    "message": "Text Parsing"
+    "message": "Pag-parse ng teksto"
   },
   "settings_text_parsing_info_1": {
-    "message": "Sottaku-Yomitan is able to scan the sentence surrounding a term and parse individual words\n                of the query on the <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">search page</a>.\n                This information can also be added to Anki cards to provide additional context."
+    "message": "Kayang i-scan ng Sottaku-Yomitan ang pangungusap sa paligid ng termino at i-parse ang mga indibidwal na salita\n                ng query sa <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">pahina ng paghahanap</a>.\n                Maaari ring idagdag ang impormasyong ito sa mga Anki card para magbigay ng karagdagang konteksto."
   },
   "settings_text_parsing_internal_description": {
-    "message": "Sentence words are parsed using Sottaku-Yomitan's dictionaries.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "Ang mga salita sa pangungusap ay pina-parse gamit ang mga diksyunaryo ng Sottaku-Yomitan.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">Higit pa…</a>"
   },
   "settings_text_parsing_internal_label": {
-    "message": "Parse sentences using Sottaku-Yomitan's internal parser"
+    "message": "I-parse ang mga pangungusap gamit ang internal na parser ng Sottaku-Yomitan"
   },
   "settings_text_parsing_internal_more": {
-    "message": "Sottaku-Yomitan's internal parser is a simple algorithm which can parse sentences using the installed dictionaries. It works by repeatedly detecting the longest term at the start of the sentence and advancing until no text remains. This provides decent results for the general case, but since grammatical structure is not taken into account, it can sometimes yield incorrect segmentation."
+    "message": "Ang internal na parser ng Sottaku-Yomitan ay isang simpleng algorithm na kayang mag-parse ng mga pangungusap gamit ang naka-install na mga diksyunaryo. Gumagana ito sa pamamagitan ng paulit-ulit na pagtukoy sa pinakamahabang termino sa simula ng pangungusap at umuusad hanggang sa wala nang natitirang teksto. Nagbibigay ito ng maayos na resulta sa pangkalahatang kaso, ngunit dahil hindi isinasaalang-alang ang istrukturang panggramatika, maaari itong magbunga ng maling paghahati."
   },
   "settings_text_parsing_mecab_description": {
-    "message": "Sentence words are parsed using a third-party program. Japanese only."
+    "message": "Ang mga salita sa pangungusap ay pina-parse gamit ang programang third-party. Para sa Japanese lamang."
   },
   "settings_text_parsing_mecab_disclaimer": {
-    "message": "This option may send search query data outside of Sottaku-Yomitan for parsing<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">Privacy Policy</a>)</span>.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "Maaaring magpadala ang opsyong ito ng data ng query sa paghahanap sa labas ng Sottaku-Yomitan para sa pag-parse<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">Patakaran sa Privacy</a>)</span>.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">Higit pa…</a>"
   },
   "settings_text_parsing_mecab_label": {
-    "message": "Parse sentences using <a href=\"https://en.wikipedia.org/wiki/MeCab\" rel=\"noopener noreferrer\" target=\"_blank\">MeCab</a>"
+    "message": "I-parse ang mga pangungusap gamit ang <a href=\"https://en.wikipedia.org/wiki/MeCab\" rel=\"noopener noreferrer\" target=\"_blank\">MeCab</a>"
   },
   "settings_text_parsing_mecab_more_1": {
-    "message": "MeCab is a third-party program which uses its own dictionaries and parsing algorithm to decompose sentences into individual words. MeCab may provide more accurate parsing results than Sottaku-Yomitan's internal parser."
+    "message": "Ang MeCab ay isang programang third-party na gumagamit ng sarili nitong mga diksyunaryo at algorithm sa pag-parse upang hatiin ang mga pangungusap sa mga indibidwal na salita. Maaaring magbigay ang MeCab ng mas tumpak na resulta kaysa sa internal na parser ng Sottaku-Yomitan."
   },
   "settings_text_parsing_mecab_more_2": {
-    "message": "In order for Sottaku-Yomitan to use it, both MeCab and a native messaging component must be installed.\n                    A setup guide can be found <a href=\"https://github.com/yomidevs/yomitan-mecab-installer/blob/master/README.md\" rel=\"noopener noreferrer\" target=\"_blank\">here</a>."
+    "message": "Upang magamit ito ng Sottaku-Yomitan, kailangang naka-install ang MeCab at ang native messaging component.\n                    Makakahanap ng gabay sa pag-setup <a href=\"https://github.com/yomidevs/yomitan-mecab-installer/blob/master/README.md\" rel=\"noopener noreferrer\" target=\"_blank\">dito</a>."
   },
   "settings_text_parsing_scan_extent_description": {
-    "message": "Adjust how many characters are bidirectionally scanned to form a sentence."
+    "message": "Ayusin kung ilang mga karakter ang binabasa sa magkabilang direksyon para mabuo ang pangungusap."
   },
   "settings_text_parsing_scan_extent_label": {
-    "message": "Sentence scanning extent"
+    "message": "Saklaw ng pag-scan ng pangungusap"
   },
   "settings_text_parsing_spacing_label": {
-    "message": "Show space between parsed words"
+    "message": "Ipakita ang espasyo sa pagitan ng mga na-parse na salita"
   },
   "settings_text_parsing_termination_custom": {
-    "message": "Custom"
+    "message": "Pasadya"
   },
   "settings_text_parsing_termination_custom_no_newlines": {
-    "message": "Custom, no newlines"
+    "message": "Custom, walang bagong linya"
   },
   "settings_text_parsing_termination_label": {
-    "message": "Sentence termination characters"
+    "message": "Mga karakter ng pagtatapos ng pangungusap"
   },
   "settings_text_parsing_termination_newlines": {
-    "message": "Newlines only"
+    "message": "Mga bagong linya lamang"
   },
   "settings_translation_heading": {
     "message": "Pagsasalin"
@@ -1749,222 +1749,222 @@
     "message": "Salita"
   },
   "sottaku_action_title_missing_id": {
-    "message": "Missing Sottaku question id"
+    "message": "Walang Sottaku question id"
   },
   "sottaku_action_title_sign_in": {
-    "message": "Sign in to Sottaku first"
+    "message": "Mag-sign in muna sa Sottaku"
   },
   "sottaku_locale_automatic": {
-    "message": "Automatic (use Sottaku account language)"
+    "message": "Awtomatiko (gamitin ang wika ng Sottaku account)"
   },
   "sottaku_request_button": {
-    "message": "Request dictionary entry"
+    "message": "Humiling ng entry sa diksyunaryo"
   },
   "sottaku_request_button_requested": {
-    "message": "Requested"
+    "message": "Na-request"
   },
   "sottaku_request_button_requesting": {
-    "message": "Requesting..."
+    "message": "Nagri-request..."
   },
   "sottaku_request_button_retry": {
-    "message": "Request translation"
+    "message": "Humiling ng pagsasalin"
   },
   "sottaku_request_button_title_submitted": {
-    "message": "Request submitted to Sottaku"
+    "message": "Naipadala ang request sa Sottaku"
   },
   "sottaku_save_button": {
-    "message": "Save to Sottaku"
+    "message": "I-save sa Sottaku"
   },
   "sottaku_save_button_saved": {
-    "message": "Saved"
+    "message": "Na-save"
   },
   "sottaku_save_button_saving": {
-    "message": "Saving..."
+    "message": "Nagse-save..."
   },
   "sottaku_save_button_title_already_saved": {
-    "message": "Already saved to Sottaku"
+    "message": "Na-save na sa Sottaku"
   },
   "sottaku_save_button_title_saved": {
-    "message": "Added to your Sottaku flashcards"
+    "message": "Idinagdag sa iyong Sottaku flashcards"
   },
   "status_footer_close": {
-    "message": "Close"
+    "message": "Isara"
   },
   "status_footer_tasks_in_progress": {
-    "message": "Tasks in progress:"
+    "message": "Mga gawaing isinasagawa:"
   },
   "support_heading": {
-    "message": "Support Sottaku-Yomitan ❤️"
+    "message": "Suportahan ang Sottaku-Yomitan ❤️"
   },
   "support_list_contribute": {
-    "message": "Contribute to the Sottaku-Yomitan project! Start by reading our <a href=\"https://github.com/sottakuapp/sottaku-yomitan/blob/master/CONTRIBUTING.md\" rel=\"noreferrer noopener\">Contribution Guidelines</a>."
+    "message": "Mag-ambag sa proyekto ng Sottaku-Yomitan! Magsimula sa pagbabasa ng aming <a href=\"https://github.com/sottakuapp/sottaku-yomitan/blob/master/CONTRIBUTING.md\" rel=\"noreferrer noopener\">Mga Gabay sa Kontribusyon</a>."
   },
   "support_list_feedback": {
-    "message": "Report any bugs or feedback on our <a href=\"https://github.com/sottakuapp/sottaku-yomitan/issues/new/choose\" rel=\"noreferrer noopener\">GitHub Issues</a> or email <a href=\"mailto:hello@sottaku.app\">hello@sottaku.app</a>."
+    "message": "Iulat ang anumang bug o feedback sa <a href=\"https://github.com/sottakuapp/sottaku-yomitan/issues/new/choose\" rel=\"noreferrer noopener\">GitHub Issues</a> o mag-email sa <a href=\"mailto:hello@sottaku.app\">hello@sottaku.app</a>."
   },
   "support_list_star": {
-    "message": "Star the project on <a href=\"https://github.com/sottakuapp/sottaku-yomitan\" rel=\"noreferrer noopener\">GitHub</a> and share it with friends."
+    "message": "Lagyan ng bituin ang proyekto sa <a href=\"https://github.com/sottakuapp/sottaku-yomitan\" rel=\"noreferrer noopener\">GitHub</a> at ibahagi ito sa mga kaibigan."
   },
   "support_subheading": {
-    "message": "Here are some ways to support Sottaku-Yomitan:"
+    "message": "Narito ang ilang paraan para suportahan ang Sottaku-Yomitan:"
   },
   "template_anki_overwrite_append_title": {
-    "message": "Insert new value after existing"
+    "message": "Ipasok ang bagong halaga pagkatapos ng umiiral"
   },
   "template_anki_overwrite_available_title": {
-    "message": "Overwrite if new value is not empty"
+    "message": "I-overwrite kapag hindi walang laman ang bagong halaga"
   },
   "template_anki_overwrite_fill_title": {
-    "message": "Overwrite if existing value is empty"
+    "message": "I-overwrite kapag walang laman ang umiiral na halaga"
   },
   "template_anki_overwrite_overwrite_title": {
-    "message": "Overwrite even if new value is empty"
+    "message": "I-overwrite kahit walang laman ang bagong halaga"
   },
   "template_anki_overwrite_prepend_title": {
-    "message": "Insert new value before existing"
+    "message": "Ipasok ang bagong halaga bago ang umiiral"
   },
   "template_anki_overwrite_skip_title": {
-    "message": "Keep existing value"
+    "message": "Panatilihin ang umiiral na halaga"
   },
   "template_audio_source_tts_anki_warning": {
-    "message": "Not supported in Anki"
+    "message": "Hindi suportado sa Anki"
   },
   "template_dictionary_integrity_error": {
-    "message": "Dictionary may not have been imported properly"
+    "message": "Maaaring hindi na-import nang maayos ang diksyunaryo"
   },
   "template_dictionary_update_available": {
-    "message": "Update available"
+    "message": "May available na update"
   },
   "template_hotkey_no_input": {
-    "message": "No input"
+    "message": "Walang input"
   },
   "template_profile_name_placeholder": {
-    "message": "Profile name"
+    "message": "Pangalan ng profile"
   },
   "template_scan_no_inputs": {
-    "message": "No inputs"
+    "message": "Walang input"
   },
   "template_scan_touch_min_time": {
-    "message": "Minimum Touch Time <span class=\"light\">(in milliseconds)</span>:"
+    "message": "Minimum na oras ng paghipo <span class=\"light\">(sa milisegundo)</span>:"
   },
   "templates_modals_title": {
-    "message": "Templates"
+    "message": "Mga template"
   },
   "templates_settings_title": {
-    "message": "Templates"
+    "message": "Mga template"
   },
   "theme_option_auto": {
-    "message": "Auto"
+    "message": "Awtomatiko"
   },
   "theme_option_browser": {
-    "message": "Browser"
+    "message": "Browser ng web"
   },
   "theme_option_dark": {
-    "message": "Dark"
+    "message": "Madilim"
   },
   "theme_option_light": {
-    "message": "Light"
+    "message": "Maliwanag"
   },
   "welcome_audio_enable_description": {
-    "message": "Show a clickable speaker icon next to search results."
+    "message": "Ipakita ang clickable na icon ng speaker sa tabi ng mga resulta ng paghahanap."
   },
   "welcome_audio_enable_disclaimer": {
-    "message": "This option may send term, reading, and/or language outside of Sottaku-Yomitan to fetch audio when the speaker icon is clicked<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">Privacy Policy</a>)</span>.\n                    <div data-show-for-browser=\"firefox firefox-mobile\">Disabling this option will disallow pronunciation audio playback for any terms searched.</div>"
+    "message": "Maaaring magpadala ang opsyong ito ng termino, pagbasa, at/o wika sa labas ng Sottaku-Yomitan para kumuha ng audio kapag na-click ang icon ng speaker<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">Patakaran sa Privacy</a>)</span>.\n                    <div data-show-for-browser=\"firefox firefox-mobile\">Ang pag-disable ng opsyong ito ay hindi magpapahintulot ng pag-play ng pronunciation audio para sa anumang hinanap na termino.</div>"
   },
   "welcome_audio_enable_label": {
-    "message": "Enable audio playback for terms"
+    "message": "Paganahin ang audio playback para sa mga termino"
   },
   "welcome_basic_customization_heading": {
-    "message": "Basic customization"
+    "message": "Pangunahing pag-customize"
   },
   "welcome_data_transmission_heading": {
-    "message": "Data Transmission"
+    "message": "Pagpapadala ng Data"
   },
   "welcome_get_started_connect_account": {
-    "message": "Connect your Sottaku account to sync dictionaries, audio, and flashcards"
+    "message": "Iugnay ang iyong Sottaku account para i-sync ang mga diksyunaryo, audio, at flashcards"
   },
   "welcome_get_started_heading": {
-    "message": "Here are some basics to get started"
+    "message": "Narito ang ilang batayan para magsimula"
   },
   "welcome_get_started_news_link": {
-    "message": "New to Sottaku-Yomitan? Visit sottaku.app for news and tips."
+    "message": "Bagong user ng Sottaku-Yomitan? Bisitahin ang sottaku.app para sa balita at tips."
   },
   "welcome_get_started_quick_start": {
-    "message": "Sottaku-Yomitan Quick Start Guide"
+    "message": "Mabilis na Gabay sa Pagsisimula ng Sottaku-Yomitan"
   },
   "welcome_heading": {
-    "message": "Welcome to Sottaku-Yomitan!"
+    "message": "Maligayang pagdating sa Sottaku-Yomitan!"
   },
   "welcome_locale_description": {
-    "message": "Language used for translations returned by Sottaku."
+    "message": "Wikang ginagamit para sa mga pagsasaling ibinabalik ng Sottaku."
   },
   "welcome_locale_label": {
-    "message": "Locale"
+    "message": "Lokal"
   },
   "welcome_locale_setup_description": {
-    "message": "Sottaku already provides Japanese and Korean lookups through your account; import additional dictionaries if you want offline access or other languages."
+    "message": "May ibinibigay na ang Sottaku na Japanese at Korean na lookup sa pamamagitan ng iyong account; mag-import ng karagdagang mga diksyunaryo kung gusto mo ng offline na access o ibang wika."
   },
   "welcome_locale_setup_heading": {
-    "message": "Locale setup"
+    "message": "Pag-setup ng locale"
   },
   "welcome_more_customization_link": {
-    "message": "More customization options are available on the Settings page"
+    "message": "May higit pang opsyon sa pag-customize sa page ng Settings"
   },
   "welcome_permissions_disabled_warning": {
-    "message": "Sottaku-Yomitan features will be limited if the recommended permissions are not enabled."
+    "message": "Mabibigo o lilimitahan ang mga feature ng Sottaku-Yomitan kung hindi naka-enable ang mga inirerekomendang pahintulot."
   },
   "welcome_permissions_enable_optional_description": {
-    "message": "This allows Sottaku-Yomitan to read the clipboard and communicate with external programs."
+    "message": "Pinapayagan nitong basahin ng Sottaku-Yomitan ang clipboard at makipag-ugnayan sa mga external na programa."
   },
   "welcome_permissions_enable_optional_label": {
-    "message": "Enable optional permissions"
+    "message": "I-enable ang mga opsyonal na pahintulot"
   },
   "welcome_permissions_enable_recommended_description": {
-    "message": "This allows Sottaku-Yomitan to scan text from most sites."
+    "message": "Pinapayagan nitong makapag-scan ang Sottaku-Yomitan ng teksto mula sa karamihan ng mga site."
   },
   "welcome_permissions_enable_recommended_label": {
-    "message": "Enable recommended permissions"
+    "message": "I-enable ang mga inirerekomendang pahintulot"
   },
   "welcome_permissions_full_enabled": {
-    "message": "All Sottaku-Yomitan features are available."
+    "message": "Magagamit ang lahat ng feature ng Sottaku-Yomitan."
   },
   "welcome_permissions_more_info_chrome": {
-    "message": "Further configuration is available on the <a href=\"/permissions.html\" rel=\"noopener\">Permissions page</a> and the web browser's <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">extension settings page</a>."
+    "message": "May karagdagang pag-configure sa <a href=\"/permissions.html\" rel=\"noopener\">page ng Mga Pahintulot</a> at sa <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">page ng settings ng extension</a> ng browser."
   },
   "welcome_permissions_more_info_firefox": {
-    "message": "Further configuration is available on the <a href=\"/permissions.html\" rel=\"noopener\">Permissions page</a> and the web browser's extension settings page."
+    "message": "May karagdagang pag-configure sa <a href=\"/permissions.html\" rel=\"noopener\">page ng Mga Pahintulot</a> at sa page ng settings ng extension ng browser."
   },
   "welcome_permissions_recommended_enabled": {
-    "message": "Essential Sottaku-Yomitan features are available."
+    "message": "Magagamit ang mahahalagang feature ng Sottaku-Yomitan."
   },
   "welcome_recommended_permissions_heading": {
-    "message": "Recommended Permissions (Important)"
+    "message": "Inirerekomendang Pahintulot (Mahalaga)"
   },
   "welcome_scan_middle_mouse_description": {
-    "message": "Hold the middle mouse button while moving the cursor to scan text."
+    "message": "Hawakan ang gitnang pindutan ng mouse habang ginagalaw ang cursor upang i-scan ang teksto."
   },
   "welcome_scan_middle_mouse_label": {
-    "message": "Scan using middle mouse button"
+    "message": "Mag-scan gamit ang gitnang pindutan ng mouse"
   },
   "welcome_scan_modifier_description": {
-    "message": "Hold a key while moving the cursor to scan text."
+    "message": "Hawakan ang isang key habang ginagalaw ang cursor upang i-scan ang teksto."
   },
   "welcome_scan_modifier_label": {
-    "message": "Scan modifier key"
+    "message": "Modifier key ng pag-scan"
   },
   "welcome_show_guide_label": {
-    "message": "Show this welcome guide on browser startup"
+    "message": "Ipakita ang gabay na ito kapag nag-start ang browser"
   },
   "welcome_text_language_description": {
-    "message": "Used for offline dictionary features and preview tooling."
+    "message": "Ginagamit para sa offline na mga feature ng diksyunaryo at mga tool sa preview."
   },
   "welcome_text_language_label": {
-    "message": "Text language"
+    "message": "Wika ng teksto"
   },
   "welcome_theme_description": {
-    "message": "Adjust the style of Sottaku-Yomitan."
+    "message": "Ayusin ang estilo ng Sottaku-Yomitan."
   },
   "welcome_theme_label": {
-    "message": "Theme"
+    "message": "Tema"
   }
 }

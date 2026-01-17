@@ -195,7 +195,7 @@
     "message": "용어 메타 수"
   },
   "dictionary_details_url": {
-    "message": "URL"
+    "message": "URL 주소"
   },
   "dictionary_extra_data_item_plural": {
     "message": "$1개 항목"
@@ -246,7 +246,7 @@
     "message": "용어 수: $1"
   },
   "display_dictionary_url": {
-    "message": "URL: $1"
+    "message": "URL 주소: $1"
   },
   "display_hotkey_add_note": {
     "message": "{0} 추가 ({0})"
@@ -1053,7 +1053,7 @@
     "message": "쿼리만 업데이트"
   },
   "settings_collapsible_varies": {
-    "message": "Varies"
+    "message": "다름"
   },
   "settings_general_api_css_bypass_label": {
     "message": "CSS 정화 우회 허용"
@@ -1188,160 +1188,160 @@
     "message": "번역"
   },
   "settings_popup_auto_hide_description": {
-    "message": "When an existing popup is present, upon scanning again, hide the existing popup even if no definitions are found when scanning again."
+    "message": "기존 팝업이 있을 때 다시 스캔하면, 정의를 찾지 못하더라도 기존 팝업을 숨깁니다."
   },
   "settings_popup_auto_hide_label": {
-    "message": "Auto-hide search popup"
+    "message": "검색 팝업 자동 숨김"
   },
   "settings_popup_delay_label": {
-    "message": "Delay <span class=\"light\">(in milliseconds)</span>"
+    "message": "지연 <span class=\"light\">(밀리초)</span>"
   },
   "settings_popup_heading": {
-    "message": "Popup Behavior"
+    "message": "팝업 동작"
   },
   "settings_popup_hide_on_exit_description": {
-    "message": "When the cursor exits the popup, the popup will be hidden."
+    "message": "커서가 팝업을 벗어나면 팝업이 숨겨집니다."
   },
   "settings_popup_hide_on_exit_label": {
-    "message": "Hide popup on cursor exit"
+    "message": "커서가 나가면 팝업 숨김"
   },
   "settings_popup_max_children_description": {
-    "message": "Change the limit on the number of popups that may be generated."
+    "message": "생성될 수 있는 팝업 수의 제한을 변경합니다."
   },
   "settings_popup_max_children_label": {
-    "message": "Maximum number of child popups"
+    "message": "자식 팝업 최대 개수"
   },
   "settings_popup_reduced_motion_description": {
-    "message": "Scrolls by a configurable height (similar to pagination), reducing animations. Useful on e-readers and e-ink screens."
+    "message": "구성 가능한 높이만큼 스크롤(페이지 넘김과 유사)하여 애니메이션을 줄입니다. 전자책 리더와 e-ink 화면에 유용합니다."
   },
   "settings_popup_reduced_motion_label": {
-    "message": "Reduced motion scrolling"
+    "message": "감소된 모션 스크롤"
   },
   "settings_popup_reduced_motion_scale_description": {
-    "message": "Percentage of the popup's height scrolled per step."
+    "message": "단계당 스크롤되는 팝업 높이의 백분율."
   },
   "settings_popup_reduced_motion_scale_label": {
-    "message": "Scale"
+    "message": "스케일"
   },
   "settings_popup_reduced_motion_swipe_description": {
-    "message": "Minimum distance on touch devices for a swipe to be recognized as scrolling. Lower values can feel more responsive but increase the chance for misinputs."
+    "message": "터치 기기에서 스와이프가 스크롤로 인식되는 최소 거리입니다. 값이 낮을수록 반응이 좋아 보일 수 있지만 오입력 가능성이 높아집니다."
   },
   "settings_popup_reduced_motion_swipe_label": {
-    "message": "Swipe threshold"
+    "message": "스와이프 임계값"
   },
   "settings_popup_reduced_motion_swipe_unit": {
     "message": "px"
   },
   "settings_popup_scan_popup_description": {
-    "message": "Text inside of popups can be scanned for definitions, which will open a new popup."
+    "message": "팝업 안의 텍스트를 정의 검색으로 스캔할 수 있으며, 새 팝업이 열립니다."
   },
   "settings_popup_scan_popup_label": {
-    "message": "Allow scanning popup content"
+    "message": "팝업 내용 스캔 허용"
   },
   "settings_popup_scan_search_description": {
-    "message": "Text on the <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">search page</a> can be scanned for definitions, which will open a popup."
+    "message": "<a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">검색 페이지</a>의 텍스트를 정의 검색으로 스캔할 수 있으며, 팝업이 열립니다."
   },
   "settings_popup_scan_search_label": {
-    "message": "Allow scanning search page content"
+    "message": "검색 페이지 내용 스캔 허용"
   },
   "settings_popup_scan_source_terms_label": {
-    "message": "Allow scanning popup source terms"
+    "message": "팝업 원본 용어 스캔 허용"
   },
   "settings_popup_search_from_results_label": {
-    "message": "Search terms when clicking text from the results list"
+    "message": "결과 목록의 텍스트를 클릭할 때 용어 검색"
   },
   "settings_popup_show_iframe_label": {
-    "message": "Show iframe popups in the root frame\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "루트 프레임에 iframe 팝업 표시\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "settings_popup_show_iframe_more_1": {
-    "message": "By default, scanning text inside of an embeded <code>&lt;iframe&gt;</code> element will open\n                    a new popup inside of that frame, which can sometimes be limiting due to the frame's size.\n                    When this option is enabled, the popup will be created in the root of the page, if possible."
+    "message": "기본적으로 임베드된 <code>&lt;iframe&gt;</code> 요소 안의 텍스트를 스캔하면\n                    해당 프레임 안에 새 팝업이 열리며, 프레임 크기 때문에 제한적일 수 있습니다.\n                    이 옵션을 사용하면 가능한 경우 페이지의 루트에 팝업이 생성됩니다."
   },
   "settings_popup_show_iframe_more_2": {
-    "message": "Note that when this option is enabled, there is a possibility that the extension can interfere with the underlying webpage, since it must send messages to the webpage in order to determine the correct position of the popup. This typically does not cause issues, but if anything unexpected happens, this option could be the cause."
+    "message": "이 옵션을 사용하면 팝업의 정확한 위치를 결정하기 위해 웹페이지에 메시지를 보내야 하므로 확장 프로그램이 기본 웹페이지와 충돌할 가능성이 있습니다. 일반적으로 문제를 일으키지 않지만, 예기치 않은 일이 발생한다면 이 옵션이 원인일 수 있습니다."
   },
   "settings_popup_size_auto_scale_label": {
-    "message": "Auto-scale\n                                <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "자동 스케일\n                                <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "settings_popup_size_auto_scale_more": {
-    "message": "Auto-scaling will scale the popup automatically based on the browser's zoom levels\n                            in order to keep the popup at a constant physical size, regardless of the zoom level.\n                            <em>Zoom level</em> uses the zoom level that is typically used on desktop browsers,\n                            and <em>Viewport</em> uses the zoom level that is typically used on mobile browsers."
+    "message": "자동 스케일은 브라우저의 확대/축소 수준에 따라 팝업을 자동으로 스케일하여,\n                            확대/축소 수준과 관계없이 일정한 물리적 크기를 유지합니다.\n                            <em>줌 수준</em>은 데스크톱 브라우저에서 일반적으로 사용하는 줌 수준을 사용하고,\n                            <em>뷰포트</em>는 모바일 브라우저에서 일반적으로 사용하는 줌 수준을 사용합니다."
   },
   "settings_popup_size_auto_scale_viewport": {
-    "message": "Viewport"
+    "message": "뷰포트"
   },
   "settings_popup_size_auto_scale_zoom": {
-    "message": "Zoom level"
+    "message": "줌 수준"
   },
   "settings_popup_size_display_full_width": {
-    "message": "Full width"
+    "message": "전체 너비"
   },
   "settings_popup_size_display_mode_description": {
-    "message": "Change the layout of the popup.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "팝업 레이아웃을 변경합니다.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">더 보기…</a>"
   },
   "settings_popup_size_display_mode_label": {
-    "message": "Display mode"
+    "message": "표시 모드"
   },
   "settings_popup_size_display_mode_more": {
-    "message": "The <em>Default</em> mode will position the popup relative to the scanned text.\n                    The <em>Full Width</em> mode will anchor the popup to the top or bottom of the screen and take up\n                    the full width of the screen, which can be useful on devices with touch screens."
+    "message": "<em>기본</em> 모드는 스캔한 텍스트에 상대적으로 팝업을 배치합니다.\n                    <em>전체 너비</em> 모드는 팝업을 화면 상단 또는 하단에 고정하고\n                    화면 전체 너비를 사용하며, 터치 스크린 장치에서 유용할 수 있습니다."
   },
   "settings_popup_size_heading": {
-    "message": "Popup Position & Size"
+    "message": "팝업 위치 및 크기"
   },
   "settings_popup_size_horizontal_offset_description": {
-    "message": "Change the distance the popup is placed relative to horizontal text."
+    "message": "가로 텍스트에 대한 팝업의 위치 거리를 변경합니다."
   },
   "settings_popup_size_horizontal_offset_label": {
-    "message": "Horizontal text offset"
+    "message": "가로 텍스트 오프셋"
   },
   "settings_popup_size_horizontal_position_description": {
-    "message": "Change where the popup is positioned relative to horizontal text."
+    "message": "가로 텍스트에 대해 팝업이 위치하는 곳을 변경합니다."
   },
   "settings_popup_size_horizontal_position_label": {
-    "message": "Horizontal text positioning"
+    "message": "가로 텍스트 위치"
   },
   "settings_popup_size_position_above": {
-    "message": "Above text"
+    "message": "텍스트 위"
   },
   "settings_popup_size_position_below": {
-    "message": "Below text"
+    "message": "텍스트 아래"
   },
   "settings_popup_size_scale_description": {
-    "message": "Control the scaling factor of the popup."
+    "message": "팝업의 스케일 팩터를 조정합니다."
   },
   "settings_popup_size_scale_label": {
-    "message": "Scale"
+    "message": "스케일"
   },
   "settings_popup_size_size_description": {
-    "message": "Control the size of the popup, in pixels."
+    "message": "팝업의 크기를 픽셀로 조정합니다."
   },
   "settings_popup_size_size_label": {
-    "message": "Size"
+    "message": "크기"
   },
   "settings_popup_size_vertical_after": {
-    "message": "After reading direction"
+    "message": "읽기 방향 이후"
   },
   "settings_popup_size_vertical_before": {
-    "message": "Before reading direction"
+    "message": "읽기 방향 이전"
   },
   "settings_popup_size_vertical_left": {
-    "message": "Left of text"
+    "message": "텍스트 왼쪽"
   },
   "settings_popup_size_vertical_offset_description": {
-    "message": "Change the distance the popup is placed relative to vertical text."
+    "message": "세로 텍스트에 대한 팝업의 위치 거리를 변경합니다."
   },
   "settings_popup_size_vertical_offset_label": {
-    "message": "Vertical text offset"
+    "message": "세로 텍스트 오프셋"
   },
   "settings_popup_size_vertical_position_description": {
-    "message": "Change where the popup is positioned relative to vertical text."
+    "message": "세로 텍스트에 대해 팝업이 위치하는 곳을 변경합니다."
   },
   "settings_popup_size_vertical_position_label": {
-    "message": "Vertical text positioning"
+    "message": "세로 텍스트 위치"
   },
   "settings_popup_size_vertical_right": {
-    "message": "Right of text"
+    "message": "텍스트 오른쪽"
   },
   "settings_popup_size_vertical_same_as_horizontal": {
-    "message": "Same as horizontal text"
+    "message": "가로 텍스트와 동일"
   },
   "settings_profile_active_description": {
     "message": "스캔에 사용되는 활성 프로필을 전환합니다."
@@ -1356,49 +1356,49 @@
     "message": "프로필"
   },
   "settings_result_average_frequencies_description": {
-    "message": "Compress frequency tags into one \"Average\" frequency tag based on the harmonic mean."
+    "message": "조화 평균을 기반으로 빈도 태그를 하나의 \"평균\" 빈도 태그로 압축합니다."
   },
   "settings_result_average_frequencies_label": {
-    "message": "Average frequencies"
+    "message": "평균 빈도"
   },
   "settings_result_display_heading": {
-    "message": "Result Display"
+    "message": "결과 표시"
   },
   "settings_result_grouping_description": {
-    "message": "Change how related results are grouped.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "관련 결과를 그룹화하는 방법을 변경합니다.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">더 보기…</a>"
   },
   "settings_result_grouping_label": {
-    "message": "Result grouping mode"
+    "message": "결과 그룹화 모드"
   },
   "settings_result_grouping_more_none": {
-    "message": "<strong>No grouping</strong> -\n                        Every definition will be listed as a separate entry."
+    "message": "<strong>그룹화 없음</strong> -\n                        각 정의가 별도의 항목으로 나열됩니다."
   },
   "settings_result_grouping_more_related_1": {
-    "message": "<strong>Group related terms</strong> -\n                            Related terms that share the same definitions will be grouped together."
+    "message": "<strong>관련 용어 그룹화</strong> -\n                            같은 정의를 공유하는 관련 용어는 함께 그룹화됩니다."
   },
   "settings_result_grouping_more_related_2": {
-    "message": "The <em>Primary dictionary</em> option should be assigned to a dictionary which contains related term information,\n                            and configuring the <em>Secondary dictionaries</em> will allow definitions for the related terms to be\n                            included from other dictionaries."
+    "message": "<em>기본 사전</em> 옵션은 관련 용어 정보를 포함하는 사전에 지정되어야 하며, <em>보조 사전</em>을 구성하면 관련 용어의 정의를 다른 사전에서 포함할 수 있습니다."
   },
   "settings_result_grouping_more_related_warning": {
-    "message": "Not all dictionaries are able to be selected as the <em>Primary dictionary</em>."
+    "message": "모든 사전을 <em>기본 사전</em>으로 선택할 수 있는 것은 아닙니다."
   },
   "settings_result_grouping_more_term_reading": {
-    "message": "<strong>Group term-reading pairs</strong> -\n                        Definitions for the same term with the same reading will be grouped together."
+    "message": "<strong>용어-읽기 쌍 그룹화</strong> -\n                        같은 용어와 같은 읽기의 정의가 함께 그룹화됩니다."
   },
   "settings_result_grouping_none": {
-    "message": "No grouping"
+    "message": "그룹화 없음"
   },
   "settings_result_grouping_primary_dictionary": {
-    "message": "Primary dictionary"
+    "message": "기본 사전"
   },
   "settings_result_grouping_related": {
-    "message": "Group related terms"
+    "message": "관련 용어 그룹화"
   },
   "settings_result_grouping_secondary_dictionaries": {
-    "message": "Secondary dictionaries…"
+    "message": "보조 사전…"
   },
   "settings_result_grouping_term_reading": {
-    "message": "Group term-reading pairs"
+    "message": "용어-읽기 쌍 그룹화"
   },
   "settings_scanning_advanced_inputs_label": {
     "message": "고급 스캔 입력 설정… <span class=\"light no-wrap\">(<span class=\"scanning-input-count\">#</span>개 정의됨)</span>"
@@ -1512,55 +1512,55 @@
     "message": "Firefox는 <code>zoom</code> 속성을 구현하지 않으므로 이 설정은 Firefox에서 효과가 없습니다."
   },
   "settings_search_window_heading": {
-    "message": "Search Window"
+    "message": "검색 창"
   },
   "settings_search_window_left_description": {
-    "message": "Control the left position of the window, in pixels."
+    "message": "창의 왼쪽 위치를 픽셀 단위로 조정합니다."
   },
   "settings_search_window_left_label": {
-    "message": "Left position"
+    "message": "왼쪽 위치"
   },
   "settings_search_window_native_window_label": {
-    "message": "Use a native browser window instead of an embedded popup\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "임베드된 팝업 대신 네이티브 브라우저 창 사용\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "settings_search_window_native_window_more": {
-    "message": "Instead of showing definitions in a popup embedded into the webpage, a native browser window containing the popup content will be opened instead. This window will be shared across all tabs."
+    "message": "웹페이지에 임베드된 팝업에 정의를 표시하는 대신, 팝업 콘텐츠가 포함된 네이티브 브라우저 창이 열립니다. 이 창은 모든 탭에서 공유됩니다."
   },
   "settings_search_window_open_link": {
-    "message": "Open…"
+    "message": "열기…"
   },
   "settings_search_window_size_description": {
-    "message": "Control the size of the window, in pixels."
+    "message": "창의 크기를 픽셀 단위로 조정합니다."
   },
   "settings_search_window_size_label": {
-    "message": "Size"
+    "message": "크기"
   },
   "settings_search_window_state_fullscreen": {
-    "message": "Fullscreen"
+    "message": "전체 화면"
   },
   "settings_search_window_state_maximized": {
-    "message": "Maximized"
+    "message": "최대화"
   },
   "settings_search_window_sticky_header_description": {
-    "message": "Search header stays on the page when scrolling down."
+    "message": "스크롤할 때 검색 헤더가 페이지에 고정됩니다."
   },
   "settings_search_window_sticky_header_label": {
-    "message": "Sticky search header"
+    "message": "고정 검색 헤더"
   },
   "settings_search_window_style_description": {
-    "message": "Change the appearance of the window."
+    "message": "창의 모양을 변경합니다."
   },
   "settings_search_window_style_label": {
-    "message": "Window style"
+    "message": "창 스타일"
   },
   "settings_search_window_top_description": {
-    "message": "Control the top position of the window, in pixels."
+    "message": "창의 위쪽 위치를 픽셀 단위로 조정합니다."
   },
   "settings_search_window_top_label": {
-    "message": "Top position"
+    "message": "위쪽 위치"
   },
   "settings_search_window_type_popup": {
-    "message": "Popup"
+    "message": "팝업"
   },
   "settings_security_heading": {
     "message": "보안"
@@ -1659,7 +1659,7 @@
     "message": "로그인됨"
   },
   "settings_sottaku_status_signed_in_as": {
-    "message": "{0}(으)로 로그인됨"
+    "message": "$1(으)로 로그인됨"
   },
   "settings_sottaku_status_signed_out": {
     "message": "Sottaku에서 로그아웃됨"
@@ -1677,58 +1677,58 @@
     "message": "사용자 이름 또는 이메일"
   },
   "settings_status_tasks_in_progress": {
-    "message": "Tasks in progress:"
+    "message": "진행 중인 작업:"
   },
   "settings_text_parsing_heading": {
-    "message": "Text Parsing"
+    "message": "텍스트 분석"
   },
   "settings_text_parsing_info_1": {
-    "message": "Sottaku-Yomitan is able to scan the sentence surrounding a term and parse individual words\n                of the query on the <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">search page</a>.\n                This information can also be added to Anki cards to provide additional context."
+    "message": "Sottaku-Yomitan은 용어 주변의 문장을 스캔하고\n                <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">검색 페이지</a>에서 쿼리의 개별 단어를 분석할 수 있습니다.\n                이 정보는 추가 문맥을 제공하기 위해 Anki 카드에 추가할 수도 있습니다."
   },
   "settings_text_parsing_internal_description": {
-    "message": "Sentence words are parsed using Sottaku-Yomitan's dictionaries.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "문장의 단어는 Sottaku-Yomitan의 사전을 사용해 분석됩니다.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">더 보기…</a>"
   },
   "settings_text_parsing_internal_label": {
-    "message": "Parse sentences using Sottaku-Yomitan's internal parser"
+    "message": "Sottaku-Yomitan의 내부 파서로 문장 분석"
   },
   "settings_text_parsing_internal_more": {
-    "message": "Sottaku-Yomitan's internal parser is a simple algorithm which can parse sentences using the installed dictionaries. It works by repeatedly detecting the longest term at the start of the sentence and advancing until no text remains. This provides decent results for the general case, but since grammatical structure is not taken into account, it can sometimes yield incorrect segmentation."
+    "message": "Sottaku-Yomitan의 내부 파서는 설치된 사전을 사용해 문장을 분석할 수 있는 간단한 알고리즘입니다. 문장 시작 부분에서 가장 긴 용어를 반복적으로 감지한 뒤 텍스트가 남지 않을 때까지 진행합니다. 이는 일반적인 경우에 괜찮은 결과를 제공하지만, 문법 구조를 고려하지 않기 때문에 때때로 잘못된 분절이 발생할 수 있습니다."
   },
   "settings_text_parsing_mecab_description": {
-    "message": "Sentence words are parsed using a third-party program. Japanese only."
+    "message": "문장의 단어는 타사 프로그램을 사용해 분석됩니다. 일본어 전용."
   },
   "settings_text_parsing_mecab_disclaimer": {
-    "message": "This option may send search query data outside of Sottaku-Yomitan for parsing<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">Privacy Policy</a>)</span>.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "이 옵션은 분석을 위해 검색 쿼리 데이터를 Sottaku-Yomitan 외부로 전송할 수 있습니다<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">개인정보 처리방침</a>)</span>.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">더 보기…</a>"
   },
   "settings_text_parsing_mecab_label": {
-    "message": "Parse sentences using <a href=\"https://en.wikipedia.org/wiki/MeCab\" rel=\"noopener noreferrer\" target=\"_blank\">MeCab</a>"
+    "message": "<a href=\"https://en.wikipedia.org/wiki/MeCab\" rel=\"noopener noreferrer\" target=\"_blank\">MeCab</a>을 사용하여 문장 분석"
   },
   "settings_text_parsing_mecab_more_1": {
-    "message": "MeCab is a third-party program which uses its own dictionaries and parsing algorithm to decompose sentences into individual words. MeCab may provide more accurate parsing results than Sottaku-Yomitan's internal parser."
+    "message": "MeCab은 자체 사전과 분석 알고리즘을 사용해 문장을 개별 단어로 분해하는 타사 프로그램입니다. MeCab은 Sottaku-Yomitan의 내부 파서보다 더 정확한 분석 결과를 제공할 수 있습니다."
   },
   "settings_text_parsing_mecab_more_2": {
-    "message": "In order for Sottaku-Yomitan to use it, both MeCab and a native messaging component must be installed.\n                    A setup guide can be found <a href=\"https://github.com/yomidevs/yomitan-mecab-installer/blob/master/README.md\" rel=\"noopener noreferrer\" target=\"_blank\">here</a>."
+    "message": "Sottaku-Yomitan이 이를 사용하려면 MeCab과 네이티브 메시징 구성 요소가 모두 설치되어야 합니다.\n                    설정 가이드는 <a href=\"https://github.com/yomidevs/yomitan-mecab-installer/blob/master/README.md\" rel=\"noopener noreferrer\" target=\"_blank\">여기</a>에서 확인할 수 있습니다."
   },
   "settings_text_parsing_scan_extent_description": {
-    "message": "Adjust how many characters are bidirectionally scanned to form a sentence."
+    "message": "문장을 구성하기 위해 양방향으로 스캔할 문자 수를 조정합니다."
   },
   "settings_text_parsing_scan_extent_label": {
-    "message": "Sentence scanning extent"
+    "message": "문장 스캔 범위"
   },
   "settings_text_parsing_spacing_label": {
-    "message": "Show space between parsed words"
+    "message": "분석된 단어 사이에 공백 표시"
   },
   "settings_text_parsing_termination_custom": {
-    "message": "Custom"
+    "message": "사용자 지정"
   },
   "settings_text_parsing_termination_custom_no_newlines": {
-    "message": "Custom, no newlines"
+    "message": "사용자 지정(줄바꿈 없음)"
   },
   "settings_text_parsing_termination_label": {
-    "message": "Sentence termination characters"
+    "message": "문장 종료 문자"
   },
   "settings_text_parsing_termination_newlines": {
-    "message": "Newlines only"
+    "message": "줄바꿈만"
   },
   "settings_translation_heading": {
     "message": "번역"
@@ -1749,222 +1749,222 @@
     "message": "단어"
   },
   "sottaku_action_title_missing_id": {
-    "message": "Missing Sottaku question id"
+    "message": "Sottaku 질문 ID가 없음"
   },
   "sottaku_action_title_sign_in": {
-    "message": "Sign in to Sottaku first"
+    "message": "먼저 Sottaku에 로그인하세요"
   },
   "sottaku_locale_automatic": {
-    "message": "Automatic (use Sottaku account language)"
+    "message": "자동 (Sottaku 계정 언어 사용)"
   },
   "sottaku_request_button": {
-    "message": "Request dictionary entry"
+    "message": "사전 항목 요청"
   },
   "sottaku_request_button_requested": {
-    "message": "Requested"
+    "message": "요청됨"
   },
   "sottaku_request_button_requesting": {
-    "message": "Requesting..."
+    "message": "요청 중..."
   },
   "sottaku_request_button_retry": {
-    "message": "Request translation"
+    "message": "번역 요청"
   },
   "sottaku_request_button_title_submitted": {
-    "message": "Request submitted to Sottaku"
+    "message": "요청이 Sottaku에 제출되었습니다"
   },
   "sottaku_save_button": {
-    "message": "Save to Sottaku"
+    "message": "Sottaku에 저장"
   },
   "sottaku_save_button_saved": {
-    "message": "Saved"
+    "message": "저장됨"
   },
   "sottaku_save_button_saving": {
-    "message": "Saving..."
+    "message": "저장 중..."
   },
   "sottaku_save_button_title_already_saved": {
-    "message": "Already saved to Sottaku"
+    "message": "이미 Sottaku에 저장됨"
   },
   "sottaku_save_button_title_saved": {
-    "message": "Added to your Sottaku flashcards"
+    "message": "Sottaku 플래시카드에 추가됨"
   },
   "status_footer_close": {
-    "message": "Close"
+    "message": "닫기"
   },
   "status_footer_tasks_in_progress": {
-    "message": "Tasks in progress:"
+    "message": "진행 중인 작업:"
   },
   "support_heading": {
-    "message": "Support Sottaku-Yomitan ❤️"
+    "message": "Sottaku-Yomitan 지원하기 ❤️"
   },
   "support_list_contribute": {
-    "message": "Contribute to the Sottaku-Yomitan project! Start by reading our <a href=\"https://github.com/sottakuapp/sottaku-yomitan/blob/master/CONTRIBUTING.md\" rel=\"noreferrer noopener\">Contribution Guidelines</a>."
+    "message": "Sottaku-Yomitan 프로젝트에 기여하세요! 먼저 <a href=\"https://github.com/sottakuapp/sottaku-yomitan/blob/master/CONTRIBUTING.md\" rel=\"noreferrer noopener\">기여 가이드라인</a>을 읽어보세요."
   },
   "support_list_feedback": {
-    "message": "Report any bugs or feedback on our <a href=\"https://github.com/sottakuapp/sottaku-yomitan/issues/new/choose\" rel=\"noreferrer noopener\">GitHub Issues</a> or email <a href=\"mailto:hello@sottaku.app\">hello@sottaku.app</a>."
+    "message": "<a href=\"https://github.com/sottakuapp/sottaku-yomitan/issues/new/choose\" rel=\"noreferrer noopener\">GitHub Issues</a>에서 버그나 피드백을 보고하거나 <a href=\"mailto:hello@sottaku.app\">hello@sottaku.app</a>로 이메일을 보내주세요."
   },
   "support_list_star": {
-    "message": "Star the project on <a href=\"https://github.com/sottakuapp/sottaku-yomitan\" rel=\"noreferrer noopener\">GitHub</a> and share it with friends."
+    "message": "<a href=\"https://github.com/sottakuapp/sottaku-yomitan\" rel=\"noreferrer noopener\">GitHub</a>에서 프로젝트에 별표를 주고 친구들과 공유하세요."
   },
   "support_subheading": {
-    "message": "Here are some ways to support Sottaku-Yomitan:"
+    "message": "Sottaku-Yomitan을 지원하는 방법:"
   },
   "template_anki_overwrite_append_title": {
-    "message": "Insert new value after existing"
+    "message": "기존 값 뒤에 새 값을 삽입"
   },
   "template_anki_overwrite_available_title": {
-    "message": "Overwrite if new value is not empty"
+    "message": "새 값이 비어 있지 않으면 덮어쓰기"
   },
   "template_anki_overwrite_fill_title": {
-    "message": "Overwrite if existing value is empty"
+    "message": "기존 값이 비어 있으면 덮어쓰기"
   },
   "template_anki_overwrite_overwrite_title": {
-    "message": "Overwrite even if new value is empty"
+    "message": "새 값이 비어 있어도 덮어쓰기"
   },
   "template_anki_overwrite_prepend_title": {
-    "message": "Insert new value before existing"
+    "message": "기존 값 앞에 새 값을 삽입"
   },
   "template_anki_overwrite_skip_title": {
-    "message": "Keep existing value"
+    "message": "기존 값 유지"
   },
   "template_audio_source_tts_anki_warning": {
-    "message": "Not supported in Anki"
+    "message": "Anki에서 지원되지 않음"
   },
   "template_dictionary_integrity_error": {
-    "message": "Dictionary may not have been imported properly"
+    "message": "사전이 제대로 가져와지지 않았을 수 있습니다"
   },
   "template_dictionary_update_available": {
-    "message": "Update available"
+    "message": "업데이트 사용 가능"
   },
   "template_hotkey_no_input": {
-    "message": "No input"
+    "message": "입력 없음"
   },
   "template_profile_name_placeholder": {
-    "message": "Profile name"
+    "message": "프로필 이름"
   },
   "template_scan_no_inputs": {
-    "message": "No inputs"
+    "message": "입력 없음"
   },
   "template_scan_touch_min_time": {
-    "message": "Minimum Touch Time <span class=\"light\">(in milliseconds)</span>:"
+    "message": "최소 터치 시간 <span class=\"light\">(밀리초)</span>:"
   },
   "templates_modals_title": {
-    "message": "Templates"
+    "message": "템플릿"
   },
   "templates_settings_title": {
-    "message": "Templates"
+    "message": "템플릿"
   },
   "theme_option_auto": {
-    "message": "Auto"
+    "message": "자동"
   },
   "theme_option_browser": {
-    "message": "Browser"
+    "message": "브라우저"
   },
   "theme_option_dark": {
-    "message": "Dark"
+    "message": "다크"
   },
   "theme_option_light": {
-    "message": "Light"
+    "message": "라이트"
   },
   "welcome_audio_enable_description": {
-    "message": "Show a clickable speaker icon next to search results."
+    "message": "검색 결과 옆에 클릭 가능한 스피커 아이콘을 표시합니다."
   },
   "welcome_audio_enable_disclaimer": {
-    "message": "This option may send term, reading, and/or language outside of Sottaku-Yomitan to fetch audio when the speaker icon is clicked<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">Privacy Policy</a>)</span>.\n                    <div data-show-for-browser=\"firefox firefox-mobile\">Disabling this option will disallow pronunciation audio playback for any terms searched.</div>"
+    "message": "스피커 아이콘을 클릭하면 오디오를 가져오기 위해 용어, 읽기 및/또는 언어가 Sottaku-Yomitan 외부로 전송될 수 있습니다<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">개인정보 처리방침</a>)</span>.\n                    <div data-show-for-browser=\"firefox firefox-mobile\">이 옵션을 비활성화하면 검색한 모든 용어의 발음 오디오 재생이 불가능합니다.</div>"
   },
   "welcome_audio_enable_label": {
-    "message": "Enable audio playback for terms"
+    "message": "용어 음성 재생 사용"
   },
   "welcome_basic_customization_heading": {
-    "message": "Basic customization"
+    "message": "기본 사용자 지정"
   },
   "welcome_data_transmission_heading": {
-    "message": "Data Transmission"
+    "message": "데이터 전송"
   },
   "welcome_get_started_connect_account": {
-    "message": "Connect your Sottaku account to sync dictionaries, audio, and flashcards"
+    "message": "사전, 오디오, 플래시카드를 동기화하려면 Sottaku 계정을 연결하세요"
   },
   "welcome_get_started_heading": {
-    "message": "Here are some basics to get started"
+    "message": "시작을 위한 기본 안내"
   },
   "welcome_get_started_news_link": {
-    "message": "New to Sottaku-Yomitan? Visit sottaku.app for news and tips."
+    "message": "Sottaku-Yomitan이 처음이신가요? 소식과 팁은 sottaku.app에서 확인하세요."
   },
   "welcome_get_started_quick_start": {
-    "message": "Sottaku-Yomitan Quick Start Guide"
+    "message": "Sottaku-Yomitan 빠른 시작 가이드"
   },
   "welcome_heading": {
-    "message": "Welcome to Sottaku-Yomitan!"
+    "message": "Sottaku-Yomitan에 오신 것을 환영합니다!"
   },
   "welcome_locale_description": {
-    "message": "Language used for translations returned by Sottaku."
+    "message": "Sottaku가 반환하는 번역에 사용되는 언어."
   },
   "welcome_locale_label": {
-    "message": "Locale"
+    "message": "언어"
   },
   "welcome_locale_setup_description": {
-    "message": "Sottaku already provides Japanese and Korean lookups through your account; import additional dictionaries if you want offline access or other languages."
+    "message": "Sottaku는 계정을 통해 일본어와 한국어 조회를 이미 제공합니다. 오프라인 접근이나 다른 언어가 필요하다면 추가 사전을 가져오세요."
   },
   "welcome_locale_setup_heading": {
-    "message": "Locale setup"
+    "message": "언어 설정"
   },
   "welcome_more_customization_link": {
-    "message": "More customization options are available on the Settings page"
+    "message": "더 많은 사용자 지정 옵션은 설정 페이지에서 사용할 수 있습니다"
   },
   "welcome_permissions_disabled_warning": {
-    "message": "Sottaku-Yomitan features will be limited if the recommended permissions are not enabled."
+    "message": "권장 권한이 활성화되지 않으면 Sottaku-Yomitan 기능이 제한됩니다."
   },
   "welcome_permissions_enable_optional_description": {
-    "message": "This allows Sottaku-Yomitan to read the clipboard and communicate with external programs."
+    "message": "이렇게 하면 Sottaku-Yomitan이 클립보드를 읽고 외부 프로그램과 통신할 수 있습니다."
   },
   "welcome_permissions_enable_optional_label": {
-    "message": "Enable optional permissions"
+    "message": "선택 권한 활성화"
   },
   "welcome_permissions_enable_recommended_description": {
-    "message": "This allows Sottaku-Yomitan to scan text from most sites."
+    "message": "이렇게 하면 Sottaku-Yomitan이 대부분의 사이트에서 텍스트를 스캔할 수 있습니다."
   },
   "welcome_permissions_enable_recommended_label": {
-    "message": "Enable recommended permissions"
+    "message": "권장 권한 활성화"
   },
   "welcome_permissions_full_enabled": {
-    "message": "All Sottaku-Yomitan features are available."
+    "message": "Sottaku-Yomitan의 모든 기능을 사용할 수 있습니다."
   },
   "welcome_permissions_more_info_chrome": {
-    "message": "Further configuration is available on the <a href=\"/permissions.html\" rel=\"noopener\">Permissions page</a> and the web browser's <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">extension settings page</a>."
+    "message": "추가 설정은 <a href=\"/permissions.html\" rel=\"noopener\">권한 페이지</a> 및 브라우저의 <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">확장 프로그램 설정 페이지</a>에서 확인할 수 있습니다."
   },
   "welcome_permissions_more_info_firefox": {
-    "message": "Further configuration is available on the <a href=\"/permissions.html\" rel=\"noopener\">Permissions page</a> and the web browser's extension settings page."
+    "message": "추가 설정은 <a href=\"/permissions.html\" rel=\"noopener\">권한 페이지</a> 및 브라우저의 확장 프로그램 설정 페이지에서 확인할 수 있습니다."
   },
   "welcome_permissions_recommended_enabled": {
-    "message": "Essential Sottaku-Yomitan features are available."
+    "message": "필수 Sottaku-Yomitan 기능을 사용할 수 있습니다."
   },
   "welcome_recommended_permissions_heading": {
-    "message": "Recommended Permissions (Important)"
+    "message": "권장 권한 (중요)"
   },
   "welcome_scan_middle_mouse_description": {
-    "message": "Hold the middle mouse button while moving the cursor to scan text."
+    "message": "커서를 움직이는 동안 가운데 마우스 버튼을 누른 채 텍스트를 스캔합니다."
   },
   "welcome_scan_middle_mouse_label": {
-    "message": "Scan using middle mouse button"
+    "message": "가운데 마우스 버튼으로 스캔"
   },
   "welcome_scan_modifier_description": {
-    "message": "Hold a key while moving the cursor to scan text."
+    "message": "커서를 움직이는 동안 키를 누르고 있으면 텍스트를 스캔합니다."
   },
   "welcome_scan_modifier_label": {
-    "message": "Scan modifier key"
+    "message": "스캔 보조 키"
   },
   "welcome_show_guide_label": {
-    "message": "Show this welcome guide on browser startup"
+    "message": "브라우저 시작 시 이 환영 가이드 표시"
   },
   "welcome_text_language_description": {
-    "message": "Used for offline dictionary features and preview tooling."
+    "message": "오프라인 사전 기능과 미리보기 도구에 사용됩니다."
   },
   "welcome_text_language_label": {
-    "message": "Text language"
+    "message": "텍스트 언어"
   },
   "welcome_theme_description": {
-    "message": "Adjust the style of Sottaku-Yomitan."
+    "message": "Sottaku-Yomitan의 스타일을 조정합니다."
   },
   "welcome_theme_label": {
-    "message": "Theme"
+    "message": "테마"
   }
 }

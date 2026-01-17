@@ -75,13 +75,13 @@
     "message": "Immer"
   },
   "common_auto": {
-    "message": "Auto"
+    "message": "Automatisch"
   },
   "common_bottom": {
     "message": "Unten"
   },
   "common_browser": {
-    "message": "Browser"
+    "message": "Webbrowser"
   },
   "common_close": {
     "message": "Schließen"
@@ -99,7 +99,7 @@
     "message": "Höhe"
   },
   "common_info": {
-    "message": "Info…"
+    "message": "Informationen…"
   },
   "common_left": {
     "message": "Links"
@@ -156,7 +156,7 @@
     "message": "Wörterbuch wird gelöscht..."
   },
   "dictionary_details_attribution": {
-    "message": "Attribution"
+    "message": "Quellenangabe"
   },
   "dictionary_details_author": {
     "message": "Autor"
@@ -195,7 +195,7 @@
     "message": "Term-Metadatenanzahl"
   },
   "dictionary_details_url": {
-    "message": "URL"
+    "message": "URL-Adresse"
   },
   "dictionary_extra_data_item_plural": {
     "message": "$1 Elemente"
@@ -246,7 +246,7 @@
     "message": "Term-Anzahl: $1"
   },
   "display_dictionary_url": {
-    "message": "URL: $1"
+    "message": "URL-Adresse: $1"
   },
   "display_hotkey_add_note": {
     "message": "{0} hinzufügen ({0})"
@@ -327,7 +327,7 @@
     "message": "Unbekannt"
   },
   "info_general_browser": {
-    "message": "Browser: <span id=\"browser\"></span>"
+    "message": "Webbrowser: <span id=\"browser\"></span>"
   },
   "info_general_export_settings": {
     "message": "<a id=\"settings-export-button\" tabindex=\"0\">Einstellungen exportieren</a>"
@@ -921,7 +921,7 @@
     "message": "Lesemodus"
   },
   "settings_appearance_reading_mode_romaji": {
-    "message": "Romaji"
+    "message": "Rōmaji"
   },
   "settings_appearance_selection_indicator_description": {
     "message": "Ändern, wie der ausgewählte Definitionseintrag visuell hervorgehoben wird."
@@ -975,7 +975,7 @@
     "message": "Audiowiedergabe für Begriffe aktivieren"
   },
   "settings_audio_fallback_bloop": {
-    "message": "Bloop"
+    "message": "Blubb"
   },
   "settings_audio_fallback_click": {
     "message": "Klick"
@@ -1053,7 +1053,7 @@
     "message": "Nur Abfrage aktualisieren"
   },
   "settings_collapsible_varies": {
-    "message": "Varies"
+    "message": "Variiert"
   },
   "settings_general_api_css_bypass_label": {
     "message": "CSS-Bereinigung umgehen zulassen"
@@ -1188,160 +1188,160 @@
     "message": "Übersetzung"
   },
   "settings_popup_auto_hide_description": {
-    "message": "When an existing popup is present, upon scanning again, hide the existing popup even if no definitions are found when scanning again."
+    "message": "Wenn bereits ein Popup vorhanden ist, wird es beim erneuten Scannen ausgeblendet, auch wenn keine Definitionen gefunden werden."
   },
   "settings_popup_auto_hide_label": {
-    "message": "Auto-hide search popup"
+    "message": "Such-Popup automatisch ausblenden"
   },
   "settings_popup_delay_label": {
-    "message": "Delay <span class=\"light\">(in milliseconds)</span>"
+    "message": "Verzögerung <span class=\"light\">(in Millisekunden)</span>"
   },
   "settings_popup_heading": {
-    "message": "Popup Behavior"
+    "message": "Popup-Verhalten"
   },
   "settings_popup_hide_on_exit_description": {
-    "message": "When the cursor exits the popup, the popup will be hidden."
+    "message": "Wenn der Cursor das Popup verlässt, wird es ausgeblendet."
   },
   "settings_popup_hide_on_exit_label": {
-    "message": "Hide popup on cursor exit"
+    "message": "Popup beim Verlassen mit dem Cursor ausblenden"
   },
   "settings_popup_max_children_description": {
-    "message": "Change the limit on the number of popups that may be generated."
+    "message": "Ändern Sie die Obergrenze für die Anzahl der Popups, die erzeugt werden können."
   },
   "settings_popup_max_children_label": {
-    "message": "Maximum number of child popups"
+    "message": "Maximale Anzahl von untergeordneten Popups"
   },
   "settings_popup_reduced_motion_description": {
-    "message": "Scrolls by a configurable height (similar to pagination), reducing animations. Useful on e-readers and e-ink screens."
+    "message": "Scrollt um eine konfigurierbare Höhe (ähnlich einer Seitennavigation) und reduziert Animationen. Nützlich für E-Reader und E-Ink-Bildschirme."
   },
   "settings_popup_reduced_motion_label": {
-    "message": "Reduced motion scrolling"
+    "message": "Scrollen mit reduzierter Bewegung"
   },
   "settings_popup_reduced_motion_scale_description": {
-    "message": "Percentage of the popup's height scrolled per step."
+    "message": "Prozentualer Anteil der Popup-Höhe, der pro Schritt gescrollt wird."
   },
   "settings_popup_reduced_motion_scale_label": {
-    "message": "Scale"
+    "message": "Skalierung"
   },
   "settings_popup_reduced_motion_swipe_description": {
-    "message": "Minimum distance on touch devices for a swipe to be recognized as scrolling. Lower values can feel more responsive but increase the chance for misinputs."
+    "message": "Mindestdistanz auf Touch-Geräten, damit eine Wischbewegung als Scrollen erkannt wird. Niedrigere Werte wirken reaktionsschneller, erhöhen aber die Wahrscheinlichkeit von Fehleingaben."
   },
   "settings_popup_reduced_motion_swipe_label": {
-    "message": "Swipe threshold"
+    "message": "Wischschwelle"
   },
   "settings_popup_reduced_motion_swipe_unit": {
     "message": "px"
   },
   "settings_popup_scan_popup_description": {
-    "message": "Text inside of popups can be scanned for definitions, which will open a new popup."
+    "message": "Text innerhalb von Popups kann nach Definitionen gescannt werden, was ein neues Popup öffnet."
   },
   "settings_popup_scan_popup_label": {
-    "message": "Allow scanning popup content"
+    "message": "Scannen von Popup-Inhalten erlauben"
   },
   "settings_popup_scan_search_description": {
-    "message": "Text on the <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">search page</a> can be scanned for definitions, which will open a popup."
+    "message": "Text auf der <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">Suchseite</a> kann nach Definitionen gescannt werden, was ein Popup öffnet."
   },
   "settings_popup_scan_search_label": {
-    "message": "Allow scanning search page content"
+    "message": "Scannen von Inhalten der Suchseite erlauben"
   },
   "settings_popup_scan_source_terms_label": {
-    "message": "Allow scanning popup source terms"
+    "message": "Scannen der Popup-Quellbegriffe erlauben"
   },
   "settings_popup_search_from_results_label": {
-    "message": "Search terms when clicking text from the results list"
+    "message": "Begriffe suchen, wenn Text aus der Ergebnisliste angeklickt wird"
   },
   "settings_popup_show_iframe_label": {
-    "message": "Show iframe popups in the root frame\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "iframe-Popups im Root-Frame anzeigen\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "settings_popup_show_iframe_more_1": {
-    "message": "By default, scanning text inside of an embeded <code>&lt;iframe&gt;</code> element will open\n                    a new popup inside of that frame, which can sometimes be limiting due to the frame's size.\n                    When this option is enabled, the popup will be created in the root of the page, if possible."
+    "message": "Standardmäßig öffnet das Scannen von Text innerhalb eines eingebetteten <code>&lt;iframe&gt;</code>-Elements\n                    ein neues Popup innerhalb dieses Frames, was aufgrund der Framegröße manchmal einschränkend sein kann.\n                    Wenn diese Option aktiviert ist, wird das Popup nach Möglichkeit im Root der Seite erstellt."
   },
   "settings_popup_show_iframe_more_2": {
-    "message": "Note that when this option is enabled, there is a possibility that the extension can interfere with the underlying webpage, since it must send messages to the webpage in order to determine the correct position of the popup. This typically does not cause issues, but if anything unexpected happens, this option could be the cause."
+    "message": "Beachten Sie, dass bei aktivierter Option die Erweiterung die zugrunde liegende Webseite beeinflussen kann, da sie Nachrichten an die Webseite senden muss, um die korrekte Position des Popups zu bestimmen. Das verursacht normalerweise keine Probleme, aber wenn etwas Unerwartetes passiert, könnte diese Option die Ursache sein."
   },
   "settings_popup_size_auto_scale_label": {
-    "message": "Auto-scale\n                                <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "Auto-Skalierung\n                                <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "settings_popup_size_auto_scale_more": {
-    "message": "Auto-scaling will scale the popup automatically based on the browser's zoom levels\n                            in order to keep the popup at a constant physical size, regardless of the zoom level.\n                            <em>Zoom level</em> uses the zoom level that is typically used on desktop browsers,\n                            and <em>Viewport</em> uses the zoom level that is typically used on mobile browsers."
+    "message": "Die Auto-Skalierung skaliert das Popup automatisch anhand der Zoomstufen des Browsers,\n                            um das Popup unabhängig vom Zoomniveau in einer konstanten physischen Größe zu halten.\n                            <em>Zoomstufe</em> verwendet die Zoomstufe, die typischerweise auf Desktop-Browsern verwendet wird,\n                            und <em>Viewport</em> verwendet die Zoomstufe, die typischerweise auf mobilen Browsern verwendet wird."
   },
   "settings_popup_size_auto_scale_viewport": {
-    "message": "Viewport"
+    "message": "Anzeigebereich"
   },
   "settings_popup_size_auto_scale_zoom": {
-    "message": "Zoom level"
+    "message": "Zoomstufe"
   },
   "settings_popup_size_display_full_width": {
-    "message": "Full width"
+    "message": "Volle Breite"
   },
   "settings_popup_size_display_mode_description": {
-    "message": "Change the layout of the popup.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "Layout des Popups ändern.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">Mehr…</a>"
   },
   "settings_popup_size_display_mode_label": {
-    "message": "Display mode"
+    "message": "Anzeigemodus"
   },
   "settings_popup_size_display_mode_more": {
-    "message": "The <em>Default</em> mode will position the popup relative to the scanned text.\n                    The <em>Full Width</em> mode will anchor the popup to the top or bottom of the screen and take up\n                    the full width of the screen, which can be useful on devices with touch screens."
+    "message": "Der Modus <em>Standard</em> positioniert das Popup relativ zum gescannten Text.\n                    Der Modus <em>Volle Breite</em> verankert das Popup oben oder unten am Bildschirm und nutzt\n                    die gesamte Bildschirmbreite, was auf Geräten mit Touchscreen nützlich sein kann."
   },
   "settings_popup_size_heading": {
-    "message": "Popup Position & Size"
+    "message": "Popup-Position & -Größe"
   },
   "settings_popup_size_horizontal_offset_description": {
-    "message": "Change the distance the popup is placed relative to horizontal text."
+    "message": "Ändern Sie den Abstand, in dem das Popup relativ zu horizontalem Text platziert wird."
   },
   "settings_popup_size_horizontal_offset_label": {
-    "message": "Horizontal text offset"
+    "message": "Horizontaler Textversatz"
   },
   "settings_popup_size_horizontal_position_description": {
-    "message": "Change where the popup is positioned relative to horizontal text."
+    "message": "Ändern Sie, wo das Popup relativ zu horizontalem Text positioniert wird."
   },
   "settings_popup_size_horizontal_position_label": {
-    "message": "Horizontal text positioning"
+    "message": "Positionierung bei horizontalem Text"
   },
   "settings_popup_size_position_above": {
-    "message": "Above text"
+    "message": "Über dem Text"
   },
   "settings_popup_size_position_below": {
-    "message": "Below text"
+    "message": "Unter dem Text"
   },
   "settings_popup_size_scale_description": {
-    "message": "Control the scaling factor of the popup."
+    "message": "Steuern Sie den Skalierungsfaktor des Popups."
   },
   "settings_popup_size_scale_label": {
-    "message": "Scale"
+    "message": "Skalierung"
   },
   "settings_popup_size_size_description": {
-    "message": "Control the size of the popup, in pixels."
+    "message": "Steuern Sie die Größe des Popups in Pixeln."
   },
   "settings_popup_size_size_label": {
-    "message": "Size"
+    "message": "Größe"
   },
   "settings_popup_size_vertical_after": {
-    "message": "After reading direction"
+    "message": "Nach Leserichtung"
   },
   "settings_popup_size_vertical_before": {
-    "message": "Before reading direction"
+    "message": "Vor Leserichtung"
   },
   "settings_popup_size_vertical_left": {
-    "message": "Left of text"
+    "message": "Links vom Text"
   },
   "settings_popup_size_vertical_offset_description": {
-    "message": "Change the distance the popup is placed relative to vertical text."
+    "message": "Ändern Sie den Abstand, in dem das Popup relativ zu vertikalem Text platziert wird."
   },
   "settings_popup_size_vertical_offset_label": {
-    "message": "Vertical text offset"
+    "message": "Vertikaler Textversatz"
   },
   "settings_popup_size_vertical_position_description": {
-    "message": "Change where the popup is positioned relative to vertical text."
+    "message": "Ändern Sie, wo das Popup relativ zu vertikalem Text positioniert wird."
   },
   "settings_popup_size_vertical_position_label": {
-    "message": "Vertical text positioning"
+    "message": "Positionierung bei vertikalem Text"
   },
   "settings_popup_size_vertical_right": {
-    "message": "Right of text"
+    "message": "Rechts vom Text"
   },
   "settings_popup_size_vertical_same_as_horizontal": {
-    "message": "Same as horizontal text"
+    "message": "Wie bei horizontalem Text"
   },
   "settings_profile_active_description": {
     "message": "Wechseln Sie das aktive Profil, das zum Scannen verwendet wird."
@@ -1356,49 +1356,49 @@
     "message": "Profil"
   },
   "settings_result_average_frequencies_description": {
-    "message": "Compress frequency tags into one \"Average\" frequency tag based on the harmonic mean."
+    "message": "Frequenz-Tags anhand des harmonischen Mittels zu einem \"Durchschnitt\"-Frequenz-Tag zusammenfassen."
   },
   "settings_result_average_frequencies_label": {
-    "message": "Average frequencies"
+    "message": "Durchschnittliche Häufigkeiten"
   },
   "settings_result_display_heading": {
-    "message": "Result Display"
+    "message": "Anzeige der Ergebnisse"
   },
   "settings_result_grouping_description": {
-    "message": "Change how related results are grouped.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "Ändern Sie, wie verwandte Ergebnisse gruppiert werden.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">Mehr…</a>"
   },
   "settings_result_grouping_label": {
-    "message": "Result grouping mode"
+    "message": "Modus der Ergebnisgruppierung"
   },
   "settings_result_grouping_more_none": {
-    "message": "<strong>No grouping</strong> -\n                        Every definition will be listed as a separate entry."
+    "message": "<strong>Keine Gruppierung</strong> -\n                        Jede Definition wird als separater Eintrag aufgeführt."
   },
   "settings_result_grouping_more_related_1": {
-    "message": "<strong>Group related terms</strong> -\n                            Related terms that share the same definitions will be grouped together."
+    "message": "<strong>Verwandte Begriffe gruppieren</strong> -\n                            Verwandte Begriffe mit denselben Definitionen werden zusammengefasst."
   },
   "settings_result_grouping_more_related_2": {
-    "message": "The <em>Primary dictionary</em> option should be assigned to a dictionary which contains related term information,\n                            and configuring the <em>Secondary dictionaries</em> will allow definitions for the related terms to be\n                            included from other dictionaries."
+    "message": "Die Option <em>Primäres Wörterbuch</em> sollte einem Wörterbuch zugewiesen werden, das Informationen zu verwandten Begriffen enthält, und das Konfigurieren der <em>Sekundären Wörterbücher</em> ermöglicht, Definitionen für verwandte Begriffe aus anderen Wörterbüchern einzubeziehen."
   },
   "settings_result_grouping_more_related_warning": {
-    "message": "Not all dictionaries are able to be selected as the <em>Primary dictionary</em>."
+    "message": "Nicht alle Wörterbücher können als <em>Primäres Wörterbuch</em> ausgewählt werden."
   },
   "settings_result_grouping_more_term_reading": {
-    "message": "<strong>Group term-reading pairs</strong> -\n                        Definitions for the same term with the same reading will be grouped together."
+    "message": "<strong>Begriff-Lesung-Paare gruppieren</strong> -\n                        Definitionen für denselben Begriff mit derselben Lesung werden zusammengefasst."
   },
   "settings_result_grouping_none": {
-    "message": "No grouping"
+    "message": "Keine Gruppierung"
   },
   "settings_result_grouping_primary_dictionary": {
-    "message": "Primary dictionary"
+    "message": "Primäres Wörterbuch"
   },
   "settings_result_grouping_related": {
-    "message": "Group related terms"
+    "message": "Verwandte Begriffe gruppieren"
   },
   "settings_result_grouping_secondary_dictionaries": {
-    "message": "Secondary dictionaries…"
+    "message": "Sekundäre Wörterbücher…"
   },
   "settings_result_grouping_term_reading": {
-    "message": "Group term-reading pairs"
+    "message": "Begriff-Lesung-Paare gruppieren"
   },
   "settings_scanning_advanced_inputs_label": {
     "message": "Erweiterte Scaneingaben konfigurieren… <span class=\"light no-wrap\">(<span class=\"scanning-input-count\">#</span> definiert)</span>"
@@ -1512,55 +1512,55 @@
     "message": "Diese Einstellung hat in Firefox keine Wirkung, da Firefox die <code>zoom</code>-Eigenschaft nicht implementiert."
   },
   "settings_search_window_heading": {
-    "message": "Search Window"
+    "message": "Suchfenster"
   },
   "settings_search_window_left_description": {
-    "message": "Control the left position of the window, in pixels."
+    "message": "Positionieren Sie das Fenster links, in Pixeln."
   },
   "settings_search_window_left_label": {
-    "message": "Left position"
+    "message": "Linke Position"
   },
   "settings_search_window_native_window_label": {
-    "message": "Use a native browser window instead of an embedded popup\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "Eigenes Browserfenster statt eingebettetem Popup verwenden\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "settings_search_window_native_window_more": {
-    "message": "Instead of showing definitions in a popup embedded into the webpage, a native browser window containing the popup content will be opened instead. This window will be shared across all tabs."
+    "message": "Anstatt Definitionen in einem in die Webseite eingebetteten Popup anzuzeigen, wird stattdessen ein natives Browserfenster mit dem Popup-Inhalt geöffnet. Dieses Fenster wird über alle Tabs hinweg geteilt."
   },
   "settings_search_window_open_link": {
-    "message": "Open…"
+    "message": "Öffnen…"
   },
   "settings_search_window_size_description": {
-    "message": "Control the size of the window, in pixels."
+    "message": "Größe des Fensters in Pixeln steuern."
   },
   "settings_search_window_size_label": {
-    "message": "Size"
+    "message": "Größe"
   },
   "settings_search_window_state_fullscreen": {
-    "message": "Fullscreen"
+    "message": "Vollbild"
   },
   "settings_search_window_state_maximized": {
-    "message": "Maximized"
+    "message": "Maximiert"
   },
   "settings_search_window_sticky_header_description": {
-    "message": "Search header stays on the page when scrolling down."
+    "message": "Die Suchkopfzeile bleibt beim Scrollen auf der Seite."
   },
   "settings_search_window_sticky_header_label": {
-    "message": "Sticky search header"
+    "message": "Fixierte Suchkopfzeile"
   },
   "settings_search_window_style_description": {
-    "message": "Change the appearance of the window."
+    "message": "Aussehen des Fensters ändern."
   },
   "settings_search_window_style_label": {
-    "message": "Window style"
+    "message": "Fensterstil"
   },
   "settings_search_window_top_description": {
-    "message": "Control the top position of the window, in pixels."
+    "message": "Positionieren Sie das Fenster oben, in Pixeln."
   },
   "settings_search_window_top_label": {
-    "message": "Top position"
+    "message": "Obere Position"
   },
   "settings_search_window_type_popup": {
-    "message": "Popup"
+    "message": "Pop-up"
   },
   "settings_security_heading": {
     "message": "Sicherheit"
@@ -1659,7 +1659,7 @@
     "message": "Angemeldet"
   },
   "settings_sottaku_status_signed_in_as": {
-    "message": "Angemeldet als {0}"
+    "message": "Angemeldet als $1"
   },
   "settings_sottaku_status_signed_out": {
     "message": "Von Sottaku abgemeldet"
@@ -1677,58 +1677,58 @@
     "message": "Benutzername oder E-Mail"
   },
   "settings_status_tasks_in_progress": {
-    "message": "Tasks in progress:"
+    "message": "Laufende Aufgaben:"
   },
   "settings_text_parsing_heading": {
-    "message": "Text Parsing"
+    "message": "Textanalyse"
   },
   "settings_text_parsing_info_1": {
-    "message": "Sottaku-Yomitan is able to scan the sentence surrounding a term and parse individual words\n                of the query on the <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">search page</a>.\n                This information can also be added to Anki cards to provide additional context."
+    "message": "Sottaku-Yomitan kann den Satz um einen Begriff scannen und einzelne Wörter\n                der Abfrage auf der <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">Suchseite</a> analysieren.\n                Diese Informationen können auch zu Anki-Karten hinzugefügt werden, um zusätzlichen Kontext bereitzustellen."
   },
   "settings_text_parsing_internal_description": {
-    "message": "Sentence words are parsed using Sottaku-Yomitan's dictionaries.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "Satzwörter werden mithilfe der Wörterbücher von Sottaku-Yomitan analysiert.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">Mehr…</a>"
   },
   "settings_text_parsing_internal_label": {
-    "message": "Parse sentences using Sottaku-Yomitan's internal parser"
+    "message": "Sätze mit dem internen Parser von Sottaku-Yomitan analysieren"
   },
   "settings_text_parsing_internal_more": {
-    "message": "Sottaku-Yomitan's internal parser is a simple algorithm which can parse sentences using the installed dictionaries. It works by repeatedly detecting the longest term at the start of the sentence and advancing until no text remains. This provides decent results for the general case, but since grammatical structure is not taken into account, it can sometimes yield incorrect segmentation."
+    "message": "Der interne Parser von Sottaku-Yomitan ist ein einfacher Algorithmus, der Sätze mithilfe der installierten Wörterbücher analysieren kann. Er funktioniert, indem wiederholt der längste Begriff am Satzanfang erkannt und weitergegangen wird, bis kein Text mehr übrig ist. Das liefert für den allgemeinen Fall brauchbare Ergebnisse, aber da die grammatische Struktur nicht berücksichtigt wird, kann es manchmal zu einer falschen Segmentierung kommen."
   },
   "settings_text_parsing_mecab_description": {
-    "message": "Sentence words are parsed using a third-party program. Japanese only."
+    "message": "Satzwörter werden mit einem Drittanbieterprogramm analysiert. Nur Japanisch."
   },
   "settings_text_parsing_mecab_disclaimer": {
-    "message": "This option may send search query data outside of Sottaku-Yomitan for parsing<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">Privacy Policy</a>)</span>.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "Diese Option kann Suchanfragedaten zur Analyse außerhalb von Sottaku-Yomitan senden<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">Datenschutzrichtlinie</a>)</span>.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">Mehr…</a>"
   },
   "settings_text_parsing_mecab_label": {
-    "message": "Parse sentences using <a href=\"https://en.wikipedia.org/wiki/MeCab\" rel=\"noopener noreferrer\" target=\"_blank\">MeCab</a>"
+    "message": "Sätze mit <a href=\"https://en.wikipedia.org/wiki/MeCab\" rel=\"noopener noreferrer\" target=\"_blank\">MeCab</a> analysieren"
   },
   "settings_text_parsing_mecab_more_1": {
-    "message": "MeCab is a third-party program which uses its own dictionaries and parsing algorithm to decompose sentences into individual words. MeCab may provide more accurate parsing results than Sottaku-Yomitan's internal parser."
+    "message": "MeCab ist ein Drittanbieterprogramm, das eigene Wörterbücher und einen Analysealgorithmus verwendet, um Sätze in einzelne Wörter zu zerlegen. MeCab kann genauere Analyseergebnisse liefern als der interne Parser von Sottaku-Yomitan."
   },
   "settings_text_parsing_mecab_more_2": {
-    "message": "In order for Sottaku-Yomitan to use it, both MeCab and a native messaging component must be installed.\n                    A setup guide can be found <a href=\"https://github.com/yomidevs/yomitan-mecab-installer/blob/master/README.md\" rel=\"noopener noreferrer\" target=\"_blank\">here</a>."
+    "message": "Damit Sottaku-Yomitan es verwenden kann, müssen sowohl MeCab als auch eine native Messaging-Komponente installiert sein.\n                    Eine Einrichtungsanleitung finden Sie <a href=\"https://github.com/yomidevs/yomitan-mecab-installer/blob/master/README.md\" rel=\"noopener noreferrer\" target=\"_blank\">hier</a>."
   },
   "settings_text_parsing_scan_extent_description": {
-    "message": "Adjust how many characters are bidirectionally scanned to form a sentence."
+    "message": "Legen Sie fest, wie viele Zeichen bidirektional gescannt werden, um einen Satz zu bilden."
   },
   "settings_text_parsing_scan_extent_label": {
-    "message": "Sentence scanning extent"
+    "message": "Satz-Scan-Bereich"
   },
   "settings_text_parsing_spacing_label": {
-    "message": "Show space between parsed words"
+    "message": "Abstand zwischen analysierten Wörtern anzeigen"
   },
   "settings_text_parsing_termination_custom": {
-    "message": "Custom"
+    "message": "Benutzerdefiniert"
   },
   "settings_text_parsing_termination_custom_no_newlines": {
-    "message": "Custom, no newlines"
+    "message": "Benutzerdefiniert, keine Zeilenumbrüche"
   },
   "settings_text_parsing_termination_label": {
-    "message": "Sentence termination characters"
+    "message": "Satzendzeichen"
   },
   "settings_text_parsing_termination_newlines": {
-    "message": "Newlines only"
+    "message": "Nur Zeilenumbrüche"
   },
   "settings_translation_heading": {
     "message": "Übersetzung"
@@ -1749,222 +1749,222 @@
     "message": "Wort"
   },
   "sottaku_action_title_missing_id": {
-    "message": "Missing Sottaku question id"
+    "message": "Sottaku-Fragen-ID fehlt"
   },
   "sottaku_action_title_sign_in": {
-    "message": "Sign in to Sottaku first"
+    "message": "Bitte zuerst bei Sottaku anmelden"
   },
   "sottaku_locale_automatic": {
-    "message": "Automatic (use Sottaku account language)"
+    "message": "Automatisch (Sottaku-Kontosprache verwenden)"
   },
   "sottaku_request_button": {
-    "message": "Request dictionary entry"
+    "message": "Wörterbucheintrag anfordern"
   },
   "sottaku_request_button_requested": {
-    "message": "Requested"
+    "message": "Angefordert"
   },
   "sottaku_request_button_requesting": {
-    "message": "Requesting..."
+    "message": "Wird angefordert..."
   },
   "sottaku_request_button_retry": {
-    "message": "Request translation"
+    "message": "Übersetzung anfordern"
   },
   "sottaku_request_button_title_submitted": {
-    "message": "Request submitted to Sottaku"
+    "message": "Anfrage an Sottaku gesendet"
   },
   "sottaku_save_button": {
-    "message": "Save to Sottaku"
+    "message": "In Sottaku speichern"
   },
   "sottaku_save_button_saved": {
-    "message": "Saved"
+    "message": "Gespeichert"
   },
   "sottaku_save_button_saving": {
-    "message": "Saving..."
+    "message": "Wird gespeichert..."
   },
   "sottaku_save_button_title_already_saved": {
-    "message": "Already saved to Sottaku"
+    "message": "Bereits in Sottaku gespeichert"
   },
   "sottaku_save_button_title_saved": {
-    "message": "Added to your Sottaku flashcards"
+    "message": "Zu deinen Sottaku-Karteikarten hinzugefügt"
   },
   "status_footer_close": {
-    "message": "Close"
+    "message": "Schließen"
   },
   "status_footer_tasks_in_progress": {
-    "message": "Tasks in progress:"
+    "message": "Laufende Aufgaben:"
   },
   "support_heading": {
-    "message": "Support Sottaku-Yomitan ❤️"
+    "message": "Unterstütze Sottaku-Yomitan ❤️"
   },
   "support_list_contribute": {
-    "message": "Contribute to the Sottaku-Yomitan project! Start by reading our <a href=\"https://github.com/sottakuapp/sottaku-yomitan/blob/master/CONTRIBUTING.md\" rel=\"noreferrer noopener\">Contribution Guidelines</a>."
+    "message": "Trage zum Sottaku-Yomitan-Projekt bei! Lies zunächst unsere <a href=\"https://github.com/sottakuapp/sottaku-yomitan/blob/master/CONTRIBUTING.md\" rel=\"noreferrer noopener\">Beitragsrichtlinien</a>."
   },
   "support_list_feedback": {
-    "message": "Report any bugs or feedback on our <a href=\"https://github.com/sottakuapp/sottaku-yomitan/issues/new/choose\" rel=\"noreferrer noopener\">GitHub Issues</a> or email <a href=\"mailto:hello@sottaku.app\">hello@sottaku.app</a>."
+    "message": "Melde Fehler oder Feedback über unsere <a href=\"https://github.com/sottakuapp/sottaku-yomitan/issues/new/choose\" rel=\"noreferrer noopener\">GitHub Issues</a> oder per E-Mail an <a href=\"mailto:hello@sottaku.app\">hello@sottaku.app</a>."
   },
   "support_list_star": {
-    "message": "Star the project on <a href=\"https://github.com/sottakuapp/sottaku-yomitan\" rel=\"noreferrer noopener\">GitHub</a> and share it with friends."
+    "message": "Gib dem Projekt auf <a href=\"https://github.com/sottakuapp/sottaku-yomitan\" rel=\"noreferrer noopener\">GitHub</a> einen Stern und teile es mit Freunden."
   },
   "support_subheading": {
-    "message": "Here are some ways to support Sottaku-Yomitan:"
+    "message": "Hier sind einige Möglichkeiten, Sottaku-Yomitan zu unterstützen:"
   },
   "template_anki_overwrite_append_title": {
-    "message": "Insert new value after existing"
+    "message": "Neuen Wert nach dem bestehenden einfügen"
   },
   "template_anki_overwrite_available_title": {
-    "message": "Overwrite if new value is not empty"
+    "message": "Überschreiben, wenn der neue Wert nicht leer ist"
   },
   "template_anki_overwrite_fill_title": {
-    "message": "Overwrite if existing value is empty"
+    "message": "Überschreiben, wenn der bestehende Wert leer ist"
   },
   "template_anki_overwrite_overwrite_title": {
-    "message": "Overwrite even if new value is empty"
+    "message": "Überschreiben, auch wenn der neue Wert leer ist"
   },
   "template_anki_overwrite_prepend_title": {
-    "message": "Insert new value before existing"
+    "message": "Neuen Wert vor dem bestehenden einfügen"
   },
   "template_anki_overwrite_skip_title": {
-    "message": "Keep existing value"
+    "message": "Bestehenden Wert beibehalten"
   },
   "template_audio_source_tts_anki_warning": {
-    "message": "Not supported in Anki"
+    "message": "In Anki nicht unterstützt"
   },
   "template_dictionary_integrity_error": {
-    "message": "Dictionary may not have been imported properly"
+    "message": "Das Wörterbuch wurde möglicherweise nicht korrekt importiert"
   },
   "template_dictionary_update_available": {
-    "message": "Update available"
+    "message": "Update verfügbar"
   },
   "template_hotkey_no_input": {
-    "message": "No input"
+    "message": "Keine Eingabe"
   },
   "template_profile_name_placeholder": {
-    "message": "Profile name"
+    "message": "Profilname"
   },
   "template_scan_no_inputs": {
-    "message": "No inputs"
+    "message": "Keine Eingaben"
   },
   "template_scan_touch_min_time": {
-    "message": "Minimum Touch Time <span class=\"light\">(in milliseconds)</span>:"
+    "message": "Minimale Berührungszeit <span class=\"light\">(in Millisekunden)</span>:"
   },
   "templates_modals_title": {
-    "message": "Templates"
+    "message": "Vorlagen"
   },
   "templates_settings_title": {
-    "message": "Templates"
+    "message": "Vorlagen"
   },
   "theme_option_auto": {
-    "message": "Auto"
+    "message": "Automatisch"
   },
   "theme_option_browser": {
-    "message": "Browser"
+    "message": "Webbrowser"
   },
   "theme_option_dark": {
-    "message": "Dark"
+    "message": "Dunkel"
   },
   "theme_option_light": {
-    "message": "Light"
+    "message": "Hell"
   },
   "welcome_audio_enable_description": {
-    "message": "Show a clickable speaker icon next to search results."
+    "message": "Zeige ein anklickbares Lautsprechersymbol neben den Suchergebnissen."
   },
   "welcome_audio_enable_disclaimer": {
-    "message": "This option may send term, reading, and/or language outside of Sottaku-Yomitan to fetch audio when the speaker icon is clicked<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">Privacy Policy</a>)</span>.\n                    <div data-show-for-browser=\"firefox firefox-mobile\">Disabling this option will disallow pronunciation audio playback for any terms searched.</div>"
+    "message": "Diese Option kann Begriff, Lesung und/oder Sprache zur Audiobeschaffung außerhalb von Sottaku-Yomitan senden, wenn auf das Lautsprechersymbol geklickt wird<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">Datenschutzrichtlinie</a>)</span>.\n                    <div data-show-for-browser=\"firefox firefox-mobile\">Wenn diese Option deaktiviert ist, wird die Aussprachewiedergabe für alle gesuchten Begriffe verhindert.</div>"
   },
   "welcome_audio_enable_label": {
-    "message": "Enable audio playback for terms"
+    "message": "Audio-Wiedergabe für Begriffe aktivieren"
   },
   "welcome_basic_customization_heading": {
-    "message": "Basic customization"
+    "message": "Grundlegende Anpassung"
   },
   "welcome_data_transmission_heading": {
-    "message": "Data Transmission"
+    "message": "Datenübertragung"
   },
   "welcome_get_started_connect_account": {
-    "message": "Connect your Sottaku account to sync dictionaries, audio, and flashcards"
+    "message": "Verbinde dein Sottaku-Konto, um Wörterbücher, Audio und Karteikarten zu synchronisieren"
   },
   "welcome_get_started_heading": {
-    "message": "Here are some basics to get started"
+    "message": "Hier sind einige Grundlagen für den Einstieg"
   },
   "welcome_get_started_news_link": {
-    "message": "New to Sottaku-Yomitan? Visit sottaku.app for news and tips."
+    "message": "Neu bei Sottaku-Yomitan? Besuche sottaku.app für News und Tipps."
   },
   "welcome_get_started_quick_start": {
-    "message": "Sottaku-Yomitan Quick Start Guide"
+    "message": "Sottaku-Yomitan Schnellstart-Leitfaden"
   },
   "welcome_heading": {
-    "message": "Welcome to Sottaku-Yomitan!"
+    "message": "Willkommen bei Sottaku-Yomitan!"
   },
   "welcome_locale_description": {
-    "message": "Language used for translations returned by Sottaku."
+    "message": "Sprache für die von Sottaku zurückgegebenen Übersetzungen."
   },
   "welcome_locale_label": {
-    "message": "Locale"
+    "message": "Sprache"
   },
   "welcome_locale_setup_description": {
-    "message": "Sottaku already provides Japanese and Korean lookups through your account; import additional dictionaries if you want offline access or other languages."
+    "message": "Sottaku bietet bereits japanische und koreanische Suchanfragen über dein Konto; importiere zusätzliche Wörterbücher, wenn du Offline-Zugriff oder weitere Sprachen möchtest."
   },
   "welcome_locale_setup_heading": {
-    "message": "Locale setup"
+    "message": "Spracheinrichtung"
   },
   "welcome_more_customization_link": {
-    "message": "More customization options are available on the Settings page"
+    "message": "Weitere Anpassungsoptionen findest du auf der Einstellungsseite"
   },
   "welcome_permissions_disabled_warning": {
-    "message": "Sottaku-Yomitan features will be limited if the recommended permissions are not enabled."
+    "message": "Sottaku-Yomitan-Funktionen sind eingeschränkt, wenn die empfohlenen Berechtigungen nicht aktiviert sind."
   },
   "welcome_permissions_enable_optional_description": {
-    "message": "This allows Sottaku-Yomitan to read the clipboard and communicate with external programs."
+    "message": "Damit kann Sottaku-Yomitan die Zwischenablage lesen und mit externen Programmen kommunizieren."
   },
   "welcome_permissions_enable_optional_label": {
-    "message": "Enable optional permissions"
+    "message": "Optionale Berechtigungen aktivieren"
   },
   "welcome_permissions_enable_recommended_description": {
-    "message": "This allows Sottaku-Yomitan to scan text from most sites."
+    "message": "Damit kann Sottaku-Yomitan Text von den meisten Seiten scannen."
   },
   "welcome_permissions_enable_recommended_label": {
-    "message": "Enable recommended permissions"
+    "message": "Empfohlene Berechtigungen aktivieren"
   },
   "welcome_permissions_full_enabled": {
-    "message": "All Sottaku-Yomitan features are available."
+    "message": "Alle Sottaku-Yomitan-Funktionen sind verfügbar."
   },
   "welcome_permissions_more_info_chrome": {
-    "message": "Further configuration is available on the <a href=\"/permissions.html\" rel=\"noopener\">Permissions page</a> and the web browser's <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">extension settings page</a>."
+    "message": "Weitere Konfigurationen sind auf der <a href=\"/permissions.html\" rel=\"noopener\">Berechtigungsseite</a> und auf der <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">Erweiterungseinstellungsseite</a> des Browsers verfügbar."
   },
   "welcome_permissions_more_info_firefox": {
-    "message": "Further configuration is available on the <a href=\"/permissions.html\" rel=\"noopener\">Permissions page</a> and the web browser's extension settings page."
+    "message": "Weitere Konfigurationen sind auf der <a href=\"/permissions.html\" rel=\"noopener\">Berechtigungsseite</a> und auf der Erweiterungseinstellungsseite des Browsers verfügbar."
   },
   "welcome_permissions_recommended_enabled": {
-    "message": "Essential Sottaku-Yomitan features are available."
+    "message": "Wesentliche Sottaku-Yomitan-Funktionen sind verfügbar."
   },
   "welcome_recommended_permissions_heading": {
-    "message": "Recommended Permissions (Important)"
+    "message": "Empfohlene Berechtigungen (Wichtig)"
   },
   "welcome_scan_middle_mouse_description": {
-    "message": "Hold the middle mouse button while moving the cursor to scan text."
+    "message": "Halte die mittlere Maustaste gedrückt, während du den Cursor bewegst, um Text zu scannen."
   },
   "welcome_scan_middle_mouse_label": {
-    "message": "Scan using middle mouse button"
+    "message": "Mit mittlerer Maustaste scannen"
   },
   "welcome_scan_modifier_description": {
-    "message": "Hold a key while moving the cursor to scan text."
+    "message": "Halte eine Taste gedrückt, während du den Cursor bewegst, um Text zu scannen."
   },
   "welcome_scan_modifier_label": {
-    "message": "Scan modifier key"
+    "message": "Scan-Modifikatortaste"
   },
   "welcome_show_guide_label": {
-    "message": "Show this welcome guide on browser startup"
+    "message": "Diesen Willkommensleitfaden beim Browserstart anzeigen"
   },
   "welcome_text_language_description": {
-    "message": "Used for offline dictionary features and preview tooling."
+    "message": "Wird für Offline-Wörterbuchfunktionen und Vorschau-Tools verwendet."
   },
   "welcome_text_language_label": {
-    "message": "Text language"
+    "message": "Textsprache"
   },
   "welcome_theme_description": {
-    "message": "Adjust the style of Sottaku-Yomitan."
+    "message": "Passe den Stil von Sottaku-Yomitan an."
   },
   "welcome_theme_label": {
-    "message": "Theme"
+    "message": "Thema"
   }
 }

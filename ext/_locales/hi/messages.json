@@ -195,7 +195,7 @@
     "message": "शब्द मेटाडेटा संख्या"
   },
   "dictionary_details_url": {
-    "message": "URL"
+    "message": "यूआरएल"
   },
   "dictionary_extra_data_item_plural": {
     "message": "$1 आइटम"
@@ -246,7 +246,7 @@
     "message": "शब्द संख्या: $1"
   },
   "display_dictionary_url": {
-    "message": "URL: $1"
+    "message": "यूआरएल: $1"
   },
   "display_hotkey_add_note": {
     "message": "{0} जोड़ें ({0})"
@@ -1053,7 +1053,7 @@
     "message": "केवल क्वेरी अपडेट करें"
   },
   "settings_collapsible_varies": {
-    "message": "Varies"
+    "message": "भिन्न"
   },
   "settings_general_api_css_bypass_label": {
     "message": "CSS sanitization को बायपास करने की अनुमति दें"
@@ -1188,160 +1188,160 @@
     "message": "अनुवाद"
   },
   "settings_popup_auto_hide_description": {
-    "message": "When an existing popup is present, upon scanning again, hide the existing popup even if no definitions are found when scanning again."
+    "message": "जब कोई मौजूदा पॉपअप हो, तो दोबारा स्कैन करने पर मौजूदा पॉपअप छिपाएँ, भले ही कोई परिभाषा न मिले।"
   },
   "settings_popup_auto_hide_label": {
-    "message": "Auto-hide search popup"
+    "message": "खोज पॉपअप स्वतः छिपाएँ"
   },
   "settings_popup_delay_label": {
-    "message": "Delay <span class=\"light\">(in milliseconds)</span>"
+    "message": "विलंब <span class=\"light\">(मिलीसेकंड में)</span>"
   },
   "settings_popup_heading": {
-    "message": "Popup Behavior"
+    "message": "पॉपअप व्यवहार"
   },
   "settings_popup_hide_on_exit_description": {
-    "message": "When the cursor exits the popup, the popup will be hidden."
+    "message": "जब कर्सर पॉपअप से बाहर निकलता है, पॉपअप छिप जाएगा।"
   },
   "settings_popup_hide_on_exit_label": {
-    "message": "Hide popup on cursor exit"
+    "message": "कर्सर निकलते ही पॉपअप छिपाएँ"
   },
   "settings_popup_max_children_description": {
-    "message": "Change the limit on the number of popups that may be generated."
+    "message": "जनरेट किए जा सकने वाले पॉपअप की संख्या की सीमा बदलें।"
   },
   "settings_popup_max_children_label": {
-    "message": "Maximum number of child popups"
+    "message": "चाइल्ड पॉपअप की अधिकतम संख्या"
   },
   "settings_popup_reduced_motion_description": {
-    "message": "Scrolls by a configurable height (similar to pagination), reducing animations. Useful on e-readers and e-ink screens."
+    "message": "कॉन्फ़िगर करने योग्य ऊँचाई से स्क्रॉल करता है (पेजिनेशन जैसा), जिससे एनिमेशन कम होते हैं। ई-रीडर और ई-इंक स्क्रीन के लिए उपयोगी।"
   },
   "settings_popup_reduced_motion_label": {
-    "message": "Reduced motion scrolling"
+    "message": "कम गति वाला स्क्रॉलिंग"
   },
   "settings_popup_reduced_motion_scale_description": {
-    "message": "Percentage of the popup's height scrolled per step."
+    "message": "प्रति चरण पॉपअप की ऊँचाई का प्रतिशत स्क्रॉल किया जाता है।"
   },
   "settings_popup_reduced_motion_scale_label": {
-    "message": "Scale"
+    "message": "स्केल"
   },
   "settings_popup_reduced_motion_swipe_description": {
-    "message": "Minimum distance on touch devices for a swipe to be recognized as scrolling. Lower values can feel more responsive but increase the chance for misinputs."
+    "message": "टच डिवाइसों पर न्यूनतम दूरी ताकि स्वाइप को स्क्रॉलिंग माना जाए। कम मान अधिक प्रतिक्रियाशील लग सकते हैं लेकिन गलत इनपुट की संभावना बढ़ाते हैं।"
   },
   "settings_popup_reduced_motion_swipe_label": {
-    "message": "Swipe threshold"
+    "message": "स्वाइप थ्रेशहोल्ड"
   },
   "settings_popup_reduced_motion_swipe_unit": {
     "message": "px"
   },
   "settings_popup_scan_popup_description": {
-    "message": "Text inside of popups can be scanned for definitions, which will open a new popup."
+    "message": "पॉपअप के अंदर का टेक्स्ट परिभाषाओं के लिए स्कैन किया जा सकता है, जिससे नया पॉपअप खुलेगा।"
   },
   "settings_popup_scan_popup_label": {
-    "message": "Allow scanning popup content"
+    "message": "पॉपअप सामग्री स्कैन करने की अनुमति दें"
   },
   "settings_popup_scan_search_description": {
-    "message": "Text on the <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">search page</a> can be scanned for definitions, which will open a popup."
+    "message": "<a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">खोज पृष्ठ</a> पर टेक्स्ट को परिभाषाओं के लिए स्कैन किया जा सकता है, जिससे पॉपअप खुलेगा।"
   },
   "settings_popup_scan_search_label": {
-    "message": "Allow scanning search page content"
+    "message": "खोज पृष्ठ सामग्री स्कैन करने की अनुमति दें"
   },
   "settings_popup_scan_source_terms_label": {
-    "message": "Allow scanning popup source terms"
+    "message": "पॉपअप स्रोत शब्दों को स्कैन करने की अनुमति दें"
   },
   "settings_popup_search_from_results_label": {
-    "message": "Search terms when clicking text from the results list"
+    "message": "परिणाम सूची के टेक्स्ट पर क्लिक करने पर शब्द खोजें"
   },
   "settings_popup_show_iframe_label": {
-    "message": "Show iframe popups in the root frame\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "रूट फ़्रेम में iframe पॉपअप दिखाएँ\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "settings_popup_show_iframe_more_1": {
-    "message": "By default, scanning text inside of an embeded <code>&lt;iframe&gt;</code> element will open\n                    a new popup inside of that frame, which can sometimes be limiting due to the frame's size.\n                    When this option is enabled, the popup will be created in the root of the page, if possible."
+    "message": "डिफ़ॉल्ट रूप से, एम्बेड किए गए <code>&lt;iframe&gt;</code> तत्व के भीतर टेक्स्ट स्कैन करने पर\n                    उसी फ्रेम के भीतर नया पॉपअप खुलेगा, जो फ्रेम के आकार के कारण कभी-कभी सीमित हो सकता है।\n                    इस विकल्प के सक्षम होने पर, संभव होने पर पॉपअप पृष्ठ के रूट में बनाया जाएगा।"
   },
   "settings_popup_show_iframe_more_2": {
-    "message": "Note that when this option is enabled, there is a possibility that the extension can interfere with the underlying webpage, since it must send messages to the webpage in order to determine the correct position of the popup. This typically does not cause issues, but if anything unexpected happens, this option could be the cause."
+    "message": "ध्यान दें कि जब यह विकल्प सक्षम होता है, तो एक्सटेंशन अंतर्निहित वेबपेज में हस्तक्षेप कर सकता है, क्योंकि पॉपअप की सही स्थिति निर्धारित करने के लिए उसे वेबपेज को संदेश भेजने पड़ते हैं। आम तौर पर इससे समस्या नहीं होती, लेकिन यदि कुछ अप्रत्याशित हो तो इसका कारण यह विकल्प हो सकता है।"
   },
   "settings_popup_size_auto_scale_label": {
-    "message": "Auto-scale\n                                <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "स्वचालित स्केलिंग\n                                <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "settings_popup_size_auto_scale_more": {
-    "message": "Auto-scaling will scale the popup automatically based on the browser's zoom levels\n                            in order to keep the popup at a constant physical size, regardless of the zoom level.\n                            <em>Zoom level</em> uses the zoom level that is typically used on desktop browsers,\n                            and <em>Viewport</em> uses the zoom level that is typically used on mobile browsers."
+    "message": "स्वचालित स्केलिंग ब्राउज़र के ज़ूम स्तरों के आधार पर पॉपअप को अपने आप स्केल करेगी,\n                            ताकि ज़ूम स्तर चाहे जो हो, पॉपअप का भौतिक आकार स्थिर रहे।\n                            <em>ज़ूम स्तर</em> डेस्कटॉप ब्राउज़र में आम तौर पर उपयोग होने वाले ज़ूम स्तर का उपयोग करता है,\n                            और <em>Viewport</em> मोबाइल ब्राउज़र में आम तौर पर उपयोग होने वाले ज़ूम स्तर का उपयोग करता है।"
   },
   "settings_popup_size_auto_scale_viewport": {
-    "message": "Viewport"
+    "message": "व्यूपोर्ट"
   },
   "settings_popup_size_auto_scale_zoom": {
-    "message": "Zoom level"
+    "message": "ज़ूम स्तर"
   },
   "settings_popup_size_display_full_width": {
-    "message": "Full width"
+    "message": "पूर्ण चौड़ाई"
   },
   "settings_popup_size_display_mode_description": {
-    "message": "Change the layout of the popup.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "पॉपअप का लेआउट बदलें.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">अधिक…</a>"
   },
   "settings_popup_size_display_mode_label": {
-    "message": "Display mode"
+    "message": "डिस्प्ले मोड"
   },
   "settings_popup_size_display_mode_more": {
-    "message": "The <em>Default</em> mode will position the popup relative to the scanned text.\n                    The <em>Full Width</em> mode will anchor the popup to the top or bottom of the screen and take up\n                    the full width of the screen, which can be useful on devices with touch screens."
+    "message": "<em>डिफ़ॉल्ट</em> मोड स्कैन किए गए टेक्स्ट के सापेक्ष पॉपअप को स्थित करेगा.\n                    <em>पूर्ण चौड़ाई</em> मोड पॉपअप को स्क्रीन के ऊपर या नीचे एंकर करेगा और\n                    स्क्रीन की पूरी चौड़ाई लेगा, जो टच स्क्रीन वाले डिवाइसों पर उपयोगी हो सकता है."
   },
   "settings_popup_size_heading": {
-    "message": "Popup Position & Size"
+    "message": "पॉपअप स्थिति और आकार"
   },
   "settings_popup_size_horizontal_offset_description": {
-    "message": "Change the distance the popup is placed relative to horizontal text."
+    "message": "क्षैतिज टेक्स्ट के सापेक्ष पॉपअप रखे जाने की दूरी बदलें।"
   },
   "settings_popup_size_horizontal_offset_label": {
-    "message": "Horizontal text offset"
+    "message": "क्षैतिज टेक्स्ट ऑफ़सेट"
   },
   "settings_popup_size_horizontal_position_description": {
-    "message": "Change where the popup is positioned relative to horizontal text."
+    "message": "क्षैतिज टेक्स्ट के सापेक्ष पॉपअप कहाँ स्थित हो, बदलें।"
   },
   "settings_popup_size_horizontal_position_label": {
-    "message": "Horizontal text positioning"
+    "message": "क्षैतिज टेक्स्ट स्थिति"
   },
   "settings_popup_size_position_above": {
-    "message": "Above text"
+    "message": "टेक्स्ट के ऊपर"
   },
   "settings_popup_size_position_below": {
-    "message": "Below text"
+    "message": "टेक्स्ट के नीचे"
   },
   "settings_popup_size_scale_description": {
-    "message": "Control the scaling factor of the popup."
+    "message": "पॉपअप के स्केलिंग फ़ैक्टर को नियंत्रित करें।"
   },
   "settings_popup_size_scale_label": {
-    "message": "Scale"
+    "message": "स्केल"
   },
   "settings_popup_size_size_description": {
-    "message": "Control the size of the popup, in pixels."
+    "message": "पॉपअप का आकार पिक्सेल में नियंत्रित करें।"
   },
   "settings_popup_size_size_label": {
-    "message": "Size"
+    "message": "आकार"
   },
   "settings_popup_size_vertical_after": {
-    "message": "After reading direction"
+    "message": "पठन दिशा के बाद"
   },
   "settings_popup_size_vertical_before": {
-    "message": "Before reading direction"
+    "message": "पठन दिशा से पहले"
   },
   "settings_popup_size_vertical_left": {
-    "message": "Left of text"
+    "message": "टेक्स्ट के बाएँ"
   },
   "settings_popup_size_vertical_offset_description": {
-    "message": "Change the distance the popup is placed relative to vertical text."
+    "message": "ऊर्ध्वाधर टेक्स्ट के सापेक्ष पॉपअप रखे जाने की दूरी बदलें।"
   },
   "settings_popup_size_vertical_offset_label": {
-    "message": "Vertical text offset"
+    "message": "ऊर्ध्वाधर टेक्स्ट ऑफ़सेट"
   },
   "settings_popup_size_vertical_position_description": {
-    "message": "Change where the popup is positioned relative to vertical text."
+    "message": "ऊर्ध्वाधर टेक्स्ट के सापेक्ष पॉपअप कहाँ स्थित हो, बदलें।"
   },
   "settings_popup_size_vertical_position_label": {
-    "message": "Vertical text positioning"
+    "message": "ऊर्ध्वाधर टेक्स्ट स्थिति"
   },
   "settings_popup_size_vertical_right": {
-    "message": "Right of text"
+    "message": "टेक्स्ट के दाएँ"
   },
   "settings_popup_size_vertical_same_as_horizontal": {
-    "message": "Same as horizontal text"
+    "message": "क्षैतिज टेक्स्ट जैसा"
   },
   "settings_profile_active_description": {
     "message": "स्कैनिंग के लिए उपयोग होने वाली सक्रिय प्रोफ़ाइल बदलें।"
@@ -1356,49 +1356,49 @@
     "message": "प्रोफ़ाइल"
   },
   "settings_result_average_frequencies_description": {
-    "message": "Compress frequency tags into one \"Average\" frequency tag based on the harmonic mean."
+    "message": "हार्मोनिक माध्य के आधार पर आवृत्ति टैगों को एक \"औसत\" आवृत्ति टैग में संकुचित करें।"
   },
   "settings_result_average_frequencies_label": {
-    "message": "Average frequencies"
+    "message": "औसत आवृत्तियाँ"
   },
   "settings_result_display_heading": {
-    "message": "Result Display"
+    "message": "परिणाम प्रदर्शन"
   },
   "settings_result_grouping_description": {
-    "message": "Change how related results are grouped.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "संबंधित परिणामों को कैसे समूहित किया जाए, बदलें.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">अधिक…</a>"
   },
   "settings_result_grouping_label": {
-    "message": "Result grouping mode"
+    "message": "परिणाम समूहकरण मोड"
   },
   "settings_result_grouping_more_none": {
-    "message": "<strong>No grouping</strong> -\n                        Every definition will be listed as a separate entry."
+    "message": "<strong>कोई समूहकरण नहीं</strong> -\n                        हर परिभाषा अलग प्रविष्टि के रूप में सूचीबद्ध होगी।"
   },
   "settings_result_grouping_more_related_1": {
-    "message": "<strong>Group related terms</strong> -\n                            Related terms that share the same definitions will be grouped together."
+    "message": "<strong>संबंधित शब्द समूहित करें</strong> -\n                            जिन संबंधित शब्दों की परिभाषाएँ समान हैं उन्हें एक साथ समूहित किया जाएगा।"
   },
   "settings_result_grouping_more_related_2": {
-    "message": "The <em>Primary dictionary</em> option should be assigned to a dictionary which contains related term information,\n                            and configuring the <em>Secondary dictionaries</em> will allow definitions for the related terms to be\n                            included from other dictionaries."
+    "message": "<em>प्राथमिक शब्दकोश</em> विकल्प किसी ऐसे शब्दकोश को असाइन किया जाना चाहिए जिसमें संबंधित शब्दों की जानकारी हो, और <em>द्वितीयक शब्दकोश</em> कॉन्फ़िगर करने से संबंधित शब्दों की परिभाषाएँ अन्य शब्दकोशों से शामिल की जा सकेंगी।"
   },
   "settings_result_grouping_more_related_warning": {
-    "message": "Not all dictionaries are able to be selected as the <em>Primary dictionary</em>."
+    "message": "सभी शब्दकोशों को <em>प्राथमिक शब्दकोश</em> के रूप में चुना नहीं जा सकता।"
   },
   "settings_result_grouping_more_term_reading": {
-    "message": "<strong>Group term-reading pairs</strong> -\n                        Definitions for the same term with the same reading will be grouped together."
+    "message": "<strong>शब्द-पठन जोड़े समूहित करें</strong> -\n                        एक ही शब्द की एक ही पठन वाली परिभाषाएँ एक साथ समूहित होंगी।"
   },
   "settings_result_grouping_none": {
-    "message": "No grouping"
+    "message": "कोई समूहकरण नहीं"
   },
   "settings_result_grouping_primary_dictionary": {
-    "message": "Primary dictionary"
+    "message": "प्राथमिक शब्दकोश"
   },
   "settings_result_grouping_related": {
-    "message": "Group related terms"
+    "message": "संबंधित शब्द समूहित करें"
   },
   "settings_result_grouping_secondary_dictionaries": {
-    "message": "Secondary dictionaries…"
+    "message": "द्वितीयक शब्दकोश…"
   },
   "settings_result_grouping_term_reading": {
-    "message": "Group term-reading pairs"
+    "message": "शब्द-पठन जोड़े समूहित करें"
   },
   "settings_scanning_advanced_inputs_label": {
     "message": "उन्नत स्कैनिंग इनपुट कॉन्फ़िगर करें… <span class=\"light no-wrap\">(<span class=\"scanning-input-count\">#</span> परिभाषित)</span>"
@@ -1512,55 +1512,55 @@
     "message": "यह सेटिंग Firefox में कोई प्रभाव नहीं डालती, क्योंकि यह <code>zoom</code> प्रॉपर्टी को लागू नहीं करता।"
   },
   "settings_search_window_heading": {
-    "message": "Search Window"
+    "message": "खोज विंडो"
   },
   "settings_search_window_left_description": {
-    "message": "Control the left position of the window, in pixels."
+    "message": "विंडो की बाईं स्थिति को पिक्सेल में नियंत्रित करें।"
   },
   "settings_search_window_left_label": {
-    "message": "Left position"
+    "message": "बाईं स्थिति"
   },
   "settings_search_window_native_window_label": {
-    "message": "Use a native browser window instead of an embedded popup\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "एम्बेडेड पॉपअप के बजाय मूल ब्राउज़र विंडो का उपयोग करें\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "settings_search_window_native_window_more": {
-    "message": "Instead of showing definitions in a popup embedded into the webpage, a native browser window containing the popup content will be opened instead. This window will be shared across all tabs."
+    "message": "वेबपेज में एम्बेडेड पॉपअप में परिभाषाएँ दिखाने के बजाय, पॉपअप सामग्री वाली एक मूल ब्राउज़र विंडो खोली जाएगी। यह विंडो सभी टैब में साझा की जाएगी।"
   },
   "settings_search_window_open_link": {
-    "message": "Open…"
+    "message": "खोलें…"
   },
   "settings_search_window_size_description": {
-    "message": "Control the size of the window, in pixels."
+    "message": "विंडो का आकार पिक्सेल में नियंत्रित करें।"
   },
   "settings_search_window_size_label": {
-    "message": "Size"
+    "message": "आकार"
   },
   "settings_search_window_state_fullscreen": {
-    "message": "Fullscreen"
+    "message": "पूर्ण स्क्रीन"
   },
   "settings_search_window_state_maximized": {
-    "message": "Maximized"
+    "message": "अधिकतम"
   },
   "settings_search_window_sticky_header_description": {
-    "message": "Search header stays on the page when scrolling down."
+    "message": "स्क्रॉल करने पर खोज हेडर पेज पर बना रहता है।"
   },
   "settings_search_window_sticky_header_label": {
-    "message": "Sticky search header"
+    "message": "स्टिकी खोज हेडर"
   },
   "settings_search_window_style_description": {
-    "message": "Change the appearance of the window."
+    "message": "विंडो का रूप बदलें।"
   },
   "settings_search_window_style_label": {
-    "message": "Window style"
+    "message": "विंडो शैली"
   },
   "settings_search_window_top_description": {
-    "message": "Control the top position of the window, in pixels."
+    "message": "विंडो की शीर्ष स्थिति को पिक्सेल में नियंत्रित करें।"
   },
   "settings_search_window_top_label": {
-    "message": "Top position"
+    "message": "शीर्ष स्थिति"
   },
   "settings_search_window_type_popup": {
-    "message": "Popup"
+    "message": "पॉपअप"
   },
   "settings_security_heading": {
     "message": "सुरक्षा"
@@ -1659,7 +1659,7 @@
     "message": "साइन इन है"
   },
   "settings_sottaku_status_signed_in_as": {
-    "message": "{0} के रूप में साइन इन है"
+    "message": "$1 के रूप में साइन इन है"
   },
   "settings_sottaku_status_signed_out": {
     "message": "Sottaku से साइन आउट"
@@ -1677,58 +1677,58 @@
     "message": "उपयोगकर्ता नाम या ईमेल"
   },
   "settings_status_tasks_in_progress": {
-    "message": "Tasks in progress:"
+    "message": "प्रगति में कार्य:"
   },
   "settings_text_parsing_heading": {
-    "message": "Text Parsing"
+    "message": "पाठ विश्लेषण"
   },
   "settings_text_parsing_info_1": {
-    "message": "Sottaku-Yomitan is able to scan the sentence surrounding a term and parse individual words\n                of the query on the <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">search page</a>.\n                This information can also be added to Anki cards to provide additional context."
+    "message": "Sottaku-Yomitan किसी शब्द के आसपास की वाक्य को स्कैन कर सकता है और\n                <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">खोज पृष्ठ</a> पर क्वेरी के व्यक्तिगत शब्दों का विश्लेषण कर सकता है।\n                यह जानकारी अतिरिक्त संदर्भ देने के लिए Anki कार्ड में भी जोड़ी जा सकती है।"
   },
   "settings_text_parsing_internal_description": {
-    "message": "Sentence words are parsed using Sottaku-Yomitan's dictionaries.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "वाक्य के शब्द Sottaku-Yomitan के शब्दकोशों का उपयोग करके विश्लेषित किए जाते हैं।\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">अधिक…</a>"
   },
   "settings_text_parsing_internal_label": {
-    "message": "Parse sentences using Sottaku-Yomitan's internal parser"
+    "message": "Sottaku-Yomitan के आंतरिक पार्सर से वाक्य विश्लेषित करें"
   },
   "settings_text_parsing_internal_more": {
-    "message": "Sottaku-Yomitan's internal parser is a simple algorithm which can parse sentences using the installed dictionaries. It works by repeatedly detecting the longest term at the start of the sentence and advancing until no text remains. This provides decent results for the general case, but since grammatical structure is not taken into account, it can sometimes yield incorrect segmentation."
+    "message": "Sottaku-Yomitan का आंतरिक पार्सर एक सरल एल्गोरिद्म है जो स्थापित शब्दकोशों का उपयोग करके वाक्यों का विश्लेषण कर सकता है। यह वाक्य की शुरुआत में सबसे लंबे शब्द को बार-बार पहचानकर और आगे बढ़ते हुए तब तक काम करता है जब तक कोई पाठ शेष नहीं रहता। यह सामान्य मामलों में ठीक परिणाम देता है, लेकिन व्याकरणिक संरचना को ध्यान में न रखने के कारण कभी-कभी गलत विभाजन हो सकता है।"
   },
   "settings_text_parsing_mecab_description": {
-    "message": "Sentence words are parsed using a third-party program. Japanese only."
+    "message": "वाक्य के शब्द तीसरे पक्ष के प्रोग्राम का उपयोग करके विश्लेषित किए जाते हैं। केवल जापानी।"
   },
   "settings_text_parsing_mecab_disclaimer": {
-    "message": "This option may send search query data outside of Sottaku-Yomitan for parsing<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">Privacy Policy</a>)</span>.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "यह विकल्प पार्सिंग के लिए खोज क्वेरी डेटा को Sottaku-Yomitan से बाहर भेज सकता है<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">गोपनीयता नीति</a>)</span>.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">अधिक…</a>"
   },
   "settings_text_parsing_mecab_label": {
-    "message": "Parse sentences using <a href=\"https://en.wikipedia.org/wiki/MeCab\" rel=\"noopener noreferrer\" target=\"_blank\">MeCab</a>"
+    "message": "<a href=\"https://en.wikipedia.org/wiki/MeCab\" rel=\"noopener noreferrer\" target=\"_blank\">MeCab</a> का उपयोग करके वाक्य विश्लेषित करें"
   },
   "settings_text_parsing_mecab_more_1": {
-    "message": "MeCab is a third-party program which uses its own dictionaries and parsing algorithm to decompose sentences into individual words. MeCab may provide more accurate parsing results than Sottaku-Yomitan's internal parser."
+    "message": "MeCab एक तृतीय-पक्ष प्रोग्राम है जो अपने शब्दकोश और पार्सिंग एल्गोरिद्म का उपयोग करके वाक्यों को अलग-अलग शब्दों में विभाजित करता है। MeCab, Sottaku-Yomitan के आंतरिक पार्सर की तुलना में अधिक सटीक परिणाम दे सकता है।"
   },
   "settings_text_parsing_mecab_more_2": {
-    "message": "In order for Sottaku-Yomitan to use it, both MeCab and a native messaging component must be installed.\n                    A setup guide can be found <a href=\"https://github.com/yomidevs/yomitan-mecab-installer/blob/master/README.md\" rel=\"noopener noreferrer\" target=\"_blank\">here</a>."
+    "message": "Sottaku-Yomitan द्वारा इसका उपयोग करने के लिए MeCab और एक मूल संदेश घटक दोनों को इंस्टॉल करना होगा।\n                    सेटअप गाइड <a href=\"https://github.com/yomidevs/yomitan-mecab-installer/blob/master/README.md\" rel=\"noopener noreferrer\" target=\"_blank\">यहाँ</a> मिल सकता है।"
   },
   "settings_text_parsing_scan_extent_description": {
-    "message": "Adjust how many characters are bidirectionally scanned to form a sentence."
+    "message": "वाक्य बनाने के लिए द्विदिश रूप से कितने अक्षर स्कैन किए जाएँ, समायोजित करें।"
   },
   "settings_text_parsing_scan_extent_label": {
-    "message": "Sentence scanning extent"
+    "message": "वाक्य स्कैन सीमा"
   },
   "settings_text_parsing_spacing_label": {
-    "message": "Show space between parsed words"
+    "message": "पार्स किए गए शब्दों के बीच स्पेस दिखाएँ"
   },
   "settings_text_parsing_termination_custom": {
-    "message": "Custom"
+    "message": "कस्टम"
   },
   "settings_text_parsing_termination_custom_no_newlines": {
-    "message": "Custom, no newlines"
+    "message": "कस्टम, बिना नई पंक्तियों के"
   },
   "settings_text_parsing_termination_label": {
-    "message": "Sentence termination characters"
+    "message": "वाक्य समाप्ति वर्ण"
   },
   "settings_text_parsing_termination_newlines": {
-    "message": "Newlines only"
+    "message": "केवल नई पंक्तियाँ"
   },
   "settings_translation_heading": {
     "message": "अनुवाद"
@@ -1749,222 +1749,222 @@
     "message": "शब्द"
   },
   "sottaku_action_title_missing_id": {
-    "message": "Missing Sottaku question id"
+    "message": "Sottaku प्रश्न आईडी गायब है"
   },
   "sottaku_action_title_sign_in": {
-    "message": "Sign in to Sottaku first"
+    "message": "पहले Sottaku में साइन इन करें"
   },
   "sottaku_locale_automatic": {
-    "message": "Automatic (use Sottaku account language)"
+    "message": "स्वचालित (Sottaku खाते की भाषा उपयोग करें)"
   },
   "sottaku_request_button": {
-    "message": "Request dictionary entry"
+    "message": "शब्दकोश प्रविष्टि का अनुरोध करें"
   },
   "sottaku_request_button_requested": {
-    "message": "Requested"
+    "message": "अनुरोधित"
   },
   "sottaku_request_button_requesting": {
-    "message": "Requesting..."
+    "message": "अनुरोध किया जा रहा है..."
   },
   "sottaku_request_button_retry": {
-    "message": "Request translation"
+    "message": "अनुवाद का अनुरोध करें"
   },
   "sottaku_request_button_title_submitted": {
-    "message": "Request submitted to Sottaku"
+    "message": "अनुरोध Sottaku को भेजा गया"
   },
   "sottaku_save_button": {
-    "message": "Save to Sottaku"
+    "message": "Sottaku में सहेजें"
   },
   "sottaku_save_button_saved": {
-    "message": "Saved"
+    "message": "सहेजा गया"
   },
   "sottaku_save_button_saving": {
-    "message": "Saving..."
+    "message": "सहेजा जा रहा है..."
   },
   "sottaku_save_button_title_already_saved": {
-    "message": "Already saved to Sottaku"
+    "message": "Sottaku में पहले से सहेजा गया"
   },
   "sottaku_save_button_title_saved": {
-    "message": "Added to your Sottaku flashcards"
+    "message": "आपकी Sottaku फ्लैशकार्ड में जोड़ा गया"
   },
   "status_footer_close": {
-    "message": "Close"
+    "message": "बंद करें"
   },
   "status_footer_tasks_in_progress": {
-    "message": "Tasks in progress:"
+    "message": "प्रगति में कार्य:"
   },
   "support_heading": {
-    "message": "Support Sottaku-Yomitan ❤️"
+    "message": "Sottaku-Yomitan को समर्थन दें ❤️"
   },
   "support_list_contribute": {
-    "message": "Contribute to the Sottaku-Yomitan project! Start by reading our <a href=\"https://github.com/sottakuapp/sottaku-yomitan/blob/master/CONTRIBUTING.md\" rel=\"noreferrer noopener\">Contribution Guidelines</a>."
+    "message": "Sottaku-Yomitan परियोजना में योगदान दें! शुरू करने के लिए हमारे <a href=\"https://github.com/sottakuapp/sottaku-yomitan/blob/master/CONTRIBUTING.md\" rel=\"noreferrer noopener\">योगदान दिशानिर्देश</a> पढ़ें।"
   },
   "support_list_feedback": {
-    "message": "Report any bugs or feedback on our <a href=\"https://github.com/sottakuapp/sottaku-yomitan/issues/new/choose\" rel=\"noreferrer noopener\">GitHub Issues</a> or email <a href=\"mailto:hello@sottaku.app\">hello@sottaku.app</a>."
+    "message": "हमारे <a href=\"https://github.com/sottakuapp/sottaku-yomitan/issues/new/choose\" rel=\"noreferrer noopener\">GitHub Issues</a> पर बग या प्रतिक्रिया रिपोर्ट करें या <a href=\"mailto:hello@sottaku.app\">hello@sottaku.app</a> पर ईमेल करें।"
   },
   "support_list_star": {
-    "message": "Star the project on <a href=\"https://github.com/sottakuapp/sottaku-yomitan\" rel=\"noreferrer noopener\">GitHub</a> and share it with friends."
+    "message": "<a href=\"https://github.com/sottakuapp/sottaku-yomitan\" rel=\"noreferrer noopener\">GitHub</a> पर प्रोजेक्ट को स्टार दें और दोस्तों के साथ साझा करें।"
   },
   "support_subheading": {
-    "message": "Here are some ways to support Sottaku-Yomitan:"
+    "message": "Sottaku-Yomitan का समर्थन करने के कुछ तरीके:"
   },
   "template_anki_overwrite_append_title": {
-    "message": "Insert new value after existing"
+    "message": "मौजूदा मान के बाद नया मान जोड़ें"
   },
   "template_anki_overwrite_available_title": {
-    "message": "Overwrite if new value is not empty"
+    "message": "यदि नया मान खाली नहीं है तो ओवरराइट करें"
   },
   "template_anki_overwrite_fill_title": {
-    "message": "Overwrite if existing value is empty"
+    "message": "यदि मौजूदा मान खाली है तो ओवरराइट करें"
   },
   "template_anki_overwrite_overwrite_title": {
-    "message": "Overwrite even if new value is empty"
+    "message": "नया मान खाली हो तब भी ओवरराइट करें"
   },
   "template_anki_overwrite_prepend_title": {
-    "message": "Insert new value before existing"
+    "message": "मौजूदा मान से पहले नया मान जोड़ें"
   },
   "template_anki_overwrite_skip_title": {
-    "message": "Keep existing value"
+    "message": "मौजूदा मान बनाए रखें"
   },
   "template_audio_source_tts_anki_warning": {
-    "message": "Not supported in Anki"
+    "message": "Anki में समर्थित नहीं"
   },
   "template_dictionary_integrity_error": {
-    "message": "Dictionary may not have been imported properly"
+    "message": "शायद शब्दकोश सही तरीके से आयात नहीं हुआ"
   },
   "template_dictionary_update_available": {
-    "message": "Update available"
+    "message": "अपडेट उपलब्ध"
   },
   "template_hotkey_no_input": {
-    "message": "No input"
+    "message": "कोई इनपुट नहीं"
   },
   "template_profile_name_placeholder": {
-    "message": "Profile name"
+    "message": "प्रोफ़ाइल नाम"
   },
   "template_scan_no_inputs": {
-    "message": "No inputs"
+    "message": "कोई इनपुट नहीं"
   },
   "template_scan_touch_min_time": {
-    "message": "Minimum Touch Time <span class=\"light\">(in milliseconds)</span>:"
+    "message": "न्यूनतम टच समय <span class=\"light\">(मिलीसेकंड में)</span>:"
   },
   "templates_modals_title": {
-    "message": "Templates"
+    "message": "टेम्पलेट्स"
   },
   "templates_settings_title": {
-    "message": "Templates"
+    "message": "टेम्पलेट्स"
   },
   "theme_option_auto": {
-    "message": "Auto"
+    "message": "स्वचालित"
   },
   "theme_option_browser": {
-    "message": "Browser"
+    "message": "ब्राउज़र"
   },
   "theme_option_dark": {
-    "message": "Dark"
+    "message": "गहरा"
   },
   "theme_option_light": {
-    "message": "Light"
+    "message": "हल्का"
   },
   "welcome_audio_enable_description": {
-    "message": "Show a clickable speaker icon next to search results."
+    "message": "खोज परिणामों के पास क्लिक करने योग्य स्पीकर आइकन दिखाएँ।"
   },
   "welcome_audio_enable_disclaimer": {
-    "message": "This option may send term, reading, and/or language outside of Sottaku-Yomitan to fetch audio when the speaker icon is clicked<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">Privacy Policy</a>)</span>.\n                    <div data-show-for-browser=\"firefox firefox-mobile\">Disabling this option will disallow pronunciation audio playback for any terms searched.</div>"
+    "message": "जब स्पीकर आइकन पर क्लिक किया जाता है, यह विकल्प ऑडियो प्राप्त करने के लिए शब्द, रीडिंग और/या भाषा को Sottaku-Yomitan के बाहर भेज सकता है<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">गोपनीयता नीति</a>)</span>.\n                    <div data-show-for-browser=\"firefox firefox-mobile\">इस विकल्प को अक्षम करने से खोजे गए किसी भी शब्द के लिए उच्चारण ऑडियो प्लेबैक संभव नहीं होगा।</div>"
   },
   "welcome_audio_enable_label": {
-    "message": "Enable audio playback for terms"
+    "message": "शब्दों के लिए ऑडियो प्लेबैक सक्षम करें"
   },
   "welcome_basic_customization_heading": {
-    "message": "Basic customization"
+    "message": "मूल अनुकूलन"
   },
   "welcome_data_transmission_heading": {
-    "message": "Data Transmission"
+    "message": "डेटा प्रसारण"
   },
   "welcome_get_started_connect_account": {
-    "message": "Connect your Sottaku account to sync dictionaries, audio, and flashcards"
+    "message": "शब्दकोश, ऑडियो और फ्लैशकार्ड सिंक करने के लिए अपने Sottaku खाते को कनेक्ट करें"
   },
   "welcome_get_started_heading": {
-    "message": "Here are some basics to get started"
+    "message": "शुरू करने के लिए कुछ बेसिक बातें"
   },
   "welcome_get_started_news_link": {
-    "message": "New to Sottaku-Yomitan? Visit sottaku.app for news and tips."
+    "message": "Sottaku-Yomitan में नए हैं? समाचार और टिप्स के लिए sottaku.app पर जाएँ।"
   },
   "welcome_get_started_quick_start": {
-    "message": "Sottaku-Yomitan Quick Start Guide"
+    "message": "Sottaku-Yomitan त्वरित प्रारंभ मार्गदर्शिका"
   },
   "welcome_heading": {
-    "message": "Welcome to Sottaku-Yomitan!"
+    "message": "Sottaku-Yomitan में आपका स्वागत है!"
   },
   "welcome_locale_description": {
-    "message": "Language used for translations returned by Sottaku."
+    "message": "Sottaku द्वारा लौटाए गए अनुवादों के लिए उपयोग की जाने वाली भाषा।"
   },
   "welcome_locale_label": {
-    "message": "Locale"
+    "message": "भाषा"
   },
   "welcome_locale_setup_description": {
-    "message": "Sottaku already provides Japanese and Korean lookups through your account; import additional dictionaries if you want offline access or other languages."
+    "message": "Sottaku पहले से ही आपके खाते के माध्यम से जापानी और कोरियाई लुकअप प्रदान करता है; ऑफ़लाइन एक्सेस या अन्य भाषाओं के लिए अतिरिक्त शब्दकोश आयात करें।"
   },
   "welcome_locale_setup_heading": {
-    "message": "Locale setup"
+    "message": "भाषा सेटअप"
   },
   "welcome_more_customization_link": {
-    "message": "More customization options are available on the Settings page"
+    "message": "अधिक अनुकूलन विकल्प सेटिंग्स पेज पर उपलब्ध हैं"
   },
   "welcome_permissions_disabled_warning": {
-    "message": "Sottaku-Yomitan features will be limited if the recommended permissions are not enabled."
+    "message": "यदि अनुशंसित अनुमतियाँ सक्षम नहीं हैं तो Sottaku-Yomitan की सुविधाएँ सीमित होंगी।"
   },
   "welcome_permissions_enable_optional_description": {
-    "message": "This allows Sottaku-Yomitan to read the clipboard and communicate with external programs."
+    "message": "यह Sottaku-Yomitan को क्लिपबोर्ड पढ़ने और बाहरी प्रोग्रामों से संवाद करने की अनुमति देता है।"
   },
   "welcome_permissions_enable_optional_label": {
-    "message": "Enable optional permissions"
+    "message": "वैकल्पिक अनुमतियाँ सक्षम करें"
   },
   "welcome_permissions_enable_recommended_description": {
-    "message": "This allows Sottaku-Yomitan to scan text from most sites."
+    "message": "यह Sottaku-Yomitan को अधिकांश साइटों से टेक्स्ट स्कैन करने की अनुमति देता है।"
   },
   "welcome_permissions_enable_recommended_label": {
-    "message": "Enable recommended permissions"
+    "message": "अनुशंसित अनुमतियाँ सक्षम करें"
   },
   "welcome_permissions_full_enabled": {
-    "message": "All Sottaku-Yomitan features are available."
+    "message": "Sottaku-Yomitan की सभी सुविधाएँ उपलब्ध हैं।"
   },
   "welcome_permissions_more_info_chrome": {
-    "message": "Further configuration is available on the <a href=\"/permissions.html\" rel=\"noopener\">Permissions page</a> and the web browser's <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">extension settings page</a>."
+    "message": "अधिक कॉन्फ़िगरेशन <a href=\"/permissions.html\" rel=\"noopener\">Permissions पेज</a> और ब्राउज़र के <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">एक्सटेंशन सेटिंग्स पेज</a> पर उपलब्ध है।"
   },
   "welcome_permissions_more_info_firefox": {
-    "message": "Further configuration is available on the <a href=\"/permissions.html\" rel=\"noopener\">Permissions page</a> and the web browser's extension settings page."
+    "message": "अधिक कॉन्फ़िगरेशन <a href=\"/permissions.html\" rel=\"noopener\">Permissions पेज</a> और ब्राउज़र के एक्सटेंशन सेटिंग्स पेज पर उपलब्ध है।"
   },
   "welcome_permissions_recommended_enabled": {
-    "message": "Essential Sottaku-Yomitan features are available."
+    "message": "Sottaku-Yomitan की आवश्यक सुविधाएँ उपलब्ध हैं।"
   },
   "welcome_recommended_permissions_heading": {
-    "message": "Recommended Permissions (Important)"
+    "message": "अनुशंसित अनुमतियाँ (महत्वपूर्ण)"
   },
   "welcome_scan_middle_mouse_description": {
-    "message": "Hold the middle mouse button while moving the cursor to scan text."
+    "message": "कर्सर चलाते समय मिडिल माउस बटन दबाए रखें ताकि टेक्स्ट स्कैन हो।"
   },
   "welcome_scan_middle_mouse_label": {
-    "message": "Scan using middle mouse button"
+    "message": "मिडिल माउस बटन से स्कैन करें"
   },
   "welcome_scan_modifier_description": {
-    "message": "Hold a key while moving the cursor to scan text."
+    "message": "टेक्स्ट स्कैन करने के लिए कर्सर चलाते समय किसी कुंजी को दबाए रखें।"
   },
   "welcome_scan_modifier_label": {
-    "message": "Scan modifier key"
+    "message": "स्कैन मॉडिफ़ायर कुंजी"
   },
   "welcome_show_guide_label": {
-    "message": "Show this welcome guide on browser startup"
+    "message": "ब्राउज़र स्टार्टअप पर यह स्वागत गाइड दिखाएँ"
   },
   "welcome_text_language_description": {
-    "message": "Used for offline dictionary features and preview tooling."
+    "message": "ऑफ़लाइन शब्दकोश सुविधाओं और प्रीव्यू टूलिंग के लिए उपयोग होता है।"
   },
   "welcome_text_language_label": {
-    "message": "Text language"
+    "message": "टेक्स्ट भाषा"
   },
   "welcome_theme_description": {
-    "message": "Adjust the style of Sottaku-Yomitan."
+    "message": "Sottaku-Yomitan की शैली समायोजित करें।"
   },
   "welcome_theme_label": {
-    "message": "Theme"
+    "message": "थीम"
   }
 }

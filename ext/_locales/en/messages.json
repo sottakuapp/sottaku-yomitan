@@ -1659,7 +1659,7 @@
     "message": "Signed in"
   },
   "settings_sottaku_status_signed_in_as": {
-    "message": "Signed in as {0}"
+    "message": "Signed in as $1"
   },
   "settings_sottaku_status_signed_out": {
     "message": "Signed out of Sottaku"
