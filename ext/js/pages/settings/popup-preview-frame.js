@@ -21,6 +21,7 @@ import {ThemeController} from '../../app/theme-controller.js';
 import {createApiMap, invokeApiMapHandler} from '../../core/api-map.js';
 import {EventListenerCollection} from '../../core/event-listener-collection.js';
 import {isObjectNotArray} from '../../core/object-utilities.js';
+import {LocaleDirectionController} from '../../dom/locale-direction-controller.js';
 import {querySelectorNotNull} from '../../dom/query-selector.js';
 import {TextSourceRange} from '../../dom/text-source-range.js';
 import {isComposing} from '../../language/ime-utilities.js';
@@ -63,6 +64,8 @@ export class PopupPreviewFrame {
         this._languageSummaries = [];
         /** @type {ThemeController} */
         this._themeController = new ThemeController(document.documentElement);
+        /** @type {LocaleDirectionController} */
+        this._localeDirectionController = new LocaleDirectionController();
         /** @type {boolean} */
         this._isSottakuLinked = false;
         /** @type {?HTMLElement} */
@@ -138,6 +141,7 @@ export class PopupPreviewFrame {
      */
     async _apiOptionsGet(optionsContext) {
         const options = await /** @type {(optionsContext: import('settings').OptionsContext) => Promise<import('settings').ProfileOptions>} */ (this._apiOptionsGetOld)(optionsContext);
+        void this._localeDirectionController.applyFromOptions(options);
         this._updateSottakuLinkedFlag(options);
         this._applyFrontendEnabledState();
         options.general.enable = true;

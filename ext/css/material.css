@@ -1342,3 +1342,22 @@ button.popup-menu-item.popup-menu-item-thin {
     flex-flow: row nowrap;
     align-items: stretch;
 }
+
+/* RTL adjustments */
+:root[dir="rtl"] {
+    direction: rtl;
+}
+:root[dir="rtl"] select {
+    background-position: left calc(10em / var(--font-size-no-units)) center;
+}
+:root[dir="rtl"] .radio-label>.radio-label-text {
+    margin-left: 0;
+    margin-right: 0.5em;
+}
+:root[dir="rtl"] .popup-menu-item-icon+.popup-menu-item-label {
+    margin-left: 0;
+    margin-right: 0.5em;
+}
+:root[dir="rtl"] .icon[data-icon=material-right-arrow] {
+    transform: scaleX(-1);
+}

@@ -378,6 +378,24 @@ button.icon-button.modal-header-button>.icon-button-inner>.icon {
 .settings-item-children.settings-item-children-group .settings-item-inner.settings-item-inner-wrappable>.settings-item-left:not(:last-child) {
     padding-right: calc(var(--settings-group-inner-horizontal-padding-half-wrappable) * 2);
 }
+
+/* RTL adjustments */
+:root[dir="rtl"] .settings-item-left {
+    padding-right: var(--settings-group-inner-horizontal-padding);
+    padding-left: var(--settings-group-inner-horizontal-padding-half);
+}
+:root[dir="rtl"] .settings-item-right {
+    padding-right: var(--settings-group-inner-horizontal-padding-half);
+    padding-left: var(--settings-group-inner-horizontal-padding);
+}
+:root[dir="rtl"] .settings-item-inner.settings-item-inner-wrappable>.settings-item-left {
+    padding-right: var(--settings-group-inner-horizontal-padding);
+    padding-left: var(--settings-group-inner-horizontal-padding-half-wrappable);
+}
+:root[dir="rtl"] .settings-item-inner.settings-item-inner-wrappable>.settings-item-right {
+    padding-right: var(--settings-group-inner-horizontal-padding-half-wrappable);
+    padding-left: var(--settings-group-inner-horizontal-padding);
+}
 .settings-item-children.settings-item-children-group .settings-item-inner.settings-item-inner-wrappable>.settings-item-right {
     padding-left: 0;
 }

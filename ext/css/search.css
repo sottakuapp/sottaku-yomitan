@@ -236,6 +236,22 @@ h1 {
     height: 480px;
 }
 
+/* RTL adjustments */
+:root[dir="rtl"] .search-header {
+    padding-left: 0;
+    padding-right: var(--search-scroll-container-horizontal-padding);
+}
+:root[dir="rtl"] #search-settings-button {
+    float: left;
+}
+:root[dir="rtl"] .search-option {
+    margin: 0.5em 0 0.5em 2em;
+}
+:root[dir="rtl"] .search-option-label {
+    padding-left: 0;
+    padding-right: 0.5em;
+}
+
 /* Dark mode before themes are applied
    DO NOT use this for normal theming */
 @media (prefers-color-scheme: dark) {

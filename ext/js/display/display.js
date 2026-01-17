@@ -31,6 +31,7 @@ import {setProfile} from '../data/profiles-util.js';
 import {PopupMenu} from '../dom/popup-menu.js';
 import {querySelectorNotNull} from '../dom/query-selector.js';
 import {ScrollElement} from '../dom/scroll-element.js';
+import {LocaleDirectionController} from '../dom/locale-direction-controller.js';
 import {TextSourceGenerator} from '../dom/text-source-generator.js';
 import {HotkeyHelpController} from '../input/hotkey-help-controller.js';
 import {TextScanner} from '../language/text-scanner.js';
@@ -201,6 +202,8 @@ export class Display extends EventDispatcher {
         this._onMenuButtonMenuCloseBind = this._onMenuButtonMenuClose.bind(this);
         /** @type {ThemeController} */
         this._themeController = new ThemeController(document.documentElement);
+        /** @type {LocaleDirectionController} */
+        this._localeDirectionController = new LocaleDirectionController();
         /** @type {import('language').LanguageSummary[]} */
         this._languageSummaries = [];
         /** @type {import('dictionary-importer').Summary[]} */
@@ -463,6 +466,7 @@ export class Display extends EventDispatcher {
 
         this._updateHotkeys(options);
         this._updateDocumentOptions(options);
+        void this._localeDirectionController.applyFromOptions(options);
         this._setTheme(options);
         this._setStickyHeader(options);
         this._hotkeyHelpController.setOptions(options);

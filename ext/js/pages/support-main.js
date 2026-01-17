@@ -17,11 +17,19 @@
 
 import {ThemeController} from '../app/theme-controller.js';
 import {Application} from '../application.js';
+import {LocaleDirectionController} from '../dom/locale-direction-controller.js';
 import {SettingsController} from './settings/settings-controller.js';
 
 await Application.main(true, async (application) => {
     const settingsController = new SettingsController(application);
     await settingsController.prepare();
+    const localeDirectionController = new LocaleDirectionController();
+    settingsController.on('optionsChanged', ({options}) => {
+        void localeDirectionController.applyFromOptions(options);
+    });
+    void settingsController.getOptions().then((options) => {
+        void localeDirectionController.applyFromOptions(options);
+    });
 
     /** @type {ThemeController} */
     const themeController = new ThemeController(document.documentElement);

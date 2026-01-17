@@ -18,6 +18,7 @@
 
 import {Application} from '../application.js';
 import {DocumentFocusController} from '../dom/document-focus-controller.js';
+import {LocaleDirectionController} from '../dom/locale-direction-controller.js';
 import {HotkeyHandler} from '../input/hotkey-handler.js';
 import {ModalController} from '../pages/settings/modal-controller.js';
 import {SettingsController} from '../pages/settings/settings-controller.js';
@@ -63,6 +64,13 @@ await Application.main(true, async (application) => {
 
     const settingsController = new SettingsController(application);
     await settingsController.prepare();
+    const localeDirectionController = new LocaleDirectionController();
+    settingsController.on('optionsChanged', ({options}) => {
+        void localeDirectionController.applyFromOptions(options);
+    });
+    void settingsController.getOptions().then((options) => {
+        void localeDirectionController.applyFromOptions(options);
+    });
 
     const settingsDisplayController = new SettingsDisplayController(settingsController, modalController);
     await settingsDisplayController.prepare();

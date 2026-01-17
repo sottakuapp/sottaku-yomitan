@@ -1546,6 +1546,40 @@ body.preview-sidebar-visible .fab-container-item.fab-container-item-popup-previe
     height: 75%;
 }
 
+/* RTL adjustments */
+:root[dir="rtl"] .heading-container-icon {
+    margin-right: 0;
+    margin-left: 0.75em;
+}
+:root[dir="rtl"] .sidebar {
+    left: auto;
+    right: 0;
+}
+:root[dir="rtl"] .outline-item-label {
+    padding-left: 0;
+    padding-right: var(--padding);
+}
+:root[dir="rtl"] .outline-item-left-warning-badge {
+    right: auto;
+    left: calc(var(--outline-item-icon-size) * -0.125);
+}
+:root[dir="rtl"] body.sidebar-visible .sidebar-inner {
+    box-shadow: var(--shadow-left);
+}
+:root[dir="rtl"] body.preview-sidebar-visible .preview-sidebar {
+    right: auto;
+    left: 0;
+    box-shadow: var(--shadow-right);
+}
+:root[dir="rtl"] .preview-frame {
+    left: auto;
+    right: 0;
+}
+:root[dir="rtl"] #action-popup {
+    float: right;
+    margin: 1.5em 1.5em 1.5em 0;
+}
+
 /* Specialized settings styles */
 #audio-source-list>div+div {
     margin-top: 0.375em;

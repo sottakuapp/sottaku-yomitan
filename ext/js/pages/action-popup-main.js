@@ -19,6 +19,7 @@
 import {ThemeController} from '../app/theme-controller.js';
 import {Application} from '../application.js';
 import {getAllPermissions, hasRequiredPermissionsForOptions} from '../data/permissions-util.js';
+import {LocaleDirectionController} from '../dom/locale-direction-controller.js';
 import {HotkeyHelpController} from '../input/hotkey-help-controller.js';
 import {HotkeyUtil} from '../input/hotkey-util.js';
 
@@ -53,6 +54,7 @@ class DisplayController {
 
         const optionsFull = await this._api.optionsGetFull();
         this._optionsFull = optionsFull;
+        const localeDirectionController = new LocaleDirectionController();
 
         void this._setupHotkeys();
 
@@ -68,6 +70,7 @@ class DisplayController {
         const {profiles, profileCurrent} = optionsFull;
         const defaultProfile = (profileCurrent >= 0 && profileCurrent < profiles.length) ? profiles[profileCurrent] : null;
         if (defaultProfile !== null) {
+            void localeDirectionController.applyFromOptions(defaultProfile.options);
             this._setupOptions(defaultProfile);
         }
 
