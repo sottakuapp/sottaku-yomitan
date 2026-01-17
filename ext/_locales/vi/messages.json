@@ -3,40 +3,40 @@
     "message": "Sottaku-Yomitan"
   },
   "action_popup_button_info_title": {
-    "message": "Information"
+    "message": "Thông tin"
   },
   "action_popup_button_search_title": {
-    "message": "Search\nShift+click to open here"
+    "message": "Tìm kiếm\nShift+nhấp để mở tại đây"
   },
   "action_popup_button_settings_title": {
-    "message": "Settings"
+    "message": "Cài đặt"
   },
   "action_popup_hotkey_info": {
-    "message": "Information ({0})"
+    "message": "Thông tin ({0})"
   },
   "action_popup_hotkey_search": {
-    "message": "Search ({0})\nShift+click to open here"
+    "message": "Tìm kiếm ({0})\nShift+nhấp để mở tại đây"
   },
   "action_popup_hotkey_settings": {
-    "message": "Settings ({0})"
+    "message": "Cài đặt ({0})"
   },
   "action_popup_link_account_tooltip": {
-    "message": "Link your Sottaku account to enable lookups"
+    "message": "Liên kết tài khoản Sottaku để bật tra cứu"
   },
   "action_popup_loading": {
-    "message": "Loading..."
+    "message": "Đang tải..."
   },
   "action_popup_profile_title": {
-    "message": "Profile"
+    "message": "Hồ sơ"
   },
   "action_popup_toggle_off": {
-    "message": "Off"
+    "message": "Tắt"
   },
   "action_popup_toggle_on": {
-    "message": "On"
+    "message": "Bật"
   },
   "action_popup_tooltip_scan": {
-    "message": "Hover over text to scan"
+    "message": "Di chuột lên văn bản để quét"
   },
   "browser_chrome": {
     "message": "Chrome"
@@ -51,268 +51,268 @@
     "message": "Firefox"
   },
   "browser_firefox_android": {
-    "message": "Firefox for Android"
+    "message": "Firefox cho Android"
   },
   "browser_safari": {
     "message": "Safari"
   },
   "command_open_info_page": {
-    "message": "Open the info page"
+    "message": "Mở trang thông tin"
   },
   "command_open_popup_window": {
-    "message": "Open the popup window"
+    "message": "Mở cửa sổ bật lên"
   },
   "command_open_search_page": {
-    "message": "Open the search page"
+    "message": "Mở trang tìm kiếm"
   },
   "command_open_settings_page": {
-    "message": "Open the settings page"
+    "message": "Mở trang cài đặt"
   },
   "command_toggle_text_scanning": {
-    "message": "Toggle text scanning on/off"
+    "message": "Bật/tắt quét văn bản"
   },
   "common_always": {
-    "message": "Always"
+    "message": "Luôn luôn"
   },
   "common_auto": {
-    "message": "Auto"
+    "message": "Tự động"
   },
   "common_bottom": {
-    "message": "Bottom"
+    "message": "Dưới"
   },
   "common_browser": {
-    "message": "Browser"
+    "message": "Trình duyệt"
   },
   "common_close": {
-    "message": "Close"
+    "message": "Đóng"
   },
   "common_configure": {
-    "message": "Configure…"
+    "message": "Cấu hình…"
   },
   "common_dark": {
-    "message": "Dark"
+    "message": "Tối"
   },
   "common_default": {
-    "message": "Default"
+    "message": "Mặc định"
   },
   "common_height": {
-    "message": "Height"
+    "message": "Chiều cao"
   },
   "common_info": {
-    "message": "Info…"
+    "message": "Thông tin…"
   },
   "common_left": {
-    "message": "Left"
+    "message": "Trái"
   },
   "common_less": {
-    "message": "Less…"
+    "message": "Ít hơn…"
   },
   "common_light": {
-    "message": "Light"
+    "message": "Sáng"
   },
   "common_manual": {
-    "message": "Manual"
+    "message": "Thủ công"
   },
   "common_mode": {
-    "message": "Mode"
+    "message": "Chế độ"
   },
   "common_move_down": {
-    "message": "Move down"
+    "message": "Di chuyển xuống"
   },
   "common_move_up": {
-    "message": "Move up"
+    "message": "Di chuyển lên"
   },
   "common_none": {
-    "message": "None"
+    "message": "Không"
   },
   "common_normal": {
-    "message": "Normal"
+    "message": "Bình thường"
   },
   "common_operator": {
-    "message": "Operator"
+    "message": "Toán tử"
   },
   "common_remove": {
-    "message": "Remove"
+    "message": "Xóa"
   },
   "common_right": {
-    "message": "Right"
+    "message": "Phải"
   },
   "common_state": {
-    "message": "State"
+    "message": "Trạng thái"
   },
   "common_test": {
-    "message": "Test"
+    "message": "Kiểm tra"
   },
   "common_top": {
-    "message": "Top"
+    "message": "Trên"
   },
   "common_type": {
-    "message": "Type"
+    "message": "Loại"
   },
   "common_width": {
-    "message": "Width"
+    "message": "Chiều rộng"
   },
   "dictionary_deleting_label": {
-    "message": "Deleting dictionary..."
+    "message": "Đang xóa từ điển..."
   },
   "dictionary_details_attribution": {
-    "message": "Attribution"
+    "message": "Ghi công"
   },
   "dictionary_details_author": {
-    "message": "Author"
+    "message": "Tác giả"
   },
   "dictionary_details_description": {
-    "message": "Description"
+    "message": "Mô tả"
   },
   "dictionary_details_expected_database": {
-    "message": "Expected: $1 (Database: $2)"
+    "message": "Dự kiến: $1 (Cơ sở dữ liệu: $2)"
   },
   "dictionary_details_import_success": {
-    "message": "Import Success"
+    "message": "Nhập thành công"
   },
   "dictionary_details_kanji_count": {
-    "message": "Kanji Count"
+    "message": "Số lượng kanji"
   },
   "dictionary_details_kanji_meta_count": {
-    "message": "Kanji Meta Count"
+    "message": "Số lượng metadata kanji"
   },
   "dictionary_details_media_count": {
-    "message": "Media Count"
+    "message": "Số lượng media"
   },
   "dictionary_details_source_language": {
-    "message": "Source Language"
+    "message": "Ngôn ngữ nguồn"
   },
   "dictionary_details_tag_meta_count": {
-    "message": "Tag Count"
+    "message": "Số lượng thẻ"
   },
   "dictionary_details_target_language": {
-    "message": "Target Language"
+    "message": "Ngôn ngữ đích"
   },
   "dictionary_details_term_count": {
-    "message": "Term Count"
+    "message": "Số lượng thuật ngữ"
   },
   "dictionary_details_term_meta_count": {
-    "message": "Term Meta Count"
+    "message": "Số lượng metadata thuật ngữ"
   },
   "dictionary_details_url": {
     "message": "URL"
   },
   "dictionary_extra_data_item_plural": {
-    "message": "$1 items"
+    "message": "$1 mục"
   },
   "dictionary_extra_data_item_singular": {
-    "message": "$1 item"
+    "message": "$1 mục"
   },
   "dictionary_main_not_selected": {
-    "message": "Not selected"
+    "message": "Chưa chọn"
   },
   "dictionary_updates_count_plural": {
-    "message": "$1 updates"
+    "message": "$1 bản cập nhật"
   },
   "dictionary_updates_count_singular": {
-    "message": "$1 update"
+    "message": "$1 bản cập nhật"
   },
   "dictionary_updates_none": {
-    "message": "No updates"
+    "message": "Không có cập nhật"
   },
   "display_add_note_title": {
-    "message": "Add {0}"
+    "message": "Thêm {0}"
   },
   "display_anki_error_plural": {
-    "message": "$1 errors occurred:"
+    "message": "Đã xảy ra $1 lỗi:"
   },
   "display_anki_error_singular": {
-    "message": "An error occurred:"
+    "message": "Đã xảy ra lỗi:"
   },
   "display_current_entry_title": {
-    "message": "Current entry"
+    "message": "Mục hiện tại"
   },
   "display_dictionary_author": {
-    "message": "Author: $1"
+    "message": "Tác giả: $1"
   },
   "display_dictionary_description": {
-    "message": "Description: $1"
+    "message": "Mô tả: $1"
   },
   "display_dictionary_kanji_count": {
-    "message": "Kanji Count: $1"
+    "message": "Số lượng kanji: $1"
   },
   "display_dictionary_size_kanji": {
-    "message": "Dictionary size: $1 kanji"
+    "message": "Kích thước từ điển: $1 kanji"
   },
   "display_dictionary_size_terms": {
-    "message": "Dictionary size: $1 terms"
+    "message": "Kích thước từ điển: $1 thuật ngữ"
   },
   "display_dictionary_term_count": {
-    "message": "Term Count: $1"
+    "message": "Số lượng thuật ngữ: $1"
   },
   "display_dictionary_url": {
     "message": "URL: $1"
   },
   "display_hotkey_add_note": {
-    "message": "Add {0} ({0})"
+    "message": "Thêm {0} ({0})"
   },
   "display_hotkey_play_audio": {
-    "message": "Play audio ({0})"
+    "message": "Phát âm thanh ({0})"
   },
   "display_hotkey_view_note": {
-    "message": "View added note ({0})"
+    "message": "Xem ghi chú đã thêm ({0})"
   },
   "display_image_label": {
-    "message": "Image"
+    "message": "Hình ảnh"
   },
   "display_inflection_algorithm": {
-    "message": "Algorithm Deinflection"
+    "message": "Khử biến hình bằng thuật toán"
   },
   "display_inflection_both": {
-    "message": "Dictionary and Algorithm Deinflection"
+    "message": "Khử biến hình bằng từ điển và thuật toán"
   },
   "display_inflection_dictionary": {
-    "message": "Dictionary Deinflection"
+    "message": "Khử biến hình bằng từ điển"
   },
   "display_kanji_heading_classifications": {
-    "message": "Classifications"
+    "message": "Phân loại"
   },
   "display_kanji_heading_codepoints": {
-    "message": "Codepoints"
+    "message": "Mã điểm"
   },
   "display_kanji_heading_dictionary_indices": {
-    "message": "Dictionary Indices"
+    "message": "Chỉ mục từ điển"
   },
   "display_kanji_heading_meaning": {
-    "message": "Meaning"
+    "message": "Nghĩa"
   },
   "display_kanji_heading_readings": {
-    "message": "Readings"
+    "message": "Cách đọc"
   },
   "display_kanji_heading_statistics": {
-    "message": "Statistics"
+    "message": "Thống kê"
   },
   "display_log_debug_info": {
-    "message": "Log debug info to console"
+    "message": "Ghi thông tin gỡ lỗi vào console"
   },
   "display_more_info": {
-    "message": "More info"
+    "message": "Thông tin thêm"
   },
   "display_no_data_found": {
-    "message": "No data found"
+    "message": "Không tìm thấy dữ liệu"
   },
   "display_note_viewer_error": {
-    "message": "Note viewer window could not be opened.<br/>\n    Check the <a href=\"/settings.html#anki\" rel=\"noopener\" target=\"_blank\"><em>Anki</em> › <em>Note viewer window</em></a> setting."
+    "message": "Không thể mở cửa sổ xem ghi chú.<br/>\n    Kiểm tra cài đặt <a href=\"/settings.html#anki\" rel=\"noopener\" target=\"_blank\"><em>Anki</em> › <em>Cửa sổ xem ghi chú</em></a>."
   },
   "display_play_audio_title": {
-    "message": "Play audio"
+    "message": "Phát âm thanh"
   },
   "display_set_primary_audio_title": {
-    "message": "Use as audio for Anki card"
+    "message": "Dùng làm âm thanh cho thẻ Anki"
   },
   "display_view_added_note_title": {
-    "message": "View added note"
+    "message": "Xem ghi chú đã thêm"
   },
   "extension_description": {
-    "message": "Sottaku-connected popup dictionary for language learning."
+    "message": "Từ điển bật lên kết nối Sottaku cho việc học ngôn ngữ."
   },
   "extension_description_dev": {
-    "message": "Sottaku-connected popup dictionary for language learning (Dev)."
+    "message": "Từ điển bật lên kết nối Sottaku cho việc học ngôn ngữ (Dev)."
   },
   "extension_name": {
     "message": "Sottaku-Yomitan"
@@ -324,151 +324,151 @@
     "message": "Sottaku-Yomitan"
   },
   "info_anki_version_unknown": {
-    "message": "Unknown"
+    "message": "Không rõ"
   },
   "info_general_browser": {
-    "message": "Browser: <span id=\"browser\"></span>"
+    "message": "Trình duyệt: <span id=\"browser\"></span>"
   },
   "info_general_export_settings": {
-    "message": "<a id=\"settings-export-button\" tabindex=\"0\">Export settings</a>"
+    "message": "<a id=\"settings-export-button\" tabindex=\"0\">Xuất cài đặt</a>"
   },
   "info_general_extension_version": {
-    "message": "Extension version: <span id=\"version\"></span>"
+    "message": "Phiên bản tiện ích: <span id=\"version\"></span>"
   },
   "info_general_heading": {
-    "message": "General"
+    "message": "Chung"
   },
   "info_general_language": {
-    "message": "Language: <span id=\"language\"></span>"
+    "message": "Ngôn ngữ: <span id=\"language\"></span>"
   },
   "info_general_platform": {
-    "message": "Platform: <span id=\"platform\"></span>"
+    "message": "Nền tảng: <span id=\"platform\"></span>"
   },
   "info_general_user_agent": {
-    "message": "User agent: <span id=\"user-agent\"></span>"
+    "message": "Tác nhân người dùng: <span id=\"user-agent\"></span>"
   },
   "info_heading": {
-    "message": "Sottaku-Yomitan Info"
+    "message": "Thông tin Sottaku-Yomitan"
   },
   "info_links_bugs": {
-    "message": "Bugs? Report them here: <a href=\"https://github.com/sottakuapp/sottaku-yomitan/issues/new/choose\" rel=\"noreferrer noopener\">GitHub Issues</a>"
+    "message": "Lỗi? Báo cáo tại đây: <a href=\"https://github.com/sottakuapp/sottaku-yomitan/issues/new/choose\" rel=\"noreferrer noopener\">GitHub Issues</a>"
   },
   "info_links_feedback": {
-    "message": "Enjoying Sottaku-Yomitan? Send feedback or ideas on GitHub or email <a href=\"mailto:hello@sottaku.app\">hello@sottaku.app</a>."
+    "message": "Bạn thích Sottaku-Yomitan? Gửi phản hồi hoặc ý tưởng trên GitHub hoặc email tới <a href=\"mailto:hello@sottaku.app\">hello@sottaku.app</a>."
   },
   "info_links_heading": {
-    "message": "Links"
+    "message": "Liên kết"
   },
   "info_links_more_info": {
-    "message": "More extension information: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">Permissions</a> | <a href=\"/legal.html\">Licenses</a> | <a href=\"/issues.html\">Issues</a>"
+    "message": "Thông tin thêm về tiện ích: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">Quyền</a> | <a href=\"/legal.html\">Giấy phép</a> | <a href=\"/issues.html\">Sự cố</a>"
   },
   "info_links_recommended_dictionaries": {
-    "message": "Recommended dictionaries: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">Sottaku-Yomitan Dictionaries</a>"
+    "message": "Từ điển được đề xuất: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">Sottaku-Yomitan Dictionaries</a>"
   },
   "info_links_release_notes": {
-    "message": "Release notes: <a data-href-format=\"https://github.com/sottakuapp/sottaku-yomitan/releases/tag/{version}\" href=\"https://github.com/sottakuapp/sottaku-yomitan/releases\" id=\"release-notes-this-version-link\" rel=\"noreferrer noopener\">This version</a> | <a href=\"https://github.com/sottakuapp/sottaku-yomitan/releases\" rel=\"noreferrer noopener\">All versions</a>"
+    "message": "Ghi chú phát hành: <a data-href-format=\"https://github.com/sottakuapp/sottaku-yomitan/releases/tag/{version}\" href=\"https://github.com/sottakuapp/sottaku-yomitan/releases\" id=\"release-notes-this-version-link\" rel=\"noreferrer noopener\">Phiên bản này</a> | <a href=\"https://github.com/sottakuapp/sottaku-yomitan/releases\" rel=\"noreferrer noopener\">Tất cả phiên bản</a>"
   },
   "info_links_source_code": {
-    "message": "Source code: <a href=\"https://github.com/sottakuapp/sottaku-yomitan\" rel=\"noreferrer noopener\">GitHub</a>"
+    "message": "Mã nguồn: <a href=\"https://github.com/sottakuapp/sottaku-yomitan\" rel=\"noreferrer noopener\">GitHub</a>"
   },
   "info_links_user_guide": {
-    "message": "Information and user guide: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">Homepage</a>"
+    "message": "Thông tin và hướng dẫn người dùng: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">Trang chủ</a>"
   },
   "info_need_help_heading": {
-    "message": "Need help?"
+    "message": "Cần trợ giúp?"
   },
   "info_quick_start_link": {
-    "message": "Check out the Quick Start Guide"
+    "message": "Xem Hướng dẫn Bắt đầu nhanh"
   },
   "info_read_wiki_link": {
-    "message": "Read the wiki"
+    "message": "Đọc wiki"
   },
   "issues_audio_expired_cert_body": {
-    "message": "If a website failes to keep its HTTPS certificate up to date, downloads can fail because the browser flags the connection as insecure. This has happened occasionally for some websites that Sottaku-Yomitan interacts with, and the issue is usually resolved within a day."
+    "message": "Nếu một trang web không cập nhật chứng chỉ HTTPS kịp thời, việc tải xuống có thể thất bại vì trình duyệt đánh dấu kết nối là không an toàn. Điều này đôi khi xảy ra với một số trang web mà Sottaku-Yomitan tương tác và thường được giải quyết trong vòng một ngày."
   },
   "issues_audio_expired_cert_heading": {
-    "message": "Audio download failed due to an expired server certificate"
+    "message": "Tải xuống âm thanh thất bại do chứng chỉ máy chủ hết hạn"
   },
   "issues_audio_expired_cert_note": {
-    "message": "This issue is a server-side issue that Sottaku-Yomitan doesn't have control over."
+    "message": "Đây là vấn đề phía máy chủ mà Sottaku-Yomitan không kiểm soát được."
   },
   "issues_audio_idle_timeout_body": {
-    "message": "Audio files can be downloaded from remote servers when creating Anki cards,\n                and sometimes these downloads can stall due to server or internet connectivity issues.\n                The <em>Idle download timeout</em> setting on the <a href=\"/settings.html#anki\">settings page</a>\n                specifies a time limit for stalled downloads."
+    "message": "Tệp âm thanh có thể được tải từ máy chủ từ xa khi tạo thẻ Anki,\n                và đôi khi các lượt tải này có thể bị treo do vấn đề máy chủ hoặc kết nối Internet.\n                Cài đặt <em>Thời gian chờ tải xuống khi nhàn rỗi</em> trên <a href=\"/settings.html#anki\">trang cài đặt</a>\n                đặt giới hạn thời gian cho các lượt tải bị treo."
   },
   "issues_audio_idle_timeout_heading": {
-    "message": "Audio download was cancelled due to an idle timeout"
+    "message": "Tải xuống âm thanh bị hủy do thời gian chờ nhàn rỗi"
   },
   "issues_audio_permissions_body": {
-    "message": "Depending on the extension's configuration, Sottaku-Yomitan can sometimes run into issues with downloading audio files while creating Anki cards. This may be due to a permissions issue where Sottaku-Yomitan hasn't been granted access to the sites hosting the audio files."
+    "message": "Tùy cấu hình của tiện ích, Sottaku-Yomitan đôi khi gặp vấn đề khi tải tệp âm thanh trong khi tạo thẻ Anki. Điều này có thể do vấn đề quyền khi Sottaku-Yomitan chưa được cấp quyền truy cập các trang lưu trữ tệp âm thanh."
   },
   "issues_audio_permissions_chrome": {
-    "message": "Check the <em>Site access</em> section of the\n                <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">extension settings pages</a>\n                and grant the extension access to <em>all sites</em> or add the specific audio host URLs."
+    "message": "Kiểm tra mục <em>Quyền truy cập trang</em> của\n                <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">các trang cài đặt tiện ích</a>\n                và cấp quyền cho tiện ích truy cập <em>tất cả các trang</em> hoặc thêm các URL máy chủ âm thanh cụ thể."
   },
   "issues_audio_permissions_firefox": {
-    "message": "From your browser's address bar, go to <code>about:addons</code> and navigate to the settings for Sottaku-Yomitan.\n                Check the <em>Site access</em> section of the extension settings pages\n                and grant the extension access to <em>all sites</em> or add the specific audio host URLs."
+    "message": "Từ thanh địa chỉ của trình duyệt, vào <code>about:addons</code> và mở cài đặt của Sottaku-Yomitan.\n                Kiểm tra mục <em>Quyền truy cập trang</em> của các trang cài đặt tiện ích\n                và cấp quyền truy cập <em>tất cả các trang</em> hoặc thêm các URL máy chủ âm thanh cụ thể."
   },
   "issues_audio_permissions_heading": {
-    "message": "Audio download failed due to possible extension permissions error <em>(Chrome)</em>"
+    "message": "Tải xuống âm thanh thất bại do khả năng lỗi quyền của tiện ích <em>(Chrome)</em>"
   },
   "issues_heading": {
-    "message": "Sottaku-Yomitan Issues"
+    "message": "Vấn đề Sottaku-Yomitan"
   },
   "legal_dependency_licenses_heading": {
-    "message": "Javascript Dependency Licenses"
+    "message": "Giấy phép phụ thuộc JavaScript"
   },
   "legal_edrdg_heading": {
-    "message": "EDRDG License"
+    "message": "Giấy phép EDRDG"
   },
   "legal_heading": {
-    "message": "Sottaku-Yomitan Legal"
+    "message": "Pháp lý Sottaku-Yomitan"
   },
   "legal_sottaku_license_heading": {
-    "message": "Sottaku-Yomitan License"
+    "message": "Giấy phép Sottaku-Yomitan"
   },
   "modal_collapsible_dictionaries_description": {
-    "message": "Dictionary definitions can be collapsed if they exceed a certain line count,\n                which may be useful for dictionaries with long definitions.\n                The appearance can be customized using custom CSS.\n                <a data-modal-action=\"show,collapsible-dictionaries-info\" tabindex=\"0\">More…</a>"
+    "message": "Định nghĩa từ điển có thể được thu gọn nếu vượt quá số dòng nhất định,\n                điều này có thể hữu ích cho các từ điển có định nghĩa dài.\n                Giao diện có thể tùy chỉnh bằng CSS riêng.\n                <a data-modal-action=\"show,collapsible-dictionaries-info\" tabindex=\"0\">Thêm…</a>"
   },
   "modal_dictionaries_none_installed": {
-    "message": "No dictionaries have been installed yet.\n                Visit the <a href=\"https://github.com/sottakuapp/sottaku-yomitan/blob/master/docs/dictionaries.md#dictionaries\" rel=\"noopener noreferrer\" target=\"_blank\">Sottaku-Yomitan homepage</a>\n                for a list of free dictionaries or click the <em>Import</em> button below to select a dictionary file to import."
+    "message": "Chưa có từ điển nào được cài đặt.\n                Hãy truy cập <a href=\"https://github.com/sottakuapp/sottaku-yomitan/blob/master/docs/dictionaries.md#dictionaries\" rel=\"noopener noreferrer\" target=\"_blank\">trang chủ Sottaku-Yomitan</a>\n                để xem danh sách từ điển miễn phí hoặc nhấp nút <em>Nhập</em> bên dưới để chọn tệp từ điển cần nhập."
   },
   "modal_dictionaries_prefix_wildcard_label": {
-    "message": "Enable support for prefix wildcard searches\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "Bật hỗ trợ tìm kiếm bằng ký tự đại diện ở đầu\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "modal_dictionary_confirm_delete_all_prompt": {
-    "message": "Are you sure you want to delete <strong>all dictionaries</strong>?"
+    "message": "Bạn có chắc muốn xóa <strong>tất cả từ điển</strong> không?"
   },
   "modal_dictionary_details_deinflections_label": {
-    "message": "Use deinflections\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "Sử dụng khử biến hình\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "modal_dictionary_details_pos_label": {
-    "message": "Part of speech filtering\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "Lọc loại từ\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "modal_dictionary_details_prefix_label": {
-    "message": "Prefix wildcard searches supported\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "Hỗ trợ tìm kiếm bằng ký tự đại diện ở đầu\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "modal_dictionary_move_prompt": {
-    "message": "Input the location the dictionary <strong class=\"dictionary-title\"></strong> should be moved to:"
+    "message": "Nhập vị trí mà từ điển <strong class=\"dictionary-title\"></strong> sẽ được chuyển tới:"
   },
   "modal_dictionary_rename_prompt": {
-    "message": "Input the display name for <strong class=\"dictionary-title\"></strong> dictionary:"
+    "message": "Nhập tên hiển thị cho từ điển <strong class=\"dictionary-title\"></strong>:"
   },
   "modal_profile_conditions_info_4": {
-    "message": "When using the Flags condition, <code>clipboard</code> is the only valid input.\n                        This lets the search page apply another profile’s settings when text is copied, provided <code>Enable search page clipboard text monitoring</code> is enabled."
+    "message": "Khi dùng điều kiện Flags, <code>clipboard</code> là đầu vào hợp lệ duy nhất.\n                        Điều này cho phép trang tìm kiếm áp dụng cài đặt của hồ sơ khác khi sao chép văn bản, miễn là <code>Bật giám sát văn bản clipboard trên trang tìm kiếm</code> được bật."
   },
   "modal_profile_conditions_label": {
-    "message": "Conditions for profile <em id=\"profile-conditions-profile-name\"></em>:"
+    "message": "Điều kiện cho hồ sơ <em id=\"profile-conditions-profile-name\"></em>:"
   },
   "modal_profile_delete_prompt": {
-    "message": "Are you sure you want to delete the profile <em id=\"profile-remove-name\"></em>?"
+    "message": "Bạn có chắc muốn xóa hồ sơ <em id=\"profile-remove-name\"></em> không?"
   },
   "modal_profile_reset_prompt": {
-    "message": "Are you sure you want to reset the profile <em id=\"profile-reset-name\"></em> to default?"
+    "message": "Bạn có chắc muốn đặt lại hồ sơ <em id=\"profile-reset-name\"></em> về mặc định không?"
   },
   "modal_recommended_dictionaries_description": {
-    "message": "For non-English dictionaries, please refer to the list of available\n                <a href=\"https://yomidevs.github.io/kaikki-to-yomitan/\" target=\"_blank\"> Kaikki dictionaries</a>."
+    "message": "Đối với các từ điển không phải tiếng Anh, vui lòng xem danh sách\n                <a href=\"https://yomidevs.github.io/kaikki-to-yomitan/\" target=\"_blank\"> từ điển Kaikki</a> có sẵn."
   },
   "modal_secondary_search_description": {
-    "message": "These dictionaries will be used to search for definitions of the related terms when the grouping mode is\n                <em>Group related terms</em>."
+    "message": "Các từ điển này sẽ được dùng để tìm định nghĩa của các thuật ngữ liên quan khi chế độ nhóm là\n                <em>Nhóm các thuật ngữ liên quan</em>."
   },
   "os_android": {
     "message": "Android"
@@ -486,706 +486,706 @@
     "message": "Open BSD"
   },
   "os_unknown": {
-    "message": "Unknown"
+    "message": "Không rõ"
   },
   "os_windows": {
     "message": "Windows"
   },
   "page_action_popup_title": {
-    "message": "Sottaku-Yomitan Action Popup"
+    "message": "Popup hành động Sottaku-Yomitan"
   },
   "page_info_title": {
-    "message": "Sottaku-Yomitan Info"
+    "message": "Thông tin Sottaku-Yomitan"
   },
   "page_issues_title": {
-    "message": "Sottaku-Yomitan Issues"
+    "message": "Vấn đề Sottaku-Yomitan"
   },
   "page_legal_title": {
-    "message": "Sottaku-Yomitan Legal"
+    "message": "Pháp lý Sottaku-Yomitan"
   },
   "page_permissions_title": {
-    "message": "Sottaku-Yomitan Permissions"
+    "message": "Quyền của Sottaku-Yomitan"
   },
   "page_popup_preview_title": {
-    "message": "Sottaku-Yomitan Popup Preview"
+    "message": "Xem trước popup Sottaku-Yomitan"
   },
   "page_popup_title": {
-    "message": "Sottaku-Yomitan Search"
+    "message": "Tìm kiếm Sottaku-Yomitan"
   },
   "page_quick_start_title": {
-    "message": "Quick Start Guide"
+    "message": "Hướng dẫn bắt đầu nhanh"
   },
   "page_search_title": {
-    "message": "Sottaku-Yomitan Search"
+    "message": "Tìm kiếm Sottaku-Yomitan"
   },
   "page_settings_title": {
-    "message": "Sottaku-Yomitan Settings"
+    "message": "Cài đặt Sottaku-Yomitan"
   },
   "page_support_title": {
-    "message": "Support Sottaku-Yomitan"
+    "message": "Hỗ trợ Sottaku-Yomitan"
   },
   "page_template_renderer_title": {
-    "message": "Sottaku-Yomitan Handlebars Sandbox"
+    "message": "Sandbox Handlebars của Sottaku-Yomitan"
   },
   "page_welcome_title": {
-    "message": "Welcome to Sottaku-Yomitan!"
+    "message": "Chào mừng đến với Sottaku-Yomitan!"
   },
   "permissions_add_origin_button": {
-    "message": "Add"
+    "message": "Thêm"
   },
   "permissions_additional_origins_label": {
-    "message": "Additional origins"
+    "message": "Origin bổ sung"
   },
   "permissions_all_urls_description": {
-    "message": "Sottaku-Yomitan requires access to all URLs in order to run scripts to scan text and show the definitions popup, and communicate with Sottaku servers."
+    "message": "Sottaku-Yomitan cần quyền truy cập vào tất cả URL để chạy các script quét văn bản, hiển thị popup định nghĩa và giao tiếp với máy chủ Sottaku."
   },
   "permissions_allow_all_urls_label": {
-    "message": "Allow access to all URLs"
+    "message": "Cho phép truy cập tất cả URL"
   },
   "permissions_allowed_origins_title": {
-    "message": "Allowed Origins"
+    "message": "Origin được phép"
   },
   "permissions_clipboard_read_description": {
-    "message": "Sottaku-Yomitan supports automatically opening a search window when text is copied to the clipboard while the browser is running, depending on how certain settings are configured. This allows Sottaku-Yomitan to support scanning text from external applications, provided there is a way to copy text from those applications to the clipboard."
+    "message": "Sottaku-Yomitan hỗ trợ tự động mở cửa sổ tìm kiếm khi văn bản được sao chép vào bộ nhớ tạm trong khi trình duyệt đang chạy, tùy thuộc vào một số cài đặt. Điều này cho phép Sottaku-Yomitan quét văn bản từ các ứng dụng bên ngoài, miễn là có cách sao chép văn bản từ các ứng dụng đó vào bộ nhớ tạm."
   },
   "permissions_clipboard_read_label": {
-    "message": "<code>clipboardRead</code> <span class=\"light\">(optional)</span>"
+    "message": "<code>clipboardRead</code> <span class=\"light\">(tùy chọn)</span>"
   },
   "permissions_clipboard_write_description": {
-    "message": "Sottaku-Yomitan supports simulating the <code>Ctrl+C</code> (copy to clipboard) keyboard shortcut\n                    when a definitions popup is open and focused."
+    "message": "Sottaku-Yomitan hỗ trợ mô phỏng phím tắt <code>Ctrl+C</code> (sao chép vào bộ nhớ tạm)\n                    khi popup định nghĩa đang mở và được tập trung."
   },
   "permissions_configure_allowed_origins": {
-    "message": "Configure allowed origins…"
+    "message": "Cấu hình origin được phép…"
   },
   "permissions_context_menu_description": {
-    "message": "Sottaku-Yomitan adds a context menu interface that lets you look up highlighted words."
+    "message": "Sottaku-Yomitan thêm giao diện menu ngữ cảnh cho phép bạn tra cứu các từ được tô sáng."
   },
   "permissions_declarative_net_request_description": {
-    "message": "Sottaku-Yomitan uses this permission to ensure certain requests have valid and secure headers.\n                        This sometimes involves removing or changing the <code>Origin</code> request header,\n                        as this can be used to fingerprint browser configuration."
+    "message": "Sottaku-Yomitan sử dụng quyền này để đảm bảo một số yêu cầu có tiêu đề hợp lệ và an toàn.\n                        Đôi khi điều này bao gồm việc xóa hoặc thay đổi tiêu đề yêu cầu <code>Origin</code>,\n                        vì nó có thể được dùng để tạo dấu vân tay cấu hình trình duyệt."
   },
   "permissions_declarative_net_request_example": {
-    "message": "Example: <code>Origin: <span class=\"extension-id-example\"></span></code>"
+    "message": "Ví dụ: <code>Origin: <span class=\"extension-id-example\"></span></code>"
   },
   "permissions_file_urls_chrome": {
-    "message": "This option can be configured from the web browser's <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">extension settings pages</a>."
+    "message": "Tùy chọn này có thể được cấu hình từ <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">trang cài đặt tiện ích mở rộng</a> của trình duyệt."
   },
   "permissions_file_urls_description": {
-    "message": "When enabled, Sottaku-Yomitan is able to scan text and show definitions on local HTML files located using the <code>file://*</code> scheme."
+    "message": "Khi được bật, Sottaku-Yomitan có thể quét văn bản và hiển thị định nghĩa trên các tệp HTML cục bộ được truy cập bằng sơ đồ <code>file://*</code>."
   },
   "permissions_file_urls_label": {
-    "message": "Allow access to file URLs <span class=\"light\">(optional)</span>"
+    "message": "Cho phép truy cập URL tệp <span class=\"light\">(tùy chọn)</span>"
   },
   "permissions_heading": {
-    "message": "Sottaku-Yomitan Permissions"
+    "message": "Quyền của Sottaku-Yomitan"
   },
   "permissions_modal_close": {
-    "message": "Close"
+    "message": "Đóng"
   },
   "permissions_native_messaging_description": {
-    "message": "Sottaku-Yomitan has the ability to communicate with an optional native messaging component in order to support\n                    parsing large blocks of Japanese text using\n                    <a href=\"https://en.wikipedia.org/wiki/MeCab\" rel=\"noopener noreferrer\" target=\"_blank\">MeCab</a>.\n                    The installation of this component is optional and is not included by default."
+    "message": "Sottaku-Yomitan có thể giao tiếp với một thành phần native messaging tùy chọn để hỗ trợ\n                    phân tích các khối lớn văn bản tiếng Nhật bằng\n                    <a href=\"https://en.wikipedia.org/wiki/MeCab\" rel=\"noopener noreferrer\" target=\"_blank\">MeCab</a>.\n                    Việc cài đặt thành phần này là tùy chọn và không được bao gồm theo mặc định."
   },
   "permissions_native_messaging_label": {
-    "message": "<code>nativeMessaging</code> <span class=\"light\">(optional)</span>"
+    "message": "<code>nativeMessaging</code> <span class=\"light\">(tùy chọn)</span>"
   },
   "permissions_no_additional_origins": {
-    "message": "No additional origins specified."
+    "message": "Không có origin bổ sung nào được chỉ định."
   },
   "permissions_persistent_storage_description": {
-    "message": "Web browsers will sometimes clear stored extension data if the device is running low on storage space. The persistent storage permission tells the browser that the extension's data should not be deleted in those circumstances."
+    "message": "Trình duyệt web đôi khi sẽ xóa dữ liệu tiện ích mở rộng đã lưu nếu thiết bị sắp hết dung lượng. Quyền lưu trữ liên tục cho biết trình duyệt không nên xóa dữ liệu của tiện ích trong những trường hợp đó."
   },
   "permissions_persistent_storage_firefox_note": {
-    "message": "It may not be possible to enable this permission on Firefox for Android."
+    "message": "Có thể không thể bật quyền này trên Firefox for Android."
   },
   "permissions_persistent_storage_label": {
-    "message": "Persistent storage"
+    "message": "Lưu trữ liên tục"
   },
   "permissions_private_windows_chrome": {
-    "message": "This option can be configured from the web browser's <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">extension settings pages</a>."
+    "message": "Tùy chọn này có thể được cấu hình từ <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">trang cài đặt tiện ích mở rộng</a> của trình duyệt."
   },
   "permissions_private_windows_description": {
-    "message": "When enabled, Sottaku-Yomitan is able to scan text and show definitions in private/incognito web browser windows."
+    "message": "Khi bật, Sottaku-Yomitan có thể quét văn bản và hiển thị định nghĩa trong các cửa sổ trình duyệt riêng tư/ẩn danh."
   },
   "permissions_private_windows_firefox": {
-    "message": "This option can be configured from the web browser's extension settings pages. From your browser's address bar, go to <code>about:addons</code> and navigate to the settings for Sottaku-Yomitan."
+    "message": "Tùy chọn này có thể được cấu hình từ trang cài đặt tiện ích mở rộng của trình duyệt. Từ thanh địa chỉ của trình duyệt, hãy vào <code>about:addons</code> và mở cài đặt của Sottaku-Yomitan."
   },
   "permissions_private_windows_label": {
-    "message": "Allow in private windows <span class=\"light\">(optional)</span>"
+    "message": "Cho phép trong cửa sổ riêng tư <span class=\"light\">(tùy chọn)</span>"
   },
   "permissions_scripting_description": {
-    "message": "Sottaku-Yomitan needs to inject content scripts and stylesheets into webpages in order to properly display the search popup."
+    "message": "Sottaku-Yomitan cần chèn các script nội dung và stylesheet vào trang web để hiển thị đúng popup tìm kiếm."
   },
   "permissions_storage_description": {
-    "message": "Sottaku-Yomitan uses storage permissions in order to save extension settings."
+    "message": "Sottaku-Yomitan sử dụng quyền lưu trữ để lưu cài đặt tiện ích mở rộng."
   },
   "popup_close_title": {
-    "message": "Close popup"
+    "message": "Đóng popup"
   },
   "popup_default_profile_title": {
-    "message": "Default Profile"
+    "message": "Hồ sơ mặc định"
   },
   "popup_hotkey_close": {
-    "message": "Close popup ({0})"
+    "message": "Đóng popup ({0})"
   },
   "popup_hotkey_next_definition": {
-    "message": "Next definition ({0})"
+    "message": "Định nghĩa tiếp theo ({0})"
   },
   "popup_hotkey_previous_definition": {
-    "message": "Previous definition ({0})"
+    "message": "Định nghĩa trước đó ({0})"
   },
   "popup_next_definition_title": {
-    "message": "Next definition"
+    "message": "Định nghĩa tiếp theo"
   },
   "popup_no_results": {
-    "message": "No results found."
+    "message": "Không tìm thấy kết quả."
   },
   "popup_preview_placeholder": {
-    "message": "Link your Sottaku account in the Sottaku section of settings to see the popup preview."
+    "message": "Liên kết tài khoản Sottaku của bạn trong mục Sottaku của cài đặt để xem bản xem trước popup."
   },
   "popup_previous_definition_title": {
-    "message": "Previous definition"
+    "message": "Định nghĩa trước đó"
   },
   "popup_pro_required_body": {
-    "message": "The popup dictionary requires a Sottaku Pro subscription."
+    "message": "Từ điển popup yêu cầu đăng ký Sottaku Pro."
   },
   "popup_pro_required_link": {
-    "message": "Upgrade at sottaku.app/upgrade"
+    "message": "Nâng cấp tại sottaku.app/upgrade"
   },
   "popup_pro_required_title": {
-    "message": "Sottaku Pro required"
+    "message": "Cần Sottaku Pro"
   },
   "popup_updated_body": {
-    "message": "The Sottaku-Yomitan extension has been updated to a new version! In order to continue viewing definitions on this page, you must reload this tab or restart your browser."
+    "message": "Tiện ích Sottaku-Yomitan đã được cập nhật lên phiên bản mới! Để tiếp tục xem các định nghĩa trên trang này, bạn phải tải lại tab này hoặc khởi động lại trình duyệt."
   },
   "popup_updated_title": {
-    "message": "Sottaku-Yomitan Updated!"
+    "message": "Sottaku-Yomitan đã được cập nhật!"
   },
   "query_parser_mecab": {
     "message": "MeCab: $1"
   },
   "query_parser_scanning": {
-    "message": "Scanning parser"
+    "message": "Bộ phân tích quét"
   },
   "query_parser_unknown_source": {
-    "message": "Unknown source: $1"
+    "message": "Nguồn không xác định: $1"
   },
   "quick_start_action_popup_alt": {
-    "message": "browser-action-popup"
+    "message": "popup hành động của trình duyệt"
   },
   "quick_start_heading": {
-    "message": "Sottaku-Yomitan Quick Start Guide"
+    "message": "Hướng dẫn bắt đầu nhanh Sottaku-Yomitan"
   },
   "quick_start_installing_body": {
-    "message": "Sottaku-Yomitan uses your Sottaku account for lookups, so you do not need to manage local dictionaries on the Settings page.\n\t                You can still visit <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">https://sottaku.app/</a> to learn more about Sottaku-Yomitan dictionaries."
+    "message": "Sottaku-Yomitan sử dụng tài khoản Sottaku của bạn để tra cứu, vì vậy bạn không cần quản lý các từ điển cục bộ trong trang Cài đặt.\n                Bạn vẫn có thể truy cập <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">https://sottaku.app/</a> để tìm hiểu thêm về các từ điển Sottaku-Yomitan."
   },
   "quick_start_installing_heading": {
-    "message": "Installing Dictionaries"
+    "message": "Cài đặt từ điển"
   },
   "quick_start_links_heading": {
-    "message": "Links"
+    "message": "Liên kết"
   },
   "quick_start_links_info": {
-    "message": "Go to Info page"
+    "message": "Đi tới trang Thông tin"
   },
   "quick_start_links_sottaku": {
-    "message": "New to Sottaku-Yomitan? Head to https://sottaku.app/!"
+    "message": "Mới dùng Sottaku-Yomitan? Hãy tới https://sottaku.app/!"
   },
   "quick_start_links_welcome": {
-    "message": "Go to Welcome page"
+    "message": "Đi tới trang Chào mừng"
   },
   "quick_start_migrating_body": {
-    "message": "You can also import an exported collection of dictionaries from the <a href=\"/settings.html#backup\">Backup section of the Settings</a> page.\n\n                <br/><br/>\n\n\t                If you are migrating from Yomichan, you may be interested in importing your data into Sottaku-Yomitan.\n\t                Please follow instructions from <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">https://sottaku.app/</a> for that.\n\n                <br/><br/>\n\n\t                If you are using or planning to use custom templates for Anki note creation, note that <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">some syntax has changed from Yomichan and Yomibaba.</a>\n                Please ensure that your custom templates are using the updated syntax."
+    "message": "Bạn cũng có thể nhập một bộ sưu tập từ điển đã xuất từ <a href=\"/settings.html#backup\">phần Sao lưu của trang Cài đặt</a>.\n\n                <br/><br/>\n\n                Nếu bạn đang chuyển từ Yomichan, bạn có thể muốn nhập dữ liệu vào Sottaku-Yomitan.\n                Vui lòng làm theo hướng dẫn tại <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">https://sottaku.app/</a>.\n\n                <br/><br/>\n\n                Nếu bạn đang sử dụng hoặc dự định sử dụng các mẫu tùy chỉnh để tạo ghi chú Anki, hãy lưu ý rằng <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">một số cú pháp đã thay đổi so với Yomichan và Yomibaba.</a>\n                Hãy đảm bảo rằng các mẫu tùy chỉnh của bạn sử dụng cú pháp đã cập nhật."
   },
   "quick_start_migrating_heading": {
-    "message": "Migrating to Sottaku-Yomitan"
+    "message": "Chuyển sang Sottaku-Yomitan"
   },
   "quick_start_quick_actions_body": {
-    "message": "Clicking the <img alt=\"\" class=\"inline-icon\" src=\"/images/yomitan-icon.svg\"/> <em>Sottaku-Yomitan</em> button in the browser bar will open the quick-actions popup."
+    "message": "Nhấp vào nút <img alt=\"\" class=\"inline-icon\" src=\"/images/yomitan-icon.svg\"/> <em>Sottaku-Yomitan</em> trên thanh trình duyệt sẽ mở popup thao tác nhanh."
   },
   "quick_start_quick_actions_cog": {
-    "message": "The <img alt=\"\" class=\"inline-icon\" src=\"/images/cog.svg\"/> <em>cog</em> button will open the <a href=\"/settings.html\" rel=\"noopener\" target=\"_blank\">Settings</a> page."
+    "message": "Nút <img alt=\"\" class=\"inline-icon\" src=\"/images/cog.svg\"/> <em>bánh răng</em> sẽ mở trang <a href=\"/settings.html\" rel=\"noopener\" target=\"_blank\">Cài đặt</a>."
   },
   "quick_start_quick_actions_heading": {
-    "message": "Quick Actions"
+    "message": "Thao tác nhanh"
   },
   "quick_start_quick_actions_info": {
-    "message": "The <img alt=\"\" class=\"inline-icon\" src=\"/images/question-mark-circle.svg\"/> <em>question mark</em> button will open the <a href=\"/info.html\" rel=\"noopener\" target=\"_blank\">Information</a> page,\n\t                        which has some helpful information and links about Sottaku-Yomitan."
+    "message": "Nút <img alt=\"\" class=\"inline-icon\" src=\"/images/question-mark-circle.svg\"/> <em>dấu hỏi</em> sẽ mở trang <a href=\"/info.html\" rel=\"noopener\" target=\"_blank\">Thông tin</a>,\n                        nơi có các thông tin và liên kết hữu ích về Sottaku-Yomitan."
   },
   "quick_start_quick_actions_search": {
-    "message": "The <img alt=\"\" class=\"inline-icon\" src=\"/images/magnifying-glass.svg\"/> <em>magnifying glass</em> button will open the <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">Search</a> page,\n                        enabling text and terms to be looked up using the installed dictionaries.\n                        This can even be used in offline mode!"
+    "message": "Nút <img alt=\"\" class=\"inline-icon\" src=\"/images/magnifying-glass.svg\"/> <em>kính lúp</em> sẽ mở trang <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">Tìm kiếm</a>,\n                        cho phép tra cứu văn bản và thuật ngữ bằng các từ điển đã cài đặt.\n                        Thậm chí có thể dùng ở chế độ ngoại tuyến!"
   },
   "quick_start_scanning_alt": {
-    "message": "scanning"
+    "message": "quét"
   },
   "quick_start_scanning_audio": {
-    "message": "Clicking the <img alt=\"\" class=\"inline-icon\" src=\"/images/play-audio.svg\"/> <em>speaker</em> button of an entry in the search results\n                    will play an audio clip of a term's pronunciation using an online dictionary, if available."
+    "message": "Nhấp vào nút <img alt=\"\" class=\"inline-icon\" src=\"/images/play-audio.svg\"/> <em>loa</em> của một mục trong kết quả tìm kiếm\n                    sẽ phát đoạn âm thanh phát âm của thuật ngữ bằng từ điển trực tuyến, nếu có."
   },
   "quick_start_scanning_body": {
-    "message": "After dictionaries have been installed, webpage text can be scanned by moving the cursor while holding a modifier key.\n                The default key is <kbd>Shift</kbd>, which can be disabled or configured in the <a href=\"/settings.html#backup\">Settings</a> page."
+    "message": "Sau khi cài đặt từ điển, bạn có thể quét văn bản trên trang web bằng cách di chuyển con trỏ trong khi giữ phím bổ trợ.\n                Phím mặc định là <kbd>Shift</kbd>, có thể tắt hoặc cấu hình trong trang <a href=\"/settings.html#backup\">Cài đặt</a>."
   },
   "quick_start_scanning_heading": {
-    "message": "Scanning Text"
+    "message": "Quét văn bản"
   },
   "quick_start_scanning_kanji": {
-    "message": "Clicking on a kanji character in a term's definition will show additional information about that character.\n                    <span class=\"light\">(Requires a kanji dictionary to be installed.)</span>"
+    "message": "Nhấp vào một ký tự kanji trong định nghĩa thuật ngữ sẽ hiển thị thêm thông tin về ký tự đó.\n                    <span class=\"light\">(Cần cài đặt từ điển kanji.)</span>"
   },
   "search_clipboard_monitor_label": {
-    "message": "Clipboard monitor"
+    "message": "Theo dõi clipboard"
   },
   "search_default_profile_label": {
-    "message": "Default Profile"
+    "message": "Hồ sơ mặc định"
   },
   "search_header_title": {
-    "message": "Sottaku-Yomitan Search"
+    "message": "Tìm kiếm Sottaku-Yomitan"
   },
   "search_settings_auto_kana_label": {
-    "message": "Automatic kana conversion"
+    "message": "Chuyển đổi kana tự động"
   },
   "search_settings_close_button": {
-    "message": "Close"
+    "message": "Đóng"
   },
   "search_settings_parser_label": {
-    "message": "Parser"
+    "message": "Trình phân tích"
   },
   "search_settings_sticky_header_description": {
-    "message": "Search header stays on the page when scrolling down."
+    "message": "Tiêu đề tìm kiếm vẫn ở lại trang khi cuộn xuống."
   },
   "search_settings_sticky_header_label": {
-    "message": "Sticky search header"
+    "message": "Tiêu đề tìm kiếm cố định"
   },
   "search_settings_title": {
-    "message": "Search Settings"
+    "message": "Cài đặt tìm kiếm"
   },
   "search_textbox_placeholder": {
-    "message": "Input a term, expression, sentence, or block of text"
+    "message": "Nhập một thuật ngữ, biểu đạt, câu, hoặc khối văn bản"
   },
   "settings_accessibility_google_docs_danger": {
-    "message": "Google has changed this compatibility implementation several times, and the changes do not seem to be announced or documented. Therefore, it is possible that this feature could stop working at any time the future without warning."
+    "message": "Google đã thay đổi cách triển khai tương thích này nhiều lần, và các thay đổi dường như không được thông báo hoặc ghi chép. Do đó, tính năng này có thể ngừng hoạt động bất cứ lúc nào trong tương lai mà không báo trước."
   },
   "settings_accessibility_google_docs_label": {
-    "message": "Enable Google Docs compatibility mode\n                        <a class=\"more-toggle more-only danger-text\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "Bật chế độ tương thích Google Docs\n                        <a class=\"more-toggle more-only danger-text\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "settings_accessibility_google_docs_more_1": {
-    "message": "Google Docs now uses\n                    <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas\" rel=\"noopener noreferrer\" target=\"_blank\">canvas-based</a>\n                    rendering to display content<sup><a href=\"https://workspaceupdates.googleblog.com/2021/05/Google-Docs-Canvas-Based-Rendering-Update.html\" rel=\"noopener noreferrer\" target=\"_blank\">[2]</a></sup>\n                    which prevents Sottaku-Yomitan from being able to scan text using the standard methods.\n                    Enabling this option will force Google Docs webpages to expose some additional text\n                    information which should allow Sottaku-Yomitan to still work."
+    "message": "Google Docs hiện sử dụng\n                    <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas\" rel=\"noopener noreferrer\" target=\"_blank\">canvas-based</a>\n                    để hiển thị nội dung<sup><a href=\"https://workspaceupdates.googleblog.com/2021/05/Google-Docs-Canvas-Based-Rendering-Update.html\" rel=\"noopener noreferrer\" target=\"_blank\">[2]</a></sup>\n                    điều này ngăn Sottaku-Yomitan quét văn bản bằng các phương pháp tiêu chuẩn.\n                    Bật tùy chọn này sẽ buộc các trang Google Docs hiển thị thêm thông tin văn bản,\n                    điều này sẽ giúp Sottaku-Yomitan tiếp tục hoạt động."
   },
   "settings_accessibility_google_docs_warning": {
-    "message": "If any profile has this setting enabled, compatibility mode will be activated; profile conditions are ignored."
+    "message": "Nếu bất kỳ hồ sơ nào bật cài đặt này, chế độ tương thích sẽ được kích hoạt; các điều kiện hồ sơ bị bỏ qua."
   },
   "settings_accessibility_heading": {
-    "message": "Accessibility"
+    "message": "Khả năng truy cập"
   },
   "settings_appearance_action_bar_description": {
-    "message": "Control when and where the action bar is visible."
+    "message": "Kiểm soát khi nào và ở đâu thanh hành động hiển thị."
   },
   "settings_appearance_action_bar_label": {
-    "message": "Action bar appearance"
+    "message": "Giao diện thanh hành động"
   },
   "settings_appearance_action_bar_location_label": {
-    "message": "Location"
+    "message": "Vị trí"
   },
   "settings_appearance_action_bar_visibility_label": {
-    "message": "Visibility"
+    "message": "Hiển thị"
   },
   "settings_appearance_collapsible_dictionaries_label": {
-    "message": "Configure collapsible dictionaries…"
+    "message": "Cấu hình từ điển có thể thu gọn…"
   },
   "settings_appearance_compact_glossaries_description": {
-    "message": "Display term glossaries using a more compact layout."
+    "message": "Hiển thị bảng chú giải thuật ngữ với bố cục gọn hơn."
   },
   "settings_appearance_compact_glossaries_label": {
-    "message": "Compact glossaries"
+    "message": "Bảng chú giải gọn"
   },
   "settings_appearance_compact_popup": {
-    "message": "Compact Popup"
+    "message": "Popup gọn"
   },
   "settings_appearance_compact_popup_anki": {
-    "message": "Compact Popup and Anki"
+    "message": "Popup gọn và Anki"
   },
   "settings_appearance_compact_tags_description": {
-    "message": "Show fewer repeated tags for term glossaries."
+    "message": "Hiển thị ít thẻ lặp lại hơn cho bảng chú giải thuật ngữ."
   },
   "settings_appearance_compact_tags_label": {
-    "message": "Compact tags"
+    "message": "Thẻ gọn"
   },
   "settings_appearance_custom_css_label": {
-    "message": "Configure custom CSS…"
+    "message": "Cấu hình CSS tùy chỉnh…"
   },
   "settings_appearance_debug_description": {
-    "message": "A menu option to log debugging information will be shown in the search results."
+    "message": "Một tùy chọn menu để ghi nhật ký thông tin gỡ lỗi sẽ hiển thị trong kết quả tìm kiếm."
   },
   "settings_appearance_debug_label": {
-    "message": "Show debug information"
+    "message": "Hiển thị thông tin gỡ lỗi"
   },
   "settings_appearance_expression_tags_description": {
-    "message": "These tags can be scanned if the options for popup content scanning are enabled."
+    "message": "Các thẻ này có thể được quét nếu các tùy chọn quét nội dung popup được bật."
   },
   "settings_appearance_expression_tags_label": {
-    "message": "Show tags for expressions and their readings"
+    "message": "Hiển thị thẻ cho biểu thức và cách đọc"
   },
   "settings_appearance_font_family_description": {
-    "message": "Change the font family used in Sottaku-Yomitan.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "Thay đổi họ phông chữ được dùng trong Sottaku-Yomitan.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">Thêm…</a>"
   },
   "settings_appearance_font_family_label": {
-    "message": "Font family"
+    "message": "Họ phông chữ"
   },
   "settings_appearance_font_family_more": {
-    "message": "The font family can be changed to any font installed on your system.<br/>\n                    You can input things such as <code>sans-serif</code>, <code>serif</code>, or <code>monospace</code>.<br/>\n                    If you want to specify one or multiple specific fonts, you can type them in manually separated by commas,\n                    for example <pre><code>\"Noto Sans JP\", \"Meiryo\", sans-serif</code></pre>"
+    "message": "Họ phông chữ có thể đổi sang bất kỳ phông chữ nào được cài đặt trên hệ thống của bạn.<br/>\n                    Bạn có thể nhập như <code>sans-serif</code>, <code>serif</code> hoặc <code>monospace</code>.<br/>\n                    Nếu muốn chỉ định một hoặc nhiều phông chữ cụ thể, bạn có thể nhập thủ công, phân tách bằng dấu phẩy,\n                    ví dụ <pre><code>\"Noto Sans JP\", \"Meiryo\", sans-serif</code></pre>"
   },
   "settings_appearance_font_size_description": {
-    "message": "Change the font size used in popups, in pixels."
+    "message": "Thay đổi cỡ chữ dùng trong popup, theo pixel."
   },
   "settings_appearance_font_size_label": {
-    "message": "Font size"
+    "message": "Cỡ chữ"
   },
   "settings_appearance_frequency_description": {
-    "message": "Change how frequency information is presented."
+    "message": "Thay đổi cách hiển thị thông tin tần suất."
   },
   "settings_appearance_frequency_inline_list": {
-    "message": "Inline list"
+    "message": "Danh sách nội tuyến"
   },
   "settings_appearance_frequency_label": {
-    "message": "Frequency display style"
+    "message": "Kiểu hiển thị tần suất"
   },
   "settings_appearance_frequency_list": {
-    "message": "List"
+    "message": "Danh sách"
   },
   "settings_appearance_frequency_split_tags": {
-    "message": "Split tags"
+    "message": "Tách thẻ"
   },
   "settings_appearance_frequency_split_tags_grouped": {
-    "message": "Split tags, grouped content"
+    "message": "Tách thẻ, nội dung nhóm"
   },
   "settings_appearance_frequency_tags": {
-    "message": "Tags"
+    "message": "Thẻ"
   },
   "settings_appearance_frequency_tags_grouped": {
-    "message": "Tags, grouped content"
+    "message": "Thẻ, nội dung nhóm"
   },
   "settings_appearance_heading": {
-    "message": "Appearance"
+    "message": "Giao diện"
   },
   "settings_appearance_indicator_asterisk": {
-    "message": "Asterisk"
+    "message": "Dấu hoa thị"
   },
   "settings_appearance_indicator_bar_left": {
-    "message": "Vertical bar (left)"
+    "message": "Thanh dọc (trái)"
   },
   "settings_appearance_indicator_bar_right": {
-    "message": "Vertical bar (right)"
+    "message": "Thanh dọc (phải)"
   },
   "settings_appearance_indicator_dot_left": {
-    "message": "Small dot (left)"
+    "message": "Chấm nhỏ (trái)"
   },
   "settings_appearance_indicator_dot_right": {
-    "message": "Small dot (right)"
+    "message": "Chấm nhỏ (phải)"
   },
   "settings_appearance_indicator_triangle": {
-    "message": "Triangle"
+    "message": "Tam giác"
   },
   "settings_appearance_line_height_description": {
-    "message": "Change the space between lines of text in popups. This will usually be a decimal number between 1 and 2."
+    "message": "Thay đổi khoảng cách giữa các dòng văn bản trong popup. Thường là số thập phân từ 1 đến 2."
   },
   "settings_appearance_line_height_label": {
-    "message": "Line height"
+    "message": "Khoảng dòng"
   },
   "settings_appearance_pitch_accent_description": {
-    "message": "Japanese only.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "Chỉ tiếng Nhật.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">Thêm…</a>"
   },
   "settings_appearance_pitch_accent_label": {
-    "message": "Pitch accent display styles"
+    "message": "Kiểu hiển thị trọng âm cao thấp"
   },
   "settings_appearance_pitch_accent_more_1": {
-    "message": "Pitch accents for terms and expressions can be shown if a dictionary supporting pitch accents is installed. There are currently three different ways that pitch accents can be presented:"
+    "message": "Có thể hiển thị trọng âm cao thấp cho thuật ngữ và biểu thức nếu có cài đặt từ điển hỗ trợ. Hiện có ba cách khác nhau để hiển thị trọng âm:"
   },
   "settings_appearance_pitch_downstep_notation": {
-    "message": "Downstep notation"
+    "message": "Ký hiệu downstep"
   },
   "settings_appearance_pitch_downstep_position": {
-    "message": "Downstep position"
+    "message": "Vị trí downstep"
   },
   "settings_appearance_pitch_graph": {
-    "message": "Graph"
+    "message": "Đồ thị"
   },
   "settings_appearance_reading_mode_description": {
-    "message": "Change what type of furigana is displayed for parsed text. Japanese only."
+    "message": "Thay đổi loại furigana hiển thị cho văn bản đã phân tích. Chỉ tiếng Nhật."
   },
   "settings_appearance_reading_mode_dictionary": {
-    "message": "Dictionary reading"
+    "message": "Cách đọc từ điển"
   },
   "settings_appearance_reading_mode_hiragana": {
-    "message": "ひらがな"
+    "message": "Hiragana"
   },
   "settings_appearance_reading_mode_katakana": {
-    "message": "カタカナ"
+    "message": "Katakana"
   },
   "settings_appearance_reading_mode_label": {
-    "message": "Reading mode"
+    "message": "Chế độ đọc"
   },
   "settings_appearance_reading_mode_romaji": {
     "message": "Romaji"
   },
   "settings_appearance_selection_indicator_description": {
-    "message": "Change how the selected definition entry is visually indicated."
+    "message": "Thay đổi cách đánh dấu trực quan mục định nghĩa được chọn."
   },
   "settings_appearance_selection_indicator_label": {
-    "message": "Selection indicator style"
+    "message": "Kiểu chỉ báo chọn"
   },
   "settings_appearance_term_display_description": {
-    "message": "Change how terms and their readings are displayed."
+    "message": "Thay đổi cách hiển thị thuật ngữ và cách đọc của chúng."
   },
   "settings_appearance_term_display_label": {
-    "message": "Term display style"
+    "message": "Kiểu hiển thị thuật ngữ"
   },
   "settings_appearance_term_display_ruby": {
-    "message": "Term furigana"
+    "message": "Furigana của thuật ngữ"
   },
   "settings_appearance_term_display_ruby_reading": {
-    "message": "Term furigana and reading"
+    "message": "Furigana và cách đọc của thuật ngữ"
   },
   "settings_appearance_term_display_term_only": {
-    "message": "Plain term"
+    "message": "Thuật ngữ đơn"
   },
   "settings_appearance_term_display_term_reading": {
-    "message": "Plain term and reading"
+    "message": "Thuật ngữ đơn và cách đọc"
   },
   "settings_appearance_theme_body_label": {
-    "message": "Body"
+    "message": "Nội dung"
   },
   "settings_appearance_theme_description": {
-    "message": "Adjust the style of Sottaku-Yomitan."
+    "message": "Điều chỉnh phong cách của Sottaku-Yomitan."
   },
   "settings_appearance_theme_label": {
-    "message": "Theme"
+    "message": "Chủ đề"
   },
   "settings_appearance_theme_shadow_label": {
-    "message": "Shadow"
+    "message": "Đổ bóng"
   },
   "settings_audio_autoplay_description": {
-    "message": "The audio for the first result will be played automatically."
+    "message": "Âm thanh cho kết quả đầu tiên sẽ được phát tự động."
   },
   "settings_audio_autoplay_label": {
-    "message": "Auto-play search result audio"
+    "message": "Tự động phát âm thanh kết quả tìm kiếm"
   },
   "settings_audio_enable_description": {
-    "message": "Show a clickable speaker icon next to search results."
+    "message": "Hiển thị biểu tượng loa có thể nhấp bên cạnh kết quả tìm kiếm."
   },
   "settings_audio_enable_disclaimer": {
-    "message": "This option may send term, reading, and/or language outside of Sottaku-Yomitan to fetch audio<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">Privacy Policy</a>)</span>."
+    "message": "Tùy chọn này có thể gửi thuật ngữ, cách đọc và/hoặc ngôn ngữ ra ngoài Sottaku-Yomitan để lấy âm thanh<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">Chính sách quyền riêng tư</a>)</span>."
   },
   "settings_audio_enable_label": {
-    "message": "Enable audio playback for terms"
+    "message": "Bật phát âm thanh cho các thuật ngữ"
   },
   "settings_audio_fallback_bloop": {
     "message": "Bloop"
   },
   "settings_audio_fallback_click": {
-    "message": "Click"
+    "message": "Nhấp"
   },
   "settings_audio_fallback_description": {
-    "message": "The sound to play when Sottaku-Yomitan fails to fetch audio."
+    "message": "Âm thanh sẽ phát khi Sottaku-Yomitan không thể lấy âm thanh."
   },
   "settings_audio_fallback_label": {
-    "message": "Audio fallback sound"
+    "message": "Âm thanh dự phòng"
   },
   "settings_audio_heading": {
-    "message": "Audio"
+    "message": "Âm thanh"
   },
   "settings_audio_sources_label": {
-    "message": "Configure audio playback sources…"
+    "message": "Cấu hình nguồn phát âm thanh…"
   },
   "settings_audio_volume_description": {
-    "message": "Adjust the volume audio is played at, in percent."
+    "message": "Điều chỉnh âm lượng phát âm thanh theo phần trăm."
   },
   "settings_audio_volume_label": {
-    "message": "Audio volume"
+    "message": "Âm lượng âm thanh"
   },
   "settings_backup_description": {
-    "message": "Sottaku-Yomitan can import and export settings files which can be used to restore settings, share settings across devices, and to help to debug problems. These files will only contain settings."
+    "message": "Sottaku-Yomitan có thể nhập và xuất các tệp cài đặt có thể được dùng để khôi phục cài đặt, chia sẻ cài đặt giữa các thiết bị và giúp gỡ lỗi. Các tệp này chỉ chứa cài đặt."
   },
   "settings_backup_export_button": {
-    "message": "Export Settings"
+    "message": "Xuất cài đặt"
   },
   "settings_backup_heading": {
-    "message": "Backup"
+    "message": "Sao lưu"
   },
   "settings_backup_import_button": {
-    "message": "Import Settings"
+    "message": "Nhập cài đặt"
   },
   "settings_backup_reset_button": {
-    "message": "Reset Settings"
+    "message": "Đặt lại cài đặt"
   },
   "settings_clipboard_background_description": {
-    "message": "Open the search page in a new window when text is copied to the clipboard."
+    "message": "Mở trang tìm kiếm trong cửa sổ mới khi văn bản được sao chép vào clipboard."
   },
   "settings_clipboard_background_label": {
-    "message": "Enable background clipboard text monitoring"
+    "message": "Bật giám sát văn bản clipboard ở chế độ nền"
   },
   "settings_clipboard_heading": {
-    "message": "Clipboard"
+    "message": "Bảng tạm"
   },
   "settings_clipboard_info_1": {
-    "message": "Sottaku-Yomitan can watch the system clipboard and automatically search on the search page when text is copied. This can be useful for using Sottaku-Yomitan to scan text from external applications."
+    "message": "Sottaku-Yomitan có thể theo dõi bảng tạm của hệ thống và tự động tìm kiếm trên trang tìm kiếm khi văn bản được sao chép. Điều này hữu ích để dùng Sottaku-Yomitan quét văn bản từ các ứng dụng bên ngoài."
   },
   "settings_clipboard_info_2": {
-    "message": "This feature requires Sottaku-Yomitan to have clipboard reading permissions, and when this option is enabled, the clipboard will be frequently checked for new text."
+    "message": "Tính năng này yêu cầu Sottaku-Yomitan có quyền đọc bảng tạm, và khi tùy chọn này được bật, bảng tạm sẽ thường xuyên được kiểm tra để tìm văn bản mới."
   },
   "settings_clipboard_max_length_description": {
-    "message": "Limit the number of characters used when searching clipboard text."
+    "message": "Giới hạn số ký tự dùng khi tìm kiếm văn bản trên bảng tạm."
   },
   "settings_clipboard_max_length_label": {
-    "message": "Maximum clipboard text search length"
+    "message": "Độ dài tối đa của tìm kiếm văn bản trên bảng tạm"
   },
   "settings_clipboard_search_description": {
-    "message": "The query on the search page will be automatically updated with text in the clipboard."
+    "message": "Truy vấn trên trang tìm kiếm sẽ được tự động cập nhật bằng văn bản trong bảng tạm."
   },
   "settings_clipboard_search_label": {
-    "message": "Enable search page clipboard text monitoring"
+    "message": "Bật giám sát văn bản bảng tạm trên trang tìm kiếm"
   },
   "settings_clipboard_search_mode_description": {
-    "message": "Change how the search page reacts to new text in the clipboard."
+    "message": "Thay đổi cách trang tìm kiếm phản ứng với văn bản mới trong bảng tạm."
   },
   "settings_clipboard_search_mode_label": {
-    "message": "Clipboard text search mode"
+    "message": "Chế độ tìm kiếm văn bản trên bảng tạm"
   },
   "settings_clipboard_search_mode_search": {
-    "message": "Search for definitions"
+    "message": "Tìm định nghĩa"
   },
   "settings_clipboard_search_mode_update": {
-    "message": "Update query only"
+    "message": "Chỉ cập nhật truy vấn"
   },
   "settings_collapsible_varies": {
     "message": "Varies"
   },
   "settings_general_api_css_bypass_label": {
-    "message": "Allow bypassing css sanitization"
+    "message": "Cho phép bỏ qua việc làm sạch CSS"
   },
   "settings_general_api_css_bypass_more_1": {
-    "message": "A malicious dictionary which contains malicious CSS may try to execute Javascript. For example, if the output of the Sottaku-Yomitan API is used in Anki, then the resulting Anki card may execute unintended Javascript. The risk in this case is similar to downloading a malicious Anki deck. Namely, in both cases, you are relying purely on Anki's sandbox to protect your machine and information from the malicious code. If the Anki sandbox works, card contents could be leaked (a minor confidential issue). If the sandbox fails, there is much more to worry about (actions being taken on your machine such as stealing credentials and sensitive information, or ransomware taking over your computer)."
+    "message": "Một từ điển độc hại chứa CSS độc hại có thể cố gắng thực thi Javascript. Ví dụ, nếu đầu ra của API Sottaku-Yomitan được dùng trong Anki, thẻ Anki tạo ra có thể thực thi Javascript không mong muốn. Rủi ro trong trường hợp này tương tự như việc tải một bộ deck Anki độc hại. Nghĩa là trong cả hai trường hợp, bạn hoàn toàn dựa vào sandbox của Anki để bảo vệ máy và thông tin khỏi mã độc. Nếu sandbox của Anki hoạt động, nội dung thẻ có thể bị rò rỉ (một vấn đề bảo mật nhỏ). Nếu sandbox thất bại, sẽ có nhiều điều đáng lo ngại hơn (các hành động trên máy của bạn như đánh cắp thông tin đăng nhập và dữ liệu nhạy cảm, hoặc ransomware chiếm quyền điều khiển máy tính)."
   },
   "settings_general_api_css_bypass_more_2": {
-    "message": "If you choose to disable the CSS sanitization, we recommend thinking end-to-end about where the Sottaku-Yomitan API output is used, and whether that destination is resilient to potentially malicious Javascript code being included, otherwise you are potentially risking the data and integrity of your system."
+    "message": "Nếu bạn chọn tắt việc làm sạch CSS, chúng tôi khuyến nghị suy nghĩ từ đầu đến cuối về nơi đầu ra của API Sottaku-Yomitan được sử dụng và liệu đích đến đó có chịu được việc chèn Javascript độc hại tiềm tàng hay không; nếu không, bạn có thể đang đặt dữ liệu và tính toàn vẹn của hệ thống vào rủi ro."
   },
   "settings_general_api_css_bypass_more_3": {
-    "message": "Sanitization bypass will allow CSS that cannot be sanitized to pass through the sanitizer unchanged. This ONLY applies to the Sottaku-Yomitan API, it will not make any other areas of Sottaku-Yomitan potentially vulnerable."
+    "message": "Bỏ qua làm sạch sẽ cho phép CSS không thể làm sạch đi qua bộ làm sạch mà không thay đổi. Điều này CHỈ áp dụng cho API Sottaku-Yomitan và sẽ không khiến các khu vực khác của Sottaku-Yomitan trở nên dễ bị tổn thương."
   },
   "settings_general_api_css_bypass_more_4": {
-    "message": "This can be required to retrieve CSS on some browsers which do not support the offscreen page necessary for full CSS sanitization in the Sottaku-Yomitan API on the backend. Sottaku-Yomitan will attempt to fall back on basic sanitization but this will fail for dictionaries making use of complex CSS."
+    "message": "Điều này có thể cần thiết để lấy CSS trên một số trình duyệt không hỗ trợ trang offscreen cần thiết cho việc làm sạch CSS đầy đủ trong API Sottaku-Yomitan ở backend. Sottaku-Yomitan sẽ cố gắng quay về làm sạch cơ bản nhưng điều này sẽ thất bại với các từ điển sử dụng CSS phức tạp."
   },
   "settings_general_api_css_bypass_warning": {
-    "message": "Only enable this option if you trust the authors of your dictionaries or will perform sanitization outside of Sottaku-Yomitan.\n                                        Malicious dictionaries can send malformed CSS to allow Javascript execution if injected into a webview or browser.\n                                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "Chỉ bật tùy chọn này nếu bạn tin tưởng tác giả các từ điển của mình hoặc sẽ thực hiện làm sạch bên ngoài Sottaku-Yomitan.\n                                        Các từ điển độc hại có thể gửi CSS sai để cho phép thực thi Javascript nếu được chèn vào webview hoặc trình duyệt.\n                                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">Thêm…</a>"
   },
   "settings_general_api_more_1": {
-    "message": "To activate the Sottaku-Yomitan API, a native messaging component must be installed.\n                        A setup guide can be found <a href=\"https://github.com/yomidevs/yomitan-api/blob/master/README.md\" rel=\"noopener noreferrer\" target=\"_blank\">here</a>."
+    "message": "Để kích hoạt API Sottaku-Yomitan, cần cài đặt thành phần native messaging.\n                        Có thể xem hướng dẫn thiết lập <a href=\"https://github.com/yomidevs/yomitan-api/blob/master/README.md\" rel=\"noopener noreferrer\" target=\"_blank\">tại đây</a>."
   },
   "settings_general_api_test_url_placeholder": {
     "message": "http://127.0.0.1:19633"
   },
   "settings_general_context_menu": {
-    "message": "Show \"Lookup in Sottaku-Yomitan\" in right-click menu"
+    "message": "Hiển thị \"Tra cứu trong Sottaku-Yomitan\" trong menu chuột phải"
   },
   "settings_general_enable_api_description": {
-    "message": "Enable support for sending local web requests to fetch data from Sottaku-Yomitan."
+    "message": "Bật hỗ trợ gửi yêu cầu web cục bộ để lấy dữ liệu từ Sottaku-Yomitan."
   },
   "settings_general_enable_api_disclaimer": {
-    "message": "This option may send data outside of Sottaku-Yomitan to local applications that request it<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">Privacy Policy</a>)</span>.\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "Tùy chọn này có thể gửi dữ liệu ra ngoài Sottaku-Yomitan tới các ứng dụng cục bộ yêu cầu<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">Chính sách quyền riêng tư</a>)</span>.\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">Thêm…</a>"
   },
   "settings_general_enable_api_label": {
-    "message": "Enable Sottaku-Yomitan API"
+    "message": "Bật API Sottaku-Yomitan"
   },
   "settings_general_enable_label": {
-    "message": "Enable Sottaku-Yomitan"
+    "message": "Bật Sottaku-Yomitan"
   },
   "settings_general_heading": {
-    "message": "General"
+    "message": "Chung"
   },
   "settings_general_locale_description": {
-    "message": "Language used for translations returned by Sottaku."
+    "message": "Ngôn ngữ dùng cho các bản dịch do Sottaku trả về."
   },
   "settings_general_locale_label": {
-    "message": "Locale"
+    "message": "Khu vực"
   },
   "settings_general_max_results_description": {
-    "message": "Adjust the maximum number of results shown for lookups."
+    "message": "Điều chỉnh số lượng kết quả tối đa được hiển thị khi tra cứu."
   },
   "settings_general_max_results_label": {
-    "message": "Maximum number of results"
+    "message": "Số lượng kết quả tối đa"
   },
   "settings_general_show_guide": {
-    "message": "Show the <a href=\"/welcome.html\" rel=\"noopener\" target=\"_blank\">welcome guide</a> on browser startup"
+    "message": "Hiển thị <a href=\"/welcome.html\" rel=\"noopener\" target=\"_blank\">hướng dẫn chào mừng</a> khi khởi động trình duyệt"
   },
   "settings_general_text_language_description": {
-    "message": "Used for offline dictionary features and preview tooling."
+    "message": "Dùng cho các tính năng từ điển ngoại tuyến và công cụ xem trước."
   },
   "settings_general_text_language_label": {
-    "message": "Text language"
+    "message": "Ngôn ngữ văn bản"
   },
   "settings_heading": {
-    "message": "Sottaku-Yomitan Settings"
+    "message": "Cài đặt Sottaku-Yomitan"
   },
   "settings_loading_delay_notice": {
-    "message": "This page is taking longer than expected to load."
+    "message": "Trang này đang mất nhiều thời gian hơn dự kiến để tải."
   },
   "settings_loading_delay_safari": {
-    "message": "Due to a bug in Safari, it may be necessary to click the <img alt=\"\" class=\"inline-icon\" src=\"/images/yomitan-icon.svg\"/> <em>Sottaku-Yomitan</em>\n                        button in the browser bar to fully load the page"
+    "message": "Do lỗi trong Safari, có thể cần nhấp vào nút <img alt=\"\" class=\"inline-icon\" src=\"/images/yomitan-icon.svg\"/> <em>Sottaku-Yomitan</em>\n                        trên thanh trình duyệt để tải trang đầy đủ"
   },
   "settings_nav_about": {
-    "message": "About Sottaku-Yomitan"
+    "message": "Giới thiệu Sottaku-Yomitan"
   },
   "settings_nav_accessibility": {
-    "message": "Accessibility"
+    "message": "Trợ năng"
   },
   "settings_nav_advanced": {
-    "message": "Advanced"
+    "message": "Nâng cao"
   },
   "settings_nav_appearance": {
-    "message": "Appearance"
+    "message": "Giao diện"
   },
   "settings_nav_audio": {
-    "message": "Audio"
+    "message": "Âm thanh"
   },
   "settings_nav_backup": {
-    "message": "Backup"
+    "message": "Sao lưu"
   },
   "settings_nav_clipboard": {
-    "message": "Clipboard"
+    "message": "Bảng tạm"
   },
   "settings_nav_debug": {
-    "message": "Debug"
+    "message": "Gỡ lỗi"
   },
   "settings_nav_general": {
-    "message": "General"
+    "message": "Chung"
   },
   "settings_nav_popup_behavior": {
-    "message": "Popup Behavior"
+    "message": "Hành vi cửa sổ bật lên"
   },
   "settings_nav_position_size": {
-    "message": "Position & Size"
+    "message": "Vị trí và kích thước"
   },
   "settings_nav_profile": {
-    "message": "Profile"
+    "message": "Hồ sơ"
   },
   "settings_nav_result_display": {
-    "message": "Result Display"
+    "message": "Hiển thị kết quả"
   },
   "settings_nav_scanning": {
-    "message": "Scanning"
+    "message": "Quét"
   },
   "settings_nav_search_window": {
-    "message": "Search Window"
+    "message": "Cửa sổ tìm kiếm"
   },
   "settings_nav_security": {
-    "message": "Security"
+    "message": "Bảo mật"
   },
   "settings_nav_shortcuts": {
-    "message": "Shortcuts"
+    "message": "Phím tắt"
   },
   "settings_nav_sottaku": {
     "message": "Sottaku"
   },
   "settings_nav_text_parsing": {
-    "message": "Text Parsing"
+    "message": "Phân tích văn bản"
   },
   "settings_nav_translation": {
-    "message": "Translation"
+    "message": "Dịch"
   },
   "settings_popup_auto_hide_description": {
     "message": "When an existing popup is present, upon scanning again, hide the existing popup even if no definitions are found when scanning again."
@@ -1344,16 +1344,16 @@
     "message": "Same as horizontal text"
   },
   "settings_profile_active_description": {
-    "message": "Switch the active profile that is used for scanning."
+    "message": "Chuyển hồ sơ đang dùng cho việc quét."
   },
   "settings_profile_active_label": {
-    "message": "Active profile"
+    "message": "Hồ sơ đang dùng"
   },
   "settings_profile_configure": {
-    "message": "Configure profiles…"
+    "message": "Cấu hình hồ sơ…"
   },
   "settings_profile_heading": {
-    "message": "Profile"
+    "message": "Hồ sơ"
   },
   "settings_result_average_frequencies_description": {
     "message": "Compress frequency tags into one \"Average\" frequency tag based on the harmonic mean."
@@ -1401,115 +1401,115 @@
     "message": "Group term-reading pairs"
   },
   "settings_scanning_advanced_inputs_label": {
-    "message": "Configure advanced scanning inputs… <span class=\"light no-wrap\">(<span class=\"scanning-input-count\">#</span> defined)</span>"
+    "message": "Cấu hình đầu vào quét nâng cao… <span class=\"light no-wrap\">(<span class=\"scanning-input-count\">#</span> đã định nghĩa)</span>"
   },
   "settings_scanning_alphanumeric_description": {
-    "message": "Only applies when language is set to Japanese, Chinese, Cantonese, or Korean."
+    "message": "Chỉ áp dụng khi ngôn ngữ được đặt là tiếng Nhật, Trung, Quảng Đông hoặc Hàn."
   },
   "settings_scanning_alphanumeric_label": {
-    "message": "Search text with non-Japanese, Chinese, or Korean characters"
+    "message": "Tìm văn bản có ký tự không phải tiếng Nhật, Trung hoặc Hàn"
   },
   "settings_scanning_deep_scan_description": {
-    "message": "Enable scanning text that is covered by other layers."
+    "message": "Bật quét văn bản bị các lớp khác che phủ."
   },
   "settings_scanning_deep_scan_label": {
-    "message": "Deep content scanning"
+    "message": "Quét nội dung sâu"
   },
   "settings_scanning_delay_description": {
-    "message": "Change the delay before scanning occurs when no modifier key is required."
+    "message": "Thay đổi độ trễ trước khi quét xảy ra khi không cần phím bổ trợ."
   },
   "settings_scanning_delay_label": {
-    "message": "Scan delay <span class=\"light\">(in milliseconds)</span>"
+    "message": "Độ trễ quét <span class=\"light\">(mili giây)</span>"
   },
   "settings_scanning_heading": {
-    "message": "Scanning"
+    "message": "Quét"
   },
   "settings_scanning_input_prevention_label": {
-    "message": "Configure input action prevention…"
+    "message": "Cấu hình chặn hành động nhập liệu…"
   },
   "settings_scanning_layout_description": {
-    "message": "Use webpage styling information to determine where line breaks are likely to be."
+    "message": "Sử dụng thông tin kiểu dáng của trang web để xác định vị trí xuống dòng có khả năng xảy ra."
   },
   "settings_scanning_layout_label": {
-    "message": "Layout-aware scanning"
+    "message": "Quét theo bố cục"
   },
   "settings_scanning_middle_mouse_description": {
-    "message": "Hold the middle mouse button while moving the cursor to scan text."
+    "message": "Giữ nút chuột giữa khi di chuyển con trỏ để quét văn bản."
   },
   "settings_scanning_middle_mouse_label": {
-    "message": "Scan using middle mouse button"
+    "message": "Quét bằng nút chuột giữa"
   },
   "settings_scanning_modifier_description": {
-    "message": "Hold a key while moving the cursor to scan text.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "Giữ một phím khi di chuyển con trỏ để quét văn bản.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">Thêm…</a>"
   },
   "settings_scanning_modifier_label": {
-    "message": "Scan modifier key"
+    "message": "Phím bổ trợ quét"
   },
   "settings_scanning_modifier_more_1": {
-    "message": "A keyboard modifier key can be used to activate text scanning when the cursor is moved.\n                    Alternatively, the <em>No key</em> option can be used to scan text whenever the cursor is moved,\n                    without requiring any key to be held."
+    "message": "Có thể dùng phím bổ trợ trên bàn phím để kích hoạt quét văn bản khi con trỏ di chuyển.\n                    Hoặc chọn tùy chọn <em>Không phím</em> để quét văn bản bất cứ khi nào con trỏ di chuyển\n                    mà không cần giữ phím nào."
   },
   "settings_scanning_modifier_more_2": {
-    "message": "More advanced scanning input customization can be set up by enabling the <em>Advanced</em> option\n                    and clicking <em data-modal-action=\"show,scanning-inputs\">Configure advanced scanning inputs</em>."
+    "message": "Có thể thiết lập tùy chỉnh nâng cao cho đầu vào quét bằng cách bật tùy chọn <em>Nâng cao</em>\n                    và nhấp <em data-modal-action=\"show,scanning-inputs\">Cấu hình đầu vào quét nâng cao</em>."
   },
   "settings_scanning_resolution_character": {
-    "message": "Character"
+    "message": "Ký tự"
   },
   "settings_scanning_resolution_description": {
-    "message": "Start the lookup scan at the word or character of the cursor position.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "Bắt đầu quét tra cứu tại từ hoặc ký tự ở vị trí con trỏ.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">Thêm…</a>"
   },
   "settings_scanning_resolution_label": {
-    "message": "Scan resolution"
+    "message": "Độ phân giải quét"
   },
   "settings_scanning_resolution_more_1": {
-    "message": "The scan resolution determines where the scan starts when the cursor is moved.\n                    The <code>Character</code> option will start scanning at the cursor's current position,\n                    while the <code>Word</code> option will start scanning at the beginning of the word."
+    "message": "Độ phân giải quét quyết định vị trí bắt đầu khi con trỏ di chuyển.\n                    Tùy chọn <code>Ký tự</code> sẽ bắt đầu quét tại vị trí hiện tại của con trỏ,\n                    trong khi tùy chọn <code>Từ</code> sẽ bắt đầu quét ở đầu từ."
   },
   "settings_scanning_resolution_word": {
-    "message": "Word"
+    "message": "Từ"
   },
   "settings_scanning_select_text_label": {
-    "message": "Select matched text"
+    "message": "Chọn văn bản khớp"
   },
   "settings_scanning_text_length_description": {
-    "message": "Change how many characters are read when scanning for terms."
+    "message": "Thay đổi số ký tự được đọc khi quét thuật ngữ."
   },
   "settings_scanning_text_length_label": {
-    "message": "Text scan length"
+    "message": "Độ dài quét văn bản"
   },
   "settings_scanning_text_length_warning": {
-    "message": "Setting this value too high (100+) may impact performance."
+    "message": "Đặt giá trị này quá cao (100+) có thể ảnh hưởng hiệu năng."
   },
   "settings_scanning_wildcard_description": {
-    "message": "Enable suffix wildcard when looking up scanned webpage text.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "Bật ký tự đại diện hậu tố khi tra cứu văn bản trang web đã quét.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">Thêm…</a>"
   },
   "settings_scanning_wildcard_label": {
-    "message": "Wildcard scanning"
+    "message": "Quét ký tự đại diện"
   },
   "settings_scanning_wildcard_more_1": {
-    "message": "Rather than searching for the source text exactly, the text will only be required to be a prefix of an existing term. For example, scanning 読み will effectively search for 読み*, which may bring up additional results such as 読み方."
+    "message": "Thay vì tìm chính xác văn bản nguồn, văn bản chỉ cần là tiền tố của một thuật ngữ hiện có. Ví dụ, quét 読み sẽ thực tế tìm 読み*, có thể đưa thêm kết quả như 読み方."
   },
   "settings_scanning_wildcard_warning": {
-    "message": "This will likely cause scanning and lookup to be slower, and the results may not be as relevant."
+    "message": "Điều này có thể làm cho việc quét và tra cứu chậm hơn, và kết quả có thể kém liên quan hơn."
   },
   "settings_scanning_without_mousemove_description": {
-    "message": "Allow scanning words under the pointer without the pointer being in motion."
+    "message": "Cho phép quét các từ dưới con trỏ khi con trỏ không di chuyển."
   },
   "settings_scanning_without_mousemove_label": {
-    "message": "Scan without mouse move"
+    "message": "Quét không cần di chuyển chuột"
   },
   "settings_scanning_zoom_description": {
-    "message": "Correct the pointer location on webpages where CSS <code>zoom</code> is used.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "Sửa vị trí con trỏ trên các trang web dùng CSS <code>zoom</code>.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">Thêm…</a>"
   },
   "settings_scanning_zoom_label": {
-    "message": "Normalize CSS zoom"
+    "message": "Chuẩn hóa zoom CSS"
   },
   "settings_scanning_zoom_more_1": {
-    "message": "The non-standard CSS <a href=\"https://developer.mozilla.org/en-US/docs/Web/CSS/zoom\" rel=\"noopener noreferrer\" target=\"_blank\"><code>zoom</code></a> property interferes with the normal calculation of the pointer coordinates when scanning webpages. This property is discouraged from being used and its use is rare, but some webpages may still use it."
+    "message": "Thuộc tính CSS không chuẩn <a href=\"https://developer.mozilla.org/en-US/docs/Web/CSS/zoom\" rel=\"noopener noreferrer\" target=\"_blank\"><code>zoom</code></a> làm nhiễu việc tính toán bình thường của tọa độ con trỏ khi quét trang web. Thuộc tính này không được khuyến nghị và hiếm dùng, nhưng một số trang web vẫn có thể dùng."
   },
   "settings_scanning_zoom_more_2": {
-    "message": "Enabling this option, which is on by default, will take the value of this property into account when scanning webpage content. It is currently put behind an option in case there are unforeseen negative side effects."
+    "message": "Bật tùy chọn này (mặc định bật) sẽ tính đến giá trị của thuộc tính này khi quét nội dung trang web. Hiện nó được đặt sau một tùy chọn phòng trường hợp có tác dụng phụ tiêu cực không lường trước."
   },
   "settings_scanning_zoom_more_3": {
-    "message": "This setting does not have any effect in Firefox, as it does not implement the <code>zoom</code> property."
+    "message": "Cài đặt này không có tác dụng trong Firefox vì Firefox không triển khai thuộc tính <code>zoom</code>."
   },
   "settings_search_window_heading": {
     "message": "Search Window"
@@ -1563,118 +1563,118 @@
     "message": "Popup"
   },
   "settings_security_heading": {
-    "message": "Security"
+    "message": "Bảo mật"
   },
   "settings_security_permissions_label": {
-    "message": "Configure Sottaku-Yomitan Permissions"
+    "message": "Cấu hình quyền của Sottaku-Yomitan"
   },
   "settings_security_secure_frame_label": {
-    "message": "Use secure popup frame URL\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "Sử dụng URL khung bật lên an toàn\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "settings_security_secure_frame_more": {
-    "message": "When this option is enabled, the URL of the <code>iframe</code> element will be assigned by\n                    directly changing the location of the <code>iframe</code>'s internal document, rather than using\n                    the <code>iframe</code>'s <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-src\" rel=\"noopener noreferrer\" target=\"_blank\"><code>src</code></a>\n                    attribute. This results in the extension URL not being exposed to the underling web page, and thus making it harder\n                    to detect the presence of Sottaku-Yomitan."
+    "message": "Khi bật tùy chọn này, URL của phần tử <code>iframe</code> sẽ được gán bằng cách\n                    thay đổi trực tiếp vị trí của tài liệu nội bộ của <code>iframe</code>, thay vì dùng\n                    thuộc tính <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-src\" rel=\"noopener noreferrer\" target=\"_blank\"><code>src</code></a> của <code>iframe</code>.\n                    Điều này khiến URL của tiện ích không bị lộ ra trang web bên dưới, do đó khó hơn\n                    để phát hiện sự hiện diện của Sottaku-Yomitan."
   },
   "settings_security_shadow_dom_label": {
-    "message": "Use a secure container around popups\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "Sử dụng vùng chứa an toàn quanh các popup\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "settings_security_shadow_dom_more": {
-    "message": "On <a href=\"https://caniuse.com/shadowdomv1\" rel=\"noopener noreferrer\" target=\"_blank\">supported browsers</a>,\n                    a popup's <code>iframe</code> element will be embeded inside of a container with a closed <a href=\"https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM\" rel=\"noopener noreferrer\" target=\"_blank\">shadow DOM</a>.\n                    This container prevents scripts running on the underlying web page from being able to discover the <code>iframe</code>,\n                    which helps avoid situations where the web page might try to modify or use the Sottaku-Yomitan popup for an unintended purpose."
+    "message": "Trên các <a href=\"https://caniuse.com/shadowdomv1\" rel=\"noopener noreferrer\" target=\"_blank\">trình duyệt được hỗ trợ</a>,\n                    phần tử <code>iframe</code> của popup sẽ được nhúng trong một vùng chứa có <a href=\"https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM\" rel=\"noopener noreferrer\" target=\"_blank\">shadow DOM</a> đóng.\n                    Vùng chứa này ngăn các script chạy trên trang web bên dưới phát hiện <code>iframe</code>,\n                    giúp tránh các tình huống mà trang web có thể cố gắng sửa đổi hoặc sử dụng popup của Sottaku-Yomitan cho mục đích ngoài ý muốn."
   },
   "settings_shortcuts_heading": {
-    "message": "Shortcuts"
+    "message": "Phím tắt"
   },
   "settings_shortcuts_native_label": {
-    "message": "Configure native keyboard shortcuts…"
+    "message": "Cấu hình phím tắt gốc…"
   },
   "settings_shortcuts_overview": {
-    "message": "<p>\n                        Sottaku-Yomitan has two categories of keyboard shortcuts:\n                    </p>\n<ul>\n<li>\n<strong>Standard</strong> keyboard shortcuts are controlled by the extension, and can be added, removed,\n                            and configured to work on webpages that Sottaku-Yomitan functions on.\n                        </li>\n<li>\n<strong>Native</strong> keyboard shortcuts are controlled by the web browser, and function globally\n                            within the web browser<span data-show-for-browser=\"chrome edge\"> or system-wide</span>.\n                        </li>\n</ul>"
+    "message": "<p>\n                        Sottaku-Yomitan có hai loại phím tắt:\n                    </p>\n<ul>\n<li>\n<strong>Tiêu chuẩn</strong> các phím tắt được tiện ích kiểm soát, và có thể thêm, xóa,\n                            và cấu hình để hoạt động trên các trang web mà Sottaku-Yomitan hoạt động.\n                        </li>\n<li>\n<strong>Gốc</strong> các phím tắt được trình duyệt web kiểm soát và hoạt động toàn cục\n                            trong trình duyệt web<span data-show-for-browser=\"chrome edge\"> hoặc trên toàn hệ thống</span>.\n                        </li>\n</ul>"
   },
   "settings_shortcuts_standard_label": {
-    "message": "Configure standard keyboard shortcuts…"
+    "message": "Cấu hình phím tắt tiêu chuẩn…"
   },
   "settings_sottaku_account_description": {
-    "message": "Click \"Use browser session\" to link the account you are signed into at sottaku.app (Pro required)."
+    "message": "Nhấp \"Dùng phiên trình duyệt\" để liên kết tài khoản bạn đã đăng nhập tại sottaku.app (cần Pro)."
   },
   "settings_sottaku_account_label": {
-    "message": "Account"
+    "message": "Tài khoản"
   },
   "settings_sottaku_account_not_connected": {
-    "message": "Not connected"
+    "message": "Chưa kết nối"
   },
   "settings_sottaku_heading": {
     "message": "Sottaku"
   },
   "settings_sottaku_integration_description": {
-    "message": "Lookups, audio, and flashcard actions always use your Sottaku account. Local dictionaries are not required."
+    "message": "Tra cứu, âm thanh và thao tác flashcard luôn sử dụng tài khoản Sottaku của bạn. Không cần từ điển cục bộ."
   },
   "settings_sottaku_integration_label": {
-    "message": "Sottaku integration"
+    "message": "Tích hợp Sottaku"
   },
   "settings_sottaku_language_add_button": {
-    "message": "Add"
+    "message": "Thêm"
   },
   "settings_sottaku_language_chinese": {
-    "message": "Chinese"
+    "message": "Tiếng Trung"
   },
   "settings_sottaku_language_japanese": {
-    "message": "Japanese"
+    "message": "Tiếng Nhật"
   },
   "settings_sottaku_language_korean": {
-    "message": "Korean"
+    "message": "Tiếng Hàn"
   },
   "settings_sottaku_language_order_description": {
-    "message": "Choose which Sottaku languages appear in the popup and their order (used for mixed mode and fallbacks)."
+    "message": "Chọn các ngôn ngữ Sottaku hiển thị trong cửa sổ bật lên và thứ tự của chúng (dùng cho chế độ kết hợp và dự phòng)."
   },
   "settings_sottaku_language_order_label": {
-    "message": "Language order"
+    "message": "Thứ tự ngôn ngữ"
   },
   "settings_sottaku_language_routing_auto": {
-    "message": "Auto (detect per search)"
+    "message": "Tự động (nhận diện theo mỗi lần tra cứu)"
   },
   "settings_sottaku_language_routing_description": {
-    "message": "Choose how Sottaku-Yomitan selects the Sottaku language for lookups (Japanese, Korean, and Chinese are supported)."
+    "message": "Chọn cách Sottaku-Yomitan chọn ngôn ngữ Sottaku cho việc tra cứu (hỗ trợ tiếng Nhật, Hàn và Trung)."
   },
   "settings_sottaku_language_routing_label": {
-    "message": "Language routing"
+    "message": "Định tuyến ngôn ngữ"
   },
   "settings_sottaku_language_routing_mixed": {
-    "message": "Mixed (show preferred languages)"
+    "message": "Kết hợp (hiển thị ngôn ngữ ưa thích)"
   },
   "settings_sottaku_password_placeholder": {
-    "message": "Password"
+    "message": "Mật khẩu"
   },
   "settings_sottaku_sign_in_button": {
-    "message": "Sign in"
+    "message": "Đăng nhập"
   },
   "settings_sottaku_sign_in_google_button": {
-    "message": "Sign in with Google (opens sottaku.app)"
+    "message": "Đăng nhập bằng Google (mở sottaku.app)"
   },
   "settings_sottaku_status_not_connected": {
-    "message": "Not connected"
+    "message": "Chưa kết nối"
   },
   "settings_sottaku_status_sign_in_required": {
-    "message": "Sign in required. Complete login in the opened tab, then click \"Use browser session\"."
+    "message": "Cần đăng nhập. Hoàn tất đăng nhập trong tab đã mở, rồi nhấp \"Dùng phiên trình duyệt\"."
   },
   "settings_sottaku_status_signed_in": {
-    "message": "Signed in"
+    "message": "Đã đăng nhập"
   },
   "settings_sottaku_status_signed_in_as": {
-    "message": "Signed in as {0}"
+    "message": "Đăng nhập với {0}"
   },
   "settings_sottaku_status_signed_out": {
-    "message": "Signed out of Sottaku"
+    "message": "Đã đăng xuất khỏi Sottaku"
   },
   "settings_sottaku_unlink_button": {
-    "message": "Unlink account"
+    "message": "Hủy liên kết tài khoản"
   },
   "settings_sottaku_use_browser_session_button": {
-    "message": "Use browser session"
+    "message": "Dùng phiên trình duyệt"
   },
   "settings_sottaku_use_browser_session_title": {
-    "message": "Re-use your signed-in browser session"
+    "message": "Tái sử dụng phiên trình duyệt đã đăng nhập của bạn"
   },
   "settings_sottaku_username_placeholder": {
-    "message": "Username or email"
+    "message": "Tên người dùng hoặc email"
   },
   "settings_status_tasks_in_progress": {
     "message": "Tasks in progress:"
@@ -1731,22 +1731,22 @@
     "message": "Newlines only"
   },
   "settings_translation_heading": {
-    "message": "Translation"
+    "message": "Dịch"
   },
   "settings_translation_replacement_patterns_label": {
-    "message": "Configure custom text replacement patterns…"
+    "message": "Cấu hình các mẫu thay thế văn bản tùy chỉnh…"
   },
   "settings_translation_search_resolution_description": {
-    "message": "<p>\"A dog\"　→　search for \"A dog\",\"A do\", \"A d\", \"A\"</p> or <p>\"A dog\"　→　\"A dog\", \"A\"</p>"
+    "message": "<p>\"A dog\"　→　tìm \"A dog\",\"A do\", \"A d\", \"A\"</p> hoặc <p>\"A dog\"　→　\"A dog\", \"A\"</p>"
   },
   "settings_translation_search_resolution_label": {
-    "message": "Dictionary search resolution"
+    "message": "Độ phân giải tìm kiếm từ điển"
   },
   "settings_translation_search_resolution_letter": {
-    "message": "Letter"
+    "message": "Ký tự"
   },
   "settings_translation_search_resolution_word": {
-    "message": "Word"
+    "message": "Từ"
   },
   "sottaku_action_title_missing_id": {
     "message": "Missing Sottaku question id"

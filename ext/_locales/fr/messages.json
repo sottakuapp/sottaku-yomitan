@@ -3,40 +3,40 @@
     "message": "Sottaku-Yomitan"
   },
   "action_popup_button_info_title": {
-    "message": "Information"
+    "message": "Informations"
   },
   "action_popup_button_search_title": {
-    "message": "Search\nShift+click to open here"
+    "message": "Rechercher\nMaj+clic pour ouvrir ici"
   },
   "action_popup_button_settings_title": {
-    "message": "Settings"
+    "message": "Paramètres"
   },
   "action_popup_hotkey_info": {
-    "message": "Information ({0})"
+    "message": "Informations ({0})"
   },
   "action_popup_hotkey_search": {
-    "message": "Search ({0})\nShift+click to open here"
+    "message": "Rechercher ({0})\nMaj+clic pour ouvrir ici"
   },
   "action_popup_hotkey_settings": {
-    "message": "Settings ({0})"
+    "message": "Paramètres ({0})"
   },
   "action_popup_link_account_tooltip": {
-    "message": "Link your Sottaku account to enable lookups"
+    "message": "Associez votre compte Sottaku pour activer les recherches"
   },
   "action_popup_loading": {
-    "message": "Loading..."
+    "message": "Chargement..."
   },
   "action_popup_profile_title": {
-    "message": "Profile"
+    "message": "Profil"
   },
   "action_popup_toggle_off": {
-    "message": "Off"
+    "message": "Désactivé"
   },
   "action_popup_toggle_on": {
-    "message": "On"
+    "message": "Activé"
   },
   "action_popup_tooltip_scan": {
-    "message": "Hover over text to scan"
+    "message": "Survolez le texte pour analyser"
   },
   "browser_chrome": {
     "message": "Chrome"
@@ -51,268 +51,268 @@
     "message": "Firefox"
   },
   "browser_firefox_android": {
-    "message": "Firefox for Android"
+    "message": "Firefox pour Android"
   },
   "browser_safari": {
     "message": "Safari"
   },
   "command_open_info_page": {
-    "message": "Open the info page"
+    "message": "Ouvrir la page d'informations"
   },
   "command_open_popup_window": {
-    "message": "Open the popup window"
+    "message": "Ouvrir la fenêtre contextuelle"
   },
   "command_open_search_page": {
-    "message": "Open the search page"
+    "message": "Ouvrir la page de recherche"
   },
   "command_open_settings_page": {
-    "message": "Open the settings page"
+    "message": "Ouvrir la page des paramètres"
   },
   "command_toggle_text_scanning": {
-    "message": "Toggle text scanning on/off"
+    "message": "Activer/désactiver l’analyse de texte"
   },
   "common_always": {
-    "message": "Always"
+    "message": "Toujours"
   },
   "common_auto": {
     "message": "Auto"
   },
   "common_bottom": {
-    "message": "Bottom"
+    "message": "Bas"
   },
   "common_browser": {
-    "message": "Browser"
+    "message": "Navigateur"
   },
   "common_close": {
-    "message": "Close"
+    "message": "Fermer"
   },
   "common_configure": {
-    "message": "Configure…"
+    "message": "Configurer…"
   },
   "common_dark": {
-    "message": "Dark"
+    "message": "Sombre"
   },
   "common_default": {
-    "message": "Default"
+    "message": "Par défaut"
   },
   "common_height": {
-    "message": "Height"
+    "message": "Hauteur"
   },
   "common_info": {
-    "message": "Info…"
+    "message": "Infos…"
   },
   "common_left": {
-    "message": "Left"
+    "message": "Gauche"
   },
   "common_less": {
-    "message": "Less…"
+    "message": "Moins…"
   },
   "common_light": {
-    "message": "Light"
+    "message": "Clair"
   },
   "common_manual": {
-    "message": "Manual"
+    "message": "Manuel"
   },
   "common_mode": {
     "message": "Mode"
   },
   "common_move_down": {
-    "message": "Move down"
+    "message": "Descendre"
   },
   "common_move_up": {
-    "message": "Move up"
+    "message": "Monter"
   },
   "common_none": {
-    "message": "None"
+    "message": "Aucun"
   },
   "common_normal": {
     "message": "Normal"
   },
   "common_operator": {
-    "message": "Operator"
+    "message": "Opérateur"
   },
   "common_remove": {
-    "message": "Remove"
+    "message": "Supprimer"
   },
   "common_right": {
-    "message": "Right"
+    "message": "Droite"
   },
   "common_state": {
-    "message": "State"
+    "message": "État"
   },
   "common_test": {
-    "message": "Test"
+    "message": "Tester"
   },
   "common_top": {
-    "message": "Top"
+    "message": "Haut"
   },
   "common_type": {
     "message": "Type"
   },
   "common_width": {
-    "message": "Width"
+    "message": "Largeur"
   },
   "dictionary_deleting_label": {
-    "message": "Deleting dictionary..."
+    "message": "Suppression du dictionnaire..."
   },
   "dictionary_details_attribution": {
     "message": "Attribution"
   },
   "dictionary_details_author": {
-    "message": "Author"
+    "message": "Auteur"
   },
   "dictionary_details_description": {
     "message": "Description"
   },
   "dictionary_details_expected_database": {
-    "message": "Expected: $1 (Database: $2)"
+    "message": "Attendu : $1 (Base de données : $2)"
   },
   "dictionary_details_import_success": {
-    "message": "Import Success"
+    "message": "Importation réussie"
   },
   "dictionary_details_kanji_count": {
-    "message": "Kanji Count"
+    "message": "Nombre de kanji"
   },
   "dictionary_details_kanji_meta_count": {
-    "message": "Kanji Meta Count"
+    "message": "Nombre de métadonnées de kanji"
   },
   "dictionary_details_media_count": {
-    "message": "Media Count"
+    "message": "Nombre de médias"
   },
   "dictionary_details_source_language": {
-    "message": "Source Language"
+    "message": "Langue source"
   },
   "dictionary_details_tag_meta_count": {
-    "message": "Tag Count"
+    "message": "Nombre d’étiquettes"
   },
   "dictionary_details_target_language": {
-    "message": "Target Language"
+    "message": "Langue cible"
   },
   "dictionary_details_term_count": {
-    "message": "Term Count"
+    "message": "Nombre de termes"
   },
   "dictionary_details_term_meta_count": {
-    "message": "Term Meta Count"
+    "message": "Nombre de métadonnées de termes"
   },
   "dictionary_details_url": {
     "message": "URL"
   },
   "dictionary_extra_data_item_plural": {
-    "message": "$1 items"
+    "message": "$1 éléments"
   },
   "dictionary_extra_data_item_singular": {
-    "message": "$1 item"
+    "message": "$1 élément"
   },
   "dictionary_main_not_selected": {
-    "message": "Not selected"
+    "message": "Non sélectionné"
   },
   "dictionary_updates_count_plural": {
-    "message": "$1 updates"
+    "message": "$1 mises à jour"
   },
   "dictionary_updates_count_singular": {
-    "message": "$1 update"
+    "message": "$1 mise à jour"
   },
   "dictionary_updates_none": {
-    "message": "No updates"
+    "message": "Aucune mise à jour"
   },
   "display_add_note_title": {
-    "message": "Add {0}"
+    "message": "Ajouter {0}"
   },
   "display_anki_error_plural": {
-    "message": "$1 errors occurred:"
+    "message": "$1 erreurs se sont produites :"
   },
   "display_anki_error_singular": {
-    "message": "An error occurred:"
+    "message": "Une erreur s’est produite :"
   },
   "display_current_entry_title": {
-    "message": "Current entry"
+    "message": "Entrée actuelle"
   },
   "display_dictionary_author": {
-    "message": "Author: $1"
+    "message": "Auteur : $1"
   },
   "display_dictionary_description": {
-    "message": "Description: $1"
+    "message": "Description : $1"
   },
   "display_dictionary_kanji_count": {
-    "message": "Kanji Count: $1"
+    "message": "Nombre de kanji : $1"
   },
   "display_dictionary_size_kanji": {
-    "message": "Dictionary size: $1 kanji"
+    "message": "Taille du dictionnaire : $1 kanji"
   },
   "display_dictionary_size_terms": {
-    "message": "Dictionary size: $1 terms"
+    "message": "Taille du dictionnaire : $1 termes"
   },
   "display_dictionary_term_count": {
-    "message": "Term Count: $1"
+    "message": "Nombre de termes : $1"
   },
   "display_dictionary_url": {
-    "message": "URL: $1"
+    "message": "URL : $1"
   },
   "display_hotkey_add_note": {
-    "message": "Add {0} ({0})"
+    "message": "Ajouter {0} ({0})"
   },
   "display_hotkey_play_audio": {
-    "message": "Play audio ({0})"
+    "message": "Lire l’audio ({0})"
   },
   "display_hotkey_view_note": {
-    "message": "View added note ({0})"
+    "message": "Voir la note ajoutée ({0})"
   },
   "display_image_label": {
     "message": "Image"
   },
   "display_inflection_algorithm": {
-    "message": "Algorithm Deinflection"
+    "message": "Désinflection par algorithme"
   },
   "display_inflection_both": {
-    "message": "Dictionary and Algorithm Deinflection"
+    "message": "Désinflection par dictionnaire et algorithme"
   },
   "display_inflection_dictionary": {
-    "message": "Dictionary Deinflection"
+    "message": "Désinflection par dictionnaire"
   },
   "display_kanji_heading_classifications": {
     "message": "Classifications"
   },
   "display_kanji_heading_codepoints": {
-    "message": "Codepoints"
+    "message": "Points de code"
   },
   "display_kanji_heading_dictionary_indices": {
-    "message": "Dictionary Indices"
+    "message": "Index du dictionnaire"
   },
   "display_kanji_heading_meaning": {
-    "message": "Meaning"
+    "message": "Signification"
   },
   "display_kanji_heading_readings": {
-    "message": "Readings"
+    "message": "Lectures"
   },
   "display_kanji_heading_statistics": {
-    "message": "Statistics"
+    "message": "Statistiques"
   },
   "display_log_debug_info": {
-    "message": "Log debug info to console"
+    "message": "Enregistrer les infos de débogage dans la console"
   },
   "display_more_info": {
-    "message": "More info"
+    "message": "Plus d'infos"
   },
   "display_no_data_found": {
-    "message": "No data found"
+    "message": "Aucune donnée trouvée"
   },
   "display_note_viewer_error": {
-    "message": "Note viewer window could not be opened.<br/>\n    Check the <a href=\"/settings.html#anki\" rel=\"noopener\" target=\"_blank\"><em>Anki</em> › <em>Note viewer window</em></a> setting."
+    "message": "La fenêtre de visualisation des notes n'a pas pu s'ouvrir.<br/>\n    Vérifiez le paramètre <a href=\"/settings.html#anki\" rel=\"noopener\" target=\"_blank\"><em>Anki</em> › <em>Fenêtre de visualisation des notes</em></a>."
   },
   "display_play_audio_title": {
-    "message": "Play audio"
+    "message": "Lire l'audio"
   },
   "display_set_primary_audio_title": {
-    "message": "Use as audio for Anki card"
+    "message": "Utiliser comme audio pour la carte Anki"
   },
   "display_view_added_note_title": {
-    "message": "View added note"
+    "message": "Voir la note ajoutée"
   },
   "extension_description": {
-    "message": "Sottaku-connected popup dictionary for language learning."
+    "message": "Dictionnaire contextuel connecté à Sottaku pour l'apprentissage des langues."
   },
   "extension_description_dev": {
-    "message": "Sottaku-connected popup dictionary for language learning (Dev)."
+    "message": "Dictionnaire contextuel connecté à Sottaku pour l'apprentissage des langues (Dev)."
   },
   "extension_name": {
     "message": "Sottaku-Yomitan"
@@ -324,151 +324,151 @@
     "message": "Sottaku-Yomitan"
   },
   "info_anki_version_unknown": {
-    "message": "Unknown"
+    "message": "Inconnu"
   },
   "info_general_browser": {
-    "message": "Browser: <span id=\"browser\"></span>"
+    "message": "Navigateur : <span id=\"browser\"></span>"
   },
   "info_general_export_settings": {
-    "message": "<a id=\"settings-export-button\" tabindex=\"0\">Export settings</a>"
+    "message": "<a id=\"settings-export-button\" tabindex=\"0\">Exporter les paramètres</a>"
   },
   "info_general_extension_version": {
-    "message": "Extension version: <span id=\"version\"></span>"
+    "message": "Version de l'extension : <span id=\"version\"></span>"
   },
   "info_general_heading": {
-    "message": "General"
+    "message": "Général"
   },
   "info_general_language": {
-    "message": "Language: <span id=\"language\"></span>"
+    "message": "Langue : <span id=\"language\"></span>"
   },
   "info_general_platform": {
-    "message": "Platform: <span id=\"platform\"></span>"
+    "message": "Plateforme : <span id=\"platform\"></span>"
   },
   "info_general_user_agent": {
-    "message": "User agent: <span id=\"user-agent\"></span>"
+    "message": "Agent utilisateur : <span id=\"user-agent\"></span>"
   },
   "info_heading": {
-    "message": "Sottaku-Yomitan Info"
+    "message": "Infos Sottaku-Yomitan"
   },
   "info_links_bugs": {
-    "message": "Bugs? Report them here: <a href=\"https://github.com/sottakuapp/sottaku-yomitan/issues/new/choose\" rel=\"noreferrer noopener\">GitHub Issues</a>"
+    "message": "Des bugs ? Signalez-les ici : <a href=\"https://github.com/sottakuapp/sottaku-yomitan/issues/new/choose\" rel=\"noreferrer noopener\">Issues GitHub</a>"
   },
   "info_links_feedback": {
-    "message": "Enjoying Sottaku-Yomitan? Send feedback or ideas on GitHub or email <a href=\"mailto:hello@sottaku.app\">hello@sottaku.app</a>."
+    "message": "Vous aimez Sottaku-Yomitan ? Envoyez vos retours ou idées sur GitHub ou par e-mail à <a href=\"mailto:hello@sottaku.app\">hello@sottaku.app</a>."
   },
   "info_links_heading": {
-    "message": "Links"
+    "message": "Liens"
   },
   "info_links_more_info": {
-    "message": "More extension information: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">Permissions</a> | <a href=\"/legal.html\">Licenses</a> | <a href=\"/issues.html\">Issues</a>"
+    "message": "Plus d'informations sur l'extension : <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">Autorisations</a> | <a href=\"/legal.html\">Licences</a> | <a href=\"/issues.html\">Problèmes</a>"
   },
   "info_links_recommended_dictionaries": {
-    "message": "Recommended dictionaries: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">Sottaku-Yomitan Dictionaries</a>"
+    "message": "Dictionnaires recommandés : <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">Dictionnaires Sottaku-Yomitan</a>"
   },
   "info_links_release_notes": {
-    "message": "Release notes: <a data-href-format=\"https://github.com/sottakuapp/sottaku-yomitan/releases/tag/{version}\" href=\"https://github.com/sottakuapp/sottaku-yomitan/releases\" id=\"release-notes-this-version-link\" rel=\"noreferrer noopener\">This version</a> | <a href=\"https://github.com/sottakuapp/sottaku-yomitan/releases\" rel=\"noreferrer noopener\">All versions</a>"
+    "message": "Notes de version : <a data-href-format=\"https://github.com/sottakuapp/sottaku-yomitan/releases/tag/{version}\" href=\"https://github.com/sottakuapp/sottaku-yomitan/releases\" id=\"release-notes-this-version-link\" rel=\"noreferrer noopener\">Cette version</a> | <a href=\"https://github.com/sottakuapp/sottaku-yomitan/releases\" rel=\"noreferrer noopener\">Toutes les versions</a>"
   },
   "info_links_source_code": {
-    "message": "Source code: <a href=\"https://github.com/sottakuapp/sottaku-yomitan\" rel=\"noreferrer noopener\">GitHub</a>"
+    "message": "Code source : <a href=\"https://github.com/sottakuapp/sottaku-yomitan\" rel=\"noreferrer noopener\">GitHub</a>"
   },
   "info_links_user_guide": {
-    "message": "Information and user guide: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">Homepage</a>"
+    "message": "Informations et guide utilisateur : <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">Page d'accueil</a>"
   },
   "info_need_help_heading": {
-    "message": "Need help?"
+    "message": "Besoin d'aide ?"
   },
   "info_quick_start_link": {
-    "message": "Check out the Quick Start Guide"
+    "message": "Consultez le guide de démarrage rapide"
   },
   "info_read_wiki_link": {
-    "message": "Read the wiki"
+    "message": "Lire le wiki"
   },
   "issues_audio_expired_cert_body": {
-    "message": "If a website failes to keep its HTTPS certificate up to date, downloads can fail because the browser flags the connection as insecure. This has happened occasionally for some websites that Sottaku-Yomitan interacts with, and the issue is usually resolved within a day."
+    "message": "Si un site Web ne maintient pas son certificat HTTPS à jour, les téléchargements peuvent échouer car le navigateur marque la connexion comme non sécurisée. Cela est arrivé occasionnellement sur certains sites avec lesquels Sottaku-Yomitan interagit, et le problème est généralement résolu en une journée."
   },
   "issues_audio_expired_cert_heading": {
-    "message": "Audio download failed due to an expired server certificate"
+    "message": "Le téléchargement audio a échoué en raison d'un certificat de serveur expiré"
   },
   "issues_audio_expired_cert_note": {
-    "message": "This issue is a server-side issue that Sottaku-Yomitan doesn't have control over."
+    "message": "Ce problème est côté serveur et Sottaku-Yomitan n'a pas de contrôle dessus."
   },
   "issues_audio_idle_timeout_body": {
-    "message": "Audio files can be downloaded from remote servers when creating Anki cards,\n                and sometimes these downloads can stall due to server or internet connectivity issues.\n                The <em>Idle download timeout</em> setting on the <a href=\"/settings.html#anki\">settings page</a>\n                specifies a time limit for stalled downloads."
+    "message": "Les fichiers audio peuvent être téléchargés depuis des serveurs distants lors de la création de cartes Anki,\n                et ces téléchargements peuvent parfois se bloquer en raison de problèmes de serveur ou de connexion Internet.\n                Le paramètre <em>Délai d'expiration de téléchargement inactif</em> sur la <a href=\"/settings.html#anki\">page des paramètres</a>\n                définit une limite de temps pour les téléchargements bloqués."
   },
   "issues_audio_idle_timeout_heading": {
-    "message": "Audio download was cancelled due to an idle timeout"
+    "message": "Le téléchargement audio a été annulé en raison d'un délai d'inactivité"
   },
   "issues_audio_permissions_body": {
-    "message": "Depending on the extension's configuration, Sottaku-Yomitan can sometimes run into issues with downloading audio files while creating Anki cards. This may be due to a permissions issue where Sottaku-Yomitan hasn't been granted access to the sites hosting the audio files."
+    "message": "Selon la configuration de l'extension, Sottaku-Yomitan peut parfois rencontrer des problèmes pour télécharger des fichiers audio lors de la création de cartes Anki. Cela peut être dû à un problème d'autorisations lorsque Sottaku-Yomitan n'a pas accès aux sites hébergeant les fichiers audio."
   },
   "issues_audio_permissions_chrome": {
-    "message": "Check the <em>Site access</em> section of the\n                <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">extension settings pages</a>\n                and grant the extension access to <em>all sites</em> or add the specific audio host URLs."
+    "message": "Vérifiez la section <em>Accès au site</em> des\n                <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">pages de paramètres de l'extension</a>\n                et accordez à l'extension l'accès à <em>tous les sites</em> ou ajoutez les URL spécifiques des hôtes audio."
   },
   "issues_audio_permissions_firefox": {
-    "message": "From your browser's address bar, go to <code>about:addons</code> and navigate to the settings for Sottaku-Yomitan.\n                Check the <em>Site access</em> section of the extension settings pages\n                and grant the extension access to <em>all sites</em> or add the specific audio host URLs."
+    "message": "Depuis la barre d'adresse du navigateur, allez sur <code>about:addons</code> et accédez aux paramètres de Sottaku-Yomitan.\n                Vérifiez la section <em>Accès au site</em> des pages de paramètres de l'extension\n                et accordez l'accès à <em>tous les sites</em> ou ajoutez les URL spécifiques des hôtes audio."
   },
   "issues_audio_permissions_heading": {
-    "message": "Audio download failed due to possible extension permissions error <em>(Chrome)</em>"
+    "message": "Le téléchargement audio a échoué en raison d'une possible erreur d'autorisations de l'extension <em>(Chrome)</em>"
   },
   "issues_heading": {
-    "message": "Sottaku-Yomitan Issues"
+    "message": "Problèmes Sottaku-Yomitan"
   },
   "legal_dependency_licenses_heading": {
-    "message": "Javascript Dependency Licenses"
+    "message": "Licences des dépendances JavaScript"
   },
   "legal_edrdg_heading": {
-    "message": "EDRDG License"
+    "message": "Licence EDRDG"
   },
   "legal_heading": {
-    "message": "Sottaku-Yomitan Legal"
+    "message": "Mentions légales Sottaku-Yomitan"
   },
   "legal_sottaku_license_heading": {
-    "message": "Sottaku-Yomitan License"
+    "message": "Licence Sottaku-Yomitan"
   },
   "modal_collapsible_dictionaries_description": {
-    "message": "Dictionary definitions can be collapsed if they exceed a certain line count,\n                which may be useful for dictionaries with long definitions.\n                The appearance can be customized using custom CSS.\n                <a data-modal-action=\"show,collapsible-dictionaries-info\" tabindex=\"0\">More…</a>"
+    "message": "Les définitions des dictionnaires peuvent être réduites si elles dépassent un certain nombre de lignes,\n                ce qui peut être utile pour les dictionnaires avec de longues définitions.\n                L'apparence peut être personnalisée avec du CSS personnalisé.\n                <a data-modal-action=\"show,collapsible-dictionaries-info\" tabindex=\"0\">Plus…</a>"
   },
   "modal_dictionaries_none_installed": {
-    "message": "No dictionaries have been installed yet.\n                Visit the <a href=\"https://github.com/sottakuapp/sottaku-yomitan/blob/master/docs/dictionaries.md#dictionaries\" rel=\"noopener noreferrer\" target=\"_blank\">Sottaku-Yomitan homepage</a>\n                for a list of free dictionaries or click the <em>Import</em> button below to select a dictionary file to import."
+    "message": "Aucun dictionnaire n'a encore été installé.\n                Visitez la <a href=\"https://github.com/sottakuapp/sottaku-yomitan/blob/master/docs/dictionaries.md#dictionaries\" rel=\"noopener noreferrer\" target=\"_blank\">page d'accueil Sottaku-Yomitan</a>\n                pour une liste de dictionnaires gratuits ou cliquez sur le bouton <em>Importer</em> ci-dessous pour sélectionner un fichier de dictionnaire à importer."
   },
   "modal_dictionaries_prefix_wildcard_label": {
-    "message": "Enable support for prefix wildcard searches\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "Activer la prise en charge des recherches par joker de préfixe\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "modal_dictionary_confirm_delete_all_prompt": {
-    "message": "Are you sure you want to delete <strong>all dictionaries</strong>?"
+    "message": "Êtes-vous sûr de vouloir supprimer <strong>tous les dictionnaires</strong> ?"
   },
   "modal_dictionary_details_deinflections_label": {
-    "message": "Use deinflections\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "Utiliser les désinflexions\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "modal_dictionary_details_pos_label": {
-    "message": "Part of speech filtering\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "Filtrage par partie du discours\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "modal_dictionary_details_prefix_label": {
-    "message": "Prefix wildcard searches supported\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "Recherches par joker de préfixe prises en charge\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "modal_dictionary_move_prompt": {
-    "message": "Input the location the dictionary <strong class=\"dictionary-title\"></strong> should be moved to:"
+    "message": "Indiquez l'emplacement où le dictionnaire <strong class=\"dictionary-title\"></strong> doit être déplacé :"
   },
   "modal_dictionary_rename_prompt": {
-    "message": "Input the display name for <strong class=\"dictionary-title\"></strong> dictionary:"
+    "message": "Indiquez le nom d'affichage du dictionnaire <strong class=\"dictionary-title\"></strong> :"
   },
   "modal_profile_conditions_info_4": {
-    "message": "When using the Flags condition, <code>clipboard</code> is the only valid input.\n                        This lets the search page apply another profile’s settings when text is copied, provided <code>Enable search page clipboard text monitoring</code> is enabled."
+    "message": "Lors de l'utilisation de la condition Flags, <code>clipboard</code> est la seule entrée valide.\n                        Cela permet à la page de recherche d'appliquer les paramètres d'un autre profil lors de la copie de texte, à condition que <code>Activer la surveillance du texte du presse-papiers sur la page de recherche</code> soit activé."
   },
   "modal_profile_conditions_label": {
-    "message": "Conditions for profile <em id=\"profile-conditions-profile-name\"></em>:"
+    "message": "Conditions pour le profil <em id=\"profile-conditions-profile-name\"></em> :"
   },
   "modal_profile_delete_prompt": {
-    "message": "Are you sure you want to delete the profile <em id=\"profile-remove-name\"></em>?"
+    "message": "Êtes-vous sûr de vouloir supprimer le profil <em id=\"profile-remove-name\"></em> ?"
   },
   "modal_profile_reset_prompt": {
-    "message": "Are you sure you want to reset the profile <em id=\"profile-reset-name\"></em> to default?"
+    "message": "Êtes-vous sûr de vouloir réinitialiser le profil <em id=\"profile-reset-name\"></em> par défaut ?"
   },
   "modal_recommended_dictionaries_description": {
-    "message": "For non-English dictionaries, please refer to the list of available\n                <a href=\"https://yomidevs.github.io/kaikki-to-yomitan/\" target=\"_blank\"> Kaikki dictionaries</a>."
+    "message": "Pour les dictionnaires non anglais, veuillez consulter la liste des\n                <a href=\"https://yomidevs.github.io/kaikki-to-yomitan/\" target=\"_blank\"> dictionnaires Kaikki</a> disponibles."
   },
   "modal_secondary_search_description": {
-    "message": "These dictionaries will be used to search for definitions of the related terms when the grouping mode is\n                <em>Group related terms</em>."
+    "message": "Ces dictionnaires seront utilisés pour rechercher des définitions des termes associés lorsque le mode de regroupement est\n                <em>Regrouper les termes associés</em>."
   },
   "os_android": {
     "message": "Android"
@@ -486,706 +486,706 @@
     "message": "Open BSD"
   },
   "os_unknown": {
-    "message": "Unknown"
+    "message": "Inconnu"
   },
   "os_windows": {
     "message": "Windows"
   },
   "page_action_popup_title": {
-    "message": "Sottaku-Yomitan Action Popup"
+    "message": "Popup d'action Sottaku-Yomitan"
   },
   "page_info_title": {
-    "message": "Sottaku-Yomitan Info"
+    "message": "Infos Sottaku-Yomitan"
   },
   "page_issues_title": {
-    "message": "Sottaku-Yomitan Issues"
+    "message": "Problèmes Sottaku-Yomitan"
   },
   "page_legal_title": {
-    "message": "Sottaku-Yomitan Legal"
+    "message": "Mentions légales Sottaku-Yomitan"
   },
   "page_permissions_title": {
-    "message": "Sottaku-Yomitan Permissions"
+    "message": "Autorisations Sottaku-Yomitan"
   },
   "page_popup_preview_title": {
-    "message": "Sottaku-Yomitan Popup Preview"
+    "message": "Aperçu du popup Sottaku-Yomitan"
   },
   "page_popup_title": {
-    "message": "Sottaku-Yomitan Search"
+    "message": "Recherche Sottaku-Yomitan"
   },
   "page_quick_start_title": {
-    "message": "Quick Start Guide"
+    "message": "Guide de démarrage rapide"
   },
   "page_search_title": {
-    "message": "Sottaku-Yomitan Search"
+    "message": "Recherche Sottaku-Yomitan"
   },
   "page_settings_title": {
-    "message": "Sottaku-Yomitan Settings"
+    "message": "Paramètres Sottaku-Yomitan"
   },
   "page_support_title": {
-    "message": "Support Sottaku-Yomitan"
+    "message": "Soutenir Sottaku-Yomitan"
   },
   "page_template_renderer_title": {
-    "message": "Sottaku-Yomitan Handlebars Sandbox"
+    "message": "Sandbox Handlebars de Sottaku-Yomitan"
   },
   "page_welcome_title": {
-    "message": "Welcome to Sottaku-Yomitan!"
+    "message": "Bienvenue sur Sottaku-Yomitan !"
   },
   "permissions_add_origin_button": {
-    "message": "Add"
+    "message": "Ajouter"
   },
   "permissions_additional_origins_label": {
-    "message": "Additional origins"
+    "message": "Origines supplémentaires"
   },
   "permissions_all_urls_description": {
-    "message": "Sottaku-Yomitan requires access to all URLs in order to run scripts to scan text and show the definitions popup, and communicate with Sottaku servers."
+    "message": "Sottaku-Yomitan requiert l'accès à toutes les URL pour exécuter des scripts d'analyse du texte, afficher le popup des définitions et communiquer avec les serveurs Sottaku."
   },
   "permissions_allow_all_urls_label": {
-    "message": "Allow access to all URLs"
+    "message": "Autoriser l'accès à toutes les URL"
   },
   "permissions_allowed_origins_title": {
-    "message": "Allowed Origins"
+    "message": "Origines autorisées"
   },
   "permissions_clipboard_read_description": {
-    "message": "Sottaku-Yomitan supports automatically opening a search window when text is copied to the clipboard while the browser is running, depending on how certain settings are configured. This allows Sottaku-Yomitan to support scanning text from external applications, provided there is a way to copy text from those applications to the clipboard."
+    "message": "Sottaku-Yomitan peut ouvrir automatiquement une fenêtre de recherche lorsque du texte est copié dans le presse-papiers pendant que le navigateur est en cours d'exécution, selon la configuration de certains paramètres. Cela permet à Sottaku-Yomitan d'analyser du texte provenant d'applications externes, à condition qu'il soit possible de copier le texte de ces applications vers le presse-papiers."
   },
   "permissions_clipboard_read_label": {
-    "message": "<code>clipboardRead</code> <span class=\"light\">(optional)</span>"
+    "message": "<code>clipboardRead</code> <span class=\"light\">(optionnel)</span>"
   },
   "permissions_clipboard_write_description": {
-    "message": "Sottaku-Yomitan supports simulating the <code>Ctrl+C</code> (copy to clipboard) keyboard shortcut\n                    when a definitions popup is open and focused."
+    "message": "Sottaku-Yomitan prend en charge la simulation du raccourci clavier <code>Ctrl+C</code> (copier dans le presse-papiers)\n                    lorsqu'un popup de définitions est ouvert et actif."
   },
   "permissions_configure_allowed_origins": {
-    "message": "Configure allowed origins…"
+    "message": "Configurer les origines autorisées…"
   },
   "permissions_context_menu_description": {
-    "message": "Sottaku-Yomitan adds a context menu interface that lets you look up highlighted words."
+    "message": "Sottaku-Yomitan ajoute une interface de menu contextuel qui vous permet de rechercher les mots surlignés."
   },
   "permissions_declarative_net_request_description": {
-    "message": "Sottaku-Yomitan uses this permission to ensure certain requests have valid and secure headers.\n                        This sometimes involves removing or changing the <code>Origin</code> request header,\n                        as this can be used to fingerprint browser configuration."
+    "message": "Sottaku-Yomitan utilise cette autorisation pour garantir que certaines requêtes ont des en-têtes valides et sécurisés.\n                        Cela implique parfois de supprimer ou de modifier l'en-tête de requête <code>Origin</code>,\n                        car il peut être utilisé pour identifier la configuration du navigateur."
   },
   "permissions_declarative_net_request_example": {
-    "message": "Example: <code>Origin: <span class=\"extension-id-example\"></span></code>"
+    "message": "Exemple : <code>Origin: <span class=\"extension-id-example\"></span></code>"
   },
   "permissions_file_urls_chrome": {
-    "message": "This option can be configured from the web browser's <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">extension settings pages</a>."
+    "message": "Cette option peut être configurée depuis les <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">pages de paramètres des extensions</a> du navigateur."
   },
   "permissions_file_urls_description": {
-    "message": "When enabled, Sottaku-Yomitan is able to scan text and show definitions on local HTML files located using the <code>file://*</code> scheme."
+    "message": "Lorsqu'elle est activée, Sottaku-Yomitan peut analyser le texte et afficher des définitions sur des fichiers HTML locaux accessibles via le schéma <code>file://*</code>."
   },
   "permissions_file_urls_label": {
-    "message": "Allow access to file URLs <span class=\"light\">(optional)</span>"
+    "message": "Autoriser l'accès aux URL de fichiers <span class=\"light\">(optionnel)</span>"
   },
   "permissions_heading": {
-    "message": "Sottaku-Yomitan Permissions"
+    "message": "Autorisations Sottaku-Yomitan"
   },
   "permissions_modal_close": {
-    "message": "Close"
+    "message": "Fermer"
   },
   "permissions_native_messaging_description": {
-    "message": "Sottaku-Yomitan has the ability to communicate with an optional native messaging component in order to support\n                    parsing large blocks of Japanese text using\n                    <a href=\"https://en.wikipedia.org/wiki/MeCab\" rel=\"noopener noreferrer\" target=\"_blank\">MeCab</a>.\n                    The installation of this component is optional and is not included by default."
+    "message": "Sottaku-Yomitan peut communiquer avec un composant de messagerie native optionnel afin de\n                    prendre en charge l'analyse de grands blocs de texte japonais via\n                    <a href=\"https://en.wikipedia.org/wiki/MeCab\" rel=\"noopener noreferrer\" target=\"_blank\">MeCab</a>.\n                    L'installation de ce composant est optionnelle et n'est pas incluse par défaut."
   },
   "permissions_native_messaging_label": {
-    "message": "<code>nativeMessaging</code> <span class=\"light\">(optional)</span>"
+    "message": "<code>nativeMessaging</code> <span class=\"light\">(optionnel)</span>"
   },
   "permissions_no_additional_origins": {
-    "message": "No additional origins specified."
+    "message": "Aucune origine supplémentaire spécifiée."
   },
   "permissions_persistent_storage_description": {
-    "message": "Web browsers will sometimes clear stored extension data if the device is running low on storage space. The persistent storage permission tells the browser that the extension's data should not be deleted in those circumstances."
+    "message": "Les navigateurs web effacent parfois les données d'extension stockées lorsque l'appareil manque d'espace. L'autorisation de stockage persistant indique au navigateur que les données de l'extension ne doivent pas être supprimées dans ces circonstances."
   },
   "permissions_persistent_storage_firefox_note": {
-    "message": "It may not be possible to enable this permission on Firefox for Android."
+    "message": "Il peut ne pas être possible d'activer cette autorisation dans Firefox pour Android."
   },
   "permissions_persistent_storage_label": {
-    "message": "Persistent storage"
+    "message": "Stockage persistant"
   },
   "permissions_private_windows_chrome": {
-    "message": "This option can be configured from the web browser's <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">extension settings pages</a>."
+    "message": "Cette option peut être configurée depuis les <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">pages de paramètres des extensions</a> du navigateur."
   },
   "permissions_private_windows_description": {
-    "message": "When enabled, Sottaku-Yomitan is able to scan text and show definitions in private/incognito web browser windows."
+    "message": "Lorsqu'elle est activée, Sottaku-Yomitan peut analyser le texte et afficher des définitions dans des fenêtres privées/incognito."
   },
   "permissions_private_windows_firefox": {
-    "message": "This option can be configured from the web browser's extension settings pages. From your browser's address bar, go to <code>about:addons</code> and navigate to the settings for Sottaku-Yomitan."
+    "message": "Cette option peut être configurée depuis les pages de paramètres des extensions du navigateur. Dans la barre d'adresse du navigateur, allez sur <code>about:addons</code> et accédez aux paramètres de Sottaku-Yomitan."
   },
   "permissions_private_windows_label": {
-    "message": "Allow in private windows <span class=\"light\">(optional)</span>"
+    "message": "Autoriser dans les fenêtres privées <span class=\"light\">(optionnel)</span>"
   },
   "permissions_scripting_description": {
-    "message": "Sottaku-Yomitan needs to inject content scripts and stylesheets into webpages in order to properly display the search popup."
+    "message": "Sottaku-Yomitan doit injecter des scripts de contenu et des feuilles de style dans les pages web pour afficher correctement le popup de recherche."
   },
   "permissions_storage_description": {
-    "message": "Sottaku-Yomitan uses storage permissions in order to save extension settings."
+    "message": "Sottaku-Yomitan utilise des autorisations de stockage pour enregistrer les paramètres de l'extension."
   },
   "popup_close_title": {
-    "message": "Close popup"
+    "message": "Fermer le popup"
   },
   "popup_default_profile_title": {
-    "message": "Default Profile"
+    "message": "Profil par défaut"
   },
   "popup_hotkey_close": {
-    "message": "Close popup ({0})"
+    "message": "Fermer le popup ({0})"
   },
   "popup_hotkey_next_definition": {
-    "message": "Next definition ({0})"
+    "message": "Définition suivante ({0})"
   },
   "popup_hotkey_previous_definition": {
-    "message": "Previous definition ({0})"
+    "message": "Définition précédente ({0})"
   },
   "popup_next_definition_title": {
-    "message": "Next definition"
+    "message": "Définition suivante"
   },
   "popup_no_results": {
-    "message": "No results found."
+    "message": "Aucun résultat trouvé."
   },
   "popup_preview_placeholder": {
-    "message": "Link your Sottaku account in the Sottaku section of settings to see the popup preview."
+    "message": "Liez votre compte Sottaku dans la section Sottaku des paramètres pour voir l'aperçu du popup."
   },
   "popup_previous_definition_title": {
-    "message": "Previous definition"
+    "message": "Définition précédente"
   },
   "popup_pro_required_body": {
-    "message": "The popup dictionary requires a Sottaku Pro subscription."
+    "message": "Le dictionnaire popup nécessite un abonnement Sottaku Pro."
   },
   "popup_pro_required_link": {
-    "message": "Upgrade at sottaku.app/upgrade"
+    "message": "Mettre à niveau sur sottaku.app/upgrade"
   },
   "popup_pro_required_title": {
-    "message": "Sottaku Pro required"
+    "message": "Sottaku Pro requis"
   },
   "popup_updated_body": {
-    "message": "The Sottaku-Yomitan extension has been updated to a new version! In order to continue viewing definitions on this page, you must reload this tab or restart your browser."
+    "message": "L'extension Sottaku-Yomitan a été mise à jour vers une nouvelle version ! Pour continuer à afficher les définitions sur cette page, vous devez recharger cet onglet ou redémarrer votre navigateur."
   },
   "popup_updated_title": {
-    "message": "Sottaku-Yomitan Updated!"
+    "message": "Sottaku-Yomitan mis à jour !"
   },
   "query_parser_mecab": {
     "message": "MeCab: $1"
   },
   "query_parser_scanning": {
-    "message": "Scanning parser"
+    "message": "Analyseur de scan"
   },
   "query_parser_unknown_source": {
-    "message": "Unknown source: $1"
+    "message": "Source inconnue : $1"
   },
   "quick_start_action_popup_alt": {
-    "message": "browser-action-popup"
+    "message": "popup d'action du navigateur"
   },
   "quick_start_heading": {
-    "message": "Sottaku-Yomitan Quick Start Guide"
+    "message": "Guide de démarrage rapide Sottaku-Yomitan"
   },
   "quick_start_installing_body": {
-    "message": "Sottaku-Yomitan uses your Sottaku account for lookups, so you do not need to manage local dictionaries on the Settings page.\n\t                You can still visit <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">https://sottaku.app/</a> to learn more about Sottaku-Yomitan dictionaries."
+    "message": "Sottaku-Yomitan utilise votre compte Sottaku pour les recherches, donc vous n'avez pas besoin de gérer des dictionnaires locaux dans la page des paramètres.\n                Vous pouvez tout de même visiter <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">https://sottaku.app/</a> pour en savoir plus sur les dictionnaires Sottaku-Yomitan."
   },
   "quick_start_installing_heading": {
-    "message": "Installing Dictionaries"
+    "message": "Installer des dictionnaires"
   },
   "quick_start_links_heading": {
-    "message": "Links"
+    "message": "Liens"
   },
   "quick_start_links_info": {
-    "message": "Go to Info page"
+    "message": "Aller à la page d'information"
   },
   "quick_start_links_sottaku": {
-    "message": "New to Sottaku-Yomitan? Head to https://sottaku.app/!"
+    "message": "Nouveau sur Sottaku-Yomitan ? Rendez-vous sur https://sottaku.app/ !"
   },
   "quick_start_links_welcome": {
-    "message": "Go to Welcome page"
+    "message": "Aller à la page de bienvenue"
   },
   "quick_start_migrating_body": {
-    "message": "You can also import an exported collection of dictionaries from the <a href=\"/settings.html#backup\">Backup section of the Settings</a> page.\n\n                <br/><br/>\n\n\t                If you are migrating from Yomichan, you may be interested in importing your data into Sottaku-Yomitan.\n\t                Please follow instructions from <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">https://sottaku.app/</a> for that.\n\n                <br/><br/>\n\n\t                If you are using or planning to use custom templates for Anki note creation, note that <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">some syntax has changed from Yomichan and Yomibaba.</a>\n                Please ensure that your custom templates are using the updated syntax."
+    "message": "Vous pouvez aussi importer une collection de dictionnaires exportée depuis la <a href=\"/settings.html#backup\">section Sauvegarde de la page Paramètres</a>.\n\n                <br/><br/>\n\n                Si vous migrez depuis Yomichan, vous souhaiterez peut-être importer vos données dans Sottaku-Yomitan.\n                Suivez les instructions sur <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">https://sottaku.app/</a>.\n\n                <br/><br/>\n\n                Si vous utilisez ou prévoyez d'utiliser des modèles personnalisés pour la création de notes Anki, notez que <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">certaines syntaxes ont changé par rapport à Yomichan et Yomibaba.</a>\n                Assurez-vous que vos modèles personnalisés utilisent la syntaxe mise à jour."
   },
   "quick_start_migrating_heading": {
-    "message": "Migrating to Sottaku-Yomitan"
+    "message": "Migrer vers Sottaku-Yomitan"
   },
   "quick_start_quick_actions_body": {
-    "message": "Clicking the <img alt=\"\" class=\"inline-icon\" src=\"/images/yomitan-icon.svg\"/> <em>Sottaku-Yomitan</em> button in the browser bar will open the quick-actions popup."
+    "message": "En cliquant sur le bouton <img alt=\"\" class=\"inline-icon\" src=\"/images/yomitan-icon.svg\"/> <em>Sottaku-Yomitan</em> dans la barre du navigateur, vous ouvrirez le popup d'actions rapides."
   },
   "quick_start_quick_actions_cog": {
-    "message": "The <img alt=\"\" class=\"inline-icon\" src=\"/images/cog.svg\"/> <em>cog</em> button will open the <a href=\"/settings.html\" rel=\"noopener\" target=\"_blank\">Settings</a> page."
+    "message": "Le bouton <img alt=\"\" class=\"inline-icon\" src=\"/images/cog.svg\"/> <em>roue dentée</em> ouvrira la page <a href=\"/settings.html\" rel=\"noopener\" target=\"_blank\">Paramètres</a>."
   },
   "quick_start_quick_actions_heading": {
-    "message": "Quick Actions"
+    "message": "Actions rapides"
   },
   "quick_start_quick_actions_info": {
-    "message": "The <img alt=\"\" class=\"inline-icon\" src=\"/images/question-mark-circle.svg\"/> <em>question mark</em> button will open the <a href=\"/info.html\" rel=\"noopener\" target=\"_blank\">Information</a> page,\n\t                        which has some helpful information and links about Sottaku-Yomitan."
+    "message": "Le bouton <img alt=\"\" class=\"inline-icon\" src=\"/images/question-mark-circle.svg\"/> <em>point d'interrogation</em> ouvrira la page <a href=\"/info.html\" rel=\"noopener\" target=\"_blank\">Informations</a>,\n                        qui contient des informations utiles et des liens sur Sottaku-Yomitan."
   },
   "quick_start_quick_actions_search": {
-    "message": "The <img alt=\"\" class=\"inline-icon\" src=\"/images/magnifying-glass.svg\"/> <em>magnifying glass</em> button will open the <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">Search</a> page,\n                        enabling text and terms to be looked up using the installed dictionaries.\n                        This can even be used in offline mode!"
+    "message": "Le bouton <img alt=\"\" class=\"inline-icon\" src=\"/images/magnifying-glass.svg\"/> <em>loupe</em> ouvrira la page <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">Recherche</a>,\n                        permettant de rechercher des textes et des termes à l'aide des dictionnaires installés.\n                        Cela fonctionne même en mode hors ligne !"
   },
   "quick_start_scanning_alt": {
-    "message": "scanning"
+    "message": "numérisation"
   },
   "quick_start_scanning_audio": {
-    "message": "Clicking the <img alt=\"\" class=\"inline-icon\" src=\"/images/play-audio.svg\"/> <em>speaker</em> button of an entry in the search results\n                    will play an audio clip of a term's pronunciation using an online dictionary, if available."
+    "message": "En cliquant sur le bouton <img alt=\"\" class=\"inline-icon\" src=\"/images/play-audio.svg\"/> <em>haut-parleur</em> d'une entrée dans les résultats de recherche,\n                    un clip audio de la prononciation d'un terme sera lu à partir d'un dictionnaire en ligne si disponible."
   },
   "quick_start_scanning_body": {
-    "message": "After dictionaries have been installed, webpage text can be scanned by moving the cursor while holding a modifier key.\n                The default key is <kbd>Shift</kbd>, which can be disabled or configured in the <a href=\"/settings.html#backup\">Settings</a> page."
+    "message": "Après l'installation des dictionnaires, le texte des pages web peut être analysé en déplaçant le curseur tout en maintenant une touche modificatrice.\n                La touche par défaut est <kbd>Shift</kbd>, que vous pouvez désactiver ou configurer sur la page <a href=\"/settings.html#backup\">Paramètres</a>."
   },
   "quick_start_scanning_heading": {
-    "message": "Scanning Text"
+    "message": "Analyser du texte"
   },
   "quick_start_scanning_kanji": {
-    "message": "Clicking on a kanji character in a term's definition will show additional information about that character.\n                    <span class=\"light\">(Requires a kanji dictionary to be installed.)</span>"
+    "message": "Cliquer sur un caractère kanji dans la définition d'un terme affichera des informations supplémentaires sur ce caractère.\n                    <span class=\"light\">(Nécessite l'installation d'un dictionnaire de kanji.)</span>"
   },
   "search_clipboard_monitor_label": {
-    "message": "Clipboard monitor"
+    "message": "Surveillance du presse-papiers"
   },
   "search_default_profile_label": {
-    "message": "Default Profile"
+    "message": "Profil par défaut"
   },
   "search_header_title": {
-    "message": "Sottaku-Yomitan Search"
+    "message": "Recherche Sottaku-Yomitan"
   },
   "search_settings_auto_kana_label": {
-    "message": "Automatic kana conversion"
+    "message": "Conversion automatique en kana"
   },
   "search_settings_close_button": {
-    "message": "Close"
+    "message": "Fermer"
   },
   "search_settings_parser_label": {
-    "message": "Parser"
+    "message": "Analyseur"
   },
   "search_settings_sticky_header_description": {
-    "message": "Search header stays on the page when scrolling down."
+    "message": "L'en-tête de recherche reste sur la page lors du défilement."
   },
   "search_settings_sticky_header_label": {
-    "message": "Sticky search header"
+    "message": "En-tête de recherche fixe"
   },
   "search_settings_title": {
-    "message": "Search Settings"
+    "message": "Paramètres de recherche"
   },
   "search_textbox_placeholder": {
-    "message": "Input a term, expression, sentence, or block of text"
+    "message": "Saisissez un terme, une expression, une phrase ou un bloc de texte"
   },
   "settings_accessibility_google_docs_danger": {
-    "message": "Google has changed this compatibility implementation several times, and the changes do not seem to be announced or documented. Therefore, it is possible that this feature could stop working at any time the future without warning."
+    "message": "Google a modifié cette implémentation de compatibilité plusieurs fois, et ces changements ne semblent pas être annoncés ou documentés. Il est donc possible que cette fonctionnalité cesse de fonctionner à tout moment à l'avenir sans avertissement."
   },
   "settings_accessibility_google_docs_label": {
-    "message": "Enable Google Docs compatibility mode\n                        <a class=\"more-toggle more-only danger-text\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "Activer le mode de compatibilité Google Docs\n                        <a class=\"more-toggle more-only danger-text\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "settings_accessibility_google_docs_more_1": {
-    "message": "Google Docs now uses\n                    <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas\" rel=\"noopener noreferrer\" target=\"_blank\">canvas-based</a>\n                    rendering to display content<sup><a href=\"https://workspaceupdates.googleblog.com/2021/05/Google-Docs-Canvas-Based-Rendering-Update.html\" rel=\"noopener noreferrer\" target=\"_blank\">[2]</a></sup>\n                    which prevents Sottaku-Yomitan from being able to scan text using the standard methods.\n                    Enabling this option will force Google Docs webpages to expose some additional text\n                    information which should allow Sottaku-Yomitan to still work."
+    "message": "Google Docs utilise désormais un rendu\n                    <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas\" rel=\"noopener noreferrer\" target=\"_blank\">basé sur canvas</a>\n                    pour afficher le contenu<sup><a href=\"https://workspaceupdates.googleblog.com/2021/05/Google-Docs-Canvas-Based-Rendering-Update.html\" rel=\"noopener noreferrer\" target=\"_blank\">[2]</a></sup>\n                    ce qui empêche Sottaku-Yomitan de scanner le texte avec les méthodes standard.\n                    L'activation de cette option forcera les pages Google Docs à exposer des informations de texte supplémentaires,\n                    ce qui devrait permettre à Sottaku-Yomitan de continuer à fonctionner."
   },
   "settings_accessibility_google_docs_warning": {
-    "message": "If any profile has this setting enabled, compatibility mode will be activated; profile conditions are ignored."
+    "message": "Si un profil a ce paramètre activé, le mode de compatibilité sera activé ; les conditions de profil sont ignorées."
   },
   "settings_accessibility_heading": {
-    "message": "Accessibility"
+    "message": "Accessibilité"
   },
   "settings_appearance_action_bar_description": {
-    "message": "Control when and where the action bar is visible."
+    "message": "Contrôlez quand et où la barre d'actions est visible."
   },
   "settings_appearance_action_bar_label": {
-    "message": "Action bar appearance"
+    "message": "Apparence de la barre d'actions"
   },
   "settings_appearance_action_bar_location_label": {
-    "message": "Location"
+    "message": "Emplacement"
   },
   "settings_appearance_action_bar_visibility_label": {
-    "message": "Visibility"
+    "message": "Visibilité"
   },
   "settings_appearance_collapsible_dictionaries_label": {
-    "message": "Configure collapsible dictionaries…"
+    "message": "Configurer les dictionnaires repliables…"
   },
   "settings_appearance_compact_glossaries_description": {
-    "message": "Display term glossaries using a more compact layout."
+    "message": "Afficher les glossaires de termes avec une mise en page plus compacte."
   },
   "settings_appearance_compact_glossaries_label": {
-    "message": "Compact glossaries"
+    "message": "Glossaires compacts"
   },
   "settings_appearance_compact_popup": {
-    "message": "Compact Popup"
+    "message": "Popup compact"
   },
   "settings_appearance_compact_popup_anki": {
-    "message": "Compact Popup and Anki"
+    "message": "Popup compact et Anki"
   },
   "settings_appearance_compact_tags_description": {
-    "message": "Show fewer repeated tags for term glossaries."
+    "message": "Afficher moins d'étiquettes répétées pour les glossaires de termes."
   },
   "settings_appearance_compact_tags_label": {
-    "message": "Compact tags"
+    "message": "Étiquettes compactes"
   },
   "settings_appearance_custom_css_label": {
-    "message": "Configure custom CSS…"
+    "message": "Configurer le CSS personnalisé…"
   },
   "settings_appearance_debug_description": {
-    "message": "A menu option to log debugging information will be shown in the search results."
+    "message": "Une option de menu pour consigner des informations de débogage sera affichée dans les résultats de recherche."
   },
   "settings_appearance_debug_label": {
-    "message": "Show debug information"
+    "message": "Afficher les informations de débogage"
   },
   "settings_appearance_expression_tags_description": {
-    "message": "These tags can be scanned if the options for popup content scanning are enabled."
+    "message": "Ces étiquettes peuvent être scannées si les options de scan du contenu du popup sont activées."
   },
   "settings_appearance_expression_tags_label": {
-    "message": "Show tags for expressions and their readings"
+    "message": "Afficher les étiquettes pour les expressions et leurs lectures"
   },
   "settings_appearance_font_family_description": {
-    "message": "Change the font family used in Sottaku-Yomitan.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "Changez la famille de police utilisée dans Sottaku-Yomitan.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">Plus…</a>"
   },
   "settings_appearance_font_family_label": {
-    "message": "Font family"
+    "message": "Famille de police"
   },
   "settings_appearance_font_family_more": {
-    "message": "The font family can be changed to any font installed on your system.<br/>\n                    You can input things such as <code>sans-serif</code>, <code>serif</code>, or <code>monospace</code>.<br/>\n                    If you want to specify one or multiple specific fonts, you can type them in manually separated by commas,\n                    for example <pre><code>\"Noto Sans JP\", \"Meiryo\", sans-serif</code></pre>"
+    "message": "La famille de police peut être définie sur toute police installée sur votre système.<br/>\n                    Vous pouvez saisir par exemple <code>sans-serif</code>, <code>serif</code> ou <code>monospace</code>.<br/>\n                    Si vous souhaitez spécifier une ou plusieurs polices précises, vous pouvez les saisir manuellement séparées par des virgules,\n                    par exemple <pre><code>\"Noto Sans JP\", \"Meiryo\", sans-serif</code></pre>"
   },
   "settings_appearance_font_size_description": {
-    "message": "Change the font size used in popups, in pixels."
+    "message": "Changez la taille de police utilisée dans les popups, en pixels."
   },
   "settings_appearance_font_size_label": {
-    "message": "Font size"
+    "message": "Taille de police"
   },
   "settings_appearance_frequency_description": {
-    "message": "Change how frequency information is presented."
+    "message": "Changez la façon dont les informations de fréquence sont présentées."
   },
   "settings_appearance_frequency_inline_list": {
-    "message": "Inline list"
+    "message": "Liste en ligne"
   },
   "settings_appearance_frequency_label": {
-    "message": "Frequency display style"
+    "message": "Style d'affichage de la fréquence"
   },
   "settings_appearance_frequency_list": {
-    "message": "List"
+    "message": "Liste"
   },
   "settings_appearance_frequency_split_tags": {
-    "message": "Split tags"
+    "message": "Séparer les étiquettes"
   },
   "settings_appearance_frequency_split_tags_grouped": {
-    "message": "Split tags, grouped content"
+    "message": "Séparer les étiquettes, contenu regroupé"
   },
   "settings_appearance_frequency_tags": {
-    "message": "Tags"
+    "message": "Étiquettes"
   },
   "settings_appearance_frequency_tags_grouped": {
-    "message": "Tags, grouped content"
+    "message": "Étiquettes, contenu regroupé"
   },
   "settings_appearance_heading": {
-    "message": "Appearance"
+    "message": "Apparence"
   },
   "settings_appearance_indicator_asterisk": {
-    "message": "Asterisk"
+    "message": "Astérisque"
   },
   "settings_appearance_indicator_bar_left": {
-    "message": "Vertical bar (left)"
+    "message": "Barre verticale (gauche)"
   },
   "settings_appearance_indicator_bar_right": {
-    "message": "Vertical bar (right)"
+    "message": "Barre verticale (droite)"
   },
   "settings_appearance_indicator_dot_left": {
-    "message": "Small dot (left)"
+    "message": "Petit point (gauche)"
   },
   "settings_appearance_indicator_dot_right": {
-    "message": "Small dot (right)"
+    "message": "Petit point (droite)"
   },
   "settings_appearance_indicator_triangle": {
     "message": "Triangle"
   },
   "settings_appearance_line_height_description": {
-    "message": "Change the space between lines of text in popups. This will usually be a decimal number between 1 and 2."
+    "message": "Changez l'espacement entre les lignes de texte dans les popups. Ce sera généralement un nombre décimal entre 1 et 2."
   },
   "settings_appearance_line_height_label": {
-    "message": "Line height"
+    "message": "Hauteur de ligne"
   },
   "settings_appearance_pitch_accent_description": {
-    "message": "Japanese only.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "Japonais uniquement.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">Plus…</a>"
   },
   "settings_appearance_pitch_accent_label": {
-    "message": "Pitch accent display styles"
+    "message": "Styles d'affichage de l'accent de hauteur"
   },
   "settings_appearance_pitch_accent_more_1": {
-    "message": "Pitch accents for terms and expressions can be shown if a dictionary supporting pitch accents is installed. There are currently three different ways that pitch accents can be presented:"
+    "message": "Les accents de hauteur pour les termes et expressions peuvent être affichés si un dictionnaire prenant en charge les accents de hauteur est installé. Il existe actuellement trois façons de présenter les accents de hauteur :"
   },
   "settings_appearance_pitch_downstep_notation": {
-    "message": "Downstep notation"
+    "message": "Notation de downstep"
   },
   "settings_appearance_pitch_downstep_position": {
-    "message": "Downstep position"
+    "message": "Position de downstep"
   },
   "settings_appearance_pitch_graph": {
-    "message": "Graph"
+    "message": "Graphique"
   },
   "settings_appearance_reading_mode_description": {
-    "message": "Change what type of furigana is displayed for parsed text. Japanese only."
+    "message": "Changez le type de furigana affiché pour le texte analysé. Japonais uniquement."
   },
   "settings_appearance_reading_mode_dictionary": {
-    "message": "Dictionary reading"
+    "message": "Lecture du dictionnaire"
   },
   "settings_appearance_reading_mode_hiragana": {
-    "message": "ひらがな"
+    "message": "Hiragana"
   },
   "settings_appearance_reading_mode_katakana": {
-    "message": "カタカナ"
+    "message": "Katakana"
   },
   "settings_appearance_reading_mode_label": {
-    "message": "Reading mode"
+    "message": "Mode de lecture"
   },
   "settings_appearance_reading_mode_romaji": {
     "message": "Romaji"
   },
   "settings_appearance_selection_indicator_description": {
-    "message": "Change how the selected definition entry is visually indicated."
+    "message": "Changez la façon dont l'entrée de définition sélectionnée est indiquée visuellement."
   },
   "settings_appearance_selection_indicator_label": {
-    "message": "Selection indicator style"
+    "message": "Style d'indicateur de sélection"
   },
   "settings_appearance_term_display_description": {
-    "message": "Change how terms and their readings are displayed."
+    "message": "Changez la façon dont les termes et leurs lectures sont affichés."
   },
   "settings_appearance_term_display_label": {
-    "message": "Term display style"
+    "message": "Style d'affichage des termes"
   },
   "settings_appearance_term_display_ruby": {
-    "message": "Term furigana"
+    "message": "Furigana du terme"
   },
   "settings_appearance_term_display_ruby_reading": {
-    "message": "Term furigana and reading"
+    "message": "Furigana et lecture du terme"
   },
   "settings_appearance_term_display_term_only": {
-    "message": "Plain term"
+    "message": "Terme seul"
   },
   "settings_appearance_term_display_term_reading": {
-    "message": "Plain term and reading"
+    "message": "Terme seul et lecture"
   },
   "settings_appearance_theme_body_label": {
-    "message": "Body"
+    "message": "Corps"
   },
   "settings_appearance_theme_description": {
-    "message": "Adjust the style of Sottaku-Yomitan."
+    "message": "Ajustez le style de Sottaku-Yomitan."
   },
   "settings_appearance_theme_label": {
-    "message": "Theme"
+    "message": "Thème"
   },
   "settings_appearance_theme_shadow_label": {
-    "message": "Shadow"
+    "message": "Ombre"
   },
   "settings_audio_autoplay_description": {
-    "message": "The audio for the first result will be played automatically."
+    "message": "Le son du premier résultat sera lu automatiquement."
   },
   "settings_audio_autoplay_label": {
-    "message": "Auto-play search result audio"
+    "message": "Lecture automatique de l'audio des résultats de recherche"
   },
   "settings_audio_enable_description": {
-    "message": "Show a clickable speaker icon next to search results."
+    "message": "Afficher une icône de haut-parleur cliquable à côté des résultats de recherche."
   },
   "settings_audio_enable_disclaimer": {
-    "message": "This option may send term, reading, and/or language outside of Sottaku-Yomitan to fetch audio<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">Privacy Policy</a>)</span>."
+    "message": "Cette option peut envoyer le terme, la lecture et/ou la langue en dehors de Sottaku-Yomitan pour récupérer l'audio<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">Politique de confidentialité</a>)</span>."
   },
   "settings_audio_enable_label": {
-    "message": "Enable audio playback for terms"
+    "message": "Activer la lecture audio pour les termes"
   },
   "settings_audio_fallback_bloop": {
     "message": "Bloop"
   },
   "settings_audio_fallback_click": {
-    "message": "Click"
+    "message": "Clic"
   },
   "settings_audio_fallback_description": {
-    "message": "The sound to play when Sottaku-Yomitan fails to fetch audio."
+    "message": "Le son à lire lorsque Sottaku-Yomitan ne parvient pas à récupérer l'audio."
   },
   "settings_audio_fallback_label": {
-    "message": "Audio fallback sound"
+    "message": "Son de secours audio"
   },
   "settings_audio_heading": {
     "message": "Audio"
   },
   "settings_audio_sources_label": {
-    "message": "Configure audio playback sources…"
+    "message": "Configurer les sources de lecture audio…"
   },
   "settings_audio_volume_description": {
-    "message": "Adjust the volume audio is played at, in percent."
+    "message": "Ajustez le volume de lecture audio, en pourcentage."
   },
   "settings_audio_volume_label": {
-    "message": "Audio volume"
+    "message": "Volume audio"
   },
   "settings_backup_description": {
-    "message": "Sottaku-Yomitan can import and export settings files which can be used to restore settings, share settings across devices, and to help to debug problems. These files will only contain settings."
+    "message": "Sottaku-Yomitan peut importer et exporter des fichiers de paramètres qui peuvent servir à restaurer des paramètres, partager des paramètres entre appareils et aider à déboguer les problèmes. Ces fichiers ne contiendront que des paramètres."
   },
   "settings_backup_export_button": {
-    "message": "Export Settings"
+    "message": "Exporter les paramètres"
   },
   "settings_backup_heading": {
-    "message": "Backup"
+    "message": "Sauvegarde"
   },
   "settings_backup_import_button": {
-    "message": "Import Settings"
+    "message": "Importer les paramètres"
   },
   "settings_backup_reset_button": {
-    "message": "Reset Settings"
+    "message": "Réinitialiser les paramètres"
   },
   "settings_clipboard_background_description": {
-    "message": "Open the search page in a new window when text is copied to the clipboard."
+    "message": "Ouvrir la page de recherche dans une nouvelle fenêtre lorsque du texte est copié dans le presse-papiers."
   },
   "settings_clipboard_background_label": {
-    "message": "Enable background clipboard text monitoring"
+    "message": "Activer la surveillance du texte du presse-papiers en arrière-plan"
   },
   "settings_clipboard_heading": {
-    "message": "Clipboard"
+    "message": "Presse-papiers"
   },
   "settings_clipboard_info_1": {
-    "message": "Sottaku-Yomitan can watch the system clipboard and automatically search on the search page when text is copied. This can be useful for using Sottaku-Yomitan to scan text from external applications."
+    "message": "Sottaku-Yomitan peut surveiller le presse-papiers du système et lancer automatiquement une recherche sur la page de recherche lorsque du texte est copié. Cela peut être utile pour utiliser Sottaku-Yomitan afin de scanner du texte depuis des applications externes."
   },
   "settings_clipboard_info_2": {
-    "message": "This feature requires Sottaku-Yomitan to have clipboard reading permissions, and when this option is enabled, the clipboard will be frequently checked for new text."
+    "message": "Cette fonctionnalité nécessite que Sottaku-Yomitan dispose des autorisations de lecture du presse-papiers, et lorsque cette option est activée, le presse-papiers sera fréquemment vérifié pour détecter du nouveau texte."
   },
   "settings_clipboard_max_length_description": {
-    "message": "Limit the number of characters used when searching clipboard text."
+    "message": "Limiter le nombre de caractères utilisés lors de la recherche dans le texte du presse-papiers."
   },
   "settings_clipboard_max_length_label": {
-    "message": "Maximum clipboard text search length"
+    "message": "Longueur maximale de recherche du texte du presse-papiers"
   },
   "settings_clipboard_search_description": {
-    "message": "The query on the search page will be automatically updated with text in the clipboard."
+    "message": "La requête de la page de recherche sera automatiquement mise à jour avec le texte du presse-papiers."
   },
   "settings_clipboard_search_label": {
-    "message": "Enable search page clipboard text monitoring"
+    "message": "Activer la surveillance du texte du presse-papiers sur la page de recherche"
   },
   "settings_clipboard_search_mode_description": {
-    "message": "Change how the search page reacts to new text in the clipboard."
+    "message": "Changer la façon dont la page de recherche réagit au nouveau texte dans le presse-papiers."
   },
   "settings_clipboard_search_mode_label": {
-    "message": "Clipboard text search mode"
+    "message": "Mode de recherche du texte du presse-papiers"
   },
   "settings_clipboard_search_mode_search": {
-    "message": "Search for definitions"
+    "message": "Rechercher des définitions"
   },
   "settings_clipboard_search_mode_update": {
-    "message": "Update query only"
+    "message": "Mettre à jour la requête uniquement"
   },
   "settings_collapsible_varies": {
     "message": "Varies"
   },
   "settings_general_api_css_bypass_label": {
-    "message": "Allow bypassing css sanitization"
+    "message": "Autoriser le contournement de la sanitation CSS"
   },
   "settings_general_api_css_bypass_more_1": {
-    "message": "A malicious dictionary which contains malicious CSS may try to execute Javascript. For example, if the output of the Sottaku-Yomitan API is used in Anki, then the resulting Anki card may execute unintended Javascript. The risk in this case is similar to downloading a malicious Anki deck. Namely, in both cases, you are relying purely on Anki's sandbox to protect your machine and information from the malicious code. If the Anki sandbox works, card contents could be leaked (a minor confidential issue). If the sandbox fails, there is much more to worry about (actions being taken on your machine such as stealing credentials and sensitive information, or ransomware taking over your computer)."
+    "message": "Un dictionnaire malveillant contenant du CSS malveillant peut tenter d'exécuter du Javascript. Par exemple, si la sortie de l'API Sottaku-Yomitan est utilisée dans Anki, la carte Anki résultante peut exécuter du Javascript involontaire. Le risque est alors similaire au téléchargement d'un deck Anki malveillant. Autrement dit, dans les deux cas, vous vous fiez uniquement au bac à sable d'Anki pour protéger votre machine et vos informations contre le code malveillant. Si le bac à sable d'Anki fonctionne, le contenu des cartes pourrait être divulgué (un problème mineur de confidentialité). Si le bac à sable échoue, il y a bien plus à craindre (des actions sur votre machine comme le vol d'identifiants et d'informations sensibles, ou un rançongiciel prenant le contrôle de votre ordinateur)."
   },
   "settings_general_api_css_bypass_more_2": {
-    "message": "If you choose to disable the CSS sanitization, we recommend thinking end-to-end about where the Sottaku-Yomitan API output is used, and whether that destination is resilient to potentially malicious Javascript code being included, otherwise you are potentially risking the data and integrity of your system."
+    "message": "Si vous choisissez de désactiver la sanitation CSS, nous recommandons de réfléchir de bout en bout à l'endroit où la sortie de l'API Sottaku-Yomitan est utilisée et si cette destination est résistante à l'inclusion éventuelle de Javascript malveillant; sinon, vous risquez les données et l'intégrité de votre système."
   },
   "settings_general_api_css_bypass_more_3": {
-    "message": "Sanitization bypass will allow CSS that cannot be sanitized to pass through the sanitizer unchanged. This ONLY applies to the Sottaku-Yomitan API, it will not make any other areas of Sottaku-Yomitan potentially vulnerable."
+    "message": "Le contournement de la sanitation permettra au CSS qui ne peut pas être assaini de passer à travers le sanitizer sans modification. Cela s'applique UNIQUEMENT à l'API Sottaku-Yomitan; cela ne rendra aucune autre zone de Sottaku-Yomitan potentiellement vulnérable."
   },
   "settings_general_api_css_bypass_more_4": {
-    "message": "This can be required to retrieve CSS on some browsers which do not support the offscreen page necessary for full CSS sanitization in the Sottaku-Yomitan API on the backend. Sottaku-Yomitan will attempt to fall back on basic sanitization but this will fail for dictionaries making use of complex CSS."
+    "message": "Cela peut être nécessaire pour récupérer du CSS sur certains navigateurs qui ne prennent pas en charge la page offscreen nécessaire à la sanitation complète du CSS dans l'API Sottaku-Yomitan côté backend. Sottaku-Yomitan tentera de revenir à une sanitation de base, mais cela échouera pour les dictionnaires utilisant du CSS complexe."
   },
   "settings_general_api_css_bypass_warning": {
-    "message": "Only enable this option if you trust the authors of your dictionaries or will perform sanitization outside of Sottaku-Yomitan.\n                                        Malicious dictionaries can send malformed CSS to allow Javascript execution if injected into a webview or browser.\n                                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "N'activez cette option que si vous faites confiance aux auteurs de vos dictionnaires ou si vous effectuez la sanitation en dehors de Sottaku-Yomitan.\n                                        Des dictionnaires malveillants peuvent envoyer du CSS mal formé pour permettre l'exécution de Javascript s'il est injecté dans une webview ou un navigateur.\n                                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">Plus…</a>"
   },
   "settings_general_api_more_1": {
-    "message": "To activate the Sottaku-Yomitan API, a native messaging component must be installed.\n                        A setup guide can be found <a href=\"https://github.com/yomidevs/yomitan-api/blob/master/README.md\" rel=\"noopener noreferrer\" target=\"_blank\">here</a>."
+    "message": "Pour activer l'API Sottaku-Yomitan, un composant de messagerie native doit être installé.\n                        Un guide de configuration est disponible <a href=\"https://github.com/yomidevs/yomitan-api/blob/master/README.md\" rel=\"noopener noreferrer\" target=\"_blank\">ici</a>."
   },
   "settings_general_api_test_url_placeholder": {
     "message": "http://127.0.0.1:19633"
   },
   "settings_general_context_menu": {
-    "message": "Show \"Lookup in Sottaku-Yomitan\" in right-click menu"
+    "message": "Afficher « Rechercher dans Sottaku-Yomitan » dans le menu clic droit"
   },
   "settings_general_enable_api_description": {
-    "message": "Enable support for sending local web requests to fetch data from Sottaku-Yomitan."
+    "message": "Activer la prise en charge des requêtes web locales pour récupérer des données depuis Sottaku-Yomitan."
   },
   "settings_general_enable_api_disclaimer": {
-    "message": "This option may send data outside of Sottaku-Yomitan to local applications that request it<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">Privacy Policy</a>)</span>.\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "Cette option peut envoyer des données en dehors de Sottaku-Yomitan vers des applications locales qui en font la demande<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">Politique de confidentialité</a>)</span>.\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">Plus…</a>"
   },
   "settings_general_enable_api_label": {
-    "message": "Enable Sottaku-Yomitan API"
+    "message": "Activer l'API Sottaku-Yomitan"
   },
   "settings_general_enable_label": {
-    "message": "Enable Sottaku-Yomitan"
+    "message": "Activer Sottaku-Yomitan"
   },
   "settings_general_heading": {
-    "message": "General"
+    "message": "Général"
   },
   "settings_general_locale_description": {
-    "message": "Language used for translations returned by Sottaku."
+    "message": "Langue utilisée pour les traductions renvoyées par Sottaku."
   },
   "settings_general_locale_label": {
-    "message": "Locale"
+    "message": "Paramètre régional"
   },
   "settings_general_max_results_description": {
-    "message": "Adjust the maximum number of results shown for lookups."
+    "message": "Ajustez le nombre maximal de résultats affichés pour les recherches."
   },
   "settings_general_max_results_label": {
-    "message": "Maximum number of results"
+    "message": "Nombre maximal de résultats"
   },
   "settings_general_show_guide": {
-    "message": "Show the <a href=\"/welcome.html\" rel=\"noopener\" target=\"_blank\">welcome guide</a> on browser startup"
+    "message": "Afficher le <a href=\"/welcome.html\" rel=\"noopener\" target=\"_blank\">guide de bienvenue</a> au démarrage du navigateur"
   },
   "settings_general_text_language_description": {
-    "message": "Used for offline dictionary features and preview tooling."
+    "message": "Utilisée pour les fonctionnalités de dictionnaires hors ligne et les outils de prévisualisation."
   },
   "settings_general_text_language_label": {
-    "message": "Text language"
+    "message": "Langue du texte"
   },
   "settings_heading": {
-    "message": "Sottaku-Yomitan Settings"
+    "message": "Paramètres de Sottaku-Yomitan"
   },
   "settings_loading_delay_notice": {
-    "message": "This page is taking longer than expected to load."
+    "message": "Cette page met plus de temps que prévu à se charger."
   },
   "settings_loading_delay_safari": {
-    "message": "Due to a bug in Safari, it may be necessary to click the <img alt=\"\" class=\"inline-icon\" src=\"/images/yomitan-icon.svg\"/> <em>Sottaku-Yomitan</em>\n                        button in the browser bar to fully load the page"
+    "message": "En raison d'un bug dans Safari, il peut être nécessaire de cliquer sur le bouton <img alt=\"\" class=\"inline-icon\" src=\"/images/yomitan-icon.svg\"/> <em>Sottaku-Yomitan</em>\n                        dans la barre du navigateur pour charger complètement la page"
   },
   "settings_nav_about": {
-    "message": "About Sottaku-Yomitan"
+    "message": "À propos de Sottaku-Yomitan"
   },
   "settings_nav_accessibility": {
-    "message": "Accessibility"
+    "message": "Accessibilité"
   },
   "settings_nav_advanced": {
-    "message": "Advanced"
+    "message": "Avancé"
   },
   "settings_nav_appearance": {
-    "message": "Appearance"
+    "message": "Apparence"
   },
   "settings_nav_audio": {
     "message": "Audio"
   },
   "settings_nav_backup": {
-    "message": "Backup"
+    "message": "Sauvegarde"
   },
   "settings_nav_clipboard": {
-    "message": "Clipboard"
+    "message": "Presse-papiers"
   },
   "settings_nav_debug": {
-    "message": "Debug"
+    "message": "Débogage"
   },
   "settings_nav_general": {
-    "message": "General"
+    "message": "Général"
   },
   "settings_nav_popup_behavior": {
-    "message": "Popup Behavior"
+    "message": "Comportement de la fenêtre contextuelle"
   },
   "settings_nav_position_size": {
-    "message": "Position & Size"
+    "message": "Position et taille"
   },
   "settings_nav_profile": {
-    "message": "Profile"
+    "message": "Profil"
   },
   "settings_nav_result_display": {
-    "message": "Result Display"
+    "message": "Affichage des résultats"
   },
   "settings_nav_scanning": {
-    "message": "Scanning"
+    "message": "Analyse"
   },
   "settings_nav_search_window": {
-    "message": "Search Window"
+    "message": "Fenêtre de recherche"
   },
   "settings_nav_security": {
-    "message": "Security"
+    "message": "Sécurité"
   },
   "settings_nav_shortcuts": {
-    "message": "Shortcuts"
+    "message": "Raccourcis"
   },
   "settings_nav_sottaku": {
     "message": "Sottaku"
   },
   "settings_nav_text_parsing": {
-    "message": "Text Parsing"
+    "message": "Analyse du texte"
   },
   "settings_nav_translation": {
-    "message": "Translation"
+    "message": "Traduction"
   },
   "settings_popup_auto_hide_description": {
     "message": "When an existing popup is present, upon scanning again, hide the existing popup even if no definitions are found when scanning again."
@@ -1344,16 +1344,16 @@
     "message": "Same as horizontal text"
   },
   "settings_profile_active_description": {
-    "message": "Switch the active profile that is used for scanning."
+    "message": "Changez le profil actif utilisé pour l'analyse."
   },
   "settings_profile_active_label": {
-    "message": "Active profile"
+    "message": "Profil actif"
   },
   "settings_profile_configure": {
-    "message": "Configure profiles…"
+    "message": "Configurer les profils…"
   },
   "settings_profile_heading": {
-    "message": "Profile"
+    "message": "Profil"
   },
   "settings_result_average_frequencies_description": {
     "message": "Compress frequency tags into one \"Average\" frequency tag based on the harmonic mean."
@@ -1401,115 +1401,115 @@
     "message": "Group term-reading pairs"
   },
   "settings_scanning_advanced_inputs_label": {
-    "message": "Configure advanced scanning inputs… <span class=\"light no-wrap\">(<span class=\"scanning-input-count\">#</span> defined)</span>"
+    "message": "Configurer les entrées d'analyse avancées… <span class=\"light no-wrap\">(<span class=\"scanning-input-count\">#</span> définies)</span>"
   },
   "settings_scanning_alphanumeric_description": {
-    "message": "Only applies when language is set to Japanese, Chinese, Cantonese, or Korean."
+    "message": "S'applique uniquement lorsque la langue est définie sur japonais, chinois, cantonais ou coréen."
   },
   "settings_scanning_alphanumeric_label": {
-    "message": "Search text with non-Japanese, Chinese, or Korean characters"
+    "message": "Rechercher du texte contenant des caractères non japonais, chinois ou coréens"
   },
   "settings_scanning_deep_scan_description": {
-    "message": "Enable scanning text that is covered by other layers."
+    "message": "Activer l'analyse du texte couvert par d'autres couches."
   },
   "settings_scanning_deep_scan_label": {
-    "message": "Deep content scanning"
+    "message": "Analyse de contenu en profondeur"
   },
   "settings_scanning_delay_description": {
-    "message": "Change the delay before scanning occurs when no modifier key is required."
+    "message": "Modifier le délai avant que l'analyse ne commence lorsque aucune touche de modification n'est requise."
   },
   "settings_scanning_delay_label": {
-    "message": "Scan delay <span class=\"light\">(in milliseconds)</span>"
+    "message": "Délai d'analyse <span class=\"light\">(en millisecondes)</span>"
   },
   "settings_scanning_heading": {
-    "message": "Scanning"
+    "message": "Analyse"
   },
   "settings_scanning_input_prevention_label": {
-    "message": "Configure input action prevention…"
+    "message": "Configurer la prévention des actions d'entrée…"
   },
   "settings_scanning_layout_description": {
-    "message": "Use webpage styling information to determine where line breaks are likely to be."
+    "message": "Utiliser les informations de style de la page web pour déterminer où les retours à la ligne sont probables."
   },
   "settings_scanning_layout_label": {
-    "message": "Layout-aware scanning"
+    "message": "Analyse sensible à la mise en page"
   },
   "settings_scanning_middle_mouse_description": {
-    "message": "Hold the middle mouse button while moving the cursor to scan text."
+    "message": "Maintenez le bouton central de la souris en déplaçant le curseur pour analyser le texte."
   },
   "settings_scanning_middle_mouse_label": {
-    "message": "Scan using middle mouse button"
+    "message": "Analyser avec le bouton central de la souris"
   },
   "settings_scanning_modifier_description": {
-    "message": "Hold a key while moving the cursor to scan text.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "Maintenez une touche en déplaçant le curseur pour analyser le texte.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">Plus…</a>"
   },
   "settings_scanning_modifier_label": {
-    "message": "Scan modifier key"
+    "message": "Touche de modification d'analyse"
   },
   "settings_scanning_modifier_more_1": {
-    "message": "A keyboard modifier key can be used to activate text scanning when the cursor is moved.\n                    Alternatively, the <em>No key</em> option can be used to scan text whenever the cursor is moved,\n                    without requiring any key to be held."
+    "message": "Une touche de modification du clavier peut être utilisée pour activer l'analyse de texte lorsque le curseur est déplacé.\n                    Alternativement, l'option <em>Aucune touche</em> permet d'analyser le texte chaque fois que le curseur est déplacé,\n                    sans avoir à maintenir une touche enfoncée."
   },
   "settings_scanning_modifier_more_2": {
-    "message": "More advanced scanning input customization can be set up by enabling the <em>Advanced</em> option\n                    and clicking <em data-modal-action=\"show,scanning-inputs\">Configure advanced scanning inputs</em>."
+    "message": "Une personnalisation plus avancée des entrées d'analyse peut être configurée en activant l'option <em>Avancé</em>\n                    et en cliquant sur <em data-modal-action=\"show,scanning-inputs\">Configurer les entrées d'analyse avancées</em>."
   },
   "settings_scanning_resolution_character": {
-    "message": "Character"
+    "message": "Caractère"
   },
   "settings_scanning_resolution_description": {
-    "message": "Start the lookup scan at the word or character of the cursor position.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "Démarrer la recherche au mot ou au caractère à la position du curseur.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">Plus…</a>"
   },
   "settings_scanning_resolution_label": {
-    "message": "Scan resolution"
+    "message": "Résolution d'analyse"
   },
   "settings_scanning_resolution_more_1": {
-    "message": "The scan resolution determines where the scan starts when the cursor is moved.\n                    The <code>Character</code> option will start scanning at the cursor's current position,\n                    while the <code>Word</code> option will start scanning at the beginning of the word."
+    "message": "La résolution d'analyse détermine où commence l'analyse lorsque le curseur est déplacé.\n                    L'option <code>Caractère</code> démarre l'analyse à la position actuelle du curseur,\n                    tandis que l'option <code>Mot</code> démarre l'analyse au début du mot."
   },
   "settings_scanning_resolution_word": {
-    "message": "Word"
+    "message": "Mot"
   },
   "settings_scanning_select_text_label": {
-    "message": "Select matched text"
+    "message": "Sélectionner le texte correspondant"
   },
   "settings_scanning_text_length_description": {
-    "message": "Change how many characters are read when scanning for terms."
+    "message": "Modifier le nombre de caractères lus lors de l'analyse des termes."
   },
   "settings_scanning_text_length_label": {
-    "message": "Text scan length"
+    "message": "Longueur d'analyse du texte"
   },
   "settings_scanning_text_length_warning": {
-    "message": "Setting this value too high (100+) may impact performance."
+    "message": "Une valeur trop élevée (100+) peut affecter les performances."
   },
   "settings_scanning_wildcard_description": {
-    "message": "Enable suffix wildcard when looking up scanned webpage text.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "Activer un joker de suffixe lors de la recherche du texte scanné de la page web.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">Plus…</a>"
   },
   "settings_scanning_wildcard_label": {
-    "message": "Wildcard scanning"
+    "message": "Analyse avec joker"
   },
   "settings_scanning_wildcard_more_1": {
-    "message": "Rather than searching for the source text exactly, the text will only be required to be a prefix of an existing term. For example, scanning 読み will effectively search for 読み*, which may bring up additional results such as 読み方."
+    "message": "Plutôt que de rechercher exactement le texte source, le texte n'aura besoin d'être qu'un préfixe d'un terme existant. Par exemple, analyser 読み recherchera effectivement 読み*, ce qui peut afficher des résultats supplémentaires tels que 読み方."
   },
   "settings_scanning_wildcard_warning": {
-    "message": "This will likely cause scanning and lookup to be slower, and the results may not be as relevant."
+    "message": "Cela risque de ralentir l'analyse et la recherche, et les résultats peuvent être moins pertinents."
   },
   "settings_scanning_without_mousemove_description": {
-    "message": "Allow scanning words under the pointer without the pointer being in motion."
+    "message": "Permet d'analyser les mots sous le pointeur sans que celui-ci soit en mouvement."
   },
   "settings_scanning_without_mousemove_label": {
-    "message": "Scan without mouse move"
+    "message": "Analyser sans déplacer la souris"
   },
   "settings_scanning_zoom_description": {
-    "message": "Correct the pointer location on webpages where CSS <code>zoom</code> is used.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "Corriger la position du pointeur sur les pages web où le CSS <code>zoom</code> est utilisé.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">Plus…</a>"
   },
   "settings_scanning_zoom_label": {
-    "message": "Normalize CSS zoom"
+    "message": "Normaliser le zoom CSS"
   },
   "settings_scanning_zoom_more_1": {
-    "message": "The non-standard CSS <a href=\"https://developer.mozilla.org/en-US/docs/Web/CSS/zoom\" rel=\"noopener noreferrer\" target=\"_blank\"><code>zoom</code></a> property interferes with the normal calculation of the pointer coordinates when scanning webpages. This property is discouraged from being used and its use is rare, but some webpages may still use it."
+    "message": "La propriété CSS non standard <a href=\"https://developer.mozilla.org/en-US/docs/Web/CSS/zoom\" rel=\"noopener noreferrer\" target=\"_blank\"><code>zoom</code></a> perturbe le calcul normal des coordonnées du pointeur lors de l'analyse des pages web. Cette propriété est déconseillée et son utilisation est rare, mais certaines pages web peuvent encore l'utiliser."
   },
   "settings_scanning_zoom_more_2": {
-    "message": "Enabling this option, which is on by default, will take the value of this property into account when scanning webpage content. It is currently put behind an option in case there are unforeseen negative side effects."
+    "message": "Activer cette option, activée par défaut, prendra en compte la valeur de cette propriété lors de l'analyse du contenu des pages web. Elle est actuellement derrière une option au cas où des effets négatifs inattendus surviendraient."
   },
   "settings_scanning_zoom_more_3": {
-    "message": "This setting does not have any effect in Firefox, as it does not implement the <code>zoom</code> property."
+    "message": "Ce paramètre n'a aucun effet dans Firefox, car il n'implémente pas la propriété <code>zoom</code>."
   },
   "settings_search_window_heading": {
     "message": "Search Window"
@@ -1563,118 +1563,118 @@
     "message": "Popup"
   },
   "settings_security_heading": {
-    "message": "Security"
+    "message": "Sécurité"
   },
   "settings_security_permissions_label": {
-    "message": "Configure Sottaku-Yomitan Permissions"
+    "message": "Configurer les autorisations de Sottaku-Yomitan"
   },
   "settings_security_secure_frame_label": {
-    "message": "Use secure popup frame URL\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "Utiliser une URL sécurisée pour le cadre de la fenêtre contextuelle\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "settings_security_secure_frame_more": {
-    "message": "When this option is enabled, the URL of the <code>iframe</code> element will be assigned by\n                    directly changing the location of the <code>iframe</code>'s internal document, rather than using\n                    the <code>iframe</code>'s <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-src\" rel=\"noopener noreferrer\" target=\"_blank\"><code>src</code></a>\n                    attribute. This results in the extension URL not being exposed to the underling web page, and thus making it harder\n                    to detect the presence of Sottaku-Yomitan."
+    "message": "Lorsque cette option est activée, l'URL de l'élément <code>iframe</code> est assignée en\n                    modifiant directement l'emplacement du document interne de l'<code>iframe</code>, plutôt qu'en utilisant\n                    l'attribut <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-src\" rel=\"noopener noreferrer\" target=\"_blank\"><code>src</code></a> de l'<code>iframe</code>.\n                    Ainsi, l'URL de l'extension n'est pas exposée à la page web sous-jacente, ce qui rend plus difficile\n                    la détection de la présence de Sottaku-Yomitan."
   },
   "settings_security_shadow_dom_label": {
-    "message": "Use a secure container around popups\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "Utiliser un conteneur sécurisé autour des fenêtres contextuelles\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "settings_security_shadow_dom_more": {
-    "message": "On <a href=\"https://caniuse.com/shadowdomv1\" rel=\"noopener noreferrer\" target=\"_blank\">supported browsers</a>,\n                    a popup's <code>iframe</code> element will be embeded inside of a container with a closed <a href=\"https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM\" rel=\"noopener noreferrer\" target=\"_blank\">shadow DOM</a>.\n                    This container prevents scripts running on the underlying web page from being able to discover the <code>iframe</code>,\n                    which helps avoid situations where the web page might try to modify or use the Sottaku-Yomitan popup for an unintended purpose."
+    "message": "Sur les <a href=\"https://caniuse.com/shadowdomv1\" rel=\"noopener noreferrer\" target=\"_blank\">navigateurs pris en charge</a>,\n                    l'élément <code>iframe</code> d'une fenêtre contextuelle sera intégré dans un conteneur avec un <a href=\"https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM\" rel=\"noopener noreferrer\" target=\"_blank\">shadow DOM</a> fermé.\n                    Ce conteneur empêche les scripts exécutés sur la page web sous-jacente de pouvoir découvrir l'<code>iframe</code>,\n                    ce qui aide à éviter les situations où la page web tenterait de modifier ou d'utiliser la fenêtre contextuelle Sottaku-Yomitan à des fins non prévues."
   },
   "settings_shortcuts_heading": {
-    "message": "Shortcuts"
+    "message": "Raccourcis"
   },
   "settings_shortcuts_native_label": {
-    "message": "Configure native keyboard shortcuts…"
+    "message": "Configurer les raccourcis clavier natifs…"
   },
   "settings_shortcuts_overview": {
-    "message": "<p>\n                        Sottaku-Yomitan has two categories of keyboard shortcuts:\n                    </p>\n<ul>\n<li>\n<strong>Standard</strong> keyboard shortcuts are controlled by the extension, and can be added, removed,\n                            and configured to work on webpages that Sottaku-Yomitan functions on.\n                        </li>\n<li>\n<strong>Native</strong> keyboard shortcuts are controlled by the web browser, and function globally\n                            within the web browser<span data-show-for-browser=\"chrome edge\"> or system-wide</span>.\n                        </li>\n</ul>"
+    "message": "<p>\n                        Sottaku-Yomitan comporte deux catégories de raccourcis clavier :\n                    </p>\n<ul>\n<li>\n<strong>Standard</strong> les raccourcis clavier sont contrôlés par l'extension et peuvent être ajoutés, supprimés,\n                            et configurés pour fonctionner sur les pages web où Sottaku-Yomitan fonctionne.\n                        </li>\n<li>\n<strong>Natifs</strong> les raccourcis clavier sont contrôlés par le navigateur web et fonctionnent globalement\n                            dans le navigateur web<span data-show-for-browser=\"chrome edge\"> ou au niveau du système</span>.\n                        </li>\n</ul>"
   },
   "settings_shortcuts_standard_label": {
-    "message": "Configure standard keyboard shortcuts…"
+    "message": "Configurer les raccourcis clavier standard…"
   },
   "settings_sottaku_account_description": {
-    "message": "Click \"Use browser session\" to link the account you are signed into at sottaku.app (Pro required)."
+    "message": "Cliquez sur « Utiliser la session du navigateur » pour lier le compte auquel vous êtes connecté sur sottaku.app (Pro requis)."
   },
   "settings_sottaku_account_label": {
-    "message": "Account"
+    "message": "Compte"
   },
   "settings_sottaku_account_not_connected": {
-    "message": "Not connected"
+    "message": "Non connecté"
   },
   "settings_sottaku_heading": {
     "message": "Sottaku"
   },
   "settings_sottaku_integration_description": {
-    "message": "Lookups, audio, and flashcard actions always use your Sottaku account. Local dictionaries are not required."
+    "message": "Les recherches, l'audio et les actions de cartes utilisent toujours votre compte Sottaku. Les dictionnaires locaux ne sont pas nécessaires."
   },
   "settings_sottaku_integration_label": {
-    "message": "Sottaku integration"
+    "message": "Intégration Sottaku"
   },
   "settings_sottaku_language_add_button": {
-    "message": "Add"
+    "message": "Ajouter"
   },
   "settings_sottaku_language_chinese": {
-    "message": "Chinese"
+    "message": "Chinois"
   },
   "settings_sottaku_language_japanese": {
-    "message": "Japanese"
+    "message": "Japonais"
   },
   "settings_sottaku_language_korean": {
-    "message": "Korean"
+    "message": "Coréen"
   },
   "settings_sottaku_language_order_description": {
-    "message": "Choose which Sottaku languages appear in the popup and their order (used for mixed mode and fallbacks)."
+    "message": "Choisissez les langues Sottaku affichées dans la fenêtre contextuelle et leur ordre (utilisé pour le mode mixte et les solutions de secours)."
   },
   "settings_sottaku_language_order_label": {
-    "message": "Language order"
+    "message": "Ordre des langues"
   },
   "settings_sottaku_language_routing_auto": {
-    "message": "Auto (detect per search)"
+    "message": "Auto (détection par recherche)"
   },
   "settings_sottaku_language_routing_description": {
-    "message": "Choose how Sottaku-Yomitan selects the Sottaku language for lookups (Japanese, Korean, and Chinese are supported)."
+    "message": "Choisissez comment Sottaku-Yomitan sélectionne la langue Sottaku pour les recherches (japonais, coréen et chinois pris en charge)."
   },
   "settings_sottaku_language_routing_label": {
-    "message": "Language routing"
+    "message": "Routage de langue"
   },
   "settings_sottaku_language_routing_mixed": {
-    "message": "Mixed (show preferred languages)"
+    "message": "Mixte (afficher les langues préférées)"
   },
   "settings_sottaku_password_placeholder": {
-    "message": "Password"
+    "message": "Mot de passe"
   },
   "settings_sottaku_sign_in_button": {
-    "message": "Sign in"
+    "message": "Se connecter"
   },
   "settings_sottaku_sign_in_google_button": {
-    "message": "Sign in with Google (opens sottaku.app)"
+    "message": "Se connecter avec Google (ouvre sottaku.app)"
   },
   "settings_sottaku_status_not_connected": {
-    "message": "Not connected"
+    "message": "Non connecté"
   },
   "settings_sottaku_status_sign_in_required": {
-    "message": "Sign in required. Complete login in the opened tab, then click \"Use browser session\"."
+    "message": "Connexion requise. Terminez la connexion dans l'onglet ouvert, puis cliquez sur « Utiliser la session du navigateur »."
   },
   "settings_sottaku_status_signed_in": {
-    "message": "Signed in"
+    "message": "Connecté"
   },
   "settings_sottaku_status_signed_in_as": {
-    "message": "Signed in as {0}"
+    "message": "Connecté en tant que {0}"
   },
   "settings_sottaku_status_signed_out": {
-    "message": "Signed out of Sottaku"
+    "message": "Déconnecté de Sottaku"
   },
   "settings_sottaku_unlink_button": {
-    "message": "Unlink account"
+    "message": "Dissocier le compte"
   },
   "settings_sottaku_use_browser_session_button": {
-    "message": "Use browser session"
+    "message": "Utiliser la session du navigateur"
   },
   "settings_sottaku_use_browser_session_title": {
-    "message": "Re-use your signed-in browser session"
+    "message": "Réutiliser votre session de navigateur connectée"
   },
   "settings_sottaku_username_placeholder": {
-    "message": "Username or email"
+    "message": "Nom d'utilisateur ou e-mail"
   },
   "settings_status_tasks_in_progress": {
     "message": "Tasks in progress:"
@@ -1731,22 +1731,22 @@
     "message": "Newlines only"
   },
   "settings_translation_heading": {
-    "message": "Translation"
+    "message": "Traduction"
   },
   "settings_translation_replacement_patterns_label": {
-    "message": "Configure custom text replacement patterns…"
+    "message": "Configurer des modèles personnalisés de remplacement de texte…"
   },
   "settings_translation_search_resolution_description": {
-    "message": "<p>\"A dog\"　→　search for \"A dog\",\"A do\", \"A d\", \"A\"</p> or <p>\"A dog\"　→　\"A dog\", \"A\"</p>"
+    "message": "<p>\"A dog\"　→　rechercher \"A dog\",\"A do\", \"A d\", \"A\"</p> ou <p>\"A dog\"　→　\"A dog\", \"A\"</p>"
   },
   "settings_translation_search_resolution_label": {
-    "message": "Dictionary search resolution"
+    "message": "Résolution de recherche du dictionnaire"
   },
   "settings_translation_search_resolution_letter": {
-    "message": "Letter"
+    "message": "Lettre"
   },
   "settings_translation_search_resolution_word": {
-    "message": "Word"
+    "message": "Mot"
   },
   "sottaku_action_title_missing_id": {
     "message": "Missing Sottaku question id"

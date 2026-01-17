@@ -3,40 +3,40 @@
     "message": "Sottaku-Yomitan"
   },
   "action_popup_button_info_title": {
-    "message": "Information"
+    "message": "信息"
   },
   "action_popup_button_search_title": {
-    "message": "Search\nShift+click to open here"
+    "message": "搜索\nShift+点击在此打开"
   },
   "action_popup_button_settings_title": {
-    "message": "Settings"
+    "message": "设置"
   },
   "action_popup_hotkey_info": {
-    "message": "Information ({0})"
+    "message": "信息 ({0})"
   },
   "action_popup_hotkey_search": {
-    "message": "Search ({0})\nShift+click to open here"
+    "message": "搜索 ({0})\nShift+点击在此打开"
   },
   "action_popup_hotkey_settings": {
-    "message": "Settings ({0})"
+    "message": "设置 ({0})"
   },
   "action_popup_link_account_tooltip": {
-    "message": "Link your Sottaku account to enable lookups"
+    "message": "关联你的 Sottaku 账号以启用查询"
   },
   "action_popup_loading": {
-    "message": "Loading..."
+    "message": "加载中..."
   },
   "action_popup_profile_title": {
-    "message": "Profile"
+    "message": "配置文件"
   },
   "action_popup_toggle_off": {
-    "message": "Off"
+    "message": "关"
   },
   "action_popup_toggle_on": {
-    "message": "On"
+    "message": "开"
   },
   "action_popup_tooltip_scan": {
-    "message": "Hover over text to scan"
+    "message": "将鼠标悬停在文本上进行扫描"
   },
   "browser_chrome": {
     "message": "Chrome"
@@ -51,268 +51,268 @@
     "message": "Firefox"
   },
   "browser_firefox_android": {
-    "message": "Firefox for Android"
+    "message": "Android 版 Firefox"
   },
   "browser_safari": {
     "message": "Safari"
   },
   "command_open_info_page": {
-    "message": "Open the info page"
+    "message": "打开信息页面"
   },
   "command_open_popup_window": {
-    "message": "Open the popup window"
+    "message": "打开弹出窗口"
   },
   "command_open_search_page": {
-    "message": "Open the search page"
+    "message": "打开搜索页面"
   },
   "command_open_settings_page": {
-    "message": "Open the settings page"
+    "message": "打开设置页面"
   },
   "command_toggle_text_scanning": {
-    "message": "Toggle text scanning on/off"
+    "message": "切换文本扫描开/关"
   },
   "common_always": {
-    "message": "Always"
+    "message": "始终"
   },
   "common_auto": {
-    "message": "Auto"
+    "message": "自动"
   },
   "common_bottom": {
-    "message": "Bottom"
+    "message": "底部"
   },
   "common_browser": {
-    "message": "Browser"
+    "message": "浏览器"
   },
   "common_close": {
-    "message": "Close"
+    "message": "关闭"
   },
   "common_configure": {
-    "message": "Configure…"
+    "message": "配置…"
   },
   "common_dark": {
-    "message": "Dark"
+    "message": "深色"
   },
   "common_default": {
-    "message": "Default"
+    "message": "默认"
   },
   "common_height": {
-    "message": "Height"
+    "message": "高度"
   },
   "common_info": {
-    "message": "Info…"
+    "message": "信息…"
   },
   "common_left": {
-    "message": "Left"
+    "message": "左"
   },
   "common_less": {
-    "message": "Less…"
+    "message": "收起…"
   },
   "common_light": {
-    "message": "Light"
+    "message": "浅色"
   },
   "common_manual": {
-    "message": "Manual"
+    "message": "手动"
   },
   "common_mode": {
-    "message": "Mode"
+    "message": "模式"
   },
   "common_move_down": {
-    "message": "Move down"
+    "message": "下移"
   },
   "common_move_up": {
-    "message": "Move up"
+    "message": "上移"
   },
   "common_none": {
-    "message": "None"
+    "message": "无"
   },
   "common_normal": {
-    "message": "Normal"
+    "message": "正常"
   },
   "common_operator": {
-    "message": "Operator"
+    "message": "运算符"
   },
   "common_remove": {
-    "message": "Remove"
+    "message": "移除"
   },
   "common_right": {
-    "message": "Right"
+    "message": "右"
   },
   "common_state": {
-    "message": "State"
+    "message": "状态"
   },
   "common_test": {
-    "message": "Test"
+    "message": "测试"
   },
   "common_top": {
-    "message": "Top"
+    "message": "顶部"
   },
   "common_type": {
-    "message": "Type"
+    "message": "类型"
   },
   "common_width": {
-    "message": "Width"
+    "message": "宽度"
   },
   "dictionary_deleting_label": {
-    "message": "Deleting dictionary..."
+    "message": "正在删除词典..."
   },
   "dictionary_details_attribution": {
-    "message": "Attribution"
+    "message": "署名"
   },
   "dictionary_details_author": {
-    "message": "Author"
+    "message": "作者"
   },
   "dictionary_details_description": {
-    "message": "Description"
+    "message": "描述"
   },
   "dictionary_details_expected_database": {
-    "message": "Expected: $1 (Database: $2)"
+    "message": "预期：$1（数据库：$2）"
   },
   "dictionary_details_import_success": {
-    "message": "Import Success"
+    "message": "导入成功"
   },
   "dictionary_details_kanji_count": {
-    "message": "Kanji Count"
+    "message": "汉字数量"
   },
   "dictionary_details_kanji_meta_count": {
-    "message": "Kanji Meta Count"
+    "message": "汉字元数据数量"
   },
   "dictionary_details_media_count": {
-    "message": "Media Count"
+    "message": "媒体数量"
   },
   "dictionary_details_source_language": {
-    "message": "Source Language"
+    "message": "源语言"
   },
   "dictionary_details_tag_meta_count": {
-    "message": "Tag Count"
+    "message": "标签数量"
   },
   "dictionary_details_target_language": {
-    "message": "Target Language"
+    "message": "目标语言"
   },
   "dictionary_details_term_count": {
-    "message": "Term Count"
+    "message": "词条数量"
   },
   "dictionary_details_term_meta_count": {
-    "message": "Term Meta Count"
+    "message": "词条元数据数量"
   },
   "dictionary_details_url": {
     "message": "URL"
   },
   "dictionary_extra_data_item_plural": {
-    "message": "$1 items"
+    "message": "$1 项"
   },
   "dictionary_extra_data_item_singular": {
-    "message": "$1 item"
+    "message": "$1 项"
   },
   "dictionary_main_not_selected": {
-    "message": "Not selected"
+    "message": "未选择"
   },
   "dictionary_updates_count_plural": {
-    "message": "$1 updates"
+    "message": "$1 次更新"
   },
   "dictionary_updates_count_singular": {
-    "message": "$1 update"
+    "message": "$1 次更新"
   },
   "dictionary_updates_none": {
-    "message": "No updates"
+    "message": "无更新"
   },
   "display_add_note_title": {
-    "message": "Add {0}"
+    "message": "添加 {0}"
   },
   "display_anki_error_plural": {
-    "message": "$1 errors occurred:"
+    "message": "发生了 $1 个错误："
   },
   "display_anki_error_singular": {
-    "message": "An error occurred:"
+    "message": "发生错误："
   },
   "display_current_entry_title": {
-    "message": "Current entry"
+    "message": "当前条目"
   },
   "display_dictionary_author": {
-    "message": "Author: $1"
+    "message": "作者：$1"
   },
   "display_dictionary_description": {
-    "message": "Description: $1"
+    "message": "描述：$1"
   },
   "display_dictionary_kanji_count": {
-    "message": "Kanji Count: $1"
+    "message": "汉字数量：$1"
   },
   "display_dictionary_size_kanji": {
-    "message": "Dictionary size: $1 kanji"
+    "message": "词典大小：$1 个汉字"
   },
   "display_dictionary_size_terms": {
-    "message": "Dictionary size: $1 terms"
+    "message": "词典大小：$1 个词条"
   },
   "display_dictionary_term_count": {
-    "message": "Term Count: $1"
+    "message": "词条数量：$1"
   },
   "display_dictionary_url": {
-    "message": "URL: $1"
+    "message": "URL：$1"
   },
   "display_hotkey_add_note": {
-    "message": "Add {0} ({0})"
+    "message": "添加 {0} ({0})"
   },
   "display_hotkey_play_audio": {
-    "message": "Play audio ({0})"
+    "message": "播放音频 ({0})"
   },
   "display_hotkey_view_note": {
-    "message": "View added note ({0})"
+    "message": "查看已添加的笔记 ({0})"
   },
   "display_image_label": {
-    "message": "Image"
+    "message": "图片"
   },
   "display_inflection_algorithm": {
-    "message": "Algorithm Deinflection"
+    "message": "算法逆变形"
   },
   "display_inflection_both": {
-    "message": "Dictionary and Algorithm Deinflection"
+    "message": "词典与算法逆变形"
   },
   "display_inflection_dictionary": {
-    "message": "Dictionary Deinflection"
+    "message": "词典逆变形"
   },
   "display_kanji_heading_classifications": {
-    "message": "Classifications"
+    "message": "分类"
   },
   "display_kanji_heading_codepoints": {
-    "message": "Codepoints"
+    "message": "码点"
   },
   "display_kanji_heading_dictionary_indices": {
-    "message": "Dictionary Indices"
+    "message": "词典索引"
   },
   "display_kanji_heading_meaning": {
-    "message": "Meaning"
+    "message": "释义"
   },
   "display_kanji_heading_readings": {
-    "message": "Readings"
+    "message": "读音"
   },
   "display_kanji_heading_statistics": {
-    "message": "Statistics"
+    "message": "统计"
   },
   "display_log_debug_info": {
-    "message": "Log debug info to console"
+    "message": "将调试信息记录到控制台"
   },
   "display_more_info": {
-    "message": "More info"
+    "message": "更多信息"
   },
   "display_no_data_found": {
-    "message": "No data found"
+    "message": "未找到数据"
   },
   "display_note_viewer_error": {
-    "message": "Note viewer window could not be opened.<br/>\n    Check the <a href=\"/settings.html#anki\" rel=\"noopener\" target=\"_blank\"><em>Anki</em> › <em>Note viewer window</em></a> setting."
+    "message": "无法打开笔记查看器窗口。<br/>\n    请检查 <a href=\"/settings.html#anki\" rel=\"noopener\" target=\"_blank\"><em>Anki</em> › <em>笔记查看器窗口</em></a> 设置。"
   },
   "display_play_audio_title": {
-    "message": "Play audio"
+    "message": "播放音频"
   },
   "display_set_primary_audio_title": {
-    "message": "Use as audio for Anki card"
+    "message": "用作 Anki 卡片的音频"
   },
   "display_view_added_note_title": {
-    "message": "View added note"
+    "message": "查看已添加的笔记"
   },
   "extension_description": {
-    "message": "Sottaku-connected popup dictionary for language learning."
+    "message": "用于语言学习的 Sottaku 连接弹出词典。"
   },
   "extension_description_dev": {
-    "message": "Sottaku-connected popup dictionary for language learning (Dev)."
+    "message": "用于语言学习的 Sottaku 连接弹出词典 (Dev)."
   },
   "extension_name": {
     "message": "Sottaku-Yomitan"
@@ -324,151 +324,151 @@
     "message": "Sottaku-Yomitan"
   },
   "info_anki_version_unknown": {
-    "message": "Unknown"
+    "message": "未知"
   },
   "info_general_browser": {
-    "message": "Browser: <span id=\"browser\"></span>"
+    "message": "浏览器：<span id=\"browser\"></span>"
   },
   "info_general_export_settings": {
-    "message": "<a id=\"settings-export-button\" tabindex=\"0\">Export settings</a>"
+    "message": "<a id=\"settings-export-button\" tabindex=\"0\">导出设置</a>"
   },
   "info_general_extension_version": {
-    "message": "Extension version: <span id=\"version\"></span>"
+    "message": "扩展版本：<span id=\"version\"></span>"
   },
   "info_general_heading": {
-    "message": "General"
+    "message": "常规"
   },
   "info_general_language": {
-    "message": "Language: <span id=\"language\"></span>"
+    "message": "语言：<span id=\"language\"></span>"
   },
   "info_general_platform": {
-    "message": "Platform: <span id=\"platform\"></span>"
+    "message": "平台：<span id=\"platform\"></span>"
   },
   "info_general_user_agent": {
-    "message": "User agent: <span id=\"user-agent\"></span>"
+    "message": "用户代理：<span id=\"user-agent\"></span>"
   },
   "info_heading": {
-    "message": "Sottaku-Yomitan Info"
+    "message": "Sottaku-Yomitan 信息"
   },
   "info_links_bugs": {
-    "message": "Bugs? Report them here: <a href=\"https://github.com/sottakuapp/sottaku-yomitan/issues/new/choose\" rel=\"noreferrer noopener\">GitHub Issues</a>"
+    "message": "有问题？在此报告：<a href=\"https://github.com/sottakuapp/sottaku-yomitan/issues/new/choose\" rel=\"noreferrer noopener\">GitHub Issues</a>"
   },
   "info_links_feedback": {
-    "message": "Enjoying Sottaku-Yomitan? Send feedback or ideas on GitHub or email <a href=\"mailto:hello@sottaku.app\">hello@sottaku.app</a>."
+    "message": "喜欢 Sottaku-Yomitan？请在 GitHub 上反馈或通过邮件联系 <a href=\"mailto:hello@sottaku.app\">hello@sottaku.app</a>。"
   },
   "info_links_heading": {
-    "message": "Links"
+    "message": "链接"
   },
   "info_links_more_info": {
-    "message": "More extension information: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">Permissions</a> | <a href=\"/legal.html\">Licenses</a> | <a href=\"/issues.html\">Issues</a>"
+    "message": "更多扩展信息：<a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">权限</a> | <a href=\"/legal.html\">许可</a> | <a href=\"/issues.html\">问题</a>"
   },
   "info_links_recommended_dictionaries": {
-    "message": "Recommended dictionaries: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">Sottaku-Yomitan Dictionaries</a>"
+    "message": "推荐词典：<a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">Sottaku-Yomitan Dictionaries</a>"
   },
   "info_links_release_notes": {
-    "message": "Release notes: <a data-href-format=\"https://github.com/sottakuapp/sottaku-yomitan/releases/tag/{version}\" href=\"https://github.com/sottakuapp/sottaku-yomitan/releases\" id=\"release-notes-this-version-link\" rel=\"noreferrer noopener\">This version</a> | <a href=\"https://github.com/sottakuapp/sottaku-yomitan/releases\" rel=\"noreferrer noopener\">All versions</a>"
+    "message": "发行说明：<a data-href-format=\"https://github.com/sottakuapp/sottaku-yomitan/releases/tag/{version}\" href=\"https://github.com/sottakuapp/sottaku-yomitan/releases\" id=\"release-notes-this-version-link\" rel=\"noreferrer noopener\">此版本</a> | <a href=\"https://github.com/sottakuapp/sottaku-yomitan/releases\" rel=\"noreferrer noopener\">所有版本</a>"
   },
   "info_links_source_code": {
-    "message": "Source code: <a href=\"https://github.com/sottakuapp/sottaku-yomitan\" rel=\"noreferrer noopener\">GitHub</a>"
+    "message": "源代码：<a href=\"https://github.com/sottakuapp/sottaku-yomitan\" rel=\"noreferrer noopener\">GitHub</a>"
   },
   "info_links_user_guide": {
-    "message": "Information and user guide: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">Homepage</a>"
+    "message": "信息与用户指南：<a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">主页</a>"
   },
   "info_need_help_heading": {
-    "message": "Need help?"
+    "message": "需要帮助？"
   },
   "info_quick_start_link": {
-    "message": "Check out the Quick Start Guide"
+    "message": "查看快速入门指南"
   },
   "info_read_wiki_link": {
-    "message": "Read the wiki"
+    "message": "阅读维基"
   },
   "issues_audio_expired_cert_body": {
-    "message": "If a website failes to keep its HTTPS certificate up to date, downloads can fail because the browser flags the connection as insecure. This has happened occasionally for some websites that Sottaku-Yomitan interacts with, and the issue is usually resolved within a day."
+    "message": "如果网站未能及时更新其 HTTPS 证书，浏览器会将连接标记为不安全，下载可能会失败。这种情况在 Sottaku-Yomitan 交互的一些网站上偶尔出现，通常会在一天内解决。"
   },
   "issues_audio_expired_cert_heading": {
-    "message": "Audio download failed due to an expired server certificate"
+    "message": "由于服务器证书过期，音频下载失败"
   },
   "issues_audio_expired_cert_note": {
-    "message": "This issue is a server-side issue that Sottaku-Yomitan doesn't have control over."
+    "message": "这是服务器端问题，Sottaku-Yomitan 无法控制。"
   },
   "issues_audio_idle_timeout_body": {
-    "message": "Audio files can be downloaded from remote servers when creating Anki cards,\n                and sometimes these downloads can stall due to server or internet connectivity issues.\n                The <em>Idle download timeout</em> setting on the <a href=\"/settings.html#anki\">settings page</a>\n                specifies a time limit for stalled downloads."
+    "message": "在创建 Anki 卡片时可从远程服务器下载音频文件，\n                有时这些下载会因服务器或网络连接问题而卡住。\n                <a href=\"/settings.html#anki\">设置页面</a>上的 <em>空闲下载超时</em> 设置\n                指定了卡住下载的时间限制。"
   },
   "issues_audio_idle_timeout_heading": {
-    "message": "Audio download was cancelled due to an idle timeout"
+    "message": "因空闲超时，音频下载已取消"
   },
   "issues_audio_permissions_body": {
-    "message": "Depending on the extension's configuration, Sottaku-Yomitan can sometimes run into issues with downloading audio files while creating Anki cards. This may be due to a permissions issue where Sottaku-Yomitan hasn't been granted access to the sites hosting the audio files."
+    "message": "根据扩展的配置，Sottaku-Yomitan 在创建 Anki 卡片时有时会遇到音频文件下载问题。这可能是由于权限问题，Sottaku-Yomitan 未被授予访问托管音频文件的网站。"
   },
   "issues_audio_permissions_chrome": {
-    "message": "Check the <em>Site access</em> section of the\n                <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">extension settings pages</a>\n                and grant the extension access to <em>all sites</em> or add the specific audio host URLs."
+    "message": "检查 <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">扩展设置页面</a> 的\n                <em>站点访问</em> 部分，\n                并授予扩展访问 <em>所有站点</em> 的权限或添加特定音频主机 URL。"
   },
   "issues_audio_permissions_firefox": {
-    "message": "From your browser's address bar, go to <code>about:addons</code> and navigate to the settings for Sottaku-Yomitan.\n                Check the <em>Site access</em> section of the extension settings pages\n                and grant the extension access to <em>all sites</em> or add the specific audio host URLs."
+    "message": "在浏览器地址栏输入 <code>about:addons</code> 并进入 Sottaku-Yomitan 的设置。\n                检查扩展设置页面的 <em>站点访问</em> 部分，\n                并授予扩展访问 <em>所有站点</em> 的权限或添加特定音频主机 URL。"
   },
   "issues_audio_permissions_heading": {
-    "message": "Audio download failed due to possible extension permissions error <em>(Chrome)</em>"
+    "message": "由于可能的扩展权限错误，音频下载失败 <em>(Chrome)</em>"
   },
   "issues_heading": {
-    "message": "Sottaku-Yomitan Issues"
+    "message": "Sottaku-Yomitan 问题"
   },
   "legal_dependency_licenses_heading": {
-    "message": "Javascript Dependency Licenses"
+    "message": "JavaScript 依赖许可"
   },
   "legal_edrdg_heading": {
-    "message": "EDRDG License"
+    "message": "EDRDG 许可"
   },
   "legal_heading": {
-    "message": "Sottaku-Yomitan Legal"
+    "message": "Sottaku-Yomitan 法律信息"
   },
   "legal_sottaku_license_heading": {
-    "message": "Sottaku-Yomitan License"
+    "message": "Sottaku-Yomitan 许可"
   },
   "modal_collapsible_dictionaries_description": {
-    "message": "Dictionary definitions can be collapsed if they exceed a certain line count,\n                which may be useful for dictionaries with long definitions.\n                The appearance can be customized using custom CSS.\n                <a data-modal-action=\"show,collapsible-dictionaries-info\" tabindex=\"0\">More…</a>"
+    "message": "如果词典定义超过一定行数，可将其折叠，\n                这对定义较长的词典可能很有用。\n                外观可通过自定义 CSS 进行调整。\n                <a data-modal-action=\"show,collapsible-dictionaries-info\" tabindex=\"0\">更多…</a>"
   },
   "modal_dictionaries_none_installed": {
-    "message": "No dictionaries have been installed yet.\n                Visit the <a href=\"https://github.com/sottakuapp/sottaku-yomitan/blob/master/docs/dictionaries.md#dictionaries\" rel=\"noopener noreferrer\" target=\"_blank\">Sottaku-Yomitan homepage</a>\n                for a list of free dictionaries or click the <em>Import</em> button below to select a dictionary file to import."
+    "message": "尚未安装任何词典。\n                请访问 <a href=\"https://github.com/sottakuapp/sottaku-yomitan/blob/master/docs/dictionaries.md#dictionaries\" rel=\"noopener noreferrer\" target=\"_blank\">Sottaku-Yomitan 主页</a>\n                查看免费词典列表，或点击下方 <em>导入</em> 按钮选择要导入的词典文件。"
   },
   "modal_dictionaries_prefix_wildcard_label": {
-    "message": "Enable support for prefix wildcard searches\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "启用前缀通配符搜索支持\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "modal_dictionary_confirm_delete_all_prompt": {
-    "message": "Are you sure you want to delete <strong>all dictionaries</strong>?"
+    "message": "确定要删除 <strong>所有词典</strong> 吗？"
   },
   "modal_dictionary_details_deinflections_label": {
-    "message": "Use deinflections\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "使用逆变形\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "modal_dictionary_details_pos_label": {
-    "message": "Part of speech filtering\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "词性过滤\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "modal_dictionary_details_prefix_label": {
-    "message": "Prefix wildcard searches supported\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "支持前缀通配符搜索\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "modal_dictionary_move_prompt": {
-    "message": "Input the location the dictionary <strong class=\"dictionary-title\"></strong> should be moved to:"
+    "message": "请输入要将词典 <strong class=\"dictionary-title\"></strong> 移动到的位置："
   },
   "modal_dictionary_rename_prompt": {
-    "message": "Input the display name for <strong class=\"dictionary-title\"></strong> dictionary:"
+    "message": "请输入词典 <strong class=\"dictionary-title\"></strong> 的显示名称："
   },
   "modal_profile_conditions_info_4": {
-    "message": "When using the Flags condition, <code>clipboard</code> is the only valid input.\n                        This lets the search page apply another profile’s settings when text is copied, provided <code>Enable search page clipboard text monitoring</code> is enabled."
+    "message": "使用 Flags 条件时，唯一有效的输入是 <code>clipboard</code>。\n                        这使得在启用 <code>启用搜索页面剪贴板文本监控</code> 时，搜索页面可在复制文本时应用另一配置文件的设置。"
   },
   "modal_profile_conditions_label": {
-    "message": "Conditions for profile <em id=\"profile-conditions-profile-name\"></em>:"
+    "message": "配置文件 <em id=\"profile-conditions-profile-name\"></em> 的条件："
   },
   "modal_profile_delete_prompt": {
-    "message": "Are you sure you want to delete the profile <em id=\"profile-remove-name\"></em>?"
+    "message": "确定要删除配置文件 <em id=\"profile-remove-name\"></em> 吗？"
   },
   "modal_profile_reset_prompt": {
-    "message": "Are you sure you want to reset the profile <em id=\"profile-reset-name\"></em> to default?"
+    "message": "确定要将配置文件 <em id=\"profile-reset-name\"></em> 重置为默认值吗？"
   },
   "modal_recommended_dictionaries_description": {
-    "message": "For non-English dictionaries, please refer to the list of available\n                <a href=\"https://yomidevs.github.io/kaikki-to-yomitan/\" target=\"_blank\"> Kaikki dictionaries</a>."
+    "message": "对于非英语词典，请参考可用的\n                <a href=\"https://yomidevs.github.io/kaikki-to-yomitan/\" target=\"_blank\"> Kaikki 词典</a> 列表。"
   },
   "modal_secondary_search_description": {
-    "message": "These dictionaries will be used to search for definitions of the related terms when the grouping mode is\n                <em>Group related terms</em>."
+    "message": "当分组模式为\n                <em>分组相关词条</em> 时，这些词典将用于搜索相关词条的释义。"
   },
   "os_android": {
     "message": "Android"
@@ -486,706 +486,706 @@
     "message": "Open BSD"
   },
   "os_unknown": {
-    "message": "Unknown"
+    "message": "未知"
   },
   "os_windows": {
     "message": "Windows"
   },
   "page_action_popup_title": {
-    "message": "Sottaku-Yomitan Action Popup"
+    "message": "Sottaku-Yomitan 操作弹窗"
   },
   "page_info_title": {
-    "message": "Sottaku-Yomitan Info"
+    "message": "Sottaku-Yomitan 信息"
   },
   "page_issues_title": {
-    "message": "Sottaku-Yomitan Issues"
+    "message": "Sottaku-Yomitan 问题"
   },
   "page_legal_title": {
-    "message": "Sottaku-Yomitan Legal"
+    "message": "Sottaku-Yomitan 法律信息"
   },
   "page_permissions_title": {
-    "message": "Sottaku-Yomitan Permissions"
+    "message": "Sottaku-Yomitan 权限"
   },
   "page_popup_preview_title": {
-    "message": "Sottaku-Yomitan Popup Preview"
+    "message": "Sottaku-Yomitan 弹窗预览"
   },
   "page_popup_title": {
-    "message": "Sottaku-Yomitan Search"
+    "message": "Sottaku-Yomitan 搜索"
   },
   "page_quick_start_title": {
-    "message": "Quick Start Guide"
+    "message": "快速入门指南"
   },
   "page_search_title": {
-    "message": "Sottaku-Yomitan Search"
+    "message": "Sottaku-Yomitan 搜索"
   },
   "page_settings_title": {
-    "message": "Sottaku-Yomitan Settings"
+    "message": "Sottaku-Yomitan 设置"
   },
   "page_support_title": {
-    "message": "Support Sottaku-Yomitan"
+    "message": "支持 Sottaku-Yomitan"
   },
   "page_template_renderer_title": {
-    "message": "Sottaku-Yomitan Handlebars Sandbox"
+    "message": "Sottaku-Yomitan Handlebars 沙盒"
   },
   "page_welcome_title": {
-    "message": "Welcome to Sottaku-Yomitan!"
+    "message": "欢迎使用 Sottaku-Yomitan！"
   },
   "permissions_add_origin_button": {
-    "message": "Add"
+    "message": "添加"
   },
   "permissions_additional_origins_label": {
-    "message": "Additional origins"
+    "message": "附加来源"
   },
   "permissions_all_urls_description": {
-    "message": "Sottaku-Yomitan requires access to all URLs in order to run scripts to scan text and show the definitions popup, and communicate with Sottaku servers."
+    "message": "Sottaku-Yomitan 需要访问所有 URL 才能运行扫描文本并显示释义弹窗的脚本，并与 Sottaku 服务器通信。"
   },
   "permissions_allow_all_urls_label": {
-    "message": "Allow access to all URLs"
+    "message": "允许访问所有 URL"
   },
   "permissions_allowed_origins_title": {
-    "message": "Allowed Origins"
+    "message": "允许的来源"
   },
   "permissions_clipboard_read_description": {
-    "message": "Sottaku-Yomitan supports automatically opening a search window when text is copied to the clipboard while the browser is running, depending on how certain settings are configured. This allows Sottaku-Yomitan to support scanning text from external applications, provided there is a way to copy text from those applications to the clipboard."
+    "message": "根据某些设置，Sottaku-Yomitan 支持在浏览器运行时当文本复制到剪贴板自动打开搜索窗口。这使 Sottaku-Yomitan 能够扫描来自外部应用的文本，前提是可以将这些应用中的文本复制到剪贴板。"
   },
   "permissions_clipboard_read_label": {
-    "message": "<code>clipboardRead</code> <span class=\"light\">(optional)</span>"
+    "message": "<code>clipboardRead</code> <span class=\"light\">(可选)</span>"
   },
   "permissions_clipboard_write_description": {
-    "message": "Sottaku-Yomitan supports simulating the <code>Ctrl+C</code> (copy to clipboard) keyboard shortcut\n                    when a definitions popup is open and focused."
+    "message": "Sottaku-Yomitan 支持模拟 <code>Ctrl+C</code>（复制到剪贴板）键盘快捷键\n                    当释义弹窗打开并获得焦点时。"
   },
   "permissions_configure_allowed_origins": {
-    "message": "Configure allowed origins…"
+    "message": "配置允许的来源…"
   },
   "permissions_context_menu_description": {
-    "message": "Sottaku-Yomitan adds a context menu interface that lets you look up highlighted words."
+    "message": "Sottaku-Yomitan 添加了一个右键菜单界面，可让你查找高亮的单词。"
   },
   "permissions_declarative_net_request_description": {
-    "message": "Sottaku-Yomitan uses this permission to ensure certain requests have valid and secure headers.\n                        This sometimes involves removing or changing the <code>Origin</code> request header,\n                        as this can be used to fingerprint browser configuration."
+    "message": "Sottaku-Yomitan 使用此权限确保某些请求具有有效且安全的标头。\n                        这有时会涉及删除或更改 <code>Origin</code> 请求标头，\n                        因为它可能被用来指纹识别浏览器配置。"
   },
   "permissions_declarative_net_request_example": {
-    "message": "Example: <code>Origin: <span class=\"extension-id-example\"></span></code>"
+    "message": "示例：<code>Origin: <span class=\"extension-id-example\"></span></code>"
   },
   "permissions_file_urls_chrome": {
-    "message": "This option can be configured from the web browser's <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">extension settings pages</a>."
+    "message": "此选项可在浏览器的 <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">扩展设置页面</a> 中进行配置。"
   },
   "permissions_file_urls_description": {
-    "message": "When enabled, Sottaku-Yomitan is able to scan text and show definitions on local HTML files located using the <code>file://*</code> scheme."
+    "message": "启用后，Sottaku-Yomitan 可以扫描文本并在通过 <code>file://*</code> 方案访问的本地 HTML 文件中显示释义。"
   },
   "permissions_file_urls_label": {
-    "message": "Allow access to file URLs <span class=\"light\">(optional)</span>"
+    "message": "允许访问文件 URL <span class=\"light\">(可选)</span>"
   },
   "permissions_heading": {
-    "message": "Sottaku-Yomitan Permissions"
+    "message": "Sottaku-Yomitan 权限"
   },
   "permissions_modal_close": {
-    "message": "Close"
+    "message": "关闭"
   },
   "permissions_native_messaging_description": {
-    "message": "Sottaku-Yomitan has the ability to communicate with an optional native messaging component in order to support\n                    parsing large blocks of Japanese text using\n                    <a href=\"https://en.wikipedia.org/wiki/MeCab\" rel=\"noopener noreferrer\" target=\"_blank\">MeCab</a>.\n                    The installation of this component is optional and is not included by default."
+    "message": "Sottaku-Yomitan 能与可选的原生消息组件通信，以支持\n                    使用 <a href=\"https://en.wikipedia.org/wiki/MeCab\" rel=\"noopener noreferrer\" target=\"_blank\">MeCab</a> 解析大量日文文本。\n                    该组件的安装是可选的，默认不包含。"
   },
   "permissions_native_messaging_label": {
-    "message": "<code>nativeMessaging</code> <span class=\"light\">(optional)</span>"
+    "message": "<code>nativeMessaging</code> <span class=\"light\">(可选)</span>"
   },
   "permissions_no_additional_origins": {
-    "message": "No additional origins specified."
+    "message": "未指定附加来源。"
   },
   "permissions_persistent_storage_description": {
-    "message": "Web browsers will sometimes clear stored extension data if the device is running low on storage space. The persistent storage permission tells the browser that the extension's data should not be deleted in those circumstances."
+    "message": "当设备存储空间不足时，浏览器有时会清除已保存的扩展数据。持久存储权限会告知浏览器在这些情况下不要删除扩展数据。"
   },
   "permissions_persistent_storage_firefox_note": {
-    "message": "It may not be possible to enable this permission on Firefox for Android."
+    "message": "在 Android 版 Firefox 上可能无法启用此权限。"
   },
   "permissions_persistent_storage_label": {
-    "message": "Persistent storage"
+    "message": "持久存储"
   },
   "permissions_private_windows_chrome": {
-    "message": "This option can be configured from the web browser's <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">extension settings pages</a>."
+    "message": "此选项可在浏览器的 <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">扩展设置页面</a> 中进行配置。"
   },
   "permissions_private_windows_description": {
-    "message": "When enabled, Sottaku-Yomitan is able to scan text and show definitions in private/incognito web browser windows."
+    "message": "启用后，Sottaku-Yomitan 可以在隐私/无痕浏览器窗口中扫描文本并显示释义。"
   },
   "permissions_private_windows_firefox": {
-    "message": "This option can be configured from the web browser's extension settings pages. From your browser's address bar, go to <code>about:addons</code> and navigate to the settings for Sottaku-Yomitan."
+    "message": "此选项可在浏览器的扩展设置页面中配置。在浏览器地址栏中输入 <code>about:addons</code> 并进入 Sottaku-Yomitan 的设置。"
   },
   "permissions_private_windows_label": {
-    "message": "Allow in private windows <span class=\"light\">(optional)</span>"
+    "message": "允许在隐私窗口中使用 <span class=\"light\">(可选)</span>"
   },
   "permissions_scripting_description": {
-    "message": "Sottaku-Yomitan needs to inject content scripts and stylesheets into webpages in order to properly display the search popup."
+    "message": "Sottaku-Yomitan 需要将内容脚本和样式表注入网页，才能正确显示搜索弹窗。"
   },
   "permissions_storage_description": {
-    "message": "Sottaku-Yomitan uses storage permissions in order to save extension settings."
+    "message": "Sottaku-Yomitan 使用存储权限来保存扩展设置。"
   },
   "popup_close_title": {
-    "message": "Close popup"
+    "message": "关闭弹窗"
   },
   "popup_default_profile_title": {
-    "message": "Default Profile"
+    "message": "默认配置文件"
   },
   "popup_hotkey_close": {
-    "message": "Close popup ({0})"
+    "message": "关闭弹窗 ({0})"
   },
   "popup_hotkey_next_definition": {
-    "message": "Next definition ({0})"
+    "message": "下一条释义 ({0})"
   },
   "popup_hotkey_previous_definition": {
-    "message": "Previous definition ({0})"
+    "message": "上一条释义 ({0})"
   },
   "popup_next_definition_title": {
-    "message": "Next definition"
+    "message": "下一条释义"
   },
   "popup_no_results": {
-    "message": "No results found."
+    "message": "未找到结果。"
   },
   "popup_preview_placeholder": {
-    "message": "Link your Sottaku account in the Sottaku section of settings to see the popup preview."
+    "message": "在设置的 Sottaku 部分关联你的 Sottaku 账户，以查看弹窗预览。"
   },
   "popup_previous_definition_title": {
-    "message": "Previous definition"
+    "message": "上一条释义"
   },
   "popup_pro_required_body": {
-    "message": "The popup dictionary requires a Sottaku Pro subscription."
+    "message": "弹窗词典需要 Sottaku Pro 订阅。"
   },
   "popup_pro_required_link": {
-    "message": "Upgrade at sottaku.app/upgrade"
+    "message": "在 sottaku.app/upgrade 升级"
   },
   "popup_pro_required_title": {
-    "message": "Sottaku Pro required"
+    "message": "需要 Sottaku Pro"
   },
   "popup_updated_body": {
-    "message": "The Sottaku-Yomitan extension has been updated to a new version! In order to continue viewing definitions on this page, you must reload this tab or restart your browser."
+    "message": "Sottaku-Yomitan 扩展已更新到新版本！要继续在此页面查看释义，你必须重新加载此标签页或重启浏览器。"
   },
   "popup_updated_title": {
-    "message": "Sottaku-Yomitan Updated!"
+    "message": "Sottaku-Yomitan 已更新！"
   },
   "query_parser_mecab": {
     "message": "MeCab: $1"
   },
   "query_parser_scanning": {
-    "message": "Scanning parser"
+    "message": "扫描解析器"
   },
   "query_parser_unknown_source": {
-    "message": "Unknown source: $1"
+    "message": "未知来源：$1"
   },
   "quick_start_action_popup_alt": {
-    "message": "browser-action-popup"
+    "message": "浏览器操作弹窗"
   },
   "quick_start_heading": {
-    "message": "Sottaku-Yomitan Quick Start Guide"
+    "message": "Sottaku-Yomitan 快速入门指南"
   },
   "quick_start_installing_body": {
-    "message": "Sottaku-Yomitan uses your Sottaku account for lookups, so you do not need to manage local dictionaries on the Settings page.\n\t                You can still visit <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">https://sottaku.app/</a> to learn more about Sottaku-Yomitan dictionaries."
+    "message": "Sottaku-Yomitan 使用你的 Sottaku 账户进行查询，因此你不需要在设置页面管理本地词典。\n                你仍然可以访问 <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">https://sottaku.app/</a> 了解更多 Sottaku-Yomitan 词典信息。"
   },
   "quick_start_installing_heading": {
-    "message": "Installing Dictionaries"
+    "message": "安装词典"
   },
   "quick_start_links_heading": {
-    "message": "Links"
+    "message": "链接"
   },
   "quick_start_links_info": {
-    "message": "Go to Info page"
+    "message": "前往信息页面"
   },
   "quick_start_links_sottaku": {
-    "message": "New to Sottaku-Yomitan? Head to https://sottaku.app/!"
+    "message": "初次使用 Sottaku-Yomitan？前往 https://sottaku.app/！"
   },
   "quick_start_links_welcome": {
-    "message": "Go to Welcome page"
+    "message": "前往欢迎页面"
   },
   "quick_start_migrating_body": {
-    "message": "You can also import an exported collection of dictionaries from the <a href=\"/settings.html#backup\">Backup section of the Settings</a> page.\n\n                <br/><br/>\n\n\t                If you are migrating from Yomichan, you may be interested in importing your data into Sottaku-Yomitan.\n\t                Please follow instructions from <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">https://sottaku.app/</a> for that.\n\n                <br/><br/>\n\n\t                If you are using or planning to use custom templates for Anki note creation, note that <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">some syntax has changed from Yomichan and Yomibaba.</a>\n                Please ensure that your custom templates are using the updated syntax."
+    "message": "你也可以从设置页面的 <a href=\"/settings.html#backup\">备份部分</a> 导入导出的词典集合。\n\n                <br/><br/>\n\n                如果你正在从 Yomichan 迁移，可能希望将数据导入 Sottaku-Yomitan。\n                请按照 <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">https://sottaku.app/</a> 上的说明操作。\n\n                <br/><br/>\n\n                如果你正在使用或计划使用用于 Anki 笔记创建的自定义模板，请注意 <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">与 Yomichan 和 Yomibaba 相比部分语法已更改。</a>\n                请确保你的自定义模板使用了更新后的语法。"
   },
   "quick_start_migrating_heading": {
-    "message": "Migrating to Sottaku-Yomitan"
+    "message": "迁移到 Sottaku-Yomitan"
   },
   "quick_start_quick_actions_body": {
-    "message": "Clicking the <img alt=\"\" class=\"inline-icon\" src=\"/images/yomitan-icon.svg\"/> <em>Sottaku-Yomitan</em> button in the browser bar will open the quick-actions popup."
+    "message": "点击浏览器栏中的 <img alt=\"\" class=\"inline-icon\" src=\"/images/yomitan-icon.svg\"/> <em>Sottaku-Yomitan</em> 按钮将打开快捷操作弹窗。"
   },
   "quick_start_quick_actions_cog": {
-    "message": "The <img alt=\"\" class=\"inline-icon\" src=\"/images/cog.svg\"/> <em>cog</em> button will open the <a href=\"/settings.html\" rel=\"noopener\" target=\"_blank\">Settings</a> page."
+    "message": "<img alt=\"\" class=\"inline-icon\" src=\"/images/cog.svg\"/> <em>齿轮</em> 按钮将打开 <a href=\"/settings.html\" rel=\"noopener\" target=\"_blank\">设置</a> 页面。"
   },
   "quick_start_quick_actions_heading": {
-    "message": "Quick Actions"
+    "message": "快捷操作"
   },
   "quick_start_quick_actions_info": {
-    "message": "The <img alt=\"\" class=\"inline-icon\" src=\"/images/question-mark-circle.svg\"/> <em>question mark</em> button will open the <a href=\"/info.html\" rel=\"noopener\" target=\"_blank\">Information</a> page,\n\t                        which has some helpful information and links about Sottaku-Yomitan."
+    "message": "<img alt=\"\" class=\"inline-icon\" src=\"/images/question-mark-circle.svg\"/> <em>问号</em> 按钮将打开 <a href=\"/info.html\" rel=\"noopener\" target=\"_blank\">信息</a> 页面，\n                        其中包含有关 Sottaku-Yomitan 的有用信息和链接。"
   },
   "quick_start_quick_actions_search": {
-    "message": "The <img alt=\"\" class=\"inline-icon\" src=\"/images/magnifying-glass.svg\"/> <em>magnifying glass</em> button will open the <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">Search</a> page,\n                        enabling text and terms to be looked up using the installed dictionaries.\n                        This can even be used in offline mode!"
+    "message": "<img alt=\"\" class=\"inline-icon\" src=\"/images/magnifying-glass.svg\"/> <em>放大镜</em> 按钮将打开 <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">搜索</a> 页面，\n                        可使用已安装的词典查询文本和词条。\n                        甚至可以在离线模式下使用！"
   },
   "quick_start_scanning_alt": {
-    "message": "scanning"
+    "message": "扫描"
   },
   "quick_start_scanning_audio": {
-    "message": "Clicking the <img alt=\"\" class=\"inline-icon\" src=\"/images/play-audio.svg\"/> <em>speaker</em> button of an entry in the search results\n                    will play an audio clip of a term's pronunciation using an online dictionary, if available."
+    "message": "点击搜索结果条目中的 <img alt=\"\" class=\"inline-icon\" src=\"/images/play-audio.svg\"/> <em>扬声器</em> 按钮，\n                    如果有在线词典可用，将播放词条发音的音频。"
   },
   "quick_start_scanning_body": {
-    "message": "After dictionaries have been installed, webpage text can be scanned by moving the cursor while holding a modifier key.\n                The default key is <kbd>Shift</kbd>, which can be disabled or configured in the <a href=\"/settings.html#backup\">Settings</a> page."
+    "message": "安装词典后，可在按住修饰键的同时移动光标来扫描网页文本。\n                默认按键为 <kbd>Shift</kbd>，可在 <a href=\"/settings.html#backup\">设置</a> 页面中禁用或配置。"
   },
   "quick_start_scanning_heading": {
-    "message": "Scanning Text"
+    "message": "扫描文本"
   },
   "quick_start_scanning_kanji": {
-    "message": "Clicking on a kanji character in a term's definition will show additional information about that character.\n                    <span class=\"light\">(Requires a kanji dictionary to be installed.)</span>"
+    "message": "点击词条释义中的汉字会显示该字符的更多信息。\n                    <span class=\"light\">(需要安装汉字词典。)</span>"
   },
   "search_clipboard_monitor_label": {
-    "message": "Clipboard monitor"
+    "message": "剪贴板监视"
   },
   "search_default_profile_label": {
-    "message": "Default Profile"
+    "message": "默认配置文件"
   },
   "search_header_title": {
-    "message": "Sottaku-Yomitan Search"
+    "message": "Sottaku-Yomitan 搜索"
   },
   "search_settings_auto_kana_label": {
-    "message": "Automatic kana conversion"
+    "message": "自动假名转换"
   },
   "search_settings_close_button": {
-    "message": "Close"
+    "message": "关闭"
   },
   "search_settings_parser_label": {
-    "message": "Parser"
+    "message": "解析器"
   },
   "search_settings_sticky_header_description": {
-    "message": "Search header stays on the page when scrolling down."
+    "message": "向下滚动时搜索标题保持在页面上。"
   },
   "search_settings_sticky_header_label": {
-    "message": "Sticky search header"
+    "message": "固定搜索标题"
   },
   "search_settings_title": {
-    "message": "Search Settings"
+    "message": "搜索设置"
   },
   "search_textbox_placeholder": {
-    "message": "Input a term, expression, sentence, or block of text"
+    "message": "输入词条、表达、句子或文本块"
   },
   "settings_accessibility_google_docs_danger": {
-    "message": "Google has changed this compatibility implementation several times, and the changes do not seem to be announced or documented. Therefore, it is possible that this feature could stop working at any time the future without warning."
+    "message": "Google 多次更改了该兼容实现，这些更改似乎没有公告或文档记录。因此，该功能未来可能随时在没有警告的情况下停止工作。"
   },
   "settings_accessibility_google_docs_label": {
-    "message": "Enable Google Docs compatibility mode\n                        <a class=\"more-toggle more-only danger-text\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "启用 Google 文档兼容模式\n                        <a class=\"more-toggle more-only danger-text\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "settings_accessibility_google_docs_more_1": {
-    "message": "Google Docs now uses\n                    <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas\" rel=\"noopener noreferrer\" target=\"_blank\">canvas-based</a>\n                    rendering to display content<sup><a href=\"https://workspaceupdates.googleblog.com/2021/05/Google-Docs-Canvas-Based-Rendering-Update.html\" rel=\"noopener noreferrer\" target=\"_blank\">[2]</a></sup>\n                    which prevents Sottaku-Yomitan from being able to scan text using the standard methods.\n                    Enabling this option will force Google Docs webpages to expose some additional text\n                    information which should allow Sottaku-Yomitan to still work."
+    "message": "Google 文档现在使用\n                    <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas\" rel=\"noopener noreferrer\" target=\"_blank\">canvas-based</a>\n                    渲染来显示内容<sup><a href=\"https://workspaceupdates.googleblog.com/2021/05/Google-Docs-Canvas-Based-Rendering-Update.html\" rel=\"noopener noreferrer\" target=\"_blank\">[2]</a></sup>\n                    这会阻止 Sottaku-Yomitan 使用标准方法扫描文本。\n                    启用此选项将强制 Google 文档网页公开一些额外的文本信息，\n                    从而使 Sottaku-Yomitan 仍能工作。"
   },
   "settings_accessibility_google_docs_warning": {
-    "message": "If any profile has this setting enabled, compatibility mode will be activated; profile conditions are ignored."
+    "message": "如果任何配置文件启用了此设置，兼容模式将被启用；配置文件条件将被忽略。"
   },
   "settings_accessibility_heading": {
-    "message": "Accessibility"
+    "message": "无障碍"
   },
   "settings_appearance_action_bar_description": {
-    "message": "Control when and where the action bar is visible."
+    "message": "控制操作栏何时何地显示。"
   },
   "settings_appearance_action_bar_label": {
-    "message": "Action bar appearance"
+    "message": "操作栏外观"
   },
   "settings_appearance_action_bar_location_label": {
-    "message": "Location"
+    "message": "位置"
   },
   "settings_appearance_action_bar_visibility_label": {
-    "message": "Visibility"
+    "message": "可见性"
   },
   "settings_appearance_collapsible_dictionaries_label": {
-    "message": "Configure collapsible dictionaries…"
+    "message": "配置可折叠词典…"
   },
   "settings_appearance_compact_glossaries_description": {
-    "message": "Display term glossaries using a more compact layout."
+    "message": "以更紧凑的布局显示术语释义。"
   },
   "settings_appearance_compact_glossaries_label": {
-    "message": "Compact glossaries"
+    "message": "紧凑释义"
   },
   "settings_appearance_compact_popup": {
-    "message": "Compact Popup"
+    "message": "紧凑弹窗"
   },
   "settings_appearance_compact_popup_anki": {
-    "message": "Compact Popup and Anki"
+    "message": "紧凑弹窗与 Anki"
   },
   "settings_appearance_compact_tags_description": {
-    "message": "Show fewer repeated tags for term glossaries."
+    "message": "减少术语释义中重复标签的显示。"
   },
   "settings_appearance_compact_tags_label": {
-    "message": "Compact tags"
+    "message": "紧凑标签"
   },
   "settings_appearance_custom_css_label": {
-    "message": "Configure custom CSS…"
+    "message": "配置自定义 CSS…"
   },
   "settings_appearance_debug_description": {
-    "message": "A menu option to log debugging information will be shown in the search results."
+    "message": "搜索结果中将显示记录调试信息的菜单选项。"
   },
   "settings_appearance_debug_label": {
-    "message": "Show debug information"
+    "message": "显示调试信息"
   },
   "settings_appearance_expression_tags_description": {
-    "message": "These tags can be scanned if the options for popup content scanning are enabled."
+    "message": "如果启用了弹窗内容扫描选项，这些标签可被扫描。"
   },
   "settings_appearance_expression_tags_label": {
-    "message": "Show tags for expressions and their readings"
+    "message": "显示表达及其读音的标签"
   },
   "settings_appearance_font_family_description": {
-    "message": "Change the font family used in Sottaku-Yomitan.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "更改 Sottaku-Yomitan 使用的字体族。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">更多…</a>"
   },
   "settings_appearance_font_family_label": {
-    "message": "Font family"
+    "message": "字体族"
   },
   "settings_appearance_font_family_more": {
-    "message": "The font family can be changed to any font installed on your system.<br/>\n                    You can input things such as <code>sans-serif</code>, <code>serif</code>, or <code>monospace</code>.<br/>\n                    If you want to specify one or multiple specific fonts, you can type them in manually separated by commas,\n                    for example <pre><code>\"Noto Sans JP\", \"Meiryo\", sans-serif</code></pre>"
+    "message": "字体族可更改为系统中安装的任何字体。<br/>\n                    你可以输入 <code>sans-serif</code>、<code>serif</code> 或 <code>monospace</code> 等。<br/>\n                    如果要指定一个或多个特定字体，可用逗号手动分隔输入，\n                    例如 <pre><code>\"Noto Sans JP\", \"Meiryo\", sans-serif</code></pre>"
   },
   "settings_appearance_font_size_description": {
-    "message": "Change the font size used in popups, in pixels."
+    "message": "更改弹窗中使用的字体大小（像素）。"
   },
   "settings_appearance_font_size_label": {
-    "message": "Font size"
+    "message": "字体大小"
   },
   "settings_appearance_frequency_description": {
-    "message": "Change how frequency information is presented."
+    "message": "更改频率信息的呈现方式。"
   },
   "settings_appearance_frequency_inline_list": {
-    "message": "Inline list"
+    "message": "内联列表"
   },
   "settings_appearance_frequency_label": {
-    "message": "Frequency display style"
+    "message": "频率显示样式"
   },
   "settings_appearance_frequency_list": {
-    "message": "List"
+    "message": "列表"
   },
   "settings_appearance_frequency_split_tags": {
-    "message": "Split tags"
+    "message": "拆分标签"
   },
   "settings_appearance_frequency_split_tags_grouped": {
-    "message": "Split tags, grouped content"
+    "message": "拆分标签，分组内容"
   },
   "settings_appearance_frequency_tags": {
-    "message": "Tags"
+    "message": "标签"
   },
   "settings_appearance_frequency_tags_grouped": {
-    "message": "Tags, grouped content"
+    "message": "标签，分组内容"
   },
   "settings_appearance_heading": {
-    "message": "Appearance"
+    "message": "外观"
   },
   "settings_appearance_indicator_asterisk": {
-    "message": "Asterisk"
+    "message": "星号"
   },
   "settings_appearance_indicator_bar_left": {
-    "message": "Vertical bar (left)"
+    "message": "垂直条（左）"
   },
   "settings_appearance_indicator_bar_right": {
-    "message": "Vertical bar (right)"
+    "message": "垂直条（右）"
   },
   "settings_appearance_indicator_dot_left": {
-    "message": "Small dot (left)"
+    "message": "小点（左）"
   },
   "settings_appearance_indicator_dot_right": {
-    "message": "Small dot (right)"
+    "message": "小点（右）"
   },
   "settings_appearance_indicator_triangle": {
-    "message": "Triangle"
+    "message": "三角形"
   },
   "settings_appearance_line_height_description": {
-    "message": "Change the space between lines of text in popups. This will usually be a decimal number between 1 and 2."
+    "message": "更改弹窗中文字行之间的间距。通常为 1 到 2 之间的小数。"
   },
   "settings_appearance_line_height_label": {
-    "message": "Line height"
+    "message": "行高"
   },
   "settings_appearance_pitch_accent_description": {
-    "message": "Japanese only.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "仅日语。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">更多…</a>"
   },
   "settings_appearance_pitch_accent_label": {
-    "message": "Pitch accent display styles"
+    "message": "音高重音显示样式"
   },
   "settings_appearance_pitch_accent_more_1": {
-    "message": "Pitch accents for terms and expressions can be shown if a dictionary supporting pitch accents is installed. There are currently three different ways that pitch accents can be presented:"
+    "message": "如果安装了支持音高重音的词典，可显示术语和表达的音高重音。目前有三种不同的显示方式："
   },
   "settings_appearance_pitch_downstep_notation": {
-    "message": "Downstep notation"
+    "message": "降阶标注"
   },
   "settings_appearance_pitch_downstep_position": {
-    "message": "Downstep position"
+    "message": "降阶位置"
   },
   "settings_appearance_pitch_graph": {
-    "message": "Graph"
+    "message": "图形"
   },
   "settings_appearance_reading_mode_description": {
-    "message": "Change what type of furigana is displayed for parsed text. Japanese only."
+    "message": "更改解析文本显示的振假名类型。仅日语。"
   },
   "settings_appearance_reading_mode_dictionary": {
-    "message": "Dictionary reading"
+    "message": "词典读音"
   },
   "settings_appearance_reading_mode_hiragana": {
-    "message": "ひらがな"
+    "message": "平假名"
   },
   "settings_appearance_reading_mode_katakana": {
-    "message": "カタカナ"
+    "message": "片假名"
   },
   "settings_appearance_reading_mode_label": {
-    "message": "Reading mode"
+    "message": "读音模式"
   },
   "settings_appearance_reading_mode_romaji": {
-    "message": "Romaji"
+    "message": "罗马字"
   },
   "settings_appearance_selection_indicator_description": {
-    "message": "Change how the selected definition entry is visually indicated."
+    "message": "更改选中释义条目的视觉指示方式。"
   },
   "settings_appearance_selection_indicator_label": {
-    "message": "Selection indicator style"
+    "message": "选择指示样式"
   },
   "settings_appearance_term_display_description": {
-    "message": "Change how terms and their readings are displayed."
+    "message": "更改术语及其读音的显示方式。"
   },
   "settings_appearance_term_display_label": {
-    "message": "Term display style"
+    "message": "术语显示样式"
   },
   "settings_appearance_term_display_ruby": {
-    "message": "Term furigana"
+    "message": "术语振假名"
   },
   "settings_appearance_term_display_ruby_reading": {
-    "message": "Term furigana and reading"
+    "message": "术语振假名与读音"
   },
   "settings_appearance_term_display_term_only": {
-    "message": "Plain term"
+    "message": "仅术语"
   },
   "settings_appearance_term_display_term_reading": {
-    "message": "Plain term and reading"
+    "message": "术语与读音"
   },
   "settings_appearance_theme_body_label": {
-    "message": "Body"
+    "message": "正文"
   },
   "settings_appearance_theme_description": {
-    "message": "Adjust the style of Sottaku-Yomitan."
+    "message": "调整 Sottaku-Yomitan 的样式。"
   },
   "settings_appearance_theme_label": {
-    "message": "Theme"
+    "message": "主题"
   },
   "settings_appearance_theme_shadow_label": {
-    "message": "Shadow"
+    "message": "阴影"
   },
   "settings_audio_autoplay_description": {
-    "message": "The audio for the first result will be played automatically."
+    "message": "将自动播放第一个结果的音频。"
   },
   "settings_audio_autoplay_label": {
-    "message": "Auto-play search result audio"
+    "message": "自动播放搜索结果音频"
   },
   "settings_audio_enable_description": {
-    "message": "Show a clickable speaker icon next to search results."
+    "message": "在搜索结果旁显示可点击的扬声器图标。"
   },
   "settings_audio_enable_disclaimer": {
-    "message": "This option may send term, reading, and/or language outside of Sottaku-Yomitan to fetch audio<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">Privacy Policy</a>)</span>."
+    "message": "此选项可能会将词条、读音和/或语言发送到 Sottaku-Yomitan 之外以获取音频<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">隐私政策</a>)</span>."
   },
   "settings_audio_enable_label": {
-    "message": "Enable audio playback for terms"
+    "message": "启用词条音频播放"
   },
   "settings_audio_fallback_bloop": {
-    "message": "Bloop"
+    "message": "布鲁普"
   },
   "settings_audio_fallback_click": {
-    "message": "Click"
+    "message": "咔嗒"
   },
   "settings_audio_fallback_description": {
-    "message": "The sound to play when Sottaku-Yomitan fails to fetch audio."
+    "message": "当 Sottaku-Yomitan 无法获取音频时播放的声音。"
   },
   "settings_audio_fallback_label": {
-    "message": "Audio fallback sound"
+    "message": "音频回退声音"
   },
   "settings_audio_heading": {
-    "message": "Audio"
+    "message": "音频"
   },
   "settings_audio_sources_label": {
-    "message": "Configure audio playback sources…"
+    "message": "配置音频播放来源…"
   },
   "settings_audio_volume_description": {
-    "message": "Adjust the volume audio is played at, in percent."
+    "message": "以百分比调整音频播放音量。"
   },
   "settings_audio_volume_label": {
-    "message": "Audio volume"
+    "message": "音频音量"
   },
   "settings_backup_description": {
-    "message": "Sottaku-Yomitan can import and export settings files which can be used to restore settings, share settings across devices, and to help to debug problems. These files will only contain settings."
+    "message": "Sottaku-Yomitan 可以导入和导出设置文件，这些文件可用于恢复设置、在设备间共享设置，并帮助调试问题。这些文件只包含设置。"
   },
   "settings_backup_export_button": {
-    "message": "Export Settings"
+    "message": "导出设置"
   },
   "settings_backup_heading": {
-    "message": "Backup"
+    "message": "备份"
   },
   "settings_backup_import_button": {
-    "message": "Import Settings"
+    "message": "导入设置"
   },
   "settings_backup_reset_button": {
-    "message": "Reset Settings"
+    "message": "重置设置"
   },
   "settings_clipboard_background_description": {
-    "message": "Open the search page in a new window when text is copied to the clipboard."
+    "message": "当文本复制到剪贴板时在新窗口中打开搜索页面。"
   },
   "settings_clipboard_background_label": {
-    "message": "Enable background clipboard text monitoring"
+    "message": "启用后台剪贴板文本监控"
   },
   "settings_clipboard_heading": {
-    "message": "Clipboard"
+    "message": "剪贴板"
   },
   "settings_clipboard_info_1": {
-    "message": "Sottaku-Yomitan can watch the system clipboard and automatically search on the search page when text is copied. This can be useful for using Sottaku-Yomitan to scan text from external applications."
+    "message": "Sottaku-Yomitan 可以监视系统剪贴板，并在文本被复制时在搜索页面上自动搜索。这对于使用 Sottaku-Yomitan 从外部应用扫描文本很有用。"
   },
   "settings_clipboard_info_2": {
-    "message": "This feature requires Sottaku-Yomitan to have clipboard reading permissions, and when this option is enabled, the clipboard will be frequently checked for new text."
+    "message": "此功能需要 Sottaku-Yomitan 拥有剪贴板读取权限，并且启用此选项后，将频繁检查剪贴板中的新文本。"
   },
   "settings_clipboard_max_length_description": {
-    "message": "Limit the number of characters used when searching clipboard text."
+    "message": "限制搜索剪贴板文本时使用的字符数。"
   },
   "settings_clipboard_max_length_label": {
-    "message": "Maximum clipboard text search length"
+    "message": "剪贴板文本搜索最大长度"
   },
   "settings_clipboard_search_description": {
-    "message": "The query on the search page will be automatically updated with text in the clipboard."
+    "message": "搜索页面上的查询将自动使用剪贴板中的文本更新。"
   },
   "settings_clipboard_search_label": {
-    "message": "Enable search page clipboard text monitoring"
+    "message": "启用搜索页面剪贴板文本监控"
   },
   "settings_clipboard_search_mode_description": {
-    "message": "Change how the search page reacts to new text in the clipboard."
+    "message": "更改搜索页面对剪贴板中新文本的反应方式。"
   },
   "settings_clipboard_search_mode_label": {
-    "message": "Clipboard text search mode"
+    "message": "剪贴板文本搜索模式"
   },
   "settings_clipboard_search_mode_search": {
-    "message": "Search for definitions"
+    "message": "搜索释义"
   },
   "settings_clipboard_search_mode_update": {
-    "message": "Update query only"
+    "message": "仅更新查询"
   },
   "settings_collapsible_varies": {
     "message": "Varies"
   },
   "settings_general_api_css_bypass_label": {
-    "message": "Allow bypassing css sanitization"
+    "message": "允许绕过 CSS 清理"
   },
   "settings_general_api_css_bypass_more_1": {
-    "message": "A malicious dictionary which contains malicious CSS may try to execute Javascript. For example, if the output of the Sottaku-Yomitan API is used in Anki, then the resulting Anki card may execute unintended Javascript. The risk in this case is similar to downloading a malicious Anki deck. Namely, in both cases, you are relying purely on Anki's sandbox to protect your machine and information from the malicious code. If the Anki sandbox works, card contents could be leaked (a minor confidential issue). If the sandbox fails, there is much more to worry about (actions being taken on your machine such as stealing credentials and sensitive information, or ransomware taking over your computer)."
+    "message": "包含恶意 CSS 的恶意词典可能会尝试执行 Javascript。例如，如果 Sottaku-Yomitan API 的输出用于 Anki，则生成的 Anki 卡片可能会执行意外的 Javascript。此情况下的风险类似于下载恶意 Anki 牌组。也就是说，在这两种情况下，你完全依赖 Anki 的沙盒来保护你的设备和信息免受恶意代码的影响。如果 Anki 的沙盒有效，卡片内容可能会泄露（一个轻微的机密性问题）。如果沙盒失效，则有更多值得担心的事情（在你的设备上执行的操作，例如窃取凭据和敏感信息，或勒索软件接管你的电脑）。"
   },
   "settings_general_api_css_bypass_more_2": {
-    "message": "If you choose to disable the CSS sanitization, we recommend thinking end-to-end about where the Sottaku-Yomitan API output is used, and whether that destination is resilient to potentially malicious Javascript code being included, otherwise you are potentially risking the data and integrity of your system."
+    "message": "如果你选择禁用 CSS 清理，我们建议从头到尾思考 Sottaku-Yomitan API 输出会在何处使用，以及该目标是否能抵御潜在的恶意 Javascript 被包含进来；否则你可能会冒着系统数据和完整性风险。"
   },
   "settings_general_api_css_bypass_more_3": {
-    "message": "Sanitization bypass will allow CSS that cannot be sanitized to pass through the sanitizer unchanged. This ONLY applies to the Sottaku-Yomitan API, it will not make any other areas of Sottaku-Yomitan potentially vulnerable."
+    "message": "绕过清理将允许无法清理的 CSS 不经更改通过清理器。这仅适用于 Sottaku-Yomitan API，不会使 Sottaku-Yomitan 的其他区域可能变得脆弱。"
   },
   "settings_general_api_css_bypass_more_4": {
-    "message": "This can be required to retrieve CSS on some browsers which do not support the offscreen page necessary for full CSS sanitization in the Sottaku-Yomitan API on the backend. Sottaku-Yomitan will attempt to fall back on basic sanitization but this will fail for dictionaries making use of complex CSS."
+    "message": "在某些浏览器中，这可能是获取 CSS 所必需的，因为这些浏览器不支持在后端的 Sottaku-Yomitan API 中进行完全 CSS 清理所需的 offscreen 页面。Sottaku-Yomitan 会尝试回退到基本清理，但对于使用复杂 CSS 的词典将失败。"
   },
   "settings_general_api_css_bypass_warning": {
-    "message": "Only enable this option if you trust the authors of your dictionaries or will perform sanitization outside of Sottaku-Yomitan.\n                                        Malicious dictionaries can send malformed CSS to allow Javascript execution if injected into a webview or browser.\n                                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "仅当你信任词典作者或会在 Sottaku-Yomitan 之外进行清理时才启用此选项。\n                                        恶意词典可以发送畸形 CSS，使其在注入 webview 或浏览器时允许执行 Javascript。\n                                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">更多…</a>"
   },
   "settings_general_api_more_1": {
-    "message": "To activate the Sottaku-Yomitan API, a native messaging component must be installed.\n                        A setup guide can be found <a href=\"https://github.com/yomidevs/yomitan-api/blob/master/README.md\" rel=\"noopener noreferrer\" target=\"_blank\">here</a>."
+    "message": "要启用 Sottaku-Yomitan API，必须安装本地消息组件。\n                        可以在 <a href=\"https://github.com/yomidevs/yomitan-api/blob/master/README.md\" rel=\"noopener noreferrer\" target=\"_blank\">此处</a> 找到设置指南。"
   },
   "settings_general_api_test_url_placeholder": {
     "message": "http://127.0.0.1:19633"
   },
   "settings_general_context_menu": {
-    "message": "Show \"Lookup in Sottaku-Yomitan\" in right-click menu"
+    "message": "在右键菜单中显示“在 Sottaku-Yomitan 中查找”"
   },
   "settings_general_enable_api_description": {
-    "message": "Enable support for sending local web requests to fetch data from Sottaku-Yomitan."
+    "message": "启用支持发送本地 Web 请求以从 Sottaku-Yomitan 获取数据。"
   },
   "settings_general_enable_api_disclaimer": {
-    "message": "This option may send data outside of Sottaku-Yomitan to local applications that request it<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">Privacy Policy</a>)</span>.\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "此选项可能会将数据发送到 Sottaku-Yomitan 之外的本地应用程序，这些应用程序会请求它<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">隐私政策</a>)</span>.\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">更多…</a>"
   },
   "settings_general_enable_api_label": {
-    "message": "Enable Sottaku-Yomitan API"
+    "message": "启用 Sottaku-Yomitan API"
   },
   "settings_general_enable_label": {
-    "message": "Enable Sottaku-Yomitan"
+    "message": "启用 Sottaku-Yomitan"
   },
   "settings_general_heading": {
-    "message": "General"
+    "message": "常规"
   },
   "settings_general_locale_description": {
-    "message": "Language used for translations returned by Sottaku."
+    "message": "Sottaku 返回的翻译所使用的语言。"
   },
   "settings_general_locale_label": {
-    "message": "Locale"
+    "message": "区域设置"
   },
   "settings_general_max_results_description": {
-    "message": "Adjust the maximum number of results shown for lookups."
+    "message": "调整查找时显示的最大结果数量。"
   },
   "settings_general_max_results_label": {
-    "message": "Maximum number of results"
+    "message": "最大结果数量"
   },
   "settings_general_show_guide": {
-    "message": "Show the <a href=\"/welcome.html\" rel=\"noopener\" target=\"_blank\">welcome guide</a> on browser startup"
+    "message": "在浏览器启动时显示 <a href=\"/welcome.html\" rel=\"noopener\" target=\"_blank\">欢迎指南</a>"
   },
   "settings_general_text_language_description": {
-    "message": "Used for offline dictionary features and preview tooling."
+    "message": "用于离线词典功能和预览工具。"
   },
   "settings_general_text_language_label": {
-    "message": "Text language"
+    "message": "文本语言"
   },
   "settings_heading": {
-    "message": "Sottaku-Yomitan Settings"
+    "message": "Sottaku-Yomitan 设置"
   },
   "settings_loading_delay_notice": {
-    "message": "This page is taking longer than expected to load."
+    "message": "此页面加载时间比预期更长。"
   },
   "settings_loading_delay_safari": {
-    "message": "Due to a bug in Safari, it may be necessary to click the <img alt=\"\" class=\"inline-icon\" src=\"/images/yomitan-icon.svg\"/> <em>Sottaku-Yomitan</em>\n                        button in the browser bar to fully load the page"
+    "message": "由于 Safari 的一个错误，可能需要点击浏览器栏中的 <img alt=\"\" class=\"inline-icon\" src=\"/images/yomitan-icon.svg\"/> <em>Sottaku-Yomitan</em>\n                        按钮才能完全加载页面"
   },
   "settings_nav_about": {
-    "message": "About Sottaku-Yomitan"
+    "message": "关于 Sottaku-Yomitan"
   },
   "settings_nav_accessibility": {
-    "message": "Accessibility"
+    "message": "无障碍"
   },
   "settings_nav_advanced": {
-    "message": "Advanced"
+    "message": "高级"
   },
   "settings_nav_appearance": {
-    "message": "Appearance"
+    "message": "外观"
   },
   "settings_nav_audio": {
-    "message": "Audio"
+    "message": "音频"
   },
   "settings_nav_backup": {
-    "message": "Backup"
+    "message": "备份"
   },
   "settings_nav_clipboard": {
-    "message": "Clipboard"
+    "message": "剪贴板"
   },
   "settings_nav_debug": {
-    "message": "Debug"
+    "message": "调试"
   },
   "settings_nav_general": {
-    "message": "General"
+    "message": "常规"
   },
   "settings_nav_popup_behavior": {
-    "message": "Popup Behavior"
+    "message": "弹窗行为"
   },
   "settings_nav_position_size": {
-    "message": "Position & Size"
+    "message": "位置与大小"
   },
   "settings_nav_profile": {
-    "message": "Profile"
+    "message": "个人资料"
   },
   "settings_nav_result_display": {
-    "message": "Result Display"
+    "message": "结果显示"
   },
   "settings_nav_scanning": {
-    "message": "Scanning"
+    "message": "扫描"
   },
   "settings_nav_search_window": {
-    "message": "Search Window"
+    "message": "搜索窗口"
   },
   "settings_nav_security": {
-    "message": "Security"
+    "message": "安全"
   },
   "settings_nav_shortcuts": {
-    "message": "Shortcuts"
+    "message": "快捷键"
   },
   "settings_nav_sottaku": {
     "message": "Sottaku"
   },
   "settings_nav_text_parsing": {
-    "message": "Text Parsing"
+    "message": "文本解析"
   },
   "settings_nav_translation": {
-    "message": "Translation"
+    "message": "翻译"
   },
   "settings_popup_auto_hide_description": {
     "message": "When an existing popup is present, upon scanning again, hide the existing popup even if no definitions are found when scanning again."
@@ -1344,16 +1344,16 @@
     "message": "Same as horizontal text"
   },
   "settings_profile_active_description": {
-    "message": "Switch the active profile that is used for scanning."
+    "message": "切换用于扫描的当前资料。"
   },
   "settings_profile_active_label": {
-    "message": "Active profile"
+    "message": "当前资料"
   },
   "settings_profile_configure": {
-    "message": "Configure profiles…"
+    "message": "配置资料…"
   },
   "settings_profile_heading": {
-    "message": "Profile"
+    "message": "个人资料"
   },
   "settings_result_average_frequencies_description": {
     "message": "Compress frequency tags into one \"Average\" frequency tag based on the harmonic mean."
@@ -1401,115 +1401,115 @@
     "message": "Group term-reading pairs"
   },
   "settings_scanning_advanced_inputs_label": {
-    "message": "Configure advanced scanning inputs… <span class=\"light no-wrap\">(<span class=\"scanning-input-count\">#</span> defined)</span>"
+    "message": "配置高级扫描输入… <span class=\"light no-wrap\">(<span class=\"scanning-input-count\">#</span> 已定义)</span>"
   },
   "settings_scanning_alphanumeric_description": {
-    "message": "Only applies when language is set to Japanese, Chinese, Cantonese, or Korean."
+    "message": "仅当语言设置为日语、中文、粤语或韩语时适用。"
   },
   "settings_scanning_alphanumeric_label": {
-    "message": "Search text with non-Japanese, Chinese, or Korean characters"
+    "message": "搜索包含非日语、中文或韩语字符的文本"
   },
   "settings_scanning_deep_scan_description": {
-    "message": "Enable scanning text that is covered by other layers."
+    "message": "启用扫描被其他图层覆盖的文本。"
   },
   "settings_scanning_deep_scan_label": {
-    "message": "Deep content scanning"
+    "message": "深度内容扫描"
   },
   "settings_scanning_delay_description": {
-    "message": "Change the delay before scanning occurs when no modifier key is required."
+    "message": "在不需要修饰键时，调整扫描开始前的延迟。"
   },
   "settings_scanning_delay_label": {
-    "message": "Scan delay <span class=\"light\">(in milliseconds)</span>"
+    "message": "扫描延迟 <span class=\"light\">（毫秒）</span>"
   },
   "settings_scanning_heading": {
-    "message": "Scanning"
+    "message": "扫描"
   },
   "settings_scanning_input_prevention_label": {
-    "message": "Configure input action prevention…"
+    "message": "配置输入动作阻止…"
   },
   "settings_scanning_layout_description": {
-    "message": "Use webpage styling information to determine where line breaks are likely to be."
+    "message": "使用网页样式信息来确定可能的换行位置。"
   },
   "settings_scanning_layout_label": {
-    "message": "Layout-aware scanning"
+    "message": "布局感知扫描"
   },
   "settings_scanning_middle_mouse_description": {
-    "message": "Hold the middle mouse button while moving the cursor to scan text."
+    "message": "按住鼠标中键并移动光标以扫描文本。"
   },
   "settings_scanning_middle_mouse_label": {
-    "message": "Scan using middle mouse button"
+    "message": "使用鼠标中键扫描"
   },
   "settings_scanning_modifier_description": {
-    "message": "Hold a key while moving the cursor to scan text.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "按住一个键并移动光标以扫描文本。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">更多…</a>"
   },
   "settings_scanning_modifier_label": {
-    "message": "Scan modifier key"
+    "message": "扫描修饰键"
   },
   "settings_scanning_modifier_more_1": {
-    "message": "A keyboard modifier key can be used to activate text scanning when the cursor is moved.\n                    Alternatively, the <em>No key</em> option can be used to scan text whenever the cursor is moved,\n                    without requiring any key to be held."
+    "message": "键盘修饰键可在移动光标时启用文本扫描。\n                    或者选择<em>无按键</em>选项，可在不按住任何键的情况下随光标移动进行扫描。"
   },
   "settings_scanning_modifier_more_2": {
-    "message": "More advanced scanning input customization can be set up by enabling the <em>Advanced</em> option\n                    and clicking <em data-modal-action=\"show,scanning-inputs\">Configure advanced scanning inputs</em>."
+    "message": "启用<em>高级</em>选项并点击<em data-modal-action=\"show,scanning-inputs\">配置高级扫描输入</em>即可设置更高级的扫描输入自定义。"
   },
   "settings_scanning_resolution_character": {
-    "message": "Character"
+    "message": "字符"
   },
   "settings_scanning_resolution_description": {
-    "message": "Start the lookup scan at the word or character of the cursor position.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "从光标位置的单词或字符开始扫描查找。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">更多…</a>"
   },
   "settings_scanning_resolution_label": {
-    "message": "Scan resolution"
+    "message": "扫描分辨率"
   },
   "settings_scanning_resolution_more_1": {
-    "message": "The scan resolution determines where the scan starts when the cursor is moved.\n                    The <code>Character</code> option will start scanning at the cursor's current position,\n                    while the <code>Word</code> option will start scanning at the beginning of the word."
+    "message": "扫描分辨率决定光标移动时从哪里开始扫描。\n                    <code>字符</code> 选项将从光标当前位置开始扫描，\n                    <code>单词</code> 选项将从单词开头开始扫描。"
   },
   "settings_scanning_resolution_word": {
-    "message": "Word"
+    "message": "单词"
   },
   "settings_scanning_select_text_label": {
-    "message": "Select matched text"
+    "message": "选择匹配的文本"
   },
   "settings_scanning_text_length_description": {
-    "message": "Change how many characters are read when scanning for terms."
+    "message": "调整扫描词条时读取的字符数量。"
   },
   "settings_scanning_text_length_label": {
-    "message": "Text scan length"
+    "message": "文本扫描长度"
   },
   "settings_scanning_text_length_warning": {
-    "message": "Setting this value too high (100+) may impact performance."
+    "message": "将此值设置过高（100+）可能影响性能。"
   },
   "settings_scanning_wildcard_description": {
-    "message": "Enable suffix wildcard when looking up scanned webpage text.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "在查找扫描到的网页文本时启用后缀通配符。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">更多…</a>"
   },
   "settings_scanning_wildcard_label": {
-    "message": "Wildcard scanning"
+    "message": "通配符扫描"
   },
   "settings_scanning_wildcard_more_1": {
-    "message": "Rather than searching for the source text exactly, the text will only be required to be a prefix of an existing term. For example, scanning 読み will effectively search for 読み*, which may bring up additional results such as 読み方."
+    "message": "不再精确匹配源文本，只要求文本是现有词条的前缀。例如，扫描 読み 实际上会搜索 読み*，这可能会带来如 読み方 等额外结果。"
   },
   "settings_scanning_wildcard_warning": {
-    "message": "This will likely cause scanning and lookup to be slower, and the results may not be as relevant."
+    "message": "这可能会使扫描和查找变慢，且结果可能不够相关。"
   },
   "settings_scanning_without_mousemove_description": {
-    "message": "Allow scanning words under the pointer without the pointer being in motion."
+    "message": "允许在指针不移动的情况下扫描指针下方的单词。"
   },
   "settings_scanning_without_mousemove_label": {
-    "message": "Scan without mouse move"
+    "message": "无需移动鼠标即可扫描"
   },
   "settings_scanning_zoom_description": {
-    "message": "Correct the pointer location on webpages where CSS <code>zoom</code> is used.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">More…</a>"
+    "message": "在使用 CSS <code>zoom</code> 的网页上校正指针位置。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">更多…</a>"
   },
   "settings_scanning_zoom_label": {
-    "message": "Normalize CSS zoom"
+    "message": "规范化 CSS 缩放"
   },
   "settings_scanning_zoom_more_1": {
-    "message": "The non-standard CSS <a href=\"https://developer.mozilla.org/en-US/docs/Web/CSS/zoom\" rel=\"noopener noreferrer\" target=\"_blank\"><code>zoom</code></a> property interferes with the normal calculation of the pointer coordinates when scanning webpages. This property is discouraged from being used and its use is rare, but some webpages may still use it."
+    "message": "非标准 CSS <a href=\"https://developer.mozilla.org/en-US/docs/Web/CSS/zoom\" rel=\"noopener noreferrer\" target=\"_blank\"><code>zoom</code></a> 属性会干扰扫描网页时指针坐标的正常计算。该属性不推荐使用且较少见，但某些网页仍可能使用。"
   },
   "settings_scanning_zoom_more_2": {
-    "message": "Enabling this option, which is on by default, will take the value of this property into account when scanning webpage content. It is currently put behind an option in case there are unforeseen negative side effects."
+    "message": "启用此选项（默认开启）后，在扫描网页内容时会考虑该属性的值。由于可能存在未预料的负面影响，因此提供为可选项。"
   },
   "settings_scanning_zoom_more_3": {
-    "message": "This setting does not have any effect in Firefox, as it does not implement the <code>zoom</code> property."
+    "message": "该设置在 Firefox 中无效，因为它未实现 <code>zoom</code> 属性。"
   },
   "settings_search_window_heading": {
     "message": "Search Window"
@@ -1563,118 +1563,118 @@
     "message": "Popup"
   },
   "settings_security_heading": {
-    "message": "Security"
+    "message": "安全"
   },
   "settings_security_permissions_label": {
-    "message": "Configure Sottaku-Yomitan Permissions"
+    "message": "配置 Sottaku-Yomitan 权限"
   },
   "settings_security_secure_frame_label": {
-    "message": "Use secure popup frame URL\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "使用安全的弹出框架 URL\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "settings_security_secure_frame_more": {
-    "message": "When this option is enabled, the URL of the <code>iframe</code> element will be assigned by\n                    directly changing the location of the <code>iframe</code>'s internal document, rather than using\n                    the <code>iframe</code>'s <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-src\" rel=\"noopener noreferrer\" target=\"_blank\"><code>src</code></a>\n                    attribute. This results in the extension URL not being exposed to the underling web page, and thus making it harder\n                    to detect the presence of Sottaku-Yomitan."
+    "message": "启用此选项后，<code>iframe</code> 元素的 URL 将通过\n                    直接更改 <code>iframe</code> 内部文档的位置来分配，而不是使用\n                    <code>iframe</code> 的 <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-src\" rel=\"noopener noreferrer\" target=\"_blank\"><code>src</code></a>\n                    属性。这样扩展的 URL 不会暴露给底层网页，从而更难\n                    检测到 Sottaku-Yomitan 的存在。"
   },
   "settings_security_shadow_dom_label": {
-    "message": "Use a secure container around popups\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    "message": "在弹出窗口周围使用安全容器\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
   },
   "settings_security_shadow_dom_more": {
-    "message": "On <a href=\"https://caniuse.com/shadowdomv1\" rel=\"noopener noreferrer\" target=\"_blank\">supported browsers</a>,\n                    a popup's <code>iframe</code> element will be embeded inside of a container with a closed <a href=\"https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM\" rel=\"noopener noreferrer\" target=\"_blank\">shadow DOM</a>.\n                    This container prevents scripts running on the underlying web page from being able to discover the <code>iframe</code>,\n                    which helps avoid situations where the web page might try to modify or use the Sottaku-Yomitan popup for an unintended purpose."
+    "message": "在<a href=\"https://caniuse.com/shadowdomv1\" rel=\"noopener noreferrer\" target=\"_blank\">支持的浏览器</a>上，\n                    弹出窗口的 <code>iframe</code> 元素将被嵌入到带有关闭的 <a href=\"https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM\" rel=\"noopener noreferrer\" target=\"_blank\">shadow DOM</a> 的容器中。\n                    该容器会阻止在底层网页上运行的脚本发现 <code>iframe</code>，\n                    从而帮助避免网页试图以非预期目的修改或使用 Sottaku-Yomitan 弹出窗口的情况。"
   },
   "settings_shortcuts_heading": {
-    "message": "Shortcuts"
+    "message": "快捷键"
   },
   "settings_shortcuts_native_label": {
-    "message": "Configure native keyboard shortcuts…"
+    "message": "配置原生键盘快捷键…"
   },
   "settings_shortcuts_overview": {
-    "message": "<p>\n                        Sottaku-Yomitan has two categories of keyboard shortcuts:\n                    </p>\n<ul>\n<li>\n<strong>Standard</strong> keyboard shortcuts are controlled by the extension, and can be added, removed,\n                            and configured to work on webpages that Sottaku-Yomitan functions on.\n                        </li>\n<li>\n<strong>Native</strong> keyboard shortcuts are controlled by the web browser, and function globally\n                            within the web browser<span data-show-for-browser=\"chrome edge\"> or system-wide</span>.\n                        </li>\n</ul>"
+    "message": "<p>\n                        Sottaku-Yomitan 有两类键盘快捷键：\n                    </p>\n<ul>\n<li>\n<strong>标准</strong> 键盘快捷键由扩展控制，可以添加、移除，\n                            并配置在 Sottaku-Yomitan 可运行的网页上工作。\n                        </li>\n<li>\n<strong>原生</strong> 键盘快捷键由浏览器控制，并在浏览器内全局生效\n                            <span data-show-for-browser=\"chrome edge\"> 或在系统范围内</span>。\n                        </li>\n</ul>"
   },
   "settings_shortcuts_standard_label": {
-    "message": "Configure standard keyboard shortcuts…"
+    "message": "配置标准键盘快捷键…"
   },
   "settings_sottaku_account_description": {
-    "message": "Click \"Use browser session\" to link the account you are signed into at sottaku.app (Pro required)."
+    "message": "点击“使用浏览器会话”以关联你在 sottaku.app 登录的账户（需要 Pro）。"
   },
   "settings_sottaku_account_label": {
-    "message": "Account"
+    "message": "账户"
   },
   "settings_sottaku_account_not_connected": {
-    "message": "Not connected"
+    "message": "未连接"
   },
   "settings_sottaku_heading": {
     "message": "Sottaku"
   },
   "settings_sottaku_integration_description": {
-    "message": "Lookups, audio, and flashcard actions always use your Sottaku account. Local dictionaries are not required."
+    "message": "查询、音频和闪卡操作始终使用你的 Sottaku 账户。不需要本地词典。"
   },
   "settings_sottaku_integration_label": {
-    "message": "Sottaku integration"
+    "message": "Sottaku 集成"
   },
   "settings_sottaku_language_add_button": {
-    "message": "Add"
+    "message": "添加"
   },
   "settings_sottaku_language_chinese": {
-    "message": "Chinese"
+    "message": "中文"
   },
   "settings_sottaku_language_japanese": {
-    "message": "Japanese"
+    "message": "日语"
   },
   "settings_sottaku_language_korean": {
-    "message": "Korean"
+    "message": "韩语"
   },
   "settings_sottaku_language_order_description": {
-    "message": "Choose which Sottaku languages appear in the popup and their order (used for mixed mode and fallbacks)."
+    "message": "选择哪些 Sottaku 语言在弹出窗口中显示以及它们的顺序（用于混合模式和回退）。"
   },
   "settings_sottaku_language_order_label": {
-    "message": "Language order"
+    "message": "语言顺序"
   },
   "settings_sottaku_language_routing_auto": {
-    "message": "Auto (detect per search)"
+    "message": "自动（每次查询检测）"
   },
   "settings_sottaku_language_routing_description": {
-    "message": "Choose how Sottaku-Yomitan selects the Sottaku language for lookups (Japanese, Korean, and Chinese are supported)."
+    "message": "选择 Sottaku-Yomitan 如何为查询选择 Sottaku 语言（支持日语、韩语和中文）。"
   },
   "settings_sottaku_language_routing_label": {
-    "message": "Language routing"
+    "message": "语言路由"
   },
   "settings_sottaku_language_routing_mixed": {
-    "message": "Mixed (show preferred languages)"
+    "message": "混合（显示偏好语言）"
   },
   "settings_sottaku_password_placeholder": {
-    "message": "Password"
+    "message": "密码"
   },
   "settings_sottaku_sign_in_button": {
-    "message": "Sign in"
+    "message": "登录"
   },
   "settings_sottaku_sign_in_google_button": {
-    "message": "Sign in with Google (opens sottaku.app)"
+    "message": "使用 Google 登录（打开 sottaku.app）"
   },
   "settings_sottaku_status_not_connected": {
-    "message": "Not connected"
+    "message": "未连接"
   },
   "settings_sottaku_status_sign_in_required": {
-    "message": "Sign in required. Complete login in the opened tab, then click \"Use browser session\"."
+    "message": "需要登录。请在打开的标签页中完成登录，然后点击“使用浏览器会话”。"
   },
   "settings_sottaku_status_signed_in": {
-    "message": "Signed in"
+    "message": "已登录"
   },
   "settings_sottaku_status_signed_in_as": {
-    "message": "Signed in as {0}"
+    "message": "以 {0} 登录"
   },
   "settings_sottaku_status_signed_out": {
-    "message": "Signed out of Sottaku"
+    "message": "已退出 Sottaku"
   },
   "settings_sottaku_unlink_button": {
-    "message": "Unlink account"
+    "message": "解除账户关联"
   },
   "settings_sottaku_use_browser_session_button": {
-    "message": "Use browser session"
+    "message": "使用浏览器会话"
   },
   "settings_sottaku_use_browser_session_title": {
-    "message": "Re-use your signed-in browser session"
+    "message": "重新使用已登录的浏览器会话"
   },
   "settings_sottaku_username_placeholder": {
-    "message": "Username or email"
+    "message": "用户名或邮箱"
   },
   "settings_status_tasks_in_progress": {
     "message": "Tasks in progress:"
@@ -1731,22 +1731,22 @@
     "message": "Newlines only"
   },
   "settings_translation_heading": {
-    "message": "Translation"
+    "message": "翻译"
   },
   "settings_translation_replacement_patterns_label": {
-    "message": "Configure custom text replacement patterns…"
+    "message": "配置自定义文本替换模式…"
   },
   "settings_translation_search_resolution_description": {
-    "message": "<p>\"A dog\"　→　search for \"A dog\",\"A do\", \"A d\", \"A\"</p> or <p>\"A dog\"　→　\"A dog\", \"A\"</p>"
+    "message": "<p>\"A dog\"　→　搜索 \"A dog\",\"A do\", \"A d\", \"A\"</p> 或 <p>\"A dog\"　→　\"A dog\", \"A\"</p>"
   },
   "settings_translation_search_resolution_label": {
-    "message": "Dictionary search resolution"
+    "message": "词典搜索分辨率"
   },
   "settings_translation_search_resolution_letter": {
-    "message": "Letter"
+    "message": "字母"
   },
   "settings_translation_search_resolution_word": {
-    "message": "Word"
+    "message": "词"
   },
   "sottaku_action_title_missing_id": {
     "message": "Missing Sottaku question id"
