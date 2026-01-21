@@ -55,6 +55,49 @@ describe('SottakuIntegration', () => {
         expect(ids).toStrictEqual([5, 2, 3, 1, 4]);
     });
 
+    test('mixed mode prioritizes longest matches before definitions', async () => {
+        const integration = new SottakuIntegration(null);
+        integration.configure({
+            general: {
+                language: 'ja',
+                maxResults: 32,
+            },
+            sottaku: {
+                enabled: true,
+                authToken: 'test-token',
+                apiBaseUrl: 'https://sottaku.app/api/v1',
+                cookieDomain: 'https://sottaku.app',
+                locale: 'en',
+                languageMode: 'mixed',
+                preferredLanguages: ['ko', 'zh'],
+            },
+        });
+
+        integration['_client'].scan = async () => ({
+            languageResults: [
+                {
+                    language: 'ko',
+                    results: [
+                        {id: 1, kanji_representation: '바', reading: '바', match_length: 1, has_definition: true, word_translation: 'bar'},
+                    ],
+                    originalTextLength: 1,
+                },
+                {
+                    language: 'zh',
+                    results: [
+                        {id: 2, kanji_representation: '反對', reading: 'fandui', match_length: 2, has_definition: false, word_translation: ''},
+                    ],
+                    originalTextLength: 2,
+                },
+            ],
+            displayPreferences: null,
+        });
+
+        const {dictionaryEntries} = await integration.findTerms('반대했다는');
+        const ids = dictionaryEntries.map((entry) => entry.sottaku.questionId);
+        expect(ids).toStrictEqual([2, 1]);
+    });
+
     test('resolves automatic locale from Sottaku language settings', async () => {
         const integration = new SottakuIntegration(null);
         integration.configure({

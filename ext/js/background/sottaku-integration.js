@@ -572,22 +572,46 @@ export class SottakuIntegration {
      * @returns {import('dictionary').TermDictionaryEntry[]}
      */
     _interleaveLanguageEntries(languageResults, maxResults) {
-        /** @type {import('dictionary').TermDictionaryEntry[]} */
-        const dictionaryEntries = [];
-        let index = 0;
-        let added = true;
-        while (dictionaryEntries.length < maxResults && added) {
-            added = false;
-            for (const {entries} of languageResults) {
-                if (index < entries.length) {
-                    dictionaryEntries.push(entries[index]);
-                    added = true;
-                    if (dictionaryEntries.length >= maxResults) { break; }
-                }
-            }
-            ++index;
+        if (languageResults.length <= 1) {
+            const entries = languageResults[0]?.entries ?? [];
+            return entries.slice(0, maxResults);
         }
-        return dictionaryEntries;
+
+        // Rank mixed-language results by match length, using definitions only as a tie-breaker.
+        /** @type {{entry: import('dictionary').TermDictionaryEntry, matchLength: number, hasDefinition: boolean, languageIndex: number, entryIndex: number}[]} */
+        const rankedEntries = [];
+        for (let languageIndex = 0; languageIndex < languageResults.length; languageIndex += 1) {
+            const {entries} = languageResults[languageIndex];
+            for (let entryIndex = 0; entryIndex < entries.length; entryIndex += 1) {
+                const entry = entries[entryIndex];
+                const metadata = entry && typeof entry === 'object' ? /** @type {any} */ (entry).sottaku : null;
+                let matchLength = 0;
+                const metadataMatchLength = Number.parseInt(metadata?.matchLength, 10);
+                if (Number.isFinite(metadataMatchLength)) {
+                    matchLength = metadataMatchLength;
+                } else {
+                    const headwordLength = entry?.headwords?.[0]?.term?.length;
+                    if (typeof headwordLength === 'number' && Number.isFinite(headwordLength)) {
+                        matchLength = headwordLength;
+                    } else if (typeof entry?.maxOriginalTextLength === 'number' && Number.isFinite(entry.maxOriginalTextLength)) {
+                        matchLength = entry.maxOriginalTextLength;
+                    }
+                }
+                const hasDefinition = Boolean(metadata?.hasDefinition);
+                rankedEntries.push({entry, matchLength, hasDefinition, languageIndex, entryIndex});
+            }
+        }
+
+        rankedEntries.sort((a, b) => {
+            let i = b.matchLength - a.matchLength;
+            if (i !== 0) { return i; }
+            i = (b.hasDefinition ? 1 : 0) - (a.hasDefinition ? 1 : 0);
+            if (i !== 0) { return i; }
+            i = a.languageIndex - b.languageIndex;
+            if (i !== 0) { return i; }
+            return a.entryIndex - b.entryIndex;
+        });
+        return rankedEntries.slice(0, maxResults).map(({entry}) => entry);
     }
 
     /**
