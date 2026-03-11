@@ -34,6 +34,7 @@ describe('DisplaySottaku', () => {
         Reflect.set(controller, '_options', {general: {language: 'ja'}});
         Reflect.set(controller, '_enabled', true);
         Reflect.get(controller, '_client').submitWordRequest = vi.fn().mockResolvedValue({});
+        const metadata = {questionId: 1, language: 'ja'};
 
         const button = window.document.createElement('button');
         button.getBoundingClientRect = () => ({
@@ -48,11 +49,34 @@ describe('DisplaySottaku', () => {
             toJSON: () => ({}),
         });
 
-        await Reflect.get(controller, '_requestWord').call(controller, {sottaku: {questionId: 1, language: 'ja'}}, button);
+        await Reflect.get(controller, '_requestWord').call(controller, {sottaku: metadata}, button);
 
         expect(button.style.minWidth).toBe('184px');
         expect(button.style.minHeight).toBe('32px');
         expect(button.dataset.sizeLocked).toBe('true');
         expect(button.textContent).toBe('Requested');
+        expect(metadata.requested).toBe(true);
+    });
+
+    test('renders previously requested words as disabled requested buttons', () => {
+        const container = window.document.createElement('div');
+        container.className = 'note-actions-container';
+        const node = window.document.createElement('div');
+        node.appendChild(container);
+        const display = {
+            on: () => {},
+            dictionaryEntries: [{sottaku: {questionId: 1, language: 'ja', hasDefinition: false, requested: true}}],
+            dictionaryEntryNodes: [node],
+        };
+        const controller = new DisplaySottaku(display);
+        Reflect.set(controller, '_enabled', true);
+
+        Reflect.get(controller, '_renderButtons').call(controller);
+
+        const button = /** @type {HTMLButtonElement} */ (container.querySelector('.sottaku-action'));
+        expect(button).not.toBeNull();
+        expect(button.disabled).toBe(true);
+        expect(button.textContent).toBe('Requested');
+        expect(button.title).toBe('Request submitted to Sottaku');
     });
 });

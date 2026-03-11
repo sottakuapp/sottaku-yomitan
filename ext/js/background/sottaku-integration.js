@@ -983,6 +983,14 @@ export class SottakuIntegration {
             questionId: Number.isFinite(questionId) ? questionId : null,
             language,
             inFlashcards: Boolean(normalizedResult.in_flashcards),
+            requested: Boolean(
+                normalizedResult.requested ??
+                normalizedInfo.requested ??
+                normalizedResult.has_pending_request ??
+                normalizedInfo.has_pending_request ??
+                normalizedResult.already_requested ??
+                normalizedInfo.already_requested
+            ),
             audio: {
                 word: audioWord,
                 sentence: audioSentence,

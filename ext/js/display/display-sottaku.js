@@ -26,6 +26,7 @@ import {getMessage} from '../dom/i18n.js';
  * @property {string} [language]
  * @property {boolean} [hasDefinition]
  * @property {boolean} [inFlashcards]
+ * @property {boolean} [requested]
  */
 
 export class DisplaySottaku {
@@ -106,7 +107,11 @@ export class DisplaySottaku {
             } else {
                 const requestButton = this._createButton('sottaku_request_button', 'Request dictionary entry', false);
                 requestButton.classList.add('sottaku-request-only');
-                this._eventListeners.addEventListener(requestButton, 'click', this._wrapAsync(() => this._requestWord(entry, requestButton)));
+                if (metadata.requested) {
+                    this._setRequestButtonRequestedState(requestButton);
+                } else {
+                    this._eventListeners.addEventListener(requestButton, 'click', this._wrapAsync(() => this._requestWord(entry, requestButton)));
+                }
                 // Move to the end so it aligns right when alone
                 container.appendChild(requestButton);
                 container.style.justifyContent = 'flex-end';
@@ -198,8 +203,8 @@ export class DisplaySottaku {
         this._setButtonText(button, 'sottaku_request_button_requesting', 'Requesting...');
         try {
             await this._client.submitWordRequest(metadata.questionId, metadata.language || this._options.general.language);
-            this._setButtonText(button, 'sottaku_request_button_requested', 'Requested');
-            this._setButtonTitle(button, 'sottaku_request_button_title_submitted', 'Request submitted to Sottaku');
+            metadata.requested = true;
+            this._setRequestButtonRequestedState(button);
         } catch (e) {
             button.disabled = false;
             this._setButtonText(button, 'sottaku_request_button_retry', 'Request translation');
@@ -232,6 +237,15 @@ export class DisplaySottaku {
             button.style.minHeight = `${Math.ceil(height)}px`;
         }
         button.dataset.sizeLocked = 'true';
+    }
+
+    /**
+     * @param {HTMLButtonElement} button
+     */
+    _setRequestButtonRequestedState(button) {
+        button.disabled = true;
+        this._setButtonText(button, 'sottaku_request_button_requested', 'Requested');
+        this._setButtonTitle(button, 'sottaku_request_button_title_submitted', 'Request submitted to Sottaku');
     }
 
     /**

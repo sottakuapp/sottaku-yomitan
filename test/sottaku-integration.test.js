@@ -136,4 +136,41 @@ describe('SottakuIntegration', () => {
         expect(glossary.type).toBe('structured-content');
         expect(glossary.content.content[0].lang).toBe('es');
     });
+
+    test('preserves requested status from scan results', async () => {
+        const integration = new SottakuIntegration(null);
+        integration.configure({
+            general: {
+                language: 'ja',
+                maxResults: 32,
+            },
+            sottaku: {
+                enabled: true,
+                authToken: 'test-token',
+                apiBaseUrl: 'https://sottaku.app/api/v1',
+                cookieDomain: 'https://sottaku.app',
+                locale: 'en',
+                languageMode: 'ja',
+                preferredLanguages: [],
+            },
+        });
+
+        integration['_client'].scan = async () => ({
+            results: [
+                {
+                    id: 1,
+                    kanji_representation: '猫',
+                    reading: 'ねこ',
+                    match_length: 2,
+                    has_definition: false,
+                    requested: true,
+                    word_translation: '',
+                },
+            ],
+            originalTextLength: 2,
+        });
+
+        const {dictionaryEntries} = await integration.findTerms('ねこ');
+        expect(dictionaryEntries[0].sottaku.requested).toBe(true);
+    });
 });
