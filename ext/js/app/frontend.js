@@ -715,7 +715,7 @@ export class Frontend {
         const popup = await popupPromise;
         const optionsContext = await this._getOptionsContext();
         if (this._updatePopupToken !== token) { return; }
-        if (popup !== null) {
+        if (this._shouldEagerlySetPopupOptionsContext(popup, currentPopup, isIframe, showIframePopupsInRootFrame)) {
             await popup.setOptionsContext(optionsContext);
         }
         if (this._updatePopupToken !== token) { return; }
@@ -804,6 +804,24 @@ export class Frontend {
             popupWindow: true,
             childrenSupported: this._childrenSupported,
         });
+    }
+
+    /**
+     * @param {?import('popup').PopupAny} popup
+     * @param {?import('popup').PopupAny} currentPopup
+     * @param {boolean} isIframe
+     * @param {boolean} showIframePopupsInRootFrame
+     * @returns {boolean}
+     */
+    _shouldEagerlySetPopupOptionsContext(popup, currentPopup, isIframe, showIframePopupsInRootFrame) {
+        return (
+            popup !== null &&
+            (
+                !isIframe ||
+                !showIframePopupsInRootFrame ||
+                popup === currentPopup
+            )
+        );
     }
 
     /**

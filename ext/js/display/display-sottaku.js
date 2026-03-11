@@ -1,11 +1,32 @@
 /*
- * Lightweight controller that adds Sottaku-specific actions to dictionary entries.
+ * Copyright (C) 2025  Sottaku Inc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 import {SottakuClient} from '../comm/sottaku-client.js';
 import {EventListenerCollection} from '../core/event-listener-collection.js';
 import {toError} from '../core/to-error.js';
 import {getMessage} from '../dom/i18n.js';
+
+/**
+ * @typedef {object} SottakuEntryMetadata
+ * @property {number} [questionId]
+ * @property {string} [language]
+ * @property {boolean} [hasDefinition]
+ * @property {boolean} [inFlashcards]
+ */
 
 export class DisplaySottaku {
     /**
@@ -74,12 +95,12 @@ export class DisplaySottaku {
             const hasDefinition = Boolean(metadata.hasDefinition);
             const node = nodes[i];
             if (!node) { continue; }
-            const container = node.querySelector('.note-actions-container');
+            const container = /** @type {?HTMLElement} */ (node.querySelector('.note-actions-container'));
             if (!container) { continue; }
             this._removeOldButtons(container);
 
             if (hasDefinition) {
-                const addButton = this._createButton('sottaku_save_button', 'Save to Sottaku', metadata.inFlashcards);
+                const addButton = this._createButton('sottaku_save_button', 'Save to Sottaku', Boolean(metadata.inFlashcards));
                 this._eventListeners.addEventListener(addButton, 'click', this._wrapAsync(() => this._addFlashcard(entry, addButton)));
                 container.appendChild(addButton);
             } else {
@@ -115,7 +136,7 @@ export class DisplaySottaku {
      * @param {Element} container
      */
     _removeOldButtons(container) {
-        for (const button of [...container.querySelectorAll('.sottaku-action')]) {
+        for (const button of container.querySelectorAll('.sottaku-action')) {
             button.remove();
         }
     }
@@ -123,7 +144,7 @@ export class DisplaySottaku {
     /** */
     _clearButtons() {
         for (const node of this._display.dictionaryEntryNodes) {
-            for (const button of [...node.querySelectorAll('.sottaku-action')]) {
+            for (const button of node.querySelectorAll('.sottaku-action')) {
                 button.remove();
             }
         }
@@ -143,6 +164,7 @@ export class DisplaySottaku {
             this._setButtonTitle(button, 'sottaku_action_title_missing_id', 'Missing Sottaku question id');
             return;
         }
+        this._lockButtonSize(button);
         button.disabled = true;
         this._setButtonText(button, 'sottaku_save_button_saving', 'Saving...');
         try {
@@ -171,6 +193,7 @@ export class DisplaySottaku {
             this._setButtonTitle(button, 'sottaku_action_title_missing_id', 'Missing Sottaku question id');
             return;
         }
+        this._lockButtonSize(button);
         button.disabled = true;
         this._setButtonText(button, 'sottaku_request_button_requesting', 'Requesting...');
         try {
@@ -196,11 +219,27 @@ export class DisplaySottaku {
     }
 
     /**
+     * Prevent label changes from shrinking the popup out from under the cursor.
+     * @param {HTMLButtonElement} button
+     */
+    _lockButtonSize(button) {
+        if (button.dataset.sizeLocked === 'true') { return; }
+        const {width, height} = button.getBoundingClientRect();
+        if (Number.isFinite(width) && width > 0) {
+            button.style.minWidth = `${Math.ceil(width)}px`;
+        }
+        if (Number.isFinite(height) && height > 0) {
+            button.style.minHeight = `${Math.ceil(height)}px`;
+        }
+        button.dataset.sizeLocked = 'true';
+    }
+
+    /**
      * @param {import('dictionary').DictionaryEntry} entry
-     * @returns {any}
+     * @returns {?SottakuEntryMetadata}
      */
     _getMetadata(entry) {
-        return entry && typeof entry === 'object' ? /** @type {any} */ (entry).sottaku : null;
+        return entry && typeof entry === 'object' ? /** @type {?SottakuEntryMetadata} */ (/** @type {Record<string, unknown>} */ (entry).sottaku) : null;
     }
 
     /**
