@@ -32,6 +32,14 @@ import {getAllFiles} from '../util.js';
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /**
+ * @param {Date} [date]
+ * @returns {string}
+ */
+function getDefaultVersion(date = new Date()) {
+    return `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}.0`;
+}
+
+/**
  * @param {string} directory
  * @param {string[]} excludeFiles
  * @param {string} outputFileName
@@ -249,7 +257,7 @@ export async function main() {
         },
         version: {
             type: 'string',
-            default: '2026.1.18.0',
+            default: getDefaultVersion(),
         },
         target: {
             type: 'string',
