@@ -734,6 +734,7 @@ export class SottakuIntegration {
             case 'ja': return {languages: ['ja'], autoPick: false, hintLanguage: null};
             case 'ko': return {languages: ['ko'], autoPick: false, hintLanguage: null};
             case 'zh': return {languages: ['zh'], autoPick: false, hintLanguage: null};
+            case 'en': return {languages: ['en'], autoPick: false, hintLanguage: null};
             case 'mixed': return {languages: preferredLanguages, autoPick: false, hintLanguage: null};
         }
         const detected = this._detectLanguageFromText(text, details);
@@ -784,6 +785,7 @@ export class SottakuIntegration {
         if (documentLang.startsWith('ja')) { return {language: 'ja', confidence: 'strong'}; }
         if (documentLang.startsWith('ko')) { return {language: 'ko', confidence: 'strong'}; }
         if (documentLang.startsWith('zh')) { return {language: 'zh', confidence: 'strong'}; }
+        if (documentLang.startsWith('en')) { return {language: 'en', confidence: 'weak'}; }
 
         const counts = this._normalizeScriptCounts(languageHints.documentScriptCounts);
         return this._resolveLanguageFromScriptCounts(counts);

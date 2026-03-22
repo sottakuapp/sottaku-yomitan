@@ -49,6 +49,7 @@ export function prefixInflection(inflectedPrefix, deinflectedPrefix, conditionsI
     return {
         type: 'prefix',
         isInflected: prefixRegExp,
+        deinflected: deinflectedPrefix,
         deinflect: (text) => deinflectedPrefix + text.slice(inflectedPrefix.length),
         conditionsIn,
         conditionsOut,
@@ -68,6 +69,7 @@ export function wholeWordInflection(inflectedWord, deinflectedWord, conditionsIn
     return {
         type: 'wholeWord',
         isInflected: regex,
+        deinflected: deinflectedWord,
         deinflect: () => deinflectedWord,
         conditionsIn,
         conditionsOut,
