@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {prefixInflection, suffixInflection} from '../language-transforms.js';
+import {prefixInflection, suffixInflection, wholeWordInflection} from '../language-transforms.js';
 
 /** @typedef {keyof typeof conditions} Condition */
 
@@ -45,6 +45,10 @@ const pastSuffixInflections = [
     suffixInflection('paid', 'pay', ['v'], ['v']),
     suffixInflection('said', 'say', ['v'], ['v']),
 ];
+const pastWholeWordInflections = [
+    wholeWordInflection('was', 'be', ['v'], ['v']),
+    wholeWordInflection('were', 'be', ['v'], ['v']),
+];
 
 const ingSuffixInflections = [
     suffixInflection('ing', '', ['v'], ['v']), // 'walking'
@@ -53,11 +57,21 @@ const ingSuffixInflections = [
     suffixInflection('cking', 'c', ['v'], ['v']), // 'panicking'
     ...doubledConsonantInflection('bdgklmnprstz', 'ing', ['v'], ['v']),
 ];
+const ingWholeWordInflections = [
+    wholeWordInflection('being', 'be', ['v'], ['v']),
+];
 
 const thirdPersonSgPresentSuffixInflections = [
     suffixInflection('s', '', ['v'], ['v']), // 'walks'
     suffixInflection('es', '', ['v'], ['v']), // 'teaches'
     suffixInflection('ies', 'y', ['v'], ['v']), // 'tries'
+];
+const presentWholeWordInflections = [
+    wholeWordInflection('am', 'be', ['v'], ['v']),
+    wholeWordInflection('are', 'be', ['v'], ['v']),
+];
+const thirdPersonSgPresentWholeWordInflections = [
+    wholeWordInflection('is', 'be', ['v'], ['v']),
 ];
 
 export const englishPhrasalVerbParticles = ['aboard', 'about', 'above', 'across', 'ahead', 'alongside', 'apart', 'around', 'aside', 'astray', 'away', 'back', 'before', 'behind', 'below', 'beneath', 'besides', 'between', 'beyond', 'by', 'close', 'down', 'east', 'west', 'north', 'south', 'eastward', 'westward', 'northward', 'southward', 'forward', 'backward', 'backwards', 'forwards', 'home', 'in', 'inside', 'instead', 'near', 'off', 'on', 'opposite', 'out', 'outside', 'over', 'overhead', 'past', 'round', 'since', 'through', 'throughout', 'together', 'under', 'underneath', 'up', 'within', 'without'];
@@ -172,6 +186,7 @@ export const englishTransforms = {
             name: 'past',
             description: 'Simple past tense of a verb',
             rules: [
+                ...pastWholeWordInflections,
                 ...pastSuffixInflections,
                 ...createPhrasalVerbInflectionsFromSuffixInflections(pastSuffixInflections),
             ],
@@ -180,14 +195,23 @@ export const englishTransforms = {
             name: 'ing',
             description: 'Present participle of a verb',
             rules: [
+                ...ingWholeWordInflections,
                 ...ingSuffixInflections,
                 ...createPhrasalVerbInflectionsFromSuffixInflections(ingSuffixInflections),
+            ],
+        },
+        'present': {
+            name: 'present',
+            description: 'Present tense of a verb',
+            rules: [
+                ...presentWholeWordInflections,
             ],
         },
         '3rd pers. sing. pres': {
             name: '3rd pers. sing. pres',
             description: 'Third person singular present tense of a verb',
             rules: [
+                ...thirdPersonSgPresentWholeWordInflections,
                 ...thirdPersonSgPresentSuffixInflections,
                 ...createPhrasalVerbInflectionsFromSuffixInflections(thirdPersonSgPresentSuffixInflections),
             ],
