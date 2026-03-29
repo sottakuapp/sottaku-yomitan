@@ -100,6 +100,8 @@ export class Popup extends EventDispatcher {
         /** @type {boolean} */
         this._useShadowDom = true;
         /** @type {string} */
+        this._customCss = '';
+        /** @type {string} */
         this._customOuterCss = '';
         /** @type {boolean} */
         this._hidePopupOnCursorExit = false;
@@ -339,10 +341,11 @@ export class Popup extends EventDispatcher {
      * @returns {Promise<void>}
      */
     async showContent(details, displayDetails) {
-        if (this._optionsContext === null) { throw new Error('Options not assigned'); }
-
         const {optionsContext, sourceRects, writingMode} = details;
-        if (optionsContext !== null) {
+        if (this._optionsContext === null) {
+            if (optionsContext === null) { throw new Error('Options not assigned'); }
+            await this._setOptionsContext(optionsContext);
+        } else if (optionsContext !== null) {
             await this._setOptionsContextIfDifferent(optionsContext);
         }
 
@@ -385,6 +388,8 @@ export class Popup extends EventDispatcher {
      * @param {string} css The CSS rules.
      */
     async setCustomCss(css) {
+        this._customCss = css;
+        if (!this._frameConnected) { return; }
         await this._invokeSafe('displaySetCustomCss', {css});
     }
 
@@ -618,6 +623,9 @@ export class Popup extends EventDispatcher {
             optionsContext: this._optionsContext,
         };
         await this._invokeSafe('displayConfigure', configureParams);
+        if (this._customCss.length > 0) {
+            await this._invokeSafe('displaySetCustomCss', {css: this._customCss});
+        }
     }
 
     /**
