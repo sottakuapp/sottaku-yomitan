@@ -28,8 +28,13 @@ import {TextSourceElement} from '../dom/text-source-element.js';
 const SCAN_RESOLUTION_EXCLUDED_LANGUAGES = new Set(['ja', 'zh', 'yue', 'ko']);
 const DOCUMENT_LANGUAGE_HINT_TTL_MS = 5 * 60 * 1000;
 const DOCUMENT_LANGUAGE_SAMPLE_MAX_CHARS = 2000;
-const ENGLISH_SOURCE_SPAN_PATTERN = /[A-Za-z0-9][A-Za-z0-9'’`-]*(?:\s+[A-Za-z0-9][A-Za-z0-9'’`-]*)*/gu;
 const ENGLISH_SOURCE_WORD_PATTERN = /[A-Za-z0-9][A-Za-z0-9'’`-]*/gu;
+const ENGLISH_AUXILIARY_PREFIX_VARIANTS = [
+    ['going', 'to'],
+    ['do', 'not'],
+    ['don\'t'],
+    ['will'],
+];
 const HIRAGANA_RANGE = [0x3040, 0x309f];
 const KATAKANA_RANGES = [
     [0x30a0, 0x30ff],
@@ -514,37 +519,58 @@ export class TextScanner extends EventDispatcher {
         if (typeof text !== 'string' || text.length === 0) { return []; }
         if (!Number.isFinite(anchorOffset) || anchorOffset < 0 || anchorOffset > text.length) { return []; }
 
-        let containingSpan = null;
-        for (const match of text.matchAll(ENGLISH_SOURCE_SPAN_PATTERN)) {
+        /** @type {{text: string, startOffset: number, anchorOffset: number}[]} */
+        const variants = [];
+        const seenTexts = new Set();
+        /** @type {{index: number, value: string, end: number}[]} */
+        const words = [];
+        for (const match of text.matchAll(ENGLISH_SOURCE_WORD_PATTERN)) {
             const index = match.index ?? -1;
             const value = match[0] || '';
             if (index < 0 || value.length === 0) { continue; }
-            if (index <= anchorOffset && anchorOffset < index + value.length) {
-                containingSpan = {index, value};
+            const end = index + value.length;
+            words.push({index, value, end});
+        }
+        if (words.length === 0) { return []; }
+
+        let hoveredWordIndex = -1;
+        for (let i = 0; i < words.length; i += 1) {
+            const {index, end} = words[i];
+            if (index <= anchorOffset && anchorOffset < end) {
+                hoveredWordIndex = i;
                 break;
             }
         }
-        if (containingSpan === null) { return []; }
+        if (hoveredWordIndex < 0) { return []; }
 
-        const variants = [];
-        const seenTexts = new Set();
-        const spanAnchorOffset = anchorOffset - containingSpan.index;
-        for (const match of containingSpan.value.matchAll(ENGLISH_SOURCE_WORD_PATTERN)) {
-            const index = match.index ?? -1;
-            if (index < 0 || index > spanAnchorOffset) { continue; }
-
-            const absoluteIndex = containingSpan.index + index;
-            const startOffset = anchorOffset - absoluteIndex;
-            const maxLength = Math.min(text.length - absoluteIndex, scanLength + startOffset);
-            if (maxLength <= 0) { continue; }
-
-            const variantText = text.slice(absoluteIndex, absoluteIndex + maxLength).replace(/\s+$/u, '');
-            if (!variantText || seenTexts.has(variantText)) { continue; }
+        const hoveredWord = words[hoveredWordIndex];
+        /**
+         * @param {number} startIndex
+         * @param {number} endIndex
+         * @returns {void}
+         */
+        const addVariant = (startIndex, endIndex) => {
+            const maxLength = Math.min(text.length - startIndex, endIndex - startIndex);
+            if (maxLength <= 0 || maxLength > scanLength + (anchorOffset - startIndex)) { return; }
+            const variantText = text.slice(startIndex, startIndex + maxLength).trim();
+            if (!variantText || seenTexts.has(variantText)) { return; }
             seenTexts.add(variantText);
-            variants.push({text: variantText, startOffset, anchorOffset: startOffset});
+            variants.push({
+                text: variantText,
+                startOffset: anchorOffset - startIndex,
+                anchorOffset: anchorOffset - startIndex,
+            });
+        };
+
+        for (const pattern of ENGLISH_AUXILIARY_PREFIX_VARIANTS) {
+            const patternStart = hoveredWordIndex - pattern.length;
+            if (patternStart < 0) { continue; }
+            const candidateWords = words.slice(patternStart, hoveredWordIndex).map(({value}) => value.toLowerCase());
+            if (candidateWords.join('\u0000') !== pattern.join('\u0000')) { continue; }
+            addVariant(words[patternStart].index, hoveredWord.end);
         }
 
-        variants.sort((a, b) => b.startOffset - a.startOffset);
+        addVariant(hoveredWord.index, hoveredWord.end);
         return variants;
     }
 
@@ -556,13 +582,9 @@ export class TextScanner extends EventDispatcher {
      * @returns {{text: string, startOffset: number, anchorOffset: number}[]}
      */
     _getTermSearchVariants(textSource, scanLength, layoutAwareScan, pointerType) {
-        const baseText = this.getTextSourceContent(textSource, scanLength, layoutAwareScan, pointerType);
-        if (baseText.length === 0) { return []; }
-
-        /** @type {{text: string, startOffset: number, anchorOffset: number}[]} */
-        const variants = [{text: baseText, startOffset: 0, anchorOffset: 0}];
         if (this._language !== 'en') {
-            return variants;
+            const baseText = this.getTextSourceContent(textSource, scanLength, layoutAwareScan, pointerType);
+            return baseText.length > 0 ? [{text: baseText, startOffset: 0, anchorOffset: 0}] : [];
         }
 
         const bidirectional = this._getBidirectionalTextSourceContent(
@@ -571,22 +593,15 @@ export class TextScanner extends EventDispatcher {
             layoutAwareScan,
             pointerType,
         );
-        if (!bidirectional.text || bidirectional.startOffset <= 0) {
-            return variants;
+        if (!bidirectional.text) {
+            return [];
         }
 
-        const seenTexts = new Set(variants.map(({text: value}) => value));
-        for (const variant of this._getEnglishBidirectionalSearchVariants(
+        return this._getEnglishBidirectionalSearchVariants(
             bidirectional.text,
             bidirectional.startOffset,
             scanLength,
-        )) {
-            if (seenTexts.has(variant.text)) { continue; }
-            seenTexts.add(variant.text);
-            variants.push(variant);
-        }
-
-        return variants;
+        );
     }
 
     /**
@@ -1532,6 +1547,9 @@ export class TextScanner extends EventDispatcher {
                 )
             ) {
                 bestResult = {dictionaryEntries, originalTextLength, startOffset};
+            }
+            if (this._language === 'en') {
+                break;
             }
         }
         if (bestResult === null) { return null; }
