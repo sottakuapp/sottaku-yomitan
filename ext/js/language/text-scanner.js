@@ -28,6 +28,8 @@ import {TextSourceElement} from '../dom/text-source-element.js';
 const SCAN_RESOLUTION_EXCLUDED_LANGUAGES = new Set(['ja', 'zh', 'yue', 'ko']);
 const DOCUMENT_LANGUAGE_HINT_TTL_MS = 5 * 60 * 1000;
 const DOCUMENT_LANGUAGE_SAMPLE_MAX_CHARS = 2000;
+const ENGLISH_SOURCE_SPAN_PATTERN = /[A-Za-z0-9][A-Za-z0-9'’`-]*(?:\s+[A-Za-z0-9][A-Za-z0-9'’`-]*)*/gu;
+const ENGLISH_SOURCE_WORD_PATTERN = /[A-Za-z0-9][A-Za-z0-9'’`-]*/gu;
 const HIRAGANA_RANGE = [0x3040, 0x309f];
 const KATAKANA_RANGES = [
     [0x30a0, 0x30ff],
@@ -479,6 +481,112 @@ export class TextScanner extends EventDispatcher {
         }
 
         return clonedTextSource.text();
+    }
+
+    /**
+     * @param {import('text-source').TextSource} textSource
+     * @param {number} length
+     * @param {boolean} layoutAwareScan
+     * @param {import('input').PointerType | undefined} pointerType
+     * @returns {{text: string, startOffset: number}}
+     */
+    _getBidirectionalTextSourceContent(textSource, length, layoutAwareScan, pointerType) {
+        const clonedTextSource = textSource.clone();
+        const startOffset = clonedTextSource.setStartOffset(length, layoutAwareScan);
+        clonedTextSource.setEndOffset(length + startOffset, false, layoutAwareScan);
+
+        const includeSelector = this._includeSelector;
+        const excludeSelector = this._getExcludeSelectorForPointerType(pointerType);
+        if (includeSelector !== null || excludeSelector !== null) {
+            this._constrainTextSource(clonedTextSource, includeSelector, excludeSelector, layoutAwareScan);
+        }
+
+        return {text: clonedTextSource.text(), startOffset};
+    }
+
+    /**
+     * @param {string} text
+     * @param {number} anchorOffset
+     * @param {number} scanLength
+     * @returns {{text: string, startOffset: number, anchorOffset: number}[]}
+     */
+    _getEnglishBidirectionalSearchVariants(text, anchorOffset, scanLength) {
+        if (typeof text !== 'string' || text.length === 0) { return []; }
+        if (!Number.isFinite(anchorOffset) || anchorOffset < 0 || anchorOffset > text.length) { return []; }
+
+        let containingSpan = null;
+        for (const match of text.matchAll(ENGLISH_SOURCE_SPAN_PATTERN)) {
+            const index = match.index ?? -1;
+            const value = match[0] || '';
+            if (index < 0 || value.length === 0) { continue; }
+            if (index <= anchorOffset && anchorOffset < index + value.length) {
+                containingSpan = {index, value};
+                break;
+            }
+        }
+        if (containingSpan === null) { return []; }
+
+        const variants = [];
+        const seenTexts = new Set();
+        const spanAnchorOffset = anchorOffset - containingSpan.index;
+        for (const match of containingSpan.value.matchAll(ENGLISH_SOURCE_WORD_PATTERN)) {
+            const index = match.index ?? -1;
+            if (index < 0 || index > spanAnchorOffset) { continue; }
+
+            const absoluteIndex = containingSpan.index + index;
+            const startOffset = anchorOffset - absoluteIndex;
+            const maxLength = Math.min(text.length - absoluteIndex, scanLength + startOffset);
+            if (maxLength <= 0) { continue; }
+
+            const variantText = text.slice(absoluteIndex, absoluteIndex + maxLength).replace(/\s+$/u, '');
+            if (!variantText || seenTexts.has(variantText)) { continue; }
+            seenTexts.add(variantText);
+            variants.push({text: variantText, startOffset, anchorOffset: startOffset});
+        }
+
+        variants.sort((a, b) => b.startOffset - a.startOffset);
+        return variants;
+    }
+
+    /**
+     * @param {import('text-source').TextSource} textSource
+     * @param {number} scanLength
+     * @param {boolean} layoutAwareScan
+     * @param {import('input').PointerType | undefined} pointerType
+     * @returns {{text: string, startOffset: number, anchorOffset: number}[]}
+     */
+    _getTermSearchVariants(textSource, scanLength, layoutAwareScan, pointerType) {
+        const baseText = this.getTextSourceContent(textSource, scanLength, layoutAwareScan, pointerType);
+        if (baseText.length === 0) { return []; }
+
+        /** @type {{text: string, startOffset: number, anchorOffset: number}[]} */
+        const variants = [{text: baseText, startOffset: 0, anchorOffset: 0}];
+        if (this._language !== 'en') {
+            return variants;
+        }
+
+        const bidirectional = this._getBidirectionalTextSourceContent(
+            textSource,
+            scanLength,
+            layoutAwareScan,
+            pointerType,
+        );
+        if (!bidirectional.text || bidirectional.startOffset <= 0) {
+            return variants;
+        }
+
+        const seenTexts = new Set(variants.map(({text: value}) => value));
+        for (const variant of this._getEnglishBidirectionalSearchVariants(
+            bidirectional.text,
+            bidirectional.startOffset,
+            scanLength,
+        )) {
+            if (seenTexts.has(variant.text)) { continue; }
+            seenTexts.add(variant.text);
+            variants.push(variant);
+        }
+
+        return variants;
     }
 
     /**
@@ -1370,10 +1478,12 @@ export class TextScanner extends EventDispatcher {
         const scriptCounts = getCjkScriptCounts(sampleText);
         const hasCounts = scriptCounts.han > 0 || scriptCounts.hiragana > 0 || scriptCounts.katakana > 0 || scriptCounts.hangul > 0;
 
-        const hints = (documentLang || hasCounts) ? {
-            documentLang: documentLang || void 0,
-            documentScriptCounts: scriptCounts,
-        } : null;
+        const hints = (documentLang || hasCounts) ?
+            {
+                documentLang: documentLang || void 0,
+                documentScriptCounts: scriptCounts,
+            } :
+            null;
 
         this._documentLanguageHints = hints;
         this._documentLanguageHintsTimestamp = now;
@@ -1393,8 +1503,13 @@ export class TextScanner extends EventDispatcher {
         const sentenceForwardQuoteMap = this._sentenceForwardQuoteMap;
         const sentenceBackwardQuoteMap = this._sentenceBackwardQuoteMap;
         const layoutAwareScan = this._layoutAwareScan;
-        const searchText = this.getTextSourceContent(textSource, scanLength, layoutAwareScan, optionsContext.pointerType);
-        if (searchText.length === 0) { return null; }
+        const searchVariants = this._getTermSearchVariants(
+            textSource,
+            scanLength,
+            layoutAwareScan,
+            optionsContext.pointerType,
+        );
+        if (searchVariants.length === 0) { return null; }
 
         /** @type {import('api').FindTermsDetails} */
         const details = {};
@@ -1402,10 +1517,29 @@ export class TextScanner extends EventDispatcher {
         if (languageHints) {
             details.languageHints = languageHints;
         }
-        const {dictionaryEntries, originalTextLength} = await this._api.termsFind(searchText, details, optionsContext);
-        if (dictionaryEntries.length === 0) { return null; }
+        /** @type {{dictionaryEntries: import('dictionary').TermDictionaryEntry[], originalTextLength: number, startOffset: number} | null} */
+        let bestResult = null;
+        for (const {text, startOffset, anchorOffset} of searchVariants) {
+            const {dictionaryEntries, originalTextLength} = await this._api.termsFind(text, details, optionsContext);
+            if (dictionaryEntries.length === 0 || originalTextLength <= anchorOffset) { continue; }
 
-        textSource.setEndOffset(originalTextLength, false, layoutAwareScan);
+            if (
+                bestResult === null ||
+                originalTextLength > bestResult.originalTextLength ||
+                (
+                    originalTextLength === bestResult.originalTextLength &&
+                    startOffset > bestResult.startOffset
+                )
+            ) {
+                bestResult = {dictionaryEntries, originalTextLength, startOffset};
+            }
+        }
+        if (bestResult === null) { return null; }
+
+        if (bestResult.startOffset > 0) {
+            textSource.setStartOffset(bestResult.startOffset, layoutAwareScan);
+        }
+        textSource.setEndOffset(bestResult.originalTextLength, false, layoutAwareScan);
         const sentence = this._textSourceGenerator.extractSentence(
             textSource,
             layoutAwareScan,
@@ -1416,7 +1550,7 @@ export class TextScanner extends EventDispatcher {
             sentenceBackwardQuoteMap,
         );
 
-        return {dictionaryEntries, sentence, type: 'terms'};
+        return {dictionaryEntries: bestResult.dictionaryEntries, sentence, type: 'terms'};
     }
 
     /**
