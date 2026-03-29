@@ -156,6 +156,130 @@ function normalizeDisplayPreferencesPayload(payload) {
 }
 
 /**
+ * @param {unknown} value
+ * @param {string} language
+ * @returns {string}
+ */
+function normalizeMatchCandidateText(value, language) {
+    const text = typeof value === 'string' ? value.trim() : '';
+    if (!text) { return ''; }
+    return language === 'en' ? text.toLowerCase() : text;
+}
+
+/**
+ * @param {string} sourceText
+ * @param {unknown} candidate
+ * @param {string} language
+ * @returns {number}
+ */
+function getPrefixMatchLength(sourceText, candidate, language) {
+    const source = normalizeMatchCandidateText(sourceText, language);
+    const normalizedCandidate = normalizeMatchCandidateText(candidate, language);
+    if (!source || !normalizedCandidate) { return 0; }
+    return source.startsWith(normalizedCandidate) ? normalizedCandidate.length : 0;
+}
+
+/**
+ * @param {any} value
+ * @returns {string[]}
+ */
+function getResultMatchCandidates(value) {
+    const candidates = new Set();
+    const addCandidate = (candidate) => {
+        if (typeof candidate !== 'string') { return; }
+        const normalizedCandidate = candidate.trim();
+        if (!normalizedCandidate) { return; }
+        candidates.add(normalizedCandidate);
+    };
+
+    addCandidate(value.kanji_representation ?? value.kanjiRepresentation);
+    addCandidate(value.reading);
+
+    const forms = Array.isArray(value.forms) ? value.forms : [];
+    for (const form of forms) {
+        if (!form || typeof form !== 'object') { continue; }
+        const formRole = typeof form.form_role === 'string' ? form.form_role : form.formRole;
+        if (typeof formRole === 'string' && formRole && formRole !== 'surface') { continue; }
+        addCandidate(form.text);
+    }
+
+    const hanziVariants = value.hanzi_variants ?? value.hanziVariants;
+    if (hanziVariants && typeof hanziVariants === 'object') {
+        addCandidate(hanziVariants.traditional);
+        addCandidate(hanziVariants.simplified);
+    }
+
+    return [...candidates];
+}
+
+/**
+ * @param {any} value
+ * @param {string} sourceText
+ * @param {string} query
+ * @param {number} originalTextLength
+ * @param {string} language
+ * @returns {number}
+ */
+function deriveResultMatchLength(value, sourceText, query, originalTextLength, language) {
+    const normalizedValue = (typeof value === 'object' && value !== null) ? value : {};
+    const matchLengthRaw = normalizedValue.match_length ?? normalizedValue.matchLength;
+    const matchLengthParsed = Number.parseInt(matchLengthRaw, 10);
+    if (Number.isFinite(matchLengthParsed)) {
+        return Math.max(0, matchLengthParsed);
+    }
+
+    const normalizedSource = (sourceText || '').trim();
+    const normalizedQuery = (query || '').trim();
+    if (normalizedSource && normalizedQuery && normalizedSource !== normalizedQuery && originalTextLength > 0) {
+        return originalTextLength;
+    }
+
+    let derivedMatchLength = 0;
+    for (const candidate of getResultMatchCandidates(normalizedValue)) {
+        derivedMatchLength = Math.max(
+            derivedMatchLength,
+            getPrefixMatchLength(sourceText, candidate, language),
+        );
+    }
+    if (derivedMatchLength > 0) {
+        return derivedMatchLength;
+    }
+
+    return 0;
+}
+
+/**
+ * @param {string} text
+ * @param {number} length
+ * @returns {string}
+ */
+function sliceCodePoints(text, length) {
+    if (typeof text !== 'string' || text.length === 0) { return ''; }
+    if (!Number.isFinite(length) || length <= 0) { return ''; }
+    return Array.from(text).slice(0, length).join('');
+}
+
+/**
+ * @param {string} sourceText
+ * @param {string} query
+ * @param {number} matchLength
+ * @returns {string}
+ */
+function resolveDisplayedSourceText(sourceText, query, matchLength) {
+    const normalizedSource = (sourceText || '').toString();
+    const normalizedQuery = (query || '').toString();
+    if (!normalizedSource) { return normalizedQuery; }
+    if (
+        Number.isFinite(matchLength) &&
+        matchLength > 0 &&
+        normalizedSource === normalizedQuery
+    ) {
+        return sliceCodePoints(normalizedSource, matchLength) || normalizedSource;
+    }
+    return normalizedSource;
+}
+
+/**
  * @typedef {object} SottakuLanguageResult
  * @property {string} language
  * @property {import('dictionary').TermDictionaryEntry[]} entries
@@ -557,7 +681,6 @@ export class SottakuIntegration {
         }
 
         const scanResults = Array.isArray(scanResultsRaw) ? scanResultsRaw : [];
-        const matchLengthFallback = normalizedSource.length || normalizedQuery.length;
         const resultMetadataCache = new Map();
         /**
          * @param {any} value
@@ -566,9 +689,13 @@ export class SottakuIntegration {
         const getResultMetadata = (value) => {
             if (resultMetadataCache.has(value)) { return resultMetadataCache.get(value); }
             const normalizedValue = (typeof value === 'object' && value !== null) ? value : {};
-            const matchLengthRaw = normalizedValue.match_length ?? normalizedValue.matchLength;
-            const matchLengthParsed = Number.parseInt(matchLengthRaw, 10);
-            const matchLength = Number.isFinite(matchLengthParsed) ? Math.max(0, matchLengthParsed) : matchLengthFallback;
+            const matchLength = deriveResultMatchLength(
+                normalizedValue,
+                normalizedSource,
+                normalizedQuery,
+                Number.isFinite(originalTextLength) ? originalTextLength : 0,
+                language,
+            );
             const translation = (
                 normalizedValue.word_translation ||
                 normalizedValue.english_word ||
@@ -816,13 +943,6 @@ export class SottakuIntegration {
      */
     _resolveOriginalTextLength(languageResults, dictionaryEntries, query) {
         let maxLength = 0;
-        for (const {originalTextLength} of languageResults) {
-            if (typeof originalTextLength === 'number' && Number.isFinite(originalTextLength)) {
-                maxLength = Math.max(maxLength, originalTextLength);
-            }
-        }
-        if (maxLength > 0) { return maxLength; }
-
         for (const entry of dictionaryEntries) {
             const metadata = entry && typeof entry === 'object' ? /** @type {any} */ (entry).sottaku : null;
             if (metadata?.matchLength) {
@@ -832,6 +952,16 @@ export class SottakuIntegration {
             const headwordLength = entry?.headwords?.[0]?.term?.length;
             if (typeof headwordLength === 'number' && Number.isFinite(headwordLength)) {
                 maxLength = Math.max(maxLength, headwordLength);
+            }
+        }
+
+        if (maxLength > 0) { return maxLength; }
+
+        for (const languageResult of languageResults) {
+            if (!Array.isArray(languageResult?.entries) || languageResult.entries.length === 0) { continue; }
+            const {originalTextLength} = languageResult;
+            if (typeof originalTextLength === 'number' && Number.isFinite(originalTextLength)) {
+                maxLength = Math.max(maxLength, originalTextLength);
             }
         }
 
@@ -1115,6 +1245,11 @@ export class SottakuIntegration {
             });
         }
         const grammarLanguage = (language || '').toString().toLowerCase();
+        const displayedSourceText = resolveDisplayedSourceText(
+            resolvedSourceText,
+            query,
+            matchLength,
+        );
 
         /** @type {import('dictionary').InflectionRuleChainCandidate[]} */
         const inflectionRuleChainCandidates = [];
@@ -1141,7 +1276,7 @@ export class SottakuIntegration {
                 reading: reading,
                 sources: [
                     {
-                        originalText: resolvedSourceText,
+                        originalText: displayedSourceText,
                         transformedText: query,
                         deinflectedText: term || query,
                         matchType: 'exact',
@@ -1221,7 +1356,11 @@ export class SottakuIntegration {
             dictionaryAlias,
             sourceTermExactMatchCount: query && term && query === term ? 1 : 0,
             matchPrimaryReading: query === reading,
-            maxOriginalTextLength: Math.max(query.length, term.length, reading.length, resolvedSourceText.length),
+            maxOriginalTextLength: (
+                Number.isFinite(matchLength) && matchLength > 0 ?
+                    matchLength :
+                    Math.max(query.length, term.length, reading.length, displayedSourceText.length)
+            ),
             headwords,
             definitions,
             pronunciations: [],

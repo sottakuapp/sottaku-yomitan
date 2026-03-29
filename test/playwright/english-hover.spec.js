@@ -240,3 +240,107 @@ test('japanese hover expands left of the hovered character and selects the exact
         });
     }
 });
+
+test('mixed-language hover uses the winning match span instead of a longer non-winning scan result', async ({page, extensionId}) => {
+    const server = http.createServer(async (req, res) => {
+        const url = new URL(req.url || '/', 'http://127.0.0.1');
+        if (req.method === 'GET' && url.pathname === '/test.html') {
+            res.writeHead(200, {'content-type': 'text/html; charset=utf-8'});
+            res.end(`<!DOCTYPE html>
+                <html lang="ja">
+                <body>
+                    <p><span id="target">インターネット回線の速度テスト</span> | Fast.com</p>
+                </body>
+                </html>`);
+            return;
+        }
+
+        if (req.method === 'POST' && url.pathname === '/api/v1/dictionary/yomitan-scan') {
+            res.writeHead(200, {'content-type': 'application/json; charset=utf-8'});
+            res.end(JSON.stringify({
+                success: true,
+                data: {
+                    language_results: [
+                        {
+                            language: 'ja',
+                            results: [
+                                {
+                                    id: 1,
+                                    language: 'ja',
+                                    kanji_representation: 'インターネット',
+                                    reading: 'インターネット',
+                                    word_translation: 'internet',
+                                    match_length: 7,
+                                    has_definition: true,
+                                },
+                            ],
+                            original_text_length: 7,
+                        },
+                        {
+                            language: 'en',
+                            results: [],
+                            original_text_length: 15,
+                        },
+                    ],
+                },
+            }));
+            return;
+        }
+
+        res.writeHead(404, {'content-type': 'application/json; charset=utf-8'});
+        res.end(JSON.stringify({success: false, error: 'not found'}));
+    });
+
+    await new Promise((resolve) => {
+        server.listen(0, '127.0.0.1', () => {
+            resolve();
+        });
+    });
+    const address = server.address();
+    if (!address || typeof address === 'string') {
+        await new Promise((resolve, reject) => {
+            server.close((error) => {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve();
+            });
+        });
+        throw new Error('Failed to start Playwright test server');
+    }
+
+    try {
+        const apiBaseUrl = `http://127.0.0.1:${address.port}/api/v1`;
+        await page.goto(`chrome-extension://${extensionId}/settings.html`);
+        await page.waitForLoadState('domcontentloaded');
+        await updateProfileSettings(page, {
+            'sottaku.enabled': true,
+            'sottaku.apiBaseUrl': apiBaseUrl,
+            'sottaku.authToken': 'playwright-token',
+            'sottaku.languageMode': 'mixed',
+            'sottaku.preferredLanguages': ['ja', 'en'],
+            'general.language': 'ja',
+            'scanning.length': 32,
+            'scanning.selectText': true,
+        });
+
+        await page.goto(`http://127.0.0.1:${address.port}/test.html`);
+        await page.keyboard.down('Shift');
+        await page.locator('#target').hover();
+        await expect.poll(async () => {
+            return await page.evaluate(() => window.getSelection()?.toString() || '');
+        }).toBe('インターネット');
+        await page.keyboard.up('Shift');
+    } finally {
+        await new Promise((resolve, reject) => {
+            server.close((error) => {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve();
+            });
+        });
+    }
+});

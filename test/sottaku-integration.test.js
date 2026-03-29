@@ -132,6 +132,54 @@ describe('SottakuIntegration', () => {
         expect(result.originalTextLength).toBe(2);
     });
 
+    test('same-source scans derive the highlight span from the matched Japanese term when match_length is missing', async () => {
+        const integration = new SottakuIntegration(null);
+        integration._client.scan = async (text) => ({
+            results: [
+                {id: 1, kanji_representation: 'インターネット', reading: 'インターネット', has_definition: true, word_translation: 'internet'},
+            ],
+            originalTextLength: text.length,
+        });
+
+        const result = await integration._fetchLanguageEntriesWithVariants({
+            apiOrigin: 'https://sottaku.app',
+            language: 'ja',
+            maxResults: 32,
+            variants: [{query: 'インターネット回線の速度テスト', sourceText: 'インターネット回線の速度テスト', originalTextLength: 'インターネット回線の速度テスト'.length}],
+            locale: 'en',
+            localeLang: 'en',
+            displayPreferences: null,
+        });
+
+        expect(result.originalTextLength).toBe('インターネット'.length);
+        expect(result.entries[0].sottaku.matchLength).toBe('インターネット'.length);
+        expect(result.entries[0].headwords[0].sources[0].originalText).toBe('インターネット');
+    });
+
+    test('transformed scans keep the original source span when match_length is missing', async () => {
+        const integration = new SottakuIntegration(null);
+        integration._client.scan = async () => ({
+            results: [
+                {id: 1, kanji_representation: 'get', reading: 'ɡet', has_definition: true, word_translation: 'obtain'},
+            ],
+            originalTextLength: 3,
+        });
+
+        const result = await integration._fetchLanguageEntriesWithVariants({
+            apiOrigin: 'https://sottaku.app',
+            language: 'en',
+            maxResults: 32,
+            variants: [{query: 'get', sourceText: 'Getting', originalTextLength: 7}],
+            locale: 'en',
+            localeLang: 'en',
+            displayPreferences: null,
+        });
+
+        expect(result.originalTextLength).toBe(7);
+        expect(result.entries[0].sottaku.matchLength).toBe(7);
+        expect(result.entries[0].headwords[0].sources[0].originalText).toBe('Getting');
+    });
+
     test('sorts longest matches then defined entries', async () => {
         const integration = new SottakuIntegration(null);
         integration.configure({
@@ -207,6 +255,31 @@ describe('SottakuIntegration', () => {
         const {dictionaryEntries} = await integration.findTerms('반대했다는');
         const ids = dictionaryEntries.map((entry) => entry.sottaku.questionId);
         expect(ids).toStrictEqual([2, 1]);
+    });
+
+    test('mixed mode highlight span ignores longer no-result languages', async () => {
+        const integration = new SottakuIntegration(null);
+
+        const dictionaryEntries = [
+            {
+                sottaku: {matchLength: 7},
+                headwords: [{term: 'インターネット'}],
+            },
+        ];
+        const originalTextLength = integration._resolveOriginalTextLength([
+            {
+                language: 'ja',
+                entries: dictionaryEntries,
+                originalTextLength: 7,
+            },
+            {
+                language: 'en',
+                entries: [],
+                originalTextLength: 15,
+            },
+        ], dictionaryEntries, 'インターネット回線の速度テスト');
+
+        expect(originalTextLength).toBe(7);
     });
 
     test('resolves automatic locale from Sottaku language settings', async () => {
