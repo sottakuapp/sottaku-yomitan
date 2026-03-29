@@ -109,7 +109,7 @@
                                     },
                                     "languageMode": {
                                         "type": "string",
-                                        "enum": ["auto", "ja", "ko", "zh", "mixed"],
+                                        "enum": ["auto", "ja", "ko", "zh", "en", "mixed"],
                                         "default": "mixed"
                                     },
                                     "preferredLanguages": {
@@ -117,7 +117,7 @@
                                         "items": {
                                             "type": "string"
                                         },
-                                        "default": ["ja", "ko", "zh"]
+                                        "default": ["ja", "ko", "zh", "en"]
                                     },
                                     "user": {
                                         "anyOf": [

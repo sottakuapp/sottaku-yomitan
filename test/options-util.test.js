@@ -470,6 +470,16 @@ function createProfileOptionsUpdatedTestData1() {
                 groups: [],
             },
         },
+        sottaku: {
+            enabled: true,
+            apiBaseUrl: 'https://sottaku.app/api/v1',
+            authToken: '',
+            locale: '',
+            languageMode: 'mixed',
+            preferredLanguages: ['ja', 'ko', 'zh', 'en'],
+            user: null,
+            cookieDomain: 'https://sottaku.app',
+        },
         dictionaries: [
             {
                 name: 'Test Dictionary 2',
@@ -704,7 +714,7 @@ function createOptionsUpdatedTestData1() {
             },
         ],
         profileCurrent: 0,
-        version: 74,
+        version: 77,
         global: {
             database: {
                 prefixWildcardsSupported: false,
@@ -780,6 +790,14 @@ describe('OptionsUtil', () => {
             modify(optionsModified);
             const optionsUpdated = await optionsUtil.update(structuredClone(optionsModified));
             expect(structuredClone(optionsUpdated)).toStrictEqual(structuredClone(options));
+        });
+
+        test('default sottaku languages include english', async () => {
+            const optionsUtil = new OptionsUtil();
+            await optionsUtil.prepare();
+
+            const options = optionsUtil.getDefault();
+            expect(options.profiles[0].options.sottaku.preferredLanguages).toStrictEqual(['ja', 'ko', 'zh', 'en']);
         });
     });
 
