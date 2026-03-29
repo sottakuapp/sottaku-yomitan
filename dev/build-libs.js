@@ -45,19 +45,117 @@ async function copyWasm(out) {
  * @param {string} scriptPath
  */
 async function buildLib(scriptPath) {
+    const outFile = path.join(extDir, 'lib', path.basename(scriptPath));
     await esbuild.build({
         entryPoints: [scriptPath],
         bundle: true,
         minify: false,
-        sourcemap: true,
+        sourcemap: false,
         target: 'es2020',
         format: 'esm',
-        outfile: path.join(extDir, 'lib', path.basename(scriptPath)),
+        outfile: outFile,
         external: ['fs'],
         banner: {
             js: '// @ts-nocheck',
         },
     });
+
+    // Clean up stale source maps from older builds so release packages do not
+    // ship code patterns that only exist inside sourcesContent.
+    fs.rmSync(`${outFile}.map`, {force: true});
+}
+
+/**
+ * Removes dormant eval-based Handlebars compiler code from the shipped bundle
+ * and aliases compile() to the interpreter-based compileAST() implementation.
+ * @throws {Error} When the generated bundle no longer matches the expected patch points.
+ */
+function patchHandlebarsBundle() {
+    const fileName = path.join(extDir, 'lib', 'handlebars.js');
+    let content = fs.readFileSync(fileName, {encoding: 'utf8'});
+
+    const replacements = [
+        {
+            before: 'this.decorators = Function.apply(this, ["fn", "props", "container", "depth0", "data", "blockParams", "depths", this.decorators.merge()]);',
+            after: 'this.decorators = function disabledHandlebarsDecoratorCompiler() { throw new _exception2["default"]("Unsafe Handlebars decorator compilation is disabled; use compileAST instead."); };',
+        },
+        {
+            before: 'return Function.apply(this, params);',
+            after: 'return function disabledHandlebarsCompiler() { throw new _exception2["default"]("Unsafe Handlebars compilation is disabled; use compileAST instead."); };',
+        },
+        {
+            before: '  SandboxedHandlebars.compileAST = import_handlebars2.default.compileAST;\n  return SandboxedHandlebars;\n};',
+            after: '  SandboxedHandlebars.compileAST = import_handlebars2.default.compileAST;\n  SandboxedHandlebars.compile = import_handlebars2.default.compile;\n  return SandboxedHandlebars;\n};',
+        },
+        {
+            before: [
+                'import_handlebars2.default.compileAST = function(input, options) {',
+                '  if (input == null || typeof input !== "string" && input.type !== "Program") {',
+                '    throw new import_handlebars2.default.Exception(',
+                '      `You must pass a string or Handlebars AST to Handlebars.compileAST. You passed ${' + 'input}`',
+                '    );',
+                '  }',
+                '  const visitor = new ElasticHandlebarsVisitor(this ?? import_handlebars2.default, input, options);',
+                '  return (context, runtimeOptions) => visitor.render(context, runtimeOptions);',
+                '};',
+            ].join('\n'),
+            after: [
+                'import_handlebars2.default.compileAST = function(input, options) {',
+                '  if (input == null || typeof input !== "string" && input.type !== "Program") {',
+                '    throw new import_handlebars2.default.Exception(',
+                '      `You must pass a string or Handlebars AST to Handlebars.compileAST. You passed ${' + 'input}`',
+                '    );',
+                '  }',
+                '  const visitor = new ElasticHandlebarsVisitor(this ?? import_handlebars2.default, input, options);',
+                '  return (context, runtimeOptions) => visitor.render(context, runtimeOptions);',
+                '};',
+                'import_handlebars2.default.compile = function(input, options) {',
+                '  return import_handlebars2.default.compileAST.call(this ?? import_handlebars2.default, input, options);',
+                '};',
+            ].join('\n'),
+        },
+    ];
+
+    for (const {before, after} of replacements) {
+        if (!content.includes(before)) {
+            throw new Error(`Failed to patch handlebars bundle: missing expected snippet: ${before.slice(0, 80)}`);
+        }
+        content = content.replace(before, after);
+    }
+
+    fs.writeFileSync(fileName, content);
+}
+
+/**
+ * Removes variable dynamic-import fallbacks from zip.js worker bundles.
+ *
+ * Firefox AMO flags `import(variable)` even when it is only a dormant fallback.
+ * The classic worker path already uses `importScripts(...)`, so the fallback can
+ * safely do the same in our shipped artifact.
+ * @throws {Error} When the generated bundle no longer matches the expected patch points.
+ */
+function patchZipWorkerBundles() {
+    const replacements = [
+        {
+            fileName: path.join(extDir, 'lib', 'z-worker.js'),
+            before: 'await import(script);',
+            after: 'importScripts(script);',
+        },
+        {
+            fileName: path.join(extDir, 'lib', 'zip.js'),
+            before: 'await import(t)',
+            after: 'importScripts(t)',
+        },
+    ];
+
+    for (const {fileName, before, after} of replacements) {
+        let content = fs.readFileSync(fileName, {encoding: 'utf8'});
+        if (!content.includes(before)) {
+            throw new Error(`Failed to patch zip worker bundle: missing expected snippet: ${before}`);
+        }
+        content = content.replaceAll(before, after);
+        fs.writeFileSync(fileName, content);
+    }
 }
 
 /**
@@ -73,6 +171,9 @@ export async function buildLibs() {
             await buildLib(path.join(devLibPath, f.name));
         }
     }
+
+    patchHandlebarsBundle();
+    patchZipWorkerBundles();
 
     const schemaDir = path.join(extDir, 'data/schemas/');
     const schemaFileNames = fs.readdirSync(schemaDir);
