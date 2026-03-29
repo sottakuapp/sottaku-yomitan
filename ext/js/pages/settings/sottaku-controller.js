@@ -20,7 +20,13 @@ import {toError} from '../../core/to-error.js';
 import {SottakuClient} from '../../comm/sottaku-client.js';
 import {getMessage} from '../../dom/i18n.js';
 import {querySelectorNotNull} from '../../dom/query-selector.js';
-import {getSottakuLanguageFlag, getSottakuLanguageName, normalizeSottakuLanguages, SOTTAKU_SUPPORTED_LANGUAGES} from '../../language/sottaku-languages.js';
+import {
+    getSottakuLanguageFlag,
+    getSottakuLanguageName,
+    normalizeSottakuLanguages,
+    normalizeSottakuSupportedLanguages,
+    SOTTAKU_SUPPORTED_LANGUAGES,
+} from '../../language/sottaku-languages.js';
 
 export class SottakuController {
     /**
@@ -514,22 +520,11 @@ export class SottakuController {
      * @returns {string[]}
      */
     _normalizeSupportedLanguagesResponse(response) {
-        const normalized = [];
-        const seen = new Set();
         const data = (response && typeof response === 'object') ? /** @type {Record<string, unknown>} */ (response) : {};
         const candidates = Array.isArray(data.languages) ?
             data.languages :
             (Array.isArray(data.supported_languages) ? data.supported_languages : []);
-
-        for (const value of candidates) {
-            if (typeof value !== 'string') { continue; }
-            const trimmed = value.trim();
-            if (!trimmed || seen.has(trimmed)) { continue; }
-            seen.add(trimmed);
-            normalized.push(trimmed);
-        }
-
-        return normalized.length > 0 ? normalized : [...SOTTAKU_SUPPORTED_LANGUAGES];
+        return normalizeSottakuSupportedLanguages(candidates);
     }
 
     /**

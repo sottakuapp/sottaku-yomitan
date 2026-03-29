@@ -1,3 +1,20 @@
+/*
+ * Copyright (C) 2025  Sottaku Inc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 import {languageDescriptorMap} from './language-descriptors.js';
 
 export const SOTTAKU_SUPPORTED_LANGUAGES = ['ja', 'ko', 'zh', 'en'];
@@ -6,10 +23,19 @@ export const SOTTAKU_SUPPORTED_LANGUAGES = ['ja', 'ko', 'zh', 'en'];
  * @param {unknown} supportedLanguages
  * @returns {string[]}
  */
-function normalizeSupportedLanguagesList(supportedLanguages) {
+export function normalizeSottakuSupportedLanguages(supportedLanguages) {
     const normalized = [];
     const seen = new Set();
-    const source = Array.isArray(supportedLanguages) ? supportedLanguages : SOTTAKU_SUPPORTED_LANGUAGES;
+    /** @type {string[]} */
+    const source = [];
+    if (Array.isArray(supportedLanguages)) {
+        for (const language of supportedLanguages) {
+            if (typeof language === 'string') {
+                source.push(language);
+            }
+        }
+    }
+    source.push(...SOTTAKU_SUPPORTED_LANGUAGES);
     for (const language of source) {
         if (typeof language !== 'string') { continue; }
         const trimmed = language.trim();
@@ -29,7 +55,7 @@ export function getSottakuLanguageFlag(language) {
         case 'ja': return '\uD83C\uDDEF\uD83C\uDDF5'; // JP flag
         case 'ko': return '\uD83C\uDDF0\uD83C\uDDF7'; // KR flag
         case 'zh': return '\uD83C\uDDE8\uD83C\uDDF3'; // CN flag
-        case 'en': return '\uD83C\uDF10'; // Globe
+        case 'en': return '\uD83C\uDDFA\uD83C\uDDF8'; // US flag
         default: return '\uD83C\uDF10'; // Globe
     }
 }
@@ -56,7 +82,7 @@ export function normalizeSottakuLanguages(preferredLanguages, defaultLanguage, s
     /** @type {string[]} */
     const normalized = [];
     const seen = new Set();
-    const normalizedSupported = normalizeSupportedLanguagesList(supportedLanguages);
+    const normalizedSupported = normalizeSottakuSupportedLanguages(supportedLanguages);
 
     /**
      * @param {unknown} value
