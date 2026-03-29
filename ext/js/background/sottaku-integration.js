@@ -607,6 +607,21 @@ export class SottakuIntegration {
 
         const limitedResults = scanResultsSorted.slice(0, Math.max(1, maxResults));
 
+        let effectiveOriginalTextLength = 0;
+        for (const result of limitedResults) {
+            effectiveOriginalTextLength = Math.max(
+                effectiveOriginalTextLength,
+                getResultMetadata(result).matchLength,
+            );
+        }
+        if (effectiveOriginalTextLength === 0) {
+            effectiveOriginalTextLength = (
+                typeof scanOriginalLength === 'number' &&
+                Number.isFinite(scanOriginalLength) &&
+                scanOriginalLength > 0
+            ) ? scanOriginalLength : originalTextLength;
+        }
+
         /** @type {import('dictionary').TermDictionaryEntry[]} */
         const entries = [];
         for (let i = 0; i < limitedResults.length; ++i) {
@@ -619,7 +634,7 @@ export class SottakuIntegration {
                 normalizedQuery,
                 i,
                 normalizedSource,
-                originalTextLength,
+                effectiveOriginalTextLength,
                 localeLang,
                 resolvedDisplayPreferences,
             ));
@@ -628,9 +643,9 @@ export class SottakuIntegration {
         return {
             language,
             entries,
-            originalTextLength: typeof originalTextLength === 'number' && Number.isFinite(originalTextLength) ?
-                originalTextLength :
-                scanOriginalLength,
+            originalTextLength: typeof effectiveOriginalTextLength === 'number' && Number.isFinite(effectiveOriginalTextLength) ?
+                effectiveOriginalTextLength :
+                0,
         };
     }
 

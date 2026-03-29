@@ -156,4 +156,126 @@ describe('TextScanner', () => {
         expect(result?.dictionaryEntries).toEqual([definitionEntry]);
         expect(textSource.text()).toBe('開発');
     });
+
+    test('keeps exact English source spans when hovering inside the matched word', async () => {
+        const definitionEntry = {id: 'future-become'};
+        const scanner = createScanner({
+            termsFind: vi.fn(async (text) => {
+                if (text === 'will become') {
+                    return {dictionaryEntries: [definitionEntry], originalTextLength: 11};
+                }
+                return {dictionaryEntries: [], originalTextLength: 0};
+            }),
+        });
+        // eslint-disable-next-line no-underscore-dangle
+        scanner._language = 'en';
+        // eslint-disable-next-line no-underscore-dangle
+        scanner._scanLength = 20;
+
+        const textSource = new TextSourceElement(
+            window.document.createElement('div'),
+            'it will become soon',
+            10,
+            10,
+        );
+        // eslint-disable-next-line no-underscore-dangle
+        const result = await scanner._findTermDictionaryEntries(textSource, {pointerType: 'mouse'});
+
+        expect(result).not.toBeNull();
+        expect(result?.dictionaryEntries).toEqual([definitionEntry]);
+        expect(textSource.text()).toBe('will become');
+    });
+
+    test('falls back to forward Japanese scans when bidirectional extraction is unavailable', async () => {
+        const definitionEntry = {id: 'development'};
+        const scanner = createScanner({
+            termsFind: vi.fn(async (text) => {
+                if (text === '開発中') {
+                    return {dictionaryEntries: [definitionEntry], originalTextLength: 2};
+                }
+                return {dictionaryEntries: [], originalTextLength: 0};
+            }),
+        });
+        // eslint-disable-next-line no-underscore-dangle
+        scanner._language = 'ja';
+        // eslint-disable-next-line no-underscore-dangle
+        scanner._scanLength = 10;
+        // eslint-disable-next-line no-underscore-dangle
+        vi.spyOn(scanner, '_getBidirectionalTextSourceContent').mockReturnValue({text: '', startOffset: 0});
+
+        const textSource = new TextSourceElement(
+            window.document.createElement('div'),
+            '開発中',
+            0,
+            0,
+        );
+        // eslint-disable-next-line no-underscore-dangle
+        const result = await scanner._findTermDictionaryEntries(textSource, {pointerType: 'mouse'});
+
+        expect(result).not.toBeNull();
+        expect(result?.dictionaryEntries).toEqual([definitionEntry]);
+        expect(textSource.text()).toBe('開発');
+        // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/unbound-method
+        expect(scanner._api.termsFind).toHaveBeenCalledWith('開発中', expect.any(Object), expect.any(Object));
+    });
+
+    test('prefers the nearest Japanese variant when equal-length matches are found', async () => {
+        const definitionEntry = {id: 'development'};
+        const scanner = createScanner({
+            termsFind: vi.fn(async () => ({
+                dictionaryEntries: [definitionEntry],
+                originalTextLength: 2,
+            })),
+        });
+        // eslint-disable-next-line no-underscore-dangle
+        scanner._language = 'ja';
+        // eslint-disable-next-line no-underscore-dangle
+        scanner._scanLength = 16;
+
+        const textSource = new TextSourceElement(
+            window.document.createElement('div'),
+            '今日は開発中です',
+            3,
+            3,
+        );
+        // eslint-disable-next-line no-underscore-dangle
+        const result = await scanner._findTermDictionaryEntries(textSource, {pointerType: 'mouse'});
+
+        expect(result).not.toBeNull();
+        expect(result?.dictionaryEntries).toEqual([definitionEntry]);
+        expect(textSource.text()).toBe('開発');
+    });
+
+    test('expands Japanese scans left of the hovered character', async () => {
+        const definitionEntry = {id: 'development'};
+        const scanner = createScanner({
+            termsFind: vi.fn(async (text) => {
+                if (text === '開発中') {
+                    return {dictionaryEntries: [definitionEntry], originalTextLength: 2};
+                }
+                return {dictionaryEntries: [], originalTextLength: 0};
+            }),
+        });
+        // eslint-disable-next-line no-underscore-dangle
+        scanner._language = 'ja';
+        // eslint-disable-next-line no-underscore-dangle
+        scanner._scanLength = 10;
+
+        const textSource = new TextSourceElement(
+            window.document.createElement('div'),
+            '開発中',
+            1,
+            1,
+        );
+        // eslint-disable-next-line no-underscore-dangle
+        const result = await scanner._findTermDictionaryEntries(textSource, {pointerType: 'mouse'});
+
+        expect(result).not.toBeNull();
+        expect(result?.dictionaryEntries).toEqual([definitionEntry]);
+        expect(textSource.text()).toBe('開発');
+        // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/unbound-method
+        expect(scanner._api.termsFind).toHaveBeenCalledWith('発中', expect.any(Object), expect.any(Object));
+        // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/unbound-method
+        expect(scanner._api.termsFind).toHaveBeenCalledWith('開発中', expect.any(Object), expect.any(Object));
+    });
 });

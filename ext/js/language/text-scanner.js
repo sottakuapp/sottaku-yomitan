@@ -582,9 +582,12 @@ export class TextScanner extends EventDispatcher {
      * @returns {{text: string, startOffset: number, anchorOffset: number}[]}
      */
     _getTermSearchVariants(textSource, scanLength, layoutAwareScan, pointerType) {
+        const baseText = this.getTextSourceContent(textSource, scanLength, layoutAwareScan, pointerType);
+        if (baseText.length === 0) { return []; }
+        const defaultVariant = {text: baseText, startOffset: 0, anchorOffset: 0};
+
         if (this._language !== 'en') {
-            const baseText = this.getTextSourceContent(textSource, scanLength, layoutAwareScan, pointerType);
-            return baseText.length > 0 ? [{text: baseText, startOffset: 0, anchorOffset: 0}] : [];
+            return [defaultVariant];
         }
 
         const bidirectional = this._getBidirectionalTextSourceContent(
@@ -593,15 +596,14 @@ export class TextScanner extends EventDispatcher {
             layoutAwareScan,
             pointerType,
         );
-        if (!bidirectional.text) {
-            return [];
-        }
+        if (!bidirectional.text) { return [defaultVariant]; }
 
-        return this._getEnglishBidirectionalSearchVariants(
+        const variants = this._getEnglishBidirectionalSearchVariants(
             bidirectional.text,
             bidirectional.startOffset,
             scanLength,
         );
+        return variants.length > 0 ? variants : [defaultVariant];
     }
 
     /**
@@ -1543,7 +1545,7 @@ export class TextScanner extends EventDispatcher {
                 originalTextLength > bestResult.originalTextLength ||
                 (
                     originalTextLength === bestResult.originalTextLength &&
-                    startOffset > bestResult.startOffset
+                    startOffset < bestResult.startOffset
                 )
             ) {
                 bestResult = {dictionaryEntries, originalTextLength, startOffset};
@@ -1555,9 +1557,11 @@ export class TextScanner extends EventDispatcher {
         if (bestResult === null) { return null; }
 
         if (bestResult.startOffset > 0) {
-            textSource.setStartOffset(bestResult.startOffset, layoutAwareScan);
+            textSource.setStartOffset(bestResult.startOffset, false);
         }
-        textSource.setEndOffset(bestResult.originalTextLength, false, layoutAwareScan);
+        // Apply the exact matched source span using raw character offsets so adjacent inline text
+        // nodes do not bleed into the visible selection/highlight.
+        textSource.setEndOffset(bestResult.originalTextLength, false, false);
         const sentence = this._textSourceGenerator.extractSentence(
             textSource,
             layoutAwareScan,

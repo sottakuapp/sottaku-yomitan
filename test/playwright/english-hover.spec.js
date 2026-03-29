@@ -24,6 +24,28 @@ test.beforeEach(async ({context}) => {
     await welcome.close();
 });
 
+/**
+ * @param {import('playwright').Page} page
+ * @param {Record<string, unknown>} values
+ * @returns {Promise<void>}
+ */
+async function updateProfileSettings(page, values) {
+    await page.evaluate(async (entries) => {
+        const optionsContext = {index: 0};
+        const targets = Object.entries(entries).map(([path, value]) => ({
+            action: 'set',
+            scope: 'profile',
+            optionsContext,
+            path,
+            value,
+        }));
+        await chrome.runtime.sendMessage({
+            action: 'modifySettings',
+            params: {targets, source: 'playwright'},
+        });
+    }, values);
+}
+
 test('english hover prefers bidirectional phrase spans and selects the exact source text', async ({page, extensionId}) => {
     const server = http.createServer(async (req, res) => {
         const url = new URL(req.url || '/', 'http://127.0.0.1');
@@ -98,27 +120,15 @@ test('english hover prefers bidirectional phrase spans and selects the exact sou
         const apiBaseUrl = `http://127.0.0.1:${address.port}/api/v1`;
         await page.goto(`chrome-extension://${extensionId}/settings.html`);
         await page.waitForLoadState('domcontentloaded');
-        await page.evaluate(async ({apiBaseUrl: value}) => {
-            // eslint-disable-next-line no-unsanitized/method, @typescript-eslint/no-unsafe-assignment
-            const apiModule = await import(chrome.runtime.getURL('js/comm/api.js'));
-            // eslint-disable-next-line no-unsanitized/method, @typescript-eslint/no-unsafe-assignment
-            const extensionModule = await import(chrome.runtime.getURL('js/extension/web-extension.js'));
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            const API = apiModule.API;
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            const WebExtension = extensionModule.WebExtension;
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            const api = new API(new WebExtension());
-            await api.modifySettings([
-                {action: 'set', scope: 'profile', path: 'sottaku.enabled', value: true},
-                {action: 'set', scope: 'profile', path: 'sottaku.apiBaseUrl', value},
-                {action: 'set', scope: 'profile', path: 'sottaku.authToken', value: 'playwright-token'},
-                {action: 'set', scope: 'profile', path: 'sottaku.preferredLanguages', value: ['en']},
-                {action: 'set', scope: 'profile', path: 'general.language', value: 'en'},
-                {action: 'set', scope: 'profile', path: 'scanning.length', value: 20},
-                {action: 'set', scope: 'profile', path: 'scanning.selectText', value: true},
-            ], 'playwright');
-        }, {apiBaseUrl});
+        await updateProfileSettings(page, {
+            'sottaku.enabled': true,
+            'sottaku.apiBaseUrl': apiBaseUrl,
+            'sottaku.authToken': 'playwright-token',
+            'sottaku.preferredLanguages': ['en'],
+            'general.language': 'en',
+            'scanning.length': 20,
+            'scanning.selectText': true,
+        });
 
         await page.goto(`http://127.0.0.1:${address.port}/test.html`);
         await page.keyboard.down('Shift');
@@ -126,6 +136,97 @@ test('english hover prefers bidirectional phrase spans and selects the exact sou
         await expect.poll(async () => {
             return await page.evaluate(() => window.getSelection()?.toString() || '');
         }).toBe('will become');
+        await page.keyboard.up('Shift');
+    } finally {
+        await new Promise((resolve, reject) => {
+            server.close((error) => {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve();
+            });
+        });
+    }
+});
+
+test('japanese hover expands left of the hovered character and selects the exact source text', async ({page, extensionId}) => {
+    const server = http.createServer(async (req, res) => {
+        const url = new URL(req.url || '/', 'http://127.0.0.1');
+        if (req.method === 'GET' && url.pathname === '/test.html') {
+            res.writeHead(200, {'content-type': 'text/html; charset=utf-8'});
+            res.end(`<!DOCTYPE html>
+                <html lang="ja">
+                <body>
+                    <p>今日は<span id="target">開発</span>中です</p>
+                </body>
+                </html>`);
+            return;
+        }
+
+        if (req.method === 'POST' && url.pathname === '/api/v1/dictionary/yomitan-scan') {
+            let body = '';
+            for await (const chunk of req) {
+                body += chunk;
+            }
+            const payload = /** @type {{text?: string}} */ (parseJson(body || '{}'));
+            const text = String(payload.text || '');
+
+            const response = text.startsWith('開発中') ?
+                {
+                    results: [{id: 1, language: 'ja', kanji_representation: '開発', reading: 'かいはつ', word_translation: 'development', match_length: 2, has_definition: true}],
+                    original_text_length: 2,
+                } :
+                {results: [], original_text_length: 0};
+
+            res.writeHead(200, {'content-type': 'application/json; charset=utf-8'});
+            res.end(JSON.stringify({success: true, data: response}));
+            return;
+        }
+
+        res.writeHead(404, {'content-type': 'application/json; charset=utf-8'});
+        res.end(JSON.stringify({success: false, error: 'not found'}));
+    });
+
+    await new Promise((resolve) => {
+        server.listen(0, '127.0.0.1', () => {
+            resolve();
+        });
+    });
+    const address = server.address();
+    if (!address || typeof address === 'string') {
+        await new Promise((resolve, reject) => {
+            server.close((error) => {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve();
+            });
+        });
+        throw new Error('Failed to start Playwright test server');
+    }
+
+    try {
+        const apiBaseUrl = `http://127.0.0.1:${address.port}/api/v1`;
+        await page.goto(`chrome-extension://${extensionId}/settings.html`);
+        await page.waitForLoadState('domcontentloaded');
+        await updateProfileSettings(page, {
+            'sottaku.enabled': true,
+            'sottaku.apiBaseUrl': apiBaseUrl,
+            'sottaku.authToken': 'playwright-token',
+            'sottaku.preferredLanguages': ['ja'],
+            'general.language': 'ja',
+            'scanning.length': 10,
+            'scanning.selectText': true,
+        });
+
+        await page.goto(`http://127.0.0.1:${address.port}/test.html`);
+        await page.keyboard.down('Shift');
+        await page.locator('#target').hover();
+        await expect.poll(async () => {
+            return await page.evaluate(() => window.getSelection()?.toString() || '');
+        }).toBe('開発');
         await page.keyboard.up('Shift');
     } finally {
         await new Promise((resolve, reject) => {

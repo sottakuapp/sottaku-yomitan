@@ -110,6 +110,28 @@ describe('SottakuIntegration', () => {
         expect(dictionaryEntries[0].headwords[0].sources[0].transformedText).toBe('get');
     });
 
+    test('variant scans use the backend original text length for the matched source span', async () => {
+        const integration = new SottakuIntegration(null);
+        integration._client.scan = async () => ({
+            results: [
+                {id: 1, kanji_representation: '開発', reading: 'かいはつ', match_length: 2, has_definition: true, word_translation: 'development'},
+            ],
+            originalTextLength: 2,
+        });
+
+        const result = await integration._fetchLanguageEntriesWithVariants({
+            apiOrigin: 'https://sottaku.app',
+            language: 'ja',
+            maxResults: 32,
+            variants: [{query: '開発中です', sourceText: '開発中です', originalTextLength: 5}],
+            locale: 'en',
+            localeLang: 'en',
+            displayPreferences: null,
+        });
+
+        expect(result.originalTextLength).toBe(2);
+    });
+
     test('sorts longest matches then defined entries', async () => {
         const integration = new SottakuIntegration(null);
         integration.configure({
