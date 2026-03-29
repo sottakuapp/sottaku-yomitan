@@ -43,6 +43,52 @@ test('search clipboard', async ({page, extensionId}) => {
     await expect(page.locator('#search-textbox')).toHaveValue('あ');
 });
 
+test('search popup survives reload while being reused', async ({context, page, extensionId}) => {
+    await page.goto(`chrome-extension://${extensionId}/settings.html`);
+    await expect(page.locator('id=dictionaries')).toBeVisible();
+
+    /**
+     * @param {string} text
+     * @returns {Promise<Record<string, unknown>>}
+     */
+    const openSearchPopup = async (text) => {
+        return /** @type {Record<string, unknown>} */ (await page.evaluate(async (query) => {
+            return await chrome.runtime.sendMessage({
+                action: 'getOrCreateSearchPopup',
+                params: {focus: true, text: query},
+            });
+        }, text));
+    };
+
+    const searchPopupUrl = `chrome-extension://${extensionId}/search.html`;
+    const getSearchPopupPage = async () => {
+        const existingPage = context.pages().find((candidate) => candidate.url().startsWith(searchPopupUrl));
+        if (typeof existingPage !== 'undefined') {
+            return existingPage;
+        }
+        return await context.waitForEvent('page', {
+            predicate: (candidate) => candidate.url().startsWith(searchPopupUrl),
+            timeout: 15000,
+        });
+    };
+
+    const popupPromise = getSearchPopupPage();
+    const firstResult = await openSearchPopup('読む');
+    expect(firstResult.error).toBeUndefined();
+    expect(firstResult.result).toMatchObject({tabId: expect.any(Number)});
+
+    const popupPage = await popupPromise;
+    await popupPage.waitForLoadState('domcontentloaded');
+    await expect(popupPage.locator('#search-textbox')).toHaveValue('読む');
+
+    void popupPage.evaluate(() => location.reload()).catch(() => {});
+
+    const reloadResult = await openSearchPopup('食べる');
+    expect(reloadResult.error).toBeUndefined();
+
+    await expect(popupPage.locator('#search-textbox')).toHaveValue('食べる', {timeout: 5000});
+});
+
 // Anki UI is removed in the Sottaku build, so this flow is kept for reference only.
 test.skip('anki add', async ({context, page, extensionId}) => {
     // Mock anki routes

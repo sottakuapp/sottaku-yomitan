@@ -1113,15 +1113,12 @@ export class Backend {
 
     /** @type {import('api').ApiHandlerNoExtraArgs<'getOrCreateSearchPopup'>} */
     async _onApiGetOrCreateSearchPopup({focus = false, text}) {
-        const {tab, created} = await this._getOrCreateSearchPopupWrapper();
+        let {tab, created} = await this._getOrCreateSearchPopupWrapper();
+        if (typeof text === 'string') {
+            ({tab, created} = await this._updateSearchPopupQueryWithRetry(tab, created, text));
+        }
         if (focus === true || (focus === 'ifCreated' && created)) {
             await this._focusTab(tab);
-        }
-        if (typeof text === 'string') {
-            const {id} = tab;
-            if (typeof id === 'number') {
-                await this._updateSearchQuery(id, text, !created);
-            }
         }
         const {id} = tab;
         return {tabId: typeof id === 'number' ? id : null, windowId: tab.windowId};
@@ -1512,7 +1509,10 @@ export class Backend {
         if (this._searchPopupTabId !== null) {
             const tab = await this._checkTabUrl(this._searchPopupTabId, urlPredicate);
             if (tab !== null) {
-                return {tab, created: false};
+                const preparedTab = await this._prepareExistingSearchPopupTab(tab);
+                if (preparedTab !== null) {
+                    return {tab: preparedTab, created: false};
+                }
             }
             this._searchPopupTabId = null;
         }
@@ -1521,10 +1521,9 @@ export class Backend {
         const existingTabInfo = await this._findSearchPopupTab(urlPredicate);
         if (existingTabInfo !== null) {
             const existingTab = existingTabInfo.tab;
-            const {id} = existingTab;
-            if (typeof id === 'number') {
-                this._searchPopupTabId = id;
-                return {tab: existingTab, created: false};
+            const preparedTab = await this._prepareExistingSearchPopupTab(existingTab);
+            if (preparedTab !== null) {
+                return {tab: preparedTab, created: false};
             }
         }
 
@@ -1548,20 +1547,53 @@ export class Backend {
         }
 
         const tab = tabs[0];
+        await this._prepareSearchPopupTab(tab);
+
+        const {id} = tab;
+        this._searchPopupTabId = id;
+        return {tab, created: true};
+    }
+
+    /**
+     * @param {chrome.tabs.Tab} tab
+     * @returns {Promise<?chrome.tabs.Tab>}
+     */
+    async _prepareExistingSearchPopupTab(tab) {
+        try {
+            await this._prepareSearchPopupTab(tab);
+        } catch (e) {
+            return null;
+        }
+
+        this._searchPopupTabId = tab.id ?? null;
+        return tab;
+    }
+
+    /**
+     * @param {chrome.tabs.Tab} tab
+     * @returns {Promise<void>}
+     */
+    async _prepareSearchPopupTab(tab) {
         const {id} = tab;
         if (typeof id !== 'number') {
             throw new Error('Tab does not have an id');
         }
-        await this._waitUntilTabFrameIsReady(id, 0, 2000);
 
-        await this._sendMessageTabPromise(
-            id,
-            {action: 'searchDisplayControllerSetMode', params: {mode: 'popup'}},
-            {frameId: 0},
-        );
-
-        this._searchPopupTabId = id;
-        return {tab, created: true};
+        for (let attempt = 0; attempt < 2; ++attempt) {
+            await this._waitUntilTabFrameIsReady(id, 0, 2000);
+            try {
+                await this._sendMessageTabPromise(
+                    id,
+                    {action: 'searchDisplayControllerSetMode', params: {mode: 'popup'}},
+                    {frameId: 0},
+                );
+                return;
+            } catch (e) {
+                if (!this._isTabConnectionError(e) || attempt >= 1) {
+                    throw e;
+                }
+            }
+        }
     }
 
     /**
@@ -1658,6 +1690,52 @@ export class Backend {
     }
 
     /**
+     * @param {chrome.tabs.Tab} tab
+     * @param {boolean} created
+     * @param {string} text
+     * @returns {Promise<{tab: chrome.tabs.Tab, created: boolean}>}
+     */
+    async _updateSearchPopupQueryWithRetry(tab, created, text) {
+        const {id} = tab;
+        if (typeof id !== 'number') {
+            return {tab, created};
+        }
+
+        try {
+            await this._updateSearchQuery(id, text, !created);
+            return {tab, created};
+        } catch (e) {
+            if (!this._isTabConnectionError(e)) {
+                throw e;
+            }
+        }
+
+        await this._prepareSearchPopupTab(tab);
+        try {
+            await this._updateSearchQuery(id, text, !created);
+            return {tab, created};
+        } catch (e) {
+            if (!this._isTabConnectionError(e)) {
+                throw e;
+            }
+        }
+
+        if (this._searchPopupTabId === id) {
+            this._searchPopupTabId = null;
+        }
+
+        const retryResult = await this._getOrCreateSearchPopupWrapper();
+        const {tab: retryTab, created: retryCreated} = retryResult;
+        const {id: retryId} = retryTab;
+        if (typeof retryId !== 'number') {
+            throw new Error('Tab does not have an id');
+        }
+
+        await this._updateSearchQuery(retryId, text, !retryCreated);
+        return retryResult;
+    }
+
+    /**
      * @param {number} tabId
      * @param {string} text
      * @param {boolean} animate
@@ -1668,6 +1746,17 @@ export class Backend {
             tabId,
             {action: 'searchDisplayControllerUpdateSearchQuery', params: {text, animate}},
             {frameId: 0},
+        );
+    }
+
+    /**
+     * @param {unknown} error
+     * @returns {boolean}
+     */
+    _isTabConnectionError(error) {
+        return (
+            error instanceof Error &&
+            /Could not establish connection|Receiving end does not exist/u.test(error.message)
         );
     }
 

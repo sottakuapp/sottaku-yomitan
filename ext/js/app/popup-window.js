@@ -285,16 +285,26 @@ export class PopupWindow extends EventDispatcher {
         }
 
         const message = /** @type {import('display').DirectApiMessageAny} */ ({action, params});
-
         const frameId = 0;
+        const invokePopupTab = async () => {
+            if (this._popupTabId === null) {
+                return void 0;
+            }
+            return /** @type {import('display').DirectApiReturn<TName>} */ (await this._application.crossFrame.invokeTab(
+                this._popupTabId,
+                frameId,
+                'displayPopupMessage2',
+                message,
+            ));
+        };
+        const openPopupTab = async () => {
+            const {tabId} = await this._application.api.getOrCreateSearchPopup({focus: 'ifCreated'});
+            this._popupTabId = tabId;
+        };
+
         if (this._popupTabId !== null) {
             try {
-                return /** @type {import('display').DirectApiReturn<TName>} */ (await this._application.crossFrame.invokeTab(
-                    this._popupTabId,
-                    frameId,
-                    'displayPopupMessage2',
-                    message,
-                ));
+                return await invokePopupTab();
             } catch (e) {
                 if (this._application.webExtension.unloaded) {
                     open = false;
@@ -307,14 +317,17 @@ export class PopupWindow extends EventDispatcher {
             return void 0;
         }
 
-        const {tabId} = await this._application.api.getOrCreateSearchPopup({focus: 'ifCreated'});
-        this._popupTabId = tabId;
+        await openPopupTab();
+        try {
+            return await invokePopupTab();
+        } catch (e) {
+            this._popupTabId = null;
+            if (this._application.webExtension.unloaded) {
+                return void 0;
+            }
+        }
 
-        return /** @type {import('display').DirectApiReturn<TName>} */ (await this._application.crossFrame.invokeTab(
-            this._popupTabId,
-            frameId,
-            'displayPopupMessage2',
-            message,
-        ));
+        await openPopupTab();
+        return await invokePopupTab();
     }
 }
