@@ -216,7 +216,7 @@ export class Translator {
             const normalizedDeinflected = (deinflectedText || '').trim();
             if (!normalizedOriginal || !normalizedDeinflected) { continue; }
             const existing = bestByDeinflected.get(normalizedDeinflected);
-            if (!existing || normalizedOriginal.length < existing.originalText.length) {
+            if (!existing || normalizedOriginal.length > existing.originalText.length) {
                 bestByDeinflected.set(normalizedDeinflected, {originalText: normalizedOriginal, deinflectedText: normalizedDeinflected});
             }
         }

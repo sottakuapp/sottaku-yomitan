@@ -17,10 +17,99 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+/* eslint-disable no-underscore-dangle */
+
 import {describe, expect, test} from 'vitest';
 import {SottakuIntegration} from '../ext/js/background/sottaku-integration.js';
+import {Translator} from '../ext/js/language/translator.js';
 
 describe('SottakuIntegration', () => {
+    test('translator keeps full source text for transformed English variants', async () => {
+        const translator = new Translator(null);
+        translator.prepare();
+
+        const variants = await translator.getDeinflectionTextVariants('Getting', {
+            language: 'en',
+            deinflect: true,
+            textReplacements: [null],
+            searchResolution: 'length',
+            removeNonJapaneseCharacters: false,
+        });
+
+        expect(variants.find(({deinflectedText}) => deinflectedText === 'get')).toStrictEqual({
+            originalText: 'Getting',
+            deinflectedText: 'get',
+        });
+    });
+
+    test('english variants prefer lowercase lemma queries while preserving the scanned source text', async () => {
+        const integration = new SottakuIntegration({
+            async getDeinflectionTextVariants() {
+                return [
+                    {originalText: 'Getting', deinflectedText: 'Getting'},
+                    {originalText: 'Getting', deinflectedText: 'Get'},
+                ];
+            },
+        });
+
+        const variants = await integration._buildQueryVariants('Getting', 'en');
+        expect(variants).toStrictEqual([
+            {query: 'get', sourceText: 'Getting', originalTextLength: 7},
+            {query: 'getting', sourceText: 'Getting', originalTextLength: 7},
+            {query: 'Getting', sourceText: 'Getting', originalTextLength: 7},
+        ]);
+    });
+
+    test('english fallback scans the transformed query after the original source misses', async () => {
+        const integration = new SottakuIntegration({
+            async getDeinflectionTextVariants() {
+                return [
+                    {originalText: 'Getting', deinflectedText: 'Getting'},
+                    {originalText: 'Getting', deinflectedText: 'Get'},
+                ];
+            },
+        });
+        integration.configure({
+            general: {
+                language: 'en',
+                maxResults: 32,
+            },
+            sottaku: {
+                enabled: true,
+                authToken: 'test-token',
+                apiBaseUrl: 'https://sottaku.app/api/v1',
+                cookieDomain: 'https://sottaku.app',
+                locale: 'en',
+                languageMode: 'en',
+                preferredLanguages: [],
+            },
+        });
+
+        const scanCalls = [];
+        integration._client.scan = async (text) => {
+            scanCalls.push(text);
+            if (text === 'get') {
+                return {
+                    results: [
+                        {id: 1, kanji_representation: 'get', reading: 'ɡet', match_length: 7, has_definition: true, word_translation: 'obtain'},
+                    ],
+                    originalTextLength: 3,
+                };
+            }
+            return {
+                results: [],
+                originalTextLength: text.length,
+            };
+        };
+
+        const {dictionaryEntries, originalTextLength} = await integration.findTerms('Getting');
+
+        expect(scanCalls).toStrictEqual(['Getting', 'get']);
+        expect(originalTextLength).toBe(7);
+        expect(dictionaryEntries[0].headwords[0].sources[0].originalText).toBe('Getting');
+        expect(dictionaryEntries[0].headwords[0].sources[0].transformedText).toBe('get');
+    });
+
     test('sorts longest matches then defined entries', async () => {
         const integration = new SottakuIntegration(null);
         integration.configure({
@@ -39,7 +128,7 @@ describe('SottakuIntegration', () => {
             },
         });
 
-        integration['_client'].scan = async () => ({
+        integration._client.scan = async () => ({
             results: [
                 {id: 1, kanji_representation: '猫', reading: 'ねこ', match_length: 2, has_definition: false, word_translation: ''},
                 {id: 5, kanji_representation: 'ねこ', reading: 'ねこ', match_length: 3, has_definition: false, word_translation: ''},
@@ -73,7 +162,7 @@ describe('SottakuIntegration', () => {
             },
         });
 
-        integration['_client'].scan = async () => ({
+        integration._client.scan = async () => ({
             languageResults: [
                 {
                     language: 'ko',
@@ -118,8 +207,8 @@ describe('SottakuIntegration', () => {
 
         /** @type {string|null} */
         let resolvedLocale = null;
-        integration['_client'].getLanguageSettings = async () => ({locale: 'es'});
-        integration['_client'].scan = async (_text, _language, _maxResults, locale) => {
+        integration._client.getLanguageSettings = async () => ({locale: 'es'});
+        integration._client.scan = async (_text, _language, _maxResults, locale) => {
             resolvedLocale = locale;
             return {
                 results: [
@@ -155,7 +244,7 @@ describe('SottakuIntegration', () => {
             },
         });
 
-        integration['_client'].scan = async () => ({
+        integration._client.scan = async () => ({
             results: [
                 {
                     id: 1,

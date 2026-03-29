@@ -350,6 +350,45 @@ export class SottakuIntegration {
         const normalizedText = (text || '').trim();
         /** @type {{query: string, sourceText: string, originalTextLength: number}[]} */
         const variants = [];
+        const isEnglish = language === 'en';
+        const seenQueries = new Set();
+        const addVariant = (query, includeOriginalEnglishCase = false) => {
+            const normalizedQuery = (query || '').trim();
+            if (!normalizedQuery) { return; }
+
+            if (isEnglish) {
+                const loweredQuery = normalizedQuery.toLowerCase();
+                if (loweredQuery && !seenQueries.has(loweredQuery)) {
+                    seenQueries.add(loweredQuery);
+                    variants.push({
+                        query: loweredQuery,
+                        sourceText: normalizedText,
+                        originalTextLength: normalizedText.length,
+                    });
+                }
+                if (
+                    includeOriginalEnglishCase &&
+                    normalizedQuery !== loweredQuery &&
+                    !seenQueries.has(normalizedQuery)
+                ) {
+                    seenQueries.add(normalizedQuery);
+                    variants.push({
+                        query: normalizedQuery,
+                        sourceText: normalizedText,
+                        originalTextLength: normalizedText.length,
+                    });
+                }
+                return;
+            }
+
+            if (seenQueries.has(normalizedQuery)) { return; }
+            seenQueries.add(normalizedQuery);
+            variants.push({
+                query: normalizedQuery,
+                sourceText: normalizedText,
+                originalTextLength: normalizedText.length,
+            });
+        };
 
         if (this._translator && typeof this._translator.getDeinflectionTextVariants === 'function') {
             const deinflectionOptions = {
@@ -361,14 +400,20 @@ export class SottakuIntegration {
             };
             try {
                 const translatorVariants = await this._translator.getDeinflectionTextVariants(normalizedText, {...deinflectionOptions, language});
-                const fullLengthVariant = translatorVariants.find(({originalText}) => (originalText || '').trim().length === normalizedText.length);
-                if (fullLengthVariant) {
-                    const {originalText, deinflectedText} = fullLengthVariant;
-                    variants.push({
-                        query: (deinflectedText || '').trim(),
-                        sourceText: (originalText || '').trim(),
-                        originalTextLength: null,
-                    });
+                const fullLengthVariants = translatorVariants.filter(({originalText}) => (
+                    (originalText || '').trim().length === normalizedText.length
+                ));
+                const prioritizedVariants = fullLengthVariants.length > 0 ? fullLengthVariants : translatorVariants;
+                prioritizedVariants.sort((a, b) => {
+                    const aExact = ((a.deinflectedText || '').trim() === normalizedText);
+                    const bExact = ((b.deinflectedText || '').trim() === normalizedText);
+                    return Number(aExact) - Number(bExact);
+                });
+                for (const {deinflectedText} of prioritizedVariants) {
+                    addVariant(
+                        deinflectedText,
+                        isEnglish && (deinflectedText || '').trim() === normalizedText,
+                    );
                 }
             } catch (e) {
                 // Ignore translator errors and fall back to the raw query.
@@ -376,11 +421,7 @@ export class SottakuIntegration {
         }
 
         if (variants.length === 0) {
-            variants.push({
-                query: normalizedText,
-                sourceText: normalizedText,
-                originalTextLength: null,
-            });
+            addVariant(normalizedText, isEnglish);
         }
 
         return variants;
@@ -394,6 +435,7 @@ export class SottakuIntegration {
         const resolvedVariants = variants.length > 0 ? variants : [{query: '', sourceText: '', originalTextLength: 0}];
         /** @type {SottakuLanguageResult | null} */
         let fallbackResult = null;
+        const scanCache = new Map();
         for (const {query, sourceText, originalTextLength} of resolvedVariants) {
             const languageResult = await this._fetchLanguageEntries({
                 apiOrigin,
@@ -405,6 +447,7 @@ export class SottakuIntegration {
                 locale,
                 localeLang,
                 displayPreferences,
+                scanCache,
             });
             if (languageResult.entries.length > 0) {
                 return languageResult;
@@ -421,10 +464,10 @@ export class SottakuIntegration {
     }
 
     /**
-     * @param {{apiOrigin: string, language: string, maxResults: number, query: string, sourceText?: string, originalTextLength?: number, locale: string, localeLang: string, displayPreferences?: {hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean} | null, scanResult?: {results: unknown[], originalTextLength: number, displayPreferences?: unknown | null}}} options
+     * @param {{apiOrigin: string, language: string, maxResults: number, query: string, sourceText?: string, originalTextLength?: number, locale: string, localeLang: string, displayPreferences?: {hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean} | null, scanResult?: {results: unknown[], originalTextLength: number, displayPreferences?: unknown | null}, scanCache?: Map<string, {results: unknown[], originalTextLength: number, displayPreferences?: unknown | null}>}} options
      * @returns {Promise<SottakuLanguageResult>}
      */
-    async _fetchLanguageEntries({apiOrigin, language, maxResults, query, sourceText, originalTextLength, locale, localeLang, displayPreferences, scanResult}) {
+    async _fetchLanguageEntries({apiOrigin, language, maxResults, query, sourceText, originalTextLength, locale, localeLang, displayPreferences, scanResult, scanCache}) {
         const normalizedQuery = (query || '').trim();
         const normalizedSource = (sourceText || normalizedQuery || '').trim();
         if (!normalizedQuery) {
@@ -452,21 +495,46 @@ export class SottakuIntegration {
                 this._automaticSettingsTimestamp = Date.now();
             }
         } else {
-            try {
-                const scanResultResponse = await this._client.scan(
-                    normalizedSource,
+            const updateDisplayPreferences = (response) => {
+                const scanDisplayPreferences = normalizeDisplayPreferencesPayload(response?.displayPreferences);
+                if (!scanDisplayPreferences) { return; }
+                resolvedDisplayPreferences = scanDisplayPreferences;
+                this._automaticSettings = scanDisplayPreferences;
+                this._automaticSettingsTimestamp = Date.now();
+            };
+            const runScan = async (scanText) => {
+                const cacheKey = `${language}\u0000${locale}\u0000${scanText}`;
+                if (scanCache && scanCache.has(cacheKey)) {
+                    return scanCache.get(cacheKey);
+                }
+                const response = await this._client.scan(
+                    scanText,
                     language,
                     maxResults,
                     locale,
                     null,
                 );
-                scanResultsRaw = scanResultResponse.results;
-                scanOriginalLength = scanResultResponse.originalTextLength;
-                const scanDisplayPreferences = normalizeDisplayPreferencesPayload(scanResultResponse.displayPreferences);
-                if (scanDisplayPreferences) {
-                    resolvedDisplayPreferences = scanDisplayPreferences;
-                    this._automaticSettings = scanDisplayPreferences;
-                    this._automaticSettingsTimestamp = Date.now();
+                if (scanCache) {
+                    scanCache.set(cacheKey, response);
+                }
+                return response;
+            };
+            const scanTexts = [];
+            if (normalizedSource) {
+                scanTexts.push(normalizedSource);
+            }
+            if (normalizedQuery && normalizedQuery !== normalizedSource) {
+                scanTexts.push(normalizedQuery);
+            }
+            try {
+                for (const scanText of scanTexts) {
+                    const scanResultResponse = await runScan(scanText);
+                    scanResultsRaw = scanResultResponse.results;
+                    scanOriginalLength = scanResultResponse.originalTextLength;
+                    updateDisplayPreferences(scanResultResponse);
+                    if (Array.isArray(scanResultsRaw) && scanResultsRaw.length > 0) {
+                        break;
+                    }
                 }
             } catch (e) {
                 const message = toError(e).message || '';
