@@ -373,6 +373,13 @@ export class SottakuController {
         if (typeof /** @type {{name?: unknown}} */ (user).name === 'string') {
             /** @type {{name?: string}} */ (normalized).name = /** @type {string} */ (user.name);
         }
+        const uiLocale = (
+            /** @type {{ui_locale?: unknown, uiLocale?: unknown}} */ (user).ui_locale ??
+            /** @type {{ui_locale?: unknown, uiLocale?: unknown}} */ (user).uiLocale
+        );
+        if (typeof uiLocale === 'string' && uiLocale.trim().length > 0) {
+            /** @type {{ui_locale?: string}} */ (normalized).ui_locale = uiLocale.trim();
+        }
         return normalized;
     }
 

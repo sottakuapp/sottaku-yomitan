@@ -248,6 +248,50 @@ describe('SottakuIntegration', () => {
         expect(glossary.content.content[0].lang).toBe('es');
     });
 
+    test('reuses stored Sottaku user locale before fetching language settings', async () => {
+        const integration = new SottakuIntegration(null);
+        integration.configure({
+            general: {
+                language: 'ja',
+                maxResults: 32,
+            },
+            sottaku: {
+                enabled: true,
+                authToken: 'test-token',
+                apiBaseUrl: 'https://sottaku.app/api/v1',
+                cookieDomain: 'https://sottaku.app',
+                locale: '',
+                languageMode: 'ja',
+                preferredLanguages: [],
+                user: {
+                    id: 1,
+                    username: 'tester',
+                    email: 'test@example.com',
+                    isPro: true,
+                    ui_locale: 'fr',
+                },
+            },
+        });
+
+        const getLanguageSettingsSpy = vi.fn(async () => ({locale: 'es'}));
+        integration._client.getLanguageSettings = getLanguageSettingsSpy;
+        integration._client.scan = async (_text, _language, _maxResults, locale) => ({
+            results: [
+                {id: 1, kanji_representation: '猫', reading: 'ねこ', match_length: 2, has_definition: true, word_translation: 'chat'},
+            ],
+            originalTextLength: 2,
+            displayPreferences: null,
+            localeUsed: locale,
+        });
+
+        const {dictionaryEntries} = await integration.findTerms('ねこ');
+        const glossary = dictionaryEntries[0].definitions[0].entries[0];
+
+        expect(getLanguageSettingsSpy).not.toHaveBeenCalled();
+        expect(glossary.type).toBe('structured-content');
+        expect(glossary.content.content[0].lang).toBe('fr');
+    });
+
     test('preserves requested status from scan results', async () => {
         const integration = new SottakuIntegration(null);
         integration.configure({

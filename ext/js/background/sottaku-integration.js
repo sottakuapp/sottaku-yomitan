@@ -1274,6 +1274,18 @@ export class SottakuIntegration {
         const configuredLocale = typeof this._options?.sottaku?.locale === 'string' ? this._options.sottaku.locale.trim() : '';
         if (configuredLocale) { return configuredLocale; }
 
+        const storedUser = (this._options?.sottaku?.user && typeof this._options.sottaku.user === 'object') ?
+            /** @type {Record<string, unknown>} */ (this._options.sottaku.user) :
+            null;
+        const storedLocale = typeof storedUser?.ui_locale === 'string' ?
+            storedUser.ui_locale.trim() :
+            (typeof storedUser?.uiLocale === 'string' ? storedUser.uiLocale.trim() : '');
+        if (storedLocale) {
+            this._automaticLocale = storedLocale;
+            this._automaticLocaleTimestamp = Date.now();
+            return storedLocale;
+        }
+
         const ttlMs = 5 * 60 * 1000;
         const now = Date.now();
         if (this._automaticLocale !== null && (now - this._automaticLocaleTimestamp) <= ttlMs) {

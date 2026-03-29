@@ -2269,6 +2269,13 @@ export class Backend {
         if (typeof email === 'string' || email === null) {
             normalized.email = email;
         }
+        const uiLocale = (
+            /** @type {{ui_locale?: unknown, uiLocale?: unknown}} */ (user).ui_locale ??
+            /** @type {{ui_locale?: unknown, uiLocale?: unknown}} */ (user).uiLocale
+        );
+        if (typeof uiLocale === 'string' && uiLocale.trim().length > 0) {
+            /** @type {{ui_locale?: string}} */ (normalized).ui_locale = uiLocale.trim();
+        }
         return normalized;
     }
 
