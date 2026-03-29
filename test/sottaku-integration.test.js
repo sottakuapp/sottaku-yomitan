@@ -19,7 +19,7 @@
 
 /* eslint-disable no-underscore-dangle */
 
-import {describe, expect, test} from 'vitest';
+import {describe, expect, test, vi} from 'vitest';
 import {SottakuIntegration} from '../ext/js/background/sottaku-integration.js';
 import {Translator} from '../ext/js/language/translator.js';
 
@@ -284,4 +284,90 @@ describe('SottakuIntegration', () => {
         const {dictionaryEntries} = await integration.findTerms('ねこ');
         expect(dictionaryEntries[0].sottaku.requested).toBe(true);
     });
+
+    test('reuses exact scan responses across repeated lookups', async () => {
+        const integration = new SottakuIntegration(null);
+        integration.configure({
+            general: {
+                language: 'ja',
+                maxResults: 32,
+            },
+            sottaku: {
+                enabled: true,
+                authToken: 'test-token',
+                apiBaseUrl: 'https://sottaku.app/api/v1',
+                cookieDomain: 'https://sottaku.app',
+                locale: 'en',
+                languageMode: 'ja',
+                preferredLanguages: [],
+            },
+        });
+
+        const scanSpy = vi.fn(async () => ({
+            results: [
+                {id: 1, kanji_representation: '猫', reading: 'ねこ', match_length: 2, has_definition: true, word_translation: 'cat'},
+            ],
+            originalTextLength: 2,
+            displayPreferences: null,
+        }));
+        integration._client.scan = scanSpy;
+
+        await integration.findTerms('ねこ');
+        await integration.findTerms('ねこ');
+
+        expect(scanSpy).toHaveBeenCalledTimes(1);
+    });
+
+    test('reuses cached fallback variant scans on repeated English lookups', async () => {
+        const integration = new SottakuIntegration({
+            async getDeinflectionTextVariants() {
+                return [
+                    {originalText: 'Getting', deinflectedText: 'Getting'},
+                    {originalText: 'Getting', deinflectedText: 'Get'},
+                ];
+            },
+        });
+        integration.configure({
+            general: {
+                language: 'en',
+                maxResults: 32,
+            },
+            sottaku: {
+                enabled: true,
+                authToken: 'test-token',
+                apiBaseUrl: 'https://sottaku.app/api/v1',
+                cookieDomain: 'https://sottaku.app',
+                locale: 'en',
+                languageMode: 'en',
+                preferredLanguages: [],
+            },
+        });
+
+        const seenTexts = [];
+        const scanSpy = vi.fn(async (text) => {
+            seenTexts.push(typeof text === 'string' ? text : '');
+            if (text === 'get') {
+                return {
+                    results: [
+                        {id: 1, kanji_representation: 'get', reading: 'ɡet', match_length: 7, has_definition: true, word_translation: 'obtain'},
+                    ],
+                    originalTextLength: 3,
+                    displayPreferences: null,
+                };
+            }
+            return {
+                results: [],
+                originalTextLength: 0,
+                displayPreferences: null,
+            };
+        });
+        integration._client.scan = scanSpy;
+
+        await integration.findTerms('Getting');
+        await integration.findTerms('Getting');
+
+        expect(scanSpy).toHaveBeenCalledTimes(2);
+        expect(seenTexts).toStrictEqual(['Getting', 'get']);
+    });
 });
+/* eslint-enable no-underscore-dangle */

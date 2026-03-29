@@ -24,6 +24,8 @@ const HAN_RANGES = [
 const LANGUAGE_HINT_MIN_COUNT = 3;
 const LANGUAGE_HINT_MIN_RATIO = 0.02;
 const SOTTAKU_SETTINGS_TTL_MS = 5 * 60 * 1000;
+const SOTTAKU_SCAN_CACHE_TTL_MS = 10 * 1000;
+const SOTTAKU_SCAN_CACHE_MAX_ENTRIES = 256;
 const HANZI_DISPLAY_MODES = new Set(['traditional', 'simplified', 'both']);
 const HANZI_DISPLAY_SEPARATOR = ' / ';
 const CHINESE_READING_MODES = new Set(['pinyin', 'bopomofo']);
@@ -174,6 +176,10 @@ export class SottakuIntegration {
         this._options = null;
         /** @type {string[]} */
         this._supportedLanguages = [...SOTTAKU_SUPPORTED_LANGUAGES];
+        /** @type {string} */
+        this._scanCacheConfigKey = '';
+        /** @type {Map<string, {expiresAt: number, value: {results: any[], originalTextLength: number, displayPreferences: unknown | null, languageResults?: {language: string, results: any[], originalTextLength: number}[] | null}}>} */
+        this._scanResponseCache = new Map();
 
         /** @type {string} */
         this._automaticLocaleCacheKey = '';
@@ -206,6 +212,10 @@ export class SottakuIntegration {
         });
 
         const automaticCacheKey = `${sottaku.apiBaseUrl}|${sottaku.authToken}`;
+        if (automaticCacheKey !== this._scanCacheConfigKey) {
+            this._scanCacheConfigKey = automaticCacheKey;
+            this._scanResponseCache.clear();
+        }
         if (automaticCacheKey !== this._automaticLocaleCacheKey) {
             this._automaticLocaleCacheKey = automaticCacheKey;
             this._automaticLocale = null;
@@ -259,7 +269,7 @@ export class SottakuIntegration {
         if (languages.length > 1) {
             let scanResult;
             try {
-                scanResult = await this._client.scan(
+                scanResult = await this._scanWithCache(
                     query,
                     languages,
                     maxResults,
@@ -503,20 +513,14 @@ export class SottakuIntegration {
                 this._automaticSettingsTimestamp = Date.now();
             };
             const runScan = async (scanText) => {
-                const cacheKey = `${language}\u0000${locale}\u0000${scanText}`;
-                if (scanCache && scanCache.has(cacheKey)) {
-                    return scanCache.get(cacheKey);
-                }
-                const response = await this._client.scan(
+                const response = await this._scanWithCache(
                     scanText,
                     language,
                     maxResults,
                     locale,
                     null,
+                    scanCache,
                 );
-                if (scanCache) {
-                    scanCache.set(cacheKey, response);
-                }
                 return response;
             };
             const scanTexts = [];
@@ -647,6 +651,113 @@ export class SottakuIntegration {
                 effectiveOriginalTextLength :
                 0,
         };
+    }
+
+    /**
+     * @param {string|string[]} language
+     * @returns {string}
+     */
+    _getScanCacheLanguageKey(language) {
+        if (Array.isArray(language)) {
+            return language.join(',');
+        }
+        return typeof language === 'string' ? language : '';
+    }
+
+    /**
+     * @param {string} text
+     * @param {string|string[]} language
+     * @param {number} maxResults
+     * @param {string} locale
+     * @param {{hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean} | null | undefined} displayPreferences
+     * @returns {string}
+     */
+    _getScanCacheKey(text, language, maxResults, locale, displayPreferences) {
+        const resolvedDisplayPreferences = (
+            displayPreferences && typeof displayPreferences === 'object'
+                ? displayPreferences
+                : null
+        );
+        return [
+            this._getScanCacheLanguageKey(language),
+            typeof locale === 'string' ? locale : '',
+            Number.isFinite(maxResults) ? String(maxResults) : '',
+            typeof text === 'string' ? text : '',
+            resolvedDisplayPreferences?.hanziDisplay || '',
+            resolvedDisplayPreferences?.chineseReadingDisplay || '',
+            resolvedDisplayPreferences?.chineseToneColors ? '1' : '0',
+        ].join('\u0000');
+    }
+
+    /**
+     * @param {string} cacheKey
+     * @returns {{results: any[], originalTextLength: number, displayPreferences: unknown | null, languageResults?: {language: string, results: any[], originalTextLength: number}[] | null} | null}
+     */
+    _getCachedScanResponse(cacheKey) {
+        const entry = this._scanResponseCache.get(cacheKey);
+        if (!entry) { return null; }
+        if (Date.now() >= entry.expiresAt) {
+            this._scanResponseCache.delete(cacheKey);
+            return null;
+        }
+        this._scanResponseCache.delete(cacheKey);
+        this._scanResponseCache.set(cacheKey, entry);
+        return entry.value;
+    }
+
+    /**
+     * @param {string} cacheKey
+     * @param {{results: any[], originalTextLength: number, displayPreferences: unknown | null, languageResults?: {language: string, results: any[], originalTextLength: number}[] | null}} value
+     * @returns {void}
+     */
+    _setCachedScanResponse(cacheKey, value) {
+        if (SOTTAKU_SCAN_CACHE_TTL_MS <= 0 || SOTTAKU_SCAN_CACHE_MAX_ENTRIES <= 0) { return; }
+        this._scanResponseCache.set(cacheKey, {
+            expiresAt: Date.now() + SOTTAKU_SCAN_CACHE_TTL_MS,
+            value,
+        });
+        while (this._scanResponseCache.size > SOTTAKU_SCAN_CACHE_MAX_ENTRIES) {
+            const oldestKey = this._scanResponseCache.keys().next().value;
+            if (typeof oldestKey !== 'string') { break; }
+            this._scanResponseCache.delete(oldestKey);
+        }
+    }
+
+    /**
+     * @param {string} text
+     * @param {string|string[]} language
+     * @param {number} maxResults
+     * @param {string} locale
+     * @param {{hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean} | null | undefined} displayPreferences
+     * @param {Map<string, {results: any[], originalTextLength: number, displayPreferences: unknown | null, languageResults?: {language: string, results: any[], originalTextLength: number}[] | null}> | undefined} perRequestCache
+     * @returns {Promise<{results: any[], originalTextLength: number, displayPreferences: unknown | null, languageResults?: {language: string, results: any[], originalTextLength: number}[] | null}>}
+     */
+    async _scanWithCache(text, language, maxResults, locale, displayPreferences, perRequestCache) {
+        const cacheKey = this._getScanCacheKey(text, language, maxResults, locale, displayPreferences);
+        if (perRequestCache && perRequestCache.has(cacheKey)) {
+            return perRequestCache.get(cacheKey);
+        }
+
+        const cachedResponse = this._getCachedScanResponse(cacheKey);
+        if (cachedResponse !== null) {
+            if (perRequestCache) {
+                perRequestCache.set(cacheKey, cachedResponse);
+            }
+            return cachedResponse;
+        }
+
+        const response = await this._client.scan(
+            text,
+            language,
+            maxResults,
+            locale,
+            displayPreferences,
+        );
+        if (perRequestCache) {
+            perRequestCache.set(cacheKey, response);
+        }
+        this._setCachedScanResponse(cacheKey, response);
+        return response;
     }
 
     /**
