@@ -81,6 +81,16 @@ export class LocaleDirectionController {
     async _resolveLocale(options) {
         const configuredLocale = typeof options?.sottaku?.locale === 'string' ? options.sottaku.locale.trim() : '';
         if (configuredLocale) { return configuredLocale; }
+        const storedLocale = (
+            typeof options?.sottaku?.user?.ui_locale === 'string' ? options.sottaku.user.ui_locale :
+            typeof options?.sottaku?.user?.uiLocale === 'string' ? options.sottaku.user.uiLocale :
+            ''
+        ).trim();
+        if (storedLocale) {
+            this._automaticLocale = storedLocale;
+            this._automaticLocaleTimestamp = Date.now();
+            return storedLocale;
+        }
         if (!this._authToken) { return ''; }
 
         const now = Date.now();

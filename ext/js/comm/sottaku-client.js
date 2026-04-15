@@ -5,6 +5,19 @@
 
 import {toError} from '../core/to-error.js';
 
+const SHARED_REQUEST_CACHE = new Map();
+const SHARED_INFLIGHT_REQUESTS = new Map();
+
+const STATIC_SETTINGS_CACHE_TTL_MS = 5 * 60 * 1000;
+const SHARED_SCAN_CACHE_TTL_MS = 10 * 1000;
+
+const REQUEST_CACHE_TTLS = new Map([
+    ['GET /profile/language-settings', STATIC_SETTINGS_CACHE_TTL_MS],
+    ['GET /profile/settings', STATIC_SETTINGS_CACHE_TTL_MS],
+    ['GET /dictionary/supported-languages', STATIC_SETTINGS_CACHE_TTL_MS],
+    ['POST /dictionary/yomitan-scan', SHARED_SCAN_CACHE_TTL_MS],
+]);
+
 /**
  * @param {unknown} message
  * @returns {Promise<unknown>}
@@ -26,6 +39,56 @@ function sendRuntimeMessagePromise(message) {
         } catch (e) {
             reject(toError(e));
         }
+    });
+}
+
+/**
+ * @param {string} method
+ * @param {string} path
+ * @returns {number}
+ */
+function getRequestCacheTtlMs(method, path) {
+    return REQUEST_CACHE_TTLS.get(`${method.toUpperCase()} ${path}`) || 0;
+}
+
+/**
+ * @param {unknown} value
+ * @returns {any}
+ */
+function cloneCachedValue(value) {
+    if (typeof globalThis.structuredClone === 'function') {
+        return globalThis.structuredClone(value);
+    }
+    return JSON.parse(JSON.stringify(value));
+}
+
+/**
+ * @param {string} requestKey
+ * @returns {any|null}
+ */
+function getSharedCachedValue(requestKey) {
+    const entry = SHARED_REQUEST_CACHE.get(requestKey);
+    if (!entry) { return null; }
+    if (Date.now() >= entry.expiresAt) {
+        SHARED_REQUEST_CACHE.delete(requestKey);
+        return null;
+    }
+    SHARED_REQUEST_CACHE.delete(requestKey);
+    SHARED_REQUEST_CACHE.set(requestKey, entry);
+    return cloneCachedValue(entry.value);
+}
+
+/**
+ * @param {string} requestKey
+ * @param {unknown} value
+ * @param {number} ttlMs
+ * @returns {void}
+ */
+function setSharedCachedValue(requestKey, value, ttlMs) {
+    if (!(ttlMs > 0)) { return; }
+    SHARED_REQUEST_CACHE.set(requestKey, {
+        expiresAt: Date.now() + ttlMs,
+        value: cloneCachedValue(value),
     });
 }
 
@@ -439,9 +502,18 @@ export class SottakuClient {
             _retryAuth = false,
         } = options;
         const url = this._buildUrl(path, language, locale);
+        const normalizedMethod = method.toUpperCase();
+        const cacheTtlMs = getRequestCacheTtlMs(normalizedMethod, path);
+        const serializedBody = body !== undefined ? JSON.stringify(body) : null;
+        const requestKey = cacheTtlMs > 0 ? [
+            normalizedMethod,
+            url,
+            auth ? this._authToken : '',
+            serializedBody || '',
+        ].join('\u0000') : null;
         /** @type {RequestInit} */
         const fetchOptions = {
-            method,
+            method: normalizedMethod,
             headers: {
                 'Accept': 'application/json',
             },
@@ -454,59 +526,89 @@ export class SottakuClient {
             };
         }
         if (body !== undefined) {
-            fetchOptions.body = JSON.stringify(body);
+            fetchOptions.body = serializedBody;
             fetchOptions.headers = {
                 ...fetchOptions.headers,
                 'Content-Type': 'application/json',
             };
         }
 
-        const response = await fetch(url, fetchOptions);
-        const rotatedToken = response.headers.get('X-New-Token');
-        if (auth && rotatedToken && rotatedToken !== this._authToken) {
-            const oldToken = this._authToken;
-            this._authToken = rotatedToken;
-            await this._notifyAuthTokenUpdated(oldToken, rotatedToken);
-        }
-        let json = null;
-        try {
-            json = await response.json();
-        } catch (e) {
-            // NOP
-        }
-
-        const message = (json && (json.error || json.message)) || response.statusText;
-
-        const isTokenExpired = (
-            response.status === 401 &&
-            auth &&
-            this._authToken &&
-            (
-                (json && (json.code === 'TOKEN_EXPIRED' || json.error === 'Invalid or expired token')) ||
-                (typeof message === 'string' && message.includes('Invalid or expired token'))
-            )
-        );
-        if (isTokenExpired && !_retryAuth) {
-            const oldToken = this._authToken;
-            let cookieToken = null;
+        const performRequest = async () => {
+            const response = await fetch(url, fetchOptions);
+            const rotatedToken = response.headers.get('X-New-Token');
+            if (auth && rotatedToken && rotatedToken !== this._authToken) {
+                const oldToken = this._authToken;
+                this._authToken = rotatedToken;
+                await this._notifyAuthTokenUpdated(oldToken, rotatedToken);
+            }
+            let json = null;
             try {
-                cookieToken = await this.syncTokenFromCookies();
+                json = await response.json();
             } catch (e) {
-                cookieToken = null;
+                // NOP
             }
-            if (cookieToken && cookieToken !== oldToken) {
-                await this._notifyAuthTokenUpdated(oldToken, cookieToken);
-                return await this._request(path, {...options, _retryAuth: true});
+
+            const message = (json && (json.error || json.message)) || response.statusText;
+
+            const isTokenExpired = (
+                response.status === 401 &&
+                auth &&
+                this._authToken &&
+                (
+                    (json && (json.code === 'TOKEN_EXPIRED' || json.error === 'Invalid or expired token')) ||
+                    (typeof message === 'string' && message.includes('Invalid or expired token'))
+                )
+            );
+            if (isTokenExpired && !_retryAuth) {
+                const oldToken = this._authToken;
+                let cookieToken = null;
+                try {
+                    cookieToken = await this.syncTokenFromCookies();
+                } catch (e) {
+                    cookieToken = null;
+                }
+                if (cookieToken && cookieToken !== oldToken) {
+                    await this._notifyAuthTokenUpdated(oldToken, cookieToken);
+                    return await this._request(path, {...options, _retryAuth: true});
+                }
+                this._authToken = '';
+                await this._notifyAuthTokenInvalidated(oldToken);
             }
-            this._authToken = '';
-            await this._notifyAuthTokenInvalidated(oldToken);
+
+            if (!response.ok || (json && json.success === false)) {
+                throw new Error(message || 'Request failed');
+            }
+
+            return (json && Object.prototype.hasOwnProperty.call(json, 'data')) ? json.data : json;
+        };
+
+        if (!requestKey) {
+            return await performRequest();
         }
 
-        if (!response.ok || (json && json.success === false)) {
-            throw new Error(message || 'Request failed');
+        const cachedValue = getSharedCachedValue(requestKey);
+        if (cachedValue !== null) {
+            return cachedValue;
         }
 
-        return (json && Object.prototype.hasOwnProperty.call(json, 'data')) ? json.data : json;
+        const inflightRequest = SHARED_INFLIGHT_REQUESTS.get(requestKey);
+        if (inflightRequest) {
+            return cloneCachedValue(await inflightRequest);
+        }
+
+        const requestPromise = (async () => {
+            const responseData = await performRequest();
+            setSharedCachedValue(requestKey, responseData, cacheTtlMs);
+            return responseData;
+        })();
+        SHARED_INFLIGHT_REQUESTS.set(requestKey, requestPromise);
+        try {
+            return cloneCachedValue(await requestPromise);
+        } finally {
+            if (SHARED_INFLIGHT_REQUESTS.get(requestKey) === requestPromise) {
+                SHARED_INFLIGHT_REQUESTS.delete(requestKey);
+            }
+        }
     }
 
     /**
