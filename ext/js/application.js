@@ -47,7 +47,6 @@ function checkChromeNotAvailable() {
 // Set up chrome alias if it's not available (Edge Legacy)
 if (checkChromeNotAvailable()) {
     // @ts-expect-error - objects should have roughly the same interface
-    // eslint-disable-next-line no-global-assign
     chrome = browser;
 }
 
@@ -299,7 +298,10 @@ export class Application extends EventDispatcher {
 
     /** @type {import('application').ApiHandler<'applicationOptionsUpdated'>} */
     _onMessageOptionsUpdated({source}) {
-        if (source !== 'background') {
+        // Token rotation from the Sottaku client is an internal auth refresh.
+        // Rebroadcasting it into every page causes popup refresh churn and can
+        // retrigger remote lookups without any user-visible settings change.
+        if (source !== 'background' && source !== 'sottaku-client') {
             this.trigger('optionsUpdated', {source});
         }
     }

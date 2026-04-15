@@ -21,6 +21,7 @@ import {EventListenerCollection} from '../core/event-listener-collection.js';
 import {log} from '../core/log.js';
 import {promiseAnimationFrame} from '../core/promise-animation-frame.js';
 import {safePerformance} from '../core/safe-performance.js';
+import {deepEqual} from '../core/utilities.js';
 import {setProfile} from '../data/profiles-util.js';
 import {addFullscreenChangeEventListener, getFullscreenElement} from '../dom/document-util.js';
 import {TextSourceElement} from '../dom/text-source-element.js';
@@ -28,6 +29,9 @@ import {TextSourceGenerator} from '../dom/text-source-generator.js';
 import {TextSourceRange} from '../dom/text-source-range.js';
 import {TextScanner} from '../language/text-scanner.js';
 import {ThemeController} from './theme-controller.js';
+
+const POPUP_INTERACTION_BRIDGE_DURATION_MS = 1500;
+const POPUP_INTERACTION_BRIDGE_PADDING_PX = 12;
 
 /**
  * This is the main class responsible for scanning and handling webpage content.
@@ -111,6 +115,8 @@ export class Frontend {
         this._isPointerOverPopup = false;
         /** @type {?import('settings').OptionsContext} */
         this._optionsContextOverride = null;
+        /** @type {number} */
+        this._popupInteractionBridgeUntil = 0;
 
         /* eslint-disable @stylistic/no-multi-spaces */
         /** @type {import('application').ApiMap} */
@@ -522,6 +528,7 @@ export class Frontend {
      */
     _clearSelection(passive) {
         this._stopClearSelectionDelayed();
+        this._popupInteractionBridgeUntil = 0;
         if (this._popup !== null) {
             void this._popup.clearAutoPlayTimer();
             void this._popup.hide(!passive);
@@ -618,13 +625,18 @@ export class Frontend {
      */
     async _updateOptionsInternal() {
         const optionsContext = await this._getOptionsContext();
+        const previousOptions = this._options;
         const options = await this._application.api.optionsGet(optionsContext);
+        const shouldReconfigurePopup = this._shouldReconfigurePopupAfterOptionsUpdate(previousOptions, options);
+        const shouldRefreshSearch = this._shouldRefreshSearchAfterOptionsUpdate(previousOptions, options);
         const {scanning: scanningOptions, sentenceParsing: sentenceParsingOptions} = options;
         this._options = options;
 
         this._hotkeyHandler.setHotkeys('web', options.inputs.hotkeys);
 
-        await this._updatePopup();
+        if (shouldReconfigurePopup) {
+            await this._updatePopup();
+        }
 
         const preventMiddleMouseOnPage = this._getPreventSecondaryMouseValueForPageType(scanningOptions.preventMiddleMouse);
         const preventMiddleMouseOnTextHover = scanningOptions.preventMiddleMouse.onTextHover;
@@ -660,7 +672,85 @@ export class Frontend {
 
         this._updateContentScale();
 
-        await this._textScanner.searchLast();
+        if (shouldRefreshSearch) {
+            await this._textScanner.searchLast();
+        }
+    }
+
+    /**
+     * Prevents popup reconfiguration churn when only volatile auth metadata changes.
+     * A popup reconfiguration pushes `displaySetOptionsContext`, which causes the popup
+     * display to call `searchLast(true)` and can clear live content mid-interaction.
+     * @param {?import('settings').ProfileOptions} previousOptions
+     * @param {import('settings').ProfileOptions} nextOptions
+     * @returns {boolean}
+     */
+    _shouldReconfigurePopupAfterOptionsUpdate(previousOptions, nextOptions) {
+        if (previousOptions === null) { return true; }
+        return !deepEqual(
+            this._createPopupOptionsUpdateSnapshot(previousOptions),
+            this._createPopupOptionsUpdateSnapshot(nextOptions),
+        );
+    }
+
+    /**
+     * @param {import('settings').ProfileOptions} options
+     * @returns {Record<string, unknown>}
+     */
+    _createPopupOptionsUpdateSnapshot(options) {
+        const snapshot = {...options};
+        const sottaku = (
+            typeof options.sottaku === 'object' && options.sottaku !== null ?
+                {...options.sottaku} :
+                {}
+        );
+        delete sottaku.authToken;
+        delete sottaku.cookieDomain;
+        delete sottaku.user;
+        snapshot.sottaku = sottaku;
+        return snapshot;
+    }
+
+    /**
+     * Avoid clearing and re-running the live popup lookup for pure auth token rotation.
+     * Refreshes are only needed when lookup inputs/results would materially change.
+     * @param {?import('settings').ProfileOptions} previousOptions
+     * @param {import('settings').ProfileOptions} nextOptions
+     * @returns {boolean}
+     */
+    _shouldRefreshSearchAfterOptionsUpdate(previousOptions, nextOptions) {
+        if (previousOptions === null) { return false; }
+        return !deepEqual(
+            this._createSearchRefreshOptionsSnapshot(previousOptions),
+            this._createSearchRefreshOptionsSnapshot(nextOptions),
+        );
+    }
+
+    /**
+     * @param {import('settings').ProfileOptions} options
+     * @returns {Record<string, unknown>}
+     */
+    _createSearchRefreshOptionsSnapshot(options) {
+        const dictionaries = Array.isArray(options.dictionaries) ? options.dictionaries : [];
+        const {general, parsing, scanning, sentenceParsing, sottaku, translation} = options;
+        return {
+            dictionaries,
+            general: {
+                language: typeof general.language === 'string' ? general.language : null,
+                maxResults: typeof general.maxResults === 'number' ? general.maxResults : null,
+            },
+            parsing,
+            scanning,
+            sentenceParsing,
+            sottaku: {
+                enabled: Boolean(sottaku.enabled),
+                apiBaseUrl: typeof sottaku.apiBaseUrl === 'string' ? sottaku.apiBaseUrl : '',
+                authConfigured: typeof sottaku.authToken === 'string' && sottaku.authToken.length > 0,
+                locale: typeof sottaku.locale === 'string' ? sottaku.locale : '',
+                preferredLanguages: Array.isArray(sottaku.preferredLanguages) ? sottaku.preferredLanguages : [],
+            },
+            translation,
+        };
     }
 
     /**
@@ -844,7 +934,14 @@ export class Frontend {
      */
     async _ignorePoint(x, y) {
         try {
-            return this._popup !== null && await this._popup.containsPoint(x, y);
+            if (this._popup === null) {
+                return false;
+            }
+            const containsPoint = await this._popup.containsPoint(x, y);
+            if (containsPoint) {
+                return true;
+            }
+            return this._shouldIgnorePointWithinPopupInteractionBridge(x, y);
         } catch (e) {
             if (!this._application.webExtension.unloaded) {
                 throw e;
@@ -920,6 +1017,7 @@ export class Frontend {
         for (const {left, top, right, bottom} of textSource.getRects()) {
             sourceRects.push({left, top, right, bottom});
         }
+        this._popupInteractionBridgeUntil = Date.now() + POPUP_INTERACTION_BRIDGE_DURATION_MS;
         this._lastShowPromise = (
             this._popup !== null ?
             this._popup.showContent(
@@ -937,6 +1035,50 @@ export class Frontend {
             log.error(error);
         });
         return this._lastShowPromise;
+    }
+
+    /**
+     * @param {number} x
+     * @param {number} y
+     * @returns {boolean}
+     */
+    _shouldIgnorePointWithinPopupInteractionBridge(x, y) {
+        if (Date.now() > this._popupInteractionBridgeUntil || this._popup === null) {
+            return false;
+        }
+
+        const textSource = this._textScanner.getCurrentTextSource();
+        if (textSource === null) {
+            return false;
+        }
+
+        const popupRect = this._popup.getFrameRect();
+        if (!popupRect.valid) {
+            return false;
+        }
+
+        let left = popupRect.left;
+        let top = popupRect.top;
+        let right = popupRect.right;
+        let bottom = popupRect.bottom;
+        let hasSourceRect = false;
+        for (const rect of textSource.getRects()) {
+            left = Math.min(left, rect.left);
+            top = Math.min(top, rect.top);
+            right = Math.max(right, rect.right);
+            bottom = Math.max(bottom, rect.bottom);
+            hasSourceRect = true;
+        }
+        if (!hasSourceRect) {
+            return false;
+        }
+
+        left -= POPUP_INTERACTION_BRIDGE_PADDING_PX;
+        top -= POPUP_INTERACTION_BRIDGE_PADDING_PX;
+        right += POPUP_INTERACTION_BRIDGE_PADDING_PX;
+        bottom += POPUP_INTERACTION_BRIDGE_PADDING_PX;
+
+        return x >= left && x < right && y >= top && y < bottom;
     }
 
     /**
