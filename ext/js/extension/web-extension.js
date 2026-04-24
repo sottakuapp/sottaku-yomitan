@@ -19,6 +19,17 @@ import {EventDispatcher} from '../core/event-dispatcher.js';
 import {toError} from '../core/to-error.js';
 
 /**
+ * @param {unknown} error
+ * @returns {boolean}
+ */
+export function isMessageConnectionError(error) {
+    return (
+        error instanceof Error &&
+        /Could not establish connection|Receiving end does not exist/u.test(error.message)
+    );
+}
+
+/**
  * @augments EventDispatcher<import('web-extension').Events>
  */
 export class WebExtension extends EventDispatcher {

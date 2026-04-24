@@ -17,8 +17,14 @@
  */
 
 import {ExtensionError} from '../core/extension-error.js';
+import {log} from '../core/log.js';
 import {isObjectNotArray} from '../core/object-utilities.js';
+import {promiseTimeout} from '../core/utilities.js';
 import {base64ToArrayBuffer} from '../data/array-buffer-util.js';
+import {isMessageConnectionError} from '../extension/web-extension.js';
+
+const offscreenMessageRetryDelay = 100;
+const offscreenMessageRetryTimeout = 5000;
 
 /**
  * This class is responsible for creating and communicating with an offscreen document.
@@ -53,7 +59,7 @@ export class OffscreenProxy {
      */
     async prepare() {
         if (await this._hasOffscreenDocument()) {
-            void this.sendMessagePromise({action: 'createAndRegisterPortOffscreen'});
+            await this._sendMessagePromiseWithRetry({action: 'createAndRegisterPortOffscreen'});
             return;
         }
         if (this._creatingOffscreen) {
@@ -70,6 +76,7 @@ export class OffscreenProxy {
         });
         await this._creatingOffscreen;
         this._creatingOffscreen = null;
+        await this._sendMessagePromiseWithRetry({action: 'createAndRegisterPortOffscreen'});
     }
 
     /**
@@ -103,6 +110,29 @@ export class OffscreenProxy {
     async sendMessagePromise(message) {
         const response = await this._webExtension.sendMessagePromise(message);
         return this._getMessageResponseResult(/** @type {import('core').Response<import('offscreen').ApiReturn<TMessageType>>} */ (response));
+    }
+
+    /**
+     * @template {import('offscreen').ApiNames} TMessageType
+     * @param {import('offscreen').ApiMessage<TMessageType>} message
+     * @returns {Promise<import('offscreen').ApiReturn<TMessageType>>}
+     */
+    async _sendMessagePromiseWithRetry(message) {
+        const startTime = Date.now();
+        while (true) {
+            try {
+                return await this.sendMessagePromise(message);
+            } catch (error) {
+                const shouldRetry = (
+                    isMessageConnectionError(error) &&
+                    Date.now() - startTime < offscreenMessageRetryTimeout
+                );
+                if (!shouldRetry) {
+                    throw error;
+                }
+            }
+            await promiseTimeout(offscreenMessageRetryDelay);
+        }
     }
 
     /**
@@ -146,7 +176,9 @@ export class OffscreenProxy {
         if (this._currentOffscreenPort !== null) {
             this._currentOffscreenPort.postMessage(message, transfers);
         } else {
-            void this.sendMessagePromise({action: 'createAndRegisterPortOffscreen'});
+            void this._sendMessagePromiseWithRetry({action: 'createAndRegisterPortOffscreen'}).catch((error) => {
+                log.error(error);
+            });
         }
     }
 }

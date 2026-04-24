@@ -22,8 +22,11 @@ import {createApiMap, invokeApiMapHandler} from './core/api-map.js';
 import {EventDispatcher} from './core/event-dispatcher.js';
 import {ExtensionError} from './core/extension-error.js';
 import {log} from './core/log.js';
-import {deferPromise} from './core/utilities.js';
-import {WebExtension} from './extension/web-extension.js';
+import {deferPromise, promiseTimeout} from './core/utilities.js';
+import {isMessageConnectionError, WebExtension} from './extension/web-extension.js';
+
+const backendReadySignalRetryDelay = 100;
+const backendReadySignalRetryTimeout = 5000;
 
 /**
  * @returns {boolean}
@@ -52,6 +55,29 @@ if (checkChromeNotAvailable()) {
 
 /**
  * @param {WebExtension} webExtension
+ * @returns {Promise<void>}
+ */
+async function requestBackendReadySignal(webExtension) {
+    const startTime = Date.now();
+    while (true) {
+        try {
+            await webExtension.sendMessagePromise({action: 'requestBackendReadySignal'});
+            return;
+        } catch (error) {
+            const shouldRetry = (
+                isMessageConnectionError(error) &&
+                Date.now() - startTime < backendReadySignalRetryTimeout
+            );
+            if (!shouldRetry) {
+                throw error;
+            }
+        }
+        await promiseTimeout(backendReadySignalRetryDelay);
+    }
+}
+
+/**
+ * @param {WebExtension} webExtension
  */
 async function waitForBackendReady(webExtension) {
     const {promise, resolve} = /** @type {import('core').DeferredPromiseDetails<void>} */ (deferPromise());
@@ -61,7 +87,7 @@ async function waitForBackendReady(webExtension) {
     const onMessage = ({action, params}, _sender, callback) => invokeApiMapHandler(apiMap, action, params, [], callback);
     chrome.runtime.onMessage.addListener(onMessage);
     try {
-        await webExtension.sendMessagePromise({action: 'requestBackendReadySignal'});
+        await requestBackendReadySignal(webExtension);
         await promise;
     } finally {
         chrome.runtime.onMessage.removeListener(onMessage);
