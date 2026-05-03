@@ -135,8 +135,11 @@ export class LanguageTransformer {
                         continue;
                     }
 
+                    const deinflectedText = deinflect(text);
+                    if (!deinflectedText) { continue; }
+
                     results.push(LanguageTransformer.createTransformedText(
-                        deinflect(text),
+                        deinflectedText,
                         rule.conditionsOut,
                         this._extendTrace(trace, {transform: id, ruleIndex: j, text}),
                     ));

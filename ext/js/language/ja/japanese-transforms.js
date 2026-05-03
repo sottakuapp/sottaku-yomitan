@@ -33,6 +33,27 @@ const fuVerbTeConjugations = [
 ];
 
 /** @typedef {keyof typeof conditions} Condition */
+
+/**
+ * @param {string} inflectedSuffix
+ * @param {string} deinflectedSuffix
+ * @param {Condition[]} conditionsIn
+ * @param {Condition[]} conditionsOut
+ * @param {string[]} excludedDeinflectedSuffixes
+ * @returns {import('language-transformer').SuffixRule<Condition>}
+ */
+function suffixInflectionExcludingDeinflectedSuffixes(inflectedSuffix, deinflectedSuffix, conditionsIn, conditionsOut, excludedDeinflectedSuffixes) {
+    const rule = suffixInflection(inflectedSuffix, deinflectedSuffix, conditionsIn, conditionsOut);
+    return {
+        ...rule,
+        excludedDeinflectedSuffixes,
+        deinflect: (text) => {
+            const deinflected = rule.deinflect(text);
+            return excludedDeinflectedSuffixes.some((suffix) => deinflected.endsWith(suffix)) ? '' : deinflected;
+        },
+    };
+}
+
 /**
  * @param {'て' | 'た' | 'たら' | 'たり'} suffix
  * @param {Condition[]} conditionsIn
@@ -298,7 +319,7 @@ export const japaneseTransforms = {
             rules: [
                 suffixInflection('ちゃ', 'る', ['v5'], ['v1']),
                 suffixInflection('いじゃ', 'ぐ', ['v5'], ['v5']),
-                suffixInflection('いちゃ', 'く', ['v5'], ['v5']),
+                suffixInflectionExcludingDeinflectedSuffixes('いちゃ', 'く', ['v5'], ['v5'], ikuVerbs),
                 suffixInflection('しちゃ', 'す', ['v5'], ['v5']),
                 suffixInflection('っちゃ', 'う', ['v5'], ['v5']),
                 suffixInflection('っちゃ', 'く', ['v5'], ['v5']),
@@ -329,7 +350,7 @@ export const japaneseTransforms = {
             rules: [
                 suffixInflection('ちゃう', 'る', ['v5'], ['v1']),
                 suffixInflection('いじゃう', 'ぐ', ['v5'], ['v5']),
-                suffixInflection('いちゃう', 'く', ['v5'], ['v5']),
+                suffixInflectionExcludingDeinflectedSuffixes('いちゃう', 'く', ['v5'], ['v5'], ikuVerbs),
                 suffixInflection('しちゃう', 'す', ['v5'], ['v5']),
                 suffixInflection('っちゃう', 'う', ['v5'], ['v5']),
                 suffixInflection('っちゃう', 'く', ['v5'], ['v5']),
@@ -360,7 +381,7 @@ export const japaneseTransforms = {
             rules: [
                 suffixInflection('ちまう', 'る', ['v5'], ['v1']),
                 suffixInflection('いじまう', 'ぐ', ['v5'], ['v5']),
-                suffixInflection('いちまう', 'く', ['v5'], ['v5']),
+                suffixInflectionExcludingDeinflectedSuffixes('いちまう', 'く', ['v5'], ['v5'], ikuVerbs),
                 suffixInflection('しちまう', 'す', ['v5'], ['v5']),
                 suffixInflection('っちまう', 'う', ['v5'], ['v5']),
                 suffixInflection('っちまう', 'く', ['v5'], ['v5']),
@@ -562,7 +583,7 @@ export const japaneseTransforms = {
             rules: [
                 suffixInflection('かったら', 'い', [], ['adj-i']),
                 suffixInflection('たら', 'る', [], ['v1']),
-                suffixInflection('いたら', 'く', [], ['v5']),
+                suffixInflectionExcludingDeinflectedSuffixes('いたら', 'く', [], ['v5'], ikuVerbs),
                 suffixInflection('いだら', 'ぐ', [], ['v5']),
                 suffixInflection('したら', 'す', [], ['v5']),
                 suffixInflection('ったら', 'う', [], ['v5']),
@@ -596,7 +617,7 @@ export const japaneseTransforms = {
             rules: [
                 suffixInflection('かったり', 'い', [], ['adj-i']),
                 suffixInflection('たり', 'る', [], ['v1']),
-                suffixInflection('いたり', 'く', [], ['v5']),
+                suffixInflectionExcludingDeinflectedSuffixes('いたり', 'く', [], ['v5'], ikuVerbs),
                 suffixInflection('いだり', 'ぐ', [], ['v5']),
                 suffixInflection('したり', 'す', [], ['v5']),
                 suffixInflection('ったり', 'う', [], ['v5']),
@@ -628,7 +649,7 @@ export const japaneseTransforms = {
             rules: [
                 suffixInflection('くて', 'い', ['-て'], ['adj-i']),
                 suffixInflection('て', 'る', ['-て'], ['v1']),
-                suffixInflection('いて', 'く', ['-て'], ['v5']),
+                suffixInflectionExcludingDeinflectedSuffixes('いて', 'く', ['-て'], ['v5'], ikuVerbs),
                 suffixInflection('いで', 'ぐ', ['-て'], ['v5']),
                 suffixInflection('して', 'す', ['-て'], ['v5']),
                 suffixInflection('って', 'う', ['-て'], ['v5']),
@@ -1162,7 +1183,7 @@ export const japaneseTransforms = {
             rules: [
                 suffixInflection('かった', 'い', ['-た'], ['adj-i']),
                 suffixInflection('た', 'る', ['-た'], ['v1']),
-                suffixInflection('いた', 'く', ['-た'], ['v5']),
+                suffixInflectionExcludingDeinflectedSuffixes('いた', 'く', ['-た'], ['v5'], ikuVerbs),
                 suffixInflection('いだ', 'ぐ', ['-た'], ['v5']),
                 suffixInflection('した', 'す', ['-た'], ['v5']),
                 suffixInflection('った', 'う', ['-た'], ['v5']),

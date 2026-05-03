@@ -63,9 +63,11 @@ export type DeinflectFunction = (inflectedWord: string) => string;
 export type Rule<TCondition = string> = {
     type: 'suffix' | 'prefix' | 'wholeWord' | 'other';
     isInflected: RegExp; // If evaluates true, will try to deinflect
+    deinflected?: string;
     deinflect: DeinflectFunction;
     conditionsIn: TCondition[];
     conditionsOut: TCondition[];
+    excludedDeinflectedSuffixes?: string[];
 };
 
 export type SuffixRule<TCondition = string> = {
@@ -75,4 +77,5 @@ export type SuffixRule<TCondition = string> = {
     deinflect: DeinflectFunction;
     conditionsIn: TCondition[];
     conditionsOut: TCondition[];
+    excludedDeinflectedSuffixes?: string[];
 };
