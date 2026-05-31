@@ -17,7 +17,7 @@
 
 import {languageDescriptorMap} from './language-descriptors.js';
 
-export const SOTTAKU_SUPPORTED_LANGUAGES = ['ja', 'ko', 'zh', 'en'];
+export const SOTTAKU_SUPPORTED_LANGUAGES = ['ja', 'ko', 'zh', 'en', 'es', 'de', 'fr', 'it'];
 
 /**
  * @param {unknown} supportedLanguages
@@ -56,6 +56,10 @@ export function getSottakuLanguageFlag(language) {
         case 'ko': return '\uD83C\uDDF0\uD83C\uDDF7'; // KR flag
         case 'zh': return '\uD83C\uDDE8\uD83C\uDDF3'; // CN flag
         case 'en': return '\uD83C\uDDFA\uD83C\uDDF8'; // US flag
+        case 'es': return '\uD83C\uDDEA\uD83C\uDDF8'; // ES flag
+        case 'de': return '\uD83C\uDDE9\uD83C\uDDEA'; // DE flag
+        case 'fr': return '\uD83C\uDDEB\uD83C\uDDF7'; // FR flag
+        case 'it': return '\uD83C\uDDEE\uD83C\uDDF9'; // IT flag
         default: return '\uD83C\uDF10'; // Globe
     }
 }

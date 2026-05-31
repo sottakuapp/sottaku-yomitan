@@ -476,7 +476,7 @@ function createProfileOptionsUpdatedTestData1() {
             authToken: '',
             locale: '',
             languageMode: 'mixed',
-            preferredLanguages: ['ja', 'ko', 'zh', 'en'],
+            preferredLanguages: ['ja', 'ko', 'zh', 'en', 'es', 'de', 'fr', 'it'],
             user: null,
             cookieDomain: 'https://sottaku.app',
         },
@@ -797,7 +797,7 @@ describe('OptionsUtil', () => {
             await optionsUtil.prepare();
 
             const options = optionsUtil.getDefault();
-            expect(options.profiles[0].options.sottaku.preferredLanguages).toStrictEqual(['ja', 'ko', 'zh', 'en']);
+            expect(options.profiles[0].options.sottaku.preferredLanguages).toStrictEqual(['ja', 'ko', 'zh', 'en', 'es', 'de', 'fr', 'it']);
         });
     });
 

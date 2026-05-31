@@ -23,8 +23,12 @@ import {
 } from '../../ext/js/language/sottaku-languages.js';
 
 describe('sottaku-languages', () => {
-    test('retains built-in English support when server languages omit it', () => {
-        expect(normalizeSottakuSupportedLanguages(['ja', 'ko', 'zh'])).toStrictEqual(['ja', 'ko', 'zh', 'en']);
+    test('retains built-in language support when server languages omit it', () => {
+        expect(normalizeSottakuSupportedLanguages(['ja', 'ko', 'zh'])).toStrictEqual(['ja', 'ko', 'zh', 'en', 'es', 'de', 'fr', 'it']);
+    });
+
+    test('includes European study languages in the built-in language list', () => {
+        expect(normalizeSottakuSupportedLanguages([])).toStrictEqual(['ja', 'ko', 'zh', 'en', 'es', 'de', 'fr', 'it']);
     });
 
     test('keeps English as a valid preferred language even when the server list is partial', () => {
@@ -33,5 +37,12 @@ describe('sottaku-languages', () => {
 
     test('uses the English flag for English', () => {
         expect(getSottakuLanguageFlag('en')).toBe('\uD83C\uDDFA\uD83C\uDDF8');
+    });
+
+    test('uses country flags for European study languages', () => {
+        expect(getSottakuLanguageFlag('es')).toBe('\uD83C\uDDEA\uD83C\uDDF8');
+        expect(getSottakuLanguageFlag('de')).toBe('\uD83C\uDDE9\uD83C\uDDEA');
+        expect(getSottakuLanguageFlag('fr')).toBe('\uD83C\uDDEB\uD83C\uDDF7');
+        expect(getSottakuLanguageFlag('it')).toBe('\uD83C\uDDEE\uD83C\uDDF9');
     });
 });

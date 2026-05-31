@@ -48,6 +48,7 @@ import {
     normalizeCombiningCharacters,
     standardizeKanji,
 } from './ja/japanese-text-preprocessors.js';
+import {italianTransforms} from './it/italian-transforms.js';
 import {japaneseTransforms} from './ja/japanese-transforms.js';
 import {isStringPartiallyJapanese} from './ja/japanese.js';
 import {georgianTransforms} from './ka/georgian-transforms.js';
@@ -272,6 +273,7 @@ const languageDescriptors = [
             ...capitalizationPreprocessors,
             removeAlphabeticDiacritics,
         },
+        languageTransforms: italianTransforms,
     },
     {
         iso: 'it',
