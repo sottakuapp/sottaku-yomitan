@@ -996,6 +996,9 @@ button.action-button:active:not(:disabled) {
     content: var(--inflection-separator);
     padding: 0 0.25em;
 }
+.inflection-rule-chain[data-inflection-separator='alternatives']>.inflection+.inflection-separator+.inflection::before {
+    content: '/';
+}
 .inflection-source-icon {
     display: inline-block;
     white-space: nowrap;

@@ -272,6 +272,7 @@ export type TermDictionaryEntry = {
 export type InflectionRuleChainCandidate = {
     source: InflectionSource;
     inflectionRules: InflectionRuleChain;
+    separator?: 'chain' | 'alternatives';
 };
 
 type textProcessorRuleChainCandidate = string[];
@@ -281,6 +282,9 @@ export type InflectionRuleChain = InflectionRule[];
 export type InflectionRule = {
     name: string;
     description?: string;
+    reasonKey?: string;
+    grammarLanguage?: string;
+    grammarUrl?: string;
 };
 
 export type InflectionSource = 'algorithm' | 'dictionary' | 'both';

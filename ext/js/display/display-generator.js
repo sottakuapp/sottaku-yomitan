@@ -1010,9 +1010,12 @@ export class DisplayGenerator {
      * @returns {?HTMLElement}
      */
     _createInflectionRuleChain(inflectionRuleChain) {
-        const {source, inflectionRules} = inflectionRuleChain;
+        const {source, inflectionRules, separator} = inflectionRuleChain;
         if (!Array.isArray(inflectionRules) || inflectionRules.length === 0) { return null; }
         const fragment = this._instantiate('inflection-rule-chain');
+        if (separator === 'alternatives') {
+            fragment.dataset.inflectionSeparator = 'alternatives';
+        }
 
         const sourceIcon = this._getInflectionSourceIcon(source);
 

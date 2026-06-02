@@ -213,6 +213,44 @@ function getResultMatchCandidates(value) {
 }
 
 /**
+ * @param {unknown} value
+ * @param {string[]} propertyNames
+ * @returns {string}
+ */
+function getObjectStringProperty(value, propertyNames) {
+    const objectValue = (value && typeof value === 'object') ? /** @type {Record<string, unknown>} */ (value) : null;
+    if (!objectValue) { return ''; }
+    for (const propertyName of propertyNames) {
+        const propertyValue = objectValue[propertyName];
+        if (typeof propertyValue === 'string') { return propertyValue; }
+    }
+    return '';
+}
+
+/**
+ * @param {unknown} value
+ * @returns {string}
+ */
+function normalizeInflectionRuleRelation(value) {
+    const relation = typeof value === 'string' ? value.trim().toLowerCase() : '';
+    switch (relation) {
+        case 'alternative':
+        case 'alternatives':
+        case 'ambiguous':
+        case 'either':
+        case 'or':
+            return 'alternatives';
+        case 'chain':
+        case 'sequence':
+        case 'sequential':
+        case 'and':
+            return 'chain';
+        default:
+            return '';
+    }
+}
+
+/**
  * @param {any} value
  * @param {string} sourceText
  * @param {string} query
@@ -1229,12 +1267,21 @@ export class SottakuIntegration {
         const resolvedSourceText = (sourceText || query || '').toString();
         const rawInflectionRules = normalizedResult.inflection_rules ?? normalizedInfo.inflection_rules;
         const rawInflectionRuleKeys = normalizedResult.inflection_rule_keys ?? normalizedInfo.inflection_rule_keys;
+        const rawInflectionRuleRelation = getObjectStringProperty(
+            result,
+            ['inflection_rule_relation', 'inflectionRuleRelation'],
+        ) || getObjectStringProperty(
+            info,
+            ['inflection_rule_relation', 'inflectionRuleRelation'],
+        );
+        const inflectionRuleRelation = normalizeInflectionRuleRelation(rawInflectionRuleRelation);
         const inflectionRuleNames = Array.isArray(rawInflectionRules) ?
             rawInflectionRules.map((value) => (value ?? '').toString().trim()) :
             [];
         const inflectionRuleKeys = Array.isArray(rawInflectionRuleKeys) ?
             rawInflectionRuleKeys.map((value) => (value ?? '').toString().trim()) :
             [];
+        /** @type {{name: string, reasonKey: string}[]} */
         const inflectionRulePairs = [];
         for (let i = 0; i < inflectionRuleNames.length; i += 1) {
             const name = inflectionRuleNames[i];
@@ -1254,17 +1301,19 @@ export class SottakuIntegration {
         /** @type {import('dictionary').InflectionRuleChainCandidate[]} */
         const inflectionRuleChainCandidates = [];
         if (inflectionRulePairs.length > 0) {
+            const inflectionRules = inflectionRulePairs.map(({name, reasonKey}) => {
+                const rule = {name, description: ''};
+                if (reasonKey && grammarLanguage) {
+                    rule.reasonKey = reasonKey;
+                    rule.grammarLanguage = grammarLanguage;
+                    rule.grammarUrl = `https://sottaku.app/dictionary/grammar/${grammarLanguage}/${encodeURIComponent(reasonKey)}`;
+                }
+                return rule;
+            });
             inflectionRuleChainCandidates.push({
                 source: 'algorithm',
-                inflectionRules: inflectionRulePairs.map(({name, reasonKey}) => {
-                    const rule = {name, description: ''};
-                    if (reasonKey && grammarLanguage) {
-                        rule.reasonKey = reasonKey;
-                        rule.grammarLanguage = grammarLanguage;
-                        rule.grammarUrl = `https://sottaku.app/dictionary/grammar/${grammarLanguage}/${encodeURIComponent(reasonKey)}`;
-                    }
-                    return rule;
-                }),
+                inflectionRules,
+                separator: inflectionRuleRelation === 'alternatives' ? 'alternatives' : 'chain',
             });
         }
 

@@ -486,5 +486,49 @@ describe('SottakuIntegration', () => {
         expect(scanSpy).toHaveBeenCalledTimes(2);
         expect(seenTexts).toStrictEqual(['Getting', 'get']);
     });
+
+    test('Sottaku API alternative inflection rules keep Sottaku grammar links and separator', () => {
+        const integration = new SottakuIntegration(null);
+        const entry = integration._createEntry(
+            {
+                id: 1,
+                kanji_representation: '来る',
+                reading: 'くる',
+                word_translation: 'come',
+                match_length: 4,
+                inflection_rules: ['Potential', 'Passive'],
+                inflection_rule_keys: ['potential', 'passive'],
+                inflection_rule_relation: 'alternatives',
+            },
+            {},
+            'ja',
+            'https://sottaku.app',
+            '来られる',
+            0,
+            '来られる',
+            4,
+            'en',
+            null,
+        );
+
+        expect(entry.inflectionRuleChainCandidates).toHaveLength(1);
+        expect(entry.inflectionRuleChainCandidates[0].separator).toBe('alternatives');
+        expect(entry.inflectionRuleChainCandidates[0].inflectionRules).toStrictEqual([
+            {
+                name: 'Potential',
+                description: '',
+                reasonKey: 'potential',
+                grammarLanguage: 'ja',
+                grammarUrl: 'https://sottaku.app/dictionary/grammar/ja/potential',
+            },
+            {
+                name: 'Passive',
+                description: '',
+                reasonKey: 'passive',
+                grammarLanguage: 'ja',
+                grammarUrl: 'https://sottaku.app/dictionary/grammar/ja/passive',
+            },
+        ]);
+    });
 });
 /* eslint-enable no-underscore-dangle */
