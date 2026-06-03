@@ -154,12 +154,23 @@ export class LanguageTransformer {
      * @returns {import('dictionary').InflectionRuleChain}
      */
     getUserFacingInflectionRules(inflectionRules) {
-        return inflectionRules.map((rule) => {
+        return LanguageTransformer.normalizeInflectionRulesForDisplay(inflectionRules).map((rule) => {
             const fullRule = this._transforms.find((transform) => transform.id === rule);
             if (typeof fullRule === 'undefined') { return {name: rule}; }
             const {name, description} = fullRule;
             return description ? {name, description} : {name};
         });
+    }
+
+    /**
+     * @param {string[]} inflectionRules
+     * @returns {string[]}
+     */
+    static normalizeInflectionRulesForDisplay(inflectionRules) {
+        if (!Array.isArray(inflectionRules) || !inflectionRules.includes('-いる')) {
+            return inflectionRules;
+        }
+        return inflectionRules.filter((rule) => rule !== '-て');
     }
 
     /**

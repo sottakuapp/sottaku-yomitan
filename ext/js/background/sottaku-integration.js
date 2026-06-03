@@ -30,6 +30,16 @@ const HANZI_DISPLAY_MODES = new Set(['traditional', 'simplified', 'both']);
 const HANZI_DISPLAY_SEPARATOR = ' / ';
 const CHINESE_READING_MODES = new Set(['pinyin', 'bopomofo']);
 const SOTTAKU_UPGRADE_URL = 'https://sottaku.app/upgrade';
+const JAPANESE_PROGRESSIVE_INFLECTION_DISPLAY_PRIORITY = new Map([
+    ['causative-passive', 0],
+    ['causative', 1],
+    ['passive', 2],
+    ['potential', 3],
+    ['progressive', 20],
+    ['polite', 30],
+    ['negative', 31],
+    ['past', 32],
+]);
 
 /**
  * @param {number} codePoint
@@ -248,6 +258,40 @@ function normalizeInflectionRuleRelation(value) {
         default:
             return '';
     }
+}
+
+/**
+ * @param {{name: string, reasonKey: string}} pair
+ * @returns {string}
+ */
+function getInflectionRuleDisplayKey(pair) {
+    const reasonKey = (pair.reasonKey || '').trim().toLowerCase();
+    if (reasonKey) { return reasonKey; }
+    const name = (pair.name || '').trim().toLowerCase();
+    if (name === 'progressive' || name === '-いる') { return 'progressive'; }
+    if (name === 'te-form' || name === '-て') { return 'te-form'; }
+    return name;
+}
+
+/**
+ * @param {string} language
+ * @param {{name: string, reasonKey: string}[]} pairs
+ * @returns {{name: string, reasonKey: string}[]}
+ */
+function normalizeInflectionRulePairsForDisplay(language, pairs) {
+    if (language !== 'ja' || !pairs.some((pair) => getInflectionRuleDisplayKey(pair) === 'progressive')) {
+        return pairs;
+    }
+
+    const filtered = pairs.filter((pair) => getInflectionRuleDisplayKey(pair) !== 'te-form');
+    return [...filtered].sort((a, b) => {
+        const aKey = getInflectionRuleDisplayKey(a);
+        const bKey = getInflectionRuleDisplayKey(b);
+        const aPriority = JAPANESE_PROGRESSIVE_INFLECTION_DISPLAY_PRIORITY.get(aKey) ?? 25;
+        const bPriority = JAPANESE_PROGRESSIVE_INFLECTION_DISPLAY_PRIORITY.get(bKey) ?? 25;
+        if (aPriority !== bPriority) { return aPriority - bPriority; }
+        return filtered.indexOf(a) - filtered.indexOf(b);
+    });
 }
 
 /**
@@ -1292,6 +1336,10 @@ export class SottakuIntegration {
             });
         }
         const grammarLanguage = (language || '').toString().toLowerCase();
+        const displayInflectionRulePairs = normalizeInflectionRulePairsForDisplay(
+            grammarLanguage,
+            inflectionRulePairs,
+        );
         const displayedSourceText = resolveDisplayedSourceText(
             resolvedSourceText,
             query,
@@ -1300,8 +1348,8 @@ export class SottakuIntegration {
 
         /** @type {import('dictionary').InflectionRuleChainCandidate[]} */
         const inflectionRuleChainCandidates = [];
-        if (inflectionRulePairs.length > 0) {
-            const inflectionRules = inflectionRulePairs.map(({name, reasonKey}) => {
+        if (displayInflectionRulePairs.length > 0) {
+            const inflectionRules = displayInflectionRulePairs.map(({name, reasonKey}) => {
                 const rule = {name, description: ''};
                 if (reasonKey && grammarLanguage) {
                     rule.reasonKey = reasonKey;
@@ -1313,7 +1361,7 @@ export class SottakuIntegration {
             inflectionRuleChainCandidates.push({
                 source: 'algorithm',
                 inflectionRules,
-                separator: inflectionRuleRelation === 'alternatives' ? 'alternatives' : 'chain',
+                separator: inflectionRuleRelation === 'alternatives' && inflectionRules.length > 1 ? 'alternatives' : 'chain',
             });
         }
 

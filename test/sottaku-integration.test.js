@@ -530,5 +530,43 @@ describe('SottakuIntegration', () => {
             },
         ]);
     });
+
+    test('Sottaku API Japanese progressive chains hide intermediate te-form', () => {
+        const integration = new SottakuIntegration(null);
+        const entry = integration._createEntry(
+            {
+                id: 1,
+                kanji_representation: 'する',
+                reading: 'する',
+                word_translation: 'do',
+                match_length: 5,
+                inflection_rules: ['Passive', 'Polite', 'Progressive', 'Te-form'],
+                inflection_rule_keys: ['passive', 'polite', 'progressive', 'te-form'],
+                inflection_rule_relation: 'chain',
+            },
+            {},
+            'ja',
+            'https://sottaku.app',
+            'されています',
+            0,
+            'されています',
+            5,
+            'en',
+            null,
+        );
+
+        expect(entry.inflectionRuleChainCandidates).toHaveLength(1);
+        expect(entry.inflectionRuleChainCandidates[0].separator).toBe('chain');
+        expect(entry.inflectionRuleChainCandidates[0].inflectionRules.map(({name}) => name)).toStrictEqual([
+            'Passive',
+            'Progressive',
+            'Polite',
+        ]);
+        expect(entry.inflectionRuleChainCandidates[0].inflectionRules.map(({reasonKey}) => reasonKey)).toStrictEqual([
+            'passive',
+            'progressive',
+            'polite',
+        ]);
+    });
 });
 /* eslint-enable no-underscore-dangle */

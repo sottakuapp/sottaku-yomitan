@@ -16,6 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import {expect, test as vitestTest} from 'vitest';
 import {japaneseTransforms} from '../../ext/js/language/ja/japanese-transforms.js';
 import {LanguageTransformer} from '../../ext/js/language/language-transformer.js';
 import {testLanguageTransformer} from '../fixtures/language-transformer-test.js';
@@ -1574,3 +1575,14 @@ const tests = [
 const languageTransformer = new LanguageTransformer();
 languageTransformer.addDescriptor(japaneseTransforms);
 testLanguageTransformer(languageTransformer, tests);
+
+vitestTest('user-facing Japanese progressive chains hide intermediate te-form', () => {
+    expect(languageTransformer.getUserFacingInflectionRules(['passive', '-て', '-いる']).map(({name}) => name)).toStrictEqual([
+        'passive',
+        '-いる',
+    ]);
+    expect(languageTransformer.getUserFacingInflectionRules(['passive', '-て']).map(({name}) => name)).toStrictEqual([
+        'passive',
+        '-て',
+    ]);
+});
