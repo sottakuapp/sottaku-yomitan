@@ -1,8 +1,26 @@
 /*
+ * Copyright (C) 2025  Sottaku Inc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+/*
  * Sottaku API helper used for authentication, dictionary search, flashcards,
  * and word requests.
  */
 
+import {parseJson, readResponseJson} from '../core/json.js';
 import {toError} from '../core/to-error.js';
 
 const SHARED_REQUEST_CACHE = new Map();
@@ -17,6 +35,8 @@ const REQUEST_CACHE_TTLS = new Map([
     ['GET /dictionary/supported-languages', STATIC_SETTINGS_CACHE_TTL_MS],
     ['POST /dictionary/yomitan-scan', SHARED_SCAN_CACHE_TTL_MS],
 ]);
+const AUTH_COOKIE_MAX_AGE_SECONDS = 90 * 24 * 60 * 60;
+const SIGNED_SESSION_TOKEN_PREFIX = 'st1.';
 
 /**
  * @param {unknown} message
@@ -43,6 +63,62 @@ function sendRuntimeMessagePromise(message) {
 }
 
 /**
+ * @param {string} value
+ * @returns {string}
+ */
+function decodeBase64Url(value) {
+    try {
+        const base64 = value.replace(/-/g, '+').replace(/_/g, '/');
+        const padded = base64 + '='.repeat((4 - (base64.length % 4)) % 4);
+        const binary = globalThis.atob(padded);
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; ++i) {
+            bytes[i] = binary.charCodeAt(i);
+        }
+        return new TextDecoder().decode(bytes);
+    } catch (e) {
+        return '';
+    }
+}
+
+/**
+ * Signed session tokens are intentionally short-lived; store the durable origin
+ * token embedded by the server so extension storage and cookies do not expire
+ * every signed-token TTL.
+ * @param {string} token
+ * @returns {string}
+ */
+function extractOriginTokenFromSignedSessionToken(token) {
+    if (!token.startsWith(SIGNED_SESSION_TOKEN_PREFIX)) { return ''; }
+    const parts = token.split('.');
+    if (parts.length !== 3) { return ''; }
+    try {
+        const payloadRaw = parseJson(decodeBase64Url(parts[1]));
+        const payload = (
+            payloadRaw !== null &&
+            typeof payloadRaw === 'object' &&
+            !Array.isArray(payloadRaw)
+        ) ?
+            /** @type {{t?: unknown}} */ (payloadRaw) :
+            null;
+        const originToken = typeof payload?.t === 'string' ? payload.t.trim() : '';
+        return originToken || '';
+    } catch (e) {
+        return '';
+    }
+}
+
+/**
+ * @param {unknown} token
+ * @returns {string}
+ */
+function normalizeAuthTokenForStorage(token) {
+    const value = typeof token === 'string' ? token.trim() : '';
+    if (!value) { return ''; }
+    return extractOriginTokenFromSignedSessionToken(value) || value;
+}
+
+/**
  * @param {string} method
  * @param {string} path
  * @returns {number}
@@ -59,7 +135,7 @@ function cloneCachedValue(value) {
     if (typeof globalThis.structuredClone === 'function') {
         return globalThis.structuredClone(value);
     }
-    return JSON.parse(JSON.stringify(value));
+    return parseJson(JSON.stringify(value));
 }
 
 /**
@@ -85,7 +161,7 @@ function getSharedCachedValue(requestKey) {
  * @returns {void}
  */
 function setSharedCachedValue(requestKey, value, ttlMs) {
-    if (!(ttlMs > 0)) { return; }
+    if (ttlMs <= 0) { return; }
     SHARED_REQUEST_CACHE.set(requestKey, {
         expiresAt: Date.now() + ttlMs,
         value: cloneCachedValue(value),
@@ -100,7 +176,7 @@ export class SottakuClient {
         /** @type {string} */
         this._apiBaseUrl = options.apiBaseUrl || 'https://sottaku.app/api/v1';
         /** @type {string} */
-        this._authToken = options.authToken || '';
+        this._authToken = normalizeAuthTokenForStorage(options.authToken);
         /** @type {string} */
         this._cookieDomain = options.cookieDomain || this._getOrigin(this._apiBaseUrl);
         /** @type {((details: {apiBaseUrl: string, oldToken: string, newToken: string}) => (void|Promise<void>))|null} */
@@ -127,7 +203,7 @@ export class SottakuClient {
             this._apiBaseUrl = options.apiBaseUrl;
         }
         if (typeof options.authToken === 'string') {
-            this._authToken = options.authToken;
+            this._authToken = normalizeAuthTokenForStorage(options.authToken);
         }
         if (typeof options.cookieDomain === 'string' && options.cookieDomain.length > 0) {
             this._cookieDomain = options.cookieDomain;
@@ -152,7 +228,12 @@ export class SottakuClient {
             auth: false,
         });
         if (typeof data?.token === 'string') {
-            this._authToken = data.token;
+            const token = normalizeAuthTokenForStorage(data.token);
+            this._authToken = token;
+            await this._persistAuthTokenCookie(token);
+            if (token !== data.token && data && typeof data === 'object') {
+                return {...data, token};
+            }
         }
         return data;
     }
@@ -164,20 +245,12 @@ export class SottakuClient {
      */
     async syncTokenFromCookies() {
         try {
-            const value = await this._getCookieValue('api_token');
-            if (value) {
-                this._authToken = value;
-                return value;
-            }
-            const sessionValue = await this._getCookieValue('session_id');
-            if (sessionValue) {
-                this._authToken = sessionValue;
-                return sessionValue;
-            }
-            const bearer = await this._getCookieValue('auth_token');
-            if (bearer) {
-                this._authToken = bearer;
-                return bearer;
+            const tokens = await this._getCookieAuthTokenCandidates();
+            const token = tokens[0] || null;
+            if (token) {
+                this._authToken = token;
+                await this._persistAuthTokenCookie(token);
+                return token;
             }
         } catch (e) {
             throw toError(e);
@@ -377,9 +450,10 @@ export class SottakuClient {
                 };
             }
             const response = await fetch(url, options);
-            const rotatedToken = response.headers.get('X-New-Token');
+            const rotatedToken = normalizeAuthTokenForStorage(response.headers.get('X-New-Token'));
             if (tokenUsed && rotatedToken && rotatedToken !== tokenUsed) {
                 this._authToken = rotatedToken;
+                await this._persistAuthTokenCookie(rotatedToken);
                 await this._notifyAuthTokenUpdated(tokenUsed, rotatedToken);
             }
             if (response.status === 401 && tokenUsed && !retriedAuth) {
@@ -389,11 +463,11 @@ export class SottakuClient {
                 }
                 let cookieToken = null;
                 try {
-                    cookieToken = await this.syncTokenFromCookies();
+                    cookieToken = await this._recoverAuthTokenFromCookies(tokenUsed);
                 } catch (e) {
                     cookieToken = null;
                 }
-                if (cookieToken && cookieToken !== tokenUsed) {
+                if (cookieToken) {
                     await this._notifyAuthTokenUpdated(tokenUsed, cookieToken);
                     continue;
                 }
@@ -504,28 +578,31 @@ export class SottakuClient {
         const url = this._buildUrl(path, language, locale);
         const normalizedMethod = method.toUpperCase();
         const cacheTtlMs = getRequestCacheTtlMs(normalizedMethod, path);
-        const serializedBody = body !== undefined ? JSON.stringify(body) : null;
-        const requestKey = cacheTtlMs > 0 ? [
-            normalizedMethod,
-            url,
-            auth ? this._authToken : '',
-            serializedBody || '',
-        ].join('\u0000') : null;
+        const serializedBody = typeof body !== 'undefined' ? JSON.stringify(body) : null;
+        const tokenUsed = auth ? this._authToken : '';
+        const requestKey = cacheTtlMs > 0 ?
+            [
+                normalizedMethod,
+                url,
+                tokenUsed,
+                serializedBody || '',
+            ].join('\u0000') :
+            null;
         /** @type {RequestInit} */
         const fetchOptions = {
             method: normalizedMethod,
             headers: {
-                'Accept': 'application/json',
+                Accept: 'application/json',
             },
             credentials: 'include',
         };
-        if (auth && this._authToken) {
+        if (auth && tokenUsed) {
             fetchOptions.headers = {
                 ...fetchOptions.headers,
-                'Authorization': `Bearer ${this._authToken}`,
+                Authorization: `Bearer ${tokenUsed}`,
             };
         }
-        if (body !== undefined) {
+        if (typeof body !== 'undefined') {
             fetchOptions.body = serializedBody;
             fetchOptions.headers = {
                 ...fetchOptions.headers,
@@ -535,44 +612,54 @@ export class SottakuClient {
 
         const performRequest = async () => {
             const response = await fetch(url, fetchOptions);
-            const rotatedToken = response.headers.get('X-New-Token');
+            const rotatedToken = normalizeAuthTokenForStorage(response.headers.get('X-New-Token'));
             if (auth && rotatedToken && rotatedToken !== this._authToken) {
-                const oldToken = this._authToken;
+                const oldToken = this._authToken || tokenUsed;
                 this._authToken = rotatedToken;
+                await this._persistAuthTokenCookie(rotatedToken);
                 await this._notifyAuthTokenUpdated(oldToken, rotatedToken);
             }
+            /** @type {any} */
             let json = null;
             try {
-                json = await response.json();
+                json = await readResponseJson(response);
             } catch (e) {
                 // NOP
             }
 
             const message = (json && (json.error || json.message)) || response.statusText;
 
+            const isAuthError = response.status === 401 && auth && tokenUsed;
+            if (isAuthError && !_retryAuth) {
+                if (this._authToken && this._authToken !== tokenUsed) {
+                    return await this._request(path, {...options, _retryAuth: true});
+                }
+                let cookieToken = null;
+                try {
+                    cookieToken = await this._recoverAuthTokenFromCookies(tokenUsed);
+                } catch (e) {
+                    cookieToken = null;
+                }
+                if (cookieToken) {
+                    await this._notifyAuthTokenUpdated(tokenUsed, cookieToken);
+                    return await this._request(path, {...options, _retryAuth: true});
+                }
+            }
+
             const isTokenExpired = (
                 response.status === 401 &&
                 auth &&
-                this._authToken &&
+                tokenUsed &&
                 (
                     (json && (json.code === 'TOKEN_EXPIRED' || json.error === 'Invalid or expired token')) ||
                     (typeof message === 'string' && message.includes('Invalid or expired token'))
                 )
             );
-            if (isTokenExpired && !_retryAuth) {
-                const oldToken = this._authToken;
-                let cookieToken = null;
-                try {
-                    cookieToken = await this.syncTokenFromCookies();
-                } catch (e) {
-                    cookieToken = null;
+            if (isTokenExpired) {
+                if (this._authToken === tokenUsed) {
+                    this._authToken = '';
                 }
-                if (cookieToken && cookieToken !== oldToken) {
-                    await this._notifyAuthTokenUpdated(oldToken, cookieToken);
-                    return await this._request(path, {...options, _retryAuth: true});
-                }
-                this._authToken = '';
-                await this._notifyAuthTokenInvalidated(oldToken);
+                await this._notifyAuthTokenInvalidated(tokenUsed);
             }
 
             if (!response.ok || (json && json.success === false)) {
@@ -635,7 +722,7 @@ export class SottakuClient {
      * @returns {Promise<string|null>}
      */
     _getCookieValue(name) {
-        if (!chrome.cookies) {
+        if (!(typeof chrome === 'object' && chrome !== null && chrome.cookies)) {
             return Promise.resolve(null);
         }
         return new Promise((resolve, reject) => {
@@ -648,6 +735,70 @@ export class SottakuClient {
                 resolve(cookie?.value ?? null);
             });
         });
+    }
+
+    /**
+     * @returns {Promise<string[]>}
+     */
+    async _getCookieAuthTokenCandidates() {
+        const tokens = [];
+        const seen = new Set();
+        for (const name of ['api_token', 'session_id', 'auth_token']) {
+            const token = normalizeAuthTokenForStorage(await this._getCookieValue(name));
+            if (!token || seen.has(token)) { continue; }
+            seen.add(token);
+            tokens.push(token);
+        }
+        return tokens;
+    }
+
+    /**
+     * @param {string} oldToken
+     * @returns {Promise<string|null>}
+     */
+    async _recoverAuthTokenFromCookies(oldToken) {
+        const normalizedOldToken = normalizeAuthTokenForStorage(oldToken);
+        const tokens = await this._getCookieAuthTokenCandidates();
+        const token = tokens.find((value) => value !== normalizedOldToken) || null;
+        if (!token) { return null; }
+        this._authToken = token;
+        await this._persistAuthTokenCookie(token);
+        return token;
+    }
+
+    /**
+     * @param {string} token
+     * @returns {Promise<void>}
+     */
+    async _persistAuthTokenCookie(token) {
+        const normalizedToken = normalizeAuthTokenForStorage(token);
+        if (!normalizedToken) { return; }
+        if (!(typeof chrome === 'object' && chrome !== null && chrome.cookies && typeof chrome.cookies.set === 'function')) {
+            return;
+        }
+        try {
+            const details = {
+                url: this._cookieDomain,
+                name: 'api_token',
+                value: normalizedToken,
+                path: '/',
+                expirationDate: Math.floor(Date.now() / 1000) + AUTH_COOKIE_MAX_AGE_SECONDS,
+                sameSite: 'lax',
+                secure: this._cookieDomain.startsWith('https://'),
+            };
+            await new Promise((resolve, reject) => {
+                void chrome.cookies.set(details, () => {
+                    const error = chrome.runtime.lastError;
+                    if (error) {
+                        reject(new Error(error.message));
+                    } else {
+                        resolve(void 0);
+                    }
+                });
+            });
+        } catch (e) {
+            // Best-effort; storage still keeps the token even when cookies are unavailable.
+        }
     }
 
     /**

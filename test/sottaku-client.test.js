@@ -27,17 +27,40 @@ async function importSottakuClientModule() {
 
 /**
  * @param {unknown} data
+ * @param {{status?: number, headers?: Record<string, string>}} [init]
  * @returns {Response}
  */
-function buildJsonResponse(data) {
+function buildJsonResponse(data, init = {}) {
+    const headers = {'Content-Type': 'application/json'};
+    if (init.headers) {
+        Object.assign(headers, init.headers);
+    }
     return new Response(
         JSON.stringify({success: true, data}),
         {
-            status: 200,
+            status: init.status || 200,
+            headers,
+        },
+    );
+}
+
+/**
+ * @param {Record<string, unknown>} data
+ * @param {number} [status]
+ * @returns {Response}
+ */
+function buildErrorResponse(data, status = 401) {
+    return new Response(
+        JSON.stringify({success: false, ...data}),
+        {
+            status,
             headers: {'Content-Type': 'application/json'},
         },
     );
 }
+
+const SIGNED_TOKEN_WITH_ORIGIN =
+    'st1.eyJ0Ijoib3JpZ2luLXNlc3Npb24tdG9rZW4iLCJ1IjoxMDQxOCwiYyI6MTc4MDQ4MzQyNCwidiI6MTc4MDQ4MzQyNCwiZSI6MTc4MDQ4MzQ1NH0.signature';
 
 /**
  * @returns {{promise: Promise<Response>, resolve: (value: Response) => void, reject: (reason?: unknown) => void}}
@@ -53,6 +76,47 @@ function createDeferredResponse() {
         reject = /** @type {(reason?: unknown) => void} */ (rejectPromise);
     });
     return {promise, resolve, reject};
+}
+
+/**
+ * @param {Record<string, string>} [cookies]
+ * @returns {{setCalls: Array<Record<string, unknown>>}}
+ */
+function stubChromeCookies(cookies = {}) {
+    /** @type {Array<Record<string, unknown>>} */
+    const setCalls = [];
+    /**
+     * @param {{name: string}} details
+     * @param {(cookie: {value: string}|null) => void} callback
+     */
+    const getCookie = (details, callback) => {
+        const {name} = details;
+        const value = cookies[name];
+        callback(typeof value === 'string' ? {value} : null);
+    };
+    /**
+     * @param {Record<string, unknown>} details
+     * @param {() => void} callback
+     */
+    const setCookie = (details, callback) => {
+        setCalls.push(details);
+        const name = typeof details.name === 'string' ? details.name : '';
+        const value = typeof details.value === 'string' ? details.value : '';
+        if (name) {
+            cookies[name] = value;
+        }
+        callback();
+    };
+    vi.stubGlobal('chrome', {
+        cookies: {
+            get: vi.fn(getCookie),
+            set: vi.fn(setCookie),
+        },
+        runtime: {
+            lastError: null,
+        },
+    });
+    return {setCalls};
 }
 
 describe('SottakuClient', () => {
@@ -116,5 +180,82 @@ describe('SottakuClient', () => {
         });
         expect(second).toStrictEqual(first);
         expect(third).toStrictEqual(first);
+    });
+
+    test('normalizes signed session tokens to their durable origin token', async () => {
+        const {SottakuClient} = await importSottakuClientModule();
+        const client = new SottakuClient({
+            apiBaseUrl: 'https://sottaku.app/api/v1',
+            authToken: SIGNED_TOKEN_WITH_ORIGIN,
+        });
+
+        expect(client.authToken).toBe('origin-session-token');
+    });
+
+    test('stores the origin token and refreshes the Sottaku cookie when the server rotates a signed token', async () => {
+        const {setCalls} = stubChromeCookies();
+        const fetchMock = vi.fn().mockResolvedValue(buildJsonResponse(
+            {user: {id: 1, username: 'akira'}},
+            {headers: {'X-New-Token': SIGNED_TOKEN_WITH_ORIGIN}},
+        ));
+        vi.stubGlobal('fetch', fetchMock);
+        const onAuthTokenUpdated = vi.fn();
+
+        const {SottakuClient} = await importSottakuClientModule();
+        const client = new SottakuClient({
+            apiBaseUrl: 'https://sottaku.app/api/v1',
+            authToken: 'old-token',
+            cookieDomain: 'https://sottaku.app',
+            onAuthTokenUpdated,
+        });
+
+        await client.getProfile();
+
+        expect(client.authToken).toBe('origin-session-token');
+        expect(onAuthTokenUpdated).toHaveBeenCalledWith({
+            apiBaseUrl: 'https://sottaku.app/api/v1',
+            oldToken: 'old-token',
+            newToken: 'origin-session-token',
+        });
+        expect(setCalls[0]).toMatchObject({
+            url: 'https://sottaku.app',
+            name: 'api_token',
+            value: 'origin-session-token',
+            path: '/',
+            secure: true,
+        });
+    });
+
+    test('retries a 401 with a newer browser-session cookie before invalidating auth', async () => {
+        stubChromeCookies({api_token: 'cookie-token'});
+        const fetchMock = vi.fn()
+            .mockResolvedValueOnce(buildErrorResponse({error: 'Unauthorized'}))
+            .mockResolvedValueOnce(buildJsonResponse({user: {id: 1, username: 'akira'}}));
+        vi.stubGlobal('fetch', fetchMock);
+        const onAuthTokenUpdated = vi.fn();
+        const onAuthTokenInvalidated = vi.fn();
+
+        const {SottakuClient} = await importSottakuClientModule();
+        const client = new SottakuClient({
+            apiBaseUrl: 'https://sottaku.app/api/v1',
+            authToken: 'old-token',
+            cookieDomain: 'https://sottaku.app',
+            onAuthTokenUpdated,
+            onAuthTokenInvalidated,
+        });
+
+        const response = await client.getProfile();
+
+        expect(response).toStrictEqual({user: {id: 1, username: 'akira'}});
+        expect(fetchMock).toHaveBeenCalledTimes(2);
+        expect(fetchMock.mock.calls[0][1].headers.Authorization).toBe('Bearer old-token');
+        expect(fetchMock.mock.calls[1][1].headers.Authorization).toBe('Bearer cookie-token');
+        expect(client.authToken).toBe('cookie-token');
+        expect(onAuthTokenUpdated).toHaveBeenCalledWith({
+            apiBaseUrl: 'https://sottaku.app/api/v1',
+            oldToken: 'old-token',
+            newToken: 'cookie-token',
+        });
+        expect(onAuthTokenInvalidated).not.toHaveBeenCalled();
     });
 });
