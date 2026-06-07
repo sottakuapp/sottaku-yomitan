@@ -3,7 +3,7 @@
 Sottaku-Yomitan is a fork of popup browser extension Yomitan which is hooked up to Sottaku.
 
 [![Get Sottaku-Yomitan for Chrome](<https://img.shields.io/chrome-web-store/v/eamdkaenfibhpkkhimnngkhccdepnljo?logo=Google%20Chrome&style=for-the-badge&logoColor=lightblue&color=lightblue&label=get%20sottaku-yomitan%20for%20chrome%20(stable)>)](https://chromewebstore.google.com/detail/sottaku-yomitan/eamdkaenfibhpkkhimnngkhccdepnljo)
-[![Get Sottaku-Yomitan for Firefox](<https://img.shields.io/amo/v/sottaku-yomitan?logo=Firefox&style=for-the-badge&color=orange&label=get%20sottaku-yomitan%20for%20firefox%20(stable)>)](https://addons.mozilla.org/en-US/firefox/addon/sottaku-yomitan/) (coming soon)
+[![Get Sottaku-Yomitan for Firefox](<https://img.shields.io/amo/v/sottaku-yomitan?logo=Firefox&style=for-the-badge&color=orange&label=get%20sottaku-yomitan%20for%20firefox%20(stable)>)](https://addons.mozilla.org/en-US/firefox/addon/sottaku-yomitan/)
 
 # Visit [https://sottaku.app/](https://sottaku.app/) to learn more!
 
@@ -40,7 +40,7 @@ Sottaku-Yomitan provides powerful features not available in other browser-based 
 
   - [stable](https://chrome.google.com/webstore/detail/sottaku-yomitan/likgccmbimhjbgkjambclfkhldnlhbnn)
 
-- **Mozilla Firefox** (coming soon)
+- **Mozilla Firefox**
 
   - [stable](https://addons.mozilla.org/en-US/firefox/addon/sottaku-yomitan/)
 
