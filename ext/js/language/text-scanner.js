@@ -513,7 +513,7 @@ export class TextScanner extends EventDispatcher {
      * @param {string} text
      * @param {number} anchorOffset
      * @param {number} scanLength
-     * @returns {{text: string, startOffset: number, anchorOffset: number}[]}
+     * @returns {{text: string, startOffset: number, anchorOffset: number, preferredScanLanguage?: string}[]}
      */
     _getEnglishBidirectionalSearchVariants(text, anchorOffset, scanLength) {
         if (typeof text !== 'string' || text.length === 0) { return []; }
@@ -547,19 +547,25 @@ export class TextScanner extends EventDispatcher {
         /**
          * @param {number} startIndex
          * @param {number} endIndex
+         * @param {boolean} [preferEnglish]
          * @returns {void}
          */
-        const addVariant = (startIndex, endIndex) => {
+        const addVariant = (startIndex, endIndex, preferEnglish = false) => {
             const maxLength = Math.min(text.length - startIndex, endIndex - startIndex);
             if (maxLength <= 0 || maxLength > scanLength + (anchorOffset - startIndex)) { return; }
             const variantText = text.slice(startIndex, startIndex + maxLength).trim();
             if (!variantText || seenTexts.has(variantText)) { return; }
             seenTexts.add(variantText);
-            variants.push({
+            /** @type {{text: string, startOffset: number, anchorOffset: number, preferredScanLanguage?: string}} */
+            const variant = {
                 text: variantText,
                 startOffset: anchorOffset - startIndex,
                 anchorOffset: anchorOffset - startIndex,
-            });
+            };
+            if (preferEnglish) {
+                variant.preferredScanLanguage = 'en';
+            }
+            variants.push(variant);
         };
 
         for (const pattern of ENGLISH_AUXILIARY_PREFIX_VARIANTS) {
@@ -567,7 +573,7 @@ export class TextScanner extends EventDispatcher {
             if (patternStart < 0) { continue; }
             const candidateWords = words.slice(patternStart, hoveredWordIndex).map(({value}) => value.toLowerCase());
             if (candidateWords.join('\u0000') !== pattern.join('\u0000')) { continue; }
-            addVariant(words[patternStart].index, hoveredWord.end);
+            addVariant(words[patternStart].index, hoveredWord.end, true);
         }
 
         addVariant(hoveredWord.index, hoveredWord.end);
@@ -579,7 +585,7 @@ export class TextScanner extends EventDispatcher {
      * @param {number} scanLength
      * @param {boolean} layoutAwareScan
      * @param {import('input').PointerType | undefined} pointerType
-     * @returns {{text: string, startOffset: number, anchorOffset: number}[]}
+     * @returns {{text: string, startOffset: number, anchorOffset: number, preferredScanLanguage?: string}[]}
      */
     _getTermSearchVariants(textSource, scanLength, layoutAwareScan, pointerType) {
         const baseText = this.getTextSourceContent(textSource, scanLength, layoutAwareScan, pointerType);
@@ -1536,8 +1542,11 @@ export class TextScanner extends EventDispatcher {
         }
         /** @type {{dictionaryEntries: import('dictionary').TermDictionaryEntry[], originalTextLength: number, startOffset: number} | null} */
         let bestResult = null;
-        for (const {text, startOffset, anchorOffset} of searchVariants) {
-            const {dictionaryEntries, originalTextLength} = await this._api.termsFind(text, details, optionsContext);
+        for (const {text, startOffset, anchorOffset, preferredScanLanguage} of searchVariants) {
+            const findDetails = typeof preferredScanLanguage === 'string' && preferredScanLanguage.length > 0 ?
+                {...details, preferredScanLanguage} :
+                details;
+            const {dictionaryEntries, originalTextLength} = await this._api.termsFind(text, findDetails, optionsContext);
             if (dictionaryEntries.length === 0 || originalTextLength <= anchorOffset) { continue; }
 
             if (

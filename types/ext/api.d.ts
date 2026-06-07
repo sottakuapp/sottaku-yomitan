@@ -49,6 +49,7 @@ export type FindTermsDetails = {
     matchType?: Translation.FindTermsMatchType;
     deinflect?: boolean;
     primaryReading?: string;
+    preferredScanLanguage?: string;
     languageHints?: {
         documentLang?: string;
         documentScriptCounts?: {

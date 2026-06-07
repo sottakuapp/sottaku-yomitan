@@ -438,11 +438,11 @@ export class SottakuIntegration {
 
     /**
      * @param {string} text
-     * @param {import('translation').FindDeinflectionOptions} [findTermsOptions]
+     * @param {import('translation').FindDeinflectionOptions} [_findTermsOptions]
      * @param {import('api').FindTermsDetails} [details]
      * @returns {Promise<{dictionaryEntries: import('dictionary').TermDictionaryEntry[], originalTextLength: number}>}
      */
-    async findTerms(text, findTermsOptions, details) {
+    async findTerms(text, _findTermsOptions, details) {
         if (this._options === null) {
             throw new ExtensionError('Sottaku options not configured');
         }
@@ -467,10 +467,6 @@ export class SottakuIntegration {
 
         /** @type {SottakuLanguageResult[]} */
         const languageResults = [];
-        const variantsByLanguage = new Map();
-        for (const language of languages) {
-            variantsByLanguage.set(language, await this._buildQueryVariants(query, language, findTermsOptions));
-        }
 
         if (languages.length > 1) {
             let scanResult;
@@ -503,8 +499,6 @@ export class SottakuIntegration {
             }
 
             for (const language of languages) {
-                const variants = variantsByLanguage.get(language) || [];
-                const primaryVariant = variants[0] || {query, sourceText: query, originalTextLength: null};
                 const scanEntry = scanResultsByLanguage.get(language);
                 const scanResultForLanguage = {
                     results: Array.isArray(scanEntry?.results) ? scanEntry.results : [],
@@ -519,9 +513,9 @@ export class SottakuIntegration {
                     apiOrigin,
                     language,
                     maxResults,
-                    query: primaryVariant.query,
-                    sourceText: primaryVariant.sourceText,
-                    originalTextLength: primaryVariant.originalTextLength,
+                    query,
+                    sourceText: query,
+                    originalTextLength: query.length,
                     locale,
                     localeLang,
                     displayPreferences: language.startsWith('zh') ? displayPreferences : null,
@@ -531,11 +525,13 @@ export class SottakuIntegration {
             }
         } else {
             for (const language of languages) {
-                const languageResult = await this._fetchLanguageEntriesWithVariants({
+                const languageResult = await this._fetchLanguageEntries({
                     apiOrigin,
                     language,
                     maxResults,
-                    variants: variantsByLanguage.get(language) || [],
+                    query,
+                    sourceText: query,
+                    originalTextLength: query.length,
                     locale,
                     localeLang,
                     displayPreferences: language.startsWith('zh') ? displayPreferences : null,
@@ -554,129 +550,6 @@ export class SottakuIntegration {
         const dictionaryEntries = this._interleaveLanguageEntries(resolvedLanguageResults, maxResults);
         const originalTextLength = this._resolveOriginalTextLength(resolvedLanguageResults, dictionaryEntries, query);
         return {dictionaryEntries, originalTextLength};
-    }
-
-    /**
-     * @param {string} text
-     * @param {string} language
-     * @param {import('translation').FindDeinflectionOptions} [findTermsOptions]
-     * @returns {Promise<{query: string, sourceText: string, originalTextLength: number}[]>}
-     */
-    async _buildQueryVariants(text, language, findTermsOptions) {
-        const normalizedText = (text || '').trim();
-        /** @type {{query: string, sourceText: string, originalTextLength: number}[]} */
-        const variants = [];
-        const isEnglish = language === 'en';
-        const seenQueries = new Set();
-        const addVariant = (query, includeOriginalEnglishCase = false) => {
-            const normalizedQuery = (query || '').trim();
-            if (!normalizedQuery) { return; }
-
-            if (isEnglish) {
-                const loweredQuery = normalizedQuery.toLowerCase();
-                if (loweredQuery && !seenQueries.has(loweredQuery)) {
-                    seenQueries.add(loweredQuery);
-                    variants.push({
-                        query: loweredQuery,
-                        sourceText: normalizedText,
-                        originalTextLength: normalizedText.length,
-                    });
-                }
-                if (
-                    includeOriginalEnglishCase &&
-                    normalizedQuery !== loweredQuery &&
-                    !seenQueries.has(normalizedQuery)
-                ) {
-                    seenQueries.add(normalizedQuery);
-                    variants.push({
-                        query: normalizedQuery,
-                        sourceText: normalizedText,
-                        originalTextLength: normalizedText.length,
-                    });
-                }
-                return;
-            }
-
-            if (seenQueries.has(normalizedQuery)) { return; }
-            seenQueries.add(normalizedQuery);
-            variants.push({
-                query: normalizedQuery,
-                sourceText: normalizedText,
-                originalTextLength: normalizedText.length,
-            });
-        };
-
-        if (this._translator && typeof this._translator.getDeinflectionTextVariants === 'function') {
-            const deinflectionOptions = {
-                deinflect: findTermsOptions?.deinflect ?? true,
-                language,
-                searchResolution: findTermsOptions?.searchResolution ?? 'length',
-                textReplacements: findTermsOptions?.textReplacements ?? [null],
-                removeNonJapaneseCharacters: findTermsOptions?.removeNonJapaneseCharacters ?? false,
-            };
-            try {
-                const translatorVariants = await this._translator.getDeinflectionTextVariants(normalizedText, {...deinflectionOptions, language});
-                const fullLengthVariants = translatorVariants.filter(({originalText}) => (
-                    (originalText || '').trim().length === normalizedText.length
-                ));
-                const prioritizedVariants = fullLengthVariants.length > 0 ? fullLengthVariants : translatorVariants;
-                prioritizedVariants.sort((a, b) => {
-                    const aExact = ((a.deinflectedText || '').trim() === normalizedText);
-                    const bExact = ((b.deinflectedText || '').trim() === normalizedText);
-                    return Number(aExact) - Number(bExact);
-                });
-                for (const {deinflectedText} of prioritizedVariants) {
-                    addVariant(
-                        deinflectedText,
-                        isEnglish && (deinflectedText || '').trim() === normalizedText,
-                    );
-                }
-            } catch (e) {
-                // Ignore translator errors and fall back to the raw query.
-            }
-        }
-
-        if (variants.length === 0) {
-            addVariant(normalizedText, isEnglish);
-        }
-
-        return variants;
-    }
-
-    /**
-     * @param {{apiOrigin: string, language: string, maxResults: number, variants: {query: string, sourceText: string, originalTextLength: number}[], locale: string, localeLang: string, displayPreferences?: {hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean} | null}} options
-     * @returns {Promise<SottakuLanguageResult>}
-     */
-    async _fetchLanguageEntriesWithVariants({apiOrigin, language, maxResults, variants, locale, localeLang, displayPreferences}) {
-        const resolvedVariants = variants.length > 0 ? variants : [{query: '', sourceText: '', originalTextLength: 0}];
-        /** @type {SottakuLanguageResult | null} */
-        let fallbackResult = null;
-        const scanCache = new Map();
-        for (const {query, sourceText, originalTextLength} of resolvedVariants) {
-            const languageResult = await this._fetchLanguageEntries({
-                apiOrigin,
-                language,
-                maxResults,
-                query,
-                sourceText,
-                originalTextLength,
-                locale,
-                localeLang,
-                displayPreferences,
-                scanCache,
-            });
-            if (languageResult.entries.length > 0) {
-                return languageResult;
-            }
-            if (fallbackResult === null) {
-                fallbackResult = languageResult;
-            }
-        }
-        return fallbackResult ?? {
-            language,
-            entries: [],
-            originalTextLength: resolvedVariants[0]?.originalTextLength ?? 0,
-        };
     }
 
     /**
@@ -1141,7 +1014,13 @@ export class SottakuIntegration {
             case 'ko': return {languages: ['ko'], autoPick: false, hintLanguage: null};
             case 'zh': return {languages: ['zh'], autoPick: false, hintLanguage: null};
             case 'en': return {languages: ['en'], autoPick: false, hintLanguage: null};
-            case 'mixed': return {languages: preferredLanguages, autoPick: false, hintLanguage: null};
+            case 'mixed': {
+                const preferredScanLanguage = this._resolvePreferredScanLanguage(details, preferredLanguages);
+                if (preferredScanLanguage !== null) {
+                    return {languages: [preferredScanLanguage], autoPick: false, hintLanguage: null};
+                }
+                return {languages: preferredLanguages, autoPick: false, hintLanguage: null};
+            }
         }
         const detected = this._detectLanguageFromText(text, details);
         if (detected?.language && detected.confidence === 'strong') {
@@ -1158,6 +1037,19 @@ export class SottakuIntegration {
 
         const fallbackLanguage = candidates[0] || defaultLanguage || 'ja';
         return {languages: [fallbackLanguage], autoPick: false, hintLanguage: null};
+    }
+
+    /**
+     * @param {import('api').FindTermsDetails} [details]
+     * @param {string[]} preferredLanguages
+     * @returns {?string}
+     */
+    _resolvePreferredScanLanguage(details, preferredLanguages) {
+        const preferredScanLanguage = typeof details?.preferredScanLanguage === 'string' ?
+            details.preferredScanLanguage.trim() :
+            '';
+        if (!preferredScanLanguage) { return null; }
+        return preferredLanguages.includes(preferredScanLanguage) ? preferredScanLanguage : null;
     }
 
     /**

@@ -21,54 +21,13 @@
 
 import {describe, expect, test, vi} from 'vitest';
 import {SottakuIntegration} from '../ext/js/background/sottaku-integration.js';
-import {Translator} from '../ext/js/language/translator.js';
 
 describe('SottakuIntegration', () => {
-    test('translator keeps full source text for transformed English variants', async () => {
-        const translator = new Translator(null);
-        translator.prepare();
-
-        const variants = await translator.getDeinflectionTextVariants('Getting', {
-            language: 'en',
-            deinflect: true,
-            textReplacements: [null],
-            searchResolution: 'length',
-            removeNonJapaneseCharacters: false,
-        });
-
-        expect(variants.find(({deinflectedText}) => deinflectedText === 'get')).toStrictEqual({
-            originalText: 'Getting',
-            deinflectedText: 'get',
-        });
-    });
-
-    test('english variants prefer lowercase lemma queries while preserving the scanned source text', async () => {
-        const integration = new SottakuIntegration({
-            async getDeinflectionTextVariants() {
-                return [
-                    {originalText: 'Getting', deinflectedText: 'Getting'},
-                    {originalText: 'Getting', deinflectedText: 'Get'},
-                ];
-            },
-        });
-
-        const variants = await integration._buildQueryVariants('Getting', 'en');
-        expect(variants).toStrictEqual([
-            {query: 'get', sourceText: 'Getting', originalTextLength: 7},
-            {query: 'getting', sourceText: 'Getting', originalTextLength: 7},
-            {query: 'Getting', sourceText: 'Getting', originalTextLength: 7},
+    test('single-language scans send the raw query once and trust backend deinflection', async () => {
+        const getDeinflectionTextVariants = vi.fn(async () => [
+            {originalText: 'Getting', deinflectedText: 'get'},
         ]);
-    });
-
-    test('english fallback scans the transformed query after the original source misses', async () => {
-        const integration = new SottakuIntegration({
-            async getDeinflectionTextVariants() {
-                return [
-                    {originalText: 'Getting', deinflectedText: 'Getting'},
-                    {originalText: 'Getting', deinflectedText: 'Get'},
-                ];
-            },
-        });
+        const integration = new SottakuIntegration({getDeinflectionTextVariants});
         integration.configure({
             general: {
                 language: 'en',
@@ -86,31 +45,27 @@ describe('SottakuIntegration', () => {
         });
 
         const scanCalls = [];
-        integration._client.scan = async (text) => {
-            scanCalls.push(text);
-            if (text === 'get') {
-                return {
-                    results: [
-                        {id: 1, kanji_representation: 'get', reading: 'ɡet', match_length: 7, has_definition: true, word_translation: 'obtain'},
-                    ],
-                    originalTextLength: 3,
-                };
-            }
+        integration._client.scan = async (text, language) => {
+            scanCalls.push({text, language});
             return {
-                results: [],
-                originalTextLength: text.length,
+                results: [
+                    {id: 1, kanji_representation: 'get', reading: 'ɡet', match_length: 7, has_definition: true, word_translation: 'obtain'},
+                ],
+                originalTextLength: 7,
             };
         };
 
         const {dictionaryEntries, originalTextLength} = await integration.findTerms('Getting');
 
-        expect(scanCalls).toStrictEqual(['Getting', 'get']);
+        expect(getDeinflectionTextVariants).not.toHaveBeenCalled();
+        expect(scanCalls).toStrictEqual([{text: 'Getting', language: 'en'}]);
         expect(originalTextLength).toBe(7);
         expect(dictionaryEntries[0].headwords[0].sources[0].originalText).toBe('Getting');
-        expect(dictionaryEntries[0].headwords[0].sources[0].transformedText).toBe('get');
+        expect(dictionaryEntries[0].headwords[0].sources[0].transformedText).toBe('Getting');
+        expect(dictionaryEntries[0].headwords[0].sources[0].deinflectedText).toBe('get');
     });
 
-    test('variant scans use the backend original text length for the matched source span', async () => {
+    test('raw scans use the backend original text length for the matched source span', async () => {
         const integration = new SottakuIntegration(null);
         integration._client.scan = async () => ({
             results: [
@@ -119,11 +74,13 @@ describe('SottakuIntegration', () => {
             originalTextLength: 2,
         });
 
-        const result = await integration._fetchLanguageEntriesWithVariants({
+        const result = await integration._fetchLanguageEntries({
             apiOrigin: 'https://sottaku.app',
             language: 'ja',
             maxResults: 32,
-            variants: [{query: '開発中です', sourceText: '開発中です', originalTextLength: 5}],
+            query: '開発中です',
+            sourceText: '開発中です',
+            originalTextLength: 5,
             locale: 'en',
             localeLang: 'en',
             displayPreferences: null,
@@ -141,11 +98,13 @@ describe('SottakuIntegration', () => {
             originalTextLength: text.length,
         });
 
-        const result = await integration._fetchLanguageEntriesWithVariants({
+        const result = await integration._fetchLanguageEntries({
             apiOrigin: 'https://sottaku.app',
             language: 'ja',
             maxResults: 32,
-            variants: [{query: 'インターネット回線の速度テスト', sourceText: 'インターネット回線の速度テスト', originalTextLength: 'インターネット回線の速度テスト'.length}],
+            query: 'インターネット回線の速度テスト',
+            sourceText: 'インターネット回線の速度テスト',
+            originalTextLength: 'インターネット回線の速度テスト'.length,
             locale: 'en',
             localeLang: 'en',
             displayPreferences: null,
@@ -154,30 +113,6 @@ describe('SottakuIntegration', () => {
         expect(result.originalTextLength).toBe('インターネット'.length);
         expect(result.entries[0].sottaku.matchLength).toBe('インターネット'.length);
         expect(result.entries[0].headwords[0].sources[0].originalText).toBe('インターネット');
-    });
-
-    test('transformed scans keep the original source span when match_length is missing', async () => {
-        const integration = new SottakuIntegration(null);
-        integration._client.scan = async () => ({
-            results: [
-                {id: 1, kanji_representation: 'get', reading: 'ɡet', has_definition: true, word_translation: 'obtain'},
-            ],
-            originalTextLength: 3,
-        });
-
-        const result = await integration._fetchLanguageEntriesWithVariants({
-            apiOrigin: 'https://sottaku.app',
-            language: 'en',
-            maxResults: 32,
-            variants: [{query: 'get', sourceText: 'Getting', originalTextLength: 7}],
-            locale: 'en',
-            localeLang: 'en',
-            displayPreferences: null,
-        });
-
-        expect(result.originalTextLength).toBe(7);
-        expect(result.entries[0].sottaku.matchLength).toBe(7);
-        expect(result.entries[0].headwords[0].sources[0].originalText).toBe('Getting');
     });
 
     test('sorts longest matches then defined entries', async () => {
@@ -255,6 +190,74 @@ describe('SottakuIntegration', () => {
         const {dictionaryEntries} = await integration.findTerms('반대했다는');
         const ids = dictionaryEntries.map((entry) => entry.sottaku.questionId);
         expect(ids).toStrictEqual([2, 1]);
+    });
+
+    test('mixed mode skips per-language local query variant generation', async () => {
+        const getDeinflectionTextVariants = vi.fn(async () => [
+            {originalText: 'Getting', deinflectedText: 'get'},
+        ]);
+        const integration = new SottakuIntegration({getDeinflectionTextVariants});
+        integration.configure({
+            general: {
+                language: 'en',
+                maxResults: 32,
+            },
+            sottaku: {
+                enabled: true,
+                authToken: 'test-token',
+                apiBaseUrl: 'https://sottaku.app/api/v1',
+                cookieDomain: 'https://sottaku.app',
+                locale: 'en',
+                languageMode: 'mixed',
+                preferredLanguages: ['ja', 'ko', 'zh', 'en', 'es', 'de', 'fr', 'it'],
+            },
+        });
+
+        const scanSpy = vi.fn(async () => ({
+            languageResults: [],
+            displayPreferences: null,
+        }));
+        integration._client.scan = scanSpy;
+
+        await integration.findTerms('Getting');
+
+        expect(getDeinflectionTextVariants).not.toHaveBeenCalled();
+        expect(scanSpy).toHaveBeenCalledTimes(1);
+        expect(scanSpy.mock.calls[0][1]).toStrictEqual(['ja', 'ko', 'zh', 'en', 'es', 'de', 'fr', 'it']);
+    });
+
+    test('mixed mode can narrow an expanded English phrase probe', async () => {
+        const integration = new SottakuIntegration(null);
+        integration.configure({
+            general: {
+                language: 'en',
+                maxResults: 32,
+            },
+            sottaku: {
+                enabled: true,
+                authToken: 'test-token',
+                apiBaseUrl: 'https://sottaku.app/api/v1',
+                cookieDomain: 'https://sottaku.app',
+                locale: 'en',
+                languageMode: 'mixed',
+                preferredLanguages: ['ja', 'en', 'es'],
+            },
+        });
+
+        const scanSpy = vi.fn(async () => ({
+            results: [
+                {id: 1, kanji_representation: 'will become', reading: 'wɪl bɪˈkʌm', match_length: 11, has_definition: true, word_translation: 'future change'},
+            ],
+            originalTextLength: 11,
+            displayPreferences: null,
+        }));
+        integration._client.scan = scanSpy;
+
+        const {dictionaryEntries} = await integration.findTerms('will become', void 0, {preferredScanLanguage: 'en'});
+
+        expect(dictionaryEntries).toHaveLength(1);
+        expect(scanSpy).toHaveBeenCalledTimes(1);
+        expect(scanSpy.mock.calls[0][1]).toBe('en');
     });
 
     test('mixed mode highlight span ignores longer no-result languages', async () => {
@@ -435,15 +438,11 @@ describe('SottakuIntegration', () => {
         expect(scanSpy).toHaveBeenCalledTimes(1);
     });
 
-    test('reuses cached fallback variant scans on repeated English lookups', async () => {
-        const integration = new SottakuIntegration({
-            async getDeinflectionTextVariants() {
-                return [
-                    {originalText: 'Getting', deinflectedText: 'Getting'},
-                    {originalText: 'Getting', deinflectedText: 'Get'},
-                ];
-            },
-        });
+    test('reuses cached raw English scan responses on repeated lookups', async () => {
+        const getDeinflectionTextVariants = vi.fn(async () => [
+            {originalText: 'Getting', deinflectedText: 'get'},
+        ]);
+        const integration = new SottakuIntegration({getDeinflectionTextVariants});
         integration.configure({
             general: {
                 language: 'en',
@@ -463,18 +462,11 @@ describe('SottakuIntegration', () => {
         const seenTexts = [];
         const scanSpy = vi.fn(async (text) => {
             seenTexts.push(typeof text === 'string' ? text : '');
-            if (text === 'get') {
-                return {
-                    results: [
-                        {id: 1, kanji_representation: 'get', reading: 'ɡet', match_length: 7, has_definition: true, word_translation: 'obtain'},
-                    ],
-                    originalTextLength: 3,
-                    displayPreferences: null,
-                };
-            }
             return {
-                results: [],
-                originalTextLength: 0,
+                results: [
+                    {id: 1, kanji_representation: 'get', reading: 'ɡet', match_length: 7, has_definition: true, word_translation: 'obtain'},
+                ],
+                originalTextLength: 7,
                 displayPreferences: null,
             };
         });
@@ -483,8 +475,9 @@ describe('SottakuIntegration', () => {
         await integration.findTerms('Getting');
         await integration.findTerms('Getting');
 
-        expect(scanSpy).toHaveBeenCalledTimes(2);
-        expect(seenTexts).toStrictEqual(['Getting', 'get']);
+        expect(getDeinflectionTextVariants).not.toHaveBeenCalled();
+        expect(scanSpy).toHaveBeenCalledTimes(1);
+        expect(seenTexts).toStrictEqual(['Getting']);
     });
 
     test('Sottaku API alternative inflection rules keep Sottaku grammar links and separator', () => {

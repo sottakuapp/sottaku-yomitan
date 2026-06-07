@@ -23,7 +23,7 @@ import {setupDomTest} from './fixtures/dom-test.js';
 const textScannerTestEnv = await setupDomTest();
 
 /**
- * @param {{termsFind?: (text: string) => Promise<{dictionaryEntries: any[], originalTextLength: number}>}} [apiOverrides]
+ * @param {{termsFind?: (text: string, details?: import('api').FindTermsDetails, optionsContext?: import('settings').OptionsContext) => Promise<{dictionaryEntries: any[], originalTextLength: number}>}} [apiOverrides]
  * @returns {TextScanner}
  */
 function createScanner(apiOverrides = {}) {
@@ -54,7 +54,7 @@ describe('TextScanner', () => {
 
         // eslint-disable-next-line no-underscore-dangle
         expect(scanner._getEnglishBidirectionalSearchVariants('it will become soon', 8, 20)).toEqual([
-            {text: 'will become', startOffset: 5, anchorOffset: 5},
+            {text: 'will become', startOffset: 5, anchorOffset: 5, preferredScanLanguage: 'en'},
             {text: 'become', startOffset: 0, anchorOffset: 0},
         ]);
     });
@@ -97,6 +97,42 @@ describe('TextScanner', () => {
         expect(textSource.text()).toBe('will become');
         // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/unbound-method
         expect(scanner._api.termsFind).toHaveBeenCalledTimes(1);
+    });
+
+    test('marks expanded English phrase variants as English preferred scans', async () => {
+        const definitionEntry = {id: 'become'};
+        /** @type {{text: string, details: import('api').FindTermsDetails}[]} */
+        const calls = [];
+        /** @type {(text: string, details?: import('api').FindTermsDetails) => Promise<{dictionaryEntries: any[], originalTextLength: number}>} */
+        const termsFind = async (text, details) => {
+            calls.push({text, details: details ?? {}});
+            if (text === 'become') {
+                return {dictionaryEntries: [definitionEntry], originalTextLength: 6};
+            }
+            return {dictionaryEntries: [], originalTextLength: 0};
+        };
+        const scanner = createScanner({
+            termsFind: vi.fn(termsFind),
+        });
+        // eslint-disable-next-line no-underscore-dangle
+        scanner._language = 'en';
+        // eslint-disable-next-line no-underscore-dangle
+        scanner._scanLength = 20;
+
+        const textSource = new TextSourceElement(
+            window.document.createElement('div'),
+            'it will become soon',
+            8,
+            8,
+        );
+        // eslint-disable-next-line no-underscore-dangle
+        const result = await scanner._findTermDictionaryEntries(textSource, {pointerType: 'mouse'});
+
+        expect(result).not.toBeNull();
+        expect(result?.dictionaryEntries).toEqual([definitionEntry]);
+        expect(calls.map(({text}) => text)).toStrictEqual(['will become', 'become']);
+        expect(calls[0].details.preferredScanLanguage).toBe('en');
+        expect(calls[1].details.preferredScanLanguage).toBeUndefined();
     });
 
     test('prefers the hovered English word over trailing text', async () => {
