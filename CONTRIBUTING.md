@@ -121,7 +121,7 @@ Otherwise, the [JSZip](https://stuk.github.io/jszip/) API is used to generate th
 
 Manifest variants for different build targets are specified in [manifest-variants.json](dev/data/manifest-variants.json).
 This file is used to generate the `ext/manifest.json` file included in the extension.
-The generated `ext/manfiest.json` should not be committed.
+The generated `ext/manifest.json` should not be committed.
 
 ## Style
 
@@ -144,7 +144,7 @@ While it's possible to use GPG for this, we recommend using SSH keys for your si
 
 GitHub already requires a key when you connect to it for basic git operations (pull, push, etc.). They call this the "authentication key" and it is an SSH key. You presumably already have one of these if you have ever used GitHub for anything before.
 
-The commit signing key is different, and is used for signing the contents of a commit. This is important because it gives us much more useful git history where we actually have guarentees about who wrote what parts of the code. With no commit signing, it is easy with someone with push access to include commits with fake author names etc., which can be quite troubling when trying to figure out what has happened during a security incident. (See [this article](https://withblue.ink/2020/05/17/how-and-why-to-sign-git-commits.html) for more.)
+The commit signing key is different, and is used for signing the contents of a commit. This is important because it gives us much more useful git history where we actually have guarantees about who wrote what parts of the code. With no commit signing, it is easy with someone with push access to include commits with fake author names etc., which can be quite troubling when trying to figure out what has happened during a security incident. (See [this article](https://withblue.ink/2020/05/17/how-and-why-to-sign-git-commits.html) for more.)
 
 ### Creating the SSH key for signing
 

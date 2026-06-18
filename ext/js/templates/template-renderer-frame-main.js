@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023-2025  Yomitan Authors
+ * Copyright (C) 2023-2026  Yomitan Authors
  * Copyright (C) 2020-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -23,7 +23,10 @@ import {SettingsController} from '../pages/settings/settings-controller.js';
 import {AnkiTemplateRenderer} from './anki-template-renderer.js';
 import {TemplateRendererFrameApi} from './template-renderer-frame-api.js';
 
-/** Entry point. */
+/**
+ * Entry point.
+ * @param {Application} application
+ */
 async function main(application) {
     const settingsController = new SettingsController(application);
     await settingsController.prepare();

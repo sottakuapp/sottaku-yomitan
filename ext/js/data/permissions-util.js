@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023-2025  Yomitan Authors
+ * Copyright (C) 2023-2026  Yomitan Authors
  * Copyright (C) 2021-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -80,7 +80,7 @@ export function getAllPermissions() {
 }
 
 /**
- * @param {string} fieldValue
+ * @param {string} _fieldValue
  * @returns {string[]}
  */
 export function getRequiredPermissionsForAnkiFieldValue(_fieldValue) {

@@ -1,1970 +1,2000 @@
 {
-  "action_default_title": {
-    "message": "Sottaku-Yomitan"
-  },
-  "action_popup_button_info_title": {
-    "message": "ข้อมูล"
-  },
-  "action_popup_button_search_title": {
-    "message": "ค้นหา\nShift+คลิกเพื่อเปิดที่นี่"
-  },
-  "action_popup_button_settings_title": {
-    "message": "การตั้งค่า"
-  },
-  "action_popup_hotkey_info": {
-    "message": "ข้อมูล ({0})"
-  },
-  "action_popup_hotkey_search": {
-    "message": "ค้นหา ({0})\nShift+คลิกเพื่อเปิดที่นี่"
-  },
-  "action_popup_hotkey_settings": {
-    "message": "การตั้งค่า ({0})"
-  },
-  "action_popup_link_account_tooltip": {
-    "message": "เชื่อมบัญชี Sottaku เพื่อเปิดใช้การค้นหา"
-  },
-  "action_popup_loading": {
-    "message": "กำลังโหลด..."
-  },
-  "action_popup_profile_title": {
-    "message": "โปรไฟล์"
-  },
-  "action_popup_toggle_off": {
-    "message": "ปิด"
-  },
-  "action_popup_toggle_on": {
-    "message": "เปิด"
-  },
-  "action_popup_tooltip_scan": {
-    "message": "วางเมาส์เหนือข้อความเพื่อสแกน"
-  },
-  "browser_chrome": {
-    "message": "Chrome"
-  },
-  "browser_edge": {
-    "message": "Edge"
-  },
-  "browser_edge_legacy": {
-    "message": "Edge Legacy"
-  },
-  "browser_firefox": {
-    "message": "Firefox"
-  },
-  "browser_firefox_android": {
-    "message": "Firefox สำหรับ Android"
-  },
-  "browser_safari": {
-    "message": "Safari"
-  },
-  "command_open_info_page": {
-    "message": "เปิดหน้าข้อมูล"
-  },
-  "command_open_popup_window": {
-    "message": "เปิดหน้าต่างป๊อปอัป"
-  },
-  "command_open_search_page": {
-    "message": "เปิดหน้าค้นหา"
-  },
-  "command_open_settings_page": {
-    "message": "เปิดหน้าการตั้งค่า"
-  },
-  "command_toggle_text_scanning": {
-    "message": "สลับการสแกนข้อความ เปิด/ปิด"
-  },
-  "common_always": {
-    "message": "เสมอ"
-  },
-  "common_auto": {
-    "message": "อัตโนมัติ"
-  },
-  "common_bottom": {
-    "message": "ล่าง"
-  },
-  "common_browser": {
-    "message": "เบราว์เซอร์"
-  },
-  "common_close": {
-    "message": "ปิด"
-  },
-  "common_configure": {
-    "message": "กำหนดค่า…"
-  },
-  "common_dark": {
-    "message": "เข้ม"
-  },
-  "common_default": {
-    "message": "ค่าเริ่มต้น"
-  },
-  "common_height": {
-    "message": "ความสูง"
-  },
-  "common_info": {
-    "message": "ข้อมูล…"
-  },
-  "common_left": {
-    "message": "ซ้าย"
-  },
-  "common_less": {
-    "message": "น้อยลง…"
-  },
-  "common_light": {
-    "message": "สว่าง"
-  },
-  "common_manual": {
-    "message": "ด้วยตนเอง"
-  },
-  "common_mode": {
-    "message": "โหมด"
-  },
-  "common_move_down": {
-    "message": "เลื่อนลง"
-  },
-  "common_move_up": {
-    "message": "เลื่อนขึ้น"
-  },
-  "common_none": {
-    "message": "ไม่มี"
-  },
-  "common_normal": {
-    "message": "ปกติ"
-  },
-  "common_operator": {
-    "message": "ตัวดำเนินการ"
-  },
-  "common_remove": {
-    "message": "ลบ"
-  },
-  "common_right": {
-    "message": "ขวา"
-  },
-  "common_state": {
-    "message": "สถานะ"
-  },
-  "common_test": {
-    "message": "ทดสอบ"
-  },
-  "common_top": {
-    "message": "บน"
-  },
-  "common_type": {
-    "message": "ประเภท"
-  },
-  "common_width": {
-    "message": "ความกว้าง"
-  },
-  "dictionary_deleting_label": {
-    "message": "กำลังลบพจนานุกรม..."
-  },
-  "dictionary_details_attribution": {
-    "message": "การระบุแหล่งที่มา"
-  },
-  "dictionary_details_author": {
-    "message": "ผู้เขียน"
-  },
-  "dictionary_details_description": {
-    "message": "คำอธิบาย"
-  },
-  "dictionary_details_expected_database": {
-    "message": "ที่คาดไว้: $1 (ฐานข้อมูล: $2)"
-  },
-  "dictionary_details_import_success": {
-    "message": "นำเข้าสำเร็จ"
-  },
-  "dictionary_details_kanji_count": {
-    "message": "จำนวนคันจิ"
-  },
-  "dictionary_details_kanji_meta_count": {
-    "message": "จำนวนเมตาดาตาคันจิ"
-  },
-  "dictionary_details_media_count": {
-    "message": "จำนวนสื่อ"
-  },
-  "dictionary_details_source_language": {
-    "message": "ภาษาต้นทาง"
-  },
-  "dictionary_details_tag_meta_count": {
-    "message": "จำนวนแท็ก"
-  },
-  "dictionary_details_target_language": {
-    "message": "ภาษาเป้าหมาย"
-  },
-  "dictionary_details_term_count": {
-    "message": "จำนวนคำศัพท์"
-  },
-  "dictionary_details_term_meta_count": {
-    "message": "จำนวนเมตาดาตาคำศัพท์"
-  },
-  "dictionary_details_url": {
-    "message": "ที่อยู่ URL"
-  },
-  "dictionary_extra_data_item_plural": {
-    "message": "$1 รายการ"
-  },
-  "dictionary_extra_data_item_singular": {
-    "message": "$1 รายการ"
-  },
-  "dictionary_main_not_selected": {
-    "message": "ยังไม่ได้เลือก"
-  },
-  "dictionary_updates_count_plural": {
-    "message": "$1 อัปเดต"
-  },
-  "dictionary_updates_count_singular": {
-    "message": "$1 อัปเดต"
-  },
-  "dictionary_updates_none": {
-    "message": "ไม่มีอัปเดต"
-  },
-  "display_add_note_title": {
-    "message": "เพิ่ม {0}"
-  },
-  "display_anki_error_plural": {
-    "message": "เกิดข้อผิดพลาด $1 รายการ:"
-  },
-  "display_anki_error_singular": {
-    "message": "เกิดข้อผิดพลาด:"
-  },
-  "display_current_entry_title": {
-    "message": "รายการปัจจุบัน"
-  },
-  "display_dictionary_author": {
-    "message": "ผู้เขียน: $1"
-  },
-  "display_dictionary_description": {
-    "message": "คำอธิบาย: $1"
-  },
-  "display_dictionary_kanji_count": {
-    "message": "จำนวนคันจิ: $1"
-  },
-  "display_dictionary_size_kanji": {
-    "message": "ขนาดพจนานุกรม: $1 คันจิ"
-  },
-  "display_dictionary_size_terms": {
-    "message": "ขนาดพจนานุกรม: $1 คำศัพท์"
-  },
-  "display_dictionary_term_count": {
-    "message": "จำนวนคำศัพท์: $1"
-  },
-  "display_dictionary_url": {
-    "message": "ที่อยู่ URL: $1"
-  },
-  "display_hotkey_add_note": {
-    "message": "เพิ่ม {0} ({0})"
-  },
-  "display_hotkey_play_audio": {
-    "message": "เล่นเสียง ({0})"
-  },
-  "display_hotkey_view_note": {
-    "message": "ดูโน้ตที่เพิ่มแล้ว ({0})"
-  },
-  "display_image_label": {
-    "message": "รูปภาพ"
-  },
-  "display_inflection_algorithm": {
-    "message": "การยกเลิกการผันด้วยอัลกอริทึม"
-  },
-  "display_inflection_both": {
-    "message": "การยกเลิกการผันด้วยพจนานุกรมและอัลกอริทึม"
-  },
-  "display_inflection_dictionary": {
-    "message": "การยกเลิกการผันด้วยพจนานุกรม"
-  },
-  "display_kanji_heading_classifications": {
-    "message": "การจัดประเภท"
-  },
-  "display_kanji_heading_codepoints": {
-    "message": "จุดโค้ด"
-  },
-  "display_kanji_heading_dictionary_indices": {
-    "message": "ดัชนีพจนานุกรม"
-  },
-  "display_kanji_heading_meaning": {
-    "message": "ความหมาย"
-  },
-  "display_kanji_heading_readings": {
-    "message": "การอ่าน"
-  },
-  "display_kanji_heading_statistics": {
-    "message": "สถิติ"
-  },
-  "display_log_debug_info": {
-    "message": "บันทึกข้อมูลดีบักไปยังคอนโซล"
-  },
-  "display_more_info": {
-    "message": "ข้อมูลเพิ่มเติม"
-  },
-  "display_no_data_found": {
-    "message": "ไม่พบข้อมูล"
-  },
-  "display_note_viewer_error": {
-    "message": "ไม่สามารถเปิดหน้าต่างตัวดูโน้ตได้.<br/>\n    ตรวจสอบการตั้งค่า <a href=\"/settings.html#anki\" rel=\"noopener\" target=\"_blank\"><em>Anki</em> › <em>หน้าต่างตัวดูโน้ต</em></a>."
-  },
-  "display_play_audio_title": {
-    "message": "เล่นเสียง"
-  },
-  "display_set_primary_audio_title": {
-    "message": "ใช้เป็นเสียงสำหรับการ์ด Anki"
-  },
-  "display_view_added_note_title": {
-    "message": "ดูโน้ตที่เพิ่มแล้ว"
-  },
-  "extension_description": {
-    "message": "พจนานุกรมป๊อปอัปเชื่อมต่อ Sottaku สำหรับการเรียนภาษา"
-  },
-  "extension_description_dev": {
-    "message": "พจนานุกรมป๊อปอัปเชื่อมต่อ Sottaku สำหรับการเรียนภาษา (Dev)."
-  },
-  "extension_name": {
-    "message": "Sottaku-Yomitan"
-  },
-  "extension_name_dev": {
-    "message": "Sottaku-Yomitan (Dev)"
-  },
-  "extension_short_name": {
-    "message": "Sottaku-Yomitan"
-  },
-  "info_anki_version_unknown": {
-    "message": "ไม่ทราบ"
-  },
-  "info_general_browser": {
-    "message": "เบราว์เซอร์: <span id=\"browser\"></span>"
-  },
-  "info_general_export_settings": {
-    "message": "<a id=\"settings-export-button\" tabindex=\"0\">ส่งออกการตั้งค่า</a>"
-  },
-  "info_general_extension_version": {
-    "message": "เวอร์ชันส่วนขยาย: <span id=\"version\"></span>"
-  },
-  "info_general_heading": {
-    "message": "ทั่วไป"
-  },
-  "info_general_language": {
-    "message": "ภาษา: <span id=\"language\"></span>"
-  },
-  "info_general_platform": {
-    "message": "แพลตฟอร์ม: <span id=\"platform\"></span>"
-  },
-  "info_general_user_agent": {
-    "message": "ตัวแทนผู้ใช้: <span id=\"user-agent\"></span>"
-  },
-  "info_heading": {
-    "message": "ข้อมูล Sottaku-Yomitan"
-  },
-  "info_links_bugs": {
-    "message": "พบข้อบกพร่อง? รายงานที่นี่: <a href=\"https://github.com/sottakuapp/sottaku-yomitan/issues/new/choose\" rel=\"noreferrer noopener\">GitHub Issues</a>"
-  },
-  "info_links_feedback": {
-    "message": "ชอบ Sottaku-Yomitan ไหม? ส่งความคิดเห็นหรือไอเดียที่ GitHub หรืออีเมล <a href=\"mailto:hello@sottaku.app\">hello@sottaku.app</a>."
-  },
-  "info_links_heading": {
-    "message": "ลิงก์"
-  },
-  "info_links_more_info": {
-    "message": "ข้อมูลส่วนขยายเพิ่มเติม: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">สิทธิ์</a> | <a href=\"/legal.html\">ใบอนุญาต</a> | <a href=\"/issues.html\">ปัญหา</a>"
-  },
-  "info_links_recommended_dictionaries": {
-    "message": "พจนานุกรมที่แนะนำ: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">Sottaku-Yomitan Dictionaries</a>"
-  },
-  "info_links_release_notes": {
-    "message": "บันทึกการออกรุ่น: <a data-href-format=\"https://github.com/sottakuapp/sottaku-yomitan/releases/tag/{version}\" href=\"https://github.com/sottakuapp/sottaku-yomitan/releases\" id=\"release-notes-this-version-link\" rel=\"noreferrer noopener\">รุ่นนี้</a> | <a href=\"https://github.com/sottakuapp/sottaku-yomitan/releases\" rel=\"noreferrer noopener\">ทุกรุ่น</a>"
-  },
-  "info_links_source_code": {
-    "message": "ซอร์สโค้ด: <a href=\"https://github.com/sottakuapp/sottaku-yomitan\" rel=\"noreferrer noopener\">GitHub</a>"
-  },
-  "info_links_user_guide": {
-    "message": "ข้อมูลและคู่มือผู้ใช้: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">หน้าแรก</a>"
-  },
-  "info_need_help_heading": {
-    "message": "ต้องการความช่วยเหลือไหม?"
-  },
-  "info_quick_start_link": {
-    "message": "ดูคู่มือเริ่มต้นอย่างรวดเร็ว"
-  },
-  "info_read_wiki_link": {
-    "message": "อ่านวิกิ"
-  },
-  "issues_audio_expired_cert_body": {
-    "message": "หากเว็บไซต์ไม่อัปเดตใบรับรอง HTTPS ให้เป็นปัจจุบัน การดาวน์โหลดอาจล้มเหลวเพราะเบราว์เซอร์ระบุการเชื่อมต่อว่าไม่ปลอดภัย ซึ่งเกิดขึ้นเป็นครั้งคราวกับบางเว็บไซต์ที่ Sottaku-Yomitan ติดต่อ และโดยปกติจะได้รับการแก้ไขภายในหนึ่งวัน"
-  },
-  "issues_audio_expired_cert_heading": {
-    "message": "การดาวน์โหลดเสียงล้มเหลวเนื่องจากใบรับรองเซิร์ฟเวอร์หมดอายุ"
-  },
-  "issues_audio_expired_cert_note": {
-    "message": "ปัญหานี้เป็นปัญหาฝั่งเซิร์ฟเวอร์และ Sottaku-Yomitan ไม่สามารถควบคุมได้"
-  },
-  "issues_audio_idle_timeout_body": {
-    "message": "สามารถดาวน์โหลดไฟล์เสียงจากเซิร์ฟเวอร์ระยะไกลได้ขณะสร้างการ์ด Anki\n                และบางครั้งการดาวน์โหลดอาจค้างเนื่องจากปัญหาเซิร์ฟเวอร์หรือการเชื่อมต่ออินเทอร์เน็ต\n                การตั้งค่า <em>หมดเวลาการดาวน์โหลดเมื่อไม่ใช้งาน</em> ใน <a href=\"/settings.html#anki\">หน้าการตั้งค่า</a>\n                กำหนดเวลาจำกัดสำหรับการดาวน์โหลดที่ค้างอยู่"
-  },
-  "issues_audio_idle_timeout_heading": {
-    "message": "การดาวน์โหลดเสียงถูกยกเลิกเนื่องจากหมดเวลาเมื่อไม่ใช้งาน"
-  },
-  "issues_audio_permissions_body": {
-    "message": "ขึ้นอยู่กับการกำหนดค่าของส่วนขยาย Sottaku-Yomitan อาจมีปัญหาในการดาวน์โหลดไฟล์เสียงระหว่างสร้างการ์ด Anki บางครั้งอาจเกิดจากปัญหาสิทธิ์ที่ Sottaku-Yomitan ยังไม่ได้รับสิทธิ์เข้าถึงเว็บไซต์ที่โฮสต์ไฟล์เสียง"
-  },
-  "issues_audio_permissions_chrome": {
-    "message": "ตรวจสอบส่วน <em>การเข้าถึงไซต์</em> ของ\n                <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">หน้าการตั้งค่าส่วนขยาย</a>\n                และให้สิทธิ์ส่วนขยายเข้าถึง <em>ทุกไซต์</em> หรือเพิ่ม URL โฮสต์เสียงเฉพาะ"
-  },
-  "issues_audio_permissions_firefox": {
-    "message": "จากแถบที่อยู่ของเบราว์เซอร์ ไปที่ <code>about:addons</code> แล้วเปิดการตั้งค่าของ Sottaku-Yomitan\n                ตรวจสอบส่วน <em>การเข้าถึงไซต์</em> ของหน้าการตั้งค่าส่วนขยาย\n                และให้สิทธิ์เข้าถึง <em>ทุกไซต์</em> หรือเพิ่ม URL โฮสต์เสียงเฉพาะ"
-  },
-  "issues_audio_permissions_heading": {
-    "message": "การดาวน์โหลดเสียงล้มเหลวเนื่องจากอาจเกิดข้อผิดพลาดของสิทธิ์ส่วนขยาย <em>(Chrome)</em>"
-  },
-  "issues_heading": {
-    "message": "ปัญหา Sottaku-Yomitan"
-  },
-  "legal_dependency_licenses_heading": {
-    "message": "ใบอนุญาตการพึ่งพา JavaScript"
-  },
-  "legal_edrdg_heading": {
-    "message": "ใบอนุญาต EDRDG"
-  },
-  "legal_heading": {
-    "message": "ข้อมูลกฎหมายของ Sottaku-Yomitan"
-  },
-  "legal_sottaku_license_heading": {
-    "message": "ใบอนุญาต Sottaku-Yomitan"
-  },
-  "modal_collapsible_dictionaries_description": {
-    "message": "นิยามในพจนานุกรมสามารถย่อได้หากยาวเกินจำนวนบรรทัดที่กำหนด\n                ซึ่งอาจเป็นประโยชน์สำหรับพจนานุกรมที่มีคำอธิบายยาว\n                รูปลักษณ์สามารถปรับแต่งได้ด้วย CSS แบบกำหนดเอง\n                <a data-modal-action=\"show,collapsible-dictionaries-info\" tabindex=\"0\">เพิ่มเติม…</a>"
-  },
-  "modal_dictionaries_none_installed": {
-    "message": "ยังไม่มีการติดตั้งพจนานุกรมใดๆ\n                โปรดไปที่ <a href=\"https://github.com/sottakuapp/sottaku-yomitan/blob/master/docs/dictionaries.md#dictionaries\" rel=\"noopener noreferrer\" target=\"_blank\">หน้าแรกของ Sottaku-Yomitan</a>\n                เพื่อดูรายชื่อพจนานุกรมฟรี หรือคลิกปุ่ม <em>นำเข้า</em> ด้านล่างเพื่อเลือกไฟล์พจนานุกรมที่จะนำเข้า"
-  },
-  "modal_dictionaries_prefix_wildcard_label": {
-    "message": "เปิดใช้การค้นหาด้วยไวลด์การ์ดแบบคำนำหน้า\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
-  },
-  "modal_dictionary_confirm_delete_all_prompt": {
-    "message": "คุณแน่ใจหรือไม่ว่าต้องการลบ <strong>พจนานุกรมทั้งหมด</strong>?"
-  },
-  "modal_dictionary_details_deinflections_label": {
-    "message": "ใช้การยกเลิกการผัน\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
-  },
-  "modal_dictionary_details_pos_label": {
-    "message": "ตัวกรองชนิดคำ\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
-  },
-  "modal_dictionary_details_prefix_label": {
-    "message": "รองรับการค้นหาด้วยไวลด์การ์ดแบบคำนำหน้า\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
-  },
-  "modal_dictionary_move_prompt": {
-    "message": "ระบุตำแหน่งที่จะย้ายพจนานุกรม <strong class=\"dictionary-title\"></strong> ไปยัง:"
-  },
-  "modal_dictionary_rename_prompt": {
-    "message": "ระบุชื่อที่แสดงสำหรับพจนานุกรม <strong class=\"dictionary-title\"></strong>:"
-  },
-  "modal_profile_conditions_info_4": {
-    "message": "เมื่อใช้เงื่อนไข Flags, <code>clipboard</code> เป็นอินพุตที่ถูกต้องเพียงอย่างเดียว\n                        สิ่งนี้ทำให้หน้าการค้นหาสามารถใช้การตั้งค่าของโปรไฟล์อื่นเมื่อมีการคัดลอกข้อความ โดยมีเงื่อนไขว่า <code>เปิดใช้การเฝ้าติดตามข้อความคลิปบอร์ดในหน้าการค้นหา</code> ถูกเปิดใช้งาน"
-  },
-  "modal_profile_conditions_label": {
-    "message": "เงื่อนไขสำหรับโปรไฟล์ <em id=\"profile-conditions-profile-name\"></em>:"
-  },
-  "modal_profile_delete_prompt": {
-    "message": "คุณแน่ใจหรือไม่ว่าต้องการลบโปรไฟล์ <em id=\"profile-remove-name\"></em>?"
-  },
-  "modal_profile_reset_prompt": {
-    "message": "คุณแน่ใจหรือไม่ว่าต้องการรีเซ็ตโปรไฟล์ <em id=\"profile-reset-name\"></em> เป็นค่าเริ่มต้น?"
-  },
-  "modal_recommended_dictionaries_description": {
-    "message": "สำหรับพจนานุกรมที่ไม่ใช่ภาษาอังกฤษ โปรดดูรายการ\n                <a href=\"https://yomidevs.github.io/kaikki-to-yomitan/\" target=\"_blank\"> พจนานุกรม Kaikki</a> ที่มีอยู่"
-  },
-  "modal_secondary_search_description": {
-    "message": "พจนานุกรมเหล่านี้จะถูกใช้เพื่อค้นหาคำจำกัดความของคำที่เกี่ยวข้องเมื่อโหมดการจัดกลุ่มเป็น\n                <em>จัดกลุ่มคำที่เกี่ยวข้อง</em>."
-  },
-  "os_android": {
-    "message": "Android"
-  },
-  "os_chrome_os": {
-    "message": "Chrome OS"
-  },
-  "os_linux": {
-    "message": "Linux"
-  },
-  "os_mac": {
-    "message": "Mac OS"
-  },
-  "os_openbsd": {
-    "message": "Open BSD"
-  },
-  "os_unknown": {
-    "message": "ไม่ทราบ"
-  },
-  "os_windows": {
-    "message": "Windows"
-  },
-  "page_action_popup_title": {
-    "message": "ป๊อปอัปการทำงานของ Sottaku-Yomitan"
-  },
-  "page_info_title": {
-    "message": "ข้อมูล Sottaku-Yomitan"
-  },
-  "page_issues_title": {
-    "message": "ปัญหา Sottaku-Yomitan"
-  },
-  "page_legal_title": {
-    "message": "กฎหมายของ Sottaku-Yomitan"
-  },
-  "page_permissions_title": {
-    "message": "สิทธิ์ของ Sottaku-Yomitan"
-  },
-  "page_popup_preview_title": {
-    "message": "ตัวอย่างป๊อปอัป Sottaku-Yomitan"
-  },
-  "page_popup_title": {
-    "message": "การค้นหา Sottaku-Yomitan"
-  },
-  "page_quick_start_title": {
-    "message": "คู่มือเริ่มต้นอย่างรวดเร็ว"
-  },
-  "page_search_title": {
-    "message": "การค้นหา Sottaku-Yomitan"
-  },
-  "page_settings_title": {
-    "message": "การตั้งค่า Sottaku-Yomitan"
-  },
-  "page_support_title": {
-    "message": "สนับสนุน Sottaku-Yomitan"
-  },
-  "page_template_renderer_title": {
-    "message": "แซนด์บ็อกซ์ Handlebars ของ Sottaku-Yomitan"
-  },
-  "page_welcome_title": {
-    "message": "ยินดีต้อนรับสู่ Sottaku-Yomitan!"
-  },
-  "permissions_add_origin_button": {
-    "message": "เพิ่ม"
-  },
-  "permissions_additional_origins_label": {
-    "message": "ต้นทางเพิ่มเติม"
-  },
-  "permissions_all_urls_description": {
-    "message": "Sottaku-Yomitan ต้องการเข้าถึง URL ทั้งหมดเพื่อเรียกใช้สคริปต์สำหรับสแกนข้อความ แสดงป๊อปอัปคำจำกัดความ และสื่อสารกับเซิร์ฟเวอร์ของ Sottaku."
-  },
-  "permissions_allow_all_urls_label": {
-    "message": "อนุญาตให้เข้าถึง URL ทั้งหมด"
-  },
-  "permissions_allowed_origins_title": {
-    "message": "ต้นทางที่อนุญาต"
-  },
-  "permissions_clipboard_read_description": {
-    "message": "Sottaku-Yomitan รองรับการเปิดหน้าต่างค้นหาโดยอัตโนมัติเมื่อคัดลอกข้อความไปยังคลิปบอร์ดขณะเบราว์เซอร์ทำงาน ทั้งนี้ขึ้นอยู่กับการตั้งค่าบางอย่าง ซึ่งช่วยให้ Sottaku-Yomitan สแกนข้อความจากแอปภายนอกได้ หากมีวิธีคัดลอกข้อความจากแอปเหล่านั้นไปยังคลิปบอร์ด."
-  },
-  "permissions_clipboard_read_label": {
-    "message": "<code>clipboardRead</code> <span class=\"light\">(ไม่บังคับ)</span>"
-  },
-  "permissions_clipboard_write_description": {
-    "message": "Sottaku-Yomitan รองรับการจำลองคีย์ลัด <code>Ctrl+C</code> (คัดลอกไปยังคลิปบอร์ด)\n                    เมื่อป๊อปอัปคำจำกัดความเปิดอยู่และอยู่ในโฟกัส."
-  },
-  "permissions_configure_allowed_origins": {
-    "message": "กำหนดค่าต้นทางที่อนุญาต…"
-  },
-  "permissions_context_menu_description": {
-    "message": "Sottaku-Yomitan เพิ่มเมนูคลิกขวาที่ช่วยให้คุณค้นหาคำที่ไฮไลต์ได้."
-  },
-  "permissions_declarative_net_request_description": {
-    "message": "Sottaku-Yomitan ใช้สิทธิ์นี้เพื่อให้แน่ใจว่าคำขอบางรายการมีส่วนหัวที่ถูกต้องและปลอดภัย.\n                        บางครั้งอาจต้องลบหรือเปลี่ยนส่วนหัวคำขอ <code>Origin</code>,\n                        เนื่องจากอาจใช้ในการระบุตัวตนการตั้งค่าเบราว์เซอร์ได้."
-  },
-  "permissions_declarative_net_request_example": {
-    "message": "ตัวอย่าง: <code>Origin: <span class=\"extension-id-example\"></span></code>"
-  },
-  "permissions_file_urls_chrome": {
-    "message": "ตัวเลือกนี้สามารถกำหนดค่าได้จาก <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">หน้าการตั้งค่าส่วนขยาย</a> ของเบราว์เซอร์."
-  },
-  "permissions_file_urls_description": {
-    "message": "เมื่อเปิดใช้งาน Sottaku-Yomitan จะสามารถสแกนข้อความและแสดงคำจำกัดความบนไฟล์ HTML ในเครื่องที่เข้าถึงผ่านสคีม <code>file://*</code>."
-  },
-  "permissions_file_urls_label": {
-    "message": "อนุญาตให้เข้าถึง URL ไฟล์ <span class=\"light\">(ไม่บังคับ)</span>"
-  },
-  "permissions_heading": {
-    "message": "สิทธิ์ของ Sottaku-Yomitan"
-  },
-  "permissions_modal_close": {
-    "message": "ปิด"
-  },
-  "permissions_native_messaging_description": {
-    "message": "Sottaku-Yomitan สามารถสื่อสารกับคอมโพเนนต์ Native Messaging แบบไม่บังคับเพื่อรองรับ\n                    การแยกวิเคราะห์บล็อกข้อความภาษาญี่ปุ่นขนาดใหญ่โดยใช้\n                    <a href=\"https://en.wikipedia.org/wiki/MeCab\" rel=\"noopener noreferrer\" target=\"_blank\">MeCab</a>.\n                    การติดตั้งคอมโพเนนต์นี้เป็นแบบไม่บังคับและไม่ได้รวมมาโดยค่าเริ่มต้น."
-  },
-  "permissions_native_messaging_label": {
-    "message": "<code>nativeMessaging</code> <span class=\"light\">(ไม่บังคับ)</span>"
-  },
-  "permissions_no_additional_origins": {
-    "message": "ไม่ได้ระบุต้นทางเพิ่มเติม."
-  },
-  "permissions_persistent_storage_description": {
-    "message": "เว็บเบราว์เซอร์อาจล้างข้อมูลส่วนขยายที่จัดเก็บไว้เมื่ออุปกรณ์มีพื้นที่จัดเก็บต่ำ สิทธิ์การจัดเก็บแบบถาวรจะบอกเบราว์เซอร์ว่าไม่ควรลบข้อมูลของส่วนขยายในกรณีดังกล่าว."
-  },
-  "permissions_persistent_storage_firefox_note": {
-    "message": "อาจไม่สามารถเปิดใช้งานสิทธิ์นี้บน Firefox สำหรับ Android ได้."
-  },
-  "permissions_persistent_storage_label": {
-    "message": "การจัดเก็บแบบถาวร"
-  },
-  "permissions_private_windows_chrome": {
-    "message": "ตัวเลือกนี้สามารถกำหนดค่าได้จาก <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">หน้าการตั้งค่าส่วนขยาย</a> ของเบราว์เซอร์."
-  },
-  "permissions_private_windows_description": {
-    "message": "เมื่อเปิดใช้งาน Sottaku-Yomitan จะสามารถสแกนข้อความและแสดงคำจำกัดความในหน้าต่างเบราว์เซอร์แบบส่วนตัว/ไม่ระบุตัวตน."
-  },
-  "permissions_private_windows_firefox": {
-    "message": "ตัวเลือกนี้สามารถกำหนดค่าได้จากหน้าการตั้งค่าส่วนขยายของเบราว์เซอร์ จากแถบที่อยู่ของเบราว์เซอร์ ให้ไปที่ <code>about:addons</code> แล้วไปยังการตั้งค่าของ Sottaku-Yomitan."
-  },
-  "permissions_private_windows_label": {
-    "message": "อนุญาตในหน้าต่างส่วนตัว <span class=\"light\">(ไม่บังคับ)</span>"
-  },
-  "permissions_scripting_description": {
-    "message": "Sottaku-Yomitan จำเป็นต้องแทรกสคริปต์เนื้อหาและสไตล์ชีตลงในหน้าเว็บเพื่อแสดงป๊อปอัปค้นหาให้ถูกต้อง."
-  },
-  "permissions_storage_description": {
-    "message": "Sottaku-Yomitan ใช้สิทธิ์การจัดเก็บเพื่อบันทึกการตั้งค่าส่วนขยาย."
-  },
-  "popup_close_title": {
-    "message": "ปิดป๊อปอัป"
-  },
-  "popup_default_profile_title": {
-    "message": "โปรไฟล์เริ่มต้น"
-  },
-  "popup_hotkey_close": {
-    "message": "ปิดป๊อปอัป ({0})"
-  },
-  "popup_hotkey_next_definition": {
-    "message": "คำจำกัดความถัดไป ({0})"
-  },
-  "popup_hotkey_previous_definition": {
-    "message": "คำจำกัดความก่อนหน้า ({0})"
-  },
-  "popup_next_definition_title": {
-    "message": "คำจำกัดความถัดไป"
-  },
-  "popup_no_results": {
-    "message": "ไม่พบผลลัพธ์"
-  },
-  "popup_preview_placeholder": {
-    "message": "เชื่อมโยงบัญชี Sottaku ของคุณในส่วน Sottaku ของการตั้งค่าเพื่อดูตัวอย่างป๊อปอัป"
-  },
-  "popup_previous_definition_title": {
-    "message": "คำจำกัดความก่อนหน้า"
-  },
-  "popup_pro_required_body": {
-    "message": "พจนานุกรมป๊อปอัปต้องมีการสมัครสมาชิก Sottaku Pro"
-  },
-  "popup_pro_required_link": {
-    "message": "อัปเกรดที่ sottaku.app/upgrade"
-  },
-  "popup_pro_required_title": {
-    "message": "ต้องมี Sottaku Pro"
-  },
-  "popup_updated_body": {
-    "message": "ส่วนขยาย Sottaku-Yomitan ได้อัปเดตเป็นเวอร์ชันใหม่แล้ว! หากต้องการดูคำจำกัดความต่อในหน้านี้ คุณต้องโหลดแท็บนี้ใหม่หรือรีสตาร์ทเบราว์เซอร์"
-  },
-  "popup_updated_title": {
-    "message": "Sottaku-Yomitan อัปเดตแล้ว!"
-  },
-  "query_parser_mecab": {
-    "message": "MeCab: $1"
-  },
-  "query_parser_scanning": {
-    "message": "พาร์เซอร์การสแกน"
-  },
-  "query_parser_unknown_source": {
-    "message": "แหล่งที่มาไม่ทราบ: $1"
-  },
-  "quick_start_action_popup_alt": {
-    "message": "ป๊อปอัปการดำเนินการของเบราว์เซอร์"
-  },
-  "quick_start_heading": {
-    "message": "คู่มือเริ่มต้นอย่างรวดเร็วของ Sottaku-Yomitan"
-  },
-  "quick_start_installing_body": {
-    "message": "Sottaku-Yomitan ใช้บัญชี Sottaku ของคุณสำหรับการค้นหา ดังนั้นคุณไม่จำเป็นต้องจัดการพจนานุกรมในเครื่องบนหน้าการตั้งค่า.\n                คุณยังสามารถไปที่ <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">https://sottaku.app/</a> เพื่อเรียนรู้เพิ่มเติมเกี่ยวกับพจนานุกรม Sottaku-Yomitan."
-  },
-  "quick_start_installing_heading": {
-    "message": "การติดตั้งพจนานุกรม"
-  },
-  "quick_start_links_heading": {
-    "message": "ลิงก์"
-  },
-  "quick_start_links_info": {
-    "message": "ไปที่หน้าข้อมูล"
-  },
-  "quick_start_links_sottaku": {
-    "message": "เพิ่งใช้ Sottaku-Yomitan ใช่ไหม? ไปที่ https://sottaku.app/!"
-  },
-  "quick_start_links_welcome": {
-    "message": "ไปที่หน้าต้อนรับ"
-  },
-  "quick_start_migrating_body": {
-    "message": "คุณยังสามารถนำเข้าชุดพจนานุกรมที่ส่งออกจาก <a href=\"/settings.html#backup\">ส่วนสำรองข้อมูลในหน้าการตั้งค่า</a>.\n\n                <br/><br/>\n\n                หากคุณกำลังย้ายจาก Yomichan คุณอาจต้องการนำเข้าข้อมูลของคุณไปยัง Sottaku-Yomitan.\n                โปรดทำตามคำแนะนำที่ <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">https://sottaku.app/</a>.\n\n                <br/><br/>\n\n                หากคุณใช้หรือวางแผนจะใช้เทมเพลตที่กำหนดเองสำหรับการสร้างโน้ต Anki โปรดทราบว่า <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">ไวยากรณ์บางส่วนได้เปลี่ยนไปจาก Yomichan และ Yomibaba.</a>\n                โปรดตรวจสอบว่าเทมเพลตที่กำหนดเองของคุณใช้ไวยากรณ์ที่อัปเดตแล้ว."
-  },
-  "quick_start_migrating_heading": {
-    "message": "ย้ายไปยัง Sottaku-Yomitan"
-  },
-  "quick_start_quick_actions_body": {
-    "message": "การคลิกปุ่ม <img alt=\"\" class=\"inline-icon\" src=\"/images/yomitan-icon.svg\"/> <em>Sottaku-Yomitan</em> ในแถบเบราว์เซอร์จะเปิดป๊อปอัปการดำเนินการด่วน."
-  },
-  "quick_start_quick_actions_cog": {
-    "message": "ปุ่ม <img alt=\"\" class=\"inline-icon\" src=\"/images/cog.svg\"/> <em>เฟือง</em> จะเปิดหน้า <a href=\"/settings.html\" rel=\"noopener\" target=\"_blank\">การตั้งค่า</a>."
-  },
-  "quick_start_quick_actions_heading": {
-    "message": "การดำเนินการด่วน"
-  },
-  "quick_start_quick_actions_info": {
-    "message": "ปุ่ม <img alt=\"\" class=\"inline-icon\" src=\"/images/question-mark-circle.svg\"/> <em>เครื่องหมายคำถาม</em> จะเปิดหน้า <a href=\"/info.html\" rel=\"noopener\" target=\"_blank\">ข้อมูล</a>,\n                        ซึ่งมีข้อมูลและลิงก์ที่เป็นประโยชน์เกี่ยวกับ Sottaku-Yomitan."
-  },
-  "quick_start_quick_actions_search": {
-    "message": "ปุ่ม <img alt=\"\" class=\"inline-icon\" src=\"/images/magnifying-glass.svg\"/> <em>แว่นขยาย</em> จะเปิดหน้า <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">ค้นหา</a>,\n                        ช่วยให้ค้นหาข้อความและคำศัพท์ด้วยพจนานุกรมที่ติดตั้งไว้.\n                        ใช้ได้แม้ในโหมดออฟไลน์!"
-  },
-  "quick_start_scanning_alt": {
-    "message": "การสแกน"
-  },
-  "quick_start_scanning_audio": {
-    "message": "การคลิกปุ่ม <img alt=\"\" class=\"inline-icon\" src=\"/images/play-audio.svg\"/> <em>ลำโพง</em> ของรายการในผลลัพธ์การค้นหา\n                    จะเล่นคลิปเสียงการออกเสียงของคำจากพจนานุกรมออนไลน์ ถ้ามี."
-  },
-  "quick_start_scanning_body": {
-    "message": "หลังจากติดตั้งพจนานุกรมแล้ว สามารถสแกนข้อความบนหน้าเว็บได้โดยเลื่อนเคอร์เซอร์ขณะกดปุ่มตัวแก้ไข.\n                ปุ่มเริ่มต้นคือ <kbd>Shift</kbd> ซึ่งสามารถปิดหรือกำหนดค่าได้ในหน้า <a href=\"/settings.html#backup\">การตั้งค่า</a>."
-  },
-  "quick_start_scanning_heading": {
-    "message": "สแกนข้อความ"
-  },
-  "quick_start_scanning_kanji": {
-    "message": "การคลิกตัวอักษรคันจิในคำจำกัดความจะแสดงข้อมูลเพิ่มเติมเกี่ยวกับอักขระนั้น.\n                    <span class=\"light\">(ต้องติดตั้งพจนานุกรมคันจิ)</span>"
-  },
-  "search_clipboard_monitor_label": {
-    "message": "ตัวเฝ้าคลิปบอร์ด"
-  },
-  "search_default_profile_label": {
-    "message": "โปรไฟล์เริ่มต้น"
-  },
-  "search_header_title": {
-    "message": "การค้นหา Sottaku-Yomitan"
-  },
-  "search_settings_auto_kana_label": {
-    "message": "แปลงคะนะอัตโนมัติ"
-  },
-  "search_settings_close_button": {
-    "message": "ปิด"
-  },
-  "search_settings_parser_label": {
-    "message": "พาร์เซอร์"
-  },
-  "search_settings_sticky_header_description": {
-    "message": "หัวข้อค้นหาจะคงอยู่บนหน้าเมื่อเลื่อนลง."
-  },
-  "search_settings_sticky_header_label": {
-    "message": "หัวข้อค้นหาแบบยึดติด"
-  },
-  "search_settings_title": {
-    "message": "การตั้งค่าการค้นหา"
-  },
-  "search_textbox_placeholder": {
-    "message": "ป้อนคำ วลี ประโยค หรือบล็อกข้อความ"
-  },
-  "settings_accessibility_google_docs_danger": {
-    "message": "Google ได้เปลี่ยนการทำงานของความเข้ากันได้นี้หลายครั้ง และดูเหมือนว่าไม่ได้มีการประกาศหรือจัดทำเอกสาร ดังนั้นจึงเป็นไปได้ว่าฟีเจอร์นี้อาจหยุดทำงานได้ทุกเมื่อในอนาคตโดยไม่เตือน"
-  },
-  "settings_accessibility_google_docs_label": {
-    "message": "เปิดใช้โหมดความเข้ากันได้กับ Google Docs\n                        <a class=\"more-toggle more-only danger-text\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
-  },
-  "settings_accessibility_google_docs_more_1": {
-    "message": "Google Docs ตอนนี้ใช้การเรนเดอร์แบบ\n                    <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas\" rel=\"noopener noreferrer\" target=\"_blank\">canvas-based</a>\n                    เพื่อแสดงเนื้อหา<sup><a href=\"https://workspaceupdates.googleblog.com/2021/05/Google-Docs-Canvas-Based-Rendering-Update.html\" rel=\"noopener noreferrer\" target=\"_blank\">[2]</a></sup>\n                    ซึ่งทำให้ Sottaku-Yomitan ไม่สามารถสแกนข้อความด้วยวิธีมาตรฐานได้\n                    การเปิดใช้ตัวเลือกนี้จะบังคับให้หน้า Google Docs แสดงข้อมูลข้อความเพิ่มเติม\n                    ซึ่งจะช่วยให้ Sottaku-Yomitan ทำงานต่อได้"
-  },
-  "settings_accessibility_google_docs_warning": {
-    "message": "หากโปรไฟล์ใดเปิดใช้การตั้งค่านี้ โหมดความเข้ากันได้จะถูกเปิดใช้งาน และเงื่อนไขของโปรไฟล์จะถูกละเลย"
-  },
-  "settings_accessibility_heading": {
-    "message": "การช่วยการเข้าถึง"
-  },
-  "settings_appearance_action_bar_description": {
-    "message": "ควบคุมว่าแถบการดำเนินการจะแสดงเมื่อใดและที่ไหน"
-  },
-  "settings_appearance_action_bar_label": {
-    "message": "รูปลักษณ์ของแถบการดำเนินการ"
-  },
-  "settings_appearance_action_bar_location_label": {
-    "message": "ตำแหน่ง"
-  },
-  "settings_appearance_action_bar_visibility_label": {
-    "message": "การมองเห็น"
-  },
-  "settings_appearance_collapsible_dictionaries_label": {
-    "message": "กำหนดค่าพจนานุกรมแบบพับได้…"
-  },
-  "settings_appearance_compact_glossaries_description": {
-    "message": "แสดงกลอสซารีคำศัพท์ด้วยเลย์เอาต์ที่กะทัดรัดขึ้น"
-  },
-  "settings_appearance_compact_glossaries_label": {
-    "message": "กลอสซารีแบบกะทัดรัด"
-  },
-  "settings_appearance_compact_popup": {
-    "message": "ป๊อปอัปแบบกะทัดรัด"
-  },
-  "settings_appearance_compact_popup_anki": {
-    "message": "ป๊อปอัปแบบกะทัดรัดและ Anki"
-  },
-  "settings_appearance_compact_tags_description": {
-    "message": "แสดงแท็กที่ซ้ำกันน้อยลงสำหรับกลอสซารีคำศัพท์"
-  },
-  "settings_appearance_compact_tags_label": {
-    "message": "แท็กแบบกะทัดรัด"
-  },
-  "settings_appearance_custom_css_label": {
-    "message": "กำหนดค่า CSS แบบกำหนดเอง…"
-  },
-  "settings_appearance_debug_description": {
-    "message": "จะแสดงตัวเลือกเมนูเพื่อบันทึกข้อมูลดีบักในผลการค้นหา"
-  },
-  "settings_appearance_debug_label": {
-    "message": "แสดงข้อมูลดีบัก"
-  },
-  "settings_appearance_expression_tags_description": {
-    "message": "สามารถสแกนแท็กเหล่านี้ได้หากเปิดใช้ตัวเลือกการสแกนเนื้อหาป๊อปอัป"
-  },
-  "settings_appearance_expression_tags_label": {
-    "message": "แสดงแท็กสำหรับนิพจน์และการอ่าน"
-  },
-  "settings_appearance_font_family_description": {
-    "message": "เปลี่ยนตระกูลแบบอักษรที่ใช้ใน Sottaku-Yomitan\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">เพิ่มเติม…</a>"
-  },
-  "settings_appearance_font_family_label": {
-    "message": "ตระกูลแบบอักษร"
-  },
-  "settings_appearance_font_family_more": {
-    "message": "ตระกูลแบบอักษรสามารถเปลี่ยนเป็นแบบอักษรใดก็ได้ที่ติดตั้งในระบบของคุณ<br/>\n                    คุณสามารถป้อนเช่น <code>sans-serif</code>, <code>serif</code> หรือ <code>monospace</code>.<br/>\n                    หากต้องการระบุแบบอักษรเฉพาะหนึ่งหรือหลายแบบ ให้พิมพ์คั่นด้วยจุลภาค\n                    เช่น <pre><code>\"Noto Sans JP\", \"Meiryo\", sans-serif</code></pre>"
-  },
-  "settings_appearance_font_size_description": {
-    "message": "เปลี่ยนขนาดแบบอักษรที่ใช้ในป๊อปอัป เป็นพิกเซล"
-  },
-  "settings_appearance_font_size_label": {
-    "message": "ขนาดแบบอักษร"
-  },
-  "settings_appearance_frequency_description": {
-    "message": "เปลี่ยนวิธีแสดงข้อมูลความถี่"
-  },
-  "settings_appearance_frequency_inline_list": {
-    "message": "รายการแบบบรรทัดเดียว"
-  },
-  "settings_appearance_frequency_label": {
-    "message": "รูปแบบการแสดงความถี่"
-  },
-  "settings_appearance_frequency_list": {
-    "message": "รายการ"
-  },
-  "settings_appearance_frequency_split_tags": {
-    "message": "แยกแท็ก"
-  },
-  "settings_appearance_frequency_split_tags_grouped": {
-    "message": "แยกแท็ก, เนื้อหาจัดกลุ่ม"
-  },
-  "settings_appearance_frequency_tags": {
-    "message": "แท็ก"
-  },
-  "settings_appearance_frequency_tags_grouped": {
-    "message": "แท็ก, เนื้อหาจัดกลุ่ม"
-  },
-  "settings_appearance_heading": {
-    "message": "รูปลักษณ์"
-  },
-  "settings_appearance_indicator_asterisk": {
-    "message": "ดอกจัน"
-  },
-  "settings_appearance_indicator_bar_left": {
-    "message": "แถบแนวตั้ง (ซ้าย)"
-  },
-  "settings_appearance_indicator_bar_right": {
-    "message": "แถบแนวตั้ง (ขวา)"
-  },
-  "settings_appearance_indicator_dot_left": {
-    "message": "จุดเล็ก (ซ้าย)"
-  },
-  "settings_appearance_indicator_dot_right": {
-    "message": "จุดเล็ก (ขวา)"
-  },
-  "settings_appearance_indicator_triangle": {
-    "message": "สามเหลี่ยม"
-  },
-  "settings_appearance_line_height_description": {
-    "message": "ปรับระยะห่างระหว่างบรรทัดข้อความในป๊อปอัป ซึ่งโดยทั่วไปจะเป็นเลขทศนิยมระหว่าง 1 ถึง 2"
-  },
-  "settings_appearance_line_height_label": {
-    "message": "ความสูงบรรทัด"
-  },
-  "settings_appearance_pitch_accent_description": {
-    "message": "เฉพาะภาษาญี่ปุ่น\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">เพิ่มเติม…</a>"
-  },
-  "settings_appearance_pitch_accent_label": {
-    "message": "รูปแบบการแสดงวรรณยุกต์เสียงสูงต่ำ"
-  },
-  "settings_appearance_pitch_accent_more_1": {
-    "message": "สามารถแสดงวรรณยุกต์เสียงสูงต่ำสำหรับคำและนิพจน์ได้หากติดตั้งพจนานุกรมที่รองรับวรรณยุกต์เสียงสูงต่ำ ขณะนี้มีสามวิธีในการแสดง:"
-  },
-  "settings_appearance_pitch_downstep_notation": {
-    "message": "สัญลักษณ์ดาวน์สเต็ป"
-  },
-  "settings_appearance_pitch_downstep_position": {
-    "message": "ตำแหน่งดาวน์สเต็ป"
-  },
-  "settings_appearance_pitch_graph": {
-    "message": "กราฟ"
-  },
-  "settings_appearance_reading_mode_description": {
-    "message": "เปลี่ยนประเภทฟุริกานะที่แสดงสำหรับข้อความที่ถูกแยกวิเคราะห์ เฉพาะภาษาญี่ปุ่น"
-  },
-  "settings_appearance_reading_mode_dictionary": {
-    "message": "การอ่านแบบพจนานุกรม"
-  },
-  "settings_appearance_reading_mode_hiragana": {
-    "message": "ฮิรางานะ"
-  },
-  "settings_appearance_reading_mode_katakana": {
-    "message": "คาตาคานะ"
-  },
-  "settings_appearance_reading_mode_label": {
-    "message": "โหมดการอ่าน"
-  },
-  "settings_appearance_reading_mode_romaji": {
-    "message": "โรมาจิ"
-  },
-  "settings_appearance_selection_indicator_description": {
-    "message": "เปลี่ยนวิธีการเน้นรายการคำจำกัดความที่เลือกด้วยภาพ"
-  },
-  "settings_appearance_selection_indicator_label": {
-    "message": "รูปแบบตัวบ่งชี้การเลือก"
-  },
-  "settings_appearance_term_display_description": {
-    "message": "เปลี่ยนวิธีแสดงคำและการอ่าน"
-  },
-  "settings_appearance_term_display_label": {
-    "message": "รูปแบบการแสดงคำ"
-  },
-  "settings_appearance_term_display_ruby": {
-    "message": "ฟุริกานะของคำ"
-  },
-  "settings_appearance_term_display_ruby_reading": {
-    "message": "ฟุริกานะของคำและการอ่าน"
-  },
-  "settings_appearance_term_display_term_only": {
-    "message": "คำธรรมดา"
-  },
-  "settings_appearance_term_display_term_reading": {
-    "message": "คำธรรมดาและการอ่าน"
-  },
-  "settings_appearance_theme_body_label": {
-    "message": "เนื้อหา"
-  },
-  "settings_appearance_theme_description": {
-    "message": "ปรับสไตล์ของ Sottaku-Yomitan"
-  },
-  "settings_appearance_theme_label": {
-    "message": "ธีม"
-  },
-  "settings_appearance_theme_shadow_label": {
-    "message": "เงา"
-  },
-  "settings_audio_autoplay_description": {
-    "message": "เสียงของผลลัพธ์แรกจะเล่นโดยอัตโนมัติ"
-  },
-  "settings_audio_autoplay_label": {
-    "message": "เล่นเสียงผลลัพธ์การค้นหาอัตโนมัติ"
-  },
-  "settings_audio_enable_description": {
-    "message": "แสดงไอคอนลำโพงที่คลิกได้ข้างผลลัพธ์การค้นหา"
-  },
-  "settings_audio_enable_disclaimer": {
-    "message": "ตัวเลือกนี้อาจส่งคำศัพท์ การอ่าน และ/หรือภาษาออกไปนอก Sottaku-Yomitan เพื่อดึงเสียง<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">นโยบายความเป็นส่วนตัว</a>)</span>."
-  },
-  "settings_audio_enable_label": {
-    "message": "เปิดใช้การเล่นเสียงสำหรับคำศัพท์"
-  },
-  "settings_audio_fallback_bloop": {
-    "message": "บลูป"
-  },
-  "settings_audio_fallback_click": {
-    "message": "คลิก"
-  },
-  "settings_audio_fallback_description": {
-    "message": "เสียงที่จะเล่นเมื่อ Sottaku-Yomitan ดึงเสียงไม่สำเร็จ"
-  },
-  "settings_audio_fallback_label": {
-    "message": "เสียงสำรอง"
-  },
-  "settings_audio_heading": {
-    "message": "เสียง"
-  },
-  "settings_audio_sources_label": {
-    "message": "ตั้งค่าแหล่งที่มาของการเล่นเสียง…"
-  },
-  "settings_audio_volume_description": {
-    "message": "ปรับระดับเสียงที่เล่นเป็นเปอร์เซ็นต์"
-  },
-  "settings_audio_volume_label": {
-    "message": "ระดับเสียง"
-  },
-  "settings_backup_description": {
-    "message": "Sottaku-Yomitan สามารถนำเข้าและส่งออกไฟล์การตั้งค่าซึ่งใช้เพื่อกู้คืนการตั้งค่า แบ่งปันการตั้งค่าระหว่างอุปกรณ์ และช่วยแก้ไขปัญหา ไฟล์เหล่านี้จะมีเฉพาะการตั้งค่าเท่านั้น"
-  },
-  "settings_backup_export_button": {
-    "message": "ส่งออกการตั้งค่า"
-  },
-  "settings_backup_heading": {
-    "message": "สำรองข้อมูล"
-  },
-  "settings_backup_import_button": {
-    "message": "นำเข้าการตั้งค่า"
-  },
-  "settings_backup_reset_button": {
-    "message": "รีเซ็ตการตั้งค่า"
-  },
-  "settings_clipboard_background_description": {
-    "message": "เปิดหน้าการค้นหาในหน้าต่างใหม่เมื่อคัดลอกข้อความไปยังคลิปบอร์ด"
-  },
-  "settings_clipboard_background_label": {
-    "message": "เปิดใช้การเฝ้าดูข้อความในคลิปบอร์ดเบื้องหลัง"
-  },
-  "settings_clipboard_heading": {
-    "message": "คลิปบอร์ด"
-  },
-  "settings_clipboard_info_1": {
-    "message": "Sottaku-Yomitan สามารถเฝ้าดูคลิปบอร์ดของระบบและค้นหาโดยอัตโนมัติบนหน้าการค้นหาเมื่อมีการคัดลอกข้อความ ซึ่งมีประโยชน์ในการใช้ Sottaku-Yomitan เพื่อสแกนข้อความจากแอปภายนอก"
-  },
-  "settings_clipboard_info_2": {
-    "message": "ฟีเจอร์นี้ต้องให้ Sottaku-Yomitan มีสิทธิ์อ่านคลิปบอร์ด และเมื่อเปิดใช้ตัวเลือกนี้ คลิปบอร์ดจะถูกตรวจสอบบ่อยครั้งเพื่อดูข้อความใหม่"
-  },
-  "settings_clipboard_max_length_description": {
-    "message": "จำกัดจำนวนอักขระที่ใช้เมื่อค้นหาข้อความในคลิปบอร์ด"
-  },
-  "settings_clipboard_max_length_label": {
-    "message": "ความยาวสูงสุดของการค้นหาข้อความในคลิปบอร์ด"
-  },
-  "settings_clipboard_search_description": {
-    "message": "คำค้นในหน้าการค้นหาจะอัปเดตอัตโนมัติด้วยข้อความในคลิปบอร์ด"
-  },
-  "settings_clipboard_search_label": {
-    "message": "เปิดใช้การเฝ้าดูข้อความในคลิปบอร์ดบนหน้าการค้นหา"
-  },
-  "settings_clipboard_search_mode_description": {
-    "message": "เปลี่ยนวิธีที่หน้าการค้นหาตอบสนองต่อข้อความใหม่ในคลิปบอร์ด"
-  },
-  "settings_clipboard_search_mode_label": {
-    "message": "โหมดการค้นหาข้อความในคลิปบอร์ด"
-  },
-  "settings_clipboard_search_mode_search": {
-    "message": "ค้นหาคำจำกัดความ"
-  },
-  "settings_clipboard_search_mode_update": {
-    "message": "อัปเดตคำค้นเท่านั้น"
-  },
-  "settings_collapsible_varies": {
-    "message": "แตกต่างกัน"
-  },
-  "settings_general_api_css_bypass_label": {
-    "message": "อนุญาตให้ข้ามการทำความสะอาด CSS"
-  },
-  "settings_general_api_css_bypass_more_1": {
-    "message": "พจนานุกรมที่เป็นอันตรายซึ่งมี CSS ที่เป็นอันตรายอาจพยายามรัน Javascript ตัวอย่างเช่น หากผลลัพธ์ของ API Sottaku-Yomitan ถูกใช้ใน Anki การ์ด Anki ที่ได้อาจรัน Javascript ที่ไม่ตั้งใจ ความเสี่ยงในกรณีนี้คล้ายกับการดาวน์โหลดเด็ค Anki ที่เป็นอันตราย กล่าวคือ ในทั้งสองกรณี คุณพึ่งพา sandbox ของ Anki เพียงอย่างเดียวเพื่อปกป้องเครื่องและข้อมูลของคุณจากโค้ดอันตราย หาก sandbox ของ Anki ทำงานได้ เนื้อหาการ์ดอาจรั่วไหล (ปัญหาความลับเล็กน้อย) หาก sandbox ล้มเหลว จะมีเรื่องที่น่ากังวลมากกว่านั้น (การดำเนินการบนเครื่องของคุณ เช่น การขโมยข้อมูลรับรองและข้อมูลที่อ่อนไหว หรือแรนซัมแวร์ยึดเครื่องของคุณ)."
-  },
-  "settings_general_api_css_bypass_more_2": {
-    "message": "หากคุณเลือกปิดการทำความสะอาด CSS เราแนะนำให้คิดแบบต้นจนจบว่าเอาต์พุตของ API Sottaku-Yomitan ถูกนำไปใช้ที่ใด และปลายทางนั้นทนทานต่อการใส่ Javascript ที่อาจเป็นอันตรายหรือไม่ มิฉะนั้นคุณอาจกำลังเสี่ยงต่อข้อมูลและความสมบูรณ์ของระบบของคุณ"
-  },
-  "settings_general_api_css_bypass_more_3": {
-    "message": "การข้ามการทำความสะอาดจะทำให้ CSS ที่ไม่สามารถทำความสะอาดได้ผ่านตัวทำความสะอาดโดยไม่เปลี่ยนแปลง ข้อนี้ใช้เฉพาะกับ API ของ Sottaku-Yomitan เท่านั้น และจะไม่ทำให้ส่วนอื่นของ Sottaku-Yomitan มีความเสี่ยง"
-  },
-  "settings_general_api_css_bypass_more_4": {
-    "message": "สิ่งนี้อาจจำเป็นเพื่อดึง CSS บนบางเบราว์เซอร์ที่ไม่รองรับหน้า offscreen ที่จำเป็นสำหรับการทำความสะอาด CSS แบบเต็มใน API ของ Sottaku-Yomitan บนแบ็กเอนด์ Sottaku-Yomitan จะพยายามถอยกลับไปใช้การทำความสะอาดพื้นฐาน แต่จะล้มเหลวกับพจนานุกรมที่ใช้ CSS ซับซ้อน"
-  },
-  "settings_general_api_css_bypass_warning": {
-    "message": "เปิดใช้ตัวเลือกนี้เฉพาะเมื่อคุณเชื่อถือผู้สร้างพจนานุกรมของคุณหรือจะทำการทำความสะอาดนอก Sottaku-Yomitan เท่านั้น\n                                        พจนานุกรมที่เป็นอันตรายสามารถส่ง CSS ที่ผิดรูปเพื่อให้รัน Javascript ได้หากถูกฝังใน webview หรือเบราว์เซอร์\n                                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">เพิ่มเติม…</a>"
-  },
-  "settings_general_api_more_1": {
-    "message": "เพื่อเปิดใช้ API ของ Sottaku-Yomitan ต้องติดตั้งคอมโพเนนต์ native messaging.\n                        สามารถดูคู่มือการตั้งค่าได้ที่ <a href=\"https://github.com/yomidevs/yomitan-api/blob/master/README.md\" rel=\"noopener noreferrer\" target=\"_blank\">ที่นี่</a>."
-  },
-  "settings_general_api_test_url_placeholder": {
-    "message": "http://127.0.0.1:19633"
-  },
-  "settings_general_context_menu": {
-    "message": "แสดง \"ค้นหาใน Sottaku-Yomitan\" ในเมนูคลิกขวา"
-  },
-  "settings_general_enable_api_description": {
-    "message": "เปิดใช้การรองรับการส่งคำขอเว็บแบบโลคัลเพื่อดึงข้อมูลจาก Sottaku-Yomitan"
-  },
-  "settings_general_enable_api_disclaimer": {
-    "message": "ตัวเลือกนี้อาจส่งข้อมูลออกนอก Sottaku-Yomitan ไปยังแอปพลิเคชันในเครื่องที่ร้องขอ<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">นโยบายความเป็นส่วนตัว</a>)</span>.\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">เพิ่มเติม…</a>"
-  },
-  "settings_general_enable_api_label": {
-    "message": "เปิดใช้ API ของ Sottaku-Yomitan"
-  },
-  "settings_general_enable_label": {
-    "message": "เปิดใช้ Sottaku-Yomitan"
-  },
-  "settings_general_heading": {
-    "message": "ทั่วไป"
-  },
-  "settings_general_locale_description": {
-    "message": "ภาษาที่ใช้สำหรับการแปลที่ Sottaku ส่งกลับมา"
-  },
-  "settings_general_locale_label": {
-    "message": "โลแคล"
-  },
-  "settings_general_max_results_description": {
-    "message": "ปรับจำนวนผลลัพธ์สูงสุดที่แสดงสำหรับการค้นหา"
-  },
-  "settings_general_max_results_label": {
-    "message": "จำนวนผลลัพธ์สูงสุด"
-  },
-  "settings_general_show_guide": {
-    "message": "แสดง <a href=\"/welcome.html\" rel=\"noopener\" target=\"_blank\">คู่มือต้อนรับ</a> เมื่อเริ่มต้นเบราว์เซอร์"
-  },
-  "settings_general_text_language_description": {
-    "message": "ใช้สำหรับฟีเจอร์พจนานุกรมแบบออฟไลน์และเครื่องมือพรีวิว"
-  },
-  "settings_general_text_language_label": {
-    "message": "ภาษาของข้อความ"
-  },
-  "settings_heading": {
-    "message": "การตั้งค่า Sottaku-Yomitan"
-  },
-  "settings_loading_delay_notice": {
-    "message": "หน้านี้ใช้เวลานานกว่าที่คาดไว้ในการโหลด"
-  },
-  "settings_loading_delay_safari": {
-    "message": "เนื่องจากบั๊กใน Safari อาจจำเป็นต้องคลิกปุ่ม <img alt=\"\" class=\"inline-icon\" src=\"/images/yomitan-icon.svg\"/> <em>Sottaku-Yomitan</em>\n                        ที่แถบเบราว์เซอร์เพื่อให้หน้าโหลดสมบูรณ์"
-  },
-  "settings_nav_about": {
-    "message": "เกี่ยวกับ Sottaku-Yomitan"
-  },
-  "settings_nav_accessibility": {
-    "message": "การช่วยการเข้าถึง"
-  },
-  "settings_nav_advanced": {
-    "message": "ขั้นสูง"
-  },
-  "settings_nav_appearance": {
-    "message": "รูปลักษณ์"
-  },
-  "settings_nav_audio": {
-    "message": "เสียง"
-  },
-  "settings_nav_backup": {
-    "message": "สำรองข้อมูล"
-  },
-  "settings_nav_clipboard": {
-    "message": "คลิปบอร์ด"
-  },
-  "settings_nav_debug": {
-    "message": "ดีบัก"
-  },
-  "settings_nav_general": {
-    "message": "ทั่วไป"
-  },
-  "settings_nav_popup_behavior": {
-    "message": "พฤติกรรมป็อปอัป"
-  },
-  "settings_nav_position_size": {
-    "message": "ตำแหน่งและขนาด"
-  },
-  "settings_nav_profile": {
-    "message": "โปรไฟล์"
-  },
-  "settings_nav_result_display": {
-    "message": "การแสดงผลลัพธ์"
-  },
-  "settings_nav_scanning": {
-    "message": "การสแกน"
-  },
-  "settings_nav_search_window": {
-    "message": "หน้าต่างค้นหา"
-  },
-  "settings_nav_security": {
-    "message": "ความปลอดภัย"
-  },
-  "settings_nav_shortcuts": {
-    "message": "คีย์ลัด"
-  },
-  "settings_nav_sottaku": {
-    "message": "Sottaku"
-  },
-  "settings_nav_text_parsing": {
-    "message": "การแยกวิเคราะห์ข้อความ"
-  },
-  "settings_nav_translation": {
-    "message": "การแปล"
-  },
-  "settings_popup_auto_hide_description": {
-    "message": "เมื่อมีป๊อปอัปอยู่แล้ว เมื่อตรวจสแกนอีกครั้ง ให้ซ่อนป๊อปอัปเดิม แม้จะไม่พบคำจำกัดความก็ตาม"
-  },
-  "settings_popup_auto_hide_label": {
-    "message": "ซ่อนป๊อปอัปการค้นหาอัตโนมัติ"
-  },
-  "settings_popup_delay_label": {
-    "message": "หน่วงเวลา <span class=\"light\">(เป็นมิลลิวินาที)</span>"
-  },
-  "settings_popup_heading": {
-    "message": "พฤติกรรมป๊อปอัป"
-  },
-  "settings_popup_hide_on_exit_description": {
-    "message": "เมื่อเคอร์เซอร์ออกจากป๊อปอัป ป๊อปอัปจะถูกซ่อน"
-  },
-  "settings_popup_hide_on_exit_label": {
-    "message": "ซ่อนป๊อปอัปเมื่อเคอร์เซอร์ออก"
-  },
-  "settings_popup_max_children_description": {
-    "message": "เปลี่ยนขีดจำกัดจำนวนป๊อปอัปที่สามารถสร้างได้"
-  },
-  "settings_popup_max_children_label": {
-    "message": "จำนวนป๊อปอัปย่อยสูงสุด"
-  },
-  "settings_popup_reduced_motion_description": {
-    "message": "เลื่อนตามความสูงที่กำหนดได้ (คล้ายการแบ่งหน้า) เพื่อลดแอนิเมชัน ใช้ได้ดีบนเครื่องอ่านอิเล็กทรอนิกส์และหน้าจอ e-ink"
-  },
-  "settings_popup_reduced_motion_label": {
-    "message": "การเลื่อนแบบลดการเคลื่อนไหว"
-  },
-  "settings_popup_reduced_motion_scale_description": {
-    "message": "เปอร์เซ็นต์ของความสูงป๊อปอัปที่เลื่อนต่อหนึ่งขั้น"
-  },
-  "settings_popup_reduced_motion_scale_label": {
-    "message": "สเกล"
-  },
-  "settings_popup_reduced_motion_swipe_description": {
-    "message": "ระยะขั้นต่ำบนอุปกรณ์สัมผัสเพื่อให้การปัดถูกมองว่าเป็นการเลื่อน ค่าเล็กลงอาจรู้สึกตอบสนองไวขึ้นแต่เพิ่มโอกาสการแตะผิด"
-  },
-  "settings_popup_reduced_motion_swipe_label": {
-    "message": "เกณฑ์การปัด"
-  },
-  "settings_popup_reduced_motion_swipe_unit": {
-    "message": "px"
-  },
-  "settings_popup_scan_popup_description": {
-    "message": "ข้อความภายในป๊อปอัปสามารถสแกนหาคำจำกัดความได้ ซึ่งจะเปิดป๊อปอัปใหม่"
-  },
-  "settings_popup_scan_popup_label": {
-    "message": "อนุญาตให้สแกนเนื้อหาป๊อปอัป"
-  },
-  "settings_popup_scan_search_description": {
-    "message": "ข้อความบน <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">หน้าค้นหา</a> สามารถสแกนหาคำจำกัดความได้ ซึ่งจะเปิดป๊อปอัป"
-  },
-  "settings_popup_scan_search_label": {
-    "message": "อนุญาตให้สแกนเนื้อหาหน้าค้นหา"
-  },
-  "settings_popup_scan_source_terms_label": {
-    "message": "อนุญาตให้สแกนคำต้นทางของป๊อปอัป"
-  },
-  "settings_popup_search_from_results_label": {
-    "message": "ค้นหาคำเมื่อคลิกข้อความจากรายการผลลัพธ์"
-  },
-  "settings_popup_show_iframe_label": {
-    "message": "แสดงป๊อปอัป iframe ในเฟรมราก\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
-  },
-  "settings_popup_show_iframe_more_1": {
-    "message": "โดยปกติ การสแกนข้อความภายในองค์ประกอบ <code>&lt;iframe&gt;</code> ที่ฝังอยู่จะเปิด\n                    ป๊อปอัปใหม่ภายในเฟรมนั้น ซึ่งอาจจำกัดได้เนื่องจากขนาดเฟรม\n                    เมื่อเปิดใช้งานตัวเลือกนี้ ป๊อปอัปจะถูกสร้างในรากของหน้า หากเป็นไปได้"
-  },
-  "settings_popup_show_iframe_more_2": {
-    "message": "โปรดทราบว่าเมื่อเปิดใช้งานตัวเลือกนี้ มีความเป็นไปได้ที่ส่วนขยายจะรบกวนหน้าเว็บพื้นฐาน เนื่องจากต้องส่งข้อความไปยังหน้าเว็บเพื่อกำหนดตำแหน่งป๊อปอัปที่ถูกต้อง โดยทั่วไปจะไม่เกิดปัญหา แต่หากมีสิ่งที่ไม่คาดคิดเกิดขึ้น ตัวเลือกนี้อาจเป็นสาเหตุ"
-  },
-  "settings_popup_size_auto_scale_label": {
-    "message": "ปรับขนาดอัตโนมัติ\n                                <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
-  },
-  "settings_popup_size_auto_scale_more": {
-    "message": "การปรับขนาดอัตโนมัติจะปรับขนาดป๊อปอัปโดยอัตโนมัติตามระดับการซูมของเบราว์เซอร์\n                            เพื่อคงขนาดทางกายภาพให้คงที่ไม่ว่าระดับการซูมจะเป็นเท่าใด\n                            <em>ระดับการซูม</em> ใช้ระดับการซูมที่มักใช้บนเบราว์เซอร์เดสก์ท็อป\n                            และ <em>Viewport</em> ใช้ระดับการซูมที่มักใช้บนเบราว์เซอร์มือถือ"
-  },
-  "settings_popup_size_auto_scale_viewport": {
-    "message": "พื้นที่มองเห็น"
-  },
-  "settings_popup_size_auto_scale_zoom": {
-    "message": "ระดับการซูม"
-  },
-  "settings_popup_size_display_full_width": {
-    "message": "เต็มความกว้าง"
-  },
-  "settings_popup_size_display_mode_description": {
-    "message": "เปลี่ยนเลย์เอาต์ของป๊อปอัป\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">เพิ่มเติม…</a>"
-  },
-  "settings_popup_size_display_mode_label": {
-    "message": "โหมดการแสดงผล"
-  },
-  "settings_popup_size_display_mode_more": {
-    "message": "โหมด <em>ค่าเริ่มต้น</em> จะจัดวางป๊อปอัปตามข้อความที่สแกน\n                    ส่วนโหมด <em>เต็มความกว้าง</em> จะยึดป๊อปอัปไว้ด้านบนหรือด้านล่างของหน้าจอและใช้\n                    ความกว้างเต็มหน้าจอ ซึ่งอาจมีประโยชน์บนอุปกรณ์ที่มีหน้าจอสัมผัส"
-  },
-  "settings_popup_size_heading": {
-    "message": "ตำแหน่งและขนาดป๊อปอัป"
-  },
-  "settings_popup_size_horizontal_offset_description": {
-    "message": "เปลี่ยนระยะที่ป๊อปอัปถูกวางสัมพันธ์กับข้อความแนวนอน"
-  },
-  "settings_popup_size_horizontal_offset_label": {
-    "message": "ออฟเซ็ตข้อความแนวนอน"
-  },
-  "settings_popup_size_horizontal_position_description": {
-    "message": "เปลี่ยนตำแหน่งที่ป๊อปอัปถูกวางสัมพันธ์กับข้อความแนวนอน"
-  },
-  "settings_popup_size_horizontal_position_label": {
-    "message": "ตำแหน่งข้อความแนวนอน"
-  },
-  "settings_popup_size_position_above": {
-    "message": "เหนือข้อความ"
-  },
-  "settings_popup_size_position_below": {
-    "message": "ใต้ข้อความ"
-  },
-  "settings_popup_size_scale_description": {
-    "message": "ควบคุมค่าการปรับขนาดของป๊อปอัป"
-  },
-  "settings_popup_size_scale_label": {
-    "message": "สเกล"
-  },
-  "settings_popup_size_size_description": {
-    "message": "ควบคุมขนาดของป๊อปอัปเป็นพิกเซล"
-  },
-  "settings_popup_size_size_label": {
-    "message": "ขนาด"
-  },
-  "settings_popup_size_vertical_after": {
-    "message": "หลังทิศทางการอ่าน"
-  },
-  "settings_popup_size_vertical_before": {
-    "message": "ก่อนทิศทางการอ่าน"
-  },
-  "settings_popup_size_vertical_left": {
-    "message": "ซ้ายของข้อความ"
-  },
-  "settings_popup_size_vertical_offset_description": {
-    "message": "เปลี่ยนระยะที่ป๊อปอัปถูกวางสัมพันธ์กับข้อความแนวตั้ง"
-  },
-  "settings_popup_size_vertical_offset_label": {
-    "message": "ออฟเซ็ตข้อความแนวตั้ง"
-  },
-  "settings_popup_size_vertical_position_description": {
-    "message": "เปลี่ยนตำแหน่งที่ป๊อปอัปถูกวางสัมพันธ์กับข้อความแนวตั้ง"
-  },
-  "settings_popup_size_vertical_position_label": {
-    "message": "ตำแหน่งข้อความแนวตั้ง"
-  },
-  "settings_popup_size_vertical_right": {
-    "message": "ขวาของข้อความ"
-  },
-  "settings_popup_size_vertical_same_as_horizontal": {
-    "message": "เหมือนข้อความแนวนอน"
-  },
-  "settings_profile_active_description": {
-    "message": "เปลี่ยนโปรไฟล์ที่ใช้งานอยู่ซึ่งใช้สำหรับการสแกน"
-  },
-  "settings_profile_active_label": {
-    "message": "โปรไฟล์ที่ใช้งานอยู่"
-  },
-  "settings_profile_configure": {
-    "message": "ตั้งค่าโปรไฟล์…"
-  },
-  "settings_profile_heading": {
-    "message": "โปรไฟล์"
-  },
-  "settings_result_average_frequencies_description": {
-    "message": "บีบอัดแท็กความถี่ให้เป็นแท็กความถี่ \"เฉลี่ย\" เดียว โดยอิงจากค่าเฉลี่ยฮาร์มอนิก"
-  },
-  "settings_result_average_frequencies_label": {
-    "message": "ความถี่เฉลี่ย"
-  },
-  "settings_result_display_heading": {
-    "message": "การแสดงผลลัพธ์"
-  },
-  "settings_result_grouping_description": {
-    "message": "เปลี่ยนวิธีจัดกลุ่มผลลัพธ์ที่เกี่ยวข้อง\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">เพิ่มเติม…</a>"
-  },
-  "settings_result_grouping_label": {
-    "message": "โหมดการจัดกลุ่มผลลัพธ์"
-  },
-  "settings_result_grouping_more_none": {
-    "message": "<strong>ไม่จัดกลุ่ม</strong> -\n                        คำจำกัดความแต่ละรายการจะถูกแสดงเป็นรายการแยกต่างหาก"
-  },
-  "settings_result_grouping_more_related_1": {
-    "message": "<strong>จัดกลุ่มคำที่เกี่ยวข้อง</strong> -\n                            คำที่เกี่ยวข้องซึ่งมีคำจำกัดความเดียวกันจะถูกจัดกลุ่มเข้าด้วยกัน"
-  },
-  "settings_result_grouping_more_related_2": {
-    "message": "ตัวเลือก <em>พจนานุกรมหลัก</em> ควรกำหนดให้กับพจนานุกรมที่มีข้อมูลคำที่เกี่ยวข้อง และการกำหนดค่า <em>พจนานุกรมรอง</em> จะช่วยให้รวมคำจำกัดความของคำที่เกี่ยวข้องจากพจนานุกรมอื่นได้"
-  },
-  "settings_result_grouping_more_related_warning": {
-    "message": "ไม่ใช่ทุกพจนานุกรมที่สามารถเลือกเป็น <em>พจนานุกรมหลัก</em> ได้"
-  },
-  "settings_result_grouping_more_term_reading": {
-    "message": "<strong>จัดกลุ่มคู่คำ-การอ่าน</strong> -\n                        คำจำกัดความของคำเดียวกันที่มีการอ่านเหมือนกันจะถูกจัดกลุ่มเข้าด้วยกัน"
-  },
-  "settings_result_grouping_none": {
-    "message": "ไม่จัดกลุ่ม"
-  },
-  "settings_result_grouping_primary_dictionary": {
-    "message": "พจนานุกรมหลัก"
-  },
-  "settings_result_grouping_related": {
-    "message": "จัดกลุ่มคำที่เกี่ยวข้อง"
-  },
-  "settings_result_grouping_secondary_dictionaries": {
-    "message": "พจนานุกรมรอง…"
-  },
-  "settings_result_grouping_term_reading": {
-    "message": "จัดกลุ่มคู่คำ-การอ่าน"
-  },
-  "settings_scanning_advanced_inputs_label": {
-    "message": "ตั้งค่าอินพุตการสแกนขั้นสูง… <span class=\"light no-wrap\">(<span class=\"scanning-input-count\">#</span> กำหนดแล้ว)</span>"
-  },
-  "settings_scanning_alphanumeric_description": {
-    "message": "ใช้ได้เมื่อภาษาเป็นญี่ปุ่น จีน กวางตุ้ง หรือเกาหลีเท่านั้น"
-  },
-  "settings_scanning_alphanumeric_label": {
-    "message": "ค้นหาข้อความที่มีอักขระที่ไม่ใช่ญี่ปุ่น จีน หรือเกาหลี"
-  },
-  "settings_scanning_deep_scan_description": {
-    "message": "เปิดใช้การสแกนข้อความที่ถูกปกคลุมด้วยเลเยอร์อื่น"
-  },
-  "settings_scanning_deep_scan_label": {
-    "message": "การสแกนเนื้อหาเชิงลึก"
-  },
-  "settings_scanning_delay_description": {
-    "message": "เปลี่ยนเวลาหน่วงก่อนเริ่มสแกนเมื่อไม่ต้องใช้ปุ่มแก้ไข"
-  },
-  "settings_scanning_delay_label": {
-    "message": "หน่วงเวลาการสแกน <span class=\"light\">(มิลลิวินาที)</span>"
-  },
-  "settings_scanning_heading": {
-    "message": "การสแกน"
-  },
-  "settings_scanning_input_prevention_label": {
-    "message": "ตั้งค่าการป้องกันการกระทำของอินพุต…"
-  },
-  "settings_scanning_layout_description": {
-    "message": "ใช้ข้อมูลสไตล์ของหน้าเว็บเพื่อกำหนดตำแหน่งที่น่าจะขึ้นบรรทัดใหม่"
-  },
-  "settings_scanning_layout_label": {
-    "message": "การสแกนตามเลย์เอาต์"
-  },
-  "settings_scanning_middle_mouse_description": {
-    "message": "กดปุ่มเมาส์กลางค้างไว้ขณะเลื่อนเคอร์เซอร์เพื่อสแกนข้อความ"
-  },
-  "settings_scanning_middle_mouse_label": {
-    "message": "สแกนด้วยปุ่มเมาส์กลาง"
-  },
-  "settings_scanning_modifier_description": {
-    "message": "กดปุ่มค้างไว้ขณะเลื่อนเคอร์เซอร์เพื่อสแกนข้อความ\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">เพิ่มเติม…</a>"
-  },
-  "settings_scanning_modifier_label": {
-    "message": "ปุ่มแก้ไขสำหรับการสแกน"
-  },
-  "settings_scanning_modifier_more_1": {
-    "message": "สามารถใช้ปุ่มแก้ไขบนแป้นพิมพ์เพื่อเปิดการสแกนข้อความเมื่อเคอร์เซอร์เคลื่อนที่ได้\n                    หรือใช้ตัวเลือก <em>ไม่มีปุ่ม</em> เพื่อสแกนข้อความทุกครั้งที่เคอร์เซอร์เคลื่อนที่\n                    โดยไม่ต้องกดปุ่มใด ๆ ค้างไว้"
-  },
-  "settings_scanning_modifier_more_2": {
-    "message": "การปรับแต่งอินพุตการสแกนขั้นสูงสามารถตั้งค่าได้โดยเปิดตัวเลือก <em>ขั้นสูง</em>\n                    และคลิก <em data-modal-action=\"show,scanning-inputs\">ตั้งค่าอินพุตการสแกนขั้นสูง</em>."
-  },
-  "settings_scanning_resolution_character": {
-    "message": "อักขระ"
-  },
-  "settings_scanning_resolution_description": {
-    "message": "เริ่มสแกนค้นหาที่คำหรืออักขระ ณ ตำแหน่งเคอร์เซอร์\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">เพิ่มเติม…</a>"
-  },
-  "settings_scanning_resolution_label": {
-    "message": "ความละเอียดการสแกน"
-  },
-  "settings_scanning_resolution_more_1": {
-    "message": "ความละเอียดการสแกนกำหนดว่าการสแกนจะเริ่มที่ใดเมื่อเคอร์เซอร์เคลื่อนที่\n                    ตัวเลือก <code>อักขระ</code> จะเริ่มสแกนที่ตำแหน่งปัจจุบันของเคอร์เซอร์\n                    ส่วนตัวเลือก <code>คำ</code> จะเริ่มสแกนที่ต้นคำ"
-  },
-  "settings_scanning_resolution_word": {
-    "message": "คำ"
-  },
-  "settings_scanning_select_text_label": {
-    "message": "เลือกข้อความที่ตรงกัน"
-  },
-  "settings_scanning_text_length_description": {
-    "message": "เปลี่ยนจำนวนอักขระที่จะอ่านเมื่อสแกนคำศัพท์"
-  },
-  "settings_scanning_text_length_label": {
-    "message": "ความยาวการสแกนข้อความ"
-  },
-  "settings_scanning_text_length_warning": {
-    "message": "ตั้งค่านี้สูงเกินไป (100+) อาจกระทบต่อประสิทธิภาพ"
-  },
-  "settings_scanning_wildcard_description": {
-    "message": "เปิดใช้ไวลด์การ์ดท้ายคำเมื่อค้นหาข้อความหน้าเว็บที่สแกน\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">เพิ่มเติม…</a>"
-  },
-  "settings_scanning_wildcard_label": {
-    "message": "การสแกนด้วยไวลด์การ์ด"
-  },
-  "settings_scanning_wildcard_more_1": {
-    "message": "แทนที่จะค้นหาข้อความต้นฉบับแบบตรง ๆ ข้อความจะต้องเป็นเพียงคำนำหน้าของคำที่มีอยู่เท่านั้น เช่น สแกน 読み จะเท่ากับการค้นหา 読み* ซึ่งอาจแสดงผลลัพธ์เพิ่มเติม เช่น 読み方"
-  },
-  "settings_scanning_wildcard_warning": {
-    "message": "ซึ่งอาจทำให้การสแกนและการค้นหาช้าลง และผลลัพธ์อาจไม่เกี่ยวข้องเท่าเดิม"
-  },
-  "settings_scanning_without_mousemove_description": {
-    "message": "อนุญาตให้สแกนคำใต้ตัวชี้โดยที่ตัวชี้ไม่ต้องเคลื่อนที่"
-  },
-  "settings_scanning_without_mousemove_label": {
-    "message": "สแกนโดยไม่ต้องขยับเมาส์"
-  },
-  "settings_scanning_zoom_description": {
-    "message": "แก้ไขตำแหน่งตัวชี้บนหน้าเว็บที่ใช้ CSS <code>zoom</code>\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">เพิ่มเติม…</a>"
-  },
-  "settings_scanning_zoom_label": {
-    "message": "ทำให้การซูม CSS เป็นมาตรฐาน"
-  },
-  "settings_scanning_zoom_more_1": {
-    "message": "คุณสมบัติ CSS ที่ไม่เป็นมาตรฐาน <a href=\"https://developer.mozilla.org/en-US/docs/Web/CSS/zoom\" rel=\"noopener noreferrer\" target=\"_blank\"><code>zoom</code></a> จะรบกวนการคำนวณพิกัดตัวชี้ตามปกติเมื่อสแกนหน้าเว็บ คุณสมบัตินี้ไม่แนะนำให้ใช้และพบไม่บ่อย แต่บางหน้าเว็บยังคงใช้"
-  },
-  "settings_scanning_zoom_more_2": {
-    "message": "การเปิดใช้ตัวเลือกนี้ซึ่งเปิดอยู่โดยค่าเริ่มต้น จะนำค่าของคุณสมบัตินี้มาพิจารณาเมื่อสแกนเนื้อหาหน้าเว็บ ขณะนี้ถูกวางไว้หลังตัวเลือกในกรณีที่มีผลข้างเคียงเชิงลบที่ไม่คาดคิด"
-  },
-  "settings_scanning_zoom_more_3": {
-    "message": "การตั้งค่านี้ไม่มีผลใน Firefox เนื่องจากไม่ได้รองรับคุณสมบัติ <code>zoom</code>"
-  },
-  "settings_search_window_heading": {
-    "message": "หน้าต่างค้นหา"
-  },
-  "settings_search_window_left_description": {
-    "message": "ควบคุมตำแหน่งซ้ายของหน้าต่างเป็นพิกเซล"
-  },
-  "settings_search_window_left_label": {
-    "message": "ตำแหน่งซ้าย"
-  },
-  "settings_search_window_native_window_label": {
-    "message": "ใช้หน้าต่างเบราว์เซอร์เนทีฟแทนป๊อปอัปที่ฝังอยู่\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
-  },
-  "settings_search_window_native_window_more": {
-    "message": "แทนที่จะแสดงคำจำกัดความในป๊อปอัปที่ฝังในหน้าเว็บ จะเปิดหน้าต่างเบราว์เซอร์เนทีฟที่มีเนื้อหาป๊อปอัปแทน หน้าต่างนี้จะแชร์กันในทุกแท็บ"
-  },
-  "settings_search_window_open_link": {
-    "message": "เปิด…"
-  },
-  "settings_search_window_size_description": {
-    "message": "ควบคุมขนาดของหน้าต่างเป็นพิกเซล"
-  },
-  "settings_search_window_size_label": {
-    "message": "ขนาด"
-  },
-  "settings_search_window_state_fullscreen": {
-    "message": "เต็มหน้าจอ"
-  },
-  "settings_search_window_state_maximized": {
-    "message": "ขยายเต็ม"
-  },
-  "settings_search_window_sticky_header_description": {
-    "message": "ส่วนหัวการค้นหาจะค้างอยู่บนหน้าเมื่อเลื่อนลง"
-  },
-  "settings_search_window_sticky_header_label": {
-    "message": "หัวการค้นหาติดไว้"
-  },
-  "settings_search_window_style_description": {
-    "message": "เปลี่ยนรูปลักษณ์ของหน้าต่าง"
-  },
-  "settings_search_window_style_label": {
-    "message": "สไตล์หน้าต่าง"
-  },
-  "settings_search_window_top_description": {
-    "message": "ควบคุมตำแหน่งบนของหน้าต่างเป็นพิกเซล"
-  },
-  "settings_search_window_top_label": {
-    "message": "ตำแหน่งบน"
-  },
-  "settings_search_window_type_popup": {
-    "message": "ป๊อปอัป"
-  },
-  "settings_security_heading": {
-    "message": "ความปลอดภัย"
-  },
-  "settings_security_permissions_label": {
-    "message": "กำหนดสิทธิ์ของ Sottaku-Yomitan"
-  },
-  "settings_security_secure_frame_label": {
-    "message": "ใช้ URL เฟรมป๊อปอัปที่ปลอดภัย\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
-  },
-  "settings_security_secure_frame_more": {
-    "message": "เมื่อเปิดใช้งานตัวเลือกนี้ URL ขององค์ประกอบ <code>iframe</code> จะถูกกำหนดโดย\n                    การเปลี่ยนตำแหน่งเอกสารภายในของ <code>iframe</code> โดยตรง แทนที่จะใช้\n                    แอตทริบิวต์ <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-src\" rel=\"noopener noreferrer\" target=\"_blank\"><code>src</code></a> ของ <code>iframe</code>\n                    ซึ่งจะทำให้ URL ของส่วนขยายไม่ถูกเปิดเผยให้หน้าเว็บพื้นฐาน และทำให้ยากขึ้น\n                    ในการตรวจพบการมีอยู่ของ Sottaku-Yomitan"
-  },
-  "settings_security_shadow_dom_label": {
-    "message": "ใช้คอนเทนเนอร์ที่ปลอดภัยรอบป๊อปอัป\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
-  },
-  "settings_security_shadow_dom_more": {
-    "message": "บน <a href=\"https://caniuse.com/shadowdomv1\" rel=\"noopener noreferrer\" target=\"_blank\">เบราว์เซอร์ที่รองรับ</a>\n                    องค์ประกอบ <code>iframe</code> ของป๊อปอัปจะถูกฝังไว้ภายในคอนเทนเนอร์ที่มี <a href=\"https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM\" rel=\"noopener noreferrer\" target=\"_blank\">shadow DOM</a> แบบปิด\n                    คอนเทนเนอร์นี้ป้องกันไม่ให้สคริปต์ที่ทำงานบนหน้าเว็บพื้นฐานสามารถค้นพบ <code>iframe</code> ได้\n                    ซึ่งช่วยหลีกเลี่ยงสถานการณ์ที่หน้าเว็บพยายามแก้ไขหรือใช้ป๊อปอัปของ Sottaku-Yomitan เพื่อวัตถุประสงค์ที่ไม่ตั้งใจ"
-  },
-  "settings_shortcuts_heading": {
-    "message": "ทางลัด"
-  },
-  "settings_shortcuts_native_label": {
-    "message": "กำหนดค่าทางลัดแป้นพิมพ์แบบเนทีฟ…"
-  },
-  "settings_shortcuts_overview": {
-    "message": "<p>\n                        Sottaku-Yomitan มีหมวดหมู่ทางลัดแป้นพิมพ์สองแบบ:\n                    </p>\n<ul>\n<li>\n<strong>มาตรฐาน</strong> ทางลัดแป้นพิมพ์ถูกควบคุมโดยส่วนขยาย และสามารถเพิ่ม ลบ\n                            และกำหนดค่าให้ทำงานบนหน้าเว็บที่ Sottaku-Yomitan ทำงานอยู่ได้\n                        </li>\n<li>\n<strong>เนทีฟ</strong> ทางลัดแป้นพิมพ์ถูกควบคุมโดยเว็บเบราว์เซอร์ และทำงานแบบครอบคลุม\n                            ภายในเว็บเบราว์เซอร์<span data-show-for-browser=\"chrome edge\"> หรือทั้งระบบ</span>.\n                        </li>\n</ul>"
-  },
-  "settings_shortcuts_standard_label": {
-    "message": "กำหนดค่าทางลัดแป้นพิมพ์มาตรฐาน…"
-  },
-  "settings_sottaku_account_description": {
-    "message": "คลิก \"ใช้เซสชันเบราว์เซอร์\" เพื่อเชื่อมโยงบัญชีที่คุณลงชื่อเข้าใช้ที่ sottaku.app (ต้องมี Pro)"
-  },
-  "settings_sottaku_account_label": {
-    "message": "บัญชี"
-  },
-  "settings_sottaku_account_not_connected": {
-    "message": "ไม่ได้เชื่อมต่อ"
-  },
-  "settings_sottaku_heading": {
-    "message": "Sottaku"
-  },
-  "settings_sottaku_integration_description": {
-    "message": "การค้นหา เสียง และการทำงานของแฟลชการ์ดจะใช้บัญชี Sottaku ของคุณเสมอ ไม่จำเป็นต้องใช้พจนานุกรมในเครื่อง"
-  },
-  "settings_sottaku_integration_label": {
-    "message": "การผสานรวม Sottaku"
-  },
-  "settings_sottaku_language_add_button": {
-    "message": "เพิ่ม"
-  },
-  "settings_sottaku_language_chinese": {
-    "message": "จีน"
-  },
-  "settings_sottaku_language_japanese": {
-    "message": "ญี่ปุ่น"
-  },
-  "settings_sottaku_language_korean": {
-    "message": "เกาหลี"
-  },
-  "settings_sottaku_language_order_description": {
-    "message": "เลือกว่าภาษา Sottaku ใดจะแสดงในป็อปอัปและลำดับของภาษา (ใช้สำหรับโหมดผสมและตัวสำรอง)"
-  },
-  "settings_sottaku_language_order_label": {
-    "message": "ลำดับภาษา"
-  },
-  "settings_sottaku_language_routing_auto": {
-    "message": "อัตโนมัติ (ตรวจจับต่อการค้นหา)"
-  },
-  "settings_sottaku_language_routing_description": {
-    "message": "เลือกวิธีที่ Sottaku-Yomitan จะเลือกภาษา Sottaku สำหรับการค้นหา (รองรับญี่ปุ่น เกาหลี และจีน)"
-  },
-  "settings_sottaku_language_routing_label": {
-    "message": "การกำหนดเส้นทางภาษา"
-  },
-  "settings_sottaku_language_routing_mixed": {
-    "message": "ผสม (แสดงภาษาที่ต้องการ)"
-  },
-  "settings_sottaku_password_placeholder": {
-    "message": "รหัสผ่าน"
-  },
-  "settings_sottaku_sign_in_button": {
-    "message": "ลงชื่อเข้าใช้"
-  },
-  "settings_sottaku_sign_in_google_button": {
-    "message": "ลงชื่อเข้าใช้ด้วย Google (เปิด sottaku.app)"
-  },
-  "settings_sottaku_status_not_connected": {
-    "message": "ไม่ได้เชื่อมต่อ"
-  },
-  "settings_sottaku_status_sign_in_required": {
-    "message": "ต้องลงชื่อเข้าใช้ ให้เข้าสู่ระบบให้เสร็จในแท็บที่เปิด แล้วคลิก \"ใช้เซสชันเบราว์เซอร์\"."
-  },
-  "settings_sottaku_status_signed_in": {
-    "message": "ลงชื่อเข้าใช้แล้ว"
-  },
-  "settings_sottaku_status_signed_in_as": {
-    "message": "ลงชื่อเข้าใช้เป็น $1"
-  },
-  "settings_sottaku_status_signed_out": {
-    "message": "ลงชื่อออกจาก Sottaku"
-  },
-  "settings_sottaku_unlink_button": {
-    "message": "ยกเลิกการเชื่อมโยงบัญชี"
-  },
-  "settings_sottaku_use_browser_session_button": {
-    "message": "ใช้เซสชันเบราว์เซอร์"
-  },
-  "settings_sottaku_use_browser_session_title": {
-    "message": "ใช้เซสชันเบราว์เซอร์ที่ลงชื่อเข้าใช้แล้วซ้ำ"
-  },
-  "settings_sottaku_username_placeholder": {
-    "message": "ชื่อผู้ใช้หรืออีเมล"
-  },
-  "settings_status_tasks_in_progress": {
-    "message": "งานที่กำลังดำเนินการ:"
-  },
-  "settings_text_parsing_heading": {
-    "message": "การแยกวิเคราะห์ข้อความ"
-  },
-  "settings_text_parsing_info_1": {
-    "message": "Sottaku-Yomitan สามารถสแกนประโยคที่อยู่รอบคำและแยกวิเคราะห์คำแต่ละคำของคำค้นบน\n                <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">หน้าค้นหา</a> ได้\n                ข้อมูลนี้ยังสามารถเพิ่มไปยังการ์ด Anki เพื่อให้บริบทเพิ่มเติมได้"
-  },
-  "settings_text_parsing_internal_description": {
-    "message": "คำในประโยคจะถูกแยกวิเคราะห์โดยใช้พจนานุกรมของ Sottaku-Yomitan\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">เพิ่มเติม…</a>"
-  },
-  "settings_text_parsing_internal_label": {
-    "message": "แยกวิเคราะห์ประโยคด้วยตัวแยกวิเคราะห์ภายในของ Sottaku-Yomitan"
-  },
-  "settings_text_parsing_internal_more": {
-    "message": "ตัวแยกวิเคราะห์ภายในของ Sottaku-Yomitan เป็นอัลกอริทึมง่ายๆ ที่สามารถแยกวิเคราะห์ประโยคโดยใช้พจนานุกรมที่ติดตั้งไว้ ทำงานโดยตรวจจับคำที่ยาวที่สุดที่ต้นประโยคซ้ำๆ แล้วเลื่อนไปจนไม่มีข้อความเหลือ วิธีนี้ให้ผลลัพธ์ที่ดีในกรณีทั่วไป แต่เนื่องจากไม่ได้คำนึงถึงโครงสร้างไวยากรณ์ บางครั้งอาจได้การแบ่งส่วนที่ไม่ถูกต้อง"
-  },
-  "settings_text_parsing_mecab_description": {
-    "message": "คำในประโยคจะถูกแยกวิเคราะห์โดยใช้โปรแกรมของบุคคลที่สาม เฉพาะภาษาญี่ปุ่นเท่านั้น"
-  },
-  "settings_text_parsing_mecab_disclaimer": {
-    "message": "ตัวเลือกนี้อาจส่งข้อมูลคำค้นออกนอก Sottaku-Yomitan เพื่อแยกวิเคราะห์<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">นโยบายความเป็นส่วนตัว</a>)</span>.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">เพิ่มเติม…</a>"
-  },
-  "settings_text_parsing_mecab_label": {
-    "message": "แยกวิเคราะห์ประโยคด้วย <a href=\"https://en.wikipedia.org/wiki/MeCab\" rel=\"noopener noreferrer\" target=\"_blank\">MeCab</a>"
-  },
-  "settings_text_parsing_mecab_more_1": {
-    "message": "MeCab เป็นโปรแกรมของบุคคลที่สามที่ใช้พจนานุกรมและอัลกอริทึมการแยกวิเคราะห์ของตัวเองเพื่อแยกประโยคออกเป็นคำแต่ละคำ MeCab อาจให้ผลการแยกวิเคราะห์ที่แม่นยำกว่าตัวแยกวิเคราะห์ภายในของ Sottaku-Yomitan"
-  },
-  "settings_text_parsing_mecab_more_2": {
-    "message": "เพื่อให้ Sottaku-Yomitan ใช้งานได้ ต้องติดตั้งทั้ง MeCab และคอมโพเนนต์การส่งข้อความแบบเนทีฟ\n                    สามารถดูคู่มือการติดตั้งได้ที่ <a href=\"https://github.com/yomidevs/yomitan-mecab-installer/blob/master/README.md\" rel=\"noopener noreferrer\" target=\"_blank\">ที่นี่</a>."
-  },
-  "settings_text_parsing_scan_extent_description": {
-    "message": "ปรับจำนวนอักขระที่สแกนแบบสองทิศทางเพื่อสร้างประโยค"
-  },
-  "settings_text_parsing_scan_extent_label": {
-    "message": "ขอบเขตการสแกนประโยค"
-  },
-  "settings_text_parsing_spacing_label": {
-    "message": "แสดงช่องว่างระหว่างคำที่แยกแล้ว"
-  },
-  "settings_text_parsing_termination_custom": {
-    "message": "กำหนดเอง"
-  },
-  "settings_text_parsing_termination_custom_no_newlines": {
-    "message": "กำหนดเอง ไม่มีขึ้นบรรทัดใหม่"
-  },
-  "settings_text_parsing_termination_label": {
-    "message": "อักขระสิ้นสุดประโยค"
-  },
-  "settings_text_parsing_termination_newlines": {
-    "message": "เฉพาะขึ้นบรรทัดใหม่"
-  },
-  "settings_translation_heading": {
-    "message": "การแปล"
-  },
-  "settings_translation_replacement_patterns_label": {
-    "message": "กำหนดรูปแบบการแทนที่ข้อความแบบกำหนดเอง…"
-  },
-  "settings_translation_search_resolution_description": {
-    "message": "<p>\"A dog\"　→　ค้นหา \"A dog\",\"A do\", \"A d\", \"A\"</p> หรือ <p>\"A dog\"　→　\"A dog\", \"A\"</p>"
-  },
-  "settings_translation_search_resolution_label": {
-    "message": "ความละเอียดของการค้นหาในพจนานุกรม"
-  },
-  "settings_translation_search_resolution_letter": {
-    "message": "ตัวอักษร"
-  },
-  "settings_translation_search_resolution_word": {
-    "message": "คำ"
-  },
-  "sottaku_action_title_missing_id": {
-    "message": "ไม่มีรหัสคำถาม Sottaku"
-  },
-  "sottaku_action_title_sign_in": {
-    "message": "โปรดเข้าสู่ระบบ Sottaku ก่อน"
-  },
-  "sottaku_locale_automatic": {
-    "message": "อัตโนมัติ (ใช้ภาษาบัญชี Sottaku)"
-  },
-  "sottaku_request_button": {
-    "message": "ขอรายการในพจนานุกรม"
-  },
-  "sottaku_request_button_requested": {
-    "message": "ส่งคำขอแล้ว"
-  },
-  "sottaku_request_button_requesting": {
-    "message": "กำลังส่งคำขอ..."
-  },
-  "sottaku_request_button_retry": {
-    "message": "ขอคำแปล"
-  },
-  "sottaku_request_button_title_submitted": {
-    "message": "ส่งคำขอไปยัง Sottaku แล้ว"
-  },
-  "sottaku_save_button": {
-    "message": "บันทึกไปยัง Sottaku"
-  },
-  "sottaku_save_button_saved": {
-    "message": "บันทึกแล้ว"
-  },
-  "sottaku_save_button_saving": {
-    "message": "กำลังบันทึก..."
-  },
-  "sottaku_save_button_title_already_saved": {
-    "message": "บันทึกใน Sottaku แล้ว"
-  },
-  "sottaku_save_button_title_saved": {
-    "message": "เพิ่มไปยังแฟลชการ์ด Sottaku ของคุณแล้ว"
-  },
-  "status_footer_close": {
-    "message": "ปิด"
-  },
-  "status_footer_tasks_in_progress": {
-    "message": "งานที่กำลังดำเนินการ:"
-  },
-  "support_heading": {
-    "message": "สนับสนุน Sottaku-Yomitan ❤️"
-  },
-  "support_list_contribute": {
-    "message": "ร่วมพัฒนาโครงการ Sottaku-Yomitan! เริ่มจากอ่าน <a href=\"https://github.com/sottakuapp/sottaku-yomitan/blob/master/CONTRIBUTING.md\" rel=\"noreferrer noopener\">แนวทางการมีส่วนร่วม</a> ของเรา"
-  },
-  "support_list_feedback": {
-    "message": "รายงานบั๊กหรือข้อเสนอแนะผ่าน <a href=\"https://github.com/sottakuapp/sottaku-yomitan/issues/new/choose\" rel=\"noreferrer noopener\">GitHub Issues</a> หรือส่งอีเมลไปที่ <a href=\"mailto:hello@sottaku.app\">hello@sottaku.app</a>."
-  },
-  "support_list_star": {
-    "message": "ให้ดาวโครงการบน <a href=\"https://github.com/sottakuapp/sottaku-yomitan\" rel=\"noreferrer noopener\">GitHub</a> และแบ่งปันกับเพื่อน ๆ"
-  },
-  "support_subheading": {
-    "message": "นี่คือบางวิธีในการสนับสนุน Sottaku-Yomitan:"
-  },
-  "template_anki_overwrite_append_title": {
-    "message": "แทรกค่าใหม่หลังค่าที่มีอยู่"
-  },
-  "template_anki_overwrite_available_title": {
-    "message": "เขียนทับถ้าค่าใหม่ไม่ว่าง"
-  },
-  "template_anki_overwrite_fill_title": {
-    "message": "เขียนทับถ้าค่าที่มีอยู่ว่าง"
-  },
-  "template_anki_overwrite_overwrite_title": {
-    "message": "เขียนทับแม้ค่าใหม่ว่าง"
-  },
-  "template_anki_overwrite_prepend_title": {
-    "message": "แทรกค่าใหม่ก่อนค่าที่มีอยู่"
-  },
-  "template_anki_overwrite_skip_title": {
-    "message": "คงค่าที่มีอยู่"
-  },
-  "template_audio_source_tts_anki_warning": {
-    "message": "ไม่รองรับใน Anki"
-  },
-  "template_dictionary_integrity_error": {
-    "message": "อาจนำเข้าพจนานุกรมไม่ถูกต้อง"
-  },
-  "template_dictionary_update_available": {
-    "message": "มีอัปเดต"
-  },
-  "template_hotkey_no_input": {
-    "message": "ไม่มีอินพุต"
-  },
-  "template_profile_name_placeholder": {
-    "message": "ชื่อโปรไฟล์"
-  },
-  "template_scan_no_inputs": {
-    "message": "ไม่มีอินพุต"
-  },
-  "template_scan_touch_min_time": {
-    "message": "เวลาสัมผัสขั้นต่ำ <span class=\"light\">(เป็นมิลลิวินาที)</span>:"
-  },
-  "templates_modals_title": {
-    "message": "เทมเพลต"
-  },
-  "templates_settings_title": {
-    "message": "เทมเพลต"
-  },
-  "theme_option_auto": {
-    "message": "อัตโนมัติ"
-  },
-  "theme_option_browser": {
-    "message": "เบราว์เซอร์"
-  },
-  "theme_option_dark": {
-    "message": "มืด"
-  },
-  "theme_option_light": {
-    "message": "สว่าง"
-  },
-  "welcome_audio_enable_description": {
-    "message": "แสดงไอคอนลำโพงที่คลิกได้ข้างผลการค้นหา"
-  },
-  "welcome_audio_enable_disclaimer": {
-    "message": "ตัวเลือกนี้อาจส่งคำ การอ่าน และ/หรือภาษาออกนอก Sottaku-Yomitan เพื่อดึงเสียงเมื่อคลิกไอคอนลำโพง<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">นโยบายความเป็นส่วนตัว</a>)</span>.\n                    <div data-show-for-browser=\"firefox firefox-mobile\">การปิดตัวเลือกนี้จะไม่อนุญาตให้เล่นเสียงการออกเสียงสำหรับคำที่ค้นหา</div>"
-  },
-  "welcome_audio_enable_label": {
-    "message": "เปิดใช้การเล่นเสียงสำหรับคำศัพท์"
-  },
-  "welcome_basic_customization_heading": {
-    "message": "การปรับแต่งพื้นฐาน"
-  },
-  "welcome_data_transmission_heading": {
-    "message": "การส่งข้อมูล"
-  },
-  "welcome_get_started_connect_account": {
-    "message": "เชื่อมต่อบัญชี Sottaku ของคุณเพื่อซิงค์พจนานุกรม เสียง และแฟลชการ์ด"
-  },
-  "welcome_get_started_heading": {
-    "message": "นี่คือพื้นฐานสำหรับการเริ่มต้น"
-  },
-  "welcome_get_started_news_link": {
-    "message": "เพิ่งเริ่มใช้ Sottaku-Yomitan? ไปที่ sottaku.app สำหรับข่าวและเคล็ดลับ"
-  },
-  "welcome_get_started_quick_start": {
-    "message": "คู่มือเริ่มต้นอย่างรวดเร็วของ Sottaku-Yomitan"
-  },
-  "welcome_heading": {
-    "message": "ยินดีต้อนรับสู่ Sottaku-Yomitan!"
-  },
-  "welcome_locale_description": {
-    "message": "ภาษาที่ใช้สำหรับคำแปลที่ Sottaku ส่งกลับมา"
-  },
-  "welcome_locale_label": {
-    "message": "ภาษา"
-  },
-  "welcome_locale_setup_description": {
-    "message": "Sottaku มีการค้นหาภาษาญี่ปุ่นและเกาหลีผ่านบัญชีของคุณอยู่แล้ว; นำเข้าพจนานุกรมเพิ่มเติมหากต้องการใช้งานออฟไลน์หรือภาษาอื่น"
-  },
-  "welcome_locale_setup_heading": {
-    "message": "ตั้งค่าภาษา"
-  },
-  "welcome_more_customization_link": {
-    "message": "มีตัวเลือกการปรับแต่งเพิ่มเติมในหน้าการตั้งค่า"
-  },
-  "welcome_permissions_disabled_warning": {
-    "message": "ฟีเจอร์ Sottaku-Yomitan จะถูกจำกัดหากไม่ได้เปิดใช้งานสิทธิ์ที่แนะนำ"
-  },
-  "welcome_permissions_enable_optional_description": {
-    "message": "ช่วยให้ Sottaku-Yomitan อ่านคลิปบอร์ดและสื่อสารกับโปรแกรมภายนอกได้"
-  },
-  "welcome_permissions_enable_optional_label": {
-    "message": "เปิดใช้สิทธิ์เพิ่มเติม"
-  },
-  "welcome_permissions_enable_recommended_description": {
-    "message": "ช่วยให้ Sottaku-Yomitan สามารถสแกนข้อความจากเว็บไซต์ส่วนใหญ่ได้"
-  },
-  "welcome_permissions_enable_recommended_label": {
-    "message": "เปิดใช้สิทธิ์ที่แนะนำ"
-  },
-  "welcome_permissions_full_enabled": {
-    "message": "ฟีเจอร์ทั้งหมดของ Sottaku-Yomitan ใช้งานได้"
-  },
-  "welcome_permissions_more_info_chrome": {
-    "message": "การตั้งค่าเพิ่มเติมมีอยู่ใน <a href=\"/permissions.html\" rel=\"noopener\">หน้าสิทธิ์</a> และใน <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">หน้าการตั้งค่าส่วนขยาย</a> ของเบราว์เซอร์"
-  },
-  "welcome_permissions_more_info_firefox": {
-    "message": "การตั้งค่าเพิ่มเติมมีอยู่ใน <a href=\"/permissions.html\" rel=\"noopener\">หน้าสิทธิ์</a> และหน้าการตั้งค่าส่วนขยายของเบราว์เซอร์"
-  },
-  "welcome_permissions_recommended_enabled": {
-    "message": "ฟีเจอร์หลักของ Sottaku-Yomitan ใช้งานได้"
-  },
-  "welcome_recommended_permissions_heading": {
-    "message": "สิทธิ์ที่แนะนำ (สำคัญ)"
-  },
-  "welcome_scan_middle_mouse_description": {
-    "message": "กดปุ่มเมาส์กลางค้างไว้ขณะเลื่อนเคอร์เซอร์เพื่อสแกนข้อความ"
-  },
-  "welcome_scan_middle_mouse_label": {
-    "message": "สแกนด้วยปุ่มเมาส์กลาง"
-  },
-  "welcome_scan_modifier_description": {
-    "message": "กดปุ่มค้างไว้ขณะเลื่อนเคอร์เซอร์เพื่อสแกนข้อความ"
-  },
-  "welcome_scan_modifier_label": {
-    "message": "ปุ่มปรับแก้การสแกน"
-  },
-  "welcome_show_guide_label": {
-    "message": "แสดงคู่มือแนะนำนี้เมื่อเริ่มเบราว์เซอร์"
-  },
-  "welcome_text_language_description": {
-    "message": "ใช้สำหรับฟีเจอร์พจนานุกรมออฟไลน์และเครื่องมือพรีวิว"
-  },
-  "welcome_text_language_label": {
-    "message": "ภาษาของข้อความ"
-  },
-  "welcome_theme_description": {
-    "message": "ปรับสไตล์ของ Sottaku-Yomitan"
-  },
-  "welcome_theme_label": {
-    "message": "ธีม"
-  }
+    "action_default_title": {
+        "message": "Sottaku-Yomitan"
+    },
+    "action_popup_button_info_title": {
+        "message": "ข้อมูล"
+    },
+    "action_popup_button_search_title": {
+        "message": "ค้นหา\nShift+คลิกเพื่อเปิดที่นี่"
+    },
+    "action_popup_button_settings_title": {
+        "message": "การตั้งค่า"
+    },
+    "action_popup_hotkey_info": {
+        "message": "ข้อมูล ({0})"
+    },
+    "action_popup_hotkey_search": {
+        "message": "ค้นหา ({0})\nShift+คลิกเพื่อเปิดที่นี่"
+    },
+    "action_popup_hotkey_settings": {
+        "message": "การตั้งค่า ({0})"
+    },
+    "action_popup_link_account_tooltip": {
+        "message": "เชื่อมบัญชี Sottaku เพื่อเปิดใช้การค้นหา"
+    },
+    "action_popup_loading": {
+        "message": "กำลังโหลด..."
+    },
+    "action_popup_profile_title": {
+        "message": "โปรไฟล์"
+    },
+    "action_popup_toggle_off": {
+        "message": "ปิด"
+    },
+    "action_popup_toggle_on": {
+        "message": "เปิด"
+    },
+    "action_popup_tooltip_scan": {
+        "message": "วางเมาส์เหนือข้อความเพื่อสแกน"
+    },
+    "browser_chrome": {
+        "message": "Chrome"
+    },
+    "browser_edge": {
+        "message": "Edge"
+    },
+    "browser_edge_legacy": {
+        "message": "Edge Legacy"
+    },
+    "browser_firefox": {
+        "message": "Firefox"
+    },
+    "browser_firefox_android": {
+        "message": "Firefox สำหรับ Android"
+    },
+    "browser_safari": {
+        "message": "Safari"
+    },
+    "command_open_info_page": {
+        "message": "เปิดหน้าข้อมูล"
+    },
+    "command_open_popup_window": {
+        "message": "เปิดหน้าต่างป๊อปอัป"
+    },
+    "command_open_search_page": {
+        "message": "เปิดหน้าค้นหา"
+    },
+    "command_open_search_page_current_tab": {
+        "message": "เปิดหน้าค้นหาในแท็บปัจจุบัน"
+    },
+    "command_open_settings_page": {
+        "message": "เปิดหน้าการตั้งค่า"
+    },
+    "command_toggle_text_scanning": {
+        "message": "สลับการสแกนข้อความ เปิด/ปิด"
+    },
+    "common_always": {
+        "message": "เสมอ"
+    },
+    "common_auto": {
+        "message": "อัตโนมัติ"
+    },
+    "common_bottom": {
+        "message": "ล่าง"
+    },
+    "common_browser": {
+        "message": "เบราว์เซอร์"
+    },
+    "common_close": {
+        "message": "ปิด"
+    },
+    "common_configure": {
+        "message": "กำหนดค่า…"
+    },
+    "common_dark": {
+        "message": "เข้ม"
+    },
+    "common_default": {
+        "message": "ค่าเริ่มต้น"
+    },
+    "common_height": {
+        "message": "ความสูง"
+    },
+    "common_info": {
+        "message": "ข้อมูล…"
+    },
+    "common_left": {
+        "message": "ซ้าย"
+    },
+    "common_less": {
+        "message": "น้อยลง…"
+    },
+    "common_light": {
+        "message": "สว่าง"
+    },
+    "common_manual": {
+        "message": "ด้วยตนเอง"
+    },
+    "common_mode": {
+        "message": "โหมด"
+    },
+    "common_move_down": {
+        "message": "เลื่อนลง"
+    },
+    "common_move_up": {
+        "message": "เลื่อนขึ้น"
+    },
+    "common_none": {
+        "message": "ไม่มี"
+    },
+    "common_normal": {
+        "message": "ปกติ"
+    },
+    "common_operator": {
+        "message": "ตัวดำเนินการ"
+    },
+    "common_remove": {
+        "message": "ลบ"
+    },
+    "common_right": {
+        "message": "ขวา"
+    },
+    "common_state": {
+        "message": "สถานะ"
+    },
+    "common_test": {
+        "message": "ทดสอบ"
+    },
+    "common_top": {
+        "message": "บน"
+    },
+    "common_type": {
+        "message": "ประเภท"
+    },
+    "common_width": {
+        "message": "ความกว้าง"
+    },
+    "dictionary_deleting_label": {
+        "message": "กำลังลบพจนานุกรม..."
+    },
+    "dictionary_details_attribution": {
+        "message": "การระบุแหล่งที่มา"
+    },
+    "dictionary_details_author": {
+        "message": "ผู้เขียน"
+    },
+    "dictionary_details_description": {
+        "message": "คำอธิบาย"
+    },
+    "dictionary_details_frequency_mode": {
+        "message": "โหมดความถี่"
+    },
+    "dictionary_details_expected_database": {
+        "message": "ที่คาดไว้: $1 (ฐานข้อมูล: $2)"
+    },
+    "dictionary_details_import_success": {
+        "message": "นำเข้าสำเร็จ"
+    },
+    "dictionary_details_kanji_count": {
+        "message": "จำนวนคันจิ"
+    },
+    "dictionary_details_kanji_meta_count": {
+        "message": "จำนวนเมตาดาตาคันจิ"
+    },
+    "dictionary_details_media_count": {
+        "message": "จำนวนสื่อ"
+    },
+    "dictionary_details_prefix_wildcards_supported": {
+        "message": "เปิดใช้ไวลด์การ์ดนำหน้าแล้ว"
+    },
+    "dictionary_details_source_language": {
+        "message": "ภาษาต้นทาง"
+    },
+    "dictionary_details_tag_meta_count": {
+        "message": "จำนวนแท็ก"
+    },
+    "dictionary_details_target_language": {
+        "message": "ภาษาเป้าหมาย"
+    },
+    "dictionary_details_term_count": {
+        "message": "จำนวนคำศัพท์"
+    },
+    "dictionary_details_term_meta_count": {
+        "message": "จำนวนเมตาดาตาคำศัพท์"
+    },
+    "dictionary_details_url": {
+        "message": "ที่อยู่ URL"
+    },
+    "dictionary_extra_data_item_plural": {
+        "message": "$1 รายการ"
+    },
+    "dictionary_extra_data_item_singular": {
+        "message": "$1 รายการ"
+    },
+    "dictionary_main_not_selected": {
+        "message": "ยังไม่ได้เลือก"
+    },
+    "dictionary_updates_count_plural": {
+        "message": "$1 อัปเดต"
+    },
+    "dictionary_updates_count_singular": {
+        "message": "$1 อัปเดต"
+    },
+    "dictionary_updates_none": {
+        "message": "ไม่มีอัปเดต"
+    },
+    "display_add_note_title": {
+        "message": "เพิ่ม {0}"
+    },
+    "display_anki_error_plural": {
+        "message": "เกิดข้อผิดพลาด $1 รายการ:"
+    },
+    "display_anki_error_singular": {
+        "message": "เกิดข้อผิดพลาด:"
+    },
+    "display_current_entry_title": {
+        "message": "รายการปัจจุบัน"
+    },
+    "display_dictionary_author": {
+        "message": "ผู้เขียน: $1"
+    },
+    "display_dictionary_description": {
+        "message": "คำอธิบาย: $1"
+    },
+    "display_dictionary_kanji_count": {
+        "message": "จำนวนคันจิ: $1"
+    },
+    "display_dictionary_size_kanji": {
+        "message": "ขนาดพจนานุกรม: $1 คันจิ"
+    },
+    "display_dictionary_size_terms": {
+        "message": "ขนาดพจนานุกรม: $1 คำศัพท์"
+    },
+    "display_dictionary_term_count": {
+        "message": "จำนวนคำศัพท์: $1"
+    },
+    "display_dictionary_url": {
+        "message": "ที่อยู่ URL: $1"
+    },
+    "display_hotkey_add_note": {
+        "message": "เพิ่ม {0} ({0})"
+    },
+    "display_hotkey_play_audio": {
+        "message": "เล่นเสียง ({0})"
+    },
+    "display_hotkey_view_note": {
+        "message": "ดูโน้ตที่เพิ่มแล้ว ({0})"
+    },
+    "display_image_label": {
+        "message": "รูปภาพ"
+    },
+    "display_inflection_algorithm": {
+        "message": "การยกเลิกการผันด้วยอัลกอริทึม"
+    },
+    "display_inflection_both": {
+        "message": "การยกเลิกการผันด้วยพจนานุกรมและอัลกอริทึม"
+    },
+    "display_inflection_dictionary": {
+        "message": "การยกเลิกการผันด้วยพจนานุกรม"
+    },
+    "display_kanji_heading_classifications": {
+        "message": "การจัดประเภท"
+    },
+    "display_kanji_heading_codepoints": {
+        "message": "จุดโค้ด"
+    },
+    "display_kanji_heading_dictionary_indices": {
+        "message": "ดัชนีพจนานุกรม"
+    },
+    "display_kanji_heading_meaning": {
+        "message": "ความหมาย"
+    },
+    "display_kanji_heading_readings": {
+        "message": "การอ่าน"
+    },
+    "display_kanji_heading_statistics": {
+        "message": "สถิติ"
+    },
+    "display_log_debug_info": {
+        "message": "บันทึกข้อมูลดีบักไปยังคอนโซล"
+    },
+    "display_more_info": {
+        "message": "ข้อมูลเพิ่มเติม"
+    },
+    "display_no_data_found": {
+        "message": "ไม่พบข้อมูล"
+    },
+    "display_note_viewer_error": {
+        "message": "ไม่สามารถเปิดหน้าต่างตัวดูโน้ตได้.<br/>\n    ตรวจสอบการตั้งค่า <a href=\"/settings.html#anki\" rel=\"noopener\" target=\"_blank\"><em>Anki</em> › <em>หน้าต่างตัวดูโน้ต</em></a>."
+    },
+    "display_play_audio_title": {
+        "message": "เล่นเสียง"
+    },
+    "display_set_primary_audio_title": {
+        "message": "ใช้เป็นเสียงสำหรับการ์ด Anki"
+    },
+    "display_view_added_note_title": {
+        "message": "ดูโน้ตที่เพิ่มแล้ว"
+    },
+    "extension_description": {
+        "message": "พจนานุกรมป๊อปอัปเชื่อมต่อ Sottaku สำหรับการเรียนภาษา"
+    },
+    "extension_description_dev": {
+        "message": "พจนานุกรมป๊อปอัปเชื่อมต่อ Sottaku สำหรับการเรียนภาษา (Dev)."
+    },
+    "extension_name": {
+        "message": "Sottaku-Yomitan"
+    },
+    "extension_name_dev": {
+        "message": "Sottaku-Yomitan (Dev)"
+    },
+    "extension_short_name": {
+        "message": "Sottaku-Yomitan"
+    },
+    "info_anki_version_unknown": {
+        "message": "ไม่ทราบ"
+    },
+    "info_general_browser": {
+        "message": "เบราว์เซอร์: <span id=\"browser\"></span>"
+    },
+    "info_general_export_settings": {
+        "message": "<a id=\"settings-export-button\" tabindex=\"0\">ส่งออกการตั้งค่า</a>"
+    },
+    "info_general_extension_version": {
+        "message": "เวอร์ชันส่วนขยาย: <span id=\"version\"></span>"
+    },
+    "info_general_heading": {
+        "message": "ทั่วไป"
+    },
+    "info_general_language": {
+        "message": "ภาษา: <span id=\"language\"></span>"
+    },
+    "info_general_platform": {
+        "message": "แพลตฟอร์ม: <span id=\"platform\"></span>"
+    },
+    "info_general_user_agent": {
+        "message": "ตัวแทนผู้ใช้: <span id=\"user-agent\"></span>"
+    },
+    "info_heading": {
+        "message": "ข้อมูล Sottaku-Yomitan"
+    },
+    "info_links_bugs": {
+        "message": "พบข้อบกพร่อง? รายงานที่นี่: <a href=\"https://github.com/sottakuapp/sottaku-yomitan/issues/new/choose\" rel=\"noreferrer noopener\">GitHub Issues</a>"
+    },
+    "info_links_feedback": {
+        "message": "ชอบ Sottaku-Yomitan ไหม? ส่งความคิดเห็นหรือไอเดียที่ GitHub หรืออีเมล <a href=\"mailto:hello@sottaku.app\">hello@sottaku.app</a>."
+    },
+    "info_links_heading": {
+        "message": "ลิงก์"
+    },
+    "info_links_more_info": {
+        "message": "ข้อมูลส่วนขยายเพิ่มเติม: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">สิทธิ์</a> | <a href=\"/legal.html\">ใบอนุญาต</a> | <a href=\"/issues.html\">ปัญหา</a>"
+    },
+    "info_links_recommended_dictionaries": {
+        "message": "พจนานุกรมที่แนะนำ: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">Sottaku-Yomitan Dictionaries</a>"
+    },
+    "info_links_release_notes": {
+        "message": "บันทึกการออกรุ่น: <a data-href-format=\"https://github.com/sottakuapp/sottaku-yomitan/releases/tag/{version}\" href=\"https://github.com/sottakuapp/sottaku-yomitan/releases\" id=\"release-notes-this-version-link\" rel=\"noreferrer noopener\">รุ่นนี้</a> | <a href=\"https://github.com/sottakuapp/sottaku-yomitan/releases\" rel=\"noreferrer noopener\">ทุกรุ่น</a>"
+    },
+    "info_links_source_code": {
+        "message": "ซอร์สโค้ด: <a href=\"https://github.com/sottakuapp/sottaku-yomitan\" rel=\"noreferrer noopener\">GitHub</a>"
+    },
+    "info_links_user_guide": {
+        "message": "ข้อมูลและคู่มือผู้ใช้: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">หน้าแรก</a>"
+    },
+    "info_need_help_heading": {
+        "message": "ต้องการความช่วยเหลือไหม?"
+    },
+    "info_quick_start_link": {
+        "message": "ดูคู่มือเริ่มต้นอย่างรวดเร็ว"
+    },
+    "info_read_wiki_link": {
+        "message": "อ่านวิกิ"
+    },
+    "issues_audio_expired_cert_body": {
+        "message": "หากเว็บไซต์ไม่อัปเดตใบรับรอง HTTPS ให้เป็นปัจจุบัน การดาวน์โหลดอาจล้มเหลวเพราะเบราว์เซอร์ระบุการเชื่อมต่อว่าไม่ปลอดภัย ซึ่งเกิดขึ้นเป็นครั้งคราวกับบางเว็บไซต์ที่ Sottaku-Yomitan ติดต่อ และโดยปกติจะได้รับการแก้ไขภายในหนึ่งวัน"
+    },
+    "issues_audio_expired_cert_heading": {
+        "message": "การดาวน์โหลดเสียงล้มเหลวเนื่องจากใบรับรองเซิร์ฟเวอร์หมดอายุ"
+    },
+    "issues_audio_expired_cert_note": {
+        "message": "ปัญหานี้เป็นปัญหาฝั่งเซิร์ฟเวอร์และ Sottaku-Yomitan ไม่สามารถควบคุมได้"
+    },
+    "issues_audio_idle_timeout_body": {
+        "message": "สามารถดาวน์โหลดไฟล์เสียงจากเซิร์ฟเวอร์ระยะไกลได้ขณะสร้างการ์ด Anki\n                และบางครั้งการดาวน์โหลดอาจค้างเนื่องจากปัญหาเซิร์ฟเวอร์หรือการเชื่อมต่ออินเทอร์เน็ต\n                การตั้งค่า <em>หมดเวลาการดาวน์โหลดเมื่อไม่ใช้งาน</em> ใน <a href=\"/settings.html#anki\">หน้าการตั้งค่า</a>\n                กำหนดเวลาจำกัดสำหรับการดาวน์โหลดที่ค้างอยู่"
+    },
+    "issues_audio_idle_timeout_heading": {
+        "message": "การดาวน์โหลดเสียงถูกยกเลิกเนื่องจากหมดเวลาเมื่อไม่ใช้งาน"
+    },
+    "issues_audio_permissions_body": {
+        "message": "ขึ้นอยู่กับการกำหนดค่าของส่วนขยาย Sottaku-Yomitan อาจมีปัญหาในการดาวน์โหลดไฟล์เสียงระหว่างสร้างการ์ด Anki บางครั้งอาจเกิดจากปัญหาสิทธิ์ที่ Sottaku-Yomitan ยังไม่ได้รับสิทธิ์เข้าถึงเว็บไซต์ที่โฮสต์ไฟล์เสียง"
+    },
+    "issues_audio_permissions_chrome": {
+        "message": "ตรวจสอบส่วน <em>การเข้าถึงไซต์</em> ของ\n                <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">หน้าการตั้งค่าส่วนขยาย</a>\n                และให้สิทธิ์ส่วนขยายเข้าถึง <em>ทุกไซต์</em> หรือเพิ่ม URL โฮสต์เสียงเฉพาะ"
+    },
+    "issues_audio_permissions_firefox": {
+        "message": "จากแถบที่อยู่ของเบราว์เซอร์ ไปที่ <code>about:addons</code> แล้วเปิดการตั้งค่าของ Sottaku-Yomitan\n                ตรวจสอบส่วน <em>การเข้าถึงไซต์</em> ของหน้าการตั้งค่าส่วนขยาย\n                และให้สิทธิ์เข้าถึง <em>ทุกไซต์</em> หรือเพิ่ม URL โฮสต์เสียงเฉพาะ"
+    },
+    "issues_audio_permissions_heading": {
+        "message": "การดาวน์โหลดเสียงล้มเหลวเนื่องจากอาจเกิดข้อผิดพลาดของสิทธิ์ส่วนขยาย <em>(Chrome)</em>"
+    },
+    "issues_heading": {
+        "message": "ปัญหา Sottaku-Yomitan"
+    },
+    "legal_dependency_licenses_heading": {
+        "message": "ใบอนุญาตการพึ่งพา JavaScript"
+    },
+    "legal_edrdg_heading": {
+        "message": "ใบอนุญาต EDRDG"
+    },
+    "legal_heading": {
+        "message": "ข้อมูลกฎหมายของ Sottaku-Yomitan"
+    },
+    "legal_sottaku_license_heading": {
+        "message": "ใบอนุญาต Sottaku-Yomitan"
+    },
+    "modal_collapsible_dictionaries_description": {
+        "message": "นิยามในพจนานุกรมสามารถย่อได้หากยาวเกินจำนวนบรรทัดที่กำหนด\n                ซึ่งอาจเป็นประโยชน์สำหรับพจนานุกรมที่มีคำอธิบายยาว\n                รูปลักษณ์สามารถปรับแต่งได้ด้วย CSS แบบกำหนดเอง\n                <a data-modal-action=\"show,collapsible-dictionaries-info\" tabindex=\"0\">เพิ่มเติม…</a>"
+    },
+    "modal_dictionaries_none_installed": {
+        "message": "ยังไม่มีการติดตั้งพจนานุกรมใดๆ\n                โปรดไปที่ <a href=\"https://github.com/sottakuapp/sottaku-yomitan/blob/master/docs/dictionaries.md#dictionaries\" rel=\"noopener noreferrer\" target=\"_blank\">หน้าแรกของ Sottaku-Yomitan</a>\n                เพื่อดูรายชื่อพจนานุกรมฟรี หรือคลิกปุ่ม <em>นำเข้า</em> ด้านล่างเพื่อเลือกไฟล์พจนานุกรมที่จะนำเข้า"
+    },
+    "modal_dictionaries_prefix_wildcard_label": {
+        "message": "เปิดใช้การค้นหาด้วยไวลด์การ์ดแบบคำนำหน้า\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    },
+    "modal_dictionary_confirm_delete_all_prompt": {
+        "message": "คุณแน่ใจหรือไม่ว่าต้องการลบ <strong>พจนานุกรมทั้งหมด</strong>?"
+    },
+    "modal_dictionary_details_deinflections_label": {
+        "message": "ใช้การยกเลิกการผัน\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    },
+    "modal_dictionary_details_pos_label": {
+        "message": "ตัวกรองชนิดคำ\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    },
+    "modal_dictionary_details_prefix_label": {
+        "message": "รองรับการค้นหาด้วยไวลด์การ์ดแบบคำนำหน้า\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    },
+    "modal_dictionary_move_prompt": {
+        "message": "ระบุตำแหน่งที่จะย้ายพจนานุกรม <strong class=\"dictionary-title\"></strong> ไปยัง:"
+    },
+    "modal_dictionary_rename_prompt": {
+        "message": "ระบุชื่อที่แสดงสำหรับพจนานุกรม <strong class=\"dictionary-title\"></strong>:"
+    },
+    "modal_profile_conditions_info_4": {
+        "message": "เมื่อใช้เงื่อนไข Flags, <code>clipboard</code> เป็นอินพุตที่ถูกต้องเพียงอย่างเดียว\n                        สิ่งนี้ทำให้หน้าการค้นหาสามารถใช้การตั้งค่าของโปรไฟล์อื่นเมื่อมีการคัดลอกข้อความ โดยมีเงื่อนไขว่า <code>เปิดใช้การเฝ้าติดตามข้อความคลิปบอร์ดในหน้าการค้นหา</code> ถูกเปิดใช้งาน"
+    },
+    "modal_profile_conditions_label": {
+        "message": "เงื่อนไขสำหรับโปรไฟล์ <em id=\"profile-conditions-profile-name\"></em>:"
+    },
+    "modal_profile_delete_prompt": {
+        "message": "คุณแน่ใจหรือไม่ว่าต้องการลบโปรไฟล์ <em id=\"profile-remove-name\"></em>?"
+    },
+    "modal_profile_reset_prompt": {
+        "message": "คุณแน่ใจหรือไม่ว่าต้องการรีเซ็ตโปรไฟล์ <em id=\"profile-reset-name\"></em> เป็นค่าเริ่มต้น?"
+    },
+    "modal_recommended_dictionaries_description": {
+        "message": "สำหรับพจนานุกรมที่ไม่ใช่ภาษาอังกฤษ โปรดดูรายการ\n                <a href=\"https://yomidevs.github.io/kaikki-to-yomitan/\" target=\"_blank\"> พจนานุกรม Kaikki</a> ที่มีอยู่"
+    },
+    "modal_secondary_search_description": {
+        "message": "พจนานุกรมเหล่านี้จะถูกใช้เพื่อค้นหาคำจำกัดความของคำที่เกี่ยวข้องเมื่อโหมดการจัดกลุ่มเป็น\n                <em>จัดกลุ่มคำที่เกี่ยวข้อง</em>."
+    },
+    "os_android": {
+        "message": "Android"
+    },
+    "os_chrome_os": {
+        "message": "Chrome OS"
+    },
+    "os_linux": {
+        "message": "Linux"
+    },
+    "os_mac": {
+        "message": "Mac OS"
+    },
+    "os_openbsd": {
+        "message": "Open BSD"
+    },
+    "os_unknown": {
+        "message": "ไม่ทราบ"
+    },
+    "os_windows": {
+        "message": "Windows"
+    },
+    "page_action_popup_title": {
+        "message": "ป๊อปอัปการทำงานของ Sottaku-Yomitan"
+    },
+    "page_info_title": {
+        "message": "ข้อมูล Sottaku-Yomitan"
+    },
+    "page_issues_title": {
+        "message": "ปัญหา Sottaku-Yomitan"
+    },
+    "page_legal_title": {
+        "message": "กฎหมายของ Sottaku-Yomitan"
+    },
+    "page_permissions_title": {
+        "message": "สิทธิ์ของ Sottaku-Yomitan"
+    },
+    "page_popup_preview_title": {
+        "message": "ตัวอย่างป๊อปอัป Sottaku-Yomitan"
+    },
+    "page_popup_title": {
+        "message": "การค้นหา Sottaku-Yomitan"
+    },
+    "page_quick_start_title": {
+        "message": "คู่มือเริ่มต้นอย่างรวดเร็ว"
+    },
+    "page_search_title": {
+        "message": "การค้นหา Sottaku-Yomitan"
+    },
+    "page_settings_title": {
+        "message": "การตั้งค่า Sottaku-Yomitan"
+    },
+    "page_support_title": {
+        "message": "สนับสนุน Sottaku-Yomitan"
+    },
+    "page_template_renderer_title": {
+        "message": "แซนด์บ็อกซ์ Handlebars ของ Sottaku-Yomitan"
+    },
+    "page_welcome_title": {
+        "message": "ยินดีต้อนรับสู่ Sottaku-Yomitan!"
+    },
+    "permissions_add_origin_button": {
+        "message": "เพิ่ม"
+    },
+    "permissions_additional_origins_label": {
+        "message": "ต้นทางเพิ่มเติม"
+    },
+    "permissions_all_urls_description": {
+        "message": "Sottaku-Yomitan ต้องการเข้าถึง URL ทั้งหมดเพื่อเรียกใช้สคริปต์สำหรับสแกนข้อความ แสดงป๊อปอัปคำจำกัดความ และสื่อสารกับเซิร์ฟเวอร์ของ Sottaku."
+    },
+    "permissions_allow_all_urls_label": {
+        "message": "อนุญาตให้เข้าถึง URL ทั้งหมด"
+    },
+    "permissions_allowed_origins_title": {
+        "message": "ต้นทางที่อนุญาต"
+    },
+    "permissions_clipboard_read_description": {
+        "message": "Sottaku-Yomitan รองรับการเปิดหน้าต่างค้นหาโดยอัตโนมัติเมื่อคัดลอกข้อความไปยังคลิปบอร์ดขณะเบราว์เซอร์ทำงาน ทั้งนี้ขึ้นอยู่กับการตั้งค่าบางอย่าง ซึ่งช่วยให้ Sottaku-Yomitan สแกนข้อความจากแอปภายนอกได้ หากมีวิธีคัดลอกข้อความจากแอปเหล่านั้นไปยังคลิปบอร์ด."
+    },
+    "permissions_clipboard_read_label": {
+        "message": "<code>clipboardRead</code> <span class=\"light\">(ไม่บังคับ)</span>"
+    },
+    "permissions_clipboard_write_description": {
+        "message": "Sottaku-Yomitan รองรับการจำลองคีย์ลัด <code>Ctrl+C</code> (คัดลอกไปยังคลิปบอร์ด)\n                    เมื่อป๊อปอัปคำจำกัดความเปิดอยู่และอยู่ในโฟกัส."
+    },
+    "permissions_configure_allowed_origins": {
+        "message": "กำหนดค่าต้นทางที่อนุญาต…"
+    },
+    "permissions_context_menu_description": {
+        "message": "Sottaku-Yomitan เพิ่มเมนูคลิกขวาที่ช่วยให้คุณค้นหาคำที่ไฮไลต์ได้."
+    },
+    "permissions_declarative_net_request_description": {
+        "message": "Sottaku-Yomitan ใช้สิทธิ์นี้เพื่อให้แน่ใจว่าคำขอบางรายการมีส่วนหัวที่ถูกต้องและปลอดภัย.\n                        บางครั้งอาจต้องลบหรือเปลี่ยนส่วนหัวคำขอ <code>Origin</code>,\n                        เนื่องจากอาจใช้ในการระบุตัวตนการตั้งค่าเบราว์เซอร์ได้."
+    },
+    "permissions_declarative_net_request_example": {
+        "message": "ตัวอย่าง: <code>Origin: <span class=\"extension-id-example\"></span></code>"
+    },
+    "permissions_file_urls_chrome": {
+        "message": "ตัวเลือกนี้สามารถกำหนดค่าได้จาก <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">หน้าการตั้งค่าส่วนขยาย</a> ของเบราว์เซอร์."
+    },
+    "permissions_file_urls_description": {
+        "message": "เมื่อเปิดใช้งาน Sottaku-Yomitan จะสามารถสแกนข้อความและแสดงคำจำกัดความบนไฟล์ HTML ในเครื่องที่เข้าถึงผ่านสคีม <code>file://*</code>."
+    },
+    "permissions_file_urls_label": {
+        "message": "อนุญาตให้เข้าถึง URL ไฟล์ <span class=\"light\">(ไม่บังคับ)</span>"
+    },
+    "permissions_heading": {
+        "message": "สิทธิ์ของ Sottaku-Yomitan"
+    },
+    "permissions_modal_close": {
+        "message": "ปิด"
+    },
+    "permissions_native_messaging_description": {
+        "message": "Sottaku-Yomitan สามารถสื่อสารกับคอมโพเนนต์ Native Messaging แบบไม่บังคับเพื่อรองรับ\n                    การแยกวิเคราะห์บล็อกข้อความภาษาญี่ปุ่นขนาดใหญ่โดยใช้\n                    <a href=\"https://en.wikipedia.org/wiki/MeCab\" rel=\"noopener noreferrer\" target=\"_blank\">MeCab</a>.\n                    การติดตั้งคอมโพเนนต์นี้เป็นแบบไม่บังคับและไม่ได้รวมมาโดยค่าเริ่มต้น."
+    },
+    "permissions_native_messaging_label": {
+        "message": "<code>nativeMessaging</code> <span class=\"light\">(ไม่บังคับ)</span>"
+    },
+    "permissions_no_additional_origins": {
+        "message": "ไม่ได้ระบุต้นทางเพิ่มเติม."
+    },
+    "permissions_persistent_storage_description": {
+        "message": "เว็บเบราว์เซอร์อาจล้างข้อมูลส่วนขยายที่จัดเก็บไว้เมื่ออุปกรณ์มีพื้นที่จัดเก็บต่ำ สิทธิ์การจัดเก็บแบบถาวรจะบอกเบราว์เซอร์ว่าไม่ควรลบข้อมูลของส่วนขยายในกรณีดังกล่าว."
+    },
+    "permissions_persistent_storage_firefox_note": {
+        "message": "อาจไม่สามารถเปิดใช้งานสิทธิ์นี้บน Firefox สำหรับ Android ได้."
+    },
+    "permissions_persistent_storage_label": {
+        "message": "การจัดเก็บแบบถาวร"
+    },
+    "permissions_private_windows_chrome": {
+        "message": "ตัวเลือกนี้สามารถกำหนดค่าได้จาก <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">หน้าการตั้งค่าส่วนขยาย</a> ของเบราว์เซอร์."
+    },
+    "permissions_private_windows_description": {
+        "message": "เมื่อเปิดใช้งาน Sottaku-Yomitan จะสามารถสแกนข้อความและแสดงคำจำกัดความในหน้าต่างเบราว์เซอร์แบบส่วนตัว/ไม่ระบุตัวตน."
+    },
+    "permissions_private_windows_firefox": {
+        "message": "ตัวเลือกนี้สามารถกำหนดค่าได้จากหน้าการตั้งค่าส่วนขยายของเบราว์เซอร์ จากแถบที่อยู่ของเบราว์เซอร์ ให้ไปที่ <code>about:addons</code> แล้วไปยังการตั้งค่าของ Sottaku-Yomitan."
+    },
+    "permissions_private_windows_label": {
+        "message": "อนุญาตในหน้าต่างส่วนตัว <span class=\"light\">(ไม่บังคับ)</span>"
+    },
+    "permissions_scripting_description": {
+        "message": "Sottaku-Yomitan จำเป็นต้องแทรกสคริปต์เนื้อหาและสไตล์ชีตลงในหน้าเว็บเพื่อแสดงป๊อปอัปค้นหาให้ถูกต้อง."
+    },
+    "permissions_storage_description": {
+        "message": "Sottaku-Yomitan ใช้สิทธิ์การจัดเก็บเพื่อบันทึกการตั้งค่าส่วนขยาย."
+    },
+    "popup_close_title": {
+        "message": "ปิดป๊อปอัป"
+    },
+    "popup_default_profile_title": {
+        "message": "โปรไฟล์เริ่มต้น"
+    },
+    "popup_hotkey_close": {
+        "message": "ปิดป๊อปอัป ({0})"
+    },
+    "popup_hotkey_next_definition": {
+        "message": "คำจำกัดความถัดไป ({0})"
+    },
+    "popup_hotkey_previous_definition": {
+        "message": "คำจำกัดความก่อนหน้า ({0})"
+    },
+    "popup_next_definition_title": {
+        "message": "คำจำกัดความถัดไป"
+    },
+    "popup_no_results": {
+        "message": "ไม่พบผลลัพธ์"
+    },
+    "popup_preview_placeholder": {
+        "message": "เชื่อมโยงบัญชี Sottaku ของคุณในส่วน Sottaku ของการตั้งค่าเพื่อดูตัวอย่างป๊อปอัป"
+    },
+    "popup_previous_definition_title": {
+        "message": "คำจำกัดความก่อนหน้า"
+    },
+    "popup_pro_required_body": {
+        "message": "พจนานุกรมป๊อปอัปต้องมีการสมัครสมาชิก Sottaku Pro"
+    },
+    "popup_pro_required_link": {
+        "message": "อัปเกรดที่ sottaku.app/upgrade"
+    },
+    "popup_pro_required_title": {
+        "message": "ต้องมี Sottaku Pro"
+    },
+    "popup_updated_body": {
+        "message": "ส่วนขยาย Sottaku-Yomitan ได้อัปเดตเป็นเวอร์ชันใหม่แล้ว! หากต้องการดูคำจำกัดความต่อในหน้านี้ คุณต้องโหลดแท็บนี้ใหม่หรือรีสตาร์ทเบราว์เซอร์"
+    },
+    "popup_updated_title": {
+        "message": "Sottaku-Yomitan อัปเดตแล้ว!"
+    },
+    "query_parser_mecab": {
+        "message": "MeCab: $1"
+    },
+    "query_parser_scanning": {
+        "message": "พาร์เซอร์การสแกน"
+    },
+    "query_parser_unknown_source": {
+        "message": "แหล่งที่มาไม่ทราบ: $1"
+    },
+    "quick_start_action_popup_alt": {
+        "message": "ป๊อปอัปการดำเนินการของเบราว์เซอร์"
+    },
+    "quick_start_heading": {
+        "message": "คู่มือเริ่มต้นอย่างรวดเร็วของ Sottaku-Yomitan"
+    },
+    "quick_start_installing_body": {
+        "message": "Sottaku-Yomitan ใช้บัญชี Sottaku ของคุณสำหรับการค้นหา ดังนั้นคุณไม่จำเป็นต้องจัดการพจนานุกรมในเครื่องบนหน้าการตั้งค่า.\n                คุณยังสามารถไปที่ <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">https://sottaku.app/</a> เพื่อเรียนรู้เพิ่มเติมเกี่ยวกับพจนานุกรม Sottaku-Yomitan."
+    },
+    "quick_start_installing_heading": {
+        "message": "การติดตั้งพจนานุกรม"
+    },
+    "quick_start_links_heading": {
+        "message": "ลิงก์"
+    },
+    "quick_start_links_info": {
+        "message": "ไปที่หน้าข้อมูล"
+    },
+    "quick_start_links_sottaku": {
+        "message": "เพิ่งใช้ Sottaku-Yomitan ใช่ไหม? ไปที่ https://sottaku.app/!"
+    },
+    "quick_start_links_welcome": {
+        "message": "ไปที่หน้าต้อนรับ"
+    },
+    "quick_start_migrating_body": {
+        "message": "คุณยังสามารถนำเข้าชุดพจนานุกรมที่ส่งออกจาก <a href=\"/settings.html#backup\">ส่วนสำรองข้อมูลในหน้าการตั้งค่า</a>.\n\n                <br/><br/>\n\n                หากคุณกำลังย้ายจาก Yomichan คุณอาจต้องการนำเข้าข้อมูลของคุณไปยัง Sottaku-Yomitan.\n                โปรดทำตามคำแนะนำที่ <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">https://sottaku.app/</a>.\n\n                <br/><br/>\n\n                หากคุณใช้หรือวางแผนจะใช้เทมเพลตที่กำหนดเองสำหรับการสร้างโน้ต Anki โปรดทราบว่า <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">ไวยากรณ์บางส่วนได้เปลี่ยนไปจาก Yomichan และ Yomibaba.</a>\n                โปรดตรวจสอบว่าเทมเพลตที่กำหนดเองของคุณใช้ไวยากรณ์ที่อัปเดตแล้ว."
+    },
+    "quick_start_migrating_heading": {
+        "message": "ย้ายไปยัง Sottaku-Yomitan"
+    },
+    "quick_start_quick_actions_body": {
+        "message": "การคลิกปุ่ม <img alt=\"\" class=\"inline-icon\" src=\"/images/yomitan-icon.svg\"/> <em>Sottaku-Yomitan</em> ในแถบเบราว์เซอร์จะเปิดป๊อปอัปการดำเนินการด่วน."
+    },
+    "quick_start_quick_actions_cog": {
+        "message": "ปุ่ม <img alt=\"\" class=\"inline-icon\" src=\"/images/cog.svg\"/> <em>เฟือง</em> จะเปิดหน้า <a href=\"/settings.html\" rel=\"noopener\" target=\"_blank\">การตั้งค่า</a>."
+    },
+    "quick_start_quick_actions_heading": {
+        "message": "การดำเนินการด่วน"
+    },
+    "quick_start_quick_actions_info": {
+        "message": "ปุ่ม <img alt=\"\" class=\"inline-icon\" src=\"/images/question-mark-circle.svg\"/> <em>เครื่องหมายคำถาม</em> จะเปิดหน้า <a href=\"/info.html\" rel=\"noopener\" target=\"_blank\">ข้อมูล</a>,\n                        ซึ่งมีข้อมูลและลิงก์ที่เป็นประโยชน์เกี่ยวกับ Sottaku-Yomitan."
+    },
+    "quick_start_quick_actions_search": {
+        "message": "ปุ่ม <img alt=\"\" class=\"inline-icon\" src=\"/images/magnifying-glass.svg\"/> <em>แว่นขยาย</em> จะเปิดหน้า <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">ค้นหา</a>,\n                        ช่วยให้ค้นหาข้อความและคำศัพท์ด้วยพจนานุกรมที่ติดตั้งไว้.\n                        ใช้ได้แม้ในโหมดออฟไลน์!"
+    },
+    "quick_start_scanning_alt": {
+        "message": "การสแกน"
+    },
+    "quick_start_scanning_audio": {
+        "message": "การคลิกปุ่ม <img alt=\"\" class=\"inline-icon\" src=\"/images/play-audio.svg\"/> <em>ลำโพง</em> ของรายการในผลลัพธ์การค้นหา\n                    จะเล่นคลิปเสียงการออกเสียงของคำจากพจนานุกรมออนไลน์ ถ้ามี."
+    },
+    "quick_start_scanning_body": {
+        "message": "หลังจากติดตั้งพจนานุกรมแล้ว สามารถสแกนข้อความบนหน้าเว็บได้โดยเลื่อนเคอร์เซอร์ขณะกดปุ่มตัวแก้ไข.\n                ปุ่มเริ่มต้นคือ <kbd>Shift</kbd> ซึ่งสามารถปิดหรือกำหนดค่าได้ในหน้า <a href=\"/settings.html#backup\">การตั้งค่า</a>."
+    },
+    "quick_start_scanning_heading": {
+        "message": "สแกนข้อความ"
+    },
+    "quick_start_scanning_kanji": {
+        "message": "การคลิกตัวอักษรคันจิในคำจำกัดความจะแสดงข้อมูลเพิ่มเติมเกี่ยวกับอักขระนั้น.\n                    <span class=\"light\">(ต้องติดตั้งพจนานุกรมคันจิ)</span>"
+    },
+    "search_clipboard_monitor_label": {
+        "message": "ตัวเฝ้าคลิปบอร์ด"
+    },
+    "search_default_profile_label": {
+        "message": "โปรไฟล์เริ่มต้น"
+    },
+    "search_header_title": {
+        "message": "การค้นหา Sottaku-Yomitan"
+    },
+    "search_settings_auto_kana_label": {
+        "message": "แปลงคะนะอัตโนมัติ"
+    },
+    "search_settings_close_button": {
+        "message": "ปิด"
+    },
+    "search_settings_parser_label": {
+        "message": "พาร์เซอร์"
+    },
+    "search_settings_sticky_header_description": {
+        "message": "หัวข้อค้นหาจะคงอยู่บนหน้าเมื่อเลื่อนลง."
+    },
+    "search_settings_sticky_header_label": {
+        "message": "หัวข้อค้นหาแบบยึดติด"
+    },
+    "search_settings_title": {
+        "message": "การตั้งค่าการค้นหา"
+    },
+    "search_textbox_placeholder": {
+        "message": "ป้อนคำ วลี ประโยค หรือบล็อกข้อความ"
+    },
+    "settings_accessibility_google_docs_danger": {
+        "message": "Google ได้เปลี่ยนการทำงานของความเข้ากันได้นี้หลายครั้ง และดูเหมือนว่าไม่ได้มีการประกาศหรือจัดทำเอกสาร ดังนั้นจึงเป็นไปได้ว่าฟีเจอร์นี้อาจหยุดทำงานได้ทุกเมื่อในอนาคตโดยไม่เตือน"
+    },
+    "settings_accessibility_google_docs_label": {
+        "message": "เปิดใช้โหมดความเข้ากันได้กับ Google Docs\n                        <a class=\"more-toggle more-only danger-text\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    },
+    "settings_accessibility_google_docs_more_1": {
+        "message": "Google Docs ตอนนี้ใช้การเรนเดอร์แบบ\n                    <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas\" rel=\"noopener noreferrer\" target=\"_blank\">canvas-based</a>\n                    เพื่อแสดงเนื้อหา<sup><a href=\"https://workspaceupdates.googleblog.com/2021/05/Google-Docs-Canvas-Based-Rendering-Update.html\" rel=\"noopener noreferrer\" target=\"_blank\">[2]</a></sup>\n                    ซึ่งทำให้ Sottaku-Yomitan ไม่สามารถสแกนข้อความด้วยวิธีมาตรฐานได้\n                    การเปิดใช้ตัวเลือกนี้จะบังคับให้หน้า Google Docs แสดงข้อมูลข้อความเพิ่มเติม\n                    ซึ่งจะช่วยให้ Sottaku-Yomitan ทำงานต่อได้"
+    },
+    "settings_accessibility_google_docs_warning": {
+        "message": "หากโปรไฟล์ใดเปิดใช้การตั้งค่านี้ โหมดความเข้ากันได้จะถูกเปิดใช้งาน และเงื่อนไขของโปรไฟล์จะถูกละเลย"
+    },
+    "settings_accessibility_heading": {
+        "message": "การช่วยการเข้าถึง"
+    },
+    "settings_appearance_action_bar_description": {
+        "message": "ควบคุมว่าแถบการดำเนินการจะแสดงเมื่อใดและที่ไหน"
+    },
+    "settings_appearance_action_bar_label": {
+        "message": "รูปลักษณ์ของแถบการดำเนินการ"
+    },
+    "settings_appearance_action_bar_location_label": {
+        "message": "ตำแหน่ง"
+    },
+    "settings_appearance_action_bar_visibility_label": {
+        "message": "การมองเห็น"
+    },
+    "settings_appearance_collapsible_dictionaries_label": {
+        "message": "กำหนดค่าพจนานุกรมแบบพับได้…"
+    },
+    "settings_appearance_compact_glossaries_description": {
+        "message": "แสดงกลอสซารีคำศัพท์ด้วยเลย์เอาต์ที่กะทัดรัดขึ้น"
+    },
+    "settings_appearance_compact_glossaries_label": {
+        "message": "กลอสซารีแบบกะทัดรัด"
+    },
+    "settings_appearance_compact_popup": {
+        "message": "ป๊อปอัปแบบกะทัดรัด"
+    },
+    "settings_appearance_compact_popup_anki": {
+        "message": "ป๊อปอัปแบบกะทัดรัดและ Anki"
+    },
+    "settings_appearance_compact_tags_description": {
+        "message": "แสดงแท็กที่ซ้ำกันน้อยลงสำหรับกลอสซารีคำศัพท์"
+    },
+    "settings_appearance_compact_tags_label": {
+        "message": "แท็กแบบกะทัดรัด"
+    },
+    "settings_appearance_custom_css_label": {
+        "message": "กำหนดค่า CSS แบบกำหนดเอง…"
+    },
+    "settings_appearance_debug_description": {
+        "message": "จะแสดงตัวเลือกเมนูเพื่อบันทึกข้อมูลดีบักในผลการค้นหา"
+    },
+    "settings_appearance_debug_label": {
+        "message": "แสดงข้อมูลดีบัก"
+    },
+    "settings_appearance_expression_tags_description": {
+        "message": "สามารถสแกนแท็กเหล่านี้ได้หากเปิดใช้ตัวเลือกการสแกนเนื้อหาป๊อปอัป"
+    },
+    "settings_appearance_expression_tags_label": {
+        "message": "แสดงแท็กสำหรับนิพจน์และการอ่าน"
+    },
+    "settings_appearance_font_family_description": {
+        "message": "เปลี่ยนตระกูลแบบอักษรที่ใช้ใน Sottaku-Yomitan\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">เพิ่มเติม…</a>"
+    },
+    "settings_appearance_font_family_label": {
+        "message": "ตระกูลแบบอักษร"
+    },
+    "settings_appearance_font_family_more": {
+        "message": "ตระกูลแบบอักษรสามารถเปลี่ยนเป็นแบบอักษรใดก็ได้ที่ติดตั้งในระบบของคุณ<br/>\n                    คุณสามารถป้อนเช่น <code>sans-serif</code>, <code>serif</code> หรือ <code>monospace</code>.<br/>\n                    หากต้องการระบุแบบอักษรเฉพาะหนึ่งหรือหลายแบบ ให้พิมพ์คั่นด้วยจุลภาค\n                    เช่น <pre><code>\"Noto Sans JP\", \"Meiryo\", sans-serif</code></pre>"
+    },
+    "settings_appearance_font_size_description": {
+        "message": "เปลี่ยนขนาดแบบอักษรที่ใช้ในป๊อปอัป เป็นพิกเซล"
+    },
+    "settings_appearance_font_size_label": {
+        "message": "ขนาดแบบอักษร"
+    },
+    "settings_appearance_frequency_description": {
+        "message": "เปลี่ยนวิธีแสดงข้อมูลความถี่"
+    },
+    "settings_appearance_frequency_inline_list": {
+        "message": "รายการแบบบรรทัดเดียว"
+    },
+    "settings_appearance_frequency_label": {
+        "message": "รูปแบบการแสดงความถี่"
+    },
+    "settings_appearance_frequency_list": {
+        "message": "รายการ"
+    },
+    "settings_appearance_frequency_list_bordered": {
+        "message": "รายการแบบมีเส้นขอบ"
+    },
+    "settings_appearance_frequency_split_tags": {
+        "message": "แยกแท็ก"
+    },
+    "settings_appearance_frequency_split_tags_grouped": {
+        "message": "แยกแท็ก, เนื้อหาจัดกลุ่ม"
+    },
+    "settings_appearance_frequency_tags": {
+        "message": "แท็ก"
+    },
+    "settings_appearance_frequency_tags_grouped": {
+        "message": "แท็ก, เนื้อหาจัดกลุ่ม"
+    },
+    "settings_appearance_heading": {
+        "message": "รูปลักษณ์"
+    },
+    "settings_appearance_indicator_asterisk": {
+        "message": "ดอกจัน"
+    },
+    "settings_appearance_indicator_bar_left": {
+        "message": "แถบแนวตั้ง (ซ้าย)"
+    },
+    "settings_appearance_indicator_bar_right": {
+        "message": "แถบแนวตั้ง (ขวา)"
+    },
+    "settings_appearance_indicator_dot_left": {
+        "message": "จุดเล็ก (ซ้าย)"
+    },
+    "settings_appearance_indicator_dot_right": {
+        "message": "จุดเล็ก (ขวา)"
+    },
+    "settings_appearance_indicator_triangle": {
+        "message": "สามเหลี่ยม"
+    },
+    "settings_appearance_line_height_description": {
+        "message": "ปรับระยะห่างระหว่างบรรทัดข้อความในป๊อปอัป ซึ่งโดยทั่วไปจะเป็นเลขทศนิยมระหว่าง 1 ถึง 2"
+    },
+    "settings_appearance_line_height_label": {
+        "message": "ความสูงบรรทัด"
+    },
+    "settings_appearance_pitch_accent_description": {
+        "message": "เฉพาะภาษาญี่ปุ่น\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">เพิ่มเติม…</a>"
+    },
+    "settings_appearance_pitch_accent_label": {
+        "message": "รูปแบบการแสดงวรรณยุกต์เสียงสูงต่ำ"
+    },
+    "settings_appearance_pitch_accent_more_1": {
+        "message": "สามารถแสดงวรรณยุกต์เสียงสูงต่ำสำหรับคำและนิพจน์ได้หากติดตั้งพจนานุกรมที่รองรับวรรณยุกต์เสียงสูงต่ำ ขณะนี้มีสามวิธีในการแสดง:"
+    },
+    "settings_appearance_pitch_downstep_notation": {
+        "message": "สัญลักษณ์ดาวน์สเต็ป"
+    },
+    "settings_appearance_pitch_downstep_position": {
+        "message": "ตำแหน่งดาวน์สเต็ป"
+    },
+    "settings_appearance_pitch_graph": {
+        "message": "กราฟ"
+    },
+    "settings_appearance_reading_mode_description": {
+        "message": "เปลี่ยนประเภทฟุริกานะที่แสดงสำหรับข้อความที่ถูกแยกวิเคราะห์ เฉพาะภาษาญี่ปุ่น"
+    },
+    "settings_appearance_reading_mode_dictionary": {
+        "message": "การอ่านแบบพจนานุกรม"
+    },
+    "settings_appearance_reading_mode_hiragana": {
+        "message": "ฮิรางานะ"
+    },
+    "settings_appearance_reading_mode_katakana": {
+        "message": "คาตาคานะ"
+    },
+    "settings_appearance_reading_mode_label": {
+        "message": "โหมดการอ่าน"
+    },
+    "settings_appearance_reading_mode_romaji": {
+        "message": "โรมาจิ"
+    },
+    "settings_appearance_selection_indicator_description": {
+        "message": "เปลี่ยนวิธีการเน้นรายการคำจำกัดความที่เลือกด้วยภาพ"
+    },
+    "settings_appearance_selection_indicator_label": {
+        "message": "รูปแบบตัวบ่งชี้การเลือก"
+    },
+    "settings_appearance_term_display_description": {
+        "message": "เปลี่ยนวิธีแสดงคำและการอ่าน"
+    },
+    "settings_appearance_term_display_label": {
+        "message": "รูปแบบการแสดงคำ"
+    },
+    "settings_appearance_term_display_ruby": {
+        "message": "ฟุริกานะของคำ"
+    },
+    "settings_appearance_term_display_ruby_reading": {
+        "message": "ฟุริกานะของคำและการอ่าน"
+    },
+    "settings_appearance_term_display_term_only": {
+        "message": "คำธรรมดา"
+    },
+    "settings_appearance_term_display_term_reading": {
+        "message": "คำธรรมดาและการอ่าน"
+    },
+    "settings_appearance_theme_body_label": {
+        "message": "เนื้อหา"
+    },
+    "settings_appearance_theme_description": {
+        "message": "ปรับสไตล์ของ Sottaku-Yomitan"
+    },
+    "settings_appearance_theme_label": {
+        "message": "ธีม"
+    },
+    "settings_appearance_theme_shadow_label": {
+        "message": "เงา"
+    },
+    "settings_audio_autoplay_description": {
+        "message": "เสียงของผลลัพธ์แรกจะเล่นโดยอัตโนมัติ"
+    },
+    "settings_audio_autoplay_label": {
+        "message": "เล่นเสียงผลลัพธ์การค้นหาอัตโนมัติ"
+    },
+    "settings_audio_enable_description": {
+        "message": "แสดงไอคอนลำโพงที่คลิกได้ข้างผลลัพธ์การค้นหา"
+    },
+    "settings_audio_enable_disclaimer": {
+        "message": "ตัวเลือกนี้อาจส่งคำศัพท์ การอ่าน และ/หรือภาษาออกไปนอก Sottaku-Yomitan เพื่อดึงเสียง<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">นโยบายความเป็นส่วนตัว</a>)</span>."
+    },
+    "settings_audio_enable_label": {
+        "message": "เปิดใช้การเล่นเสียงสำหรับคำศัพท์"
+    },
+    "settings_audio_fallback_bloop": {
+        "message": "บลูป"
+    },
+    "settings_audio_fallback_click": {
+        "message": "คลิก"
+    },
+    "settings_audio_fallback_description": {
+        "message": "เสียงที่จะเล่นเมื่อ Sottaku-Yomitan ดึงเสียงไม่สำเร็จ"
+    },
+    "settings_audio_fallback_label": {
+        "message": "เสียงสำรอง"
+    },
+    "settings_audio_heading": {
+        "message": "เสียง"
+    },
+    "settings_audio_sources_label": {
+        "message": "ตั้งค่าแหล่งที่มาของการเล่นเสียง…"
+    },
+    "settings_audio_volume_description": {
+        "message": "ปรับระดับเสียงที่เล่นเป็นเปอร์เซ็นต์"
+    },
+    "settings_audio_volume_label": {
+        "message": "ระดับเสียง"
+    },
+    "settings_backup_description": {
+        "message": "Sottaku-Yomitan สามารถนำเข้าและส่งออกไฟล์การตั้งค่าซึ่งใช้เพื่อกู้คืนการตั้งค่า แบ่งปันการตั้งค่าระหว่างอุปกรณ์ และช่วยแก้ไขปัญหา ไฟล์เหล่านี้จะมีเฉพาะการตั้งค่าเท่านั้น"
+    },
+    "settings_backup_export_button": {
+        "message": "ส่งออกการตั้งค่า"
+    },
+    "settings_backup_heading": {
+        "message": "สำรองข้อมูล"
+    },
+    "settings_backup_import_button": {
+        "message": "นำเข้าการตั้งค่า"
+    },
+    "settings_backup_reset_button": {
+        "message": "รีเซ็ตการตั้งค่า"
+    },
+    "settings_clipboard_background_description": {
+        "message": "เปิดหน้าการค้นหาในหน้าต่างใหม่เมื่อคัดลอกข้อความไปยังคลิปบอร์ด"
+    },
+    "settings_clipboard_background_label": {
+        "message": "เปิดใช้การเฝ้าดูข้อความในคลิปบอร์ดเบื้องหลัง"
+    },
+    "settings_clipboard_heading": {
+        "message": "คลิปบอร์ด"
+    },
+    "settings_clipboard_info_1": {
+        "message": "Sottaku-Yomitan สามารถเฝ้าดูคลิปบอร์ดของระบบและค้นหาโดยอัตโนมัติบนหน้าการค้นหาเมื่อมีการคัดลอกข้อความ ซึ่งมีประโยชน์ในการใช้ Sottaku-Yomitan เพื่อสแกนข้อความจากแอปภายนอก"
+    },
+    "settings_clipboard_info_2": {
+        "message": "ฟีเจอร์นี้ต้องให้ Sottaku-Yomitan มีสิทธิ์อ่านคลิปบอร์ด และเมื่อเปิดใช้ตัวเลือกนี้ คลิปบอร์ดจะถูกตรวจสอบบ่อยครั้งเพื่อดูข้อความใหม่"
+    },
+    "settings_clipboard_max_length_description": {
+        "message": "จำกัดจำนวนอักขระที่ใช้เมื่อค้นหาข้อความในคลิปบอร์ด"
+    },
+    "settings_clipboard_max_length_label": {
+        "message": "ความยาวสูงสุดของการค้นหาข้อความในคลิปบอร์ด"
+    },
+    "settings_clipboard_search_description": {
+        "message": "คำค้นในหน้าการค้นหาจะอัปเดตอัตโนมัติด้วยข้อความในคลิปบอร์ด"
+    },
+    "settings_clipboard_search_label": {
+        "message": "เปิดใช้การเฝ้าดูข้อความในคลิปบอร์ดบนหน้าการค้นหา"
+    },
+    "settings_clipboard_search_mode_description": {
+        "message": "เปลี่ยนวิธีที่หน้าการค้นหาตอบสนองต่อข้อความใหม่ในคลิปบอร์ด"
+    },
+    "settings_clipboard_search_mode_label": {
+        "message": "โหมดการค้นหาข้อความในคลิปบอร์ด"
+    },
+    "settings_clipboard_search_mode_search": {
+        "message": "ค้นหาคำจำกัดความ"
+    },
+    "settings_clipboard_search_mode_update": {
+        "message": "อัปเดตคำค้นเท่านั้น"
+    },
+    "settings_collapsible_varies": {
+        "message": "แตกต่างกัน"
+    },
+    "settings_general_api_css_bypass_label": {
+        "message": "อนุญาตให้ข้ามการทำความสะอาด CSS"
+    },
+    "settings_general_api_css_bypass_more_1": {
+        "message": "พจนานุกรมที่เป็นอันตรายซึ่งมี CSS ที่เป็นอันตรายอาจพยายามรัน Javascript ตัวอย่างเช่น หากผลลัพธ์ของ API Sottaku-Yomitan ถูกใช้ใน Anki การ์ด Anki ที่ได้อาจรัน Javascript ที่ไม่ตั้งใจ ความเสี่ยงในกรณีนี้คล้ายกับการดาวน์โหลดเด็ค Anki ที่เป็นอันตราย กล่าวคือ ในทั้งสองกรณี คุณพึ่งพา sandbox ของ Anki เพียงอย่างเดียวเพื่อปกป้องเครื่องและข้อมูลของคุณจากโค้ดอันตราย หาก sandbox ของ Anki ทำงานได้ เนื้อหาการ์ดอาจรั่วไหล (ปัญหาความลับเล็กน้อย) หาก sandbox ล้มเหลว จะมีเรื่องที่น่ากังวลมากกว่านั้น (การดำเนินการบนเครื่องของคุณ เช่น การขโมยข้อมูลรับรองและข้อมูลที่อ่อนไหว หรือแรนซัมแวร์ยึดเครื่องของคุณ)."
+    },
+    "settings_general_api_css_bypass_more_2": {
+        "message": "หากคุณเลือกปิดการทำความสะอาด CSS เราแนะนำให้คิดแบบต้นจนจบว่าเอาต์พุตของ API Sottaku-Yomitan ถูกนำไปใช้ที่ใด และปลายทางนั้นทนทานต่อการใส่ Javascript ที่อาจเป็นอันตรายหรือไม่ มิฉะนั้นคุณอาจกำลังเสี่ยงต่อข้อมูลและความสมบูรณ์ของระบบของคุณ"
+    },
+    "settings_general_api_css_bypass_more_3": {
+        "message": "การข้ามการทำความสะอาดจะทำให้ CSS ที่ไม่สามารถทำความสะอาดได้ผ่านตัวทำความสะอาดโดยไม่เปลี่ยนแปลง ข้อนี้ใช้เฉพาะกับ API ของ Sottaku-Yomitan เท่านั้น และจะไม่ทำให้ส่วนอื่นของ Sottaku-Yomitan มีความเสี่ยง"
+    },
+    "settings_general_api_css_bypass_more_4": {
+        "message": "สิ่งนี้อาจจำเป็นเพื่อดึง CSS บนบางเบราว์เซอร์ที่ไม่รองรับหน้า offscreen ที่จำเป็นสำหรับการทำความสะอาด CSS แบบเต็มใน API ของ Sottaku-Yomitan บนแบ็กเอนด์ Sottaku-Yomitan จะพยายามถอยกลับไปใช้การทำความสะอาดพื้นฐาน แต่จะล้มเหลวกับพจนานุกรมที่ใช้ CSS ซับซ้อน"
+    },
+    "settings_general_api_css_bypass_warning": {
+        "message": "เปิดใช้ตัวเลือกนี้เฉพาะเมื่อคุณเชื่อถือผู้สร้างพจนานุกรมของคุณหรือจะทำการทำความสะอาดนอก Sottaku-Yomitan เท่านั้น\n                                        พจนานุกรมที่เป็นอันตรายสามารถส่ง CSS ที่ผิดรูปเพื่อให้รัน Javascript ได้หากถูกฝังใน webview หรือเบราว์เซอร์\n                                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">เพิ่มเติม…</a>"
+    },
+    "settings_general_api_more_1": {
+        "message": "เพื่อเปิดใช้ API ของ Sottaku-Yomitan ต้องติดตั้งคอมโพเนนต์ native messaging.\n                        สามารถดูคู่มือการตั้งค่าได้ที่ <a href=\"https://github.com/yomidevs/yomitan-api/blob/master/README.md\" rel=\"noopener noreferrer\" target=\"_blank\">ที่นี่</a>."
+    },
+    "settings_general_api_test_url_placeholder": {
+        "message": "http://127.0.0.1:19633"
+    },
+    "settings_general_context_menu": {
+        "message": "แสดง \"ค้นหาใน Sottaku-Yomitan\" ในเมนูคลิกขวา"
+    },
+    "settings_general_enable_api_description": {
+        "message": "เปิดใช้การรองรับการส่งคำขอเว็บแบบโลคัลเพื่อดึงข้อมูลจาก Sottaku-Yomitan"
+    },
+    "settings_general_enable_api_disclaimer": {
+        "message": "ตัวเลือกนี้อาจส่งข้อมูลออกนอก Sottaku-Yomitan ไปยังแอปพลิเคชันในเครื่องที่ร้องขอ<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">นโยบายความเป็นส่วนตัว</a>)</span>.\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">เพิ่มเติม…</a>"
+    },
+    "settings_general_enable_api_label": {
+        "message": "เปิดใช้ API ของ Sottaku-Yomitan"
+    },
+    "settings_general_enable_label": {
+        "message": "เปิดใช้ Sottaku-Yomitan"
+    },
+    "settings_general_heading": {
+        "message": "ทั่วไป"
+    },
+    "settings_general_locale_description": {
+        "message": "ภาษาที่ใช้สำหรับการแปลที่ Sottaku ส่งกลับมา"
+    },
+    "settings_general_locale_label": {
+        "message": "โลแคล"
+    },
+    "settings_general_max_results_description": {
+        "message": "ปรับจำนวนผลลัพธ์สูงสุดที่แสดงสำหรับการค้นหา"
+    },
+    "settings_general_max_results_label": {
+        "message": "จำนวนผลลัพธ์สูงสุด"
+    },
+    "settings_general_show_guide": {
+        "message": "แสดง <a href=\"/welcome.html\" rel=\"noopener\" target=\"_blank\">คู่มือต้อนรับ</a> เมื่อเริ่มต้นเบราว์เซอร์"
+    },
+    "settings_general_text_language_description": {
+        "message": "ใช้สำหรับฟีเจอร์พจนานุกรมแบบออฟไลน์และเครื่องมือพรีวิว"
+    },
+    "settings_general_text_language_label": {
+        "message": "ภาษาของข้อความ"
+    },
+    "settings_heading": {
+        "message": "การตั้งค่า Sottaku-Yomitan"
+    },
+    "settings_loading_delay_notice": {
+        "message": "หน้านี้ใช้เวลานานกว่าที่คาดไว้ในการโหลด"
+    },
+    "settings_loading_delay_safari": {
+        "message": "เนื่องจากบั๊กใน Safari อาจจำเป็นต้องคลิกปุ่ม <img alt=\"\" class=\"inline-icon\" src=\"/images/yomitan-icon.svg\"/> <em>Sottaku-Yomitan</em>\n                        ที่แถบเบราว์เซอร์เพื่อให้หน้าโหลดสมบูรณ์"
+    },
+    "settings_nav_about": {
+        "message": "เกี่ยวกับ Sottaku-Yomitan"
+    },
+    "settings_nav_accessibility": {
+        "message": "การช่วยการเข้าถึง"
+    },
+    "settings_nav_advanced": {
+        "message": "ขั้นสูง"
+    },
+    "settings_nav_appearance": {
+        "message": "รูปลักษณ์"
+    },
+    "settings_nav_audio": {
+        "message": "เสียง"
+    },
+    "settings_nav_backup": {
+        "message": "สำรองข้อมูล"
+    },
+    "settings_nav_clipboard": {
+        "message": "คลิปบอร์ด"
+    },
+    "settings_nav_debug": {
+        "message": "ดีบัก"
+    },
+    "settings_nav_general": {
+        "message": "ทั่วไป"
+    },
+    "settings_nav_popup_behavior": {
+        "message": "พฤติกรรมป็อปอัป"
+    },
+    "settings_nav_position_size": {
+        "message": "ตำแหน่งและขนาด"
+    },
+    "settings_nav_profile": {
+        "message": "โปรไฟล์"
+    },
+    "settings_nav_result_display": {
+        "message": "การแสดงผลลัพธ์"
+    },
+    "settings_nav_scanning": {
+        "message": "การสแกน"
+    },
+    "settings_nav_search_window": {
+        "message": "หน้าต่างค้นหา"
+    },
+    "settings_nav_security": {
+        "message": "ความปลอดภัย"
+    },
+    "settings_nav_shortcuts": {
+        "message": "คีย์ลัด"
+    },
+    "settings_nav_sottaku": {
+        "message": "Sottaku"
+    },
+    "settings_nav_text_parsing": {
+        "message": "การแยกวิเคราะห์ข้อความ"
+    },
+    "settings_nav_translation": {
+        "message": "การแปล"
+    },
+    "settings_popup_auto_hide_description": {
+        "message": "เมื่อมีป๊อปอัปอยู่แล้ว เมื่อตรวจสแกนอีกครั้ง ให้ซ่อนป๊อปอัปเดิม แม้จะไม่พบคำจำกัดความก็ตาม"
+    },
+    "settings_popup_auto_hide_label": {
+        "message": "ซ่อนป๊อปอัปการค้นหาอัตโนมัติ"
+    },
+    "settings_popup_delay_label": {
+        "message": "หน่วงเวลา <span class=\"light\">(เป็นมิลลิวินาที)</span>"
+    },
+    "settings_popup_heading": {
+        "message": "พฤติกรรมป๊อปอัป"
+    },
+    "settings_popup_hide_on_exit_description": {
+        "message": "เมื่อเคอร์เซอร์ออกจากป๊อปอัป ป๊อปอัปจะถูกซ่อน"
+    },
+    "settings_popup_hide_on_exit_label": {
+        "message": "ซ่อนป๊อปอัปเมื่อเคอร์เซอร์ออก"
+    },
+    "settings_popup_max_children_description": {
+        "message": "เปลี่ยนขีดจำกัดจำนวนป๊อปอัปที่สามารถสร้างได้"
+    },
+    "settings_popup_max_children_label": {
+        "message": "จำนวนป๊อปอัปย่อยสูงสุด"
+    },
+    "settings_popup_reduced_motion_description": {
+        "message": "เลื่อนตามความสูงที่กำหนดได้ (คล้ายการแบ่งหน้า) เพื่อลดแอนิเมชัน ใช้ได้ดีบนเครื่องอ่านอิเล็กทรอนิกส์และหน้าจอ e-ink"
+    },
+    "settings_popup_reduced_motion_label": {
+        "message": "การเลื่อนแบบลดการเคลื่อนไหว"
+    },
+    "settings_popup_reduced_motion_scale_description": {
+        "message": "เปอร์เซ็นต์ของความสูงป๊อปอัปที่เลื่อนต่อหนึ่งขั้น"
+    },
+    "settings_popup_reduced_motion_scale_label": {
+        "message": "สเกล"
+    },
+    "settings_popup_reduced_motion_swipe_description": {
+        "message": "ระยะขั้นต่ำบนอุปกรณ์สัมผัสเพื่อให้การปัดถูกมองว่าเป็นการเลื่อน ค่าเล็กลงอาจรู้สึกตอบสนองไวขึ้นแต่เพิ่มโอกาสการแตะผิด"
+    },
+    "settings_popup_reduced_motion_swipe_label": {
+        "message": "เกณฑ์การปัด"
+    },
+    "settings_popup_reduced_motion_swipe_unit": {
+        "message": "px"
+    },
+    "settings_popup_scan_popup_description": {
+        "message": "ข้อความภายในป๊อปอัปสามารถสแกนหาคำจำกัดความได้ ซึ่งจะเปิดป๊อปอัปใหม่"
+    },
+    "settings_popup_scan_popup_label": {
+        "message": "อนุญาตให้สแกนเนื้อหาป๊อปอัป"
+    },
+    "settings_popup_scan_search_description": {
+        "message": "ข้อความบน <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">หน้าค้นหา</a> สามารถสแกนหาคำจำกัดความได้ ซึ่งจะเปิดป๊อปอัป"
+    },
+    "settings_popup_scan_search_label": {
+        "message": "อนุญาตให้สแกนเนื้อหาหน้าค้นหา"
+    },
+    "settings_popup_scan_source_terms_label": {
+        "message": "อนุญาตให้สแกนคำต้นทางของป๊อปอัป"
+    },
+    "settings_popup_search_from_results_label": {
+        "message": "ค้นหาคำเมื่อคลิกข้อความจากรายการผลลัพธ์"
+    },
+    "settings_popup_show_iframe_label": {
+        "message": "แสดงป๊อปอัป iframe ในเฟรมราก\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    },
+    "settings_popup_show_iframe_more_1": {
+        "message": "โดยปกติ การสแกนข้อความภายในองค์ประกอบ <code>&lt;iframe&gt;</code> ที่ฝังอยู่จะเปิด\n                    ป๊อปอัปใหม่ภายในเฟรมนั้น ซึ่งอาจจำกัดได้เนื่องจากขนาดเฟรม\n                    เมื่อเปิดใช้งานตัวเลือกนี้ ป๊อปอัปจะถูกสร้างในรากของหน้า หากเป็นไปได้"
+    },
+    "settings_popup_show_iframe_more_2": {
+        "message": "โปรดทราบว่าเมื่อเปิดใช้งานตัวเลือกนี้ มีความเป็นไปได้ที่ส่วนขยายจะรบกวนหน้าเว็บพื้นฐาน เนื่องจากต้องส่งข้อความไปยังหน้าเว็บเพื่อกำหนดตำแหน่งป๊อปอัปที่ถูกต้อง โดยทั่วไปจะไม่เกิดปัญหา แต่หากมีสิ่งที่ไม่คาดคิดเกิดขึ้น ตัวเลือกนี้อาจเป็นสาเหตุ"
+    },
+    "settings_popup_size_auto_scale_label": {
+        "message": "ปรับขนาดอัตโนมัติ\n                                <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    },
+    "settings_popup_size_auto_scale_more": {
+        "message": "การปรับขนาดอัตโนมัติจะปรับขนาดป๊อปอัปโดยอัตโนมัติตามระดับการซูมของเบราว์เซอร์\n                            เพื่อคงขนาดทางกายภาพให้คงที่ไม่ว่าระดับการซูมจะเป็นเท่าใด\n                            <em>ระดับการซูม</em> ใช้ระดับการซูมที่มักใช้บนเบราว์เซอร์เดสก์ท็อป\n                            และ <em>Viewport</em> ใช้ระดับการซูมที่มักใช้บนเบราว์เซอร์มือถือ"
+    },
+    "settings_popup_size_auto_scale_viewport": {
+        "message": "พื้นที่มองเห็น"
+    },
+    "settings_popup_size_auto_scale_zoom": {
+        "message": "ระดับการซูม"
+    },
+    "settings_popup_size_display_full_width": {
+        "message": "เต็มความกว้าง"
+    },
+    "settings_popup_size_display_mode_description": {
+        "message": "เปลี่ยนเลย์เอาต์ของป๊อปอัป\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">เพิ่มเติม…</a>"
+    },
+    "settings_popup_size_display_mode_label": {
+        "message": "โหมดการแสดงผล"
+    },
+    "settings_popup_size_display_mode_more": {
+        "message": "โหมด <em>ค่าเริ่มต้น</em> จะจัดวางป๊อปอัปตามข้อความที่สแกน\n                    ส่วนโหมด <em>เต็มความกว้าง</em> จะยึดป๊อปอัปไว้ด้านบนหรือด้านล่างของหน้าจอและใช้\n                    ความกว้างเต็มหน้าจอ ซึ่งอาจมีประโยชน์บนอุปกรณ์ที่มีหน้าจอสัมผัส"
+    },
+    "settings_popup_size_full_width_position_label": {
+        "message": "ตำแหน่งป๊อปอัป"
+    },
+    "settings_popup_size_full_width_position_top": {
+        "message": "ด้านบน"
+    },
+    "settings_popup_size_full_width_position_above_cursor": {
+        "message": "ตามเคอร์เซอร์"
+    },
+    "settings_popup_size_full_width_position_bottom": {
+        "message": "ด้านล่าง"
+    },
+    "settings_popup_size_heading": {
+        "message": "ตำแหน่งและขนาดป๊อปอัป"
+    },
+    "settings_popup_size_horizontal_offset_description": {
+        "message": "เปลี่ยนระยะที่ป๊อปอัปถูกวางสัมพันธ์กับข้อความแนวนอน"
+    },
+    "settings_popup_size_horizontal_offset_label": {
+        "message": "ออฟเซ็ตข้อความแนวนอน"
+    },
+    "settings_popup_size_horizontal_position_description": {
+        "message": "เปลี่ยนตำแหน่งที่ป๊อปอัปถูกวางสัมพันธ์กับข้อความแนวนอน"
+    },
+    "settings_popup_size_horizontal_position_label": {
+        "message": "ตำแหน่งข้อความแนวนอน"
+    },
+    "settings_popup_size_position_above": {
+        "message": "เหนือข้อความ"
+    },
+    "settings_popup_size_position_below": {
+        "message": "ใต้ข้อความ"
+    },
+    "settings_popup_size_scale_description": {
+        "message": "ควบคุมค่าการปรับขนาดของป๊อปอัป"
+    },
+    "settings_popup_size_scale_label": {
+        "message": "สเกล"
+    },
+    "settings_popup_size_size_description": {
+        "message": "ควบคุมขนาดของป๊อปอัปเป็นพิกเซล"
+    },
+    "settings_popup_size_size_label": {
+        "message": "ขนาด"
+    },
+    "settings_popup_size_vertical_after": {
+        "message": "หลังทิศทางการอ่าน"
+    },
+    "settings_popup_size_vertical_before": {
+        "message": "ก่อนทิศทางการอ่าน"
+    },
+    "settings_popup_size_vertical_left": {
+        "message": "ซ้ายของข้อความ"
+    },
+    "settings_popup_size_vertical_offset_description": {
+        "message": "เปลี่ยนระยะที่ป๊อปอัปถูกวางสัมพันธ์กับข้อความแนวตั้ง"
+    },
+    "settings_popup_size_vertical_offset_label": {
+        "message": "ออฟเซ็ตข้อความแนวตั้ง"
+    },
+    "settings_popup_size_vertical_position_description": {
+        "message": "เปลี่ยนตำแหน่งที่ป๊อปอัปถูกวางสัมพันธ์กับข้อความแนวตั้ง"
+    },
+    "settings_popup_size_vertical_position_label": {
+        "message": "ตำแหน่งข้อความแนวตั้ง"
+    },
+    "settings_popup_size_vertical_right": {
+        "message": "ขวาของข้อความ"
+    },
+    "settings_popup_size_vertical_same_as_horizontal": {
+        "message": "เหมือนข้อความแนวนอน"
+    },
+    "settings_profile_active_description": {
+        "message": "เปลี่ยนโปรไฟล์ที่ใช้งานอยู่ซึ่งใช้สำหรับการสแกน"
+    },
+    "settings_profile_active_label": {
+        "message": "โปรไฟล์ที่ใช้งานอยู่"
+    },
+    "settings_profile_configure": {
+        "message": "ตั้งค่าโปรไฟล์…"
+    },
+    "settings_profile_heading": {
+        "message": "โปรไฟล์"
+    },
+    "settings_result_average_frequencies_description": {
+        "message": "บีบอัดแท็กความถี่ให้เป็นแท็กความถี่ \"เฉลี่ย\" เดียว โดยอิงจากค่าเฉลี่ยฮาร์มอนิก"
+    },
+    "settings_result_average_frequencies_label": {
+        "message": "ความถี่เฉลี่ย"
+    },
+    "settings_result_display_heading": {
+        "message": "การแสดงผลลัพธ์"
+    },
+    "settings_result_grouping_description": {
+        "message": "เปลี่ยนวิธีจัดกลุ่มผลลัพธ์ที่เกี่ยวข้อง\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">เพิ่มเติม…</a>"
+    },
+    "settings_result_grouping_label": {
+        "message": "โหมดการจัดกลุ่มผลลัพธ์"
+    },
+    "settings_result_grouping_more_none": {
+        "message": "<strong>ไม่จัดกลุ่ม</strong> -\n                        คำจำกัดความแต่ละรายการจะถูกแสดงเป็นรายการแยกต่างหาก"
+    },
+    "settings_result_grouping_more_related_1": {
+        "message": "<strong>จัดกลุ่มคำที่เกี่ยวข้อง</strong> -\n                            คำที่เกี่ยวข้องซึ่งมีคำจำกัดความเดียวกันจะถูกจัดกลุ่มเข้าด้วยกัน"
+    },
+    "settings_result_grouping_more_related_2": {
+        "message": "ตัวเลือก <em>พจนานุกรมหลัก</em> ควรกำหนดให้กับพจนานุกรมที่มีข้อมูลคำที่เกี่ยวข้อง และการกำหนดค่า <em>พจนานุกรมรอง</em> จะช่วยให้รวมคำจำกัดความของคำที่เกี่ยวข้องจากพจนานุกรมอื่นได้"
+    },
+    "settings_result_grouping_more_related_warning": {
+        "message": "ไม่ใช่ทุกพจนานุกรมที่สามารถเลือกเป็น <em>พจนานุกรมหลัก</em> ได้"
+    },
+    "settings_result_grouping_more_term_reading": {
+        "message": "<strong>จัดกลุ่มคู่คำ-การอ่าน</strong> -\n                        คำจำกัดความของคำเดียวกันที่มีการอ่านเหมือนกันจะถูกจัดกลุ่มเข้าด้วยกัน"
+    },
+    "settings_result_grouping_more_term": {
+        "message": "<strong>จัดกลุ่มตามคำศัพท์</strong> - คำจำกัดความของคำศัพท์เดียวกันจะถูกรวมกลุ่มเข้าด้วยกัน โดยไม่คำนึงถึงรูปแบบการอ่านที่ต่างกัน"
+    },
+    "settings_result_grouping_none": {
+        "message": "ไม่จัดกลุ่ม"
+    },
+    "settings_result_grouping_primary_dictionary": {
+        "message": "พจนานุกรมหลัก"
+    },
+    "settings_result_grouping_related": {
+        "message": "จัดกลุ่มคำที่เกี่ยวข้อง"
+    },
+    "settings_result_grouping_term": {
+        "message": "จัดกลุ่มตามคำศัพท์"
+    },
+    "settings_result_grouping_secondary_dictionaries": {
+        "message": "พจนานุกรมรอง…"
+    },
+    "settings_result_grouping_term_reading": {
+        "message": "จัดกลุ่มคู่คำ-การอ่าน"
+    },
+    "settings_scanning_advanced_inputs_label": {
+        "message": "ตั้งค่าอินพุตการสแกนขั้นสูง… <span class=\"light no-wrap\">(<span class=\"scanning-input-count\">#</span> กำหนดแล้ว)</span>"
+    },
+    "settings_scanning_alphanumeric_description": {
+        "message": "ใช้ได้เมื่อภาษาเป็นญี่ปุ่น จีน กวางตุ้ง หรือเกาหลีเท่านั้น"
+    },
+    "settings_scanning_alphanumeric_label": {
+        "message": "ค้นหาข้อความที่มีอักขระที่ไม่ใช่ญี่ปุ่น จีน หรือเกาหลี"
+    },
+    "settings_scanning_deep_scan_description": {
+        "message": "เปิดใช้การสแกนข้อความที่ถูกปกคลุมด้วยเลเยอร์อื่น"
+    },
+    "settings_scanning_deep_scan_label": {
+        "message": "การสแกนเนื้อหาเชิงลึก"
+    },
+    "settings_scanning_delay_description": {
+        "message": "เปลี่ยนเวลาหน่วงก่อนเริ่มสแกนเมื่อไม่ต้องใช้ปุ่มแก้ไข"
+    },
+    "settings_scanning_delay_label": {
+        "message": "หน่วงเวลาการสแกน <span class=\"light\">(มิลลิวินาที)</span>"
+    },
+    "settings_scanning_heading": {
+        "message": "การสแกน"
+    },
+    "settings_scanning_input_prevention_label": {
+        "message": "ตั้งค่าการป้องกันการกระทำของอินพุต…"
+    },
+    "settings_scanning_layout_description": {
+        "message": "ใช้ข้อมูลสไตล์ของหน้าเว็บเพื่อกำหนดตำแหน่งที่น่าจะขึ้นบรรทัดใหม่"
+    },
+    "settings_scanning_layout_label": {
+        "message": "การสแกนตามเลย์เอาต์"
+    },
+    "settings_scanning_middle_mouse_description": {
+        "message": "กดปุ่มเมาส์กลางค้างไว้ขณะเลื่อนเคอร์เซอร์เพื่อสแกนข้อความ"
+    },
+    "settings_scanning_middle_mouse_label": {
+        "message": "สแกนด้วยปุ่มเมาส์กลาง"
+    },
+    "settings_scanning_modifier_description": {
+        "message": "กดปุ่มค้างไว้ขณะเลื่อนเคอร์เซอร์เพื่อสแกนข้อความ\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">เพิ่มเติม…</a>"
+    },
+    "settings_scanning_modifier_label": {
+        "message": "ปุ่มแก้ไขสำหรับการสแกน"
+    },
+    "settings_scanning_modifier_more_1": {
+        "message": "สามารถใช้ปุ่มแก้ไขบนแป้นพิมพ์เพื่อเปิดการสแกนข้อความเมื่อเคอร์เซอร์เคลื่อนที่ได้\n                    หรือใช้ตัวเลือก <em>ไม่มีปุ่ม</em> เพื่อสแกนข้อความทุกครั้งที่เคอร์เซอร์เคลื่อนที่\n                    โดยไม่ต้องกดปุ่มใด ๆ ค้างไว้"
+    },
+    "settings_scanning_modifier_more_2": {
+        "message": "การปรับแต่งอินพุตการสแกนขั้นสูงสามารถตั้งค่าได้โดยเปิดตัวเลือก <em>ขั้นสูง</em>\n                    และคลิก <em data-modal-action=\"show,scanning-inputs\">ตั้งค่าอินพุตการสแกนขั้นสูง</em>."
+    },
+    "settings_scanning_resolution_character": {
+        "message": "อักขระ"
+    },
+    "settings_scanning_resolution_description": {
+        "message": "เริ่มสแกนค้นหาที่คำหรืออักขระ ณ ตำแหน่งเคอร์เซอร์\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">เพิ่มเติม…</a>"
+    },
+    "settings_scanning_resolution_label": {
+        "message": "ความละเอียดการสแกน"
+    },
+    "settings_scanning_resolution_more_1": {
+        "message": "ความละเอียดการสแกนกำหนดว่าการสแกนจะเริ่มที่ใดเมื่อเคอร์เซอร์เคลื่อนที่\n                    ตัวเลือก <code>อักขระ</code> จะเริ่มสแกนที่ตำแหน่งปัจจุบันของเคอร์เซอร์\n                    ส่วนตัวเลือก <code>คำ</code> จะเริ่มสแกนที่ต้นคำ"
+    },
+    "settings_scanning_resolution_word": {
+        "message": "คำ"
+    },
+    "settings_scanning_select_text_label": {
+        "message": "เลือกข้อความที่ตรงกัน"
+    },
+    "settings_scanning_text_length_description": {
+        "message": "เปลี่ยนจำนวนอักขระที่จะอ่านเมื่อสแกนคำศัพท์"
+    },
+    "settings_scanning_text_length_label": {
+        "message": "ความยาวการสแกนข้อความ"
+    },
+    "settings_scanning_text_length_warning": {
+        "message": "ตั้งค่านี้สูงเกินไป (100+) อาจกระทบต่อประสิทธิภาพ"
+    },
+    "settings_scanning_wildcard_description": {
+        "message": "เปิดใช้ไวลด์การ์ดท้ายคำเมื่อค้นหาข้อความหน้าเว็บที่สแกน\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">เพิ่มเติม…</a>"
+    },
+    "settings_scanning_wildcard_label": {
+        "message": "การสแกนด้วยไวลด์การ์ด"
+    },
+    "settings_scanning_wildcard_more_1": {
+        "message": "แทนที่จะค้นหาข้อความต้นฉบับแบบตรง ๆ ข้อความจะต้องเป็นเพียงคำนำหน้าของคำที่มีอยู่เท่านั้น เช่น สแกน 読み จะเท่ากับการค้นหา 読み* ซึ่งอาจแสดงผลลัพธ์เพิ่มเติม เช่น 読み方"
+    },
+    "settings_scanning_wildcard_warning": {
+        "message": "ซึ่งอาจทำให้การสแกนและการค้นหาช้าลง และผลลัพธ์อาจไม่เกี่ยวข้องเท่าเดิม"
+    },
+    "settings_scanning_without_mousemove_description": {
+        "message": "อนุญาตให้สแกนคำใต้ตัวชี้โดยที่ตัวชี้ไม่ต้องเคลื่อนที่"
+    },
+    "settings_scanning_without_mousemove_label": {
+        "message": "สแกนโดยไม่ต้องขยับเมาส์"
+    },
+    "settings_scanning_zoom_description": {
+        "message": "แก้ไขตำแหน่งตัวชี้บนหน้าเว็บที่ใช้ CSS <code>zoom</code>\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">เพิ่มเติม…</a>"
+    },
+    "settings_scanning_zoom_label": {
+        "message": "ทำให้การซูม CSS เป็นมาตรฐาน"
+    },
+    "settings_scanning_zoom_more_1": {
+        "message": "คุณสมบัติ CSS ที่ไม่เป็นมาตรฐาน <a href=\"https://developer.mozilla.org/en-US/docs/Web/CSS/zoom\" rel=\"noopener noreferrer\" target=\"_blank\"><code>zoom</code></a> จะรบกวนการคำนวณพิกัดตัวชี้ตามปกติเมื่อสแกนหน้าเว็บ คุณสมบัตินี้ไม่แนะนำให้ใช้และพบไม่บ่อย แต่บางหน้าเว็บยังคงใช้"
+    },
+    "settings_scanning_zoom_more_2": {
+        "message": "การเปิดใช้ตัวเลือกนี้ซึ่งเปิดอยู่โดยค่าเริ่มต้น จะนำค่าของคุณสมบัตินี้มาพิจารณาเมื่อสแกนเนื้อหาหน้าเว็บ ขณะนี้ถูกวางไว้หลังตัวเลือกในกรณีที่มีผลข้างเคียงเชิงลบที่ไม่คาดคิด"
+    },
+    "settings_scanning_zoom_more_3": {
+        "message": "การตั้งค่านี้ไม่มีผลใน Firefox เนื่องจากไม่ได้รองรับคุณสมบัติ <code>zoom</code>"
+    },
+    "settings_search_window_heading": {
+        "message": "หน้าต่างค้นหา"
+    },
+    "settings_search_window_left_description": {
+        "message": "ควบคุมตำแหน่งซ้ายของหน้าต่างเป็นพิกเซล"
+    },
+    "settings_search_window_left_label": {
+        "message": "ตำแหน่งซ้าย"
+    },
+    "settings_search_window_native_window_label": {
+        "message": "ใช้หน้าต่างเบราว์เซอร์เนทีฟแทนป๊อปอัปที่ฝังอยู่\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    },
+    "settings_search_window_native_window_more": {
+        "message": "แทนที่จะแสดงคำจำกัดความในป๊อปอัปที่ฝังในหน้าเว็บ จะเปิดหน้าต่างเบราว์เซอร์เนทีฟที่มีเนื้อหาป๊อปอัปแทน หน้าต่างนี้จะแชร์กันในทุกแท็บ"
+    },
+    "settings_search_window_open_link": {
+        "message": "เปิด…"
+    },
+    "settings_search_window_size_description": {
+        "message": "ควบคุมขนาดของหน้าต่างเป็นพิกเซล"
+    },
+    "settings_search_window_size_label": {
+        "message": "ขนาด"
+    },
+    "settings_search_window_state_fullscreen": {
+        "message": "เต็มหน้าจอ"
+    },
+    "settings_search_window_state_maximized": {
+        "message": "ขยายเต็ม"
+    },
+    "settings_search_window_sticky_header_description": {
+        "message": "ส่วนหัวการค้นหาจะค้างอยู่บนหน้าเมื่อเลื่อนลง"
+    },
+    "settings_search_window_sticky_header_label": {
+        "message": "หัวการค้นหาติดไว้"
+    },
+    "settings_search_window_style_description": {
+        "message": "เปลี่ยนรูปลักษณ์ของหน้าต่าง"
+    },
+    "settings_search_window_style_label": {
+        "message": "สไตล์หน้าต่าง"
+    },
+    "settings_search_window_top_description": {
+        "message": "ควบคุมตำแหน่งบนของหน้าต่างเป็นพิกเซล"
+    },
+    "settings_search_window_top_label": {
+        "message": "ตำแหน่งบน"
+    },
+    "settings_search_window_type_popup": {
+        "message": "ป๊อปอัป"
+    },
+    "settings_security_heading": {
+        "message": "ความปลอดภัย"
+    },
+    "settings_security_permissions_label": {
+        "message": "กำหนดสิทธิ์ของ Sottaku-Yomitan"
+    },
+    "settings_security_secure_frame_label": {
+        "message": "ใช้ URL เฟรมป๊อปอัปที่ปลอดภัย\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    },
+    "settings_security_secure_frame_more": {
+        "message": "เมื่อเปิดใช้งานตัวเลือกนี้ URL ขององค์ประกอบ <code>iframe</code> จะถูกกำหนดโดย\n                    การเปลี่ยนตำแหน่งเอกสารภายในของ <code>iframe</code> โดยตรง แทนที่จะใช้\n                    แอตทริบิวต์ <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-src\" rel=\"noopener noreferrer\" target=\"_blank\"><code>src</code></a> ของ <code>iframe</code>\n                    ซึ่งจะทำให้ URL ของส่วนขยายไม่ถูกเปิดเผยให้หน้าเว็บพื้นฐาน และทำให้ยากขึ้น\n                    ในการตรวจพบการมีอยู่ของ Sottaku-Yomitan"
+    },
+    "settings_security_shadow_dom_label": {
+        "message": "ใช้คอนเทนเนอร์ที่ปลอดภัยรอบป๊อปอัป\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    },
+    "settings_security_shadow_dom_more": {
+        "message": "บน <a href=\"https://caniuse.com/shadowdomv1\" rel=\"noopener noreferrer\" target=\"_blank\">เบราว์เซอร์ที่รองรับ</a>\n                    องค์ประกอบ <code>iframe</code> ของป๊อปอัปจะถูกฝังไว้ภายในคอนเทนเนอร์ที่มี <a href=\"https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM\" rel=\"noopener noreferrer\" target=\"_blank\">shadow DOM</a> แบบปิด\n                    คอนเทนเนอร์นี้ป้องกันไม่ให้สคริปต์ที่ทำงานบนหน้าเว็บพื้นฐานสามารถค้นพบ <code>iframe</code> ได้\n                    ซึ่งช่วยหลีกเลี่ยงสถานการณ์ที่หน้าเว็บพยายามแก้ไขหรือใช้ป๊อปอัปของ Sottaku-Yomitan เพื่อวัตถุประสงค์ที่ไม่ตั้งใจ"
+    },
+    "settings_shortcuts_heading": {
+        "message": "ทางลัด"
+    },
+    "settings_shortcuts_native_label": {
+        "message": "กำหนดค่าทางลัดแป้นพิมพ์แบบเนทีฟ…"
+    },
+    "settings_shortcuts_overview": {
+        "message": "<p>\n                        Sottaku-Yomitan มีหมวดหมู่ทางลัดแป้นพิมพ์สองแบบ:\n                    </p>\n<ul>\n<li>\n<strong>มาตรฐาน</strong> ทางลัดแป้นพิมพ์ถูกควบคุมโดยส่วนขยาย และสามารถเพิ่ม ลบ\n                            และกำหนดค่าให้ทำงานบนหน้าเว็บที่ Sottaku-Yomitan ทำงานอยู่ได้\n                        </li>\n<li>\n<strong>เนทีฟ</strong> ทางลัดแป้นพิมพ์ถูกควบคุมโดยเว็บเบราว์เซอร์ และทำงานแบบครอบคลุม\n                            ภายในเว็บเบราว์เซอร์<span data-show-for-browser=\"chrome edge\"> หรือทั้งระบบ</span>.\n                        </li>\n</ul>"
+    },
+    "settings_shortcuts_standard_label": {
+        "message": "กำหนดค่าทางลัดแป้นพิมพ์มาตรฐาน…"
+    },
+    "settings_sottaku_account_description": {
+        "message": "คลิก \"ใช้เซสชันเบราว์เซอร์\" เพื่อเชื่อมโยงบัญชีที่คุณลงชื่อเข้าใช้ที่ sottaku.app (ต้องมี Pro)"
+    },
+    "settings_sottaku_account_label": {
+        "message": "บัญชี"
+    },
+    "settings_sottaku_account_not_connected": {
+        "message": "ไม่ได้เชื่อมต่อ"
+    },
+    "settings_sottaku_heading": {
+        "message": "Sottaku"
+    },
+    "settings_sottaku_integration_description": {
+        "message": "การค้นหา เสียง และการทำงานของแฟลชการ์ดจะใช้บัญชี Sottaku ของคุณเสมอ ไม่จำเป็นต้องใช้พจนานุกรมในเครื่อง"
+    },
+    "settings_sottaku_integration_label": {
+        "message": "การผสานรวม Sottaku"
+    },
+    "settings_sottaku_language_add_button": {
+        "message": "เพิ่ม"
+    },
+    "settings_sottaku_language_chinese": {
+        "message": "จีน"
+    },
+    "settings_sottaku_language_japanese": {
+        "message": "ญี่ปุ่น"
+    },
+    "settings_sottaku_language_korean": {
+        "message": "เกาหลี"
+    },
+    "settings_sottaku_language_order_description": {
+        "message": "เลือกว่าภาษา Sottaku ใดจะแสดงในป็อปอัปและลำดับของภาษา (ใช้สำหรับโหมดผสมและตัวสำรอง)"
+    },
+    "settings_sottaku_language_order_label": {
+        "message": "ลำดับภาษา"
+    },
+    "settings_sottaku_language_routing_auto": {
+        "message": "อัตโนมัติ (ตรวจจับต่อการค้นหา)"
+    },
+    "settings_sottaku_language_routing_description": {
+        "message": "เลือกวิธีที่ Sottaku-Yomitan จะเลือกภาษา Sottaku สำหรับการค้นหา (รองรับญี่ปุ่น เกาหลี และจีน)"
+    },
+    "settings_sottaku_language_routing_label": {
+        "message": "การกำหนดเส้นทางภาษา"
+    },
+    "settings_sottaku_language_routing_mixed": {
+        "message": "ผสม (แสดงภาษาที่ต้องการ)"
+    },
+    "settings_sottaku_password_placeholder": {
+        "message": "รหัสผ่าน"
+    },
+    "settings_sottaku_sign_in_button": {
+        "message": "ลงชื่อเข้าใช้"
+    },
+    "settings_sottaku_sign_in_google_button": {
+        "message": "ลงชื่อเข้าใช้ด้วย Google (เปิด sottaku.app)"
+    },
+    "settings_sottaku_status_not_connected": {
+        "message": "ไม่ได้เชื่อมต่อ"
+    },
+    "settings_sottaku_status_sign_in_required": {
+        "message": "ต้องลงชื่อเข้าใช้ ให้เข้าสู่ระบบให้เสร็จในแท็บที่เปิด แล้วคลิก \"ใช้เซสชันเบราว์เซอร์\"."
+    },
+    "settings_sottaku_status_signed_in": {
+        "message": "ลงชื่อเข้าใช้แล้ว"
+    },
+    "settings_sottaku_status_signed_in_as": {
+        "message": "ลงชื่อเข้าใช้เป็น $1"
+    },
+    "settings_sottaku_status_signed_out": {
+        "message": "ลงชื่อออกจาก Sottaku"
+    },
+    "settings_sottaku_unlink_button": {
+        "message": "ยกเลิกการเชื่อมโยงบัญชี"
+    },
+    "settings_sottaku_use_browser_session_button": {
+        "message": "ใช้เซสชันเบราว์เซอร์"
+    },
+    "settings_sottaku_use_browser_session_title": {
+        "message": "ใช้เซสชันเบราว์เซอร์ที่ลงชื่อเข้าใช้แล้วซ้ำ"
+    },
+    "settings_sottaku_username_placeholder": {
+        "message": "ชื่อผู้ใช้หรืออีเมล"
+    },
+    "settings_status_tasks_in_progress": {
+        "message": "งานที่กำลังดำเนินการ:"
+    },
+    "settings_text_parsing_heading": {
+        "message": "การแยกวิเคราะห์ข้อความ"
+    },
+    "settings_text_parsing_info_1": {
+        "message": "Sottaku-Yomitan สามารถสแกนประโยคที่อยู่รอบคำและแยกวิเคราะห์คำแต่ละคำของคำค้นบน\n                <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">หน้าค้นหา</a> ได้\n                ข้อมูลนี้ยังสามารถเพิ่มไปยังการ์ด Anki เพื่อให้บริบทเพิ่มเติมได้"
+    },
+    "settings_text_parsing_internal_description": {
+        "message": "คำในประโยคจะถูกแยกวิเคราะห์โดยใช้พจนานุกรมของ Sottaku-Yomitan\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">เพิ่มเติม…</a>"
+    },
+    "settings_text_parsing_internal_label": {
+        "message": "แยกวิเคราะห์ประโยคด้วยตัวแยกวิเคราะห์ภายในของ Sottaku-Yomitan"
+    },
+    "settings_text_parsing_internal_more": {
+        "message": "ตัวแยกวิเคราะห์ภายในของ Sottaku-Yomitan เป็นอัลกอริทึมง่ายๆ ที่สามารถแยกวิเคราะห์ประโยคโดยใช้พจนานุกรมที่ติดตั้งไว้ ทำงานโดยตรวจจับคำที่ยาวที่สุดที่ต้นประโยคซ้ำๆ แล้วเลื่อนไปจนไม่มีข้อความเหลือ วิธีนี้ให้ผลลัพธ์ที่ดีในกรณีทั่วไป แต่เนื่องจากไม่ได้คำนึงถึงโครงสร้างไวยากรณ์ บางครั้งอาจได้การแบ่งส่วนที่ไม่ถูกต้อง"
+    },
+    "settings_text_parsing_mecab_description": {
+        "message": "คำในประโยคจะถูกแยกวิเคราะห์โดยใช้โปรแกรมของบุคคลที่สาม เฉพาะภาษาญี่ปุ่นเท่านั้น"
+    },
+    "settings_text_parsing_mecab_disclaimer": {
+        "message": "ตัวเลือกนี้อาจส่งข้อมูลคำค้นออกนอก Sottaku-Yomitan เพื่อแยกวิเคราะห์<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">นโยบายความเป็นส่วนตัว</a>)</span>.\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">เพิ่มเติม…</a>"
+    },
+    "settings_text_parsing_mecab_label": {
+        "message": "แยกวิเคราะห์ประโยคด้วย <a href=\"https://en.wikipedia.org/wiki/MeCab\" rel=\"noopener noreferrer\" target=\"_blank\">MeCab</a>"
+    },
+    "settings_text_parsing_mecab_more_1": {
+        "message": "MeCab เป็นโปรแกรมของบุคคลที่สามที่ใช้พจนานุกรมและอัลกอริทึมการแยกวิเคราะห์ของตัวเองเพื่อแยกประโยคออกเป็นคำแต่ละคำ MeCab อาจให้ผลการแยกวิเคราะห์ที่แม่นยำกว่าตัวแยกวิเคราะห์ภายในของ Sottaku-Yomitan"
+    },
+    "settings_text_parsing_mecab_more_2": {
+        "message": "เพื่อให้ Sottaku-Yomitan ใช้งานได้ ต้องติดตั้งทั้ง MeCab และคอมโพเนนต์การส่งข้อความแบบเนทีฟ\n                    สามารถดูคู่มือการติดตั้งได้ที่ <a href=\"https://github.com/yomidevs/yomitan-mecab-installer/blob/master/README.md\" rel=\"noopener noreferrer\" target=\"_blank\">ที่นี่</a>."
+    },
+    "settings_text_parsing_scan_extent_description": {
+        "message": "ปรับจำนวนอักขระที่สแกนแบบสองทิศทางเพื่อสร้างประโยค"
+    },
+    "settings_text_parsing_scan_extent_label": {
+        "message": "ขอบเขตการสแกนประโยค"
+    },
+    "settings_text_parsing_spacing_label": {
+        "message": "แสดงช่องว่างระหว่างคำที่แยกแล้ว"
+    },
+    "settings_text_parsing_termination_custom": {
+        "message": "กำหนดเอง"
+    },
+    "settings_text_parsing_termination_custom_no_newlines": {
+        "message": "กำหนดเอง ไม่มีขึ้นบรรทัดใหม่"
+    },
+    "settings_text_parsing_termination_label": {
+        "message": "อักขระสิ้นสุดประโยค"
+    },
+    "settings_text_parsing_termination_newlines": {
+        "message": "เฉพาะขึ้นบรรทัดใหม่"
+    },
+    "settings_translation_heading": {
+        "message": "การแปล"
+    },
+    "settings_translation_replacement_patterns_label": {
+        "message": "กำหนดรูปแบบการแทนที่ข้อความแบบกำหนดเอง…"
+    },
+    "settings_translation_search_resolution_description": {
+        "message": "<p>\"A dog\" → ค้นหา \"A dog\",\"A do\", \"A d\", \"A\"</p> หรือ <p>\"A dog\" → \"A dog\", \"A\"</p>"
+    },
+    "settings_translation_search_resolution_label": {
+        "message": "ความละเอียดของการค้นหาในพจนานุกรม"
+    },
+    "settings_translation_search_resolution_letter": {
+        "message": "ตัวอักษร"
+    },
+    "settings_translation_search_resolution_word": {
+        "message": "คำ"
+    },
+    "sottaku_action_title_missing_id": {
+        "message": "ไม่มีรหัสคำถาม Sottaku"
+    },
+    "sottaku_action_title_sign_in": {
+        "message": "โปรดเข้าสู่ระบบ Sottaku ก่อน"
+    },
+    "sottaku_locale_automatic": {
+        "message": "อัตโนมัติ (ใช้ภาษาบัญชี Sottaku)"
+    },
+    "sottaku_request_button": {
+        "message": "ขอรายการในพจนานุกรม"
+    },
+    "sottaku_request_button_requested": {
+        "message": "ส่งคำขอแล้ว"
+    },
+    "sottaku_request_button_requesting": {
+        "message": "กำลังส่งคำขอ..."
+    },
+    "sottaku_request_button_retry": {
+        "message": "ขอคำแปล"
+    },
+    "sottaku_request_button_title_submitted": {
+        "message": "ส่งคำขอไปยัง Sottaku แล้ว"
+    },
+    "sottaku_save_button": {
+        "message": "บันทึกไปยัง Sottaku"
+    },
+    "sottaku_save_button_saved": {
+        "message": "บันทึกแล้ว"
+    },
+    "sottaku_save_button_saving": {
+        "message": "กำลังบันทึก..."
+    },
+    "sottaku_save_button_title_already_saved": {
+        "message": "บันทึกใน Sottaku แล้ว"
+    },
+    "sottaku_save_button_title_saved": {
+        "message": "เพิ่มไปยังแฟลชการ์ด Sottaku ของคุณแล้ว"
+    },
+    "status_footer_close": {
+        "message": "ปิด"
+    },
+    "status_footer_tasks_in_progress": {
+        "message": "งานที่กำลังดำเนินการ:"
+    },
+    "support_heading": {
+        "message": "สนับสนุน Sottaku-Yomitan ❤️"
+    },
+    "support_list_contribute": {
+        "message": "ร่วมพัฒนาโครงการ Sottaku-Yomitan! เริ่มจากอ่าน <a href=\"https://github.com/sottakuapp/sottaku-yomitan/blob/master/CONTRIBUTING.md\" rel=\"noreferrer noopener\">แนวทางการมีส่วนร่วม</a> ของเรา"
+    },
+    "support_list_feedback": {
+        "message": "รายงานบั๊กหรือข้อเสนอแนะผ่าน <a href=\"https://github.com/sottakuapp/sottaku-yomitan/issues/new/choose\" rel=\"noreferrer noopener\">GitHub Issues</a> หรือส่งอีเมลไปที่ <a href=\"mailto:hello@sottaku.app\">hello@sottaku.app</a>."
+    },
+    "support_list_star": {
+        "message": "ให้ดาวโครงการบน <a href=\"https://github.com/sottakuapp/sottaku-yomitan\" rel=\"noreferrer noopener\">GitHub</a> และแบ่งปันกับเพื่อน ๆ"
+    },
+    "support_subheading": {
+        "message": "นี่คือบางวิธีในการสนับสนุน Sottaku-Yomitan:"
+    },
+    "template_anki_overwrite_append_title": {
+        "message": "แทรกค่าใหม่หลังค่าที่มีอยู่"
+    },
+    "template_anki_overwrite_available_title": {
+        "message": "เขียนทับถ้าค่าใหม่ไม่ว่าง"
+    },
+    "template_anki_overwrite_fill_title": {
+        "message": "เขียนทับถ้าค่าที่มีอยู่ว่าง"
+    },
+    "template_anki_overwrite_overwrite_title": {
+        "message": "เขียนทับแม้ค่าใหม่ว่าง"
+    },
+    "template_anki_overwrite_prepend_title": {
+        "message": "แทรกค่าใหม่ก่อนค่าที่มีอยู่"
+    },
+    "template_anki_overwrite_skip_title": {
+        "message": "คงค่าที่มีอยู่"
+    },
+    "template_audio_source_tts_anki_warning": {
+        "message": "ไม่รองรับใน Anki"
+    },
+    "template_dictionary_integrity_error": {
+        "message": "อาจนำเข้าพจนานุกรมไม่ถูกต้อง"
+    },
+    "template_dictionary_update_available": {
+        "message": "มีอัปเดต"
+    },
+    "template_hotkey_no_input": {
+        "message": "ไม่มีอินพุต"
+    },
+    "template_profile_name_placeholder": {
+        "message": "ชื่อโปรไฟล์"
+    },
+    "template_scan_no_inputs": {
+        "message": "ไม่มีอินพุต"
+    },
+    "template_scan_touch_min_time": {
+        "message": "เวลาสัมผัสขั้นต่ำ <span class=\"light\">(เป็นมิลลิวินาที)</span>:"
+    },
+    "templates_modals_title": {
+        "message": "เทมเพลต"
+    },
+    "templates_settings_title": {
+        "message": "เทมเพลต"
+    },
+    "theme_option_auto": {
+        "message": "อัตโนมัติ"
+    },
+    "theme_option_browser": {
+        "message": "เบราว์เซอร์"
+    },
+    "theme_option_dark": {
+        "message": "มืด"
+    },
+    "theme_option_light": {
+        "message": "สว่าง"
+    },
+    "welcome_audio_enable_description": {
+        "message": "แสดงไอคอนลำโพงที่คลิกได้ข้างผลการค้นหา"
+    },
+    "welcome_audio_enable_disclaimer": {
+        "message": "ตัวเลือกนี้อาจส่งคำ การอ่าน และ/หรือภาษาออกนอก Sottaku-Yomitan เพื่อดึงเสียงเมื่อคลิกไอคอนลำโพง<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">นโยบายความเป็นส่วนตัว</a>)</span>.\n                    <div data-show-for-browser=\"firefox firefox-mobile\">การปิดตัวเลือกนี้จะไม่อนุญาตให้เล่นเสียงการออกเสียงสำหรับคำที่ค้นหา</div>"
+    },
+    "welcome_audio_enable_label": {
+        "message": "เปิดใช้การเล่นเสียงสำหรับคำศัพท์"
+    },
+    "welcome_basic_customization_heading": {
+        "message": "การปรับแต่งพื้นฐาน"
+    },
+    "welcome_data_transmission_heading": {
+        "message": "การส่งข้อมูล"
+    },
+    "welcome_get_started_connect_account": {
+        "message": "เชื่อมต่อบัญชี Sottaku ของคุณเพื่อซิงค์พจนานุกรม เสียง และแฟลชการ์ด"
+    },
+    "welcome_get_started_heading": {
+        "message": "นี่คือพื้นฐานสำหรับการเริ่มต้น"
+    },
+    "welcome_get_started_news_link": {
+        "message": "เพิ่งเริ่มใช้ Sottaku-Yomitan? ไปที่ sottaku.app สำหรับข่าวและเคล็ดลับ"
+    },
+    "welcome_get_started_quick_start": {
+        "message": "คู่มือเริ่มต้นอย่างรวดเร็วของ Sottaku-Yomitan"
+    },
+    "welcome_heading": {
+        "message": "ยินดีต้อนรับสู่ Sottaku-Yomitan!"
+    },
+    "welcome_locale_description": {
+        "message": "ภาษาที่ใช้สำหรับคำแปลที่ Sottaku ส่งกลับมา"
+    },
+    "welcome_locale_label": {
+        "message": "ภาษา"
+    },
+    "welcome_locale_setup_description": {
+        "message": "Sottaku มีการค้นหาภาษาญี่ปุ่นและเกาหลีผ่านบัญชีของคุณอยู่แล้ว; นำเข้าพจนานุกรมเพิ่มเติมหากต้องการใช้งานออฟไลน์หรือภาษาอื่น"
+    },
+    "welcome_locale_setup_heading": {
+        "message": "ตั้งค่าภาษา"
+    },
+    "welcome_more_customization_link": {
+        "message": "มีตัวเลือกการปรับแต่งเพิ่มเติมในหน้าการตั้งค่า"
+    },
+    "welcome_permissions_disabled_warning": {
+        "message": "ฟีเจอร์ Sottaku-Yomitan จะถูกจำกัดหากไม่ได้เปิดใช้งานสิทธิ์ที่แนะนำ"
+    },
+    "welcome_permissions_enable_optional_description": {
+        "message": "ช่วยให้ Sottaku-Yomitan อ่านคลิปบอร์ดและสื่อสารกับโปรแกรมภายนอกได้"
+    },
+    "welcome_permissions_enable_optional_label": {
+        "message": "เปิดใช้สิทธิ์เพิ่มเติม"
+    },
+    "welcome_permissions_enable_recommended_description": {
+        "message": "ช่วยให้ Sottaku-Yomitan สามารถสแกนข้อความจากเว็บไซต์ส่วนใหญ่ได้"
+    },
+    "welcome_permissions_enable_recommended_label": {
+        "message": "เปิดใช้สิทธิ์ที่แนะนำ"
+    },
+    "welcome_permissions_full_enabled": {
+        "message": "ฟีเจอร์ทั้งหมดของ Sottaku-Yomitan ใช้งานได้"
+    },
+    "welcome_permissions_more_info_chrome": {
+        "message": "การตั้งค่าเพิ่มเติมมีอยู่ใน <a href=\"/permissions.html\" rel=\"noopener\">หน้าสิทธิ์</a> และใน <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">หน้าการตั้งค่าส่วนขยาย</a> ของเบราว์เซอร์"
+    },
+    "welcome_permissions_more_info_firefox": {
+        "message": "การตั้งค่าเพิ่มเติมมีอยู่ใน <a href=\"/permissions.html\" rel=\"noopener\">หน้าสิทธิ์</a> และหน้าการตั้งค่าส่วนขยายของเบราว์เซอร์"
+    },
+    "welcome_permissions_recommended_enabled": {
+        "message": "ฟีเจอร์หลักของ Sottaku-Yomitan ใช้งานได้"
+    },
+    "welcome_recommended_permissions_heading": {
+        "message": "สิทธิ์ที่แนะนำ (สำคัญ)"
+    },
+    "welcome_scan_middle_mouse_description": {
+        "message": "กดปุ่มเมาส์กลางค้างไว้ขณะเลื่อนเคอร์เซอร์เพื่อสแกนข้อความ"
+    },
+    "welcome_scan_middle_mouse_label": {
+        "message": "สแกนด้วยปุ่มเมาส์กลาง"
+    },
+    "welcome_scan_modifier_description": {
+        "message": "กดปุ่มค้างไว้ขณะเลื่อนเคอร์เซอร์เพื่อสแกนข้อความ"
+    },
+    "welcome_scan_modifier_label": {
+        "message": "ปุ่มปรับแก้การสแกน"
+    },
+    "welcome_show_guide_label": {
+        "message": "แสดงคู่มือแนะนำนี้เมื่อเริ่มเบราว์เซอร์"
+    },
+    "welcome_text_language_description": {
+        "message": "ใช้สำหรับฟีเจอร์พจนานุกรมออฟไลน์และเครื่องมือพรีวิว"
+    },
+    "welcome_text_language_label": {
+        "message": "ภาษาของข้อความ"
+    },
+    "welcome_theme_description": {
+        "message": "ปรับสไตล์ของ Sottaku-Yomitan"
+    },
+    "welcome_theme_label": {
+        "message": "ธีม"
+    }
 }

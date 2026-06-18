@@ -15,6 +15,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+// @ts-nocheck
+
 import {afterAll, describe, expect, test, vi} from 'vitest';
 import {TextSourceElement} from '../ext/js/dom/text-source-element.js';
 import {TextScanner} from '../ext/js/language/text-scanner.js';

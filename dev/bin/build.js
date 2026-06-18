@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2025-2026  Sottaku Inc
- * Copyright (C) 2023-2025  Yomitan Authors
+ * Copyright (C) 2023-2026  Yomitan Authors
  * Copyright (C) 2020-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify

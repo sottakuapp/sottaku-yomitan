@@ -332,6 +332,36 @@
         ]
     },
     {
+        "selectors": [":root[dir='rtl'] .gloss-link-external-icon"],
+        "styles": [
+            ["margin-left", "0"],
+            ["margin-right", "0.25em"]
+        ]
+    },
+    {
+        "selectors": [
+            ":root[dir='rtl'] .gloss-sc-ol",
+            ":root[dir='rtl'] .gloss-sc-ul"
+        ],
+        "styles": [
+            ["padding-left", "0"],
+            ["padding-right", "var(--list-padding2)"]
+        ]
+    },
+    {
+        "selectors": [":root[dir='rtl'] .gloss-sc-details"],
+        "styles": [
+            ["padding-left", "0"],
+            ["padding-right", "var(--list-padding1)"]
+        ]
+    },
+    {
+        "selectors": [":root[dir='rtl'][data-glossary-layout-mode^=compact] .gloss-sc-ul[data-sc-content=glossary]"],
+        "styles": [
+            ["padding-right", "0"]
+        ]
+    },
+    {
         "selectors": [".gloss-image-link:not([data-appearance=monochrome]) .gloss-image-background"],
         "styles": [
             ["display", "none"]

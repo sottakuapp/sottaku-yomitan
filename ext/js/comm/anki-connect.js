@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023-2025  Yomitan Authors
+ * Copyright (C) 2023-2026  Yomitan Authors
  * Copyright (C) 2016-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -517,7 +517,8 @@ export class AnkiConnect {
      * @returns {Promise<unknown[]>}
      */
     async _invokeMulti(actions) {
-        const result = await this._invoke('multi', {actions});
+        const modifiedActions = this._apiKey !== null ? actions.map((action) => ({...action, key: this._apiKey})) : actions;
+        const result = await this._invoke('multi', {actions: modifiedActions});
         if (!Array.isArray(result)) {
             throw this._createUnexpectedResultError('array', result);
         }

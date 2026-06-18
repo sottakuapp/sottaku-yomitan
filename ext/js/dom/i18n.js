@@ -54,7 +54,7 @@ const LOCALE_ALIASES = new Map([
     ['fil_ph', 'tl'],
 ]);
 
-/** @type {Map<string, Promise<Record<string, {message: string}>>|Record<string, {message: string}>>} */
+/** @type {Map<string, Promise<Record<string, {message: string}>|null>|Record<string, {message: string}>>} */
 const localeCache = new Map();
 /** @type {string|null} */
 let activeLocale = null;
@@ -129,7 +129,7 @@ function applySubstitutions(message, substitutions) {
 
 /**
  * @param {string} key
- * @param {string[]|string|undefined} substitutions
+ * @param {string[]|string} [substitutions]
  * @returns {string}
  */
 export function getMessage(key, substitutions) {
@@ -198,15 +198,15 @@ export function localizeElement(root) {
     const rootNode = root || null;
     if (rootNode === null) { return; }
 
-    /** @type {Element[]} */
+    /** @type {HTMLElement[]} */
     const elements = [];
     if (rootNode instanceof Element) {
         if (rootNode.matches('[data-i18n], [data-i18n-html], [data-i18n-attr]')) {
-            elements.push(rootNode);
+            elements.push(/** @type {HTMLElement} */ (rootNode));
         }
-        elements.push(...rootNode.querySelectorAll('[data-i18n], [data-i18n-html], [data-i18n-attr]'));
+        elements.push(.../** @type {HTMLElement[]} */ (Array.from(rootNode.querySelectorAll('[data-i18n], [data-i18n-html], [data-i18n-attr]'))));
     } else {
-        elements.push(...rootNode.querySelectorAll('[data-i18n], [data-i18n-html], [data-i18n-attr]'));
+        elements.push(.../** @type {HTMLElement[]} */ (Array.from(rootNode.querySelectorAll('[data-i18n], [data-i18n-html], [data-i18n-attr]'))));
     }
 
     for (const element of elements) {

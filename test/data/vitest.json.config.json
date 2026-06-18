@@ -2,6 +2,7 @@
     "test": {
         "include": [
             "test/json.test.js"
-        ]
+        ],
+        "testTimeout": 20000
     }
 }

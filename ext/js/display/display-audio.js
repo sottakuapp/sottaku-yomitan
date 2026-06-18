@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023-2025  Yomitan Authors
+ * Copyright (C) 2023-2026  Yomitan Authors
  * Copyright (C) 2021-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -217,9 +217,10 @@ export class DisplayAudio {
      * @param {import('display').EventArgument<'contentUpdateEntry'>} details
      */
     _onContentUpdateEntry({element}) {
-        this._hideUnavailableAudioButtons(element);
+        const entryElement = /** @type {HTMLElement} */ (element);
+        this._hideUnavailableAudioButtons(entryElement);
         const eventListeners = this._eventListeners;
-        for (const button of element.querySelectorAll('.action-button[data-action=play-audio]')) {
+        for (const button of entryElement.querySelectorAll('.action-button[data-action=play-audio]')) {
             eventListeners.addEventListener(button, 'click', this._onAudioPlayButtonClickBind, false);
             eventListeners.addEventListener(button, 'contextmenu', this._onAudioPlayButtonContextMenuBind, false);
             eventListeners.addEventListener(button, 'menuClose', this._onAudioPlayMenuCloseClickBind, false);
@@ -684,7 +685,7 @@ export class DisplayAudio {
 
     /**
      * @param {?import('dictionary').TermHeadword} headword
-     * @returns {Promise<string|null>}
+     * @returns {Promise<{word: string|null, sentence: string|null}>}
      */
     async _getSottakuAudioUrls(headword) {
         if (!headword || typeof headword !== 'object') { return {word: null, sentence: null}; }
@@ -714,8 +715,9 @@ export class DisplayAudio {
         try {
             const info = await this._sottakuClient.getWordInfo(metadata.questionId, language);
             if (info && typeof info === 'object') {
-                const word = this._resolveSottakuAudioUrl(info.word_audio_file, apiOrigin);
-                const sentence = this._resolveSottakuAudioUrl(info.sentence_audio_file, apiOrigin);
+                const infoObject = /** @type {Record<string, unknown>} */ (info);
+                const word = this._resolveSottakuAudioUrl(infoObject.word_audio_file, apiOrigin);
+                const sentence = this._resolveSottakuAudioUrl(infoObject.sentence_audio_file, apiOrigin);
                 metadata.audio = {
                     word: word || metadata.audio?.word || null,
                     sentence: sentence || metadata.audio?.sentence || null,
@@ -789,7 +791,7 @@ export class DisplayAudio {
 
     /**
      * Hide audio buttons for entries without definitions.
-     * @param {Element} element
+     * @param {HTMLElement} element
      */
     _hideUnavailableAudioButtons(element) {
         const {dictionaryEntries, dictionaryEntryNodes} = this._display;
@@ -802,7 +804,8 @@ export class DisplayAudio {
         const metadata = headword && typeof headword === 'object' ? /** @type {any} */ (headword).sottaku : null;
         const hasDefinition = Boolean(metadata?.hasDefinition);
         if (!hasDefinition) {
-            for (const button of element.querySelectorAll('.action-button[data-action=play-audio]')) {
+            const buttons = /** @type {NodeListOf<HTMLElement>} */ (element.querySelectorAll('button.action-button[data-action=play-audio]'));
+            for (const button of buttons) {
                 button.hidden = true;
             }
         }

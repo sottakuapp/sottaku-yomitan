@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023-2025  Yomitan Authors
+ * Copyright (C) 2023-2026  Yomitan Authors
  * Copyright (C) 2016-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -53,6 +53,7 @@ export class Frontend {
         allowRootFramePopupProxy,
         childrenSupported = true,
         hotkeyHandler,
+        browser,
     }) {
         /** @type {import('../application.js').Application} */
         this._application = application;
@@ -100,6 +101,7 @@ export class Frontend {
             searchTerms: true,
             searchKanji: true,
             textSourceGenerator: this._textSourceGenerator,
+            browser: browser,
         });
         /** @type {boolean} */
         this._textScannerHasBeenEnabled = false;
@@ -445,7 +447,7 @@ export class Frontend {
             if (optionsContext === null) {
                 optionsContext = {depth: this._depth, url};
             } else {
-                url = optionsContext.url;
+                url = typeof optionsContext.url === 'string' ? optionsContext.url : url;
             }
 
             const {tabId, frameId} = this._application;
@@ -698,12 +700,10 @@ export class Frontend {
      * @returns {Record<string, unknown>}
      */
     _createPopupOptionsUpdateSnapshot(options) {
+        /** @type {Record<string, unknown>} */
         const snapshot = {...options};
-        const sottaku = (
-            typeof options.sottaku === 'object' && options.sottaku !== null ?
-                {...options.sottaku} :
-                {}
-        );
+        /** @type {Record<string, unknown>} */
+        const sottaku = {...options.sottaku};
         delete sottaku.authToken;
         delete sottaku.cookieDomain;
         delete sottaku.user;
@@ -805,7 +805,7 @@ export class Frontend {
         const popup = await popupPromise;
         const optionsContext = await this._getOptionsContext();
         if (this._updatePopupToken !== token) { return; }
-        if (this._shouldEagerlySetPopupOptionsContext(popup, currentPopup, isIframe, showIframePopupsInRootFrame)) {
+        if (popup !== null && this._shouldEagerlySetPopupOptionsContext(popup, currentPopup, isIframe, showIframePopupsInRootFrame)) {
             await popup.setOptionsContext(optionsContext);
         }
         if (this._updatePopupToken !== token) { return; }

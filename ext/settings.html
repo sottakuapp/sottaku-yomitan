@@ -948,6 +948,7 @@
                     <option value="split-tags-grouped" data-i18n="settings_appearance_frequency_split_tags_grouped">Split tags, grouped content</option>
                     <option value="inline-list" data-i18n="settings_appearance_frequency_inline_list">Inline list</option>
                     <option value="list" data-i18n="settings_appearance_frequency_list">List</option>
+                    <option value="list-bordered" data-i18n="settings_appearance_frequency_list_bordered">List, bordered</option>
                 </select>
             </div>
         </div></div>
@@ -1080,6 +1081,7 @@
                     >
                         <option value="split" data-i18n="settings_result_grouping_none">No grouping</option>
                         <option value="group" data-i18n="settings_result_grouping_term_reading">Group term-reading pairs</option>
+                        <option value="term" data-i18n="settings_result_grouping_term">Group by term</option>
                         <option value="merge" data-i18n="settings_result_grouping_related">Group related terms</option>
                     </select>
                 </div>
@@ -1093,6 +1095,10 @@
                     <li data-i18n-html="settings_result_grouping_more_term_reading">
                         <strong>Group term-reading pairs</strong> -
                         Definitions for the same term with the same reading will be grouped together.
+                    </li>
+                    <li data-i18n-html="settings_result_grouping_more_term">
+                        <strong>Group by term</strong> -
+                        Definitions for the same term will be grouped together, regardless of reading variations.
                     </li>
                     <li>
                         <p data-i18n-html="settings_result_grouping_more_related_1">
@@ -1159,7 +1165,13 @@
                     </div>
                 </div>
                 <div class="settings-item-right">
-                    <select data-setting="general.popupDisplayMode">
+                    <select data-setting="general.popupDisplayMode"
+                        data-transform='{
+                            "type": "setVisibility",
+                            "selector": "#full-width-position-options",
+                            "condition": {"op": "===", "value": "full-width"}
+                        }'
+                    >
                         <option value="default" data-i18n="common_default">Default</option>
                         <option value="full-width" data-i18n="settings_popup_size_display_full_width">Full width</option>
                     </select>
@@ -1174,6 +1186,20 @@
                 <p>
                     <a tabindex="0" class="more-toggle" data-parent-distance="3" data-i18n="common_less">Less&hellip;</a>
                 </p>
+            </div>
+            <div class="settings-item-children settings-item-children-group" id="full-width-position-options" hidden>
+                <div class="settings-item"><div class="settings-item-inner settings-item-inner-wrappable">
+                    <div class="settings-item-left">
+                        <div class="settings-item-label" data-i18n="settings_popup_size_full_width_position_label">Popup position</div>
+                    </div>
+                    <div class="settings-item-right">
+                        <select data-setting="general.popupFullWidthPosition">
+                            <option value="top" data-i18n="settings_popup_size_full_width_position_top">Top</option>
+                            <option value="above-cursor" data-i18n="settings_popup_size_full_width_position_above_cursor">Follow cursor</option>
+                            <option value="bottom" data-i18n="settings_popup_size_full_width_position_bottom">Bottom</option>
+                        </select>
+                    </div>
+                </div></div>
             </div>
         </div>
         <div class="settings-item">

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023-2025  Yomitan Authors
+ * Copyright (C) 2023-2026  Yomitan Authors
  * Copyright (C) 2020-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -70,7 +70,7 @@
     --content-dimmer-color: rgba(0, 0, 0, 0.1);
     --advanced-color: #6640be;
     --advanced-color-lighter: hsl(258, 50%, 75%);
-    --advanced-color-transparent25: rgba(102, 64, 190, 0.5);
+    --advanced-color-transparent50: rgba(102, 64, 190, 0.5);
 
     --modal-padding-horizontal: 1em;
     --modal-padding-vertical: 0.625em;
@@ -456,6 +456,7 @@ a.heading-link-light {
     cursor: pointer;
     transition: background-color var(--animation-duration) ease-in-out;
     box-sizing: border-box;
+    position: relative;
 }
 .outline-item,
 .outline-item:hover {
@@ -868,10 +869,18 @@ select.short-height {
     height: 100%;
     width: 0.25em;
 }
+.outline-item.advanced-only::after {
+    content: '';
+    background-color: var(--advanced-color-lighter);
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 0.25em;
+}
 .advanced-toggle {
     --accent-color: var(--advanced-color);
     --accent-color-lighter: var(--advanced-color-lighter);
-    --accent-color-transparent25: var(--advanced-color-transparent25);
+    --accent-color-transparent25: var(--advanced-color-transparent50);
 }
 
 /* Debug settings */
@@ -882,6 +891,14 @@ select.short-height {
     position: absolute;
     right: 0;
     top: 0;
+    height: 100%;
+    width: 0.25em;
+}
+.outline-item.debug-only::after {
+    content: '';
+    background-color: var(--danger-color-lighter);
+    position: absolute;
+    left: 0;
     height: 100%;
     width: 0.25em;
 }
@@ -1547,35 +1564,35 @@ body.preview-sidebar-visible .fab-container-item.fab-container-item-popup-previe
 }
 
 /* RTL adjustments */
-:root[dir="rtl"] .heading-container-icon {
+:root[dir='rtl'] .heading-container-icon {
     margin-right: 0;
     margin-left: 0.75em;
 }
-:root[dir="rtl"] .sidebar {
+:root[dir='rtl'] .sidebar {
     left: auto;
     right: 0;
 }
-:root[dir="rtl"] .outline-item-label {
+:root[dir='rtl'] .outline-item-label {
     padding-left: 0;
     padding-right: var(--padding);
 }
-:root[dir="rtl"] .outline-item-left-warning-badge {
+:root[dir='rtl'] .outline-item-left-warning-badge {
     right: auto;
     left: calc(var(--outline-item-icon-size) * -0.125);
 }
-:root[dir="rtl"] body.sidebar-visible .sidebar-inner {
+:root[dir='rtl'] body.sidebar-visible .sidebar-inner {
     box-shadow: var(--shadow-left);
 }
-:root[dir="rtl"] body.preview-sidebar-visible .preview-sidebar {
+:root[dir='rtl'] body.preview-sidebar-visible .preview-sidebar {
     right: auto;
     left: 0;
     box-shadow: var(--shadow-right);
 }
-:root[dir="rtl"] .preview-frame {
+:root[dir='rtl'] .preview-frame {
     left: auto;
     right: 0;
 }
-:root[dir="rtl"] #action-popup {
+:root[dir='rtl'] #action-popup {
     float: right;
     margin: 1.5em 1.5em 1.5em 0;
 }

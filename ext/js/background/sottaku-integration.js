@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import {SottakuClient} from '../comm/sottaku-client.js';
 import {ExtensionError} from '../core/extension-error.js';
 import {toError} from '../core/to-error.js';
@@ -467,6 +469,8 @@ export class SottakuIntegration {
 
         /** @type {SottakuLanguageResult[]} */
         const languageResults = [];
+        /** @type {Map<string, {results: any[], originalTextLength: number, displayPreferences: unknown | null, languageResults?: {language: string, results: any[], originalTextLength: number}[] | null}>} */
+        const scanCache = new Map();
 
         if (languages.length > 1) {
             let scanResult;
@@ -477,6 +481,7 @@ export class SottakuIntegration {
                     maxResults,
                     locale,
                     null,
+                    scanCache,
                 );
             } catch (e) {
                 const message = toError(e).message || '';

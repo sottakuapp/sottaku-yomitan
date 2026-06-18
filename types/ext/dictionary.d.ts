@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023-2025  Yomitan Authors
+ * Copyright (C) 2023-2026  Yomitan Authors
  * Copyright (C) 2021-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -198,6 +198,10 @@ export type KanjiFrequency = {
      * Whether or not the displayValue string was parsed to determine the frequency value.
      */
     displayValueParsed: boolean;
+    /**
+     * How the frequency should be interpreted.
+     */
+    frequencyMode: DictionaryData.FrequencyMode | null;
 };
 
 // Terms
@@ -298,6 +302,10 @@ export type TermHeadword = {
      */
     index: number;
     /**
+     * The current index of this headword in the parent {@link TermDictionaryEntry.headwords} array.
+     */
+    headwordIndex: number;
+    /**
      * The text for the term.
      */
     term: string;
@@ -328,7 +336,7 @@ export type TermDefinition = {
      */
     index: number;
     /**
-     * A list of headwords that this definition corresponds to.
+     * A list of {@link TermHeadword.headwordIndex} values which this definition corresponds to.
      */
     headwordIndices: number[];
     /**
@@ -385,11 +393,11 @@ export type TermPronunciation = {
      */
     index: number;
     /**
-     * Which headword this pronunciation corresponds to.
+     * Which {@link TermHeadword.headwordIndex} this pronunciation corresponds to.
      */
     headwordIndex: number;
     /**
-     * The name of the dictionary that the proununciation information originated from.
+     * The name of the dictionary that the pronunciation information originated from.
      */
     dictionary: string;
     /**
@@ -463,7 +471,7 @@ export type TermFrequency = {
      */
     index: number;
     /**
-     * Which headword this frequency corresponds to.
+     * Which {@link TermHeadword.headwordIndex} this frequency corresponds to.
      */
     headwordIndex: number;
     /**
@@ -482,6 +490,10 @@ export type TermFrequency = {
      * Whether or not the frequency had an explicit reading specified.
      */
     hasReading: boolean;
+    /**
+     * How the frequency number should be interpreted for this dictionary.
+     */
+    frequencyMode: DictionaryData.FrequencyMode | null;
     /**
      * The frequency for the term, as a number of occurrences or an overall rank.
      */

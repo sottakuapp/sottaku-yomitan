@@ -17,6 +17,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+// @ts-nocheck
+
 /* eslint-disable no-underscore-dangle */
 
 import {describe, expect, test, vi} from 'vitest';

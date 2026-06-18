@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023-2025  Yomitan Authors
+ * Copyright (C) 2023-2026  Yomitan Authors
  * Copyright (C) 2016-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -347,7 +347,7 @@ export class OptionsUtil {
                 length: 10,
                 modifier: 'shift',
                 deepDomScan: false,
-                popupNestingMaxDepth: 0,
+                popupNestingMaxDepth: 10,
                 enablePopupSearch: false,
                 enableOnPopupExpressions: false,
                 enableOnSearchPage: true,
@@ -590,6 +590,9 @@ export class OptionsUtil {
             this._updateVersion75,
             this._updateVersion76,
             this._updateVersion77,
+            this._updateVersion78,
+            this._updateVersion79,
+            this._updateVersion80,
         ];
         /* eslint-enable @typescript-eslint/unbound-method */
         if (typeof targetVersion === 'number' && targetVersion < result.length) {
@@ -1836,10 +1839,36 @@ export class OptionsUtil {
     }
 
     /**
-     *  - Added sottaku integration defaults
+     *  - Split rank-based and occurrence-based frequency field templates.
      *  @type {import('options-util').UpdateFunction}
      */
     async _updateVersion75(options) {
+        await this._applyAnkiFieldTemplatesPatch(options, '/data/templates/anki-field-templates-upgrade-v75.handlebars');
+    }
+
+    /**
+     * - Added general.popupFullWidthPosition.
+     * @type {import('options-util').UpdateFunction}
+     */
+    async _updateVersion76(options) {
+        for (const profile of options.profiles) {
+            profile.options.general.popupFullWidthPosition = 'bottom';
+        }
+    }
+
+    /**
+     *  - Add {url-plain} handlebar
+     *  @type {import('options-util').UpdateFunction}
+     */
+    async _updateVersion77(options) {
+        await this._applyAnkiFieldTemplatesPatch(options, '/data/templates/anki-field-templates-upgrade-v77.handlebars');
+    }
+
+    /**
+     *  - Added sottaku integration defaults
+     *  @type {import('options-util').UpdateFunction}
+     */
+    async _updateVersion78(options) {
         for (const profile of options.profiles) {
             const current = profile.options.sottaku;
             const preferredLanguages = Array.isArray(current?.preferredLanguages) && current.preferredLanguages.length > 0 ?
@@ -1865,7 +1894,7 @@ export class OptionsUtil {
      *  - Normalize Sottaku language settings and add mixed language mode.
      *  @type {import('options-util').UpdateFunction}
      */
-    async _updateVersion76(options) {
+    async _updateVersion79(options) {
         for (const profile of options.profiles) {
             const {sottaku, general} = profile.options;
             const preferredLanguages = normalizeSottakuLanguages(
@@ -1886,7 +1915,7 @@ export class OptionsUtil {
      * - Added sottaku.locale.
      * @type {import('options-util').UpdateFunction}
      */
-    async _updateVersion77(options) {
+    async _updateVersion80(options) {
         for (const profile of options.profiles) {
             const sottaku = profile.options?.sottaku;
             if (!sottaku || typeof sottaku !== 'object') { continue; }

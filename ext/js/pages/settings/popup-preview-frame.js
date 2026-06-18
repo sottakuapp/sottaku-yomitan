@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023-2025  Yomitan Authors
+ * Copyright (C) 2023-2026  Yomitan Authors
  * Copyright (C) 2019-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -119,6 +119,7 @@ export class PopupPreviewFrame {
             allowRootFramePopupProxy: false,
             childrenSupported: false,
             hotkeyHandler: this._hotkeyHandler,
+            browser: null,
         });
         this._frontend.setOptionsContextOverride(this._optionsContext);
         await this._frontend.prepare();
@@ -373,7 +374,7 @@ export class PopupPreviewFrame {
     }
 
     /**
-     * @param {?import('settings').OptionsContext} [optionsContext]
+     * @param {import('settings').OptionsContext} [optionsContext]
      */
     async _refreshSottakuLinked(optionsContext = this._optionsContext ?? {current: true}) {
         const options = await this._application.api.optionsGet(optionsContext);
@@ -387,9 +388,9 @@ export class PopupPreviewFrame {
     }
 
     /**
-     * @param {{linked: boolean, hasToken: boolean, hasUser: boolean}} status
+     * @param {Record<string, unknown>} [_status]
      */
-    _updateDebugStatus() {
+    _updateDebugStatus(_status = undefined) {
         if (this._debugNode === null) { return; }
         this._debugNode.textContent = '';
         this._debugNode.hidden = true;

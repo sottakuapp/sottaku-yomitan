@@ -170,7 +170,7 @@ function setSharedCachedValue(requestKey, value, ttlMs) {
 
 export class SottakuClient {
     /**
-     * @param {{apiBaseUrl?: string, authToken?: string, cookieDomain?: string, onAuthTokenUpdated?: ((details: {apiBaseUrl: string, oldToken: string, newToken: string}) => (void|Promise<void>)), onAuthTokenInvalidated?: ((details: {apiBaseUrl: string, oldToken: string}) => (void|Promise<void>))}} [options]
+     * @param {{apiBaseUrl?: string, authToken?: string, cookieDomain?: string, onAuthTokenUpdated?: ((details: {apiBaseUrl: string, oldToken: string, newToken: string}) => (void|Promise<void>))|null, onAuthTokenInvalidated?: ((details: {apiBaseUrl: string, oldToken: string}) => (void|Promise<void>))|null}} [options]
      */
     constructor(options = {}) {
         /** @type {string} */
@@ -408,9 +408,10 @@ export class SottakuClient {
             body: {wordIds, language, locale},
         });
         if (data && typeof data === 'object' && 'word_info' in data) {
-            /** @type {Record<string, unknown>} */
-            const {word_info: wordInfo} = /** @type {{word_info: Record<string, unknown>}} */ (data);
-            return wordInfo;
+            const {word_info: wordInfo} = /** @type {{word_info: unknown}} */ (data);
+            return (wordInfo && typeof wordInfo === 'object' && !Array.isArray(wordInfo)) ?
+                /** @type {Record<string, unknown>} */ (wordInfo) :
+                {};
         }
         return {};
     }
@@ -783,7 +784,7 @@ export class SottakuClient {
                 value: normalizedToken,
                 path: '/',
                 expirationDate: Math.floor(Date.now() / 1000) + AUTH_COOKIE_MAX_AGE_SECONDS,
-                sameSite: 'lax',
+                sameSite: /** @type {chrome.cookies.SameSiteStatus} */ ('lax'),
                 secure: this._cookieDomain.startsWith('https://'),
             };
             await new Promise((resolve, reject) => {

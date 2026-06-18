@@ -133,7 +133,11 @@
             }
           ],
           "frequencyHarmonic": 1,
+          "frequencyHarmonicRank": 1,
+          "frequencyHarmonicOccurrence": 1,
           "frequencyAverage": 1,
+          "frequencyAverageRank": 1,
+          "frequencyAverageOccurrence": 1,
           "url": "url:",
           "cloze": {
             "sentence": "",
@@ -297,7 +301,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "url": "url:",
           "cloze": {
             "sentence": "",
@@ -612,7 +620,11 @@
             }
           ],
           "frequencyHarmonic": 1,
+          "frequencyHarmonicRank": 1,
+          "frequencyHarmonicOccurrence": 1,
           "frequencyAverage": 1,
+          "frequencyAverageRank": 1,
+          "frequencyAverageOccurrence": 1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -940,7 +952,11 @@
             }
           ],
           "frequencyHarmonic": 1,
+          "frequencyHarmonicRank": 1,
+          "frequencyHarmonicOccurrence": 1,
           "frequencyAverage": 1,
+          "frequencyAverageRank": 1,
+          "frequencyAverageOccurrence": 1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -1260,7 +1276,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -1579,7 +1599,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -1898,7 +1922,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -2217,7 +2245,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -2540,7 +2572,11 @@
             }
           ],
           "frequencyHarmonic": 1,
+          "frequencyHarmonicRank": 1,
+          "frequencyHarmonicOccurrence": 1,
           "frequencyAverage": 1,
+          "frequencyAverageRank": 1,
+          "frequencyAverageOccurrence": 1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -2868,7 +2904,11 @@
             }
           ],
           "frequencyHarmonic": 1,
+          "frequencyHarmonicRank": 1,
+          "frequencyHarmonicOccurrence": 1,
           "frequencyAverage": 1,
+          "frequencyAverageRank": 1,
+          "frequencyAverageOccurrence": 1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -3080,6 +3120,14 @@
                   "expression": "打ち込む",
                   "reading": "うちこむ",
                   "pitches": [
+                    {
+                      "positions": "HHHHH",
+                      "tags": []
+                    },
+                    {
+                      "positions": "HHHHL",
+                      "tags": []
+                    },
                     {
                       "positions": "HHHH",
                       "tags": []
@@ -3295,7 +3343,11 @@
             }
           ],
           "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
           "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
           "pitches": [
             {
               "index": 0,
@@ -3329,6 +3381,14 @@
               "expression": "打ち込む",
               "reading": "うちこむ",
               "pitches": [
+                {
+                  "positions": "HHHHH",
+                  "tags": []
+                },
+                {
+                  "positions": "HHHHL",
+                  "tags": []
+                },
                 {
                   "positions": "HHHH",
                   "tags": []
@@ -3483,6 +3543,30 @@
                 ],
                 "reading": "うちこむ",
                 "positions": 3,
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": []
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHH",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": []
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHL",
                 "nasalPositions": [],
                 "devoicePositions": [],
                 "tags": [],
@@ -3692,7 +3776,7 @@
             ]
           }
         ],
-        "pitchCount": 18,
+        "pitchCount": 20,
         "phoneticTranscriptions": [
           {
             "dictionary": "Test Dictionary 2",
@@ -4011,7 +4095,11 @@
             }
           ],
           "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
           "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
           "pitches": [
             {
               "index": 0,
@@ -4301,6 +4389,14 @@
                   "reading": "うちこむ",
                   "pitches": [
                     {
+                      "positions": "HHHHH",
+                      "tags": []
+                    },
+                    {
+                      "positions": "HHHHL",
+                      "tags": []
+                    },
+                    {
                       "positions": "HHHH",
                       "tags": []
                     },
@@ -4515,7 +4611,11 @@
             }
           ],
           "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
           "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
           "pitches": [
             {
               "index": 0,
@@ -4549,6 +4649,14 @@
               "expression": "打ち込む",
               "reading": "うちこむ",
               "pitches": [
+                {
+                  "positions": "HHHHH",
+                  "tags": []
+                },
+                {
+                  "positions": "HHHHL",
+                  "tags": []
+                },
                 {
                   "positions": "HHHH",
                   "tags": []
@@ -4703,6 +4811,30 @@
                 ],
                 "reading": "うちこむ",
                 "positions": 3,
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": []
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHH",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": []
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHL",
                 "nasalPositions": [],
                 "devoicePositions": [],
                 "tags": [],
@@ -4912,7 +5044,7 @@
             ]
           }
         ],
-        "pitchCount": 18,
+        "pitchCount": 20,
         "phoneticTranscriptions": [
           {
             "dictionary": "Test Dictionary 2",
@@ -5231,7 +5363,11 @@
             }
           ],
           "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
           "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
           "pitches": [
             {
               "index": 0,
@@ -5633,7 +5769,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -5957,7 +6097,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -6281,7 +6425,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -6605,7 +6753,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -6928,7 +7080,11 @@
             }
           ],
           "frequencyHarmonic": 1,
+          "frequencyHarmonicRank": 1,
+          "frequencyHarmonicOccurrence": 1,
           "frequencyAverage": 1,
+          "frequencyAverageRank": 1,
+          "frequencyAverageOccurrence": 1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -7256,7 +7412,11 @@
             }
           ],
           "frequencyHarmonic": 1,
+          "frequencyHarmonicRank": 1,
+          "frequencyHarmonicOccurrence": 1,
           "frequencyAverage": 1,
+          "frequencyAverageRank": 1,
+          "frequencyAverageOccurrence": 1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -7418,7 +7578,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -7742,7 +7906,11 @@
             }
           ],
           "frequencyHarmonic": 1,
+          "frequencyHarmonicRank": 1,
+          "frequencyHarmonicOccurrence": 1,
           "frequencyAverage": 1,
+          "frequencyAverageRank": 1,
+          "frequencyAverageOccurrence": 1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 0,
@@ -8075,7 +8243,11 @@
             }
           ],
           "frequencyHarmonic": 1,
+          "frequencyHarmonicRank": 1,
+          "frequencyHarmonicOccurrence": 1,
           "frequencyAverage": 1,
+          "frequencyAverageRank": 1,
+          "frequencyAverageOccurrence": 1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 0,
@@ -8394,7 +8566,11 @@
             }
           ],
           "frequencyHarmonic": 1,
+          "frequencyHarmonicRank": 1,
+          "frequencyHarmonicOccurrence": 1,
           "frequencyAverage": 1,
+          "frequencyAverageRank": 1,
+          "frequencyAverageOccurrence": 1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 0,
@@ -8714,7 +8890,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 0,
@@ -9033,7 +9213,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 0,
@@ -9357,7 +9541,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 0,
@@ -9676,7 +9864,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 0,
@@ -9893,6 +10085,14 @@
                   "reading": "うちこむ",
                   "pitches": [
                     {
+                      "positions": "HHHHH",
+                      "tags": []
+                    },
+                    {
+                      "positions": "HHHHL",
+                      "tags": []
+                    },
+                    {
                       "positions": "HHHH",
                       "tags": []
                     },
@@ -10107,7 +10307,11 @@
             }
           ],
           "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
           "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
           "pitches": [
             {
               "index": 0,
@@ -10141,6 +10345,14 @@
               "expression": "打ち込む",
               "reading": "うちこむ",
               "pitches": [
+                {
+                  "positions": "HHHHH",
+                  "tags": []
+                },
+                {
+                  "positions": "HHHHL",
+                  "tags": []
+                },
                 {
                   "positions": "HHHH",
                   "tags": []
@@ -10295,6 +10507,30 @@
                 ],
                 "reading": "うちこむ",
                 "positions": 3,
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": []
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHH",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": []
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHL",
                 "nasalPositions": [],
                 "devoicePositions": [],
                 "tags": [],
@@ -10504,7 +10740,7 @@
             ]
           }
         ],
-        "pitchCount": 18,
+        "pitchCount": 20,
         "phoneticTranscriptions": [
           {
             "dictionary": "Test Dictionary 2",
@@ -10685,6 +10921,14 @@
                   "expression": "打ち込む",
                   "reading": "うちこむ",
                   "pitches": [
+                    {
+                      "positions": "HHHHH",
+                      "tags": []
+                    },
+                    {
+                      "positions": "HHHHL",
+                      "tags": []
+                    },
                     {
                       "positions": "HHHH",
                       "tags": []
@@ -10900,7 +11144,11 @@
             }
           ],
           "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
           "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
           "pitches": [
             {
               "index": 0,
@@ -10934,6 +11182,14 @@
               "expression": "打ち込む",
               "reading": "うちこむ",
               "pitches": [
+                {
+                  "positions": "HHHHH",
+                  "tags": []
+                },
+                {
+                  "positions": "HHHHL",
+                  "tags": []
+                },
                 {
                   "positions": "HHHH",
                   "tags": []
@@ -11088,6 +11344,30 @@
                 ],
                 "reading": "うちこむ",
                 "positions": 3,
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": []
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHH",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": []
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHL",
                 "nasalPositions": [],
                 "devoicePositions": [],
                 "tags": [],
@@ -11297,7 +11577,7 @@
             ]
           }
         ],
-        "pitchCount": 18,
+        "pitchCount": 20,
         "phoneticTranscriptions": [
           {
             "dictionary": "Test Dictionary 2",
@@ -11591,7 +11871,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 0,
@@ -11915,7 +12199,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 0,
@@ -12269,7 +12557,11 @@
             }
           ],
           "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
           "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
           "pitches": [
             {
               "index": 0,
@@ -12696,7 +12988,11 @@
             }
           ],
           "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
           "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
           "pitches": [
             {
               "index": 0,
@@ -13098,7 +13394,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 0,
@@ -13422,7 +13722,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 0,
@@ -13588,7 +13892,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 0,
@@ -13641,11 +13949,11 @@
     "noteDataList": []
   },
   {
-    "name": "Search using different modes",
+    "name": "Search using different modes - simple",
     "noteDataList": null
   },
   {
-    "name": "Search using different modes",
+    "name": "Search using different modes - group",
     "noteDataList": [
       {
         "marker": "{marker}",
@@ -13819,6 +14127,14 @@
                   "expression": "打ち込む",
                   "reading": "うちこむ",
                   "pitches": [
+                    {
+                      "positions": "HHHHH",
+                      "tags": []
+                    },
+                    {
+                      "positions": "HHHHL",
+                      "tags": []
+                    },
                     {
                       "positions": "HHHH",
                       "tags": []
@@ -14072,7 +14388,11 @@
             }
           ],
           "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
           "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
           "pitches": [
             {
               "index": 0,
@@ -14106,6 +14426,14 @@
               "expression": "打ち込む",
               "reading": "うちこむ",
               "pitches": [
+                {
+                  "positions": "HHHHH",
+                  "tags": []
+                },
+                {
+                  "positions": "HHHHL",
+                  "tags": []
+                },
                 {
                   "positions": "HHHH",
                   "tags": []
@@ -14242,6 +14570,30 @@
                 ],
                 "reading": "うちこむ",
                 "positions": 3,
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": []
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHH",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": []
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHL",
                 "nasalPositions": [],
                 "devoicePositions": [],
                 "tags": [],
@@ -14451,7 +14803,7 @@
             ]
           }
         ],
-        "pitchCount": 18,
+        "pitchCount": 20,
         "phoneticTranscriptions": [
           {
             "dictionary": "Test Dictionary 2",
@@ -14815,7 +15167,11 @@
             }
           ],
           "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
           "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
           "pitches": [
             {
               "index": 0,
@@ -15244,7 +15600,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -15603,7 +15963,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -15921,7 +16285,11 @@
             }
           ],
           "frequencyHarmonic": 1,
+          "frequencyHarmonicRank": 1,
+          "frequencyHarmonicOccurrence": 1,
           "frequencyAverage": 1,
+          "frequencyAverageRank": 1,
+          "frequencyAverageOccurrence": 1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -16248,7 +16616,11 @@
             }
           ],
           "frequencyHarmonic": 1,
+          "frequencyHarmonicRank": 1,
+          "frequencyHarmonicOccurrence": 1,
           "frequencyAverage": 1,
+          "frequencyAverageRank": 1,
+          "frequencyAverageOccurrence": 1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -16287,7 +16659,7 @@
     ]
   },
   {
-    "name": "Search using different modes",
+    "name": "Search using different modes - merge",
     "noteDataList": [
       {
         "marker": "{marker}",
@@ -16465,6 +16837,14 @@
                   "expression": "打ち込む",
                   "reading": "うちこむ",
                   "pitches": [
+                    {
+                      "positions": "HHHHH",
+                      "tags": []
+                    },
+                    {
+                      "positions": "HHHHL",
+                      "tags": []
+                    },
                     {
                       "positions": "HHHH",
                       "tags": []
@@ -16982,7 +17362,11 @@
             }
           ],
           "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
           "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
           "pitches": [
             {
               "index": 0,
@@ -17016,6 +17400,14 @@
               "expression": "打ち込む",
               "reading": "うちこむ",
               "pitches": [
+                {
+                  "positions": "HHHHH",
+                  "tags": []
+                },
+                {
+                  "positions": "HHHHL",
+                  "tags": []
+                },
                 {
                   "positions": "HHHH",
                   "tags": []
@@ -17188,6 +17580,34 @@
                 ],
                 "reading": "うちこむ",
                 "positions": 3,
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "うちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHH",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "うちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHL",
                 "nasalPositions": [],
                 "devoicePositions": [],
                 "tags": [],
@@ -17459,7 +17879,7 @@
             ]
           }
         ],
-        "pitchCount": 20,
+        "pitchCount": 22,
         "phoneticTranscriptions": [
           {
             "dictionary": "Test Dictionary 2",
@@ -18036,7 +18456,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 2,
@@ -18348,7 +18772,11 @@
             }
           ],
           "frequencyHarmonic": 1,
+          "frequencyHarmonicRank": 1,
+          "frequencyHarmonicOccurrence": 1,
           "frequencyAverage": 1,
+          "frequencyAverageRank": 1,
+          "frequencyAverageOccurrence": 1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -18668,7 +19096,11 @@
             }
           ],
           "frequencyHarmonic": 1,
+          "frequencyHarmonicRank": 1,
+          "frequencyHarmonicOccurrence": 1,
           "frequencyAverage": 1,
+          "frequencyAverageRank": 1,
+          "frequencyAverageOccurrence": 1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -18707,6 +19139,2438 @@
     ]
   },
   {
+    "name": "Search using different modes - term",
+    "noteDataList": [
+      {
+        "marker": "{marker}",
+        "definition": {
+          "type": "termGrouped",
+          "source": "打ち込む",
+          "rawSource": "打ち込む",
+          "sourceTerm": "打ち込む",
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
+          "score": 10,
+          "sequence": 4,
+          "dictionary": "Test Dictionary 2",
+          "dictionaryAlias": "termsDictAlias",
+          "dictionaryOrder": {
+            "index": 0
+          },
+          "dictionaryNames": [
+            "Test Dictionary 2"
+          ],
+          "expression": "打ち込む",
+          "reading": "うちこむ",
+          "expressions": [
+            {
+              "sourceTerm": "打ち込む",
+              "expression": "打ち込む",
+              "reading": "うちこむ",
+              "termTags": [
+                {
+                  "name": "E1",
+                  "category": "default",
+                  "notes": "example tag 1",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": false
+                },
+                {
+                  "name": "E2",
+                  "category": "default",
+                  "notes": "example tag 2",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": false
+                },
+                {
+                  "name": "P",
+                  "category": "popular",
+                  "notes": "popular term",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": false
+                }
+              ],
+              "frequencies": [
+                {
+                  "index": 0,
+                  "expressionIndex": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打ち込む",
+                  "reading": "うちこむ",
+                  "hasReading": false,
+                  "frequency": 3
+                },
+                {
+                  "index": 1,
+                  "expressionIndex": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打ち込む",
+                  "reading": "うちこむ",
+                  "hasReading": false,
+                  "frequency": "seven"
+                },
+                {
+                  "index": 2,
+                  "expressionIndex": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打ち込む",
+                  "reading": "うちこむ",
+                  "hasReading": true,
+                  "frequency": 12
+                },
+                {
+                  "index": 3,
+                  "expressionIndex": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打ち込む",
+                  "reading": "うちこむ",
+                  "hasReading": true,
+                  "frequency": "eighteen"
+                },
+                {
+                  "index": 4,
+                  "expressionIndex": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打ち込む",
+                  "reading": "うちこむ",
+                  "hasReading": true,
+                  "frequency": "twenty-four (24)"
+                },
+                {
+                  "index": 5,
+                  "expressionIndex": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打ち込む",
+                  "reading": "うちこむ",
+                  "hasReading": true,
+                  "frequency": 30
+                }
+              ],
+              "pitches": [
+                {
+                  "index": 0,
+                  "expressionIndex": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打ち込む",
+                  "reading": "うちこむ",
+                  "pitches": [
+                    {
+                      "positions": 0,
+                      "tags": []
+                    },
+                    {
+                      "positions": 3,
+                      "tags": []
+                    }
+                  ]
+                },
+                {
+                  "index": 1,
+                  "expressionIndex": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打ち込む",
+                  "reading": "うちこむ",
+                  "pitches": [
+                    {
+                      "positions": "HHHHH",
+                      "tags": []
+                    },
+                    {
+                      "positions": "HHHHL",
+                      "tags": []
+                    },
+                    {
+                      "positions": "HHHH",
+                      "tags": []
+                    },
+                    {
+                      "positions": "HHHL",
+                      "tags": []
+                    },
+                    {
+                      "positions": "HHLH",
+                      "tags": []
+                    },
+                    {
+                      "positions": "HHLL",
+                      "tags": []
+                    },
+                    {
+                      "positions": "HLHH",
+                      "tags": []
+                    },
+                    {
+                      "positions": "HLHL",
+                      "tags": []
+                    },
+                    {
+                      "positions": "HLLH",
+                      "tags": []
+                    },
+                    {
+                      "positions": "HLLL",
+                      "tags": []
+                    },
+                    {
+                      "positions": "LHHH",
+                      "tags": []
+                    },
+                    {
+                      "positions": "LHHL",
+                      "tags": []
+                    },
+                    {
+                      "positions": "LHLH",
+                      "tags": []
+                    },
+                    {
+                      "positions": "LHLL",
+                      "tags": []
+                    },
+                    {
+                      "positions": "LLHH",
+                      "tags": []
+                    },
+                    {
+                      "positions": "LLHL",
+                      "tags": []
+                    },
+                    {
+                      "positions": "LLLH",
+                      "tags": []
+                    },
+                    {
+                      "positions": "LLLL",
+                      "tags": []
+                    }
+                  ]
+                }
+              ],
+              "furiganaSegments": [
+                {
+                  "text": "打",
+                  "furigana": "う"
+                },
+                {
+                  "text": "ち",
+                  "furigana": ""
+                },
+                {
+                  "text": "込",
+                  "furigana": "こ"
+                },
+                {
+                  "text": "む",
+                  "furigana": ""
+                }
+              ],
+              "termFrequency": "normal",
+              "wordClasses": [
+                "v5"
+              ]
+            },
+            {
+              "sourceTerm": "打ち込む",
+              "expression": "打ち込む",
+              "reading": "ぶちこむ",
+              "termTags": [
+                {
+                  "name": "E1",
+                  "category": "default",
+                  "notes": "example tag 1",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": false
+                },
+                {
+                  "name": "E2",
+                  "category": "default",
+                  "notes": "example tag 2",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": false
+                },
+                {
+                  "name": "P",
+                  "category": "popular",
+                  "notes": "popular term",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": false
+                }
+              ],
+              "frequencies": [
+                {
+                  "index": 0,
+                  "expressionIndex": 1,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打ち込む",
+                  "reading": "ぶちこむ",
+                  "hasReading": false,
+                  "frequency": 3
+                },
+                {
+                  "index": 1,
+                  "expressionIndex": 1,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打ち込む",
+                  "reading": "ぶちこむ",
+                  "hasReading": false,
+                  "frequency": "seven"
+                },
+                {
+                  "index": 2,
+                  "expressionIndex": 1,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打ち込む",
+                  "reading": "ぶちこむ",
+                  "hasReading": true,
+                  "frequency": 13
+                },
+                {
+                  "index": 3,
+                  "expressionIndex": 1,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打ち込む",
+                  "reading": "ぶちこむ",
+                  "hasReading": true,
+                  "frequency": "nineteen"
+                },
+                {
+                  "index": 4,
+                  "expressionIndex": 1,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打ち込む",
+                  "reading": "ぶちこむ",
+                  "hasReading": true,
+                  "frequency": "twenty-five (25)"
+                },
+                {
+                  "index": 5,
+                  "expressionIndex": 1,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打ち込む",
+                  "reading": "ぶちこむ",
+                  "hasReading": true,
+                  "frequency": "thirty-one"
+                }
+              ],
+              "pitches": [
+                {
+                  "index": 0,
+                  "expressionIndex": 1,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打ち込む",
+                  "reading": "ぶちこむ",
+                  "pitches": [
+                    {
+                      "positions": 0,
+                      "tags": []
+                    },
+                    {
+                      "positions": 3,
+                      "tags": []
+                    }
+                  ]
+                }
+              ],
+              "furiganaSegments": [
+                {
+                  "text": "打",
+                  "furigana": "ぶ"
+                },
+                {
+                  "text": "ち",
+                  "furigana": ""
+                },
+                {
+                  "text": "込",
+                  "furigana": "こ"
+                },
+                {
+                  "text": "む",
+                  "furigana": ""
+                }
+              ],
+              "termFrequency": "normal",
+              "wordClasses": [
+                "v5"
+              ]
+            }
+          ],
+          "termTags": [
+            {
+              "name": "E1",
+              "category": "default",
+              "notes": "example tag 1",
+              "order": 0,
+              "score": 0,
+              "dictionary": "Test Dictionary 2",
+              "redundant": false
+            },
+            {
+              "name": "E2",
+              "category": "default",
+              "notes": "example tag 2",
+              "order": 0,
+              "score": 0,
+              "dictionary": "Test Dictionary 2",
+              "redundant": false
+            },
+            {
+              "name": "P",
+              "category": "popular",
+              "notes": "popular term",
+              "order": 0,
+              "score": 0,
+              "dictionary": "Test Dictionary 2",
+              "redundant": false
+            }
+          ],
+          "definitions": [
+            {
+              "sequence": 4,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "glossaryScopedStyles": ".yomitan-glossary {ul[data-sc-content='glossary'] {\n    color: #ffff00;\n}\n}",
+              "dictScopedStyles": ".yomitan-glossary {[data-dictionary=\"Test Dictionary 2\"] {ul[data-sc-content='glossary'] {\n    color: #ffff00;\n}\n}\n}",
+              "glossary": [
+                "uchikomu definition 1",
+                "uchikomu definition 2"
+              ],
+              "definitionTags": [
+                {
+                  "name": "vt",
+                  "category": "partOfSpeech",
+                  "notes": "transitive verb",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": false
+                }
+              ]
+            },
+            {
+              "sequence": 4,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "glossaryScopedStyles": ".yomitan-glossary {ul[data-sc-content='glossary'] {\n    color: #ffff00;\n}\n}",
+              "dictScopedStyles": ".yomitan-glossary {[data-dictionary=\"Test Dictionary 2\"] {ul[data-sc-content='glossary'] {\n    color: #ffff00;\n}\n}\n}",
+              "glossary": [
+                "buchikomu definition 1",
+                "buchikomu definition 2"
+              ],
+              "definitionTags": [
+                {
+                  "name": "vt",
+                  "category": "partOfSpeech",
+                  "notes": "transitive verb",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": true
+                }
+              ]
+            },
+            {
+              "sequence": 4,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "glossaryScopedStyles": ".yomitan-glossary {ul[data-sc-content='glossary'] {\n    color: #ffff00;\n}\n}",
+              "dictScopedStyles": ".yomitan-glossary {[data-dictionary=\"Test Dictionary 2\"] {ul[data-sc-content='glossary'] {\n    color: #ffff00;\n}\n}\n}",
+              "glossary": [
+                "uchikomu definition 3",
+                "uchikomu definition 4"
+              ],
+              "definitionTags": [
+                {
+                  "name": "vt",
+                  "category": "partOfSpeech",
+                  "notes": "transitive verb",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": true
+                }
+              ]
+            },
+            {
+              "sequence": 4,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "glossaryScopedStyles": ".yomitan-glossary {ul[data-sc-content='glossary'] {\n    color: #ffff00;\n}\n}",
+              "dictScopedStyles": ".yomitan-glossary {[data-dictionary=\"Test Dictionary 2\"] {ul[data-sc-content='glossary'] {\n    color: #ffff00;\n}\n}\n}",
+              "glossary": [
+                "buchikomu definition 3",
+                "buchikomu definition 4"
+              ],
+              "definitionTags": [
+                {
+                  "name": "vt",
+                  "category": "partOfSpeech",
+                  "notes": "transitive verb",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": true
+                }
+              ]
+            }
+          ],
+          "frequencies": [
+            {
+              "index": 0,
+              "expressionIndex": 0,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打ち込む",
+              "reading": "うちこむ",
+              "hasReading": false,
+              "frequency": 3
+            },
+            {
+              "index": 1,
+              "expressionIndex": 0,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打ち込む",
+              "reading": "うちこむ",
+              "hasReading": false,
+              "frequency": "seven"
+            },
+            {
+              "index": 2,
+              "expressionIndex": 0,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打ち込む",
+              "reading": "うちこむ",
+              "hasReading": true,
+              "frequency": 12
+            },
+            {
+              "index": 3,
+              "expressionIndex": 0,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打ち込む",
+              "reading": "うちこむ",
+              "hasReading": true,
+              "frequency": "eighteen"
+            },
+            {
+              "index": 4,
+              "expressionIndex": 0,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打ち込む",
+              "reading": "うちこむ",
+              "hasReading": true,
+              "frequency": "twenty-four (24)"
+            },
+            {
+              "index": 5,
+              "expressionIndex": 0,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打ち込む",
+              "reading": "うちこむ",
+              "hasReading": true,
+              "frequency": 30
+            },
+            {
+              "index": 6,
+              "expressionIndex": 1,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打ち込む",
+              "reading": "ぶちこむ",
+              "hasReading": false,
+              "frequency": 3
+            },
+            {
+              "index": 7,
+              "expressionIndex": 1,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打ち込む",
+              "reading": "ぶちこむ",
+              "hasReading": false,
+              "frequency": "seven"
+            },
+            {
+              "index": 8,
+              "expressionIndex": 1,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打ち込む",
+              "reading": "ぶちこむ",
+              "hasReading": true,
+              "frequency": 13
+            },
+            {
+              "index": 9,
+              "expressionIndex": 1,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打ち込む",
+              "reading": "ぶちこむ",
+              "hasReading": true,
+              "frequency": "nineteen"
+            },
+            {
+              "index": 10,
+              "expressionIndex": 1,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打ち込む",
+              "reading": "ぶちこむ",
+              "hasReading": true,
+              "frequency": "twenty-five (25)"
+            },
+            {
+              "index": 11,
+              "expressionIndex": 1,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打ち込む",
+              "reading": "ぶちこむ",
+              "hasReading": true,
+              "frequency": "thirty-one"
+            }
+          ],
+          "frequencyNumbers": [
+            {
+              "dictionary": "Test Dictionary 2",
+              "frequency": 3
+            }
+          ],
+          "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
+          "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
+          "pitches": [
+            {
+              "index": 0,
+              "expressionIndex": 0,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打ち込む",
+              "reading": "うちこむ",
+              "pitches": [
+                {
+                  "positions": 0,
+                  "tags": []
+                },
+                {
+                  "positions": 3,
+                  "tags": []
+                }
+              ]
+            },
+            {
+              "index": 1,
+              "expressionIndex": 0,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打ち込む",
+              "reading": "うちこむ",
+              "pitches": [
+                {
+                  "positions": "HHHHH",
+                  "tags": []
+                },
+                {
+                  "positions": "HHHHL",
+                  "tags": []
+                },
+                {
+                  "positions": "HHHH",
+                  "tags": []
+                },
+                {
+                  "positions": "HHHL",
+                  "tags": []
+                },
+                {
+                  "positions": "HHLH",
+                  "tags": []
+                },
+                {
+                  "positions": "HHLL",
+                  "tags": []
+                },
+                {
+                  "positions": "HLHH",
+                  "tags": []
+                },
+                {
+                  "positions": "HLHL",
+                  "tags": []
+                },
+                {
+                  "positions": "HLLH",
+                  "tags": []
+                },
+                {
+                  "positions": "HLLL",
+                  "tags": []
+                },
+                {
+                  "positions": "LHHH",
+                  "tags": []
+                },
+                {
+                  "positions": "LHHL",
+                  "tags": []
+                },
+                {
+                  "positions": "LHLH",
+                  "tags": []
+                },
+                {
+                  "positions": "LHLL",
+                  "tags": []
+                },
+                {
+                  "positions": "LLHH",
+                  "tags": []
+                },
+                {
+                  "positions": "LLHL",
+                  "tags": []
+                },
+                {
+                  "positions": "LLLH",
+                  "tags": []
+                },
+                {
+                  "positions": "LLLL",
+                  "tags": []
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "expressionIndex": 1,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打ち込む",
+              "reading": "ぶちこむ",
+              "pitches": [
+                {
+                  "positions": 0,
+                  "tags": []
+                },
+                {
+                  "positions": 3,
+                  "tags": []
+                }
+              ]
+            }
+          ],
+          "phoneticTranscriptions": [
+            {
+              "index": 0,
+              "expressionIndex": 0,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打ち込む",
+              "reading": "うちこむ",
+              "phoneticTranscriptions": []
+            },
+            {
+              "index": 1,
+              "expressionIndex": 0,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打ち込む",
+              "reading": "うちこむ",
+              "phoneticTranscriptions": []
+            },
+            {
+              "index": 2,
+              "expressionIndex": 1,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打ち込む",
+              "reading": "ぶちこむ",
+              "phoneticTranscriptions": []
+            }
+          ],
+          "sourceTermExactMatchCount": 2,
+          "url": "url:",
+          "cloze": {
+            "sentence": "",
+            "prefix": "",
+            "body": "",
+            "bodyKana": "",
+            "suffix": ""
+          }
+        },
+        "glossaryLayoutMode": "default",
+        "compactTags": false,
+        "group": false,
+        "merge": false,
+        "compactGlossaries": false,
+        "uniqueExpressions": [
+          "打ち込む"
+        ],
+        "uniqueReadings": [
+          "うちこむ",
+          "ぶちこむ"
+        ],
+        "pitches": [
+          {
+            "dictionary": "Test Dictionary 2",
+            "pitches": [
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": 0,
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "うちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": 3,
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "うちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHH",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "うちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHL",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "うちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHH",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "うちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHL",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "うちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHLH",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "うちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHLL",
+                "nasalPositions": [],
+                "devoicePositions": [
+                  2
+                ],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "うちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HLHH",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "うちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HLHL",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "うちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HLLH",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "うちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HLLL",
+                "nasalPositions": [
+                  3
+                ],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "うちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "LHHH",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "うちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "LHHL",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "うちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "LHLH",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "うちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "LHLL",
+                "nasalPositions": [
+                  3
+                ],
+                "devoicePositions": [
+                  2
+                ],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "うちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "LLHH",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "うちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "LLHL",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "うちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "LLLH",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "うちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "LLLL",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "うちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "ぶちこむ",
+                "positions": 0,
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "ぶちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "ぶちこむ",
+                "positions": 3,
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "ぶちこむ"
+                ]
+              }
+            ]
+          }
+        ],
+        "pitchCount": 22,
+        "phoneticTranscriptions": [
+          {
+            "dictionary": "Test Dictionary 2",
+            "phoneticTranscriptions": []
+          }
+        ],
+        "context": {
+          "query": "query",
+          "fullQuery": "fullQuery",
+          "document": {
+            "title": "title"
+          }
+        },
+        "media": {}
+      },
+      {
+        "marker": "{marker}",
+        "definition": {
+          "type": "termGrouped",
+          "source": "打ち",
+          "rawSource": "打ち",
+          "sourceTerm": "打つ",
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                {
+                  "name": "continuative",
+                  "description": "Used to indicate actions that are (being) carried out.\nRefers to 連用形, the part of the verb after conjugating with -ます and dropping ます."
+                }
+              ]
+            }
+          ],
+          "score": 10,
+          "sequence": 3,
+          "dictionary": "Test Dictionary 2",
+          "dictionaryAlias": "termsDictAlias",
+          "dictionaryOrder": {
+            "index": 0
+          },
+          "dictionaryNames": [
+            "Test Dictionary 2"
+          ],
+          "expression": "打つ",
+          "reading": "うつ",
+          "expressions": [
+            {
+              "sourceTerm": "打つ",
+              "expression": "打つ",
+              "reading": "うつ",
+              "termTags": [
+                {
+                  "name": "E1",
+                  "category": "default",
+                  "notes": "example tag 1",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": false
+                },
+                {
+                  "name": "E2",
+                  "category": "default",
+                  "notes": "example tag 2",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": false
+                },
+                {
+                  "name": "P",
+                  "category": "popular",
+                  "notes": "popular term",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": false
+                }
+              ],
+              "frequencies": [
+                {
+                  "index": 0,
+                  "expressionIndex": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打つ",
+                  "reading": "うつ",
+                  "hasReading": false,
+                  "frequency": 2
+                },
+                {
+                  "index": 1,
+                  "expressionIndex": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打つ",
+                  "reading": "うつ",
+                  "hasReading": false,
+                  "frequency": 6
+                },
+                {
+                  "index": 2,
+                  "expressionIndex": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打つ",
+                  "reading": "うつ",
+                  "hasReading": true,
+                  "frequency": 10
+                },
+                {
+                  "index": 3,
+                  "expressionIndex": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打つ",
+                  "reading": "うつ",
+                  "hasReading": true,
+                  "frequency": "sixteen"
+                },
+                {
+                  "index": 4,
+                  "expressionIndex": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打つ",
+                  "reading": "うつ",
+                  "hasReading": true,
+                  "frequency": "twenty-two (22)"
+                },
+                {
+                  "index": 5,
+                  "expressionIndex": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打つ",
+                  "reading": "うつ",
+                  "hasReading": true,
+                  "frequency": 28
+                }
+              ],
+              "pitches": [],
+              "furiganaSegments": [
+                {
+                  "text": "打",
+                  "furigana": "う"
+                },
+                {
+                  "text": "つ",
+                  "furigana": ""
+                }
+              ],
+              "termFrequency": "normal",
+              "wordClasses": [
+                "v5"
+              ]
+            },
+            {
+              "sourceTerm": "打つ",
+              "expression": "打つ",
+              "reading": "ぶつ",
+              "termTags": [
+                {
+                  "name": "E1",
+                  "category": "default",
+                  "notes": "example tag 1",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": false
+                },
+                {
+                  "name": "E2",
+                  "category": "default",
+                  "notes": "example tag 2",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": false
+                },
+                {
+                  "name": "P",
+                  "category": "popular",
+                  "notes": "popular term",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": false
+                }
+              ],
+              "frequencies": [
+                {
+                  "index": 0,
+                  "expressionIndex": 1,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打つ",
+                  "reading": "ぶつ",
+                  "hasReading": false,
+                  "frequency": 2
+                },
+                {
+                  "index": 1,
+                  "expressionIndex": 1,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打つ",
+                  "reading": "ぶつ",
+                  "hasReading": false,
+                  "frequency": 6
+                },
+                {
+                  "index": 2,
+                  "expressionIndex": 1,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打つ",
+                  "reading": "ぶつ",
+                  "hasReading": true,
+                  "frequency": 11
+                },
+                {
+                  "index": 3,
+                  "expressionIndex": 1,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打つ",
+                  "reading": "ぶつ",
+                  "hasReading": true,
+                  "frequency": "seventeen"
+                },
+                {
+                  "index": 4,
+                  "expressionIndex": 1,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打つ",
+                  "reading": "ぶつ",
+                  "hasReading": true,
+                  "frequency": "twenty-three (23)"
+                },
+                {
+                  "index": 5,
+                  "expressionIndex": 1,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打つ",
+                  "reading": "ぶつ",
+                  "hasReading": true,
+                  "frequency": "twenty-nine"
+                }
+              ],
+              "pitches": [],
+              "furiganaSegments": [
+                {
+                  "text": "打",
+                  "furigana": "ぶ"
+                },
+                {
+                  "text": "つ",
+                  "furigana": ""
+                }
+              ],
+              "termFrequency": "normal",
+              "wordClasses": [
+                "v5"
+              ]
+            }
+          ],
+          "termTags": [
+            {
+              "name": "E1",
+              "category": "default",
+              "notes": "example tag 1",
+              "order": 0,
+              "score": 0,
+              "dictionary": "Test Dictionary 2",
+              "redundant": false
+            },
+            {
+              "name": "E2",
+              "category": "default",
+              "notes": "example tag 2",
+              "order": 0,
+              "score": 0,
+              "dictionary": "Test Dictionary 2",
+              "redundant": false
+            },
+            {
+              "name": "P",
+              "category": "popular",
+              "notes": "popular term",
+              "order": 0,
+              "score": 0,
+              "dictionary": "Test Dictionary 2",
+              "redundant": false
+            }
+          ],
+          "definitions": [
+            {
+              "sequence": 3,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "glossaryScopedStyles": ".yomitan-glossary {ul[data-sc-content='glossary'] {\n    color: #ffff00;\n}\n}",
+              "dictScopedStyles": ".yomitan-glossary {[data-dictionary=\"Test Dictionary 2\"] {ul[data-sc-content='glossary'] {\n    color: #ffff00;\n}\n}\n}",
+              "glossary": [
+                "utsu definition 1",
+                "utsu definition 2"
+              ],
+              "definitionTags": [
+                {
+                  "name": "vt",
+                  "category": "partOfSpeech",
+                  "notes": "transitive verb",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": false
+                }
+              ]
+            },
+            {
+              "sequence": 3,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "glossaryScopedStyles": ".yomitan-glossary {ul[data-sc-content='glossary'] {\n    color: #ffff00;\n}\n}",
+              "dictScopedStyles": ".yomitan-glossary {[data-dictionary=\"Test Dictionary 2\"] {ul[data-sc-content='glossary'] {\n    color: #ffff00;\n}\n}\n}",
+              "glossary": [
+                "butsu definition 1",
+                "butsu definition 2"
+              ],
+              "definitionTags": [
+                {
+                  "name": "vt",
+                  "category": "partOfSpeech",
+                  "notes": "transitive verb",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": true
+                }
+              ]
+            },
+            {
+              "sequence": 3,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "glossaryScopedStyles": ".yomitan-glossary {ul[data-sc-content='glossary'] {\n    color: #ffff00;\n}\n}",
+              "dictScopedStyles": ".yomitan-glossary {[data-dictionary=\"Test Dictionary 2\"] {ul[data-sc-content='glossary'] {\n    color: #ffff00;\n}\n}\n}",
+              "glossary": [
+                "utsu definition 3",
+                "utsu definition 4"
+              ],
+              "definitionTags": [
+                {
+                  "name": "vt",
+                  "category": "partOfSpeech",
+                  "notes": "transitive verb",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": true
+                }
+              ]
+            },
+            {
+              "sequence": 3,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "glossaryScopedStyles": ".yomitan-glossary {ul[data-sc-content='glossary'] {\n    color: #ffff00;\n}\n}",
+              "dictScopedStyles": ".yomitan-glossary {[data-dictionary=\"Test Dictionary 2\"] {ul[data-sc-content='glossary'] {\n    color: #ffff00;\n}\n}\n}",
+              "glossary": [
+                "butsu definition 3",
+                "butsu definition 4"
+              ],
+              "definitionTags": [
+                {
+                  "name": "vt",
+                  "category": "partOfSpeech",
+                  "notes": "transitive verb",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": true
+                }
+              ]
+            }
+          ],
+          "frequencies": [
+            {
+              "index": 0,
+              "expressionIndex": 0,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打つ",
+              "reading": "うつ",
+              "hasReading": false,
+              "frequency": 2
+            },
+            {
+              "index": 1,
+              "expressionIndex": 0,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打つ",
+              "reading": "うつ",
+              "hasReading": false,
+              "frequency": 6
+            },
+            {
+              "index": 2,
+              "expressionIndex": 0,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打つ",
+              "reading": "うつ",
+              "hasReading": true,
+              "frequency": 10
+            },
+            {
+              "index": 3,
+              "expressionIndex": 0,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打つ",
+              "reading": "うつ",
+              "hasReading": true,
+              "frequency": "sixteen"
+            },
+            {
+              "index": 4,
+              "expressionIndex": 0,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打つ",
+              "reading": "うつ",
+              "hasReading": true,
+              "frequency": "twenty-two (22)"
+            },
+            {
+              "index": 5,
+              "expressionIndex": 0,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打つ",
+              "reading": "うつ",
+              "hasReading": true,
+              "frequency": 28
+            },
+            {
+              "index": 6,
+              "expressionIndex": 1,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打つ",
+              "reading": "ぶつ",
+              "hasReading": false,
+              "frequency": 2
+            },
+            {
+              "index": 7,
+              "expressionIndex": 1,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打つ",
+              "reading": "ぶつ",
+              "hasReading": false,
+              "frequency": 6
+            },
+            {
+              "index": 8,
+              "expressionIndex": 1,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打つ",
+              "reading": "ぶつ",
+              "hasReading": true,
+              "frequency": 11
+            },
+            {
+              "index": 9,
+              "expressionIndex": 1,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打つ",
+              "reading": "ぶつ",
+              "hasReading": true,
+              "frequency": "seventeen"
+            },
+            {
+              "index": 10,
+              "expressionIndex": 1,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打つ",
+              "reading": "ぶつ",
+              "hasReading": true,
+              "frequency": "twenty-three (23)"
+            },
+            {
+              "index": 11,
+              "expressionIndex": 1,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打つ",
+              "reading": "ぶつ",
+              "hasReading": true,
+              "frequency": "twenty-nine"
+            }
+          ],
+          "frequencyNumbers": [
+            {
+              "dictionary": "Test Dictionary 2",
+              "frequency": 2
+            }
+          ],
+          "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
+          "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
+          "pitches": [],
+          "phoneticTranscriptions": [],
+          "sourceTermExactMatchCount": 2,
+          "url": "url:",
+          "cloze": {
+            "sentence": "",
+            "prefix": "",
+            "body": "",
+            "bodyKana": "",
+            "suffix": ""
+          }
+        },
+        "glossaryLayoutMode": "default",
+        "compactTags": false,
+        "group": false,
+        "merge": false,
+        "compactGlossaries": false,
+        "uniqueExpressions": [
+          "打つ"
+        ],
+        "uniqueReadings": [
+          "うつ",
+          "ぶつ"
+        ],
+        "pitches": [],
+        "pitchCount": 0,
+        "phoneticTranscriptions": [],
+        "context": {
+          "query": "query",
+          "fullQuery": "fullQuery",
+          "document": {
+            "title": "title"
+          }
+        },
+        "media": {}
+      },
+      {
+        "marker": "{marker}",
+        "definition": {
+          "type": "termGrouped",
+          "source": "打",
+          "rawSource": "打",
+          "sourceTerm": "打",
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
+          "score": 1,
+          "sequence": -1,
+          "dictionary": "Test Dictionary 2",
+          "dictionaryAlias": "termsDictAlias",
+          "dictionaryOrder": {
+            "index": 0
+          },
+          "dictionaryNames": [
+            "Test Dictionary 2"
+          ],
+          "expression": "打",
+          "reading": "だ",
+          "expressions": [
+            {
+              "sourceTerm": "打",
+              "expression": "打",
+              "reading": "だ",
+              "termTags": [
+                {
+                  "name": "E1",
+                  "category": "default",
+                  "notes": "example tag 1",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": false
+                }
+              ],
+              "frequencies": [
+                {
+                  "index": 0,
+                  "expressionIndex": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打",
+                  "reading": "だ",
+                  "hasReading": false,
+                  "frequency": 1
+                },
+                {
+                  "index": 1,
+                  "expressionIndex": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打",
+                  "reading": "だ",
+                  "hasReading": false,
+                  "frequency": "four"
+                },
+                {
+                  "index": 2,
+                  "expressionIndex": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打",
+                  "reading": "だ",
+                  "hasReading": false,
+                  "frequency": "five (5)"
+                },
+                {
+                  "index": 3,
+                  "expressionIndex": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打",
+                  "reading": "だ",
+                  "hasReading": true,
+                  "frequency": 8
+                },
+                {
+                  "index": 4,
+                  "expressionIndex": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打",
+                  "reading": "だ",
+                  "hasReading": true,
+                  "frequency": "fourteen"
+                },
+                {
+                  "index": 5,
+                  "expressionIndex": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打",
+                  "reading": "だ",
+                  "hasReading": true,
+                  "frequency": "twenty (20)"
+                },
+                {
+                  "index": 6,
+                  "expressionIndex": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打",
+                  "reading": "だ",
+                  "hasReading": true,
+                  "frequency": 26
+                }
+              ],
+              "pitches": [],
+              "furiganaSegments": [
+                {
+                  "text": "打",
+                  "furigana": "だ"
+                }
+              ],
+              "termFrequency": "normal",
+              "wordClasses": [
+                "n"
+              ]
+            },
+            {
+              "sourceTerm": "打",
+              "expression": "打",
+              "reading": "ダース",
+              "termTags": [
+                {
+                  "name": "E1",
+                  "category": "default",
+                  "notes": "example tag 1",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": false
+                }
+              ],
+              "frequencies": [
+                {
+                  "index": 0,
+                  "expressionIndex": 1,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打",
+                  "reading": "ダース",
+                  "hasReading": false,
+                  "frequency": 1
+                },
+                {
+                  "index": 1,
+                  "expressionIndex": 1,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打",
+                  "reading": "ダース",
+                  "hasReading": false,
+                  "frequency": "four"
+                },
+                {
+                  "index": 2,
+                  "expressionIndex": 1,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打",
+                  "reading": "ダース",
+                  "hasReading": false,
+                  "frequency": "five (5)"
+                },
+                {
+                  "index": 3,
+                  "expressionIndex": 1,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打",
+                  "reading": "ダース",
+                  "hasReading": true,
+                  "frequency": 9
+                },
+                {
+                  "index": 4,
+                  "expressionIndex": 1,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打",
+                  "reading": "ダース",
+                  "hasReading": true,
+                  "frequency": "fifteen"
+                },
+                {
+                  "index": 5,
+                  "expressionIndex": 1,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打",
+                  "reading": "ダース",
+                  "hasReading": true,
+                  "frequency": "twenty-one (21)"
+                },
+                {
+                  "index": 6,
+                  "expressionIndex": 1,
+                  "dictionary": "Test Dictionary 2",
+                  "dictionaryAlias": "termsDictAlias",
+                  "dictionaryOrder": {
+                    "index": 0
+                  },
+                  "expression": "打",
+                  "reading": "ダース",
+                  "hasReading": true,
+                  "frequency": "twenty-seven"
+                }
+              ],
+              "pitches": [],
+              "furiganaSegments": [
+                {
+                  "text": "打",
+                  "furigana": "ダース"
+                }
+              ],
+              "termFrequency": "normal",
+              "wordClasses": [
+                "n"
+              ]
+            }
+          ],
+          "termTags": [
+            {
+              "name": "E1",
+              "category": "default",
+              "notes": "example tag 1",
+              "order": 0,
+              "score": 0,
+              "dictionary": "Test Dictionary 2",
+              "redundant": false
+            }
+          ],
+          "definitions": [
+            {
+              "sequence": 1,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "glossaryScopedStyles": ".yomitan-glossary {ul[data-sc-content='glossary'] {\n    color: #ffff00;\n}\n}",
+              "dictScopedStyles": ".yomitan-glossary {[data-dictionary=\"Test Dictionary 2\"] {ul[data-sc-content='glossary'] {\n    color: #ffff00;\n}\n}\n}",
+              "glossary": [
+                "da definition 1",
+                "da definition 2"
+              ],
+              "definitionTags": [
+                {
+                  "name": "n",
+                  "category": "partOfSpeech",
+                  "notes": "noun",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": false
+                }
+              ]
+            },
+            {
+              "sequence": 2,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "glossaryScopedStyles": ".yomitan-glossary {ul[data-sc-content='glossary'] {\n    color: #ffff00;\n}\n}",
+              "dictScopedStyles": ".yomitan-glossary {[data-dictionary=\"Test Dictionary 2\"] {ul[data-sc-content='glossary'] {\n    color: #ffff00;\n}\n}\n}",
+              "glossary": [
+                "daasu definition 1",
+                "daasu definition 2"
+              ],
+              "definitionTags": [
+                {
+                  "name": "abbr",
+                  "category": "default",
+                  "notes": "abbreviation",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": false
+                },
+                {
+                  "name": "n",
+                  "category": "partOfSpeech",
+                  "notes": "noun",
+                  "order": 0,
+                  "score": 0,
+                  "dictionary": "Test Dictionary 2",
+                  "redundant": true
+                }
+              ]
+            }
+          ],
+          "frequencies": [
+            {
+              "index": 0,
+              "expressionIndex": 0,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打",
+              "reading": "だ",
+              "hasReading": false,
+              "frequency": 1
+            },
+            {
+              "index": 1,
+              "expressionIndex": 0,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打",
+              "reading": "だ",
+              "hasReading": false,
+              "frequency": "four"
+            },
+            {
+              "index": 2,
+              "expressionIndex": 0,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打",
+              "reading": "だ",
+              "hasReading": false,
+              "frequency": "five (5)"
+            },
+            {
+              "index": 3,
+              "expressionIndex": 0,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打",
+              "reading": "だ",
+              "hasReading": true,
+              "frequency": 8
+            },
+            {
+              "index": 4,
+              "expressionIndex": 0,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打",
+              "reading": "だ",
+              "hasReading": true,
+              "frequency": "fourteen"
+            },
+            {
+              "index": 5,
+              "expressionIndex": 0,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打",
+              "reading": "だ",
+              "hasReading": true,
+              "frequency": "twenty (20)"
+            },
+            {
+              "index": 6,
+              "expressionIndex": 0,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打",
+              "reading": "だ",
+              "hasReading": true,
+              "frequency": 26
+            },
+            {
+              "index": 7,
+              "expressionIndex": 1,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打",
+              "reading": "ダース",
+              "hasReading": false,
+              "frequency": 1
+            },
+            {
+              "index": 8,
+              "expressionIndex": 1,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打",
+              "reading": "ダース",
+              "hasReading": false,
+              "frequency": "four"
+            },
+            {
+              "index": 9,
+              "expressionIndex": 1,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打",
+              "reading": "ダース",
+              "hasReading": false,
+              "frequency": "five (5)"
+            },
+            {
+              "index": 10,
+              "expressionIndex": 1,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打",
+              "reading": "ダース",
+              "hasReading": true,
+              "frequency": 9
+            },
+            {
+              "index": 11,
+              "expressionIndex": 1,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打",
+              "reading": "ダース",
+              "hasReading": true,
+              "frequency": "fifteen"
+            },
+            {
+              "index": 12,
+              "expressionIndex": 1,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打",
+              "reading": "ダース",
+              "hasReading": true,
+              "frequency": "twenty-one (21)"
+            },
+            {
+              "index": 13,
+              "expressionIndex": 1,
+              "dictionary": "Test Dictionary 2",
+              "dictionaryAlias": "termsDictAlias",
+              "dictionaryOrder": {
+                "index": 0
+              },
+              "expression": "打",
+              "reading": "ダース",
+              "hasReading": true,
+              "frequency": "twenty-seven"
+            }
+          ],
+          "frequencyNumbers": [
+            {
+              "dictionary": "Test Dictionary 2",
+              "frequency": 1
+            }
+          ],
+          "frequencyHarmonic": 1,
+          "frequencyHarmonicRank": 1,
+          "frequencyHarmonicOccurrence": 1,
+          "frequencyAverage": 1,
+          "frequencyAverageRank": 1,
+          "frequencyAverageOccurrence": 1,
+          "pitches": [],
+          "phoneticTranscriptions": [],
+          "sourceTermExactMatchCount": 2,
+          "url": "url:",
+          "cloze": {
+            "sentence": "",
+            "prefix": "",
+            "body": "",
+            "bodyKana": "",
+            "suffix": ""
+          }
+        },
+        "glossaryLayoutMode": "default",
+        "compactTags": false,
+        "group": false,
+        "merge": false,
+        "compactGlossaries": false,
+        "uniqueExpressions": [
+          "打"
+        ],
+        "uniqueReadings": [
+          "だ",
+          "ダース"
+        ],
+        "pitches": [],
+        "pitchCount": 0,
+        "phoneticTranscriptions": [],
+        "context": {
+          "query": "query",
+          "fullQuery": "fullQuery",
+          "document": {
+            "title": "title"
+          }
+        },
+        "media": {}
+      }
+    ]
+  },
+  {
     "name": "Search inflected term",
     "noteDataList": [
       {
@@ -18721,10 +21585,6 @@
             {
               "source": "algorithm",
               "inflectionRules": [
-                {
-                  "name": "-て",
-                  "description": "て-form.\nIt has a myriad of meanings. Primarily, it is a conjunctive particle that connects two clauses together.\nUsage: Attach て to the continuative form (連用形) of verbs after euphonic change form, くて to the stem of i-adjectives."
-                },
                 {
                   "name": "-いる",
                   "description": "1. Indicates an action continues or progresses to a point in time.\n2. Indicates an action is completed and remains as is.\n3. Indicates a state or condition that can be taken to be the result of undergoing some change.\nUsage: Attach いる to the て-form of verbs. い can be dropped in speech.\nAttach でいる after ない negative form of verbs.\n(Slang) Attach おる to the て-form of verbs. Contracts to とる・でる in speech."
@@ -18895,6 +21755,14 @@
                   "expression": "打ち込む",
                   "reading": "うちこむ",
                   "pitches": [
+                    {
+                      "positions": "HHHHH",
+                      "tags": []
+                    },
+                    {
+                      "positions": "HHHHL",
+                      "tags": []
+                    },
                     {
                       "positions": "HHHH",
                       "tags": []
@@ -19110,7 +21978,11 @@
             }
           ],
           "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
           "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
           "pitches": [
             {
               "index": 0,
@@ -19144,6 +22016,14 @@
               "expression": "打ち込む",
               "reading": "うちこむ",
               "pitches": [
+                {
+                  "positions": "HHHHH",
+                  "tags": []
+                },
+                {
+                  "positions": "HHHHL",
+                  "tags": []
+                },
                 {
                   "positions": "HHHH",
                   "tags": []
@@ -19298,6 +22178,30 @@
                 ],
                 "reading": "うちこむ",
                 "positions": 3,
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": []
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHH",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": []
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHL",
                 "nasalPositions": [],
                 "devoicePositions": [],
                 "tags": [],
@@ -19507,7 +22411,7 @@
             ]
           }
         ],
-        "pitchCount": 18,
+        "pitchCount": 20,
         "phoneticTranscriptions": [
           {
             "dictionary": "Test Dictionary 2",
@@ -19535,10 +22439,6 @@
             {
               "source": "algorithm",
               "inflectionRules": [
-                {
-                  "name": "-て",
-                  "description": "て-form.\nIt has a myriad of meanings. Primarily, it is a conjunctive particle that connects two clauses together.\nUsage: Attach て to the continuative form (連用形) of verbs after euphonic change form, くて to the stem of i-adjectives."
-                },
                 {
                   "name": "-いる",
                   "description": "1. Indicates an action continues or progresses to a point in time.\n2. Indicates an action is completed and remains as is.\n3. Indicates a state or condition that can be taken to be the result of undergoing some change.\nUsage: Attach いる to the て-form of verbs. い can be dropped in speech.\nAttach でいる after ない negative form of verbs.\n(Slang) Attach おる to the て-form of verbs. Contracts to とる・でる in speech."
@@ -19847,7 +22747,11 @@
             }
           ],
           "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
           "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
           "pitches": [
             {
               "index": 0,
@@ -19983,10 +22887,6 @@
             {
               "source": "algorithm",
               "inflectionRules": [
-                {
-                  "name": "-て",
-                  "description": "て-form.\nIt has a myriad of meanings. Primarily, it is a conjunctive particle that connects two clauses together.\nUsage: Attach て to the continuative form (連用形) of verbs after euphonic change form, くて to the stem of i-adjectives."
-                },
                 {
                   "name": "-いる",
                   "description": "1. Indicates an action continues or progresses to a point in time.\n2. Indicates an action is completed and remains as is.\n3. Indicates a state or condition that can be taken to be the result of undergoing some change.\nUsage: Attach いる to the て-form of verbs. い can be dropped in speech.\nAttach でいる after ない negative form of verbs.\n(Slang) Attach おる to the て-form of verbs. Contracts to とる・でる in speech."
@@ -20157,6 +23057,14 @@
                   "expression": "打ち込む",
                   "reading": "うちこむ",
                   "pitches": [
+                    {
+                      "positions": "HHHHH",
+                      "tags": []
+                    },
+                    {
+                      "positions": "HHHHL",
+                      "tags": []
+                    },
                     {
                       "positions": "HHHH",
                       "tags": []
@@ -20372,7 +23280,11 @@
             }
           ],
           "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
           "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
           "pitches": [
             {
               "index": 0,
@@ -20406,6 +23318,14 @@
               "expression": "打ち込む",
               "reading": "うちこむ",
               "pitches": [
+                {
+                  "positions": "HHHHH",
+                  "tags": []
+                },
+                {
+                  "positions": "HHHHL",
+                  "tags": []
+                },
                 {
                   "positions": "HHHH",
                   "tags": []
@@ -20560,6 +23480,30 @@
                 ],
                 "reading": "うちこむ",
                 "positions": 3,
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": []
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHH",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": []
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHL",
                 "nasalPositions": [],
                 "devoicePositions": [],
                 "tags": [],
@@ -20769,7 +23713,7 @@
             ]
           }
         ],
-        "pitchCount": 18,
+        "pitchCount": 20,
         "phoneticTranscriptions": [
           {
             "dictionary": "Test Dictionary 2",
@@ -20797,10 +23741,6 @@
             {
               "source": "algorithm",
               "inflectionRules": [
-                {
-                  "name": "-て",
-                  "description": "て-form.\nIt has a myriad of meanings. Primarily, it is a conjunctive particle that connects two clauses together.\nUsage: Attach て to the continuative form (連用形) of verbs after euphonic change form, くて to the stem of i-adjectives."
-                },
                 {
                   "name": "-いる",
                   "description": "1. Indicates an action continues or progresses to a point in time.\n2. Indicates an action is completed and remains as is.\n3. Indicates a state or condition that can be taken to be the result of undergoing some change.\nUsage: Attach いる to the て-form of verbs. い can be dropped in speech.\nAttach でいる after ない negative form of verbs.\n(Slang) Attach おる to the て-form of verbs. Contracts to とる・でる in speech."
@@ -21109,7 +24049,11 @@
             }
           ],
           "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
           "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
           "pitches": [
             {
               "index": 0,
@@ -21511,7 +24455,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -21835,7 +24783,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -22159,7 +25111,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -22483,7 +25439,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -22806,7 +25766,11 @@
             }
           ],
           "frequencyHarmonic": 1,
+          "frequencyHarmonicRank": 1,
+          "frequencyHarmonicOccurrence": 1,
           "frequencyAverage": 1,
+          "frequencyAverageRank": 1,
+          "frequencyAverageOccurrence": 1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -23134,7 +26098,11 @@
             }
           ],
           "frequencyHarmonic": 1,
+          "frequencyHarmonicRank": 1,
+          "frequencyHarmonicOccurrence": 1,
           "frequencyAverage": 1,
+          "frequencyAverageRank": 1,
+          "frequencyAverageOccurrence": 1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -23347,6 +26315,14 @@
                   "reading": "うちこむ",
                   "pitches": [
                     {
+                      "positions": "HHHHH",
+                      "tags": []
+                    },
+                    {
+                      "positions": "HHHHL",
+                      "tags": []
+                    },
+                    {
                       "positions": "HHHH",
                       "tags": []
                     },
@@ -23561,7 +26537,11 @@
             }
           ],
           "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
           "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
           "pitches": [
             {
               "index": 0,
@@ -23595,6 +26575,14 @@
               "expression": "打ち込む",
               "reading": "うちこむ",
               "pitches": [
+                {
+                  "positions": "HHHHH",
+                  "tags": []
+                },
+                {
+                  "positions": "HHHHL",
+                  "tags": []
+                },
                 {
                   "positions": "HHHH",
                   "tags": []
@@ -23749,6 +26737,30 @@
                 ],
                 "reading": "うちこむ",
                 "positions": 3,
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": []
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHH",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": []
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHL",
                 "nasalPositions": [],
                 "devoicePositions": [],
                 "tags": [],
@@ -23958,7 +26970,7 @@
             ]
           }
         ],
-        "pitchCount": 18,
+        "pitchCount": 20,
         "phoneticTranscriptions": [
           {
             "dictionary": "Test Dictionary 2",
@@ -24277,7 +27289,11 @@
             }
           ],
           "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
           "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
           "pitches": [
             {
               "index": 0,
@@ -24567,6 +27583,14 @@
                   "reading": "うちこむ",
                   "pitches": [
                     {
+                      "positions": "HHHHH",
+                      "tags": []
+                    },
+                    {
+                      "positions": "HHHHL",
+                      "tags": []
+                    },
+                    {
                       "positions": "HHHH",
                       "tags": []
                     },
@@ -24781,7 +27805,11 @@
             }
           ],
           "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
           "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
           "pitches": [
             {
               "index": 0,
@@ -24815,6 +27843,14 @@
               "expression": "打ち込む",
               "reading": "うちこむ",
               "pitches": [
+                {
+                  "positions": "HHHHH",
+                  "tags": []
+                },
+                {
+                  "positions": "HHHHL",
+                  "tags": []
+                },
                 {
                   "positions": "HHHH",
                   "tags": []
@@ -24969,6 +28005,30 @@
                 ],
                 "reading": "うちこむ",
                 "positions": 3,
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": []
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHH",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": []
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHL",
                 "nasalPositions": [],
                 "devoicePositions": [],
                 "tags": [],
@@ -25178,7 +28238,7 @@
             ]
           }
         ],
-        "pitchCount": 18,
+        "pitchCount": 20,
         "phoneticTranscriptions": [
           {
             "dictionary": "Test Dictionary 2",
@@ -25497,7 +28557,11 @@
             }
           ],
           "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
           "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
           "pitches": [
             {
               "index": 0,
@@ -25899,7 +28963,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -26223,7 +29291,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -26547,7 +29619,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -26871,7 +29947,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -27194,7 +30274,11 @@
             }
           ],
           "frequencyHarmonic": 1,
+          "frequencyHarmonicRank": 1,
+          "frequencyHarmonicOccurrence": 1,
           "frequencyAverage": 1,
+          "frequencyAverageRank": 1,
+          "frequencyAverageOccurrence": 1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -27522,7 +30606,11 @@
             }
           ],
           "frequencyHarmonic": 1,
+          "frequencyHarmonicRank": 1,
+          "frequencyHarmonicOccurrence": 1,
           "frequencyAverage": 1,
+          "frequencyAverageRank": 1,
+          "frequencyAverageOccurrence": 1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -27735,6 +30823,14 @@
                   "reading": "うちこむ",
                   "pitches": [
                     {
+                      "positions": "HHHHH",
+                      "tags": []
+                    },
+                    {
+                      "positions": "HHHHL",
+                      "tags": []
+                    },
+                    {
                       "positions": "HHHH",
                       "tags": []
                     },
@@ -27949,7 +31045,11 @@
             }
           ],
           "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
           "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
           "pitches": [
             {
               "index": 0,
@@ -27983,6 +31083,14 @@
               "expression": "打ち込む",
               "reading": "うちこむ",
               "pitches": [
+                {
+                  "positions": "HHHHH",
+                  "tags": []
+                },
+                {
+                  "positions": "HHHHL",
+                  "tags": []
+                },
                 {
                   "positions": "HHHH",
                   "tags": []
@@ -28137,6 +31245,30 @@
                 ],
                 "reading": "うちこむ",
                 "positions": 3,
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": []
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHH",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": []
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHL",
                 "nasalPositions": [],
                 "devoicePositions": [],
                 "tags": [],
@@ -28346,7 +31478,7 @@
             ]
           }
         ],
-        "pitchCount": 18,
+        "pitchCount": 20,
         "phoneticTranscriptions": [
           {
             "dictionary": "Test Dictionary 2",
@@ -28665,7 +31797,11 @@
             }
           ],
           "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
           "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
           "pitches": [
             {
               "index": 0,
@@ -28955,6 +32091,14 @@
                   "reading": "うちこむ",
                   "pitches": [
                     {
+                      "positions": "HHHHH",
+                      "tags": []
+                    },
+                    {
+                      "positions": "HHHHL",
+                      "tags": []
+                    },
+                    {
                       "positions": "HHHH",
                       "tags": []
                     },
@@ -29169,7 +32313,11 @@
             }
           ],
           "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
           "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
           "pitches": [
             {
               "index": 0,
@@ -29203,6 +32351,14 @@
               "expression": "打ち込む",
               "reading": "うちこむ",
               "pitches": [
+                {
+                  "positions": "HHHHH",
+                  "tags": []
+                },
+                {
+                  "positions": "HHHHL",
+                  "tags": []
+                },
                 {
                   "positions": "HHHH",
                   "tags": []
@@ -29357,6 +32513,30 @@
                 ],
                 "reading": "うちこむ",
                 "positions": 3,
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": []
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHH",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": []
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHL",
                 "nasalPositions": [],
                 "devoicePositions": [],
                 "tags": [],
@@ -29566,7 +32746,7 @@
             ]
           }
         ],
-        "pitchCount": 18,
+        "pitchCount": 20,
         "phoneticTranscriptions": [
           {
             "dictionary": "Test Dictionary 2",
@@ -29885,7 +33065,11 @@
             }
           ],
           "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
           "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
           "pitches": [
             {
               "index": 0,
@@ -30287,7 +33471,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -30611,7 +33799,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -30935,7 +34127,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -31259,7 +34455,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -31582,7 +34782,11 @@
             }
           ],
           "frequencyHarmonic": 1,
+          "frequencyHarmonicRank": 1,
+          "frequencyHarmonicOccurrence": 1,
           "frequencyAverage": 1,
+          "frequencyAverageRank": 1,
+          "frequencyAverageOccurrence": 1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -31910,7 +35114,11 @@
             }
           ],
           "frequencyHarmonic": 1,
+          "frequencyHarmonicRank": 1,
+          "frequencyHarmonicOccurrence": 1,
           "frequencyAverage": 1,
+          "frequencyAverageRank": 1,
+          "frequencyAverageOccurrence": 1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -32071,7 +35279,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 0,
@@ -32231,7 +35443,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 0,
@@ -32400,7 +35616,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 0,
@@ -32627,6 +35847,14 @@
                   "expression": "打ち込む",
                   "reading": "うちこむ",
                   "pitches": [
+                    {
+                      "positions": "HHHHH",
+                      "tags": []
+                    },
+                    {
+                      "positions": "HHHHL",
+                      "tags": []
+                    },
                     {
                       "positions": "HHHH",
                       "tags": []
@@ -33144,7 +36372,11 @@
             }
           ],
           "frequencyHarmonic": 3,
+          "frequencyHarmonicRank": 3,
+          "frequencyHarmonicOccurrence": 3,
           "frequencyAverage": 3,
+          "frequencyAverageRank": 3,
+          "frequencyAverageOccurrence": 3,
           "pitches": [
             {
               "index": 0,
@@ -33178,6 +36410,14 @@
               "expression": "打ち込む",
               "reading": "うちこむ",
               "pitches": [
+                {
+                  "positions": "HHHHH",
+                  "tags": []
+                },
+                {
+                  "positions": "HHHHL",
+                  "tags": []
+                },
                 {
                   "positions": "HHHH",
                   "tags": []
@@ -33350,6 +36590,34 @@
                 ],
                 "reading": "うちこむ",
                 "positions": 3,
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "うちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHH",
+                "nasalPositions": [],
+                "devoicePositions": [],
+                "tags": [],
+                "exclusiveExpressions": [],
+                "exclusiveReadings": [
+                  "うちこむ"
+                ]
+              },
+              {
+                "expressions": [
+                  "打ち込む"
+                ],
+                "reading": "うちこむ",
+                "positions": "HHHHL",
                 "nasalPositions": [],
                 "devoicePositions": [],
                 "tags": [],
@@ -33621,7 +36889,7 @@
             ]
           }
         ],
-        "pitchCount": 20,
+        "pitchCount": 22,
         "phoneticTranscriptions": [
           {
             "dictionary": "Test Dictionary 2",
@@ -34198,7 +37466,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 0,
@@ -34367,7 +37639,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [
             {
               "index": 0,
@@ -34661,7 +37937,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [
             {
               "index": 0,
@@ -34849,7 +38129,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [
             {
               "index": 0,
@@ -35037,7 +38321,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [
             {
               "index": 0,
@@ -35225,7 +38513,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [
             {
               "index": 0,
@@ -35419,7 +38711,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [
             {
               "index": 0,
@@ -35657,7 +38953,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -35797,7 +39097,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -35899,7 +39203,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -36013,7 +39321,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -36127,7 +39439,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -36447,7 +39763,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 0,
@@ -36766,7 +40086,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 0,
@@ -37090,7 +40414,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 0,
@@ -37409,7 +40737,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 0,
@@ -37566,7 +40898,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -37886,7 +41222,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 0,
@@ -38205,7 +41545,11 @@
             }
           ],
           "frequencyHarmonic": 2,
+          "frequencyHarmonicRank": 2,
+          "frequencyHarmonicOccurrence": 2,
           "frequencyAverage": 2,
+          "frequencyAverageRank": 2,
+          "frequencyAverageOccurrence": 2,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 0,
@@ -38340,7 +41684,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 0,
@@ -38458,7 +41806,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -38572,7 +41924,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -38690,7 +42046,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -38804,7 +42164,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -38918,7 +42282,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -39027,7 +42395,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -39141,7 +42513,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -39250,7 +42626,11 @@
           "frequencies": [],
           "frequencyNumbers": [],
           "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
           "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
           "pitches": [],
           "phoneticTranscriptions": [],
           "sourceTermExactMatchCount": 1,
@@ -39279,6 +42659,241 @@
         ],
         "uniqueReadings": [
           "じちょう"
+        ],
+        "pitches": [],
+        "pitchCount": 0,
+        "phoneticTranscriptions": [],
+        "context": {
+          "query": "query",
+          "fullQuery": "fullQuery",
+          "document": {
+            "title": "title"
+          }
+        },
+        "media": {}
+      }
+    ]
+  },
+  {
+    "name": "Longer match first (PR#1075)",
+    "noteDataList": [
+      {
+        "marker": "{marker}",
+        "definition": {
+          "type": "term",
+          "id": 34,
+          "source": "oppidorum",
+          "rawSource": "oppidorum",
+          "sourceTerm": "oppidum",
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "dictionary",
+              "inflectionRules": [
+                {
+                  "name": "genitive plural"
+                }
+              ]
+            }
+          ],
+          "score": 5,
+          "isPrimary": true,
+          "sequence": 26,
+          "dictionary": "Test Dictionary 2",
+          "dictionaryAlias": "termsDictAlias",
+          "dictionaryOrder": {
+            "index": 0
+          },
+          "dictionaryNames": [
+            "Test Dictionary 2"
+          ],
+          "expression": "oppidum",
+          "reading": "oppidum",
+          "expressions": [
+            {
+              "sourceTerm": "oppidum",
+              "expression": "oppidum",
+              "reading": "oppidum",
+              "termTags": [],
+              "frequencies": [],
+              "pitches": [],
+              "furiganaSegments": [
+                {
+                  "text": "oppidum",
+                  "furigana": ""
+                }
+              ],
+              "termFrequency": "normal",
+              "wordClasses": [
+                "n2s"
+              ]
+            }
+          ],
+          "glossary": [
+            "oppidum definition - town"
+          ],
+          "glossaryScopedStyles": ".yomitan-glossary {ul[data-sc-content='glossary'] {\n    color: #ffff00;\n}\n}",
+          "dictScopedStyles": ".yomitan-glossary {[data-dictionary=\"Test Dictionary 2\"] {ul[data-sc-content='glossary'] {\n    color: #ffff00;\n}\n}\n}",
+          "definitionTags": [
+            {
+              "name": "n",
+              "category": "partOfSpeech",
+              "notes": "noun",
+              "order": 0,
+              "score": 0,
+              "dictionary": "Test Dictionary 2",
+              "redundant": false
+            }
+          ],
+          "termTags": [],
+          "frequencies": [],
+          "frequencyNumbers": [],
+          "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
+          "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
+          "pitches": [],
+          "phoneticTranscriptions": [],
+          "sourceTermExactMatchCount": 1,
+          "url": "url:",
+          "cloze": {
+            "sentence": "",
+            "prefix": "",
+            "body": "",
+            "bodyKana": "",
+            "suffix": ""
+          },
+          "furiganaSegments": [
+            {
+              "text": "oppidum",
+              "furigana": ""
+            }
+          ]
+        },
+        "glossaryLayoutMode": "default",
+        "compactTags": false,
+        "group": false,
+        "merge": false,
+        "compactGlossaries": false,
+        "uniqueExpressions": [
+          "oppidum"
+        ],
+        "uniqueReadings": [
+          "oppidum"
+        ],
+        "pitches": [],
+        "pitchCount": 0,
+        "phoneticTranscriptions": [],
+        "context": {
+          "query": "query",
+          "fullQuery": "fullQuery",
+          "document": {
+            "title": "title"
+          }
+        },
+        "media": {}
+      },
+      {
+        "marker": "{marker}",
+        "definition": {
+          "type": "term",
+          "id": 35,
+          "source": "oppido",
+          "rawSource": "oppido",
+          "sourceTerm": "oppido",
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
+          "score": 5,
+          "isPrimary": true,
+          "sequence": 27,
+          "dictionary": "Test Dictionary 2",
+          "dictionaryAlias": "termsDictAlias",
+          "dictionaryOrder": {
+            "index": 0
+          },
+          "dictionaryNames": [
+            "Test Dictionary 2"
+          ],
+          "expression": "oppido",
+          "reading": "oppidō",
+          "expressions": [
+            {
+              "sourceTerm": "oppido",
+              "expression": "oppido",
+              "reading": "oppidō",
+              "termTags": [],
+              "frequencies": [],
+              "pitches": [],
+              "furiganaSegments": [
+                {
+                  "text": "oppido",
+                  "furigana": "oppidō"
+                }
+              ],
+              "termFrequency": "normal",
+              "wordClasses": [
+                "adv"
+              ]
+            }
+          ],
+          "glossary": [
+            "oppido definition - very"
+          ],
+          "glossaryScopedStyles": ".yomitan-glossary {ul[data-sc-content='glossary'] {\n    color: #ffff00;\n}\n}",
+          "dictScopedStyles": ".yomitan-glossary {[data-dictionary=\"Test Dictionary 2\"] {ul[data-sc-content='glossary'] {\n    color: #ffff00;\n}\n}\n}",
+          "definitionTags": [
+            {
+              "name": "adv",
+              "category": "default",
+              "notes": "",
+              "order": 0,
+              "score": 0,
+              "dictionary": "Test Dictionary 2",
+              "redundant": false
+            }
+          ],
+          "termTags": [],
+          "frequencies": [],
+          "frequencyNumbers": [],
+          "frequencyHarmonic": -1,
+          "frequencyHarmonicRank": -1,
+          "frequencyHarmonicOccurrence": -1,
+          "frequencyAverage": -1,
+          "frequencyAverageRank": -1,
+          "frequencyAverageOccurrence": -1,
+          "pitches": [],
+          "phoneticTranscriptions": [],
+          "sourceTermExactMatchCount": 1,
+          "url": "url:",
+          "cloze": {
+            "sentence": "",
+            "prefix": "",
+            "body": "",
+            "bodyKana": "",
+            "suffix": ""
+          },
+          "furiganaSegments": [
+            {
+              "text": "oppido",
+              "furigana": "oppidō"
+            }
+          ]
+        },
+        "glossaryLayoutMode": "default",
+        "compactTags": false,
+        "group": false,
+        "merge": false,
+        "compactGlossaries": false,
+        "uniqueExpressions": [
+          "oppido"
+        ],
+        "uniqueReadings": [
+          "oppidō"
         ],
         "pitches": [],
         "pitchCount": 0,

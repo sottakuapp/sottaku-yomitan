@@ -380,19 +380,19 @@ button.icon-button.modal-header-button>.icon-button-inner>.icon {
 }
 
 /* RTL adjustments */
-:root[dir="rtl"] .settings-item-left {
+:root[dir='rtl'] .settings-item-left {
     padding-right: var(--settings-group-inner-horizontal-padding);
     padding-left: var(--settings-group-inner-horizontal-padding-half);
 }
-:root[dir="rtl"] .settings-item-right {
+:root[dir='rtl'] .settings-item-right {
     padding-right: var(--settings-group-inner-horizontal-padding-half);
     padding-left: var(--settings-group-inner-horizontal-padding);
 }
-:root[dir="rtl"] .settings-item-inner.settings-item-inner-wrappable>.settings-item-left {
+:root[dir='rtl'] .settings-item-inner.settings-item-inner-wrappable>.settings-item-left {
     padding-right: var(--settings-group-inner-horizontal-padding);
     padding-left: var(--settings-group-inner-horizontal-padding-half-wrappable);
 }
-:root[dir="rtl"] .settings-item-inner.settings-item-inner-wrappable>.settings-item-right {
+:root[dir='rtl'] .settings-item-inner.settings-item-inner-wrappable>.settings-item-right {
     padding-right: var(--settings-group-inner-horizontal-padding-half-wrappable);
     padding-left: var(--settings-group-inner-horizontal-padding);
 }

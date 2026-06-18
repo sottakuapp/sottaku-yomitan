@@ -79,7 +79,7 @@ export class SottakuLocalesController {
      */
     async _loadSupportedLocales() {
         try {
-            const response = await this._client.getSupportedLocales();
+            const response = /** @type {Record<string, unknown>} */ (await this._client.getSupportedLocales());
             const rawLocales = Array.isArray(response?.locales) ? response.locales : [];
             const normalized = [];
             const seen = new Set();

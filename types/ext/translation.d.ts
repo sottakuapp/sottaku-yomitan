@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023-2025  Yomitan Authors
+ * Copyright (C) 2023-2026  Yomitan Authors
  * Copyright (C) 2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -65,7 +65,7 @@ export type FindTermsOptions = {
      */
     deinflect: boolean;
     /**
-     * The reading which will be sorted to the top of the results.
+     * The reading which will be sorted to the top of the results, if provided as a query parameter.
      */
     primaryReading: string;
     /**
@@ -105,6 +105,10 @@ export type FindTermsOptions = {
      * ISO-639 code of the language.
      */
     language: string;
+    /**
+     * Whether to force using using all frequency dictionaries, even in 'simple' FindTermsMode mode.
+     */
+    useAllFrequencyDictionaries: boolean;
 };
 
 /**

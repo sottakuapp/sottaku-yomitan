@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023-2025  Yomitan Authors
+ * Copyright (C) 2023-2026  Yomitan Authors
  * Copyright (C) 2017-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -481,6 +481,7 @@ export class Display extends EventDispatcher {
             readingMode: options.parsing.readingMode,
             useInternalParser: options.parsing.enableScanningParser,
             useMecabParser: options.parsing.enableMecabParser,
+            useAllFrequencyDictionaries: options.parsing.useAllFrequencyDictionaries,
             language: options.general.language,
             scanning: {
                 inputs: scanningOptions.inputs,
@@ -1247,7 +1248,7 @@ export class Display extends EventDispatcher {
         const grammarLanguage = node.dataset.grammarLanguage;
         if (grammarUrl || (reasonKey && grammarLanguage)) {
             const resolvedUrl = grammarUrl ||
-                `https://sottaku.app/dictionary/grammar/${grammarLanguage}/${encodeURIComponent(reasonKey)}`;
+                `https://sottaku.app/dictionary/grammar/${grammarLanguage}/${encodeURIComponent(reasonKey || '')}`;
             window.open(resolvedUrl, '_blank')?.focus();
             return;
         }
@@ -1353,6 +1354,7 @@ export class Display extends EventDispatcher {
     _updateDocumentOptions(options) {
         const data = document.documentElement.dataset;
         data.ankiEnabled = `${options.anki.enable}`;
+        data.language = options.general.language;
         data.resultOutputMode = `${options.general.resultOutputMode}`;
         data.glossaryLayoutMode = `${options.general.glossaryLayoutMode}`;
         data.compactTags = `${options.general.compactTags}`;
@@ -2158,6 +2160,7 @@ export class Display extends EventDispatcher {
             childrenSupported: this._childrenSupported,
             hotkeyHandler: this._hotkeyHandler,
             canUseWindowPopup: true,
+            browser: this._browser,
         });
         this._frontend = frontend;
         await frontend.prepare();
@@ -2268,6 +2271,7 @@ export class Display extends EventDispatcher {
                 searchOnClick: true,
                 searchOnClickOnly: true,
                 textSourceGenerator: this._textSourceGenerator,
+                browser: this._browser,
             });
             this._contentTextScanner.includeSelector = '.click-scannable,.click-scannable *';
             this._contentTextScanner.excludeSelector = '.scan-disable,.scan-disable *';

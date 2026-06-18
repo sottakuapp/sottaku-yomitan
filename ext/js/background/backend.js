@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023-2025  Yomitan Authors
+ * Copyright (C) 2023-2026  Yomitan Authors
  * Copyright (C) 2016-2022  Yomichan Authors
  * Copyright (C) 2025  Sottaku Inc
  *
@@ -30,12 +30,13 @@ import {logErrorLevelToNumber} from '../core/log-utilities.js';
 import {log} from '../core/log.js';
 import {isObjectNotArray} from '../core/object-utilities.js';
 import {clone, deferPromise, promiseTimeout} from '../core/utilities.js';
-import {generateAnkiNoteMediaFileName, INVALID_NOTE_ID, isNoteDataValid} from '../data/anki-util.js';
+import {generateAnkiNoteMediaFileName, INVALID_NOTE_ID, isNoteDataValid, mediaFileNameHashOrTimestamp} from '../data/anki-util.js';
 import {arrayBufferToBase64} from '../data/array-buffer-util.js';
 import {OptionsUtil} from '../data/options-util.js';
 import {getAllPermissions, hasPermissions, hasRequiredPermissionsForOptions} from '../data/permissions-util.js';
 import {DictionaryDatabase} from '../dictionary/dictionary-database.js';
 import {Environment} from '../extension/environment.js';
+import {CacheMap} from '../general/cache-map.js';
 import {ObjectPropertyAccessor} from '../general/object-property-accessor.js';
 import {distributeFuriganaInflected, isCodePointJapanese, convertKatakanaToHiragana as jpConvertKatakanaToHiragana} from '../language/ja/japanese.js';
 import {getLanguageSummaries, isTextLookupWorthy} from '../language/languages.js';
@@ -217,11 +218,14 @@ export class Backend {
             ['openInfoPage', this._onCommandOpenInfoPage.bind(this)],
             ['openSettingsPage', this._onCommandOpenSettingsPage.bind(this)],
             ['openSearchPage', this._onCommandOpenSearchPage.bind(this)],
+            ['openSearchPageCurrentTab', this._onCommandOpenSearchPageCurrentTab.bind(this)],
             ['openPopupWindow', this._onCommandOpenPopupWindow.bind(this)],
         ]));
 
         /** @type {YomitanApi} */
         this._yomitanApi = new YomitanApi(this._apiMap, this._offscreen);
+        /** @type {CacheMap<string, {originalTextLength: number, textSegments: import('api').ParseTextSegment[]}>} */
+        this._textParseCache = new CacheMap(10000, 3600000); // 1 hour idle time, ~32MB per 1000 entries for Japanese
     }
 
     /**
@@ -584,32 +588,45 @@ export class Backend {
     }
 
     /** @type {import('api').ApiHandler<'parseText'>} */
-    async _onApiParseText({text, optionsContext, scanLength, useInternalParser, useMecabParser}) {
-        const [internalResults, mecabResults] = await Promise.all([
-            (useInternalParser ? this._textParseScanning(text, scanLength, optionsContext) : null),
-            (useMecabParser ? this._textParseMecab(text) : null),
-        ]);
-
+    async _onApiParseText({text, optionsContext, scanLength, useInternalParser, useMecabParser, useAllFrequencyDictionaries}) {
         /** @type {import('api').ParseTextResultItem[]} */
         const results = [];
 
-        if (internalResults !== null) {
-            results.push({
-                id: 'scan',
-                source: 'scanning-parser',
-                dictionary: null,
-                content: internalResults,
-            });
-        }
+        const [internalResults, mecabResults] = await Promise.all([
+            useInternalParser ?
+                (Array.isArray(text) ?
+                    Promise.all(text.map((t) => this._textParseScanning(t, scanLength, optionsContext, useAllFrequencyDictionaries))) :
+                    Promise.all([this._textParseScanning(text, scanLength, optionsContext, useAllFrequencyDictionaries)])) :
+                null,
+            useMecabParser ?
+                (Array.isArray(text) ?
+                    Promise.all(text.map((t) => this._textParseMecab(t))) :
+                    Promise.all([this._textParseMecab(text)])) :
+                null,
+        ]);
 
-        if (mecabResults !== null) {
-            for (const [dictionary, content] of mecabResults) {
+        if (internalResults !== null) {
+            for (const [index, internalResult] of internalResults.entries()) {
                 results.push({
-                    id: `mecab-${dictionary}`,
-                    source: 'mecab',
-                    dictionary,
-                    content,
+                    id: 'scan',
+                    source: 'scanning-parser',
+                    dictionary: null,
+                    index,
+                    content: internalResult,
                 });
+            }
+        }
+        if (mecabResults !== null) {
+            for (const [index, mecabResult] of mecabResults.entries()) {
+                for (const [dictionary, content] of mecabResult) {
+                    results.push({
+                        id: `mecab-${dictionary}`,
+                        source: 'mecab',
+                        dictionary,
+                        index,
+                        content,
+                    });
+                }
             }
         }
 
@@ -1004,6 +1021,7 @@ export class Backend {
         if (!(typeof newToken === 'string' && newToken.length > 0)) { return; }
         if (oldToken === newToken) { return; }
 
+        /** @param {string} value */
         const normalizeBaseUrl = (value) => value.replace(/\/+$/, '');
         const apiBaseUrlNormalized = normalizeBaseUrl(apiBaseUrl);
 
@@ -1047,6 +1065,7 @@ export class Backend {
         if (!(typeof apiBaseUrl === 'string' && apiBaseUrl.length > 0)) { return; }
         if (!(typeof oldToken === 'string' && oldToken.length > 0)) { return; }
 
+        /** @param {string} value */
         const normalizeBaseUrl = (value) => value.replace(/\/+$/, '');
         const apiBaseUrlNormalized = normalizeBaseUrl(apiBaseUrl);
 
@@ -1383,7 +1402,8 @@ export class Backend {
             const parsedUrl = new URL(url);
             const parsedBaseUrl = `${parsedUrl.origin}${parsedUrl.pathname}`;
             const parsedMode = parsedUrl.searchParams.get('mode');
-            return parsedBaseUrl === baseUrl && (parsedMode === mode || (!parsedMode && mode === 'existingOrNewTab'));
+            const modeIsNotSpecial = mode === 'existingOrNewTab' || mode === 'existingOrCurrentTab';
+            return parsedBaseUrl === baseUrl && (parsedMode === mode || (!parsedMode && modeIsNotSpecial));
         };
 
         const openInTab = async () => {
@@ -1411,12 +1431,32 @@ export class Backend {
                 }
                 await this._createTab(queryUrl);
                 return;
+            case 'existingOrCurrentTab':
+                try {
+                    if (await openInTab()) { return; }
+                } catch (e) {
+                    // NOP
+                }
+                await this._updateTab(queryUrl);
+                return;
             case 'newTab':
                 await this._createTab(queryUrl);
                 return;
             case 'popup':
                 return;
         }
+    }
+
+    /**
+     * @param {undefined|{mode: import('backend').Mode, query?: string}} params
+     */
+    async _onCommandOpenSearchPageCurrentTab(params) {
+        /** @type {{mode: import('backend').Mode, query?: string}} */
+        const newParams = {mode: 'existingOrCurrentTab'};
+        if (typeof params === 'object' && params !== null) {
+            newParams.query = params.query;
+        }
+        await this._onCommandOpenSearchPage(newParams);
     }
 
     /**
@@ -1550,6 +1590,9 @@ export class Backend {
         await this._prepareSearchPopupTab(tab);
 
         const {id} = tab;
+        if (typeof id !== 'number') {
+            throw new Error('Created window tab did not have an id');
+        }
         this._searchPopupTabId = id;
         return {tab, created: true};
     }
@@ -1790,6 +1833,8 @@ export class Backend {
 
         void this._accessibilityController.update(this._getOptionsFull(false));
 
+        this._textParseCache.clear();
+
         this._sendMessageAllTabsIgnoreResponse({action: 'applicationOptionsUpdated', params: {source}});
     }
 
@@ -1955,9 +2000,10 @@ export class Backend {
      * @param {string} text
      * @param {number} scanLength
      * @param {import('settings').OptionsContext} optionsContext
+     * @param {import('api').ApiParam<'parseText', 'useAllFrequencyDictionaries'>} useAllFrequencyDictionaries
      * @returns {Promise<import('api').ParseTextLine[]>}
      */
-    async _textParseScanning(text, scanLength, optionsContext) {
+    async _textParseScanning(text, scanLength, optionsContext, useAllFrequencyDictionaries) {
         /** @type {import('translator').FindTermsMode} */
         const mode = 'simple';
         const options = this._getProfileOptions(optionsContext, false);
@@ -1965,31 +2011,61 @@ export class Backend {
         /** @type {import('api').FindTermsDetails} */
         const details = {matchType: 'exact', deinflect: true};
         const findTermsOptions = this._getTranslatorFindTermsOptions(mode, details, options);
+        if (useAllFrequencyDictionaries) { findTermsOptions.useAllFrequencyDictionaries = true; }
         /** @type {import('api').ParseTextLine[]} */
         const results = [];
         let previousUngroupedSegment = null;
         let i = 0;
         const ii = text.length;
         while (i < ii) {
-            const {dictionaryEntries, originalTextLength} = await this._translator.findTerms(
-                mode,
-                text.substring(i, i + scanLength),
-                findTermsOptions,
-            );
             const codePoint = /** @type {number} */ (text.codePointAt(i));
             const character = String.fromCodePoint(codePoint);
-            if (
-                dictionaryEntries.length > 0 &&
+            const substring = text.substring(i, i + scanLength);
+            const cacheKey = `${optionsContext.index}:${substring}`;
+            let cached = this._textParseCache.get(cacheKey);
+            if (typeof cached === 'undefined') {
+                const {dictionaryEntries, originalTextLength} = await this._translator.findTerms(
+                    mode,
+                    substring,
+                    findTermsOptions,
+                );
+                /** @type {import('api').ParseTextSegment[]} */
+                const textSegments = [];
+                if (dictionaryEntries.length > 0 &&
                 originalTextLength > 0 &&
                 (originalTextLength !== character.length || isCodePointJapanese(codePoint))
-            ) {
-                previousUngroupedSegment = null;
-                const {headwords: [{term, reading}]} = dictionaryEntries[0];
-                const source = text.substring(i, i + originalTextLength);
-                const textSegments = [];
-                for (const {text: text2, reading: reading2} of distributeFuriganaInflected(term, reading, source)) {
-                    textSegments.push({text: text2, reading: reading2});
+                ) {
+                    const {headwords: [{term, reading}]} = dictionaryEntries[0];
+                    const source = substring.substring(0, originalTextLength);
+                    for (const {text: text2, reading: reading2} of distributeFuriganaInflected(term, reading, source)) {
+                        textSegments.push({text: text2, reading: reading2});
+                    }
+                    if (textSegments.length > 0) {
+                        const token = textSegments.map((s) => s.text).join('');
+                        const trimmedHeadwords = [];
+                        for (const dictionaryEntry of dictionaryEntries) {
+                            const validHeadwords = [];
+                            for (const headword of dictionaryEntry.headwords) {
+                                const validSources = [];
+                                for (const src of headword.sources) {
+                                    if (src.originalText !== token) { continue; }
+                                    if (!src.isPrimary) { continue; }
+                                    if (src.matchType !== 'exact') { continue; }
+                                    validSources.push(src);
+                                }
+                                if (validSources.length > 0) { validHeadwords.push({term: headword.term, reading: headword.reading, sources: validSources, frequencies: dictionaryEntry.frequencies.filter((f) => f.headwordIndex === headword.headwordIndex)}); }
+                            }
+                            if (validHeadwords.length > 0) { trimmedHeadwords.push(validHeadwords); }
+                        }
+                        textSegments[0].headwords = trimmedHeadwords;
+                    }
                 }
+                cached = {originalTextLength, textSegments};
+                if (typeof optionsContext.index !== 'undefined') { this._textParseCache.set(cacheKey, cached); }
+            }
+            const {originalTextLength, textSegments} = cached;
+            if (textSegments.length > 0) {
+                previousUngroupedSegment = null;
                 results.push(textSegments);
                 i += originalTextLength;
             } else {
@@ -2023,18 +2099,25 @@ export class Backend {
             /** @type {import('api').ParseTextLine[]} */
             const result = [];
             for (const line of lines) {
-                for (const {term, reading, source} of line) {
+                for (const {term, reading, source, lemma, lemma_reading} of line) {
                     const termParts = [];
+                    let isFirstPart = true;
                     for (const {text: text2, reading: reading2} of distributeFuriganaInflected(
                         term.length > 0 ? term : source,
                         jpConvertKatakanaToHiragana(reading),
                         source,
                     )) {
-                        termParts.push({text: text2, reading: reading2});
+                        /** @type {import('api').ParseTextSegment} */
+                        const termPart = {text: text2, reading: reading2};
+                        if (isFirstPart) {
+                            termPart.lemma = lemma;
+                            termPart.lemmaReading = jpConvertKatakanaToHiragana(lemma_reading);
+                            isFirstPart = false;
+                        }
+                        termParts.push(termPart);
                     }
                     result.push(termParts);
                 }
-                result.push([{text: '\n', reading: ''}]);
             }
             results.push([name, result]);
         }
@@ -2195,9 +2278,9 @@ export class Backend {
         let user = null;
         try {
             const profile = await client.getProfile();
-            if (profile && typeof profile === 'object' && isObjectNotArray(profile.user)) {
-                // @ts-expect-error - Allow loose shape from API
-                user = profile.user;
+            const profileObject = profile && typeof profile === 'object' ? /** @type {Record<string, unknown>} */ (profile) : null;
+            if (profileObject !== null && isObjectNotArray(profileObject.user)) {
+                user = profileObject.user;
             }
         } catch (e) {
             // NOP
@@ -2682,6 +2765,7 @@ export class Backend {
         const {windowId} = tab;
 
         let token = null;
+        const errors = [];
         try {
             if (typeof tabId === 'number' && typeof frameId === 'number') {
                 const action = 'frontendSetAllVisibleOverride';
@@ -2689,16 +2773,29 @@ export class Backend {
                 token = await this._sendMessageTabPromise(tabId, {action, params}, {frameId});
             }
 
-            return await new Promise((resolve, reject) => {
-                chrome.tabs.captureVisibleTab(windowId, {format, quality}, (result) => {
-                    const e = chrome.runtime.lastError;
-                    if (e) {
-                        reject(new Error(e.message));
-                    } else {
-                        resolve(result);
-                    }
+            try {
+                return await new Promise((resolve, reject) => {
+                    chrome.tabs.captureVisibleTab(windowId, {format, quality}, (result) => {
+                        const e = chrome.runtime.lastError;
+                        if (e) {
+                            reject(new Error(e.message));
+                        } else {
+                            resolve(result);
+                        }
+                    });
                 });
-            });
+            } catch (e) {
+                errors.push(e);
+            }
+
+            // Fallback for some Firefox. Usually `chrome.tabs.captureVisibleTab` works but occasionally it doesn't
+            try {
+                return await browser.tabs.captureVisibleTab(windowId, {format, quality});
+            } catch (e) {
+                errors.push(e);
+            }
+
+            throw new Error('Failed to screenshot, errors: [' + errors.join(', ') + ']');
         } finally {
             if (token !== null) {
                 const action = 'frontendClearAllVisibleOverride';
@@ -2819,7 +2916,7 @@ export class Backend {
 
         let extension = contentType !== null ? getFileExtensionFromAudioMediaType(contentType) : null;
         if (extension === null) { extension = '.mp3'; }
-        let fileName = generateAnkiNoteMediaFileName('yomitan_audio', extension, timestamp);
+        let fileName = await mediaFileNameHashOrTimestamp('yomitan_audio', data, extension, null, timestamp);
         fileName = fileName.replace(/\]/g, '');
         return await ankiConnect.storeMediaFile(fileName, data);
     }
@@ -2913,11 +3010,7 @@ export class Backend {
             if (media !== null) {
                 const {content, mediaType} = media;
                 const extension = getFileExtensionFromImageMediaType(mediaType);
-                fileName = generateAnkiNoteMediaFileName(
-                    `yomitan_dictionary_media_${i + 1}`,
-                    extension !== null ? extension : '',
-                    timestamp,
-                );
+                fileName = await mediaFileNameHashOrTimestamp('yomitan_dictionary_media', content, extension, i, timestamp);
                 try {
                     fileName = await ankiConnect.storeMediaFile(fileName, content);
                 } catch (e) {
@@ -3079,6 +3172,7 @@ export class Backend {
             enabledDictionaryMap,
             excludeDictionaryDefinitions,
             language,
+            useAllFrequencyDictionaries: false,
         };
     }
 
@@ -3221,6 +3315,23 @@ export class Backend {
     }
 
     /**
+     * @param {string} url
+     * @returns {Promise<chrome.tabs.Tab>}
+     */
+    _updateTab(url) {
+        return new Promise((resolve, reject) => {
+            chrome.tabs.update({url}, (tab) => {
+                const e = chrome.runtime.lastError;
+                if (e || !tab) {
+                    reject(new Error(e ? e.message : 'No active tab to update.'));
+                } else {
+                    resolve(tab);
+                }
+            });
+        });
+    }
+
+    /**
      * @param {number} tabId
      * @returns {Promise<chrome.tabs.Tab>}
      */
@@ -3310,6 +3421,7 @@ export class Backend {
     _normalizeOpenSettingsPageMode(mode, defaultValue) {
         switch (mode) {
             case 'existingOrNewTab':
+            case 'existingOrCurrentTab':
             case 'newTab':
             case 'popup':
                 return mode;

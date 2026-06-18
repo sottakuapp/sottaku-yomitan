@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023-2025  Yomitan Authors
+ * Copyright (C) 2023-2026  Yomitan Authors
  * Copyright (C) 2016-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,11 +19,12 @@
 import {safePerformance} from '../core/safe-performance.js';
 import {applyTextReplacement} from '../general/regex-util.js';
 import {isCodePointJapanese} from './ja/japanese.js';
+import {isCodePointKorean} from './ko/korean.js';
 import {LanguageTransformer} from './language-transformer.js';
 import {getAllLanguageReadingNormalizers, getAllLanguageTextProcessors} from './languages.js';
 import {MultiLanguageTransformer} from './multi-language-transformer.js';
+import {MAX_PROCESS_VARIANTS} from './text-processors.js';
 import {isCodePointChinese} from './zh/chinese.js';
-import {isCodePointKorean} from './ko/korean.js';
 
 /**
  * Class which finds term and kanji dictionary entries for text.
@@ -47,6 +48,10 @@ export class Translator {
         this._textProcessors = new Map();
         /** @type {import('translation-internal').ReadingNormalizerMap} */
         this._readingNormalizers = new Map();
+        /** @type {?Map<string, (import('dictionary-importer').Summary['frequencyMode'])>} */
+        this._dictionaryFrequencyModeMap = null;
+        /** @type {?Promise<Map<string, (import('dictionary-importer').Summary['frequencyMode'])>>} */
+        this._dictionaryFrequencyModeMapPromise = null;
     }
 
     /**
@@ -67,25 +72,29 @@ export class Translator {
      */
     clearDatabaseCaches() {
         this._tagCache.clear();
+        this._dictionaryFrequencyModeMap = null;
+        this._dictionaryFrequencyModeMapPromise = null;
     }
 
     /**
      * Finds term definitions for the given text.
      * @param {import('translator').FindTermsMode} mode The mode to use for finding terms, which determines the format of the resulting array.
-     *   One of: 'group', 'merge', 'split', 'simple'
      * @param {string} text The text to find terms for.
      * @param {import('translation').FindTermsOptions} options A object describing settings about the lookup.
      * @returns {Promise<{dictionaryEntries: import('dictionary').TermDictionaryEntry[], originalTextLength: number}>} An object containing dictionary entries and the length of the original source text.
      */
     async findTerms(mode, text, options) {
         safePerformance.mark('translator:findTerms:start');
-        const {enabledDictionaryMap, excludeDictionaryDefinitions, sortFrequencyDictionary, sortFrequencyDictionaryOrder, language, primaryReading} = options;
+        const {enabledDictionaryMap, excludeDictionaryDefinitions, sortFrequencyDictionary, sortFrequencyDictionaryOrder, language, primaryReading, useAllFrequencyDictionaries} = options;
         const tagAggregator = new TranslatorTagAggregator();
         let {dictionaryEntries, originalTextLength} = await this._findTermsInternal(text, options, tagAggregator, primaryReading);
 
         switch (mode) {
             case 'group':
                 dictionaryEntries = this._groupDictionaryEntriesByHeadword(language, dictionaryEntries, tagAggregator, primaryReading);
+                break;
+            case 'term':
+                dictionaryEntries = this._groupDictionaryEntriesByTerm(language, dictionaryEntries, tagAggregator, primaryReading);
                 break;
             case 'merge':
                 dictionaryEntries = await this._getRelatedDictionaryEntries(dictionaryEntries, options, tagAggregator);
@@ -96,7 +105,7 @@ export class Translator {
             this._removeExcludedDefinitions(dictionaryEntries, excludeDictionaryDefinitions);
         }
 
-        if (mode !== 'simple') {
+        if (mode !== 'simple' || useAllFrequencyDictionaries) {
             await this._addTermMeta(dictionaryEntries, enabledDictionaryMap, tagAggregator);
             await this._expandTagGroupsAndGroup(tagAggregator.getTagExpansionTargets());
         } else {
@@ -239,6 +248,7 @@ export class Translator {
 
         const termList = termReadingList.map(({term}) => term);
         const metas = await this._database.findTermMetaBulk(termList, dictionarySet);
+        const dictionaryFrequencyModeMap = await this._getDictionaryFrequencyModeMap();
 
         /** @type {import('translator').TermFrequencySimple[]} */
         const results = [];
@@ -260,6 +270,7 @@ export class Translator {
                 frequency: frequencyValue,
                 displayValue,
                 displayValueParsed,
+                frequencyMode: dictionaryFrequencyModeMap.get(dictionary),
             });
         }
         return results;
@@ -312,12 +323,15 @@ export class Translator {
                     }
                     const {existingEntry, existingIndex} = existingEntryInfo;
 
-                    const existingTransformedLength = existingEntry.headwords[0].sources[0].transformedText.length;
+                    const existingTransformedText = existingEntry.headwords[0].sources[0].transformedText;
+                    const existingTransformedLength = existingTransformedText.length;
                     if (transformedText.length < existingTransformedLength) {
                         continue;
                     }
                     if (transformedText.length > existingTransformedLength) {
-                        dictionaryEntries.splice(existingIndex, 1, this._createTermDictionaryEntryFromDatabaseEntry(databaseEntry, originalText, transformedText, deinflectedText, textProcessorRuleChainCandidates, inflectionRuleChainCandidates, true, enabledDictionaryMap, tagAggregator, primaryReading));
+                        if (originalText !== existingTransformedText) {
+                            dictionaryEntries.splice(existingIndex, 1, this._createTermDictionaryEntryFromDatabaseEntry(databaseEntry, originalText, transformedText, deinflectedText, textProcessorRuleChainCandidates, inflectionRuleChainCandidates, true, enabledDictionaryMap, tagAggregator, primaryReading));
+                        }
                     } else {
                         this._mergeInflectionRuleChains(existingEntry, inflectionRuleChainCandidates);
                         this._mergeTextProcessorRuleChains(existingEntry, textProcessorRuleChainCandidates);
@@ -603,7 +617,7 @@ export class Translator {
 
     /**
      * @param {string} text
-     * @param {import('language').TextProcessorWithId<unknown>[]} textProcessors
+     * @param {import('language').TextProcessorWithId[]} textProcessors
      * @param {(import('translation').FindTermsTextReplacement[] | null)[]} textReplacements
      * @param {import('translation-internal').TextCache} textCache
      * @returns {import('translation-internal').VariantAndTextProcessorRuleChainCandidatesMap}
@@ -618,12 +632,11 @@ export class Translator {
             if (textReplacement === null) { continue; }
             variantsMap.set(this._applyTextReplacements(text, textReplacement), [['Text Replacement' + ' ' + id]]);
         }
-        for (const {id, textProcessor: {process, options}} of textProcessors) {
+        for (const {id, textProcessor: {process}} of textProcessors) {
             /** @type {import('translation-internal').VariantAndTextProcessorRuleChainCandidatesMap} */
             const newVariantsMap = new Map();
             for (const [variant, currentPreprocessorRuleChainCandidates] of variantsMap) {
-                for (const option of options) {
-                    const processed = this._getProcessedText(textCache, variant, id, option, process);
+                for (const processed of this._getProcessedTexts(textCache, variant, id, process)) {
                     const existingCandidates = newVariantsMap.get(processed);
 
                     // Ignore if applying the textProcessor doesn't change the source
@@ -649,30 +662,27 @@ export class Translator {
      * @param {import('translation-internal').TextCache} textCache
      * @param {string} text
      * @param {string} id
-     * @param {unknown} setting
      * @param {import('language').TextProcessorFunction} process
-     * @returns {string}
+     * @returns {string[]}
      */
-    _getProcessedText(textCache, text, id, setting, process) {
+    _getProcessedTexts(textCache, text, id, process) {
         let level1 = textCache.get(text);
         if (!level1) {
             level1 = new Map();
             textCache.set(text, level1);
         }
 
-        let level2 = level1.get(id);
-        if (!level2) {
-            level2 = new Map();
-            level1.set(id, level2);
+        let results = level1.get(id);
+        if (typeof results === 'undefined') {
+            results = process(text);
+            if (results.length > MAX_PROCESS_VARIANTS) {
+                // eslint-disable-next-line no-console
+                console.warn(`Text processor "${id}" produced ${results.length} variants for input "${text}"; truncating to ${MAX_PROCESS_VARIANTS}`);
+                results = results.slice(0, MAX_PROCESS_VARIANTS);
+            }
+            level1.set(id, results);
         }
-
-        if (!level2.has(setting)) {
-            text = process(text, setting);
-            level2.set(setting, text);
-        } else {
-            text = level2.get(setting) || '';
-        }
-        return text;
+        return results;
     }
 
     /**
@@ -899,13 +909,45 @@ export class Translator {
      * @returns {import('translation-internal').TermDictionaryEntry[]}
      */
     _groupDictionaryEntriesByHeadword(language, dictionaryEntries, tagAggregator, primaryReading) {
-        /** @type {Map<string, import('translation-internal').TermDictionaryEntry[]>} */
-        const groups = new Map();
         const readingNormalizer = this._readingNormalizers.get(language);
-        for (const dictionaryEntry of dictionaryEntries) {
+        /** @type {(entry: import('translation-internal').TermDictionaryEntry) => string} */
+        const createGroupingKey = (dictionaryEntry) => {
             const {inflectionRuleChainCandidates, headwords: [{term, reading}]} = dictionaryEntry;
             const normalizedReading = typeof readingNormalizer === 'undefined' ? reading : readingNormalizer(reading);
-            const key = this._createMapKey([term, normalizedReading, ...inflectionRuleChainCandidates]);
+            return this._createMapKey([term, normalizedReading, ...inflectionRuleChainCandidates]);
+        };
+        return this._groupDictionaryEntries(language, dictionaryEntries, tagAggregator, primaryReading, createGroupingKey);
+    }
+
+    /**
+     * @param {string} language
+     * @param {Iterable<import('translation-internal').TermDictionaryEntry>} dictionaryEntries
+     * @param {TranslatorTagAggregator} tagAggregator
+     * @param {string} primaryReading
+     * @returns {import('translation-internal').TermDictionaryEntry[]}
+     */
+    _groupDictionaryEntriesByTerm(language, dictionaryEntries, tagAggregator, primaryReading) {
+        /** @type {(entry: import('translation-internal').TermDictionaryEntry) => string} */
+        const createGroupingKey = (dictionaryEntry) => {
+            const {inflectionRuleChainCandidates, headwords: [{term}]} = dictionaryEntry;
+            return this._createMapKey([term, ...inflectionRuleChainCandidates]);
+        };
+        return this._groupDictionaryEntries(language, dictionaryEntries, tagAggregator, primaryReading, createGroupingKey);
+    }
+
+    /**
+     * @param {string} language
+     * @param {Iterable<import('translation-internal').TermDictionaryEntry>} dictionaryEntries
+     * @param {TranslatorTagAggregator} tagAggregator
+     * @param {string} primaryReading
+     * @param {(entry: import('translation-internal').TermDictionaryEntry) => string} createGroupingKey
+     * @returns {import('translation-internal').TermDictionaryEntry[]}
+     */
+    _groupDictionaryEntries(language, dictionaryEntries, tagAggregator, primaryReading, createGroupingKey) {
+        /** @type {Map<string, import('translation-internal').TermDictionaryEntry[]>} */
+        const groups = new Map();
+        for (const dictionaryEntry of dictionaryEntries) {
+            const key = createGroupingKey(dictionaryEntry);
             let groupDictionaryEntries = groups.get(key);
             if (typeof groupDictionaryEntries === 'undefined') {
                 groupDictionaryEntries = [];
@@ -973,7 +1015,9 @@ export class Translator {
                 --i;
                 --ii;
             } else {
-                indexRemap.set(oldIndex, indexRemap.size);
+                const newIndex = indexRemap.size;
+                indexRemap.set(oldIndex, newIndex);
+                headwords[i].headwordIndex = newIndex;
             }
             ++oldIndex;
         }
@@ -1239,6 +1283,8 @@ export class Translator {
      * @param {TranslatorTagAggregator} tagAggregator
      */
     async _addTermMeta(dictionaryEntries, enabledDictionaryMap, tagAggregator) {
+        const dictionaryFrequencyModeMap = await this._getDictionaryFrequencyModeMap();
+
         /** @type {Map<string, Map<string, {headwordIndex: number, pronunciations: import('dictionary').TermPronunciation[], frequencies: import('dictionary').TermFrequency[]}[]>>} */
         const headwordMap = new Map();
         /** @type {string[]} */
@@ -1277,6 +1323,7 @@ export class Translator {
                             const hasReading = (data !== null && typeof data === 'object' && typeof data.reading === 'string');
                             if (hasReading && data.reading !== reading) { continue; }
                             const frequency = hasReading ? data.frequency : /** @type {import('dictionary-data').GenericFrequencyData} */ (data);
+                            const frequencyMode = dictionaryFrequencyModeMap.get(dictionary);
                             for (const {frequencies, headwordIndex} of targets) {
                                 const {frequency: frequencyValue, displayValue, displayValueParsed} = this._getFrequencyInfo(frequency);
                                 frequencies.push(this._createTermFrequency(
@@ -1289,6 +1336,7 @@ export class Translator {
                                     frequencyValue,
                                     displayValue,
                                     displayValueParsed,
+                                    frequencyMode,
                                 ));
                             }
                         }
@@ -1370,6 +1418,7 @@ export class Translator {
         }
 
         const metas = await this._database.findKanjiMetaBulk(kanjiList, enabledDictionaryMap);
+        const dictionaryFrequencyModeMap = await this._getDictionaryFrequencyModeMap();
         for (const {character, mode, data, dictionary, index} of metas) {
             const {index: dictionaryIndex} = this._getDictionaryOrder(dictionary, enabledDictionaryMap);
             const dictionaryAlias = this._getDictionaryAlias(dictionary, enabledDictionaryMap);
@@ -1377,6 +1426,7 @@ export class Translator {
                 case 'freq':
                     {
                         const {frequencies} = dictionaryEntries[index];
+                        const frequencyMode = dictionaryFrequencyModeMap.get(dictionary);
                         const {frequency, displayValue, displayValueParsed} = this._getFrequencyInfo(data);
                         frequencies.push(this._createKanjiFrequency(
                             frequencies.length,
@@ -1387,6 +1437,7 @@ export class Translator {
                             frequency,
                             displayValue,
                             displayValueParsed,
+                            frequencyMode,
                         ));
                     }
                     break;
@@ -1577,10 +1628,11 @@ export class Translator {
      * @param {number} frequency
      * @param {?string} displayValue
      * @param {boolean} displayValueParsed
+     * @param {import('dictionary-data').FrequencyMode|undefined} frequencyMode
      * @returns {import('dictionary').KanjiFrequency}
      */
-    _createKanjiFrequency(index, dictionary, dictionaryIndex, dictionaryAlias, character, frequency, displayValue, displayValueParsed) {
-        return {index, dictionary, dictionaryIndex, dictionaryAlias, character, frequency, displayValue, displayValueParsed};
+    _createKanjiFrequency(index, dictionary, dictionaryIndex, dictionaryAlias, character, frequency, displayValue, displayValueParsed, frequencyMode) {
+        return {index, dictionary, dictionaryIndex, dictionaryAlias, character, frequency, displayValue, displayValueParsed, frequencyMode: frequencyMode ?? null};
     }
 
     /**
@@ -1658,7 +1710,7 @@ export class Translator {
      * @returns {import('dictionary').TermHeadword}
      */
     _createTermHeadword(index, term, reading, sources, tags, wordClasses) {
-        return {index, term, reading, sources, tags, wordClasses};
+        return {index, headwordIndex: index, term, reading, sources, tags, wordClasses};
     }
 
     /**
@@ -1715,10 +1767,31 @@ export class Translator {
      * @param {number} frequency
      * @param {?string} displayValue
      * @param {boolean} displayValueParsed
+     * @param {import('dictionary-importer').Summary['frequencyMode']} frequencyMode
      * @returns {import('dictionary').TermFrequency}
      */
-    _createTermFrequency(index, headwordIndex, dictionary, dictionaryIndex, dictionaryAlias, hasReading, frequency, displayValue, displayValueParsed) {
-        return {index, headwordIndex, dictionary, dictionaryIndex, dictionaryAlias, hasReading, frequency, displayValue, displayValueParsed};
+    _createTermFrequency(index, headwordIndex, dictionary, dictionaryIndex, dictionaryAlias, hasReading, frequency, displayValue, displayValueParsed, frequencyMode) {
+        return {index, headwordIndex, dictionary, frequencyMode: frequencyMode ?? null, dictionaryIndex, dictionaryAlias, hasReading, frequency, displayValue, displayValueParsed};
+    }
+
+    /**
+     * @returns {Promise<Map<string, (import('dictionary-importer').Summary['frequencyMode'])>>}
+     */
+    async _getDictionaryFrequencyModeMap() {
+        if (this._dictionaryFrequencyModeMap !== null) { return this._dictionaryFrequencyModeMap; }
+        if (this._dictionaryFrequencyModeMapPromise !== null) { return await this._dictionaryFrequencyModeMapPromise; }
+
+        this._dictionaryFrequencyModeMapPromise = (async () => {
+            const dictionaryInfoList = await this._database.getDictionaryInfo();
+            /** @type {Map<string, (import('dictionary-importer').Summary['frequencyMode'])>} */
+            const map = new Map();
+            for (const info of dictionaryInfoList) { map.set(info.title, info.frequencyMode); } // Relies on DictionaryDatabase.dictionaryExists() preventing duplicates
+            this._dictionaryFrequencyModeMap = map;
+            this._dictionaryFrequencyModeMapPromise = null;
+            return map;
+        })();
+
+        return await this._dictionaryFrequencyModeMapPromise;
     }
 
     /**
@@ -1830,8 +1903,17 @@ export class Translator {
         const definitionEntries = [];
         /** @type {Map<string, import('dictionary').TermHeadword>} */
         const headwords = new Map();
+        /** @type {Map<number, number>} */
+        const headwordDictionaryIndices = new Map();
         for (const dictionaryEntry of dictionaryEntries) {
             const headwordIndexMap = this._addTermHeadwords(language, headwords, dictionaryEntry.headwords, tagAggregator);
+            // Track minimum dictionary index for each headword
+            for (const headwordIndex of headwordIndexMap) {
+                const existing = headwordDictionaryIndices.get(headwordIndex);
+                if (typeof existing === 'undefined' || dictionaryEntry.dictionaryIndex < existing) {
+                    headwordDictionaryIndices.set(headwordIndex, dictionaryEntry.dictionaryIndex);
+                }
+            }
             definitionEntries.push({index: definitionEntries.length, dictionaryEntry, headwordIndexMap});
         }
 
@@ -1882,19 +1964,9 @@ export class Translator {
 
         const headwordsArray = [...headwords.values()];
 
-        let sourceTermExactMatchCount = 0;
-        let matchPrimaryReading = false;
-        for (const {sources, reading} of headwordsArray) {
-            if (primaryReading.length > 0 && reading === primaryReading) {
-                matchPrimaryReading = true;
-            }
-            for (const source of sources) {
-                if (source.isPrimary && source.matchSource === 'term') {
-                    ++sourceTermExactMatchCount;
-                    break;
-                }
-            }
-        }
+        this._sortHeadwords(headwordsArray, headwordDictionaryIndices, definitions);
+
+        const {sourceTermExactMatchCount, matchPrimaryReading} = this._getHeadwordMatchCounts(headwordsArray, primaryReading);
 
         return this._createTermDictionaryEntry(
             isPrimary,
@@ -1909,6 +1981,65 @@ export class Translator {
             headwordsArray,
             definitions,
         );
+    }
+
+    /**
+     * @param {import('dictionary').TermHeadword[]} headwordsArray
+     * @param {Map<number, number>} headwordDictionaryIndices
+     * @param {import('dictionary').TermDefinition[]} definitions
+     */
+    _sortHeadwords(headwordsArray, headwordDictionaryIndices, definitions) {
+        // Sort headwords: primary sources first, then by dictionary index
+        headwordsArray.sort((a, b) => {
+            const aHasPrimary = a.sources.some((s) => s.isPrimary);
+            const bHasPrimary = b.sources.some((s) => s.isPrimary);
+            if (aHasPrimary !== bHasPrimary) { return aHasPrimary ? -1 : 1; }
+            const aDictIndex = headwordDictionaryIndices.get(a.index) ?? Number.MAX_SAFE_INTEGER;
+            const bDictIndex = headwordDictionaryIndices.get(b.index) ?? Number.MAX_SAFE_INTEGER;
+            return aDictIndex - bDictIndex;
+        });
+
+        // Update headword indices after sorting
+        /** @type {Map<number, number>} */
+        const headwordIndexMap = new Map();
+        for (let i = 0; i < headwordsArray.length; i++) {
+            headwordIndexMap.set(headwordsArray[i].index, i);
+            headwordsArray[i].index = i;
+            headwordsArray[i].headwordIndex = i;
+        }
+
+        // Remap definition headword indices
+        for (const definition of definitions) {
+            for (let i = 0; i < definition.headwordIndices.length; i++) {
+                const oldIndex = definition.headwordIndices[i];
+                const newIndex = headwordIndexMap.get(oldIndex);
+                if (typeof newIndex === 'number') {
+                    definition.headwordIndices[i] = newIndex;
+                }
+            }
+        }
+    }
+
+    /**
+     * @param {import('dictionary').TermHeadword[]} headwordsArray
+     * @param {string} primaryReading
+     * @returns {{sourceTermExactMatchCount: number, matchPrimaryReading: boolean}}
+     */
+    _getHeadwordMatchCounts(headwordsArray, primaryReading) {
+        let sourceTermExactMatchCount = 0;
+        let matchPrimaryReading = false;
+        for (const {sources, reading} of headwordsArray) {
+            if (primaryReading.length > 0 && reading === primaryReading) {
+                matchPrimaryReading = true;
+            }
+            for (const source of sources) {
+                if (source.isPrimary && source.matchSource === 'term') {
+                    ++sourceTermExactMatchCount;
+                    break;
+                }
+            }
+        }
+        return {sourceTermExactMatchCount, matchPrimaryReading};
     }
 
     // Data collection addition functions

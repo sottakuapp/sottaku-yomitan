@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024-2025  Yomitan Authors
+ * Copyright (C) 2024-2026  Yomitan Authors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@ import {suffixInflection} from '../language-transforms.js';
 
 const conditions = {
     v: {
-        name: 'Verb or Auxiliary Verb',
+        name: 'Verb',
         isDictionaryForm: true,
         i18n: [
             {
@@ -29,7 +29,7 @@ const conditions = {
         ],
     },
     adj: {
-        name: 'Adjective or Auxiliary Adjective',
+        name: 'Adjective',
         isDictionaryForm: true,
         i18n: [
             {
@@ -3627,7 +3627,7 @@ export const koreanTransforms = {
                 suffixInflection('ㅓㅇㅛ', 'ㅓㄷㅏ', [], ['v', 'adj']),
                 suffixInflection('ㅇㅏㅇㅛ', 'ㄷㅏ', [], ['v', 'adj']),
                 suffixInflection('ㅇㅓㅇㅛ', 'ㄷㅏ', [], ['v', 'adj', 'ida']),
-                suffixInflection('ㅗㅐㅇㅛ', 'ㅗㅣㄷㅏ', [], ['v', 'adj']),
+                suffixInflection('ㅇㅛ', 'ㄷㅏ', [], ['v', 'adj']),
                 suffixInflection('ㅕㅇㅛ', 'ㅣㄷㅏ', [], ['v', 'adj']),
                 suffixInflection('ㅇㅕㅇㅛ', 'ㅇㅣㄷㅏ', [], ['v', 'adj', 'ida']),
                 suffixInflection('ㅇㅖㅇㅛ', 'ㅇㅣㄷㅏ', [], ['adj', 'ida']),
@@ -3637,6 +3637,7 @@ export const koreanTransforms = {
                 suffixInflection('ㅇㅜㅓㅇㅛ', 'ㅂㄷㅏ', [], ['v', 'adj']),
                 suffixInflection('ㅇㅏㅇㅛ', 'ㅅㄷㅏ', [], ['v', 'adj']),
                 suffixInflection('ㅇㅓㅇㅛ', 'ㅅㄷㅏ', [], ['v', 'adj']),
+                suffixInflection('ㅐㅇㅛ', 'ㅣㄷㅏ', [], ['v', 'adj']),
                 suffixInflection('ㅐㅇㅛ', 'ㅏㅎㄷㅏ', [], ['adj']),
                 suffixInflection('ㅐㅇㅛ', 'ㅓㅎㄷㅏ', [], ['adj']),
                 suffixInflection('ㅖㅇㅛ', 'ㅕㅎㄷㅏ', [], ['adj']),

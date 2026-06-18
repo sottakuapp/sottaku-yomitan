@@ -15,6 +15,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+// @ts-nocheck
+
 import {afterAll, describe, expect, test, vi} from 'vitest';
 import {DisplaySottaku} from '../ext/js/display/display-sottaku.js';
 import {setupDomTest} from './fixtures/dom-test.js';

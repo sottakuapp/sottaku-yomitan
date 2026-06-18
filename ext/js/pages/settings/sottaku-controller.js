@@ -172,9 +172,9 @@ export class SottakuController {
         if (this._busy) { return; }
         try {
             this._busy = true;
-            await this._settingsController.modifySettings([
-                {action: 'set', scope: 'profile', path: 'sottaku.authToken', value: ''},
-                {action: 'set', scope: 'profile', path: 'sottaku.user', value: null},
+            await this._settingsController.modifyProfileSettings([
+                {action: 'set', path: 'sottaku.authToken', value: ''},
+                {action: 'set', path: 'sottaku.user', value: null},
             ]);
             await this._setSkipAutoSync(true);
             this._client.setConfig({authToken: ''});
@@ -195,13 +195,14 @@ export class SottakuController {
     async _applyAuthUpdate(token, user) {
         const origin = this._getOriginFromApiUrl();
         const normalizedUser = this._normalizeUser(user);
+        /** @type {import('settings-modifications').Modification[]} */
         const updates = [
-            {action: 'set', scope: 'profile', path: 'sottaku.authToken', value: token},
-            {action: 'set', scope: 'profile', path: 'sottaku.cookieDomain', value: origin},
-            {action: 'set', scope: 'profile', path: 'sottaku.enabled', value: true},
-            {action: 'set', scope: 'profile', path: 'sottaku.user', value: normalizedUser},
+            {action: 'set', path: 'sottaku.authToken', value: token},
+            {action: 'set', path: 'sottaku.cookieDomain', value: origin},
+            {action: 'set', path: 'sottaku.enabled', value: true},
+            {action: 'set', path: 'sottaku.user', value: normalizedUser},
         ];
-        await this._settingsController.modifySettings(updates);
+        await this._settingsController.modifyProfileSettings(updates);
         await this._setSkipAutoSync(false);
         this._client.setConfig({authToken: token, cookieDomain: origin});
         this._updateStatus({authToken: token, user: normalizedUser, enabled: true});
@@ -237,11 +238,11 @@ export class SottakuController {
         if (this._getUserDisplayName(sottaku.user)) { return; }
         this._loadingUser = true;
         try {
-            const profile = await this._client.getProfile();
+            const profile = /** @type {Record<string, unknown>} */ (await this._client.getProfile());
             const normalizedUser = this._normalizeUser(profile?.user);
             if (normalizedUser) {
-                await this._settingsController.modifySettings([
-                    {action: 'set', scope: 'profile', path: 'sottaku.user', value: normalizedUser},
+                await this._settingsController.modifyProfileSettings([
+                    {action: 'set', path: 'sottaku.user', value: normalizedUser},
                 ]);
                 this._updateStatus({authToken: sottaku.authToken, user: normalizedUser, enabled: true});
             }
@@ -271,8 +272,8 @@ export class SottakuController {
             const preferredChanged = normalizedPreferred.join(',') !== this._preferredLanguages.join(',');
             this._preferredLanguages = normalizedPreferred;
             if (preferredChanged) {
-                await this._settingsController.modifySettings([
-                    {action: 'set', scope: 'profile', path: 'sottaku.preferredLanguages', value: normalizedPreferred},
+                await this._settingsController.modifyProfileSettings([
+                    {action: 'set', path: 'sottaku.preferredLanguages', value: normalizedPreferred},
                 ]);
             }
             this._renderLanguageList();
@@ -335,9 +336,9 @@ export class SottakuController {
      */
     async _setSkipAutoSync(value) {
         this._skipAutoSync = value;
-        await new Promise((resolve) => {
-            chrome.storage.local.set({sottakuSkipAutoSync: value}, () => { resolve(); });
-        });
+        await /** @type {Promise<void>} */ (new Promise((resolve) => {
+            chrome.storage.local.set({sottakuSkipAutoSync: value}, () => { resolve(void 0); });
+        }));
     }
 
     /**
@@ -503,8 +504,8 @@ export class SottakuController {
         this._preferredLanguages = normalized;
         this._renderLanguageList();
         try {
-            await this._settingsController.modifySettings([
-                {action: 'set', scope: 'profile', path: 'sottaku.preferredLanguages', value: normalized},
+            await this._settingsController.modifyProfileSettings([
+                {action: 'set', path: 'sottaku.preferredLanguages', value: normalized},
             ]);
         } catch (e) {
             this._setStatus(toError(e).message, true);
@@ -570,9 +571,8 @@ export class SottakuController {
             /** @type {unknown} */
             let user = null;
             try {
-                const profile = await this._client.getProfile();
+                const profile = /** @type {Record<string, unknown>} */ (await this._client.getProfile());
                 if (profile && typeof profile === 'object' && isObjectNotArray(profile.user)) {
-                    // @ts-expect-error - Allow loose shape from API
                     user = profile.user;
                 }
             } catch (error) {

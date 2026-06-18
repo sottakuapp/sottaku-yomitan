@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023-2025  Yomitan Authors
+ * Copyright (C) 2023-2026  Yomitan Authors
  * Copyright (C) 2021-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -259,19 +259,19 @@
 }
 
 /* RTL adjustments */
-:root[dir="rtl"] .gloss-link-external-icon {
+:root[dir='rtl'] .gloss-link-external-icon {
     margin-left: 0;
     margin-right: 0.25em;
 }
-:root[dir="rtl"] .gloss-sc-ol,
-:root[dir="rtl"] .gloss-sc-ul {
+:root[dir='rtl'] .gloss-sc-ol,
+:root[dir='rtl'] .gloss-sc-ul {
     padding-left: 0;
     padding-right: var(--list-padding2);
 }
-:root[dir="rtl"] .gloss-sc-details {
+:root[dir='rtl'] .gloss-sc-details {
     padding-left: 0;
     padding-right: var(--list-padding1);
 }
-:root[dir="rtl"][data-glossary-layout-mode^=compact] .gloss-sc-ul[data-sc-content=glossary] {
+:root[dir='rtl'][data-glossary-layout-mode^=compact] .gloss-sc-ul[data-sc-content=glossary] {
     padding-right: 0;
 }

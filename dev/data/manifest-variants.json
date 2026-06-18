@@ -66,15 +66,15 @@
                 "template-renderer.html"
             ]
         },
-      "permissions": [
-        "storage",
-        "clipboardWrite",
-        "declarativeNetRequest",
-        "scripting",
-        "offscreen",
-        "contextMenus",
-        "cookies"
-      ],
+        "permissions": [
+            "storage",
+            "clipboardWrite",
+            "declarativeNetRequest",
+            "scripting",
+            "offscreen",
+            "contextMenus",
+            "cookies"
+        ],
         "optional_permissions": [
             "clipboardRead",
             "nativeMessaging"
@@ -108,6 +108,9 @@
                     "default": "Alt+Insert"
                 },
                 "description": "__MSG_command_open_search_page__"
+            },
+            "openSearchPageCurrentTab": {
+                "description": "__MSG_command_open_search_page_current_tab__"
             },
             "openPopupWindow": {
                 "description": "__MSG_command_open_popup_window__"
@@ -193,18 +196,18 @@
             "name": "firefox",
             "inherit": "base",
             "fileName": "sottaku-yomitan-firefox.zip",
-	            "modifications": [
-	                {
-	                    "action": "set",
-	                    "path": [
-	                        "author"
-	                    ],
-	                    "value": "Sottaku Inc"
-	                },
-	                {
-	                    "action": "delete",
-	                    "path": [
-	                        "background",
+            "modifications": [
+                {
+                    "action": "set",
+                    "path": [
+                        "author"
+                    ],
+                    "value": "Sottaku Inc"
+                },
+                {
+                    "action": "delete",
+                    "path": [
+                        "background",
                         "service_worker"
                     ]
                 },
@@ -253,27 +256,27 @@
                     ],
                     "value": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; img-src blob: 'self'; style-src 'self' 'unsafe-inline'; media-src *; connect-src *"
                 },
-	                {
-	                    "action": "set",
-	                    "path": [
-	                        "browser_specific_settings"
-	                    ],
-	                    "value": {
-	                        "gecko": {
-	                            "id": "sottaku-yomitan@sottaku.app",
-	                            "strict_min_version": "115.0",
-	                            "data_collection_permissions": {
-	                                "required": [
-	                                    "websiteContent",
-	                                    "authenticationInfo"
-	                                ]
-	                            }
-	                        },
-	                        "gecko_android": {
-	                            "strict_min_version": "115.0"
-	                        }
-	                    }
-	                },
+                {
+                    "action": "set",
+                    "path": [
+                        "browser_specific_settings"
+                    ],
+                    "value": {
+                        "gecko": {
+                            "id": "sottaku-yomitan@sottaku.app",
+                            "strict_min_version": "115.0",
+                            "data_collection_permissions": {
+                                "required": [
+                                    "websiteContent",
+                                    "authenticationInfo"
+                                ]
+                            }
+                        },
+                        "gecko_android": {
+                            "strict_min_version": "115.0"
+                        }
+                    }
+                },
                 {
                     "action": "remove",
                     "path": [

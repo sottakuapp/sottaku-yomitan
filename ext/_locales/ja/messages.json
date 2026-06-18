@@ -1,1970 +1,2000 @@
 {
-  "action_default_title": {
-    "message": "Sottaku-Yomitan"
-  },
-  "action_popup_button_info_title": {
-    "message": "情報"
-  },
-  "action_popup_button_search_title": {
-    "message": "検索\nShift+クリックでここに開く"
-  },
-  "action_popup_button_settings_title": {
-    "message": "設定"
-  },
-  "action_popup_hotkey_info": {
-    "message": "情報 ({0})"
-  },
-  "action_popup_hotkey_search": {
-    "message": "検索 ({0})\nShift+クリックでここに開く"
-  },
-  "action_popup_hotkey_settings": {
-    "message": "設定 ({0})"
-  },
-  "action_popup_link_account_tooltip": {
-    "message": "Sottakuアカウントを連携して検索を有効にする"
-  },
-  "action_popup_loading": {
-    "message": "読み込み中..."
-  },
-  "action_popup_profile_title": {
-    "message": "プロフィール"
-  },
-  "action_popup_toggle_off": {
-    "message": "オフ"
-  },
-  "action_popup_toggle_on": {
-    "message": "オン"
-  },
-  "action_popup_tooltip_scan": {
-    "message": "テキストにカーソルを合わせてスキャン"
-  },
-  "browser_chrome": {
-    "message": "Chrome"
-  },
-  "browser_edge": {
-    "message": "Edge"
-  },
-  "browser_edge_legacy": {
-    "message": "Edge Legacy"
-  },
-  "browser_firefox": {
-    "message": "Firefox"
-  },
-  "browser_firefox_android": {
-    "message": "Android 用 Firefox"
-  },
-  "browser_safari": {
-    "message": "Safari"
-  },
-  "command_open_info_page": {
-    "message": "情報ページを開く"
-  },
-  "command_open_popup_window": {
-    "message": "ポップアップウィンドウを開く"
-  },
-  "command_open_search_page": {
-    "message": "検索ページを開く"
-  },
-  "command_open_settings_page": {
-    "message": "設定ページを開く"
-  },
-  "command_toggle_text_scanning": {
-    "message": "テキストスキャンをオン/オフ"
-  },
-  "common_always": {
-    "message": "常に"
-  },
-  "common_auto": {
-    "message": "自動"
-  },
-  "common_bottom": {
-    "message": "下"
-  },
-  "common_browser": {
-    "message": "ブラウザー"
-  },
-  "common_close": {
-    "message": "閉じる"
-  },
-  "common_configure": {
-    "message": "設定…"
-  },
-  "common_dark": {
-    "message": "ダーク"
-  },
-  "common_default": {
-    "message": "デフォルト"
-  },
-  "common_height": {
-    "message": "高さ"
-  },
-  "common_info": {
-    "message": "情報…"
-  },
-  "common_left": {
-    "message": "左"
-  },
-  "common_less": {
-    "message": "少なく…"
-  },
-  "common_light": {
-    "message": "ライト"
-  },
-  "common_manual": {
-    "message": "手動"
-  },
-  "common_mode": {
-    "message": "モード"
-  },
-  "common_move_down": {
-    "message": "下へ移動"
-  },
-  "common_move_up": {
-    "message": "上へ移動"
-  },
-  "common_none": {
-    "message": "なし"
-  },
-  "common_normal": {
-    "message": "標準"
-  },
-  "common_operator": {
-    "message": "オペレーター"
-  },
-  "common_remove": {
-    "message": "削除"
-  },
-  "common_right": {
-    "message": "右"
-  },
-  "common_state": {
-    "message": "状態"
-  },
-  "common_test": {
-    "message": "テスト"
-  },
-  "common_top": {
-    "message": "上"
-  },
-  "common_type": {
-    "message": "種類"
-  },
-  "common_width": {
-    "message": "幅"
-  },
-  "dictionary_deleting_label": {
-    "message": "辞書を削除中..."
-  },
-  "dictionary_details_attribution": {
-    "message": "帰属"
-  },
-  "dictionary_details_author": {
-    "message": "作者"
-  },
-  "dictionary_details_description": {
-    "message": "説明"
-  },
-  "dictionary_details_expected_database": {
-    "message": "期待値: $1 (データベース: $2)"
-  },
-  "dictionary_details_import_success": {
-    "message": "インポート成功"
-  },
-  "dictionary_details_kanji_count": {
-    "message": "漢字数"
-  },
-  "dictionary_details_kanji_meta_count": {
-    "message": "漢字メタ数"
-  },
-  "dictionary_details_media_count": {
-    "message": "メディア数"
-  },
-  "dictionary_details_source_language": {
-    "message": "ソース言語"
-  },
-  "dictionary_details_tag_meta_count": {
-    "message": "タグ数"
-  },
-  "dictionary_details_target_language": {
-    "message": "ターゲット言語"
-  },
-  "dictionary_details_term_count": {
-    "message": "語数"
-  },
-  "dictionary_details_term_meta_count": {
-    "message": "語メタ数"
-  },
-  "dictionary_details_url": {
-    "message": "URL"
-  },
-  "dictionary_extra_data_item_plural": {
-    "message": "$1 件"
-  },
-  "dictionary_extra_data_item_singular": {
-    "message": "$1 件"
-  },
-  "dictionary_main_not_selected": {
-    "message": "未選択"
-  },
-  "dictionary_updates_count_plural": {
-    "message": "$1 件の更新"
-  },
-  "dictionary_updates_count_singular": {
-    "message": "$1 件の更新"
-  },
-  "dictionary_updates_none": {
-    "message": "更新なし"
-  },
-  "display_add_note_title": {
-    "message": "{0} を追加"
-  },
-  "display_anki_error_plural": {
-    "message": "$1 件のエラーが発生しました:"
-  },
-  "display_anki_error_singular": {
-    "message": "エラーが発生しました:"
-  },
-  "display_current_entry_title": {
-    "message": "現在のエントリー"
-  },
-  "display_dictionary_author": {
-    "message": "作者: $1"
-  },
-  "display_dictionary_description": {
-    "message": "説明: $1"
-  },
-  "display_dictionary_kanji_count": {
-    "message": "漢字数: $1"
-  },
-  "display_dictionary_size_kanji": {
-    "message": "辞書サイズ: $1 漢字"
-  },
-  "display_dictionary_size_terms": {
-    "message": "辞書サイズ: $1 語"
-  },
-  "display_dictionary_term_count": {
-    "message": "語数: $1"
-  },
-  "display_dictionary_url": {
-    "message": "URL: $1"
-  },
-  "display_hotkey_add_note": {
-    "message": "{0} を追加 ({0})"
-  },
-  "display_hotkey_play_audio": {
-    "message": "音声を再生 ({0})"
-  },
-  "display_hotkey_view_note": {
-    "message": "追加したノートを表示 ({0})"
-  },
-  "display_image_label": {
-    "message": "画像"
-  },
-  "display_inflection_algorithm": {
-    "message": "アルゴリズム逆活用"
-  },
-  "display_inflection_both": {
-    "message": "辞書とアルゴリズムによる逆活用"
-  },
-  "display_inflection_dictionary": {
-    "message": "辞書による逆活用"
-  },
-  "display_kanji_heading_classifications": {
-    "message": "分類"
-  },
-  "display_kanji_heading_codepoints": {
-    "message": "コードポイント"
-  },
-  "display_kanji_heading_dictionary_indices": {
-    "message": "辞書インデックス"
-  },
-  "display_kanji_heading_meaning": {
-    "message": "意味"
-  },
-  "display_kanji_heading_readings": {
-    "message": "読み"
-  },
-  "display_kanji_heading_statistics": {
-    "message": "統計"
-  },
-  "display_log_debug_info": {
-    "message": "デバッグ情報をコンソールに記録"
-  },
-  "display_more_info": {
-    "message": "詳細"
-  },
-  "display_no_data_found": {
-    "message": "データが見つかりません"
-  },
-  "display_note_viewer_error": {
-    "message": "ノートビューアーウィンドウを開けませんでした。<br/>\n    <a href=\"/settings.html#anki\" rel=\"noopener\" target=\"_blank\"><em>Anki</em> › <em>ノートビューアーウィンドウ</em></a> の設定を確認してください。"
-  },
-  "display_play_audio_title": {
-    "message": "音声を再生"
-  },
-  "display_set_primary_audio_title": {
-    "message": "Ankiカードの音声として使用"
-  },
-  "display_view_added_note_title": {
-    "message": "追加したノートを表示"
-  },
-  "extension_description": {
-    "message": "語学学習向けのSottaku連携ポップアップ辞書。"
-  },
-  "extension_description_dev": {
-    "message": "語学学習向けのSottaku連携ポップアップ辞書 (Dev)."
-  },
-  "extension_name": {
-    "message": "Sottaku-Yomitan"
-  },
-  "extension_name_dev": {
-    "message": "Sottaku-Yomitan (Dev)"
-  },
-  "extension_short_name": {
-    "message": "Sottaku-Yomitan"
-  },
-  "info_anki_version_unknown": {
-    "message": "不明"
-  },
-  "info_general_browser": {
-    "message": "ブラウザー: <span id=\"browser\"></span>"
-  },
-  "info_general_export_settings": {
-    "message": "<a id=\"settings-export-button\" tabindex=\"0\">設定をエクスポート</a>"
-  },
-  "info_general_extension_version": {
-    "message": "拡張機能のバージョン: <span id=\"version\"></span>"
-  },
-  "info_general_heading": {
-    "message": "一般"
-  },
-  "info_general_language": {
-    "message": "言語: <span id=\"language\"></span>"
-  },
-  "info_general_platform": {
-    "message": "プラットフォーム: <span id=\"platform\"></span>"
-  },
-  "info_general_user_agent": {
-    "message": "ユーザーエージェント: <span id=\"user-agent\"></span>"
-  },
-  "info_heading": {
-    "message": "Sottaku-Yomitan 情報"
-  },
-  "info_links_bugs": {
-    "message": "バグ？こちらで報告: <a href=\"https://github.com/sottakuapp/sottaku-yomitan/issues/new/choose\" rel=\"noreferrer noopener\">GitHub Issues</a>"
-  },
-  "info_links_feedback": {
-    "message": "Sottaku-Yomitan を楽しんでいますか？GitHubでフィードバックやアイデアを送るか、<a href=\"mailto:hello@sottaku.app\">hello@sottaku.app</a> にメールしてください。"
-  },
-  "info_links_heading": {
-    "message": "リンク"
-  },
-  "info_links_more_info": {
-    "message": "拡張機能の詳細: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">権限</a> | <a href=\"/legal.html\">ライセンス</a> | <a href=\"/issues.html\">問題</a>"
-  },
-  "info_links_recommended_dictionaries": {
-    "message": "おすすめ辞書: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">Sottaku-Yomitan Dictionaries</a>"
-  },
-  "info_links_release_notes": {
-    "message": "リリースノート: <a data-href-format=\"https://github.com/sottakuapp/sottaku-yomitan/releases/tag/{version}\" href=\"https://github.com/sottakuapp/sottaku-yomitan/releases\" id=\"release-notes-this-version-link\" rel=\"noreferrer noopener\">このバージョン</a> | <a href=\"https://github.com/sottakuapp/sottaku-yomitan/releases\" rel=\"noreferrer noopener\">すべてのバージョン</a>"
-  },
-  "info_links_source_code": {
-    "message": "ソースコード: <a href=\"https://github.com/sottakuapp/sottaku-yomitan\" rel=\"noreferrer noopener\">GitHub</a>"
-  },
-  "info_links_user_guide": {
-    "message": "情報とユーザーガイド: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">ホームページ</a>"
-  },
-  "info_need_help_heading": {
-    "message": "お困りですか？"
-  },
-  "info_quick_start_link": {
-    "message": "クイックスタートガイドを見る"
-  },
-  "info_read_wiki_link": {
-    "message": "ウィキを読む"
-  },
-  "issues_audio_expired_cert_body": {
-    "message": "ウェブサイトがHTTPS証明書を最新の状態に保てない場合、ブラウザーが接続を安全でないと判断し、ダウンロードが失敗することがあります。これはSottaku-Yomitanがやり取りする一部のサイトで時々発生し、通常は1日以内に解決します。"
-  },
-  "issues_audio_expired_cert_heading": {
-    "message": "サーバー証明書の期限切れにより音声ダウンロードに失敗しました"
-  },
-  "issues_audio_expired_cert_note": {
-    "message": "これはサーバー側の問題であり、Sottaku-Yomitanでは制御できません。"
-  },
-  "issues_audio_idle_timeout_body": {
-    "message": "Ankiカード作成時に音声ファイルがリモートサーバーからダウンロードされることがあり、\n                サーバーやインターネット接続の問題でダウンロードが停止する場合があります。\n                <a href=\"/settings.html#anki\">設定ページ</a>の <em>アイドルダウンロードのタイムアウト</em> 設定で\n                停止したダウンロードの時間制限を指定します。"
-  },
-  "issues_audio_idle_timeout_heading": {
-    "message": "アイドルタイムアウトにより音声ダウンロードがキャンセルされました"
-  },
-  "issues_audio_permissions_body": {
-    "message": "拡張機能の構成によっては、Ankiカード作成時の音声ファイルのダウンロードで問題が発生することがあります。これは、Sottaku-Yomitanが音声ファイルをホストするサイトへのアクセス権を持っていないために起こる場合があります。"
-  },
-  "issues_audio_permissions_chrome": {
-    "message": "<a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">拡張機能の設定ページ</a>の\n                <em>サイトアクセス</em> セクションを確認し、\n                拡張機能に <em>すべてのサイト</em> へのアクセスを許可するか、特定の音声ホストのURLを追加してください。"
-  },
-  "issues_audio_permissions_firefox": {
-    "message": "ブラウザーのアドレスバーから <code>about:addons</code> に移動し、Sottaku-Yomitanの設定を開きます。\n                拡張機能の設定ページの <em>サイトアクセス</em> セクションを確認し、\n                <em>すべてのサイト</em> へのアクセスを許可するか、特定の音声ホストのURLを追加してください。"
-  },
-  "issues_audio_permissions_heading": {
-    "message": "拡張機能の権限エラーの可能性により音声ダウンロードに失敗しました <em>(Chrome)</em>"
-  },
-  "issues_heading": {
-    "message": "Sottaku-Yomitan の問題"
-  },
-  "legal_dependency_licenses_heading": {
-    "message": "JavaScript 依存関係のライセンス"
-  },
-  "legal_edrdg_heading": {
-    "message": "EDRDG ライセンス"
-  },
-  "legal_heading": {
-    "message": "Sottaku-Yomitan 法的情報"
-  },
-  "legal_sottaku_license_heading": {
-    "message": "Sottaku-Yomitan ライセンス"
-  },
-  "modal_collapsible_dictionaries_description": {
-    "message": "辞書の定義は一定の行数を超えると折りたたむことができます。\n                長い定義の辞書に役立ちます。\n                外観はカスタムCSSで変更できます。\n                <a data-modal-action=\"show,collapsible-dictionaries-info\" tabindex=\"0\">詳細…</a>"
-  },
-  "modal_dictionaries_none_installed": {
-    "message": "まだ辞書がインストールされていません。\n                無料辞書の一覧は <a href=\"https://github.com/sottakuapp/sottaku-yomitan/blob/master/docs/dictionaries.md#dictionaries\" rel=\"noopener noreferrer\" target=\"_blank\">Sottaku-Yomitan ホームページ</a> を参照するか、\n                下の <em>インポート</em> ボタンをクリックしてインポートする辞書ファイルを選択してください。"
-  },
-  "modal_dictionaries_prefix_wildcard_label": {
-    "message": "プレフィックスのワイルドカード検索を有効化\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
-  },
-  "modal_dictionary_confirm_delete_all_prompt": {
-    "message": "<strong>すべての辞書</strong>を削除しますか？"
-  },
-  "modal_dictionary_details_deinflections_label": {
-    "message": "逆活用を使用\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
-  },
-  "modal_dictionary_details_pos_label": {
-    "message": "品詞フィルタリング\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
-  },
-  "modal_dictionary_details_prefix_label": {
-    "message": "プレフィックスのワイルドカード検索に対応\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
-  },
-  "modal_dictionary_move_prompt": {
-    "message": "辞書 <strong class=\"dictionary-title\"></strong> の移動先を入力してください:"
-  },
-  "modal_dictionary_rename_prompt": {
-    "message": "辞書 <strong class=\"dictionary-title\"></strong> の表示名を入力してください:"
-  },
-  "modal_profile_conditions_info_4": {
-    "message": "Flags 条件を使用する場合、有効な入力は <code>clipboard</code> のみです。\n                        これにより、<code>検索ページのクリップボードテキスト監視を有効化</code> が有効な場合、テキストのコピー時に別のプロファイルの設定を検索ページに適用できます。"
-  },
-  "modal_profile_conditions_label": {
-    "message": "プロファイル <em id=\"profile-conditions-profile-name\"></em> の条件:"
-  },
-  "modal_profile_delete_prompt": {
-    "message": "プロファイル <em id=\"profile-remove-name\"></em> を削除しますか？"
-  },
-  "modal_profile_reset_prompt": {
-    "message": "プロファイル <em id=\"profile-reset-name\"></em> を既定にリセットしますか？"
-  },
-  "modal_recommended_dictionaries_description": {
-    "message": "英語以外の辞書については、利用可能な\n                <a href=\"https://yomidevs.github.io/kaikki-to-yomitan/\" target=\"_blank\"> Kaikki 辞書</a> の一覧を参照してください。"
-  },
-  "modal_secondary_search_description": {
-    "message": "これらの辞書は、グループ化モードが\n                <em>関連語をグループ化</em> のときに関連語の定義検索に使用されます。"
-  },
-  "os_android": {
-    "message": "Android"
-  },
-  "os_chrome_os": {
-    "message": "Chrome OS"
-  },
-  "os_linux": {
-    "message": "Linux"
-  },
-  "os_mac": {
-    "message": "Mac OS"
-  },
-  "os_openbsd": {
-    "message": "Open BSD"
-  },
-  "os_unknown": {
-    "message": "不明"
-  },
-  "os_windows": {
-    "message": "Windows"
-  },
-  "page_action_popup_title": {
-    "message": "Sottaku-Yomitan アクションポップアップ"
-  },
-  "page_info_title": {
-    "message": "Sottaku-Yomitan 情報"
-  },
-  "page_issues_title": {
-    "message": "Sottaku-Yomitan の問題"
-  },
-  "page_legal_title": {
-    "message": "Sottaku-Yomitan 法的情報"
-  },
-  "page_permissions_title": {
-    "message": "Sottaku-Yomitan 権限"
-  },
-  "page_popup_preview_title": {
-    "message": "Sottaku-Yomitan ポップアッププレビュー"
-  },
-  "page_popup_title": {
-    "message": "Sottaku-Yomitan 検索"
-  },
-  "page_quick_start_title": {
-    "message": "クイックスタートガイド"
-  },
-  "page_search_title": {
-    "message": "Sottaku-Yomitan 検索"
-  },
-  "page_settings_title": {
-    "message": "Sottaku-Yomitan 設定"
-  },
-  "page_support_title": {
-    "message": "Sottaku-Yomitan を支援"
-  },
-  "page_template_renderer_title": {
-    "message": "Sottaku-Yomitan Handlebars サンドボックス"
-  },
-  "page_welcome_title": {
-    "message": "Sottaku-Yomitan へようこそ！"
-  },
-  "permissions_add_origin_button": {
-    "message": "追加"
-  },
-  "permissions_additional_origins_label": {
-    "message": "追加のオリジン"
-  },
-  "permissions_all_urls_description": {
-    "message": "Sottaku-Yomitan はテキストをスキャンして定義ポップアップを表示し、Sottaku サーバーと通信するために、すべての URL へのアクセスが必要です。"
-  },
-  "permissions_allow_all_urls_label": {
-    "message": "すべての URL へのアクセスを許可"
-  },
-  "permissions_allowed_origins_title": {
-    "message": "許可されたオリジン"
-  },
-  "permissions_clipboard_read_description": {
-    "message": "特定の設定により、ブラウザーが動作中にテキストがクリップボードへコピーされると、Sottaku-Yomitan は検索ウィンドウを自動的に開くことができます。これにより、外部アプリからテキストをクリップボードにコピーできる場合に限り、Sottaku-Yomitan が外部アプリのテキストをスキャンできるようになります。"
-  },
-  "permissions_clipboard_read_label": {
-    "message": "<code>clipboardRead</code> <span class=\"light\">(オプション)</span>"
-  },
-  "permissions_clipboard_write_description": {
-    "message": "定義ポップアップが開いてフォーカスされているときに、Sottaku-Yomitan は <code>Ctrl+C</code>（クリップボードにコピー）のキーボードショートカットをシミュレートできます。"
-  },
-  "permissions_configure_allowed_origins": {
-    "message": "許可されたオリジンを設定…"
-  },
-  "permissions_context_menu_description": {
-    "message": "Sottaku-Yomitan は強調表示された単語を検索できるコンテキストメニューを追加します。"
-  },
-  "permissions_declarative_net_request_description": {
-    "message": "Sottaku-Yomitan は特定のリクエストに有効で安全なヘッダーが付くように、この権限を使用します。\n                        これは <code>Origin</code> リクエストヘッダーを削除または変更することがあり、\n                        それによってブラウザー構成のフィンガープリントが可能になるためです。"
-  },
-  "permissions_declarative_net_request_example": {
-    "message": "例: <code>Origin: <span class=\"extension-id-example\"></span></code>"
-  },
-  "permissions_file_urls_chrome": {
-    "message": "このオプションはブラウザーの <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">拡張機能の設定ページ</a> から設定できます。"
-  },
-  "permissions_file_urls_description": {
-    "message": "有効にすると、Sottaku-Yomitan は <code>file://*</code> スキームで指定されたローカル HTML ファイル上のテキストをスキャンして定義を表示できます。"
-  },
-  "permissions_file_urls_label": {
-    "message": "ファイル URL へのアクセスを許可 <span class=\"light\">(オプション)</span>"
-  },
-  "permissions_heading": {
-    "message": "Sottaku-Yomitan の権限"
-  },
-  "permissions_modal_close": {
-    "message": "閉じる"
-  },
-  "permissions_native_messaging_description": {
-    "message": "Sottaku-Yomitan は、オプションのネイティブメッセージング コンポーネントと通信して\n                    <a href=\"https://en.wikipedia.org/wiki/MeCab\" rel=\"noopener noreferrer\" target=\"_blank\">MeCab</a> を使用した日本語の大きなテキストブロックの解析をサポートできます。\n                    このコンポーネントのインストールは任意で、既定では含まれていません。"
-  },
-  "permissions_native_messaging_label": {
-    "message": "<code>nativeMessaging</code> <span class=\"light\">(オプション)</span>"
-  },
-  "permissions_no_additional_origins": {
-    "message": "追加のオリジンは指定されていません。"
-  },
-  "permissions_persistent_storage_description": {
-    "message": "デバイスの空き容量が少なくなると、ウェブブラウザーが保存済みの拡張機能データを削除する場合があります。永続ストレージ権限は、その状況で拡張機能のデータを削除しないようブラウザーに伝えます。"
-  },
-  "permissions_persistent_storage_firefox_note": {
-    "message": "Firefox for Android ではこの権限を有効にできない場合があります。"
-  },
-  "permissions_persistent_storage_label": {
-    "message": "永続ストレージ"
-  },
-  "permissions_private_windows_chrome": {
-    "message": "このオプションはブラウザーの <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">拡張機能の設定ページ</a> から設定できます。"
-  },
-  "permissions_private_windows_description": {
-    "message": "有効にすると、Sottaku-Yomitan はプライベート/シークレットウィンドウでテキストをスキャンして定義を表示できます。"
-  },
-  "permissions_private_windows_firefox": {
-    "message": "このオプションはブラウザーの拡張機能設定ページから設定できます。ブラウザーのアドレスバーで <code>about:addons</code> を開き、Sottaku-Yomitan の設定に移動してください。"
-  },
-  "permissions_private_windows_label": {
-    "message": "プライベートウィンドウで許可 <span class=\"light\">(オプション)</span>"
-  },
-  "permissions_scripting_description": {
-    "message": "Sottaku-Yomitan は検索ポップアップを正しく表示するために、ウェブページへコンテンツスクリプトとスタイルシートを挿入する必要があります。"
-  },
-  "permissions_storage_description": {
-    "message": "Sottaku-Yomitan は拡張機能の設定を保存するためにストレージ権限を使用します。"
-  },
-  "popup_close_title": {
-    "message": "ポップアップを閉じる"
-  },
-  "popup_default_profile_title": {
-    "message": "デフォルトプロフィール"
-  },
-  "popup_hotkey_close": {
-    "message": "ポップアップを閉じる ({0})"
-  },
-  "popup_hotkey_next_definition": {
-    "message": "次の定義 ({0})"
-  },
-  "popup_hotkey_previous_definition": {
-    "message": "前の定義 ({0})"
-  },
-  "popup_next_definition_title": {
-    "message": "次の定義"
-  },
-  "popup_no_results": {
-    "message": "結果が見つかりませんでした。"
-  },
-  "popup_preview_placeholder": {
-    "message": "設定の Sottaku セクションで Sottaku アカウントを連携するとポップアッププレビューが表示されます。"
-  },
-  "popup_previous_definition_title": {
-    "message": "前の定義"
-  },
-  "popup_pro_required_body": {
-    "message": "ポップアップ辞書には Sottaku Pro のサブスクリプションが必要です。"
-  },
-  "popup_pro_required_link": {
-    "message": "sottaku.app/upgrade でアップグレード"
-  },
-  "popup_pro_required_title": {
-    "message": "Sottaku Pro が必要"
-  },
-  "popup_updated_body": {
-    "message": "Sottaku-Yomitan 拡張機能が新しいバージョンに更新されました！このページで定義を表示し続けるには、このタブを再読み込みするか、ブラウザーを再起動してください。"
-  },
-  "popup_updated_title": {
-    "message": "Sottaku-Yomitan が更新されました！"
-  },
-  "query_parser_mecab": {
-    "message": "MeCab: $1"
-  },
-  "query_parser_scanning": {
-    "message": "スキャンパーサー"
-  },
-  "query_parser_unknown_source": {
-    "message": "不明なソース: $1"
-  },
-  "quick_start_action_popup_alt": {
-    "message": "ブラウザーアクションポップアップ"
-  },
-  "quick_start_heading": {
-    "message": "Sottaku-Yomitan クイックスタートガイド"
-  },
-  "quick_start_installing_body": {
-    "message": "Sottaku-Yomitan は検索に Sottaku アカウントを使用するため、設定ページでローカル辞書を管理する必要はありません。\n                それでも Sottaku-Yomitan の辞書について詳しく知りたい場合は <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">https://sottaku.app/</a> をご覧ください。"
-  },
-  "quick_start_installing_heading": {
-    "message": "辞書のインストール"
-  },
-  "quick_start_links_heading": {
-    "message": "リンク"
-  },
-  "quick_start_links_info": {
-    "message": "情報ページへ移動"
-  },
-  "quick_start_links_sottaku": {
-    "message": "Sottaku-Yomitan が初めてですか？ https://sottaku.app/ へ！"
-  },
-  "quick_start_links_welcome": {
-    "message": "ウェルカムページへ移動"
-  },
-  "quick_start_migrating_body": {
-    "message": "設定ページの <a href=\"/settings.html#backup\">バックアップ セクション</a> から、エクスポートした辞書コレクションをインポートすることもできます。\n\n                <br/><br/>\n\n                Yomichan から移行する場合、データを Sottaku-Yomitan に取り込むことを検討してください。\n                その手順は <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">https://sottaku.app/</a> の案内に従ってください。\n\n                <br/><br/>\n\n                Anki ノート作成のためにカスタムテンプレートを使用している、または使用する予定がある場合は、<a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">Yomichan や Yomibaba から一部の構文が変更されています。</a>\n                カスタムテンプレートが更新済みの構文を使用していることを確認してください。"
-  },
-  "quick_start_migrating_heading": {
-    "message": "Sottaku-Yomitan への移行"
-  },
-  "quick_start_quick_actions_body": {
-    "message": "ブラウザーバーの <img alt=\"\" class=\"inline-icon\" src=\"/images/yomitan-icon.svg\"/> <em>Sottaku-Yomitan</em> ボタンをクリックすると、クイックアクションのポップアップが開きます。"
-  },
-  "quick_start_quick_actions_cog": {
-    "message": "<img alt=\"\" class=\"inline-icon\" src=\"/images/cog.svg\"/> <em>歯車</em> ボタンで <a href=\"/settings.html\" rel=\"noopener\" target=\"_blank\">設定</a> ページを開きます。"
-  },
-  "quick_start_quick_actions_heading": {
-    "message": "クイックアクション"
-  },
-  "quick_start_quick_actions_info": {
-    "message": "<img alt=\"\" class=\"inline-icon\" src=\"/images/question-mark-circle.svg\"/> <em>はてな</em> ボタンで <a href=\"/info.html\" rel=\"noopener\" target=\"_blank\">情報</a> ページを開きます。\n                        そこには Sottaku-Yomitan に関する役立つ情報とリンクがあります。"
-  },
-  "quick_start_quick_actions_search": {
-    "message": "<img alt=\"\" class=\"inline-icon\" src=\"/images/magnifying-glass.svg\"/> <em>虫眼鏡</em> ボタンで <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">検索</a> ページを開きます。\n                        インストールした辞書を使ってテキストや単語を検索できます。\n                        オフラインモードでも使用できます！"
-  },
-  "quick_start_scanning_alt": {
-    "message": "スキャン"
-  },
-  "quick_start_scanning_audio": {
-    "message": "検索結果内の項目にある <img alt=\"\" class=\"inline-icon\" src=\"/images/play-audio.svg\"/> <em>スピーカー</em> ボタンをクリックすると、\n                    利用可能な場合はオンライン辞書を使って単語の発音の音声が再生されます。"
-  },
-  "quick_start_scanning_body": {
-    "message": "辞書をインストールした後は、修飾キーを押しながらカーソルを動かすことでウェブページのテキストをスキャンできます。\n                既定のキーは <kbd>Shift</kbd> で、<a href=\"/settings.html#backup\">設定</a> ページで無効化または設定できます。"
-  },
-  "quick_start_scanning_heading": {
-    "message": "テキストのスキャン"
-  },
-  "quick_start_scanning_kanji": {
-    "message": "用語の定義内の漢字をクリックすると、その文字に関する追加情報が表示されます。\n                    <span class=\"light\">(漢字辞書のインストールが必要です。)</span>"
-  },
-  "search_clipboard_monitor_label": {
-    "message": "クリップボード監視"
-  },
-  "search_default_profile_label": {
-    "message": "デフォルトプロフィール"
-  },
-  "search_header_title": {
-    "message": "Sottaku-Yomitan 検索"
-  },
-  "search_settings_auto_kana_label": {
-    "message": "かなの自動変換"
-  },
-  "search_settings_close_button": {
-    "message": "閉じる"
-  },
-  "search_settings_parser_label": {
-    "message": "パーサー"
-  },
-  "search_settings_sticky_header_description": {
-    "message": "下にスクロールしても検索ヘッダーはページに残ります。"
-  },
-  "search_settings_sticky_header_label": {
-    "message": "検索ヘッダーを固定"
-  },
-  "search_settings_title": {
-    "message": "検索設定"
-  },
-  "search_textbox_placeholder": {
-    "message": "単語、表現、文、またはテキストブロックを入力"
-  },
-  "settings_accessibility_google_docs_danger": {
-    "message": "Google はこの互換実装を何度も変更しており、変更は告知や文書化されていないようです。そのため、この機能は将来いつでも予告なく動作しなくなる可能性があります。"
-  },
-  "settings_accessibility_google_docs_label": {
-    "message": "Google ドキュメント互換モードを有効化\n                        <a class=\"more-toggle more-only danger-text\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
-  },
-  "settings_accessibility_google_docs_more_1": {
-    "message": "Google ドキュメントは現在、内容表示に\n                    <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas\" rel=\"noopener noreferrer\" target=\"_blank\">canvas ベース</a>\n                    のレンダリングを使用しています<sup><a href=\"https://workspaceupdates.googleblog.com/2021/05/Google-Docs-Canvas-Based-Rendering-Update.html\" rel=\"noopener noreferrer\" target=\"_blank\">[2]</a></sup>\n                    これにより、Sottaku-Yomitan は標準の方法でテキストをスキャンできなくなります。\n                    このオプションを有効にすると、Google ドキュメントのウェブページが追加のテキスト情報を公開するよう強制され、\n                    Sottaku-Yomitan が引き続き動作できるはずです。"
-  },
-  "settings_accessibility_google_docs_warning": {
-    "message": "いずれかのプロフィールでこの設定が有効になっている場合、互換モードが有効化されます。プロフィール条件は無視されます。"
-  },
-  "settings_accessibility_heading": {
-    "message": "アクセシビリティ"
-  },
-  "settings_appearance_action_bar_description": {
-    "message": "アクションバーの表示タイミングと場所を制御します。"
-  },
-  "settings_appearance_action_bar_label": {
-    "message": "アクションバーの外観"
-  },
-  "settings_appearance_action_bar_location_label": {
-    "message": "位置"
-  },
-  "settings_appearance_action_bar_visibility_label": {
-    "message": "表示"
-  },
-  "settings_appearance_collapsible_dictionaries_label": {
-    "message": "折りたたみ辞書を設定…"
-  },
-  "settings_appearance_compact_glossaries_description": {
-    "message": "用語のグロッサリーをよりコンパクトなレイアウトで表示します。"
-  },
-  "settings_appearance_compact_glossaries_label": {
-    "message": "コンパクトなグロッサリー"
-  },
-  "settings_appearance_compact_popup": {
-    "message": "コンパクトポップアップ"
-  },
-  "settings_appearance_compact_popup_anki": {
-    "message": "コンパクトポップアップと Anki"
-  },
-  "settings_appearance_compact_tags_description": {
-    "message": "用語グロッサリーで繰り返し表示されるタグを減らします。"
-  },
-  "settings_appearance_compact_tags_label": {
-    "message": "コンパクトタグ"
-  },
-  "settings_appearance_custom_css_label": {
-    "message": "カスタム CSS を設定…"
-  },
-  "settings_appearance_debug_description": {
-    "message": "検索結果にデバッグ情報を記録するメニュー項目が表示されます。"
-  },
-  "settings_appearance_debug_label": {
-    "message": "デバッグ情報を表示"
-  },
-  "settings_appearance_expression_tags_description": {
-    "message": "ポップアップ内容のスキャン設定が有効な場合、これらのタグをスキャンできます。"
-  },
-  "settings_appearance_expression_tags_label": {
-    "message": "表現と読みのタグを表示"
-  },
-  "settings_appearance_font_family_description": {
-    "message": "Sottaku-Yomitan で使用するフォントファミリーを変更します。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">詳細…</a>"
-  },
-  "settings_appearance_font_family_label": {
-    "message": "フォントファミリー"
-  },
-  "settings_appearance_font_family_more": {
-    "message": "フォントファミリーはシステムにインストールされている任意のフォントに変更できます。<br/>\n                    <code>sans-serif</code>、<code>serif</code>、<code>monospace</code> などを入力できます。<br/>\n                    特定のフォントを1つまたは複数指定したい場合は、カンマ区切りで手動入力してください。\n                    例: <pre><code>\"Noto Sans JP\", \"Meiryo\", sans-serif</code></pre>"
-  },
-  "settings_appearance_font_size_description": {
-    "message": "ポップアップで使用するフォントサイズをピクセル単位で変更します。"
-  },
-  "settings_appearance_font_size_label": {
-    "message": "フォントサイズ"
-  },
-  "settings_appearance_frequency_description": {
-    "message": "頻度情報の表示方法を変更します。"
-  },
-  "settings_appearance_frequency_inline_list": {
-    "message": "インラインリスト"
-  },
-  "settings_appearance_frequency_label": {
-    "message": "頻度表示スタイル"
-  },
-  "settings_appearance_frequency_list": {
-    "message": "リスト"
-  },
-  "settings_appearance_frequency_split_tags": {
-    "message": "タグを分割"
-  },
-  "settings_appearance_frequency_split_tags_grouped": {
-    "message": "タグを分割（グループ化）"
-  },
-  "settings_appearance_frequency_tags": {
-    "message": "タグ"
-  },
-  "settings_appearance_frequency_tags_grouped": {
-    "message": "タグ（グループ化）"
-  },
-  "settings_appearance_heading": {
-    "message": "外観"
-  },
-  "settings_appearance_indicator_asterisk": {
-    "message": "アスタリスク"
-  },
-  "settings_appearance_indicator_bar_left": {
-    "message": "縦棒（左）"
-  },
-  "settings_appearance_indicator_bar_right": {
-    "message": "縦棒（右）"
-  },
-  "settings_appearance_indicator_dot_left": {
-    "message": "小さな点（左）"
-  },
-  "settings_appearance_indicator_dot_right": {
-    "message": "小さな点（右）"
-  },
-  "settings_appearance_indicator_triangle": {
-    "message": "三角形"
-  },
-  "settings_appearance_line_height_description": {
-    "message": "ポップアップ内のテキスト行間を変更します。通常は 1 から 2 の間の小数です。"
-  },
-  "settings_appearance_line_height_label": {
-    "message": "行の高さ"
-  },
-  "settings_appearance_pitch_accent_description": {
-    "message": "日本語のみ。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">詳細…</a>"
-  },
-  "settings_appearance_pitch_accent_label": {
-    "message": "ピッチアクセント表示スタイル"
-  },
-  "settings_appearance_pitch_accent_more_1": {
-    "message": "ピッチアクセント対応辞書がインストールされている場合、用語や表現のピッチアクセントを表示できます。現在、ピッチアクセントの表示方法は3種類あります:"
-  },
-  "settings_appearance_pitch_downstep_notation": {
-    "message": "ダウンステップ表記"
-  },
-  "settings_appearance_pitch_downstep_position": {
-    "message": "ダウンステップ位置"
-  },
-  "settings_appearance_pitch_graph": {
-    "message": "グラフ"
-  },
-  "settings_appearance_reading_mode_description": {
-    "message": "解析したテキストに表示するふりがなの種類を変更します。日本語のみ。"
-  },
-  "settings_appearance_reading_mode_dictionary": {
-    "message": "辞書読み"
-  },
-  "settings_appearance_reading_mode_hiragana": {
-    "message": "ひらがな"
-  },
-  "settings_appearance_reading_mode_katakana": {
-    "message": "カタカナ"
-  },
-  "settings_appearance_reading_mode_label": {
-    "message": "読みモード"
-  },
-  "settings_appearance_reading_mode_romaji": {
-    "message": "ローマ字"
-  },
-  "settings_appearance_selection_indicator_description": {
-    "message": "選択中の定義エントリの表示方法を変更します。"
-  },
-  "settings_appearance_selection_indicator_label": {
-    "message": "選択インジケーターのスタイル"
-  },
-  "settings_appearance_term_display_description": {
-    "message": "用語と読みの表示方法を変更します。"
-  },
-  "settings_appearance_term_display_label": {
-    "message": "用語表示スタイル"
-  },
-  "settings_appearance_term_display_ruby": {
-    "message": "用語のふりがな"
-  },
-  "settings_appearance_term_display_ruby_reading": {
-    "message": "用語のふりがなと読み"
-  },
-  "settings_appearance_term_display_term_only": {
-    "message": "用語のみ"
-  },
-  "settings_appearance_term_display_term_reading": {
-    "message": "用語と読み"
-  },
-  "settings_appearance_theme_body_label": {
-    "message": "本文"
-  },
-  "settings_appearance_theme_description": {
-    "message": "Sottaku-Yomitan のスタイルを調整します。"
-  },
-  "settings_appearance_theme_label": {
-    "message": "テーマ"
-  },
-  "settings_appearance_theme_shadow_label": {
-    "message": "影"
-  },
-  "settings_audio_autoplay_description": {
-    "message": "最初の結果の音声が自動的に再生されます。"
-  },
-  "settings_audio_autoplay_label": {
-    "message": "検索結果の音声を自動再生"
-  },
-  "settings_audio_enable_description": {
-    "message": "検索結果の横にクリック可能なスピーカーアイコンを表示します。"
-  },
-  "settings_audio_enable_disclaimer": {
-    "message": "このオプションは、音声取得のために語句・読み・言語を Sottaku-Yomitan の外部に送信する場合があります<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">プライバシーポリシー</a>)</span>."
-  },
-  "settings_audio_enable_label": {
-    "message": "語句の音声再生を有効にする"
-  },
-  "settings_audio_fallback_bloop": {
-    "message": "ブロップ"
-  },
-  "settings_audio_fallback_click": {
-    "message": "クリック"
-  },
-  "settings_audio_fallback_description": {
-    "message": "Sottaku-Yomitan が音声の取得に失敗したときに再生する音。"
-  },
-  "settings_audio_fallback_label": {
-    "message": "音声フォールバック音"
-  },
-  "settings_audio_heading": {
-    "message": "音声"
-  },
-  "settings_audio_sources_label": {
-    "message": "音声再生ソースを設定…"
-  },
-  "settings_audio_volume_description": {
-    "message": "音声の再生音量をパーセントで調整します。"
-  },
-  "settings_audio_volume_label": {
-    "message": "音量"
-  },
-  "settings_backup_description": {
-    "message": "Sottaku-Yomitan は設定ファイルのインポート/エクスポートができ、設定の復元、デバイス間での共有、問題のデバッグに役立ちます。これらのファイルには設定のみが含まれます。"
-  },
-  "settings_backup_export_button": {
-    "message": "設定をエクスポート"
-  },
-  "settings_backup_heading": {
-    "message": "バックアップ"
-  },
-  "settings_backup_import_button": {
-    "message": "設定をインポート"
-  },
-  "settings_backup_reset_button": {
-    "message": "設定をリセット"
-  },
-  "settings_clipboard_background_description": {
-    "message": "テキストがクリップボードにコピーされたときに、新しいウィンドウで検索ページを開きます。"
-  },
-  "settings_clipboard_background_label": {
-    "message": "バックグラウンドでクリップボードのテキスト監視を有効にする"
-  },
-  "settings_clipboard_heading": {
-    "message": "クリップボード"
-  },
-  "settings_clipboard_info_1": {
-    "message": "Sottaku-Yomitan はシステムのクリップボードを監視し、テキストがコピーされたときに検索ページで自動的に検索できます。これは外部アプリからのテキストを Sottaku-Yomitan でスキャンするのに役立ちます。"
-  },
-  "settings_clipboard_info_2": {
-    "message": "この機能を使うには Sottaku-Yomitan にクリップボード読み取り権限が必要で、このオプションが有効になると、クリップボードは新しいテキストのために頻繁にチェックされます。"
-  },
-  "settings_clipboard_max_length_description": {
-    "message": "クリップボードのテキスト検索で使用する文字数を制限します。"
-  },
-  "settings_clipboard_max_length_label": {
-    "message": "クリップボードテキスト検索の最大長"
-  },
-  "settings_clipboard_search_description": {
-    "message": "検索ページのクエリは、クリップボードのテキストで自動的に更新されます。"
-  },
-  "settings_clipboard_search_label": {
-    "message": "検索ページでクリップボードのテキスト監視を有効にする"
-  },
-  "settings_clipboard_search_mode_description": {
-    "message": "クリップボード内の新しいテキストに対する検索ページの反応を変更します。"
-  },
-  "settings_clipboard_search_mode_label": {
-    "message": "クリップボードテキスト検索モード"
-  },
-  "settings_clipboard_search_mode_search": {
-    "message": "定義を検索"
-  },
-  "settings_clipboard_search_mode_update": {
-    "message": "クエリのみ更新"
-  },
-  "settings_collapsible_varies": {
-    "message": "さまざま"
-  },
-  "settings_general_api_css_bypass_label": {
-    "message": "CSS サニタイズのバイパスを許可"
-  },
-  "settings_general_api_css_bypass_more_1": {
-    "message": "悪意のある CSS を含む辞書は Javascript の実行を試みる可能性があります。例えば、Sottaku-Yomitan API の出力を Anki で使用すると、生成された Anki カードが意図しない Javascript を実行する可能性があります。この場合のリスクは、悪意のある Anki デッキをダウンロードするのと同程度です。つまり、どちらの場合も悪意のあるコードからマシンと情報を守るために Anki のサンドボックスに完全に依存しています。Anki のサンドボックスが機能すればカード内容が漏える可能性があります（小さな機密性の問題）。サンドボックスが失敗すると、さらに深刻な懸念があります（資格情報や機密情報の盗難、ランサムウェアによるコンピュータの乗っ取りなど）。"
-  },
-  "settings_general_api_css_bypass_more_2": {
-    "message": "CSS サニタイズを無効にする場合は、Sottaku-Yomitan API の出力がどこで使われるか、そしてその出力先が潜在的な悪意のある Javascript の混入に耐えられるかをエンドツーエンドで検討することを推奨します。そうしないと、システムのデータと整合性をリスクにさらす可能性があります。"
-  },
-  "settings_general_api_css_bypass_more_3": {
-    "message": "サニタイズのバイパスにより、サニタイズできない CSS が変更されないままサニタイザーを通過します。これは Sottaku-Yomitan API にのみ適用され、Sottaku-Yomitan の他の領域を潜在的に脆弱にするものではありません。"
-  },
-  "settings_general_api_css_bypass_more_4": {
-    "message": "一部のブラウザでは、バックエンドの Sottaku-Yomitan API で完全な CSS サニタイズに必要な offscreen ページをサポートしていないため、CSS の取得にこれが必要になる場合があります。Sottaku-Yomitan は基本的なサニタイズにフォールバックしようとしますが、複雑な CSS を使用する辞書では失敗します。"
-  },
-  "settings_general_api_css_bypass_warning": {
-    "message": "このオプションは、辞書の作者を信頼できる場合、または Sottaku-Yomitan の外でサニタイズを行う場合にのみ有効にしてください。\n                                        悪意のある辞書は、不正な CSS を送信して webview やブラウザに注入された場合に Javascript を実行させる可能性があります。\n                                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">詳細…</a>"
-  },
-  "settings_general_api_more_1": {
-    "message": "Sottaku-Yomitan API を有効化するには、ネイティブメッセージングコンポーネントのインストールが必要です。\n                        セットアップガイドは <a href=\"https://github.com/yomidevs/yomitan-api/blob/master/README.md\" rel=\"noopener noreferrer\" target=\"_blank\">こちら</a> で確認できます。"
-  },
-  "settings_general_api_test_url_placeholder": {
-    "message": "http://127.0.0.1:19633"
-  },
-  "settings_general_context_menu": {
-    "message": "右クリックメニューに「Sottaku-Yomitan で検索」を表示"
-  },
-  "settings_general_enable_api_description": {
-    "message": "Sottaku-Yomitan からデータを取得するためのローカル Web リクエスト送信のサポートを有効にします。"
-  },
-  "settings_general_enable_api_disclaimer": {
-    "message": "このオプションは、要求したローカルアプリケーションに Sottaku-Yomitan の外部へデータを送信する場合があります<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">プライバシーポリシー</a>)</span>.\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">詳細…</a>"
-  },
-  "settings_general_enable_api_label": {
-    "message": "Sottaku-Yomitan API を有効にする"
-  },
-  "settings_general_enable_label": {
-    "message": "Sottaku-Yomitan を有効にする"
-  },
-  "settings_general_heading": {
-    "message": "一般"
-  },
-  "settings_general_locale_description": {
-    "message": "Sottaku が返す翻訳に使用される言語。"
-  },
-  "settings_general_locale_label": {
-    "message": "ロケール"
-  },
-  "settings_general_max_results_description": {
-    "message": "検索で表示する結果の最大数を調整します。"
-  },
-  "settings_general_max_results_label": {
-    "message": "結果の最大数"
-  },
-  "settings_general_show_guide": {
-    "message": "ブラウザ起動時に <a href=\"/welcome.html\" rel=\"noopener\" target=\"_blank\">ウェルカムガイド</a> を表示"
-  },
-  "settings_general_text_language_description": {
-    "message": "オフライン辞書機能とプレビュー用ツールに使用されます。"
-  },
-  "settings_general_text_language_label": {
-    "message": "テキスト言語"
-  },
-  "settings_heading": {
-    "message": "Sottaku-Yomitan の設定"
-  },
-  "settings_loading_delay_notice": {
-    "message": "このページの読み込みに予想以上の時間がかかっています。"
-  },
-  "settings_loading_delay_safari": {
-    "message": "Safari の不具合により、ページを完全に読み込むにはブラウザバーの <img alt=\"\" class=\"inline-icon\" src=\"/images/yomitan-icon.svg\"/> <em>Sottaku-Yomitan</em>\n                        ボタンをクリックする必要がある場合があります"
-  },
-  "settings_nav_about": {
-    "message": "Sottaku-Yomitan について"
-  },
-  "settings_nav_accessibility": {
-    "message": "アクセシビリティ"
-  },
-  "settings_nav_advanced": {
-    "message": "高度な設定"
-  },
-  "settings_nav_appearance": {
-    "message": "外観"
-  },
-  "settings_nav_audio": {
-    "message": "音声"
-  },
-  "settings_nav_backup": {
-    "message": "バックアップ"
-  },
-  "settings_nav_clipboard": {
-    "message": "クリップボード"
-  },
-  "settings_nav_debug": {
-    "message": "デバッグ"
-  },
-  "settings_nav_general": {
-    "message": "一般"
-  },
-  "settings_nav_popup_behavior": {
-    "message": "ポップアップの動作"
-  },
-  "settings_nav_position_size": {
-    "message": "位置とサイズ"
-  },
-  "settings_nav_profile": {
-    "message": "プロフィール"
-  },
-  "settings_nav_result_display": {
-    "message": "結果表示"
-  },
-  "settings_nav_scanning": {
-    "message": "スキャン"
-  },
-  "settings_nav_search_window": {
-    "message": "検索ウィンドウ"
-  },
-  "settings_nav_security": {
-    "message": "セキュリティ"
-  },
-  "settings_nav_shortcuts": {
-    "message": "ショートカット"
-  },
-  "settings_nav_sottaku": {
-    "message": "Sottaku"
-  },
-  "settings_nav_text_parsing": {
-    "message": "テキスト解析"
-  },
-  "settings_nav_translation": {
-    "message": "翻訳"
-  },
-  "settings_popup_auto_hide_description": {
-    "message": "既存のポップアップがある場合、再スキャン時に定義が見つからなくても既存のポップアップを隠します。"
-  },
-  "settings_popup_auto_hide_label": {
-    "message": "検索ポップアップを自動的に隠す"
-  },
-  "settings_popup_delay_label": {
-    "message": "遅延 <span class=\"light\">(ミリ秒)</span>"
-  },
-  "settings_popup_heading": {
-    "message": "ポップアップの動作"
-  },
-  "settings_popup_hide_on_exit_description": {
-    "message": "カーソルがポップアップから出ると、ポップアップは隠されます。"
-  },
-  "settings_popup_hide_on_exit_label": {
-    "message": "カーソル退出でポップアップを隠す"
-  },
-  "settings_popup_max_children_description": {
-    "message": "生成できるポップアップの数の上限を変更します。"
-  },
-  "settings_popup_max_children_label": {
-    "message": "子ポップアップの最大数"
-  },
-  "settings_popup_reduced_motion_description": {
-    "message": "設定可能な高さでスクロール（ページ送りのように）し、アニメーションを減らします。電子書籍端末やe-ink画面に便利です。"
-  },
-  "settings_popup_reduced_motion_label": {
-    "message": "動きを抑えたスクロール"
-  },
-  "settings_popup_reduced_motion_scale_description": {
-    "message": "1ステップあたりにスクロールするポップアップの高さの割合。"
-  },
-  "settings_popup_reduced_motion_scale_label": {
-    "message": "スケール"
-  },
-  "settings_popup_reduced_motion_swipe_description": {
-    "message": "タッチデバイスでスワイプをスクロールとして認識するための最小距離。値が低いほど反応が良く感じられますが、誤入力の可能性が高まります。"
-  },
-  "settings_popup_reduced_motion_swipe_label": {
-    "message": "スワイプしきい値"
-  },
-  "settings_popup_reduced_motion_swipe_unit": {
-    "message": "px"
-  },
-  "settings_popup_scan_popup_description": {
-    "message": "ポップアップ内のテキストを定義のためにスキャンでき、新しいポップアップが開きます。"
-  },
-  "settings_popup_scan_popup_label": {
-    "message": "ポップアップ内容のスキャンを許可"
-  },
-  "settings_popup_scan_search_description": {
-    "message": "<a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">検索ページ</a>のテキストを定義のためにスキャンでき、ポップアップが開きます。"
-  },
-  "settings_popup_scan_search_label": {
-    "message": "検索ページ内容のスキャンを許可"
-  },
-  "settings_popup_scan_source_terms_label": {
-    "message": "ポップアップの元の語のスキャンを許可"
-  },
-  "settings_popup_search_from_results_label": {
-    "message": "結果リストのテキストをクリックしたときに語を検索"
-  },
-  "settings_popup_show_iframe_label": {
-    "message": "iframe内ポップアップをルートフレームに表示\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
-  },
-  "settings_popup_show_iframe_more_1": {
-    "message": "デフォルトでは、埋め込まれた <code>&lt;iframe&gt;</code> 要素内のテキストをスキャンすると\n                    そのフレーム内で新しいポップアップが開きます。フレームのサイズにより制限されることがあります。\n                    このオプションを有効にすると、可能な場合はページのルートにポップアップが作成されます。"
-  },
-  "settings_popup_show_iframe_more_2": {
-    "message": "このオプションを有効にすると、ポップアップの正しい位置を決定するためにウェブページへメッセージを送る必要があるため、拡張機能が基のウェブページに干渉する可能性があります。通常は問題になりませんが、予期しないことが起きた場合はこのオプションが原因かもしれません。"
-  },
-  "settings_popup_size_auto_scale_label": {
-    "message": "自動スケーリング\n                                <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
-  },
-  "settings_popup_size_auto_scale_more": {
-    "message": "自動スケーリングは、ズームレベルに関係なく一定の物理サイズを保つために、\n                            ブラウザーのズームレベルに基づいてポップアップを自動的に拡大縮小します。\n                            <em>ズームレベル</em>はデスクトップブラウザーで一般的に使用されるズームレベルを使用し、\n                            <em>ビューポート</em>はモバイルブラウザーで一般的に使用されるズームレベルを使用します。"
-  },
-  "settings_popup_size_auto_scale_viewport": {
-    "message": "ビューポート"
-  },
-  "settings_popup_size_auto_scale_zoom": {
-    "message": "ズームレベル"
-  },
-  "settings_popup_size_display_full_width": {
-    "message": "全幅"
-  },
-  "settings_popup_size_display_mode_description": {
-    "message": "ポップアップのレイアウトを変更します。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">詳細…</a>"
-  },
-  "settings_popup_size_display_mode_label": {
-    "message": "表示モード"
-  },
-  "settings_popup_size_display_mode_more": {
-    "message": "<em>既定</em>モードではスキャンしたテキストに対してポップアップを配置します。\n                    <em>全幅</em>モードではポップアップを画面の上部または下部に固定し、\n                    画面の全幅を使用します。タッチスクリーン搭載のデバイスで役立つ場合があります。"
-  },
-  "settings_popup_size_heading": {
-    "message": "ポップアップの位置とサイズ"
-  },
-  "settings_popup_size_horizontal_offset_description": {
-    "message": "横書きテキストに対するポップアップの距離を変更します。"
-  },
-  "settings_popup_size_horizontal_offset_label": {
-    "message": "横書きテキストのオフセット"
-  },
-  "settings_popup_size_horizontal_position_description": {
-    "message": "横書きテキストに対してポップアップをどこに配置するか変更します。"
-  },
-  "settings_popup_size_horizontal_position_label": {
-    "message": "横書きテキストの位置"
-  },
-  "settings_popup_size_position_above": {
-    "message": "テキストの上"
-  },
-  "settings_popup_size_position_below": {
-    "message": "テキストの下"
-  },
-  "settings_popup_size_scale_description": {
-    "message": "ポップアップのスケーリング係数を制御します。"
-  },
-  "settings_popup_size_scale_label": {
-    "message": "スケール"
-  },
-  "settings_popup_size_size_description": {
-    "message": "ポップアップのサイズをピクセル単位で制御します。"
-  },
-  "settings_popup_size_size_label": {
-    "message": "サイズ"
-  },
-  "settings_popup_size_vertical_after": {
-    "message": "読み方向の後"
-  },
-  "settings_popup_size_vertical_before": {
-    "message": "読み方向の前"
-  },
-  "settings_popup_size_vertical_left": {
-    "message": "テキストの左"
-  },
-  "settings_popup_size_vertical_offset_description": {
-    "message": "縦書きテキストに対するポップアップの距離を変更します。"
-  },
-  "settings_popup_size_vertical_offset_label": {
-    "message": "縦書きテキストのオフセット"
-  },
-  "settings_popup_size_vertical_position_description": {
-    "message": "縦書きテキストに対してポップアップをどこに配置するか変更します。"
-  },
-  "settings_popup_size_vertical_position_label": {
-    "message": "縦書きテキストの位置"
-  },
-  "settings_popup_size_vertical_right": {
-    "message": "テキストの右"
-  },
-  "settings_popup_size_vertical_same_as_horizontal": {
-    "message": "横書きと同じ"
-  },
-  "settings_profile_active_description": {
-    "message": "スキャンに使用するアクティブなプロフィールを切り替えます。"
-  },
-  "settings_profile_active_label": {
-    "message": "アクティブなプロフィール"
-  },
-  "settings_profile_configure": {
-    "message": "プロフィールを設定…"
-  },
-  "settings_profile_heading": {
-    "message": "プロフィール"
-  },
-  "settings_result_average_frequencies_description": {
-    "message": "調和平均に基づいて頻度タグを「平均」頻度タグ1つに圧縮します。"
-  },
-  "settings_result_average_frequencies_label": {
-    "message": "平均頻度"
-  },
-  "settings_result_display_heading": {
-    "message": "結果の表示"
-  },
-  "settings_result_grouping_description": {
-    "message": "関連する結果のグルーピング方法を変更します。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">詳細…</a>"
-  },
-  "settings_result_grouping_label": {
-    "message": "結果のグルーピングモード"
-  },
-  "settings_result_grouping_more_none": {
-    "message": "<strong>グルーピングなし</strong> -\n                        各定義は個別のエントリとして一覧表示されます。"
-  },
-  "settings_result_grouping_more_related_1": {
-    "message": "<strong>関連語をグループ化</strong> -\n                            同じ定義を共有する関連語はまとめて表示されます。"
-  },
-  "settings_result_grouping_more_related_2": {
-    "message": "<em>主辞書</em>のオプションは関連語情報を含む辞書に割り当てる必要があり、<em>副辞書</em>を設定することで関連語の定義を他の辞書から含められます。"
-  },
-  "settings_result_grouping_more_related_warning": {
-    "message": "すべての辞書が<em>主辞書</em>として選択できるわけではありません。"
-  },
-  "settings_result_grouping_more_term_reading": {
-    "message": "<strong>語と読みのペアをグループ化</strong> -\n                        同じ語で同じ読みの定義はまとめて表示されます。"
-  },
-  "settings_result_grouping_none": {
-    "message": "グルーピングなし"
-  },
-  "settings_result_grouping_primary_dictionary": {
-    "message": "主辞書"
-  },
-  "settings_result_grouping_related": {
-    "message": "関連語をグループ化"
-  },
-  "settings_result_grouping_secondary_dictionaries": {
-    "message": "副辞書…"
-  },
-  "settings_result_grouping_term_reading": {
-    "message": "語と読みのペアをグループ化"
-  },
-  "settings_scanning_advanced_inputs_label": {
-    "message": "高度なスキャン入力を設定… <span class=\"light no-wrap\">(<span class=\"scanning-input-count\">#</span> 件定義済み)</span>"
-  },
-  "settings_scanning_alphanumeric_description": {
-    "message": "言語が日本語・中国語・広東語・韓国語の場合にのみ適用されます。"
-  },
-  "settings_scanning_alphanumeric_label": {
-    "message": "日本語・中国語・韓国語以外の文字を含むテキストを検索"
-  },
-  "settings_scanning_deep_scan_description": {
-    "message": "他のレイヤーに覆われたテキストのスキャンを有効にします。"
-  },
-  "settings_scanning_deep_scan_label": {
-    "message": "深いコンテンツのスキャン"
-  },
-  "settings_scanning_delay_description": {
-    "message": "修飾キーが不要なときにスキャンが始まるまでの遅延を変更します。"
-  },
-  "settings_scanning_delay_label": {
-    "message": "スキャン遅延 <span class=\"light\">（ミリ秒）</span>"
-  },
-  "settings_scanning_heading": {
-    "message": "スキャン"
-  },
-  "settings_scanning_input_prevention_label": {
-    "message": "入力操作の抑制を設定…"
-  },
-  "settings_scanning_layout_description": {
-    "message": "ウェブページのスタイル情報を使用して改行位置を推定します。"
-  },
-  "settings_scanning_layout_label": {
-    "message": "レイアウト対応スキャン"
-  },
-  "settings_scanning_middle_mouse_description": {
-    "message": "中クリックボタンを押しながらカーソルを動かしてテキストをスキャンします。"
-  },
-  "settings_scanning_middle_mouse_label": {
-    "message": "中クリックでスキャン"
-  },
-  "settings_scanning_modifier_description": {
-    "message": "カーソルを動かしながらキーを押してテキストをスキャンします。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">詳細…</a>"
-  },
-  "settings_scanning_modifier_label": {
-    "message": "スキャン修飾キー"
-  },
-  "settings_scanning_modifier_more_1": {
-    "message": "キーボードの修飾キーを使って、カーソル移動時にテキストスキャンを有効にできます。\n                    あるいは、<em>キーなし</em> を選択すると、キーを押さずにカーソルを動かすだけでスキャンできます。"
-  },
-  "settings_scanning_modifier_more_2": {
-    "message": "より高度なスキャン入力のカスタマイズは、<em>高度</em> を有効にして\n                    <em data-modal-action=\"show,scanning-inputs\">高度なスキャン入力を設定</em> をクリックします。"
-  },
-  "settings_scanning_resolution_character": {
-    "message": "文字"
-  },
-  "settings_scanning_resolution_description": {
-    "message": "カーソル位置の単語または文字から検索スキャンを開始します。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">詳細…</a>"
-  },
-  "settings_scanning_resolution_label": {
-    "message": "スキャン解像度"
-  },
-  "settings_scanning_resolution_more_1": {
-    "message": "スキャン解像度は、カーソルを動かしたときにスキャンがどこから始まるかを決定します。\n                    <code>文字</code> を選ぶとカーソルの現在位置からスキャンを開始し、\n                    <code>単語</code> を選ぶと単語の先頭からスキャンを開始します。"
-  },
-  "settings_scanning_resolution_word": {
-    "message": "単語"
-  },
-  "settings_scanning_select_text_label": {
-    "message": "一致したテキストを選択"
-  },
-  "settings_scanning_text_length_description": {
-    "message": "用語をスキャンするときに読み取る文字数を変更します。"
-  },
-  "settings_scanning_text_length_label": {
-    "message": "テキストスキャンの長さ"
-  },
-  "settings_scanning_text_length_warning": {
-    "message": "この値を高くしすぎる（100+）とパフォーマンスに影響する可能性があります。"
-  },
-  "settings_scanning_wildcard_description": {
-    "message": "スキャンしたウェブページのテキストを検索する際に、後方のワイルドカードを有効にします。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">詳細…</a>"
-  },
-  "settings_scanning_wildcard_label": {
-    "message": "ワイルドカードスキャン"
-  },
-  "settings_scanning_wildcard_more_1": {
-    "message": "元のテキストを正確に検索するのではなく、既存の用語の接頭辞であれば一致するようになります。例えば、読み をスキャンすると 読み* を検索したのと同じになり、読み方 など追加の結果が表示される場合があります。"
-  },
-  "settings_scanning_wildcard_warning": {
-    "message": "これによりスキャンと検索が遅くなり、結果の関連性が下がる可能性があります。"
-  },
-  "settings_scanning_without_mousemove_description": {
-    "message": "ポインターを動かさずに、下の単語をスキャンできるようにします。"
-  },
-  "settings_scanning_without_mousemove_label": {
-    "message": "マウス移動なしでスキャン"
-  },
-  "settings_scanning_zoom_description": {
-    "message": "CSS の <code>zoom</code> が使われているページでポインター位置を補正します。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">詳細…</a>"
-  },
-  "settings_scanning_zoom_label": {
-    "message": "CSS zoom を正規化"
-  },
-  "settings_scanning_zoom_more_1": {
-    "message": "標準外の CSS <a href=\"https://developer.mozilla.org/en-US/docs/Web/CSS/zoom\" rel=\"noopener noreferrer\" target=\"_blank\"><code>zoom</code></a> プロパティは、ウェブページのスキャン時のポインター座標の通常の計算を妨げます。このプロパティは使用が推奨されず、使用例は稀ですが、一部のページでは使われています。"
-  },
-  "settings_scanning_zoom_more_2": {
-    "message": "このオプション（既定でオン）を有効にすると、ウェブページ内容をスキャンする際にこのプロパティの値を考慮します。予期しない悪影響がある可能性に備え、オプション化されています。"
-  },
-  "settings_scanning_zoom_more_3": {
-    "message": "この設定は Firefox では効果がありません。Firefox は <code>zoom</code> プロパティを実装していないためです。"
-  },
-  "settings_search_window_heading": {
-    "message": "検索ウィンドウ"
-  },
-  "settings_search_window_left_description": {
-    "message": "ウィンドウの左位置をピクセル単位で制御します。"
-  },
-  "settings_search_window_left_label": {
-    "message": "左位置"
-  },
-  "settings_search_window_native_window_label": {
-    "message": "埋め込みポップアップではなくネイティブのブラウザーウィンドウを使用\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
-  },
-  "settings_search_window_native_window_more": {
-    "message": "ウェブページに埋め込まれたポップアップで定義を表示する代わりに、ポップアップ内容を含むネイティブのブラウザーウィンドウを開きます。このウィンドウはすべてのタブで共有されます。"
-  },
-  "settings_search_window_open_link": {
-    "message": "開く…"
-  },
-  "settings_search_window_size_description": {
-    "message": "ウィンドウのサイズをピクセル単位で制御します。"
-  },
-  "settings_search_window_size_label": {
-    "message": "サイズ"
-  },
-  "settings_search_window_state_fullscreen": {
-    "message": "全画面"
-  },
-  "settings_search_window_state_maximized": {
-    "message": "最大化"
-  },
-  "settings_search_window_sticky_header_description": {
-    "message": "スクロールしても検索ヘッダーがページに残ります。"
-  },
-  "settings_search_window_sticky_header_label": {
-    "message": "固定された検索ヘッダー"
-  },
-  "settings_search_window_style_description": {
-    "message": "ウィンドウの外観を変更します。"
-  },
-  "settings_search_window_style_label": {
-    "message": "ウィンドウスタイル"
-  },
-  "settings_search_window_top_description": {
-    "message": "ウィンドウの上位置をピクセル単位で制御します。"
-  },
-  "settings_search_window_top_label": {
-    "message": "上位置"
-  },
-  "settings_search_window_type_popup": {
-    "message": "ポップアップ"
-  },
-  "settings_security_heading": {
-    "message": "セキュリティ"
-  },
-  "settings_security_permissions_label": {
-    "message": "Sottaku-Yomitan の権限を設定"
-  },
-  "settings_security_secure_frame_label": {
-    "message": "ポップアップフレームの安全なURLを使用\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
-  },
-  "settings_security_secure_frame_more": {
-    "message": "このオプションを有効にすると、<code>iframe</code> 要素のURLは\n                    <code>iframe</code> の内部ドキュメントの場所を直接変更して割り当てられ、\n                    <code>iframe</code> の <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-src\" rel=\"noopener noreferrer\" target=\"_blank\"><code>src</code></a>\n                    属性を使用しません。これにより拡張機能のURLが背後のWebページに公開されず、\n                    Sottaku-Yomitan の存在を検出しにくくなります。"
-  },
-  "settings_security_shadow_dom_label": {
-    "message": "ポップアップの周囲に安全なコンテナを使用\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
-  },
-  "settings_security_shadow_dom_more": {
-    "message": "<a href=\"https://caniuse.com/shadowdomv1\" rel=\"noopener noreferrer\" target=\"_blank\">対応ブラウザー</a>では、\n                    ポップアップの <code>iframe</code> 要素は閉じた <a href=\"https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM\" rel=\"noopener noreferrer\" target=\"_blank\">shadow DOM</a> を持つコンテナ内に埋め込まれます。\n                    このコンテナにより、背後のWebページで実行されているスクリプトが <code>iframe</code> を検出できなくなり、\n                    Webページが意図しない目的で Sottaku-Yomitan のポップアップを変更または使用しようとする状況を避けるのに役立ちます。"
-  },
-  "settings_shortcuts_heading": {
-    "message": "ショートカット"
-  },
-  "settings_shortcuts_native_label": {
-    "message": "ネイティブキーボードショートカットを設定…"
-  },
-  "settings_shortcuts_overview": {
-    "message": "<p>\n                        Sottaku-Yomitan にはキーボードショートカットのカテゴリが2つあります:\n                    </p>\n<ul>\n<li>\n<strong>標準</strong>キーボードショートカットは拡張機能が管理し、追加・削除でき、\n                            Sottaku-Yomitan が機能するWebページで動作するよう設定できます。\n                        </li>\n<li>\n<strong>ネイティブ</strong>キーボードショートカットはウェブブラウザーが管理し、ウェブブラウザー内でグローバルに動作します\n                            <span data-show-for-browser=\"chrome edge\"> またはシステム全体で</span>。\n                        </li>\n</ul>"
-  },
-  "settings_shortcuts_standard_label": {
-    "message": "標準キーボードショートカットを設定…"
-  },
-  "settings_sottaku_account_description": {
-    "message": "「ブラウザセッションを使用」をクリックして sottaku.app にサインインしているアカウントを連携します（Pro が必要）。"
-  },
-  "settings_sottaku_account_label": {
-    "message": "アカウント"
-  },
-  "settings_sottaku_account_not_connected": {
-    "message": "未接続"
-  },
-  "settings_sottaku_heading": {
-    "message": "Sottaku"
-  },
-  "settings_sottaku_integration_description": {
-    "message": "検索・音声・フラッシュカードの操作は常に Sottaku アカウントを使用します。ローカル辞書は不要です。"
-  },
-  "settings_sottaku_integration_label": {
-    "message": "Sottaku 連携"
-  },
-  "settings_sottaku_language_add_button": {
-    "message": "追加"
-  },
-  "settings_sottaku_language_chinese": {
-    "message": "中国語"
-  },
-  "settings_sottaku_language_japanese": {
-    "message": "日本語"
-  },
-  "settings_sottaku_language_korean": {
-    "message": "韓国語"
-  },
-  "settings_sottaku_language_order_description": {
-    "message": "ポップアップに表示する Sottaku の言語と順序を選びます（混在モードとフォールバックに使用）。"
-  },
-  "settings_sottaku_language_order_label": {
-    "message": "言語の順序"
-  },
-  "settings_sottaku_language_routing_auto": {
-    "message": "自動（検索ごとに判定）"
-  },
-  "settings_sottaku_language_routing_description": {
-    "message": "検索時に Sottaku-Yomitan が Sottaku の言語を選択する方法を選びます（日本語・韓国語・中国語に対応）。"
-  },
-  "settings_sottaku_language_routing_label": {
-    "message": "言語ルーティング"
-  },
-  "settings_sottaku_language_routing_mixed": {
-    "message": "混在（優先言語を表示）"
-  },
-  "settings_sottaku_password_placeholder": {
-    "message": "パスワード"
-  },
-  "settings_sottaku_sign_in_button": {
-    "message": "サインイン"
-  },
-  "settings_sottaku_sign_in_google_button": {
-    "message": "Google でサインイン（sottaku.app を開きます）"
-  },
-  "settings_sottaku_status_not_connected": {
-    "message": "未接続"
-  },
-  "settings_sottaku_status_sign_in_required": {
-    "message": "サインインが必要です。開いたタブでログインを完了し、「ブラウザセッションを使用」をクリックしてください。"
-  },
-  "settings_sottaku_status_signed_in": {
-    "message": "サインイン済み"
-  },
-  "settings_sottaku_status_signed_in_as": {
-    "message": "$1 としてサインイン済み"
-  },
-  "settings_sottaku_status_signed_out": {
-    "message": "Sottaku からサインアウト済み"
-  },
-  "settings_sottaku_unlink_button": {
-    "message": "アカウントの連携を解除"
-  },
-  "settings_sottaku_use_browser_session_button": {
-    "message": "ブラウザセッションを使用"
-  },
-  "settings_sottaku_use_browser_session_title": {
-    "message": "サインイン済みのブラウザセッションを再利用"
-  },
-  "settings_sottaku_username_placeholder": {
-    "message": "ユーザー名またはメールアドレス"
-  },
-  "settings_status_tasks_in_progress": {
-    "message": "進行中のタスク:"
-  },
-  "settings_text_parsing_heading": {
-    "message": "テキスト解析"
-  },
-  "settings_text_parsing_info_1": {
-    "message": "Sottaku-Yomitan は用語の周囲の文をスキャンし、\n                <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">検索ページ</a>上のクエリの各単語を解析できます。\n                この情報は追加の文脈として Anki カードにも追加できます。"
-  },
-  "settings_text_parsing_internal_description": {
-    "message": "文中の単語は Sottaku-Yomitan の辞書を使って解析されます。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">詳細…</a>"
-  },
-  "settings_text_parsing_internal_label": {
-    "message": "Sottaku-Yomitan の内部パーサーで文を解析"
-  },
-  "settings_text_parsing_internal_more": {
-    "message": "Sottaku-Yomitan の内部パーサーは、インストールされた辞書を使って文を解析できる簡単なアルゴリズムです。文の先頭で最も長い語を繰り返し検出し、テキストがなくなるまで進めます。一般的なケースでは良好な結果を提供しますが、文法構造を考慮しないため、誤った区切りになることがあります。"
-  },
-  "settings_text_parsing_mecab_description": {
-    "message": "文中の単語はサードパーティーのプログラムで解析されます。日本語のみ。"
-  },
-  "settings_text_parsing_mecab_disclaimer": {
-    "message": "このオプションは解析のために検索クエリデータを Sottaku-Yomitan の外部に送信する場合があります<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">プライバシーポリシー</a>)</span>。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">詳細…</a>"
-  },
-  "settings_text_parsing_mecab_label": {
-    "message": "<a href=\"https://en.wikipedia.org/wiki/MeCab\" rel=\"noopener noreferrer\" target=\"_blank\">MeCab</a> を使用して文を解析"
-  },
-  "settings_text_parsing_mecab_more_1": {
-    "message": "MeCab は独自の辞書と解析アルゴリズムを使用して文を単語に分解するサードパーティーのプログラムです。MeCab は Sottaku-Yomitan の内部パーサーより正確な解析結果を提供する場合があります。"
-  },
-  "settings_text_parsing_mecab_more_2": {
-    "message": "Sottaku-Yomitan が使用するには、MeCab とネイティブメッセージングコンポーネントの両方をインストールする必要があります。\n                    セットアップガイドは <a href=\"https://github.com/yomidevs/yomitan-mecab-installer/blob/master/README.md\" rel=\"noopener noreferrer\" target=\"_blank\">こちら</a> にあります。"
-  },
-  "settings_text_parsing_scan_extent_description": {
-    "message": "文を形成するために双方向にスキャンする文字数を調整します。"
-  },
-  "settings_text_parsing_scan_extent_label": {
-    "message": "文スキャン範囲"
-  },
-  "settings_text_parsing_spacing_label": {
-    "message": "解析された単語の間に空白を表示"
-  },
-  "settings_text_parsing_termination_custom": {
-    "message": "カスタム"
-  },
-  "settings_text_parsing_termination_custom_no_newlines": {
-    "message": "カスタム（改行なし）"
-  },
-  "settings_text_parsing_termination_label": {
-    "message": "文の終端文字"
-  },
-  "settings_text_parsing_termination_newlines": {
-    "message": "改行のみ"
-  },
-  "settings_translation_heading": {
-    "message": "翻訳"
-  },
-  "settings_translation_replacement_patterns_label": {
-    "message": "カスタムのテキスト置換パターンを設定…"
-  },
-  "settings_translation_search_resolution_description": {
-    "message": "<p>\"A dog\"　→　\"A dog\",\"A do\", \"A d\", \"A\" を検索</p> または <p>\"A dog\"　→　\"A dog\", \"A\"</p>"
-  },
-  "settings_translation_search_resolution_label": {
-    "message": "辞書検索の解像度"
-  },
-  "settings_translation_search_resolution_letter": {
-    "message": "文字"
-  },
-  "settings_translation_search_resolution_word": {
-    "message": "単語"
-  },
-  "sottaku_action_title_missing_id": {
-    "message": "Sottaku の質問IDが見つかりません"
-  },
-  "sottaku_action_title_sign_in": {
-    "message": "まず Sottaku にサインインしてください"
-  },
-  "sottaku_locale_automatic": {
-    "message": "自動（Sottaku アカウントの言語を使用）"
-  },
-  "sottaku_request_button": {
-    "message": "辞書項目をリクエスト"
-  },
-  "sottaku_request_button_requested": {
-    "message": "リクエスト済み"
-  },
-  "sottaku_request_button_requesting": {
-    "message": "リクエスト中..."
-  },
-  "sottaku_request_button_retry": {
-    "message": "翻訳をリクエスト"
-  },
-  "sottaku_request_button_title_submitted": {
-    "message": "リクエストを Sottaku に送信しました"
-  },
-  "sottaku_save_button": {
-    "message": "Sottaku に保存"
-  },
-  "sottaku_save_button_saved": {
-    "message": "保存済み"
-  },
-  "sottaku_save_button_saving": {
-    "message": "保存中..."
-  },
-  "sottaku_save_button_title_already_saved": {
-    "message": "すでに Sottaku に保存されています"
-  },
-  "sottaku_save_button_title_saved": {
-    "message": "Sottaku のフラッシュカードに追加されました"
-  },
-  "status_footer_close": {
-    "message": "閉じる"
-  },
-  "status_footer_tasks_in_progress": {
-    "message": "進行中のタスク:"
-  },
-  "support_heading": {
-    "message": "Sottaku-Yomitan を応援する ❤️"
-  },
-  "support_list_contribute": {
-    "message": "Sottaku-Yomitan プロジェクトに貢献しましょう！まず <a href=\"https://github.com/sottakuapp/sottaku-yomitan/blob/master/CONTRIBUTING.md\" rel=\"noreferrer noopener\">貢献ガイドライン</a> をお読みください。"
-  },
-  "support_list_feedback": {
-    "message": "<a href=\"https://github.com/sottakuapp/sottaku-yomitan/issues/new/choose\" rel=\"noreferrer noopener\">GitHub Issues</a> でバグやフィードバックを報告するか、<a href=\"mailto:hello@sottaku.app\">hello@sottaku.app</a> にメールしてください。"
-  },
-  "support_list_star": {
-    "message": "<a href=\"https://github.com/sottakuapp/sottaku-yomitan\" rel=\"noreferrer noopener\">GitHub</a> でプロジェクトにスターを付け、友だちに共有しましょう。"
-  },
-  "support_subheading": {
-    "message": "Sottaku-Yomitan を支援する方法はこちら:"
-  },
-  "template_anki_overwrite_append_title": {
-    "message": "既存の値の後に新しい値を挿入"
-  },
-  "template_anki_overwrite_available_title": {
-    "message": "新しい値が空でない場合に上書き"
-  },
-  "template_anki_overwrite_fill_title": {
-    "message": "既存の値が空の場合に上書き"
-  },
-  "template_anki_overwrite_overwrite_title": {
-    "message": "新しい値が空でも上書き"
-  },
-  "template_anki_overwrite_prepend_title": {
-    "message": "既存の値の前に新しい値を挿入"
-  },
-  "template_anki_overwrite_skip_title": {
-    "message": "既存の値を保持"
-  },
-  "template_audio_source_tts_anki_warning": {
-    "message": "Anki ではサポートされていません"
-  },
-  "template_dictionary_integrity_error": {
-    "message": "辞書が正しくインポートされていない可能性があります"
-  },
-  "template_dictionary_update_available": {
-    "message": "更新があります"
-  },
-  "template_hotkey_no_input": {
-    "message": "入力なし"
-  },
-  "template_profile_name_placeholder": {
-    "message": "プロファイル名"
-  },
-  "template_scan_no_inputs": {
-    "message": "入力なし"
-  },
-  "template_scan_touch_min_time": {
-    "message": "最小タッチ時間 <span class=\"light\">(ミリ秒)</span>:"
-  },
-  "templates_modals_title": {
-    "message": "テンプレート"
-  },
-  "templates_settings_title": {
-    "message": "テンプレート"
-  },
-  "theme_option_auto": {
-    "message": "自動"
-  },
-  "theme_option_browser": {
-    "message": "ブラウザー"
-  },
-  "theme_option_dark": {
-    "message": "ダーク"
-  },
-  "theme_option_light": {
-    "message": "ライト"
-  },
-  "welcome_audio_enable_description": {
-    "message": "検索結果の横にクリック可能なスピーカーアイコンを表示します。"
-  },
-  "welcome_audio_enable_disclaimer": {
-    "message": "スピーカーアイコンをクリックすると、音声取得のために用語・読み・言語が Sottaku-Yomitan の外部へ送信される場合があります<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">プライバシーポリシー</a>)</span>。\n                    <div data-show-for-browser=\"firefox firefox-mobile\">このオプションを無効にすると、検索した用語の発音音声は再生できません。</div>"
-  },
-  "welcome_audio_enable_label": {
-    "message": "用語の音声再生を有効にする"
-  },
-  "welcome_basic_customization_heading": {
-    "message": "基本的なカスタマイズ"
-  },
-  "welcome_data_transmission_heading": {
-    "message": "データ送信"
-  },
-  "welcome_get_started_connect_account": {
-    "message": "辞書・音声・フラッシュカードを同期するために Sottaku アカウントを接続"
-  },
-  "welcome_get_started_heading": {
-    "message": "開始するための基本はこちら"
-  },
-  "welcome_get_started_news_link": {
-    "message": "Sottaku-Yomitan は初めてですか？ニュースやヒントは sottaku.app をご覧ください。"
-  },
-  "welcome_get_started_quick_start": {
-    "message": "Sottaku-Yomitan クイックスタートガイド"
-  },
-  "welcome_heading": {
-    "message": "Sottaku-Yomitan へようこそ！"
-  },
-  "welcome_locale_description": {
-    "message": "Sottaku が返す翻訳に使用される言語。"
-  },
-  "welcome_locale_label": {
-    "message": "言語"
-  },
-  "welcome_locale_setup_description": {
-    "message": "Sottaku はアカウントを通じて日本語と韓国語の検索を提供しています。オフラインアクセスや他の言語が必要な場合は追加の辞書をインポートしてください。"
-  },
-  "welcome_locale_setup_heading": {
-    "message": "言語設定"
-  },
-  "welcome_more_customization_link": {
-    "message": "詳細なカスタマイズは設定ページで利用できます"
-  },
-  "welcome_permissions_disabled_warning": {
-    "message": "推奨される権限が有効でない場合、Sottaku-Yomitan の機能は制限されます。"
-  },
-  "welcome_permissions_enable_optional_description": {
-    "message": "これにより Sottaku-Yomitan はクリップボードを読み取り、外部プログラムと通信できます。"
-  },
-  "welcome_permissions_enable_optional_label": {
-    "message": "任意の権限を有効化"
-  },
-  "welcome_permissions_enable_recommended_description": {
-    "message": "これにより Sottaku-Yomitan はほとんどのサイトのテキストをスキャンできます。"
-  },
-  "welcome_permissions_enable_recommended_label": {
-    "message": "推奨される権限を有効化"
-  },
-  "welcome_permissions_full_enabled": {
-    "message": "Sottaku-Yomitan のすべての機能が利用可能です。"
-  },
-  "welcome_permissions_more_info_chrome": {
-    "message": "追加の設定は <a href=\"/permissions.html\" rel=\"noopener\">権限ページ</a> と、ブラウザーの <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">拡張機能の設定ページ</a> で利用できます。"
-  },
-  "welcome_permissions_more_info_firefox": {
-    "message": "追加の設定は <a href=\"/permissions.html\" rel=\"noopener\">権限ページ</a> とブラウザーの拡張機能設定ページで利用できます。"
-  },
-  "welcome_permissions_recommended_enabled": {
-    "message": "Sottaku-Yomitan の主要機能が利用可能です。"
-  },
-  "welcome_recommended_permissions_heading": {
-    "message": "推奨される権限（重要）"
-  },
-  "welcome_scan_middle_mouse_description": {
-    "message": "カーソルを動かしながら中ボタンを押し続けてテキストをスキャンします。"
-  },
-  "welcome_scan_middle_mouse_label": {
-    "message": "中ボタンでスキャン"
-  },
-  "welcome_scan_modifier_description": {
-    "message": "キーを押しながらカーソルを動かしてテキストをスキャンします。"
-  },
-  "welcome_scan_modifier_label": {
-    "message": "スキャン修飾キー"
-  },
-  "welcome_show_guide_label": {
-    "message": "ブラウザー起動時にこのウェルカムガイドを表示"
-  },
-  "welcome_text_language_description": {
-    "message": "オフライン辞書機能とプレビュー用ツールに使用されます。"
-  },
-  "welcome_text_language_label": {
-    "message": "テキスト言語"
-  },
-  "welcome_theme_description": {
-    "message": "Sottaku-Yomitan のスタイルを調整します。"
-  },
-  "welcome_theme_label": {
-    "message": "テーマ"
-  }
+    "action_default_title": {
+        "message": "Sottaku-Yomitan"
+    },
+    "action_popup_button_info_title": {
+        "message": "情報"
+    },
+    "action_popup_button_search_title": {
+        "message": "検索\nShift+クリックでここに開く"
+    },
+    "action_popup_button_settings_title": {
+        "message": "設定"
+    },
+    "action_popup_hotkey_info": {
+        "message": "情報 ({0})"
+    },
+    "action_popup_hotkey_search": {
+        "message": "検索 ({0})\nShift+クリックでここに開く"
+    },
+    "action_popup_hotkey_settings": {
+        "message": "設定 ({0})"
+    },
+    "action_popup_link_account_tooltip": {
+        "message": "Sottakuアカウントを連携して検索を有効にする"
+    },
+    "action_popup_loading": {
+        "message": "読み込み中..."
+    },
+    "action_popup_profile_title": {
+        "message": "プロフィール"
+    },
+    "action_popup_toggle_off": {
+        "message": "オフ"
+    },
+    "action_popup_toggle_on": {
+        "message": "オン"
+    },
+    "action_popup_tooltip_scan": {
+        "message": "テキストにカーソルを合わせてスキャン"
+    },
+    "browser_chrome": {
+        "message": "Chrome"
+    },
+    "browser_edge": {
+        "message": "Edge"
+    },
+    "browser_edge_legacy": {
+        "message": "Edge Legacy"
+    },
+    "browser_firefox": {
+        "message": "Firefox"
+    },
+    "browser_firefox_android": {
+        "message": "Android 用 Firefox"
+    },
+    "browser_safari": {
+        "message": "Safari"
+    },
+    "command_open_info_page": {
+        "message": "情報ページを開く"
+    },
+    "command_open_popup_window": {
+        "message": "ポップアップウィンドウを開く"
+    },
+    "command_open_search_page": {
+        "message": "検索ページを開く"
+    },
+    "command_open_search_page_current_tab": {
+        "message": "現在のタブで検索ページを開く"
+    },
+    "command_open_settings_page": {
+        "message": "設定ページを開く"
+    },
+    "command_toggle_text_scanning": {
+        "message": "テキストスキャンをオン/オフ"
+    },
+    "common_always": {
+        "message": "常に"
+    },
+    "common_auto": {
+        "message": "自動"
+    },
+    "common_bottom": {
+        "message": "下"
+    },
+    "common_browser": {
+        "message": "ブラウザー"
+    },
+    "common_close": {
+        "message": "閉じる"
+    },
+    "common_configure": {
+        "message": "設定…"
+    },
+    "common_dark": {
+        "message": "ダーク"
+    },
+    "common_default": {
+        "message": "デフォルト"
+    },
+    "common_height": {
+        "message": "高さ"
+    },
+    "common_info": {
+        "message": "情報…"
+    },
+    "common_left": {
+        "message": "左"
+    },
+    "common_less": {
+        "message": "少なく…"
+    },
+    "common_light": {
+        "message": "ライト"
+    },
+    "common_manual": {
+        "message": "手動"
+    },
+    "common_mode": {
+        "message": "モード"
+    },
+    "common_move_down": {
+        "message": "下へ移動"
+    },
+    "common_move_up": {
+        "message": "上へ移動"
+    },
+    "common_none": {
+        "message": "なし"
+    },
+    "common_normal": {
+        "message": "標準"
+    },
+    "common_operator": {
+        "message": "オペレーター"
+    },
+    "common_remove": {
+        "message": "削除"
+    },
+    "common_right": {
+        "message": "右"
+    },
+    "common_state": {
+        "message": "状態"
+    },
+    "common_test": {
+        "message": "テスト"
+    },
+    "common_top": {
+        "message": "上"
+    },
+    "common_type": {
+        "message": "種類"
+    },
+    "common_width": {
+        "message": "幅"
+    },
+    "dictionary_deleting_label": {
+        "message": "辞書を削除中..."
+    },
+    "dictionary_details_attribution": {
+        "message": "帰属"
+    },
+    "dictionary_details_author": {
+        "message": "作者"
+    },
+    "dictionary_details_description": {
+        "message": "説明"
+    },
+    "dictionary_details_frequency_mode": {
+        "message": "頻度モード"
+    },
+    "dictionary_details_expected_database": {
+        "message": "期待値: $1 (データベース: $2)"
+    },
+    "dictionary_details_import_success": {
+        "message": "インポート成功"
+    },
+    "dictionary_details_kanji_count": {
+        "message": "漢字数"
+    },
+    "dictionary_details_kanji_meta_count": {
+        "message": "漢字メタ数"
+    },
+    "dictionary_details_media_count": {
+        "message": "メディア数"
+    },
+    "dictionary_details_prefix_wildcards_supported": {
+        "message": "接頭ワイルドカード有効"
+    },
+    "dictionary_details_source_language": {
+        "message": "ソース言語"
+    },
+    "dictionary_details_tag_meta_count": {
+        "message": "タグ数"
+    },
+    "dictionary_details_target_language": {
+        "message": "ターゲット言語"
+    },
+    "dictionary_details_term_count": {
+        "message": "語数"
+    },
+    "dictionary_details_term_meta_count": {
+        "message": "語メタ数"
+    },
+    "dictionary_details_url": {
+        "message": "URL"
+    },
+    "dictionary_extra_data_item_plural": {
+        "message": "$1 件"
+    },
+    "dictionary_extra_data_item_singular": {
+        "message": "$1 件"
+    },
+    "dictionary_main_not_selected": {
+        "message": "未選択"
+    },
+    "dictionary_updates_count_plural": {
+        "message": "$1 件の更新"
+    },
+    "dictionary_updates_count_singular": {
+        "message": "$1 件の更新"
+    },
+    "dictionary_updates_none": {
+        "message": "更新なし"
+    },
+    "display_add_note_title": {
+        "message": "{0} を追加"
+    },
+    "display_anki_error_plural": {
+        "message": "$1 件のエラーが発生しました:"
+    },
+    "display_anki_error_singular": {
+        "message": "エラーが発生しました:"
+    },
+    "display_current_entry_title": {
+        "message": "現在のエントリー"
+    },
+    "display_dictionary_author": {
+        "message": "作者: $1"
+    },
+    "display_dictionary_description": {
+        "message": "説明: $1"
+    },
+    "display_dictionary_kanji_count": {
+        "message": "漢字数: $1"
+    },
+    "display_dictionary_size_kanji": {
+        "message": "辞書サイズ: $1 漢字"
+    },
+    "display_dictionary_size_terms": {
+        "message": "辞書サイズ: $1 語"
+    },
+    "display_dictionary_term_count": {
+        "message": "語数: $1"
+    },
+    "display_dictionary_url": {
+        "message": "URL: $1"
+    },
+    "display_hotkey_add_note": {
+        "message": "{0} を追加 ({0})"
+    },
+    "display_hotkey_play_audio": {
+        "message": "音声を再生 ({0})"
+    },
+    "display_hotkey_view_note": {
+        "message": "追加したノートを表示 ({0})"
+    },
+    "display_image_label": {
+        "message": "画像"
+    },
+    "display_inflection_algorithm": {
+        "message": "アルゴリズム逆活用"
+    },
+    "display_inflection_both": {
+        "message": "辞書とアルゴリズムによる逆活用"
+    },
+    "display_inflection_dictionary": {
+        "message": "辞書による逆活用"
+    },
+    "display_kanji_heading_classifications": {
+        "message": "分類"
+    },
+    "display_kanji_heading_codepoints": {
+        "message": "コードポイント"
+    },
+    "display_kanji_heading_dictionary_indices": {
+        "message": "辞書インデックス"
+    },
+    "display_kanji_heading_meaning": {
+        "message": "意味"
+    },
+    "display_kanji_heading_readings": {
+        "message": "読み"
+    },
+    "display_kanji_heading_statistics": {
+        "message": "統計"
+    },
+    "display_log_debug_info": {
+        "message": "デバッグ情報をコンソールに記録"
+    },
+    "display_more_info": {
+        "message": "詳細"
+    },
+    "display_no_data_found": {
+        "message": "データが見つかりません"
+    },
+    "display_note_viewer_error": {
+        "message": "ノートビューアーウィンドウを開けませんでした。<br/>\n    <a href=\"/settings.html#anki\" rel=\"noopener\" target=\"_blank\"><em>Anki</em> › <em>ノートビューアーウィンドウ</em></a> の設定を確認してください。"
+    },
+    "display_play_audio_title": {
+        "message": "音声を再生"
+    },
+    "display_set_primary_audio_title": {
+        "message": "Ankiカードの音声として使用"
+    },
+    "display_view_added_note_title": {
+        "message": "追加したノートを表示"
+    },
+    "extension_description": {
+        "message": "語学学習向けのSottaku連携ポップアップ辞書。"
+    },
+    "extension_description_dev": {
+        "message": "語学学習向けのSottaku連携ポップアップ辞書 (Dev)."
+    },
+    "extension_name": {
+        "message": "Sottaku-Yomitan"
+    },
+    "extension_name_dev": {
+        "message": "Sottaku-Yomitan (Dev)"
+    },
+    "extension_short_name": {
+        "message": "Sottaku-Yomitan"
+    },
+    "info_anki_version_unknown": {
+        "message": "不明"
+    },
+    "info_general_browser": {
+        "message": "ブラウザー: <span id=\"browser\"></span>"
+    },
+    "info_general_export_settings": {
+        "message": "<a id=\"settings-export-button\" tabindex=\"0\">設定をエクスポート</a>"
+    },
+    "info_general_extension_version": {
+        "message": "拡張機能のバージョン: <span id=\"version\"></span>"
+    },
+    "info_general_heading": {
+        "message": "一般"
+    },
+    "info_general_language": {
+        "message": "言語: <span id=\"language\"></span>"
+    },
+    "info_general_platform": {
+        "message": "プラットフォーム: <span id=\"platform\"></span>"
+    },
+    "info_general_user_agent": {
+        "message": "ユーザーエージェント: <span id=\"user-agent\"></span>"
+    },
+    "info_heading": {
+        "message": "Sottaku-Yomitan 情報"
+    },
+    "info_links_bugs": {
+        "message": "バグ？こちらで報告: <a href=\"https://github.com/sottakuapp/sottaku-yomitan/issues/new/choose\" rel=\"noreferrer noopener\">GitHub Issues</a>"
+    },
+    "info_links_feedback": {
+        "message": "Sottaku-Yomitan を楽しんでいますか？GitHubでフィードバックやアイデアを送るか、<a href=\"mailto:hello@sottaku.app\">hello@sottaku.app</a> にメールしてください。"
+    },
+    "info_links_heading": {
+        "message": "リンク"
+    },
+    "info_links_more_info": {
+        "message": "拡張機能の詳細: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">権限</a> | <a href=\"/legal.html\">ライセンス</a> | <a href=\"/issues.html\">問題</a>"
+    },
+    "info_links_recommended_dictionaries": {
+        "message": "おすすめ辞書: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">Sottaku-Yomitan Dictionaries</a>"
+    },
+    "info_links_release_notes": {
+        "message": "リリースノート: <a data-href-format=\"https://github.com/sottakuapp/sottaku-yomitan/releases/tag/{version}\" href=\"https://github.com/sottakuapp/sottaku-yomitan/releases\" id=\"release-notes-this-version-link\" rel=\"noreferrer noopener\">このバージョン</a> | <a href=\"https://github.com/sottakuapp/sottaku-yomitan/releases\" rel=\"noreferrer noopener\">すべてのバージョン</a>"
+    },
+    "info_links_source_code": {
+        "message": "ソースコード: <a href=\"https://github.com/sottakuapp/sottaku-yomitan\" rel=\"noreferrer noopener\">GitHub</a>"
+    },
+    "info_links_user_guide": {
+        "message": "情報とユーザーガイド: <a href=\"https://sottaku.app/\" rel=\"noreferrer noopener\">ホームページ</a>"
+    },
+    "info_need_help_heading": {
+        "message": "お困りですか？"
+    },
+    "info_quick_start_link": {
+        "message": "クイックスタートガイドを見る"
+    },
+    "info_read_wiki_link": {
+        "message": "ウィキを読む"
+    },
+    "issues_audio_expired_cert_body": {
+        "message": "ウェブサイトがHTTPS証明書を最新の状態に保てない場合、ブラウザーが接続を安全でないと判断し、ダウンロードが失敗することがあります。これはSottaku-Yomitanがやり取りする一部のサイトで時々発生し、通常は1日以内に解決します。"
+    },
+    "issues_audio_expired_cert_heading": {
+        "message": "サーバー証明書の期限切れにより音声ダウンロードに失敗しました"
+    },
+    "issues_audio_expired_cert_note": {
+        "message": "これはサーバー側の問題であり、Sottaku-Yomitanでは制御できません。"
+    },
+    "issues_audio_idle_timeout_body": {
+        "message": "Ankiカード作成時に音声ファイルがリモートサーバーからダウンロードされることがあり、\n                サーバーやインターネット接続の問題でダウンロードが停止する場合があります。\n                <a href=\"/settings.html#anki\">設定ページ</a>の <em>アイドルダウンロードのタイムアウト</em> 設定で\n                停止したダウンロードの時間制限を指定します。"
+    },
+    "issues_audio_idle_timeout_heading": {
+        "message": "アイドルタイムアウトにより音声ダウンロードがキャンセルされました"
+    },
+    "issues_audio_permissions_body": {
+        "message": "拡張機能の構成によっては、Ankiカード作成時の音声ファイルのダウンロードで問題が発生することがあります。これは、Sottaku-Yomitanが音声ファイルをホストするサイトへのアクセス権を持っていないために起こる場合があります。"
+    },
+    "issues_audio_permissions_chrome": {
+        "message": "<a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">拡張機能の設定ページ</a>の\n                <em>サイトアクセス</em> セクションを確認し、\n                拡張機能に <em>すべてのサイト</em> へのアクセスを許可するか、特定の音声ホストのURLを追加してください。"
+    },
+    "issues_audio_permissions_firefox": {
+        "message": "ブラウザーのアドレスバーから <code>about:addons</code> に移動し、Sottaku-Yomitanの設定を開きます。\n                拡張機能の設定ページの <em>サイトアクセス</em> セクションを確認し、\n                <em>すべてのサイト</em> へのアクセスを許可するか、特定の音声ホストのURLを追加してください。"
+    },
+    "issues_audio_permissions_heading": {
+        "message": "拡張機能の権限エラーの可能性により音声ダウンロードに失敗しました <em>(Chrome)</em>"
+    },
+    "issues_heading": {
+        "message": "Sottaku-Yomitan の問題"
+    },
+    "legal_dependency_licenses_heading": {
+        "message": "JavaScript 依存関係のライセンス"
+    },
+    "legal_edrdg_heading": {
+        "message": "EDRDG ライセンス"
+    },
+    "legal_heading": {
+        "message": "Sottaku-Yomitan 法的情報"
+    },
+    "legal_sottaku_license_heading": {
+        "message": "Sottaku-Yomitan ライセンス"
+    },
+    "modal_collapsible_dictionaries_description": {
+        "message": "辞書の定義は一定の行数を超えると折りたたむことができます。\n                長い定義の辞書に役立ちます。\n                外観はカスタムCSSで変更できます。\n                <a data-modal-action=\"show,collapsible-dictionaries-info\" tabindex=\"0\">詳細…</a>"
+    },
+    "modal_dictionaries_none_installed": {
+        "message": "まだ辞書がインストールされていません。\n                無料辞書の一覧は <a href=\"https://github.com/sottakuapp/sottaku-yomitan/blob/master/docs/dictionaries.md#dictionaries\" rel=\"noopener noreferrer\" target=\"_blank\">Sottaku-Yomitan ホームページ</a> を参照するか、\n                下の <em>インポート</em> ボタンをクリックしてインポートする辞書ファイルを選択してください。"
+    },
+    "modal_dictionaries_prefix_wildcard_label": {
+        "message": "プレフィックスのワイルドカード検索を有効化\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    },
+    "modal_dictionary_confirm_delete_all_prompt": {
+        "message": "<strong>すべての辞書</strong>を削除しますか？"
+    },
+    "modal_dictionary_details_deinflections_label": {
+        "message": "逆活用を使用\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    },
+    "modal_dictionary_details_pos_label": {
+        "message": "品詞フィルタリング\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    },
+    "modal_dictionary_details_prefix_label": {
+        "message": "プレフィックスのワイルドカード検索に対応\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    },
+    "modal_dictionary_move_prompt": {
+        "message": "辞書 <strong class=\"dictionary-title\"></strong> の移動先を入力してください:"
+    },
+    "modal_dictionary_rename_prompt": {
+        "message": "辞書 <strong class=\"dictionary-title\"></strong> の表示名を入力してください:"
+    },
+    "modal_profile_conditions_info_4": {
+        "message": "Flags 条件を使用する場合、有効な入力は <code>clipboard</code> のみです。\n                        これにより、<code>検索ページのクリップボードテキスト監視を有効化</code> が有効な場合、テキストのコピー時に別のプロファイルの設定を検索ページに適用できます。"
+    },
+    "modal_profile_conditions_label": {
+        "message": "プロファイル <em id=\"profile-conditions-profile-name\"></em> の条件:"
+    },
+    "modal_profile_delete_prompt": {
+        "message": "プロファイル <em id=\"profile-remove-name\"></em> を削除しますか？"
+    },
+    "modal_profile_reset_prompt": {
+        "message": "プロファイル <em id=\"profile-reset-name\"></em> を既定にリセットしますか？"
+    },
+    "modal_recommended_dictionaries_description": {
+        "message": "英語以外の辞書については、利用可能な\n                <a href=\"https://yomidevs.github.io/kaikki-to-yomitan/\" target=\"_blank\"> Kaikki 辞書</a> の一覧を参照してください。"
+    },
+    "modal_secondary_search_description": {
+        "message": "これらの辞書は、グループ化モードが\n                <em>関連語をグループ化</em> のときに関連語の定義検索に使用されます。"
+    },
+    "os_android": {
+        "message": "Android"
+    },
+    "os_chrome_os": {
+        "message": "Chrome OS"
+    },
+    "os_linux": {
+        "message": "Linux"
+    },
+    "os_mac": {
+        "message": "Mac OS"
+    },
+    "os_openbsd": {
+        "message": "Open BSD"
+    },
+    "os_unknown": {
+        "message": "不明"
+    },
+    "os_windows": {
+        "message": "Windows"
+    },
+    "page_action_popup_title": {
+        "message": "Sottaku-Yomitan アクションポップアップ"
+    },
+    "page_info_title": {
+        "message": "Sottaku-Yomitan 情報"
+    },
+    "page_issues_title": {
+        "message": "Sottaku-Yomitan の問題"
+    },
+    "page_legal_title": {
+        "message": "Sottaku-Yomitan 法的情報"
+    },
+    "page_permissions_title": {
+        "message": "Sottaku-Yomitan 権限"
+    },
+    "page_popup_preview_title": {
+        "message": "Sottaku-Yomitan ポップアッププレビュー"
+    },
+    "page_popup_title": {
+        "message": "Sottaku-Yomitan 検索"
+    },
+    "page_quick_start_title": {
+        "message": "クイックスタートガイド"
+    },
+    "page_search_title": {
+        "message": "Sottaku-Yomitan 検索"
+    },
+    "page_settings_title": {
+        "message": "Sottaku-Yomitan 設定"
+    },
+    "page_support_title": {
+        "message": "Sottaku-Yomitan を支援"
+    },
+    "page_template_renderer_title": {
+        "message": "Sottaku-Yomitan Handlebars サンドボックス"
+    },
+    "page_welcome_title": {
+        "message": "Sottaku-Yomitan へようこそ！"
+    },
+    "permissions_add_origin_button": {
+        "message": "追加"
+    },
+    "permissions_additional_origins_label": {
+        "message": "追加のオリジン"
+    },
+    "permissions_all_urls_description": {
+        "message": "Sottaku-Yomitan はテキストをスキャンして定義ポップアップを表示し、Sottaku サーバーと通信するために、すべての URL へのアクセスが必要です。"
+    },
+    "permissions_allow_all_urls_label": {
+        "message": "すべての URL へのアクセスを許可"
+    },
+    "permissions_allowed_origins_title": {
+        "message": "許可されたオリジン"
+    },
+    "permissions_clipboard_read_description": {
+        "message": "特定の設定により、ブラウザーが動作中にテキストがクリップボードへコピーされると、Sottaku-Yomitan は検索ウィンドウを自動的に開くことができます。これにより、外部アプリからテキストをクリップボードにコピーできる場合に限り、Sottaku-Yomitan が外部アプリのテキストをスキャンできるようになります。"
+    },
+    "permissions_clipboard_read_label": {
+        "message": "<code>clipboardRead</code> <span class=\"light\">(オプション)</span>"
+    },
+    "permissions_clipboard_write_description": {
+        "message": "定義ポップアップが開いてフォーカスされているときに、Sottaku-Yomitan は <code>Ctrl+C</code>（クリップボードにコピー）のキーボードショートカットをシミュレートできます。"
+    },
+    "permissions_configure_allowed_origins": {
+        "message": "許可されたオリジンを設定…"
+    },
+    "permissions_context_menu_description": {
+        "message": "Sottaku-Yomitan は強調表示された単語を検索できるコンテキストメニューを追加します。"
+    },
+    "permissions_declarative_net_request_description": {
+        "message": "Sottaku-Yomitan は特定のリクエストに有効で安全なヘッダーが付くように、この権限を使用します。\n                        これは <code>Origin</code> リクエストヘッダーを削除または変更することがあり、\n                        それによってブラウザー構成のフィンガープリントが可能になるためです。"
+    },
+    "permissions_declarative_net_request_example": {
+        "message": "例: <code>Origin: <span class=\"extension-id-example\"></span></code>"
+    },
+    "permissions_file_urls_chrome": {
+        "message": "このオプションはブラウザーの <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">拡張機能の設定ページ</a> から設定できます。"
+    },
+    "permissions_file_urls_description": {
+        "message": "有効にすると、Sottaku-Yomitan は <code>file://*</code> スキームで指定されたローカル HTML ファイル上のテキストをスキャンして定義を表示できます。"
+    },
+    "permissions_file_urls_label": {
+        "message": "ファイル URL へのアクセスを許可 <span class=\"light\">(オプション)</span>"
+    },
+    "permissions_heading": {
+        "message": "Sottaku-Yomitan の権限"
+    },
+    "permissions_modal_close": {
+        "message": "閉じる"
+    },
+    "permissions_native_messaging_description": {
+        "message": "Sottaku-Yomitan は、オプションのネイティブメッセージング コンポーネントと通信して\n                    <a href=\"https://en.wikipedia.org/wiki/MeCab\" rel=\"noopener noreferrer\" target=\"_blank\">MeCab</a> を使用した日本語の大きなテキストブロックの解析をサポートできます。\n                    このコンポーネントのインストールは任意で、既定では含まれていません。"
+    },
+    "permissions_native_messaging_label": {
+        "message": "<code>nativeMessaging</code> <span class=\"light\">(オプション)</span>"
+    },
+    "permissions_no_additional_origins": {
+        "message": "追加のオリジンは指定されていません。"
+    },
+    "permissions_persistent_storage_description": {
+        "message": "デバイスの空き容量が少なくなると、ウェブブラウザーが保存済みの拡張機能データを削除する場合があります。永続ストレージ権限は、その状況で拡張機能のデータを削除しないようブラウザーに伝えます。"
+    },
+    "permissions_persistent_storage_firefox_note": {
+        "message": "Firefox for Android ではこの権限を有効にできない場合があります。"
+    },
+    "permissions_persistent_storage_label": {
+        "message": "永続ストレージ"
+    },
+    "permissions_private_windows_chrome": {
+        "message": "このオプションはブラウザーの <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">拡張機能の設定ページ</a> から設定できます。"
+    },
+    "permissions_private_windows_description": {
+        "message": "有効にすると、Sottaku-Yomitan はプライベート/シークレットウィンドウでテキストをスキャンして定義を表示できます。"
+    },
+    "permissions_private_windows_firefox": {
+        "message": "このオプションはブラウザーの拡張機能設定ページから設定できます。ブラウザーのアドレスバーで <code>about:addons</code> を開き、Sottaku-Yomitan の設定に移動してください。"
+    },
+    "permissions_private_windows_label": {
+        "message": "プライベートウィンドウで許可 <span class=\"light\">(オプション)</span>"
+    },
+    "permissions_scripting_description": {
+        "message": "Sottaku-Yomitan は検索ポップアップを正しく表示するために、ウェブページへコンテンツスクリプトとスタイルシートを挿入する必要があります。"
+    },
+    "permissions_storage_description": {
+        "message": "Sottaku-Yomitan は拡張機能の設定を保存するためにストレージ権限を使用します。"
+    },
+    "popup_close_title": {
+        "message": "ポップアップを閉じる"
+    },
+    "popup_default_profile_title": {
+        "message": "デフォルトプロフィール"
+    },
+    "popup_hotkey_close": {
+        "message": "ポップアップを閉じる ({0})"
+    },
+    "popup_hotkey_next_definition": {
+        "message": "次の定義 ({0})"
+    },
+    "popup_hotkey_previous_definition": {
+        "message": "前の定義 ({0})"
+    },
+    "popup_next_definition_title": {
+        "message": "次の定義"
+    },
+    "popup_no_results": {
+        "message": "結果が見つかりませんでした。"
+    },
+    "popup_preview_placeholder": {
+        "message": "設定の Sottaku セクションで Sottaku アカウントを連携するとポップアッププレビューが表示されます。"
+    },
+    "popup_previous_definition_title": {
+        "message": "前の定義"
+    },
+    "popup_pro_required_body": {
+        "message": "ポップアップ辞書には Sottaku Pro のサブスクリプションが必要です。"
+    },
+    "popup_pro_required_link": {
+        "message": "sottaku.app/upgrade でアップグレード"
+    },
+    "popup_pro_required_title": {
+        "message": "Sottaku Pro が必要"
+    },
+    "popup_updated_body": {
+        "message": "Sottaku-Yomitan 拡張機能が新しいバージョンに更新されました！このページで定義を表示し続けるには、このタブを再読み込みするか、ブラウザーを再起動してください。"
+    },
+    "popup_updated_title": {
+        "message": "Sottaku-Yomitan が更新されました！"
+    },
+    "query_parser_mecab": {
+        "message": "MeCab: $1"
+    },
+    "query_parser_scanning": {
+        "message": "スキャンパーサー"
+    },
+    "query_parser_unknown_source": {
+        "message": "不明なソース: $1"
+    },
+    "quick_start_action_popup_alt": {
+        "message": "ブラウザーアクションポップアップ"
+    },
+    "quick_start_heading": {
+        "message": "Sottaku-Yomitan クイックスタートガイド"
+    },
+    "quick_start_installing_body": {
+        "message": "Sottaku-Yomitan は検索に Sottaku アカウントを使用するため、設定ページでローカル辞書を管理する必要はありません。\n                それでも Sottaku-Yomitan の辞書について詳しく知りたい場合は <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">https://sottaku.app/</a> をご覧ください。"
+    },
+    "quick_start_installing_heading": {
+        "message": "辞書のインストール"
+    },
+    "quick_start_links_heading": {
+        "message": "リンク"
+    },
+    "quick_start_links_info": {
+        "message": "情報ページへ移動"
+    },
+    "quick_start_links_sottaku": {
+        "message": "Sottaku-Yomitan が初めてですか？ https://sottaku.app/ へ！"
+    },
+    "quick_start_links_welcome": {
+        "message": "ウェルカムページへ移動"
+    },
+    "quick_start_migrating_body": {
+        "message": "設定ページの <a href=\"/settings.html#backup\">バックアップ セクション</a> から、エクスポートした辞書コレクションをインポートすることもできます。\n\n                <br/><br/>\n\n                Yomichan から移行する場合、データを Sottaku-Yomitan に取り込むことを検討してください。\n                その手順は <a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">https://sottaku.app/</a> の案内に従ってください。\n\n                <br/><br/>\n\n                Anki ノート作成のためにカスタムテンプレートを使用している、または使用する予定がある場合は、<a href=\"https://sottaku.app/\" rel=\"noopener noreferrer\" target=\"_blank\">Yomichan や Yomibaba から一部の構文が変更されています。</a>\n                カスタムテンプレートが更新済みの構文を使用していることを確認してください。"
+    },
+    "quick_start_migrating_heading": {
+        "message": "Sottaku-Yomitan への移行"
+    },
+    "quick_start_quick_actions_body": {
+        "message": "ブラウザーバーの <img alt=\"\" class=\"inline-icon\" src=\"/images/yomitan-icon.svg\"/> <em>Sottaku-Yomitan</em> ボタンをクリックすると、クイックアクションのポップアップが開きます。"
+    },
+    "quick_start_quick_actions_cog": {
+        "message": "<img alt=\"\" class=\"inline-icon\" src=\"/images/cog.svg\"/> <em>歯車</em> ボタンで <a href=\"/settings.html\" rel=\"noopener\" target=\"_blank\">設定</a> ページを開きます。"
+    },
+    "quick_start_quick_actions_heading": {
+        "message": "クイックアクション"
+    },
+    "quick_start_quick_actions_info": {
+        "message": "<img alt=\"\" class=\"inline-icon\" src=\"/images/question-mark-circle.svg\"/> <em>はてな</em> ボタンで <a href=\"/info.html\" rel=\"noopener\" target=\"_blank\">情報</a> ページを開きます。\n                        そこには Sottaku-Yomitan に関する役立つ情報とリンクがあります。"
+    },
+    "quick_start_quick_actions_search": {
+        "message": "<img alt=\"\" class=\"inline-icon\" src=\"/images/magnifying-glass.svg\"/> <em>虫眼鏡</em> ボタンで <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">検索</a> ページを開きます。\n                        インストールした辞書を使ってテキストや単語を検索できます。\n                        オフラインモードでも使用できます！"
+    },
+    "quick_start_scanning_alt": {
+        "message": "スキャン"
+    },
+    "quick_start_scanning_audio": {
+        "message": "検索結果内の項目にある <img alt=\"\" class=\"inline-icon\" src=\"/images/play-audio.svg\"/> <em>スピーカー</em> ボタンをクリックすると、\n                    利用可能な場合はオンライン辞書を使って単語の発音の音声が再生されます。"
+    },
+    "quick_start_scanning_body": {
+        "message": "辞書をインストールした後は、修飾キーを押しながらカーソルを動かすことでウェブページのテキストをスキャンできます。\n                既定のキーは <kbd>Shift</kbd> で、<a href=\"/settings.html#backup\">設定</a> ページで無効化または設定できます。"
+    },
+    "quick_start_scanning_heading": {
+        "message": "テキストのスキャン"
+    },
+    "quick_start_scanning_kanji": {
+        "message": "用語の定義内の漢字をクリックすると、その文字に関する追加情報が表示されます。\n                    <span class=\"light\">(漢字辞書のインストールが必要です。)</span>"
+    },
+    "search_clipboard_monitor_label": {
+        "message": "クリップボード監視"
+    },
+    "search_default_profile_label": {
+        "message": "デフォルトプロフィール"
+    },
+    "search_header_title": {
+        "message": "Sottaku-Yomitan 検索"
+    },
+    "search_settings_auto_kana_label": {
+        "message": "かなの自動変換"
+    },
+    "search_settings_close_button": {
+        "message": "閉じる"
+    },
+    "search_settings_parser_label": {
+        "message": "パーサー"
+    },
+    "search_settings_sticky_header_description": {
+        "message": "下にスクロールしても検索ヘッダーはページに残ります。"
+    },
+    "search_settings_sticky_header_label": {
+        "message": "検索ヘッダーを固定"
+    },
+    "search_settings_title": {
+        "message": "検索設定"
+    },
+    "search_textbox_placeholder": {
+        "message": "単語、表現、文、またはテキストブロックを入力"
+    },
+    "settings_accessibility_google_docs_danger": {
+        "message": "Google はこの互換実装を何度も変更しており、変更は告知や文書化されていないようです。そのため、この機能は将来いつでも予告なく動作しなくなる可能性があります。"
+    },
+    "settings_accessibility_google_docs_label": {
+        "message": "Google ドキュメント互換モードを有効化\n                        <a class=\"more-toggle more-only danger-text\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    },
+    "settings_accessibility_google_docs_more_1": {
+        "message": "Google ドキュメントは現在、内容表示に\n                    <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas\" rel=\"noopener noreferrer\" target=\"_blank\">canvas ベース</a>\n                    のレンダリングを使用しています<sup><a href=\"https://workspaceupdates.googleblog.com/2021/05/Google-Docs-Canvas-Based-Rendering-Update.html\" rel=\"noopener noreferrer\" target=\"_blank\">[2]</a></sup>\n                    これにより、Sottaku-Yomitan は標準の方法でテキストをスキャンできなくなります。\n                    このオプションを有効にすると、Google ドキュメントのウェブページが追加のテキスト情報を公開するよう強制され、\n                    Sottaku-Yomitan が引き続き動作できるはずです。"
+    },
+    "settings_accessibility_google_docs_warning": {
+        "message": "いずれかのプロフィールでこの設定が有効になっている場合、互換モードが有効化されます。プロフィール条件は無視されます。"
+    },
+    "settings_accessibility_heading": {
+        "message": "アクセシビリティ"
+    },
+    "settings_appearance_action_bar_description": {
+        "message": "アクションバーの表示タイミングと場所を制御します。"
+    },
+    "settings_appearance_action_bar_label": {
+        "message": "アクションバーの外観"
+    },
+    "settings_appearance_action_bar_location_label": {
+        "message": "位置"
+    },
+    "settings_appearance_action_bar_visibility_label": {
+        "message": "表示"
+    },
+    "settings_appearance_collapsible_dictionaries_label": {
+        "message": "折りたたみ辞書を設定…"
+    },
+    "settings_appearance_compact_glossaries_description": {
+        "message": "用語のグロッサリーをよりコンパクトなレイアウトで表示します。"
+    },
+    "settings_appearance_compact_glossaries_label": {
+        "message": "コンパクトなグロッサリー"
+    },
+    "settings_appearance_compact_popup": {
+        "message": "コンパクトポップアップ"
+    },
+    "settings_appearance_compact_popup_anki": {
+        "message": "コンパクトポップアップと Anki"
+    },
+    "settings_appearance_compact_tags_description": {
+        "message": "用語グロッサリーで繰り返し表示されるタグを減らします。"
+    },
+    "settings_appearance_compact_tags_label": {
+        "message": "コンパクトタグ"
+    },
+    "settings_appearance_custom_css_label": {
+        "message": "カスタム CSS を設定…"
+    },
+    "settings_appearance_debug_description": {
+        "message": "検索結果にデバッグ情報を記録するメニュー項目が表示されます。"
+    },
+    "settings_appearance_debug_label": {
+        "message": "デバッグ情報を表示"
+    },
+    "settings_appearance_expression_tags_description": {
+        "message": "ポップアップ内容のスキャン設定が有効な場合、これらのタグをスキャンできます。"
+    },
+    "settings_appearance_expression_tags_label": {
+        "message": "表現と読みのタグを表示"
+    },
+    "settings_appearance_font_family_description": {
+        "message": "Sottaku-Yomitan で使用するフォントファミリーを変更します。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">詳細…</a>"
+    },
+    "settings_appearance_font_family_label": {
+        "message": "フォントファミリー"
+    },
+    "settings_appearance_font_family_more": {
+        "message": "フォントファミリーはシステムにインストールされている任意のフォントに変更できます。<br/>\n                    <code>sans-serif</code>、<code>serif</code>、<code>monospace</code> などを入力できます。<br/>\n                    特定のフォントを1つまたは複数指定したい場合は、カンマ区切りで手動入力してください。\n                    例: <pre><code>\"Noto Sans JP\", \"Meiryo\", sans-serif</code></pre>"
+    },
+    "settings_appearance_font_size_description": {
+        "message": "ポップアップで使用するフォントサイズをピクセル単位で変更します。"
+    },
+    "settings_appearance_font_size_label": {
+        "message": "フォントサイズ"
+    },
+    "settings_appearance_frequency_description": {
+        "message": "頻度情報の表示方法を変更します。"
+    },
+    "settings_appearance_frequency_inline_list": {
+        "message": "インラインリスト"
+    },
+    "settings_appearance_frequency_label": {
+        "message": "頻度表示スタイル"
+    },
+    "settings_appearance_frequency_list": {
+        "message": "リスト"
+    },
+    "settings_appearance_frequency_list_bordered": {
+        "message": "リスト（枠線付き）"
+    },
+    "settings_appearance_frequency_split_tags": {
+        "message": "タグを分割"
+    },
+    "settings_appearance_frequency_split_tags_grouped": {
+        "message": "タグを分割（グループ化）"
+    },
+    "settings_appearance_frequency_tags": {
+        "message": "タグ"
+    },
+    "settings_appearance_frequency_tags_grouped": {
+        "message": "タグ（グループ化）"
+    },
+    "settings_appearance_heading": {
+        "message": "外観"
+    },
+    "settings_appearance_indicator_asterisk": {
+        "message": "アスタリスク"
+    },
+    "settings_appearance_indicator_bar_left": {
+        "message": "縦棒（左）"
+    },
+    "settings_appearance_indicator_bar_right": {
+        "message": "縦棒（右）"
+    },
+    "settings_appearance_indicator_dot_left": {
+        "message": "小さな点（左）"
+    },
+    "settings_appearance_indicator_dot_right": {
+        "message": "小さな点（右）"
+    },
+    "settings_appearance_indicator_triangle": {
+        "message": "三角形"
+    },
+    "settings_appearance_line_height_description": {
+        "message": "ポップアップ内のテキスト行間を変更します。通常は 1 から 2 の間の小数です。"
+    },
+    "settings_appearance_line_height_label": {
+        "message": "行の高さ"
+    },
+    "settings_appearance_pitch_accent_description": {
+        "message": "日本語のみ。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">詳細…</a>"
+    },
+    "settings_appearance_pitch_accent_label": {
+        "message": "ピッチアクセント表示スタイル"
+    },
+    "settings_appearance_pitch_accent_more_1": {
+        "message": "ピッチアクセント対応辞書がインストールされている場合、用語や表現のピッチアクセントを表示できます。現在、ピッチアクセントの表示方法は3種類あります:"
+    },
+    "settings_appearance_pitch_downstep_notation": {
+        "message": "ダウンステップ表記"
+    },
+    "settings_appearance_pitch_downstep_position": {
+        "message": "ダウンステップ位置"
+    },
+    "settings_appearance_pitch_graph": {
+        "message": "グラフ"
+    },
+    "settings_appearance_reading_mode_description": {
+        "message": "解析したテキストに表示するふりがなの種類を変更します。日本語のみ。"
+    },
+    "settings_appearance_reading_mode_dictionary": {
+        "message": "辞書読み"
+    },
+    "settings_appearance_reading_mode_hiragana": {
+        "message": "ひらがな"
+    },
+    "settings_appearance_reading_mode_katakana": {
+        "message": "カタカナ"
+    },
+    "settings_appearance_reading_mode_label": {
+        "message": "読みモード"
+    },
+    "settings_appearance_reading_mode_romaji": {
+        "message": "ローマ字"
+    },
+    "settings_appearance_selection_indicator_description": {
+        "message": "選択中の定義エントリの表示方法を変更します。"
+    },
+    "settings_appearance_selection_indicator_label": {
+        "message": "選択インジケーターのスタイル"
+    },
+    "settings_appearance_term_display_description": {
+        "message": "用語と読みの表示方法を変更します。"
+    },
+    "settings_appearance_term_display_label": {
+        "message": "用語表示スタイル"
+    },
+    "settings_appearance_term_display_ruby": {
+        "message": "用語のふりがな"
+    },
+    "settings_appearance_term_display_ruby_reading": {
+        "message": "用語のふりがなと読み"
+    },
+    "settings_appearance_term_display_term_only": {
+        "message": "用語のみ"
+    },
+    "settings_appearance_term_display_term_reading": {
+        "message": "用語と読み"
+    },
+    "settings_appearance_theme_body_label": {
+        "message": "本文"
+    },
+    "settings_appearance_theme_description": {
+        "message": "Sottaku-Yomitan のスタイルを調整します。"
+    },
+    "settings_appearance_theme_label": {
+        "message": "テーマ"
+    },
+    "settings_appearance_theme_shadow_label": {
+        "message": "影"
+    },
+    "settings_audio_autoplay_description": {
+        "message": "最初の結果の音声が自動的に再生されます。"
+    },
+    "settings_audio_autoplay_label": {
+        "message": "検索結果の音声を自動再生"
+    },
+    "settings_audio_enable_description": {
+        "message": "検索結果の横にクリック可能なスピーカーアイコンを表示します。"
+    },
+    "settings_audio_enable_disclaimer": {
+        "message": "このオプションは、音声取得のために語句・読み・言語を Sottaku-Yomitan の外部に送信する場合があります<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">プライバシーポリシー</a>)</span>."
+    },
+    "settings_audio_enable_label": {
+        "message": "語句の音声再生を有効にする"
+    },
+    "settings_audio_fallback_bloop": {
+        "message": "ブロップ"
+    },
+    "settings_audio_fallback_click": {
+        "message": "クリック"
+    },
+    "settings_audio_fallback_description": {
+        "message": "Sottaku-Yomitan が音声の取得に失敗したときに再生する音。"
+    },
+    "settings_audio_fallback_label": {
+        "message": "音声フォールバック音"
+    },
+    "settings_audio_heading": {
+        "message": "音声"
+    },
+    "settings_audio_sources_label": {
+        "message": "音声再生ソースを設定…"
+    },
+    "settings_audio_volume_description": {
+        "message": "音声の再生音量をパーセントで調整します。"
+    },
+    "settings_audio_volume_label": {
+        "message": "音量"
+    },
+    "settings_backup_description": {
+        "message": "Sottaku-Yomitan は設定ファイルのインポート/エクスポートができ、設定の復元、デバイス間での共有、問題のデバッグに役立ちます。これらのファイルには設定のみが含まれます。"
+    },
+    "settings_backup_export_button": {
+        "message": "設定をエクスポート"
+    },
+    "settings_backup_heading": {
+        "message": "バックアップ"
+    },
+    "settings_backup_import_button": {
+        "message": "設定をインポート"
+    },
+    "settings_backup_reset_button": {
+        "message": "設定をリセット"
+    },
+    "settings_clipboard_background_description": {
+        "message": "テキストがクリップボードにコピーされたときに、新しいウィンドウで検索ページを開きます。"
+    },
+    "settings_clipboard_background_label": {
+        "message": "バックグラウンドでクリップボードのテキスト監視を有効にする"
+    },
+    "settings_clipboard_heading": {
+        "message": "クリップボード"
+    },
+    "settings_clipboard_info_1": {
+        "message": "Sottaku-Yomitan はシステムのクリップボードを監視し、テキストがコピーされたときに検索ページで自動的に検索できます。これは外部アプリからのテキストを Sottaku-Yomitan でスキャンするのに役立ちます。"
+    },
+    "settings_clipboard_info_2": {
+        "message": "この機能を使うには Sottaku-Yomitan にクリップボード読み取り権限が必要で、このオプションが有効になると、クリップボードは新しいテキストのために頻繁にチェックされます。"
+    },
+    "settings_clipboard_max_length_description": {
+        "message": "クリップボードのテキスト検索で使用する文字数を制限します。"
+    },
+    "settings_clipboard_max_length_label": {
+        "message": "クリップボードテキスト検索の最大長"
+    },
+    "settings_clipboard_search_description": {
+        "message": "検索ページのクエリは、クリップボードのテキストで自動的に更新されます。"
+    },
+    "settings_clipboard_search_label": {
+        "message": "検索ページでクリップボードのテキスト監視を有効にする"
+    },
+    "settings_clipboard_search_mode_description": {
+        "message": "クリップボード内の新しいテキストに対する検索ページの反応を変更します。"
+    },
+    "settings_clipboard_search_mode_label": {
+        "message": "クリップボードテキスト検索モード"
+    },
+    "settings_clipboard_search_mode_search": {
+        "message": "定義を検索"
+    },
+    "settings_clipboard_search_mode_update": {
+        "message": "クエリのみ更新"
+    },
+    "settings_collapsible_varies": {
+        "message": "さまざま"
+    },
+    "settings_general_api_css_bypass_label": {
+        "message": "CSS サニタイズのバイパスを許可"
+    },
+    "settings_general_api_css_bypass_more_1": {
+        "message": "悪意のある CSS を含む辞書は Javascript の実行を試みる可能性があります。例えば、Sottaku-Yomitan API の出力を Anki で使用すると、生成された Anki カードが意図しない Javascript を実行する可能性があります。この場合のリスクは、悪意のある Anki デッキをダウンロードするのと同程度です。つまり、どちらの場合も悪意のあるコードからマシンと情報を守るために Anki のサンドボックスに完全に依存しています。Anki のサンドボックスが機能すればカード内容が漏える可能性があります（小さな機密性の問題）。サンドボックスが失敗すると、さらに深刻な懸念があります（資格情報や機密情報の盗難、ランサムウェアによるコンピュータの乗っ取りなど）。"
+    },
+    "settings_general_api_css_bypass_more_2": {
+        "message": "CSS サニタイズを無効にする場合は、Sottaku-Yomitan API の出力がどこで使われるか、そしてその出力先が潜在的な悪意のある Javascript の混入に耐えられるかをエンドツーエンドで検討することを推奨します。そうしないと、システムのデータと整合性をリスクにさらす可能性があります。"
+    },
+    "settings_general_api_css_bypass_more_3": {
+        "message": "サニタイズのバイパスにより、サニタイズできない CSS が変更されないままサニタイザーを通過します。これは Sottaku-Yomitan API にのみ適用され、Sottaku-Yomitan の他の領域を潜在的に脆弱にするものではありません。"
+    },
+    "settings_general_api_css_bypass_more_4": {
+        "message": "一部のブラウザでは、バックエンドの Sottaku-Yomitan API で完全な CSS サニタイズに必要な offscreen ページをサポートしていないため、CSS の取得にこれが必要になる場合があります。Sottaku-Yomitan は基本的なサニタイズにフォールバックしようとしますが、複雑な CSS を使用する辞書では失敗します。"
+    },
+    "settings_general_api_css_bypass_warning": {
+        "message": "このオプションは、辞書の作者を信頼できる場合、または Sottaku-Yomitan の外でサニタイズを行う場合にのみ有効にしてください。\n                                        悪意のある辞書は、不正な CSS を送信して webview やブラウザに注入された場合に Javascript を実行させる可能性があります。\n                                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">詳細…</a>"
+    },
+    "settings_general_api_more_1": {
+        "message": "Sottaku-Yomitan API を有効化するには、ネイティブメッセージングコンポーネントのインストールが必要です。\n                        セットアップガイドは <a href=\"https://github.com/yomidevs/yomitan-api/blob/master/README.md\" rel=\"noopener noreferrer\" target=\"_blank\">こちら</a> で確認できます。"
+    },
+    "settings_general_api_test_url_placeholder": {
+        "message": "http://127.0.0.1:19633"
+    },
+    "settings_general_context_menu": {
+        "message": "右クリックメニューに「Sottaku-Yomitan で検索」を表示"
+    },
+    "settings_general_enable_api_description": {
+        "message": "Sottaku-Yomitan からデータを取得するためのローカル Web リクエスト送信のサポートを有効にします。"
+    },
+    "settings_general_enable_api_disclaimer": {
+        "message": "このオプションは、要求したローカルアプリケーションに Sottaku-Yomitan の外部へデータを送信する場合があります<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">プライバシーポリシー</a>)</span>.\n                            <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">詳細…</a>"
+    },
+    "settings_general_enable_api_label": {
+        "message": "Sottaku-Yomitan API を有効にする"
+    },
+    "settings_general_enable_label": {
+        "message": "Sottaku-Yomitan を有効にする"
+    },
+    "settings_general_heading": {
+        "message": "一般"
+    },
+    "settings_general_locale_description": {
+        "message": "Sottaku が返す翻訳に使用される言語。"
+    },
+    "settings_general_locale_label": {
+        "message": "ロケール"
+    },
+    "settings_general_max_results_description": {
+        "message": "検索で表示する結果の最大数を調整します。"
+    },
+    "settings_general_max_results_label": {
+        "message": "結果の最大数"
+    },
+    "settings_general_show_guide": {
+        "message": "ブラウザ起動時に <a href=\"/welcome.html\" rel=\"noopener\" target=\"_blank\">ウェルカムガイド</a> を表示"
+    },
+    "settings_general_text_language_description": {
+        "message": "オフライン辞書機能とプレビュー用ツールに使用されます。"
+    },
+    "settings_general_text_language_label": {
+        "message": "テキスト言語"
+    },
+    "settings_heading": {
+        "message": "Sottaku-Yomitan の設定"
+    },
+    "settings_loading_delay_notice": {
+        "message": "このページの読み込みに予想以上の時間がかかっています。"
+    },
+    "settings_loading_delay_safari": {
+        "message": "Safari の不具合により、ページを完全に読み込むにはブラウザバーの <img alt=\"\" class=\"inline-icon\" src=\"/images/yomitan-icon.svg\"/> <em>Sottaku-Yomitan</em>\n                        ボタンをクリックする必要がある場合があります"
+    },
+    "settings_nav_about": {
+        "message": "Sottaku-Yomitan について"
+    },
+    "settings_nav_accessibility": {
+        "message": "アクセシビリティ"
+    },
+    "settings_nav_advanced": {
+        "message": "高度な設定"
+    },
+    "settings_nav_appearance": {
+        "message": "外観"
+    },
+    "settings_nav_audio": {
+        "message": "音声"
+    },
+    "settings_nav_backup": {
+        "message": "バックアップ"
+    },
+    "settings_nav_clipboard": {
+        "message": "クリップボード"
+    },
+    "settings_nav_debug": {
+        "message": "デバッグ"
+    },
+    "settings_nav_general": {
+        "message": "一般"
+    },
+    "settings_nav_popup_behavior": {
+        "message": "ポップアップの動作"
+    },
+    "settings_nav_position_size": {
+        "message": "位置とサイズ"
+    },
+    "settings_nav_profile": {
+        "message": "プロフィール"
+    },
+    "settings_nav_result_display": {
+        "message": "結果表示"
+    },
+    "settings_nav_scanning": {
+        "message": "スキャン"
+    },
+    "settings_nav_search_window": {
+        "message": "検索ウィンドウ"
+    },
+    "settings_nav_security": {
+        "message": "セキュリティ"
+    },
+    "settings_nav_shortcuts": {
+        "message": "ショートカット"
+    },
+    "settings_nav_sottaku": {
+        "message": "Sottaku"
+    },
+    "settings_nav_text_parsing": {
+        "message": "テキスト解析"
+    },
+    "settings_nav_translation": {
+        "message": "翻訳"
+    },
+    "settings_popup_auto_hide_description": {
+        "message": "既存のポップアップがある場合、再スキャン時に定義が見つからなくても既存のポップアップを隠します。"
+    },
+    "settings_popup_auto_hide_label": {
+        "message": "検索ポップアップを自動的に隠す"
+    },
+    "settings_popup_delay_label": {
+        "message": "遅延 <span class=\"light\">(ミリ秒)</span>"
+    },
+    "settings_popup_heading": {
+        "message": "ポップアップの動作"
+    },
+    "settings_popup_hide_on_exit_description": {
+        "message": "カーソルがポップアップから出ると、ポップアップは隠されます。"
+    },
+    "settings_popup_hide_on_exit_label": {
+        "message": "カーソル退出でポップアップを隠す"
+    },
+    "settings_popup_max_children_description": {
+        "message": "生成できるポップアップの数の上限を変更します。"
+    },
+    "settings_popup_max_children_label": {
+        "message": "子ポップアップの最大数"
+    },
+    "settings_popup_reduced_motion_description": {
+        "message": "設定可能な高さでスクロール（ページ送りのように）し、アニメーションを減らします。電子書籍端末やe-ink画面に便利です。"
+    },
+    "settings_popup_reduced_motion_label": {
+        "message": "動きを抑えたスクロール"
+    },
+    "settings_popup_reduced_motion_scale_description": {
+        "message": "1ステップあたりにスクロールするポップアップの高さの割合。"
+    },
+    "settings_popup_reduced_motion_scale_label": {
+        "message": "スケール"
+    },
+    "settings_popup_reduced_motion_swipe_description": {
+        "message": "タッチデバイスでスワイプをスクロールとして認識するための最小距離。値が低いほど反応が良く感じられますが、誤入力の可能性が高まります。"
+    },
+    "settings_popup_reduced_motion_swipe_label": {
+        "message": "スワイプしきい値"
+    },
+    "settings_popup_reduced_motion_swipe_unit": {
+        "message": "px"
+    },
+    "settings_popup_scan_popup_description": {
+        "message": "ポップアップ内のテキストを定義のためにスキャンでき、新しいポップアップが開きます。"
+    },
+    "settings_popup_scan_popup_label": {
+        "message": "ポップアップ内容のスキャンを許可"
+    },
+    "settings_popup_scan_search_description": {
+        "message": "<a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">検索ページ</a>のテキストを定義のためにスキャンでき、ポップアップが開きます。"
+    },
+    "settings_popup_scan_search_label": {
+        "message": "検索ページ内容のスキャンを許可"
+    },
+    "settings_popup_scan_source_terms_label": {
+        "message": "ポップアップの元の語のスキャンを許可"
+    },
+    "settings_popup_search_from_results_label": {
+        "message": "結果リストのテキストをクリックしたときに語を検索"
+    },
+    "settings_popup_show_iframe_label": {
+        "message": "iframe内ポップアップをルートフレームに表示\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    },
+    "settings_popup_show_iframe_more_1": {
+        "message": "デフォルトでは、埋め込まれた <code>&lt;iframe&gt;</code> 要素内のテキストをスキャンすると\n                    そのフレーム内で新しいポップアップが開きます。フレームのサイズにより制限されることがあります。\n                    このオプションを有効にすると、可能な場合はページのルートにポップアップが作成されます。"
+    },
+    "settings_popup_show_iframe_more_2": {
+        "message": "このオプションを有効にすると、ポップアップの正しい位置を決定するためにウェブページへメッセージを送る必要があるため、拡張機能が基のウェブページに干渉する可能性があります。通常は問題になりませんが、予期しないことが起きた場合はこのオプションが原因かもしれません。"
+    },
+    "settings_popup_size_auto_scale_label": {
+        "message": "自動スケーリング\n                                <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    },
+    "settings_popup_size_auto_scale_more": {
+        "message": "自動スケーリングは、ズームレベルに関係なく一定の物理サイズを保つために、\n                            ブラウザーのズームレベルに基づいてポップアップを自動的に拡大縮小します。\n                            <em>ズームレベル</em>はデスクトップブラウザーで一般的に使用されるズームレベルを使用し、\n                            <em>ビューポート</em>はモバイルブラウザーで一般的に使用されるズームレベルを使用します。"
+    },
+    "settings_popup_size_auto_scale_viewport": {
+        "message": "ビューポート"
+    },
+    "settings_popup_size_auto_scale_zoom": {
+        "message": "ズームレベル"
+    },
+    "settings_popup_size_display_full_width": {
+        "message": "全幅"
+    },
+    "settings_popup_size_display_mode_description": {
+        "message": "ポップアップのレイアウトを変更します。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">詳細…</a>"
+    },
+    "settings_popup_size_display_mode_label": {
+        "message": "表示モード"
+    },
+    "settings_popup_size_display_mode_more": {
+        "message": "<em>既定</em>モードではスキャンしたテキストに対してポップアップを配置します。\n                    <em>全幅</em>モードではポップアップを画面の上部または下部に固定し、\n                    画面の全幅を使用します。タッチスクリーン搭載のデバイスで役立つ場合があります。"
+    },
+    "settings_popup_size_full_width_position_label": {
+        "message": "ポップアップの位置"
+    },
+    "settings_popup_size_full_width_position_top": {
+        "message": "上"
+    },
+    "settings_popup_size_full_width_position_above_cursor": {
+        "message": "カーソルに追従"
+    },
+    "settings_popup_size_full_width_position_bottom": {
+        "message": "下"
+    },
+    "settings_popup_size_heading": {
+        "message": "ポップアップの位置とサイズ"
+    },
+    "settings_popup_size_horizontal_offset_description": {
+        "message": "横書きテキストに対するポップアップの距離を変更します。"
+    },
+    "settings_popup_size_horizontal_offset_label": {
+        "message": "横書きテキストのオフセット"
+    },
+    "settings_popup_size_horizontal_position_description": {
+        "message": "横書きテキストに対してポップアップをどこに配置するか変更します。"
+    },
+    "settings_popup_size_horizontal_position_label": {
+        "message": "横書きテキストの位置"
+    },
+    "settings_popup_size_position_above": {
+        "message": "テキストの上"
+    },
+    "settings_popup_size_position_below": {
+        "message": "テキストの下"
+    },
+    "settings_popup_size_scale_description": {
+        "message": "ポップアップのスケーリング係数を制御します。"
+    },
+    "settings_popup_size_scale_label": {
+        "message": "スケール"
+    },
+    "settings_popup_size_size_description": {
+        "message": "ポップアップのサイズをピクセル単位で制御します。"
+    },
+    "settings_popup_size_size_label": {
+        "message": "サイズ"
+    },
+    "settings_popup_size_vertical_after": {
+        "message": "読み方向の後"
+    },
+    "settings_popup_size_vertical_before": {
+        "message": "読み方向の前"
+    },
+    "settings_popup_size_vertical_left": {
+        "message": "テキストの左"
+    },
+    "settings_popup_size_vertical_offset_description": {
+        "message": "縦書きテキストに対するポップアップの距離を変更します。"
+    },
+    "settings_popup_size_vertical_offset_label": {
+        "message": "縦書きテキストのオフセット"
+    },
+    "settings_popup_size_vertical_position_description": {
+        "message": "縦書きテキストに対してポップアップをどこに配置するか変更します。"
+    },
+    "settings_popup_size_vertical_position_label": {
+        "message": "縦書きテキストの位置"
+    },
+    "settings_popup_size_vertical_right": {
+        "message": "テキストの右"
+    },
+    "settings_popup_size_vertical_same_as_horizontal": {
+        "message": "横書きと同じ"
+    },
+    "settings_profile_active_description": {
+        "message": "スキャンに使用するアクティブなプロフィールを切り替えます。"
+    },
+    "settings_profile_active_label": {
+        "message": "アクティブなプロフィール"
+    },
+    "settings_profile_configure": {
+        "message": "プロフィールを設定…"
+    },
+    "settings_profile_heading": {
+        "message": "プロフィール"
+    },
+    "settings_result_average_frequencies_description": {
+        "message": "調和平均に基づいて頻度タグを「平均」頻度タグ1つに圧縮します。"
+    },
+    "settings_result_average_frequencies_label": {
+        "message": "平均頻度"
+    },
+    "settings_result_display_heading": {
+        "message": "結果の表示"
+    },
+    "settings_result_grouping_description": {
+        "message": "関連する結果のグルーピング方法を変更します。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">詳細…</a>"
+    },
+    "settings_result_grouping_label": {
+        "message": "結果のグルーピングモード"
+    },
+    "settings_result_grouping_more_none": {
+        "message": "<strong>グルーピングなし</strong> -\n                        各定義は個別のエントリとして一覧表示されます。"
+    },
+    "settings_result_grouping_more_related_1": {
+        "message": "<strong>関連語をグループ化</strong> -\n                            同じ定義を共有する関連語はまとめて表示されます。"
+    },
+    "settings_result_grouping_more_related_2": {
+        "message": "<em>主辞書</em>のオプションは関連語情報を含む辞書に割り当てる必要があり、<em>副辞書</em>を設定することで関連語の定義を他の辞書から含められます。"
+    },
+    "settings_result_grouping_more_related_warning": {
+        "message": "すべての辞書が<em>主辞書</em>として選択できるわけではありません。"
+    },
+    "settings_result_grouping_more_term_reading": {
+        "message": "<strong>語と読みのペアをグループ化</strong> -\n                        同じ語で同じ読みの定義はまとめて表示されます。"
+    },
+    "settings_result_grouping_more_term": {
+        "message": "<strong>語句でグループ化</strong> - 読みの違いに関係なく、同じ語句の定義をまとめます。"
+    },
+    "settings_result_grouping_none": {
+        "message": "グルーピングなし"
+    },
+    "settings_result_grouping_primary_dictionary": {
+        "message": "主辞書"
+    },
+    "settings_result_grouping_related": {
+        "message": "関連語をグループ化"
+    },
+    "settings_result_grouping_term": {
+        "message": "語句でグループ化"
+    },
+    "settings_result_grouping_secondary_dictionaries": {
+        "message": "副辞書…"
+    },
+    "settings_result_grouping_term_reading": {
+        "message": "語と読みのペアをグループ化"
+    },
+    "settings_scanning_advanced_inputs_label": {
+        "message": "高度なスキャン入力を設定… <span class=\"light no-wrap\">(<span class=\"scanning-input-count\">#</span> 件定義済み)</span>"
+    },
+    "settings_scanning_alphanumeric_description": {
+        "message": "言語が日本語・中国語・広東語・韓国語の場合にのみ適用されます。"
+    },
+    "settings_scanning_alphanumeric_label": {
+        "message": "日本語・中国語・韓国語以外の文字を含むテキストを検索"
+    },
+    "settings_scanning_deep_scan_description": {
+        "message": "他のレイヤーに覆われたテキストのスキャンを有効にします。"
+    },
+    "settings_scanning_deep_scan_label": {
+        "message": "深いコンテンツのスキャン"
+    },
+    "settings_scanning_delay_description": {
+        "message": "修飾キーが不要なときにスキャンが始まるまでの遅延を変更します。"
+    },
+    "settings_scanning_delay_label": {
+        "message": "スキャン遅延 <span class=\"light\">（ミリ秒）</span>"
+    },
+    "settings_scanning_heading": {
+        "message": "スキャン"
+    },
+    "settings_scanning_input_prevention_label": {
+        "message": "入力操作の抑制を設定…"
+    },
+    "settings_scanning_layout_description": {
+        "message": "ウェブページのスタイル情報を使用して改行位置を推定します。"
+    },
+    "settings_scanning_layout_label": {
+        "message": "レイアウト対応スキャン"
+    },
+    "settings_scanning_middle_mouse_description": {
+        "message": "中クリックボタンを押しながらカーソルを動かしてテキストをスキャンします。"
+    },
+    "settings_scanning_middle_mouse_label": {
+        "message": "中クリックでスキャン"
+    },
+    "settings_scanning_modifier_description": {
+        "message": "カーソルを動かしながらキーを押してテキストをスキャンします。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">詳細…</a>"
+    },
+    "settings_scanning_modifier_label": {
+        "message": "スキャン修飾キー"
+    },
+    "settings_scanning_modifier_more_1": {
+        "message": "キーボードの修飾キーを使って、カーソル移動時にテキストスキャンを有効にできます。\n                    あるいは、<em>キーなし</em> を選択すると、キーを押さずにカーソルを動かすだけでスキャンできます。"
+    },
+    "settings_scanning_modifier_more_2": {
+        "message": "より高度なスキャン入力のカスタマイズは、<em>高度</em> を有効にして\n                    <em data-modal-action=\"show,scanning-inputs\">高度なスキャン入力を設定</em> をクリックします。"
+    },
+    "settings_scanning_resolution_character": {
+        "message": "文字"
+    },
+    "settings_scanning_resolution_description": {
+        "message": "カーソル位置の単語または文字から検索スキャンを開始します。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">詳細…</a>"
+    },
+    "settings_scanning_resolution_label": {
+        "message": "スキャン解像度"
+    },
+    "settings_scanning_resolution_more_1": {
+        "message": "スキャン解像度は、カーソルを動かしたときにスキャンがどこから始まるかを決定します。\n                    <code>文字</code> を選ぶとカーソルの現在位置からスキャンを開始し、\n                    <code>単語</code> を選ぶと単語の先頭からスキャンを開始します。"
+    },
+    "settings_scanning_resolution_word": {
+        "message": "単語"
+    },
+    "settings_scanning_select_text_label": {
+        "message": "一致したテキストを選択"
+    },
+    "settings_scanning_text_length_description": {
+        "message": "用語をスキャンするときに読み取る文字数を変更します。"
+    },
+    "settings_scanning_text_length_label": {
+        "message": "テキストスキャンの長さ"
+    },
+    "settings_scanning_text_length_warning": {
+        "message": "この値を高くしすぎる（100+）とパフォーマンスに影響する可能性があります。"
+    },
+    "settings_scanning_wildcard_description": {
+        "message": "スキャンしたウェブページのテキストを検索する際に、後方のワイルドカードを有効にします。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">詳細…</a>"
+    },
+    "settings_scanning_wildcard_label": {
+        "message": "ワイルドカードスキャン"
+    },
+    "settings_scanning_wildcard_more_1": {
+        "message": "元のテキストを正確に検索するのではなく、既存の用語の接頭辞であれば一致するようになります。例えば、読み をスキャンすると 読み* を検索したのと同じになり、読み方 など追加の結果が表示される場合があります。"
+    },
+    "settings_scanning_wildcard_warning": {
+        "message": "これによりスキャンと検索が遅くなり、結果の関連性が下がる可能性があります。"
+    },
+    "settings_scanning_without_mousemove_description": {
+        "message": "ポインターを動かさずに、下の単語をスキャンできるようにします。"
+    },
+    "settings_scanning_without_mousemove_label": {
+        "message": "マウス移動なしでスキャン"
+    },
+    "settings_scanning_zoom_description": {
+        "message": "CSS の <code>zoom</code> が使われているページでポインター位置を補正します。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">詳細…</a>"
+    },
+    "settings_scanning_zoom_label": {
+        "message": "CSS zoom を正規化"
+    },
+    "settings_scanning_zoom_more_1": {
+        "message": "標準外の CSS <a href=\"https://developer.mozilla.org/en-US/docs/Web/CSS/zoom\" rel=\"noopener noreferrer\" target=\"_blank\"><code>zoom</code></a> プロパティは、ウェブページのスキャン時のポインター座標の通常の計算を妨げます。このプロパティは使用が推奨されず、使用例は稀ですが、一部のページでは使われています。"
+    },
+    "settings_scanning_zoom_more_2": {
+        "message": "このオプション（既定でオン）を有効にすると、ウェブページ内容をスキャンする際にこのプロパティの値を考慮します。予期しない悪影響がある可能性に備え、オプション化されています。"
+    },
+    "settings_scanning_zoom_more_3": {
+        "message": "この設定は Firefox では効果がありません。Firefox は <code>zoom</code> プロパティを実装していないためです。"
+    },
+    "settings_search_window_heading": {
+        "message": "検索ウィンドウ"
+    },
+    "settings_search_window_left_description": {
+        "message": "ウィンドウの左位置をピクセル単位で制御します。"
+    },
+    "settings_search_window_left_label": {
+        "message": "左位置"
+    },
+    "settings_search_window_native_window_label": {
+        "message": "埋め込みポップアップではなくネイティブのブラウザーウィンドウを使用\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    },
+    "settings_search_window_native_window_more": {
+        "message": "ウェブページに埋め込まれたポップアップで定義を表示する代わりに、ポップアップ内容を含むネイティブのブラウザーウィンドウを開きます。このウィンドウはすべてのタブで共有されます。"
+    },
+    "settings_search_window_open_link": {
+        "message": "開く…"
+    },
+    "settings_search_window_size_description": {
+        "message": "ウィンドウのサイズをピクセル単位で制御します。"
+    },
+    "settings_search_window_size_label": {
+        "message": "サイズ"
+    },
+    "settings_search_window_state_fullscreen": {
+        "message": "全画面"
+    },
+    "settings_search_window_state_maximized": {
+        "message": "最大化"
+    },
+    "settings_search_window_sticky_header_description": {
+        "message": "スクロールしても検索ヘッダーがページに残ります。"
+    },
+    "settings_search_window_sticky_header_label": {
+        "message": "固定された検索ヘッダー"
+    },
+    "settings_search_window_style_description": {
+        "message": "ウィンドウの外観を変更します。"
+    },
+    "settings_search_window_style_label": {
+        "message": "ウィンドウスタイル"
+    },
+    "settings_search_window_top_description": {
+        "message": "ウィンドウの上位置をピクセル単位で制御します。"
+    },
+    "settings_search_window_top_label": {
+        "message": "上位置"
+    },
+    "settings_search_window_type_popup": {
+        "message": "ポップアップ"
+    },
+    "settings_security_heading": {
+        "message": "セキュリティ"
+    },
+    "settings_security_permissions_label": {
+        "message": "Sottaku-Yomitan の権限を設定"
+    },
+    "settings_security_secure_frame_label": {
+        "message": "ポップアップフレームの安全なURLを使用\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    },
+    "settings_security_secure_frame_more": {
+        "message": "このオプションを有効にすると、<code>iframe</code> 要素のURLは\n                    <code>iframe</code> の内部ドキュメントの場所を直接変更して割り当てられ、\n                    <code>iframe</code> の <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-src\" rel=\"noopener noreferrer\" target=\"_blank\"><code>src</code></a>\n                    属性を使用しません。これにより拡張機能のURLが背後のWebページに公開されず、\n                    Sottaku-Yomitan の存在を検出しにくくなります。"
+    },
+    "settings_security_shadow_dom_label": {
+        "message": "ポップアップの周囲に安全なコンテナを使用\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">(?)</a>"
+    },
+    "settings_security_shadow_dom_more": {
+        "message": "<a href=\"https://caniuse.com/shadowdomv1\" rel=\"noopener noreferrer\" target=\"_blank\">対応ブラウザー</a>では、\n                    ポップアップの <code>iframe</code> 要素は閉じた <a href=\"https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM\" rel=\"noopener noreferrer\" target=\"_blank\">shadow DOM</a> を持つコンテナ内に埋め込まれます。\n                    このコンテナにより、背後のWebページで実行されているスクリプトが <code>iframe</code> を検出できなくなり、\n                    Webページが意図しない目的で Sottaku-Yomitan のポップアップを変更または使用しようとする状況を避けるのに役立ちます。"
+    },
+    "settings_shortcuts_heading": {
+        "message": "ショートカット"
+    },
+    "settings_shortcuts_native_label": {
+        "message": "ネイティブキーボードショートカットを設定…"
+    },
+    "settings_shortcuts_overview": {
+        "message": "<p>\n                        Sottaku-Yomitan にはキーボードショートカットのカテゴリが2つあります:\n                    </p>\n<ul>\n<li>\n<strong>標準</strong>キーボードショートカットは拡張機能が管理し、追加・削除でき、\n                            Sottaku-Yomitan が機能するWebページで動作するよう設定できます。\n                        </li>\n<li>\n<strong>ネイティブ</strong>キーボードショートカットはウェブブラウザーが管理し、ウェブブラウザー内でグローバルに動作します\n                            <span data-show-for-browser=\"chrome edge\"> またはシステム全体で</span>。\n                        </li>\n</ul>"
+    },
+    "settings_shortcuts_standard_label": {
+        "message": "標準キーボードショートカットを設定…"
+    },
+    "settings_sottaku_account_description": {
+        "message": "「ブラウザセッションを使用」をクリックして sottaku.app にサインインしているアカウントを連携します（Pro が必要）。"
+    },
+    "settings_sottaku_account_label": {
+        "message": "アカウント"
+    },
+    "settings_sottaku_account_not_connected": {
+        "message": "未接続"
+    },
+    "settings_sottaku_heading": {
+        "message": "Sottaku"
+    },
+    "settings_sottaku_integration_description": {
+        "message": "検索・音声・フラッシュカードの操作は常に Sottaku アカウントを使用します。ローカル辞書は不要です。"
+    },
+    "settings_sottaku_integration_label": {
+        "message": "Sottaku 連携"
+    },
+    "settings_sottaku_language_add_button": {
+        "message": "追加"
+    },
+    "settings_sottaku_language_chinese": {
+        "message": "中国語"
+    },
+    "settings_sottaku_language_japanese": {
+        "message": "日本語"
+    },
+    "settings_sottaku_language_korean": {
+        "message": "韓国語"
+    },
+    "settings_sottaku_language_order_description": {
+        "message": "ポップアップに表示する Sottaku の言語と順序を選びます（混在モードとフォールバックに使用）。"
+    },
+    "settings_sottaku_language_order_label": {
+        "message": "言語の順序"
+    },
+    "settings_sottaku_language_routing_auto": {
+        "message": "自動（検索ごとに判定）"
+    },
+    "settings_sottaku_language_routing_description": {
+        "message": "検索時に Sottaku-Yomitan が Sottaku の言語を選択する方法を選びます（日本語・韓国語・中国語に対応）。"
+    },
+    "settings_sottaku_language_routing_label": {
+        "message": "言語ルーティング"
+    },
+    "settings_sottaku_language_routing_mixed": {
+        "message": "混在（優先言語を表示）"
+    },
+    "settings_sottaku_password_placeholder": {
+        "message": "パスワード"
+    },
+    "settings_sottaku_sign_in_button": {
+        "message": "サインイン"
+    },
+    "settings_sottaku_sign_in_google_button": {
+        "message": "Google でサインイン（sottaku.app を開きます）"
+    },
+    "settings_sottaku_status_not_connected": {
+        "message": "未接続"
+    },
+    "settings_sottaku_status_sign_in_required": {
+        "message": "サインインが必要です。開いたタブでログインを完了し、「ブラウザセッションを使用」をクリックしてください。"
+    },
+    "settings_sottaku_status_signed_in": {
+        "message": "サインイン済み"
+    },
+    "settings_sottaku_status_signed_in_as": {
+        "message": "$1 としてサインイン済み"
+    },
+    "settings_sottaku_status_signed_out": {
+        "message": "Sottaku からサインアウト済み"
+    },
+    "settings_sottaku_unlink_button": {
+        "message": "アカウントの連携を解除"
+    },
+    "settings_sottaku_use_browser_session_button": {
+        "message": "ブラウザセッションを使用"
+    },
+    "settings_sottaku_use_browser_session_title": {
+        "message": "サインイン済みのブラウザセッションを再利用"
+    },
+    "settings_sottaku_username_placeholder": {
+        "message": "ユーザー名またはメールアドレス"
+    },
+    "settings_status_tasks_in_progress": {
+        "message": "進行中のタスク:"
+    },
+    "settings_text_parsing_heading": {
+        "message": "テキスト解析"
+    },
+    "settings_text_parsing_info_1": {
+        "message": "Sottaku-Yomitan は用語の周囲の文をスキャンし、\n                <a href=\"/search.html\" rel=\"noopener\" target=\"_blank\">検索ページ</a>上のクエリの各単語を解析できます。\n                この情報は追加の文脈として Anki カードにも追加できます。"
+    },
+    "settings_text_parsing_internal_description": {
+        "message": "文中の単語は Sottaku-Yomitan の辞書を使って解析されます。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">詳細…</a>"
+    },
+    "settings_text_parsing_internal_label": {
+        "message": "Sottaku-Yomitan の内部パーサーで文を解析"
+    },
+    "settings_text_parsing_internal_more": {
+        "message": "Sottaku-Yomitan の内部パーサーは、インストールされた辞書を使って文を解析できる簡単なアルゴリズムです。文の先頭で最も長い語を繰り返し検出し、テキストがなくなるまで進めます。一般的なケースでは良好な結果を提供しますが、文法構造を考慮しないため、誤った区切りになることがあります。"
+    },
+    "settings_text_parsing_mecab_description": {
+        "message": "文中の単語はサードパーティーのプログラムで解析されます。日本語のみ。"
+    },
+    "settings_text_parsing_mecab_disclaimer": {
+        "message": "このオプションは解析のために検索クエリデータを Sottaku-Yomitan の外部に送信する場合があります<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">プライバシーポリシー</a>)</span>。\n                        <a class=\"more-toggle more-only\" data-parent-distance=\"4\" tabindex=\"0\">詳細…</a>"
+    },
+    "settings_text_parsing_mecab_label": {
+        "message": "<a href=\"https://en.wikipedia.org/wiki/MeCab\" rel=\"noopener noreferrer\" target=\"_blank\">MeCab</a> を使用して文を解析"
+    },
+    "settings_text_parsing_mecab_more_1": {
+        "message": "MeCab は独自の辞書と解析アルゴリズムを使用して文を単語に分解するサードパーティーのプログラムです。MeCab は Sottaku-Yomitan の内部パーサーより正確な解析結果を提供する場合があります。"
+    },
+    "settings_text_parsing_mecab_more_2": {
+        "message": "Sottaku-Yomitan が使用するには、MeCab とネイティブメッセージングコンポーネントの両方をインストールする必要があります。\n                    セットアップガイドは <a href=\"https://github.com/yomidevs/yomitan-mecab-installer/blob/master/README.md\" rel=\"noopener noreferrer\" target=\"_blank\">こちら</a> にあります。"
+    },
+    "settings_text_parsing_scan_extent_description": {
+        "message": "文を形成するために双方向にスキャンする文字数を調整します。"
+    },
+    "settings_text_parsing_scan_extent_label": {
+        "message": "文スキャン範囲"
+    },
+    "settings_text_parsing_spacing_label": {
+        "message": "解析された単語の間に空白を表示"
+    },
+    "settings_text_parsing_termination_custom": {
+        "message": "カスタム"
+    },
+    "settings_text_parsing_termination_custom_no_newlines": {
+        "message": "カスタム（改行なし）"
+    },
+    "settings_text_parsing_termination_label": {
+        "message": "文の終端文字"
+    },
+    "settings_text_parsing_termination_newlines": {
+        "message": "改行のみ"
+    },
+    "settings_translation_heading": {
+        "message": "翻訳"
+    },
+    "settings_translation_replacement_patterns_label": {
+        "message": "カスタムのテキスト置換パターンを設定…"
+    },
+    "settings_translation_search_resolution_description": {
+        "message": "<p>\"A dog\" → \"A dog\",\"A do\", \"A d\", \"A\" を検索</p> または <p>\"A dog\" → \"A dog\", \"A\"</p>"
+    },
+    "settings_translation_search_resolution_label": {
+        "message": "辞書検索の解像度"
+    },
+    "settings_translation_search_resolution_letter": {
+        "message": "文字"
+    },
+    "settings_translation_search_resolution_word": {
+        "message": "単語"
+    },
+    "sottaku_action_title_missing_id": {
+        "message": "Sottaku の質問IDが見つかりません"
+    },
+    "sottaku_action_title_sign_in": {
+        "message": "まず Sottaku にサインインしてください"
+    },
+    "sottaku_locale_automatic": {
+        "message": "自動（Sottaku アカウントの言語を使用）"
+    },
+    "sottaku_request_button": {
+        "message": "辞書項目をリクエスト"
+    },
+    "sottaku_request_button_requested": {
+        "message": "リクエスト済み"
+    },
+    "sottaku_request_button_requesting": {
+        "message": "リクエスト中..."
+    },
+    "sottaku_request_button_retry": {
+        "message": "翻訳をリクエスト"
+    },
+    "sottaku_request_button_title_submitted": {
+        "message": "リクエストを Sottaku に送信しました"
+    },
+    "sottaku_save_button": {
+        "message": "Sottaku に保存"
+    },
+    "sottaku_save_button_saved": {
+        "message": "保存済み"
+    },
+    "sottaku_save_button_saving": {
+        "message": "保存中..."
+    },
+    "sottaku_save_button_title_already_saved": {
+        "message": "すでに Sottaku に保存されています"
+    },
+    "sottaku_save_button_title_saved": {
+        "message": "Sottaku のフラッシュカードに追加されました"
+    },
+    "status_footer_close": {
+        "message": "閉じる"
+    },
+    "status_footer_tasks_in_progress": {
+        "message": "進行中のタスク:"
+    },
+    "support_heading": {
+        "message": "Sottaku-Yomitan を応援する ❤️"
+    },
+    "support_list_contribute": {
+        "message": "Sottaku-Yomitan プロジェクトに貢献しましょう！まず <a href=\"https://github.com/sottakuapp/sottaku-yomitan/blob/master/CONTRIBUTING.md\" rel=\"noreferrer noopener\">貢献ガイドライン</a> をお読みください。"
+    },
+    "support_list_feedback": {
+        "message": "<a href=\"https://github.com/sottakuapp/sottaku-yomitan/issues/new/choose\" rel=\"noreferrer noopener\">GitHub Issues</a> でバグやフィードバックを報告するか、<a href=\"mailto:hello@sottaku.app\">hello@sottaku.app</a> にメールしてください。"
+    },
+    "support_list_star": {
+        "message": "<a href=\"https://github.com/sottakuapp/sottaku-yomitan\" rel=\"noreferrer noopener\">GitHub</a> でプロジェクトにスターを付け、友だちに共有しましょう。"
+    },
+    "support_subheading": {
+        "message": "Sottaku-Yomitan を支援する方法はこちら:"
+    },
+    "template_anki_overwrite_append_title": {
+        "message": "既存の値の後に新しい値を挿入"
+    },
+    "template_anki_overwrite_available_title": {
+        "message": "新しい値が空でない場合に上書き"
+    },
+    "template_anki_overwrite_fill_title": {
+        "message": "既存の値が空の場合に上書き"
+    },
+    "template_anki_overwrite_overwrite_title": {
+        "message": "新しい値が空でも上書き"
+    },
+    "template_anki_overwrite_prepend_title": {
+        "message": "既存の値の前に新しい値を挿入"
+    },
+    "template_anki_overwrite_skip_title": {
+        "message": "既存の値を保持"
+    },
+    "template_audio_source_tts_anki_warning": {
+        "message": "Anki ではサポートされていません"
+    },
+    "template_dictionary_integrity_error": {
+        "message": "辞書が正しくインポートされていない可能性があります"
+    },
+    "template_dictionary_update_available": {
+        "message": "更新があります"
+    },
+    "template_hotkey_no_input": {
+        "message": "入力なし"
+    },
+    "template_profile_name_placeholder": {
+        "message": "プロファイル名"
+    },
+    "template_scan_no_inputs": {
+        "message": "入力なし"
+    },
+    "template_scan_touch_min_time": {
+        "message": "最小タッチ時間 <span class=\"light\">(ミリ秒)</span>:"
+    },
+    "templates_modals_title": {
+        "message": "テンプレート"
+    },
+    "templates_settings_title": {
+        "message": "テンプレート"
+    },
+    "theme_option_auto": {
+        "message": "自動"
+    },
+    "theme_option_browser": {
+        "message": "ブラウザー"
+    },
+    "theme_option_dark": {
+        "message": "ダーク"
+    },
+    "theme_option_light": {
+        "message": "ライト"
+    },
+    "welcome_audio_enable_description": {
+        "message": "検索結果の横にクリック可能なスピーカーアイコンを表示します。"
+    },
+    "welcome_audio_enable_disclaimer": {
+        "message": "スピーカーアイコンをクリックすると、音声取得のために用語・読み・言語が Sottaku-Yomitan の外部へ送信される場合があります<span data-show-for-browser=\"firefox firefox-mobile\"> (<a href=\"https://sottaku.app/privacy-policy\" rel=\"noreferrer noopener\" target=\"_blank\">プライバシーポリシー</a>)</span>。\n                    <div data-show-for-browser=\"firefox firefox-mobile\">このオプションを無効にすると、検索した用語の発音音声は再生できません。</div>"
+    },
+    "welcome_audio_enable_label": {
+        "message": "用語の音声再生を有効にする"
+    },
+    "welcome_basic_customization_heading": {
+        "message": "基本的なカスタマイズ"
+    },
+    "welcome_data_transmission_heading": {
+        "message": "データ送信"
+    },
+    "welcome_get_started_connect_account": {
+        "message": "辞書・音声・フラッシュカードを同期するために Sottaku アカウントを接続"
+    },
+    "welcome_get_started_heading": {
+        "message": "開始するための基本はこちら"
+    },
+    "welcome_get_started_news_link": {
+        "message": "Sottaku-Yomitan は初めてですか？ニュースやヒントは sottaku.app をご覧ください。"
+    },
+    "welcome_get_started_quick_start": {
+        "message": "Sottaku-Yomitan クイックスタートガイド"
+    },
+    "welcome_heading": {
+        "message": "Sottaku-Yomitan へようこそ！"
+    },
+    "welcome_locale_description": {
+        "message": "Sottaku が返す翻訳に使用される言語。"
+    },
+    "welcome_locale_label": {
+        "message": "言語"
+    },
+    "welcome_locale_setup_description": {
+        "message": "Sottaku はアカウントを通じて日本語と韓国語の検索を提供しています。オフラインアクセスや他の言語が必要な場合は追加の辞書をインポートしてください。"
+    },
+    "welcome_locale_setup_heading": {
+        "message": "言語設定"
+    },
+    "welcome_more_customization_link": {
+        "message": "詳細なカスタマイズは設定ページで利用できます"
+    },
+    "welcome_permissions_disabled_warning": {
+        "message": "推奨される権限が有効でない場合、Sottaku-Yomitan の機能は制限されます。"
+    },
+    "welcome_permissions_enable_optional_description": {
+        "message": "これにより Sottaku-Yomitan はクリップボードを読み取り、外部プログラムと通信できます。"
+    },
+    "welcome_permissions_enable_optional_label": {
+        "message": "任意の権限を有効化"
+    },
+    "welcome_permissions_enable_recommended_description": {
+        "message": "これにより Sottaku-Yomitan はほとんどのサイトのテキストをスキャンできます。"
+    },
+    "welcome_permissions_enable_recommended_label": {
+        "message": "推奨される権限を有効化"
+    },
+    "welcome_permissions_full_enabled": {
+        "message": "Sottaku-Yomitan のすべての機能が利用可能です。"
+    },
+    "welcome_permissions_more_info_chrome": {
+        "message": "追加の設定は <a href=\"/permissions.html\" rel=\"noopener\">権限ページ</a> と、ブラウザーの <a class=\"extension-settings-link\" data-special-url=\"chrome://extensions/?id={id}\" tabindex=\"0\">拡張機能の設定ページ</a> で利用できます。"
+    },
+    "welcome_permissions_more_info_firefox": {
+        "message": "追加の設定は <a href=\"/permissions.html\" rel=\"noopener\">権限ページ</a> とブラウザーの拡張機能設定ページで利用できます。"
+    },
+    "welcome_permissions_recommended_enabled": {
+        "message": "Sottaku-Yomitan の主要機能が利用可能です。"
+    },
+    "welcome_recommended_permissions_heading": {
+        "message": "推奨される権限（重要）"
+    },
+    "welcome_scan_middle_mouse_description": {
+        "message": "カーソルを動かしながら中ボタンを押し続けてテキストをスキャンします。"
+    },
+    "welcome_scan_middle_mouse_label": {
+        "message": "中ボタンでスキャン"
+    },
+    "welcome_scan_modifier_description": {
+        "message": "キーを押しながらカーソルを動かしてテキストをスキャンします。"
+    },
+    "welcome_scan_modifier_label": {
+        "message": "スキャン修飾キー"
+    },
+    "welcome_show_guide_label": {
+        "message": "ブラウザー起動時にこのウェルカムガイドを表示"
+    },
+    "welcome_text_language_description": {
+        "message": "オフライン辞書機能とプレビュー用ツールに使用されます。"
+    },
+    "welcome_text_language_label": {
+        "message": "テキスト言語"
+    },
+    "welcome_theme_description": {
+        "message": "Sottaku-Yomitan のスタイルを調整します。"
+    },
+    "welcome_theme_label": {
+        "message": "テーマ"
+    }
 }

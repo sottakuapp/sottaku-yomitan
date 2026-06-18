@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023-2025  Yomitan Authors
+ * Copyright (C) 2023-2026  Yomitan Authors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,6 +21,10 @@
  */
 export type ManifestOverrides = {
     author?: chrome.runtime.Manifest['author'] | string;
+    browser_specific_settings?: {
+        gecko?: Record<string, unknown>;
+        gecko_android?: Record<string, unknown>;
+    };
 };
 
 export type Manifest = Omit<chrome.runtime.Manifest, keyof ManifestOverrides> & ManifestOverrides;

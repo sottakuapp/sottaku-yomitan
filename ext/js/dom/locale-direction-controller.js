@@ -103,7 +103,7 @@ export class LocaleDirectionController {
 
         this._automaticLocalePromise = (async () => {
             try {
-                const settings = await this._client.getLanguageSettings();
+                const settings = /** @type {Record<string, unknown>} */ (await this._client.getLanguageSettings());
                 const locale = typeof settings?.locale === 'string' ? settings.locale.trim() : '';
                 this._automaticLocale = locale;
                 this._automaticLocaleTimestamp = Date.now();

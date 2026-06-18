@@ -168,6 +168,7 @@
                                     "showAdvanced",
                                     "showDebug",
                                     "popupDisplayMode",
+                                    "popupFullWidthPosition",
                                     "popupWidth",
                                     "popupHeight",
                                     "popupHorizontalOffset",
@@ -223,7 +224,7 @@
                                     },
                                     "resultOutputMode": {
                                         "type": "string",
-                                        "enum": ["group", "merge", "split"],
+                                        "enum": ["group", "merge", "split", "term"],
                                         "default": "group"
                                     },
                                     "fontFamily": {
@@ -259,6 +260,11 @@
                                         "type": "string",
                                         "enum": ["default", "full-width"],
                                         "default": "default"
+                                    },
+                                    "popupFullWidthPosition": {
+                                        "type": "string",
+                                        "enum": ["top", "above-cursor", "bottom"],
+                                        "default": "bottom"
                                     },
                                     "popupWidth": {
                                         "type": "number",
@@ -399,7 +405,7 @@
                                     },
                                     "frequencyDisplayMode": {
                                         "type": "string",
-                                        "enum": ["tags", "tags-grouped", "split-tags", "split-tags-grouped", "inline-list", "list"],
+                                        "enum": ["tags", "tags-grouped", "split-tags", "split-tags-grouped", "inline-list", "list", "list-bordered"],
                                         "default": "split-tags-grouped"
                                     },
                                     "termDisplayMode": {
@@ -859,7 +865,7 @@
                                     "popupNestingMaxDepth": {
                                         "type": "integer",
                                         "minimum": 0,
-                                        "default": 0
+                                        "default": 10
                                     },
                                     "enablePopupSearch": {
                                         "type": "boolean",
@@ -1081,7 +1087,8 @@
                                     "noteGuiMode",
                                     "apiKey",
                                     "downloadTimeout",
-                                    "forceSync"
+                                    "forceSync",
+                                    "noteDupeCheckFirst"
                                 ],
                                 "properties": {
                                     "enable": {
@@ -1255,6 +1262,10 @@
                                         "minimum": 0
                                     },
                                     "forceSync": {
+                                        "type": "boolean",
+                                        "default": false
+                                    },
+                                    "noteDupeCheckFirst": {
                                         "type": "boolean",
                                         "default": false
                                     }

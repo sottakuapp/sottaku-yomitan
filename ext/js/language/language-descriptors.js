@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024-2025  Yomitan Authors
+ * Copyright (C) 2024-2026  Yomitan Authors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,14 +30,17 @@ import {normalizeRadicalCharacters} from './CJK-util.js';
 import {eszettPreprocessor} from './de/german-text-preprocessors.js';
 import {germanTransforms} from './de/german-transforms.js';
 import {removeDoubleAcuteAccents} from './el/modern-greek-processors.js';
+import {modernGreekTransforms} from './el/modern-greek-transforms.js';
 import {englishTransforms} from './en/english-transforms.js';
 import {esperantoTransforms} from './eo/esperanto-transforms.js';
 import {spanishTransforms} from './es/spanish-transforms.js';
+import {basqueTransforms} from './eu/basque-transforms.js';
 import {apostropheVariants} from './fr/french-text-preprocessors.js';
 import {frenchTransforms} from './fr/french-transforms.js';
 import {irishTransforms} from './ga/irish-transforms.js';
 import {convertLatinToGreek} from './grc/ancient-greek-processors.js';
 import {ancientGreekTransforms} from './grc/ancient-greek-transforms.js';
+import {removeApostrophedWords} from './it/italian-processors.js';
 import {
     alphabeticToHiragana,
     alphanumericWidthVariants,
@@ -58,7 +61,7 @@ import {processDiphtongs} from './la/latin-text-preprocessors.js';
 import {latinTransforms} from './la/latin-transforms.js';
 import {removeRussianDiacritics, yoToE} from './ru/russian-text-preprocessors.js';
 import {oldIrishTransforms} from './sga/old-irish-transforms.js';
-import {removeSerboCroatianAccentMarks} from './sh/serbo-croatian-text-preprocessors.js';
+import {addSerboCroatianDiacritics, removeSerboCroatianAccentMarks} from './sh/serbo-croatian-text-preprocessors.js';
 import {albanianTransforms} from './sq/albanian-transforms.js';
 import {capitalizeFirstLetter, decapitalize, removeAlphabeticDiacritics} from './text-processors.js';
 import {tagalogTransforms} from './tl/tagalog-transforms.js';
@@ -75,6 +78,12 @@ const capitalizationPreprocessors = {
 
 /** @type {import('language-descriptors').LanguageDescriptorAny[]} */
 const languageDescriptors = [
+    {
+        iso: 'xxx',
+        iso639_3: 'xxx',
+        name: 'Any / Unknown',
+        exampleText: '???',
+    },
     {
         iso: 'aii',
         iso639_3: 'aii',
@@ -114,6 +123,13 @@ const languageDescriptors = [
             convertHaToTaMarbuta,
         },
         languageTransforms: arabicTransforms,
+    },
+    {
+        iso: 'be',
+        iso639_3: 'bel',
+        name: 'Belarusian',
+        exampleText: 'чытаць',
+        textPreprocessors: capitalizationPreprocessors,
     },
     {
         iso: 'bg',
@@ -158,6 +174,7 @@ const languageDescriptors = [
             ...capitalizationPreprocessors,
             removeDoubleAcuteAccents,
         },
+        languageTransforms: modernGreekTransforms,
     },
     {
         iso: 'en',
@@ -188,6 +205,14 @@ const languageDescriptors = [
         iso639_3: 'est',
         name: 'Estonian',
         exampleText: 'lugema',
+        textPreprocessors: capitalizationPreprocessors,
+    },
+    {
+        iso: 'eu',
+        iso639_3: 'eus',
+        name: 'Basque',
+        exampleText: 'irakurri',
+        languageTransforms: basqueTransforms,
         textPreprocessors: capitalizationPreprocessors,
     },
     {
@@ -224,6 +249,13 @@ const languageDescriptors = [
         exampleText: 'léigh',
         textPreprocessors: capitalizationPreprocessors,
         languageTransforms: irishTransforms,
+    },
+    {
+        iso: 'gd',
+        iso639_3: 'gla',
+        name: 'Scottish Gaelic',
+        exampleText: 'leugh',
+        textPreprocessors: capitalizationPreprocessors,
     },
     {
         iso: 'grc',
@@ -283,6 +315,7 @@ const languageDescriptors = [
         textPreprocessors: {
             ...capitalizationPreprocessors,
             removeAlphabeticDiacritics,
+            removeApostrophedWords,
         },
     },
     {
@@ -445,6 +478,7 @@ const languageDescriptors = [
         textPreprocessors: {
             ...capitalizationPreprocessors,
             removeSerboCroatianAccentMarks,
+            addSerboCroatianDiacritics,
         },
     },
     {

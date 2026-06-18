@@ -99,7 +99,7 @@ test('english hover prefers bidirectional phrase spans and selects the exact sou
 
     await new Promise((resolve) => {
         server.listen(0, '127.0.0.1', () => {
-            resolve();
+            resolve(void 0);
         });
     });
     const address = server.address();
@@ -110,7 +110,7 @@ test('english hover prefers bidirectional phrase spans and selects the exact sou
                     reject(error);
                     return;
                 }
-                resolve();
+                resolve(void 0);
             });
         });
         throw new Error('Failed to start Playwright test server');
@@ -144,7 +144,7 @@ test('english hover prefers bidirectional phrase spans and selects the exact sou
                     reject(error);
                     return;
                 }
-                resolve();
+                resolve(void 0);
             });
         });
     }
@@ -190,7 +190,7 @@ test('japanese hover expands left of the hovered character and selects the exact
 
     await new Promise((resolve) => {
         server.listen(0, '127.0.0.1', () => {
-            resolve();
+            resolve(void 0);
         });
     });
     const address = server.address();
@@ -201,7 +201,7 @@ test('japanese hover expands left of the hovered character and selects the exact
                     reject(error);
                     return;
                 }
-                resolve();
+                resolve(void 0);
             });
         });
         throw new Error('Failed to start Playwright test server');
@@ -235,7 +235,7 @@ test('japanese hover expands left of the hovered character and selects the exact
                     reject(error);
                     return;
                 }
-                resolve();
+                resolve(void 0);
             });
         });
     }
@@ -293,7 +293,7 @@ test('mixed-language hover uses the winning match span instead of a longer non-w
 
     await new Promise((resolve) => {
         server.listen(0, '127.0.0.1', () => {
-            resolve();
+            resolve(void 0);
         });
     });
     const address = server.address();
@@ -304,7 +304,7 @@ test('mixed-language hover uses the winning match span instead of a longer non-w
                     reject(error);
                     return;
                 }
-                resolve();
+                resolve(void 0);
             });
         });
         throw new Error('Failed to start Playwright test server');
@@ -339,7 +339,7 @@ test('mixed-language hover uses the winning match span instead of a longer non-w
                     reject(error);
                     return;
                 }
-                resolve();
+                resolve(void 0);
             });
         });
     }

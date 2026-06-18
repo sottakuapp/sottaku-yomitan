@@ -111,7 +111,7 @@ async function createApiServer() {
 
     await new Promise((resolve) => {
         server.listen(0, '127.0.0.1', () => {
-            resolve();
+            resolve(void 0);
         });
     });
     const address = server.address();
@@ -122,7 +122,7 @@ async function createApiServer() {
                     reject(error);
                     return;
                 }
-                resolve();
+                resolve(void 0);
             });
         });
         throw new Error('Failed to start popup blanking test server');
@@ -216,7 +216,7 @@ test('request dictionary entry keeps the popup alive after auth token rotation o
                     reject(error);
                     return;
                 }
-                resolve();
+                resolve(void 0);
             });
         });
     }

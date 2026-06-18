@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023-2025  Yomitan Authors
+ * Copyright (C) 2023-2026  Yomitan Authors
  * Copyright (C) 2019-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -69,6 +69,7 @@ const PINYIN_TONE_MARKS = new Map([
     ['\u01f9', 4],
     ['\u1e3f', 2],
 ]);
+/** @type {Record<string, string[]>} */
 const PINYIN_TONE_MARKS_BY_BASE = {
     'a': ['\u0101', '\u00e1', '\u01ce', '\u00e0'],
     'e': ['\u0113', '\u00e9', '\u011b', '\u00e8'],
@@ -410,10 +411,10 @@ function normalizeReadingTokens(tokens) {
 /**
  * @param {unknown} tokens
  * @param {string} [modeHint]
- * @param {boolean} includeSpaces
+ * @param {boolean} [includeSpaces=false]
  * @returns {Array<{text: string, tone?: string}>|null}
  */
-function buildToneReadingSegmentsFromTokens(tokens, modeHint, includeSpaces) {
+function buildToneReadingSegmentsFromTokens(tokens, modeHint, includeSpaces = false) {
     const normalizedTokens = normalizeReadingTokens(tokens);
     if (!normalizedTokens.length) {
         return null;
@@ -443,10 +444,10 @@ function buildToneReadingSegmentsFromTokens(tokens, modeHint, includeSpaces) {
  * @param {string} reading
  * @param {unknown} tokens
  * @param {string} [modeHint]
- * @param {boolean} includeSpaces
+ * @param {boolean} [includeSpaces=false]
  * @returns {Array<{text: string, tone?: string}>|null}
  */
-function buildToneReadingSegments(reading, tokens, modeHint, includeSpaces) {
+function buildToneReadingSegments(reading, tokens, modeHint, includeSpaces = false) {
     const fromTokens = buildToneReadingSegmentsFromTokens(tokens, modeHint, includeSpaces);
     if (fromTokens) {
         return fromTokens;
@@ -537,6 +538,7 @@ function buildToneIndexMap(term, reading) {
         return null;
     }
     const chars = Array.from(text);
+    /** @type {number[]} */
     const cjkIndices = [];
     chars.forEach((char, idx) => {
         const codePoint = char.codePointAt(0);
@@ -551,6 +553,7 @@ function buildToneIndexMap(term, reading) {
     if (!toneDigits.length || toneDigits.length !== cjkIndices.length) {
         return null;
     }
+    /** @type {Map<number, string>} */
     const toneByIndex = new Map();
     cjkIndices.forEach((idx, toneIdx) => {
         toneByIndex.set(idx, toneDigits[toneIdx]);
@@ -699,7 +702,8 @@ export class DisplayGenerator {
                 const currentDictionaryInfo = dictionaryInfo.find(({title}) => title === dictionary);
                 if (currentDictionaryInfo) {
                     const dictionaryContentArray = [];
-                    dictionaryContentArray.push(currentDictionaryInfo.title);
+                    // Title and revision are required keys as per the schema.
+                    dictionaryContentArray.push(currentDictionaryInfo.title, `rev.${currentDictionaryInfo.revision}`);
                     if (currentDictionaryInfo.author) {
                         dictionaryContentArray.push(getMessage('display_dictionary_author', [currentDictionaryInfo.author]));
                     }
@@ -753,13 +757,24 @@ export class DisplayGenerator {
         const glyphContainer = this._querySelector(node, '.kanji-glyph');
         const frequencyGroupListContainer = this._querySelector(node, '.frequency-group-list');
         const tagContainer = this._querySelector(node, '.kanji-tag-list');
-        const definitionsContainer = this._querySelector(node, '.kanji-gloss-list');
-        const chineseReadingsContainer = this._querySelector(node, '.kanji-readings-chinese');
-        const japaneseReadingsContainer = this._querySelector(node, '.kanji-readings-japanese');
+
+        const definitionsContainer = this._querySelector(node, '.kanji-gloss-container');
+        const definitionsHeader = this._querySelector(node, '.kanji-meaning-header');
+
+        const readingsContainer = this._querySelector(node, '.kanji-readings');
+        const readingsHeader = this._querySelector(node, '.kanji-readings-header');
+
         const statisticsContainer = this._querySelector(node, '.kanji-statistics');
+        const statisticsHeader = this._querySelector(node, '.kanji-statistics-header');
+
         const classificationsContainer = this._querySelector(node, '.kanji-classifications');
+        const classificationsHeader = this._querySelector(node, '.kanji-classifications-header');
+
         const codepointsContainer = this._querySelector(node, '.kanji-codepoints');
+        const codepointsHeader = this._querySelector(node, '.kanji-codepoints-header');
+
         const dictionaryIndicesContainer = this._querySelector(node, '.kanji-dictionary-indices');
+        const dictionaryIndicesHeader = this._querySelector(node, '.kanji-dictionary-indices-header');
 
         this._setTextContent(glyphContainer, dictionaryEntry.character, this._language);
         if (this._language === 'ja') { glyphContainer.style.fontFamily = 'kanji-stroke-orders, sans-serif'; }
@@ -792,14 +807,75 @@ export class DisplayGenerator {
 
         this._appendMultiple(frequencyGroupListContainer, this._createFrequencyGroup.bind(this), groupedFrequencies, true);
         this._appendMultiple(tagContainer, this._createTag.bind(this), [...dictionaryEntry.tags, dictionaryTag]);
-        this._appendMultiple(definitionsContainer, this._createKanjiDefinition.bind(this), dictionaryEntry.definitions);
-        this._appendMultiple(chineseReadingsContainer, this._createKanjiReading.bind(this), dictionaryEntry.onyomi);
-        this._appendMultiple(japaneseReadingsContainer, this._createKanjiReading.bind(this), dictionaryEntry.kunyomi);
 
-        statisticsContainer.appendChild(this._createKanjiInfoTable(dictionaryEntry.stats.misc));
-        classificationsContainer.appendChild(this._createKanjiInfoTable(dictionaryEntry.stats.class));
-        codepointsContainer.appendChild(this._createKanjiInfoTable(dictionaryEntry.stats.code));
-        dictionaryIndicesContainer.appendChild(this._createKanjiInfoTable(dictionaryEntry.stats.index));
+        const definitionElements = [];
+        if (dictionaryEntry.definitions.length > 0) {
+            const element = document.createElement('ol');
+            element.className = 'kanji-gloss-list';
+            for (const x of dictionaryEntry.definitions) { element.appendChild(this._createKanjiDefinition(x)); }
+            definitionElements.push(element);
+        }
+
+        const onyomiElements = [];
+        if (dictionaryEntry.onyomi.length > 0) {
+            const element = document.createElement('dl');
+            element.className = 'kanji-readings-chinese';
+            for (const x of dictionaryEntry.onyomi) { element.appendChild(this._createKanjiReading(x)); }
+            onyomiElements.push(element);
+        }
+
+        const kunyomiElements = [];
+        if (dictionaryEntry.kunyomi.length > 0) {
+            const element = document.createElement('dl');
+            element.className = 'kanji-readings-japanese';
+            for (const x of dictionaryEntry.kunyomi) { element.appendChild(this._createKanjiReading(x)); }
+            kunyomiElements.push(element);
+        }
+
+        const tableMappings = [
+            {
+                container: definitionsContainer,
+                elements: definitionElements,
+                header: definitionsHeader,
+            },
+            {
+                container: readingsContainer,
+                elements: [...onyomiElements, ...kunyomiElements],
+                header: readingsHeader,
+            },
+            {
+                container: statisticsContainer,
+                elements: this._createKanjiInfoTable(dictionaryEntry.stats.misc),
+                header: statisticsHeader,
+            },
+            {
+                container: classificationsContainer,
+                elements: this._createKanjiInfoTable(dictionaryEntry.stats.class),
+                header: classificationsHeader,
+            },
+            {
+                container: codepointsContainer,
+                elements: this._createKanjiInfoTable(dictionaryEntry.stats.code),
+                header: codepointsHeader,
+            },
+            {
+                container: dictionaryIndicesContainer,
+                elements: this._createKanjiInfoTable(dictionaryEntry.stats.index),
+                header: dictionaryIndicesHeader,
+            },
+        ];
+
+        for (const tableMapping of tableMappings) {
+            if (tableMapping.elements.length === 0) {
+                tableMapping.header.remove();
+                tableMapping.container.remove();
+                continue;
+            }
+
+            for (const tableElement of tableMapping.elements) {
+                tableMapping.container.appendChild(tableElement);
+            }
+        }
 
         return node;
     }
@@ -1209,7 +1285,7 @@ export class DisplayGenerator {
 
     /**
      * @param {import('dictionary').KanjiStat[]} details
-     * @returns {HTMLElement}
+     * @returns {HTMLElement[]}
      */
     _createKanjiInfoTable(details) {
         const node = this._instantiate('kanji-info-table');
@@ -1217,11 +1293,10 @@ export class DisplayGenerator {
 
         const count = this._appendMultiple(container, this._createKanjiInfoTableItem.bind(this), details);
         if (count === 0) {
-            const n = this._createKanjiInfoTableItemEmpty();
-            container.appendChild(n);
+            return [];
         }
 
-        return node;
+        return [node];
     }
 
     /**
