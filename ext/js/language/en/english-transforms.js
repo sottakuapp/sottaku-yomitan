@@ -45,9 +45,99 @@ const pastSuffixInflections = [
     suffixInflection('paid', 'pay', ['v'], ['v']),
     suffixInflection('said', 'say', ['v'], ['v']),
 ];
+const pastIrregularInflectionPairs = [
+    ['arose', 'arise'],
+    ['awoke', 'awake'],
+    ['bore', 'bear'],
+    ['became', 'become'],
+    ['began', 'begin'],
+    ['bent', 'bend'],
+    ['bound', 'bind'],
+    ['bit', 'bite'],
+    ['bled', 'bleed'],
+    ['blew', 'blow'],
+    ['broke', 'break'],
+    ['brought', 'bring'],
+    ['built', 'build'],
+    ['bought', 'buy'],
+    ['caught', 'catch'],
+    ['chose', 'choose'],
+    ['came', 'come'],
+    ['dealt', 'deal'],
+    ['dug', 'dig'],
+    ['did', 'do'],
+    ['drew', 'draw'],
+    ['dreamed', 'dream'],
+    ['drank', 'drink'],
+    ['drove', 'drive'],
+    ['ate', 'eat'],
+    ['fell', 'fall'],
+    ['fed', 'feed'],
+    ['felt', 'feel'],
+    ['fought', 'fight'],
+    ['found', 'find'],
+    ['flew', 'fly'],
+    ['forgot', 'forget'],
+    ['forgave', 'forgive'],
+    ['froze', 'freeze'],
+    ['got', 'get'],
+    ['gave', 'give'],
+    ['went', 'go'],
+    ['grew', 'grow'],
+    ['hung', 'hang'],
+    ['had', 'have'],
+    ['heard', 'hear'],
+    ['hid', 'hide'],
+    ['held', 'hold'],
+    ['kept', 'keep'],
+    ['knew', 'know'],
+    ['led', 'lead'],
+    ['left', 'leave'],
+    ['lent', 'lend'],
+    ['lay', 'lie'],
+    ['lost', 'lose'],
+    ['made', 'make'],
+    ['meant', 'mean'],
+    ['met', 'meet'],
+    ['rode', 'ride'],
+    ['rang', 'ring'],
+    ['rose', 'rise'],
+    ['ran', 'run'],
+    ['saw', 'see'],
+    ['sold', 'sell'],
+    ['sent', 'send'],
+    ['shook', 'shake'],
+    ['shone', 'shine'],
+    ['shot', 'shoot'],
+    ['showed', 'show'],
+    ['sang', 'sing'],
+    ['sat', 'sit'],
+    ['slept', 'sleep'],
+    ['spoke', 'speak'],
+    ['spent', 'spend'],
+    ['stood', 'stand'],
+    ['stole', 'steal'],
+    ['stuck', 'stick'],
+    ['struck', 'strike'],
+    ['swam', 'swim'],
+    ['took', 'take'],
+    ['taught', 'teach'],
+    ['tore', 'tear'],
+    ['told', 'tell'],
+    ['thought', 'think'],
+    ['threw', 'throw'],
+    ['understood', 'understand'],
+    ['woke', 'wake'],
+    ['wore', 'wear'],
+    ['won', 'win'],
+    ['wrote', 'write'],
+];
 const pastWholeWordInflections = [
     wholeWordInflection('was', 'be', ['v'], ['v']),
     wholeWordInflection('were', 'be', ['v'], ['v']),
+    ...pastIrregularInflectionPairs.map(([inflected, deinflected]) => (
+        wholeWordInflection(inflected, deinflected, ['v'], ['v'])
+    )),
 ];
 
 const ingSuffixInflections = [
@@ -125,6 +215,18 @@ function createPhrasalVerbInflectionsFromSuffixInflections(sourceRules) {
     });
 }
 
+/**
+ * @param {import('language-transformer').Rule<Condition>[]} sourceRules
+ * @returns {import('language-transformer').Rule<Condition>[]}
+ */
+function createPhrasalVerbInflectionsFromWholeWordInflections(sourceRules) {
+    return sourceRules.flatMap(({isInflected, deinflected}) => {
+        if (typeof deinflected === 'undefined') { return []; }
+        const inflectedWord = isInflected.source.replace(/^\^/, '').replace(/\$$/, '');
+        return [createPhrasalVerbInflection(inflectedWord, deinflected)];
+    });
+}
+
 const conditions = {
     v: {
         name: 'Verb',
@@ -189,6 +291,7 @@ export const englishTransforms = {
                 ...pastWholeWordInflections,
                 ...pastSuffixInflections,
                 ...createPhrasalVerbInflectionsFromSuffixInflections(pastSuffixInflections),
+                ...createPhrasalVerbInflectionsFromWholeWordInflections(pastWholeWordInflections),
             ],
         },
         'ing': {

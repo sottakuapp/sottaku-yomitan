@@ -1022,6 +1022,17 @@ export const koreanTransforms = {
                 suffixInflection('ㄷㅏㄱㅗ', '', [], ['p', 'f', 'eusi']),
             ],
         },
+        '-((느)ㄴ)다고서': {
+            name: '-((느)ㄴ)다고서',
+            rules: [
+                suffixInflection('ㄴㄷㅏㄱㅗㅅㅓ', 'ㄷㅏ', [], ['v']),
+                suffixInflection('ㄴㅡㄴㄷㅏㄱㅗㅅㅓ', 'ㄷㅏ', [], ['v']),
+                suffixInflection('ㄴㄷㅏㄱㅗㅅㅓ', 'ㄹㄷㅏ', [], ['v']),
+                suffixInflection('ㄴㄷㅏㄱㅗㅅㅓ', '', [], ['eusi']),
+                suffixInflection('ㄷㅏㄱㅗㅅㅓ', 'ㄷㅏ', [], ['adj']),
+                suffixInflection('ㄷㅏㄱㅗㅅㅓ', '', [], ['p', 'f', 'eusi']),
+            ],
+        },
         '-((느)ㄴ)다나': {
             name: '-((느)ㄴ)다나',
             rules: [

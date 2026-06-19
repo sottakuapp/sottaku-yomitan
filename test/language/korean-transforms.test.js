@@ -739,6 +739,20 @@ const tests = [
         ],
     },
     {
+        category: 'media grammar coverage',
+        valid: true,
+        tests: [
+            {term: '바라보다', source: '바라보던',     rule: 'v', reasons: ['-던']},
+            {term: '없다', source: '없던',     rule: 'adj', reasons: ['-던']},
+            {term: '없다', source: '없대',     rule: 'adj', reasons: ['-((느)ㄴ)대']},
+            {term: '끝나다', source: '끝났대',     rule: 'v', reasons: ['-았/었', '-((느)ㄴ)대']},
+            {term: '듣다', source: '듣기',     rule: 'v', reasons: ['-기']},
+            {term: '싫다', source: '싫다고서',     rule: 'adj', reasons: ['-((느)ㄴ)다고서']},
+            {term: '싫다', source: '싫다며',     rule: 'adj', reasons: ['-((느)ㄴ)다며']},
+            {term: '가다', source: '갈수록',     rule: 'v', reasons: ['-(으)ㄹ수록']},
+        ],
+    },
+    {
         category: 'invalid deinflections',
         valid: false,
         tests: [
