@@ -750,6 +750,7 @@ const tests = [
             {term: '싫다', source: '싫다고서',     rule: 'adj', reasons: ['-((느)ㄴ)다고서']},
             {term: '싫다', source: '싫다며',     rule: 'adj', reasons: ['-((느)ㄴ)다며']},
             {term: '가다', source: '갈수록',     rule: 'v', reasons: ['-(으)ㄹ수록']},
+            {term: '피우다', source: '피우리라',     rule: 'v', reasons: ['-(으)리라']},
         ],
     },
     {
