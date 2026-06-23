@@ -15,11 +15,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import {readFileSync} from 'fs';
 import {afterAll, describe, expect, test} from 'vitest';
 import {DisplayGenerator} from '../ext/js/display/display-generator.js';
 import {setupDomTest} from './fixtures/dom-test.js';
 
 const {window, teardown} = await setupDomTest();
+const displayCss = readFileSync(new URL('../ext/css/display.css', import.meta.url), {encoding: 'utf8'});
 
 describe('DisplayGenerator', () => {
     afterAll(() => teardown(global));
@@ -46,12 +48,23 @@ describe('DisplayGenerator', () => {
                 .map((node) => node.textContent)
                 .join('')
         ));
+        const hanziToneClasses = rubies.map((ruby) => (
+            [...ruby.querySelectorAll('.headword-kanji-link')]
+                .map((node) => [...node.classList].filter((className) => className.startsWith('tone-')))
+        ));
 
         expect(rubies).toHaveLength(2);
         expect(spellings).toStrictEqual(['履歷', '履历']);
+        expect(hanziToneClasses).toStrictEqual([[['tone-3'], ['tone-4']], [['tone-3'], ['tone-4']]]);
         expect(readings).toStrictEqual(['lǚ lì', 'lǚ lì']);
         expect(container.childNodes[1].textContent).toBe(' / ');
         expect([...rubies[0].querySelectorAll('rt .tone')].map((node) => node.textContent)).toStrictEqual(['lǚ', 'lì']);
         expect([...rubies[1].querySelectorAll('rt .tone')].map((node) => node.textContent)).toStrictEqual(['lǚ', 'lì']);
+    });
+
+    test('keeps tone-color rules specific enough for Hanzi links', () => {
+        for (let tone = 1; tone <= 5; tone += 1) {
+            expect(displayCss).toContain(`.headword-kanji-link.tone-${tone}`);
+        }
     });
 });

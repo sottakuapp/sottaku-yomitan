@@ -281,6 +281,26 @@
     color: var(--tone-5-color);
 }
 
+.headword-kanji-link.tone-1 {
+    color: var(--tone-1-color);
+}
+
+.headword-kanji-link.tone-2 {
+    color: var(--tone-2-color);
+}
+
+.headword-kanji-link.tone-3 {
+    color: var(--tone-3-color);
+}
+
+.headword-kanji-link.tone-4 {
+    color: var(--tone-4-color);
+}
+
+.headword-kanji-link.tone-5 {
+    color: var(--tone-5-color);
+}
+
 
 /* Fonts */
 @font-face {
