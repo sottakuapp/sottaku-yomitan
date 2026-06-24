@@ -57,17 +57,57 @@ describe('TextScanner', () => {
         // eslint-disable-next-line no-underscore-dangle
         expect(scanner._getEnglishBidirectionalSearchVariants('it will become soon', 8, 20)).toEqual([
             {text: 'will become', startOffset: 5, anchorOffset: 5, preferredScanLanguage: 'en'},
+            {text: 'become soon', startOffset: 0, anchorOffset: 0},
             {text: 'become', startOffset: 0, anchorOffset: 0},
         ]);
     });
 
-    test('keeps ordinary English lookups on the hovered word only', () => {
+    test('adds forward English phrase candidates before single-word fallback', () => {
         const scanner = createScanner();
 
         // eslint-disable-next-line no-underscore-dangle
+        expect(scanner._getEnglishBidirectionalSearchVariants('take the easy way out', 0, 32)).toEqual([
+            {text: 'take the easy way out', startOffset: 0, anchorOffset: 0},
+            {text: 'take', startOffset: 0, anchorOffset: 0},
+        ]);
+
+        // eslint-disable-next-line no-underscore-dangle
         expect(scanner._getEnglishBidirectionalSearchVariants('perpetrators are burning in hell', 0, 32)).toEqual([
+            {text: 'perpetrators are burning in hell', startOffset: 0, anchorOffset: 0},
             {text: 'perpetrators', startOffset: 0, anchorOffset: 0},
         ]);
+    });
+
+    test('uses a longer English scan window for multi-word phrase entries', async () => {
+        const definitionEntry = {id: 'easy-way-out'};
+        const phrase = 'take the easy way out';
+        const scanner = createScanner({
+            termsFind: vi.fn(async (text) => {
+                if (text === phrase) {
+                    return {dictionaryEntries: [definitionEntry], originalTextLength: phrase.length};
+                }
+                return {dictionaryEntries: [], originalTextLength: 0};
+            }),
+        });
+        // eslint-disable-next-line no-underscore-dangle
+        scanner._language = 'en';
+        // eslint-disable-next-line no-underscore-dangle
+        scanner._scanLength = 10;
+
+        const textSource = new TextSourceElement(
+            window.document.createElement('div'),
+            phrase,
+            0,
+            0,
+        );
+        // eslint-disable-next-line no-underscore-dangle
+        const result = await scanner._findTermDictionaryEntries(textSource, {pointerType: 'mouse'});
+
+        expect(result).not.toBeNull();
+        expect(result?.dictionaryEntries).toEqual([definitionEntry]);
+        expect(textSource.text()).toBe(phrase);
+        // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/unbound-method
+        expect(scanner._api.termsFind).toHaveBeenCalledWith(phrase, expect.any(Object), expect.any(Object));
     });
 
     test('uses the first successful English phrase span and stops scanning', async () => {
@@ -132,9 +172,10 @@ describe('TextScanner', () => {
 
         expect(result).not.toBeNull();
         expect(result?.dictionaryEntries).toEqual([definitionEntry]);
-        expect(calls.map(({text}) => text)).toStrictEqual(['will become', 'become']);
+        expect(calls.map(({text}) => text)).toStrictEqual(['will become', 'become soon', 'become']);
         expect(calls[0].details.preferredScanLanguage).toBe('en');
         expect(calls[1].details.preferredScanLanguage).toBeUndefined();
+        expect(calls[2].details.preferredScanLanguage).toBeUndefined();
     });
 
     test('prefers the hovered English word over trailing text', async () => {
@@ -165,7 +206,21 @@ describe('TextScanner', () => {
         expect(result?.dictionaryEntries).toEqual([definitionEntry]);
         expect(textSource.text()).toBe('perpetrators');
         // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/unbound-method
-        expect(scanner._api.termsFind).toHaveBeenCalledTimes(1);
+        expect(scanner._api.termsFind).toHaveBeenCalledTimes(2);
+        // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/unbound-method
+        expect(scanner._api.termsFind).toHaveBeenNthCalledWith(
+            1,
+            'perpetrators are burning in hell',
+            expect.any(Object),
+            expect.any(Object),
+        );
+        // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/unbound-method
+        expect(scanner._api.termsFind).toHaveBeenNthCalledWith(
+            2,
+            'perpetrators',
+            expect.any(Object),
+            expect.any(Object),
+        );
     });
 
     test('keeps exact source spans for non-English matches', async () => {

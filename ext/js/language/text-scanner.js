@@ -28,6 +28,7 @@ import {TextSourceElement} from '../dom/text-source-element.js';
 const SCAN_RESOLUTION_EXCLUDED_LANGUAGES = new Set(['ja', 'zh', 'yue', 'ko']);
 const DOCUMENT_LANGUAGE_HINT_TTL_MS = 5 * 60 * 1000;
 const DOCUMENT_LANGUAGE_SAMPLE_MAX_CHARS = 2000;
+const ENGLISH_PHRASE_SCAN_LENGTH_MIN = 32;
 const ENGLISH_SOURCE_WORD_PATTERN = /[A-Za-z0-9][A-Za-z0-9'’`-]*/gu;
 const ENGLISH_AUXILIARY_PREFIX_VARIANTS = [
     ['going', 'to'],
@@ -571,6 +572,17 @@ export class TextScanner extends EventDispatcher {
             variants.push(variant);
         };
 
+        /**
+         * @param {{end: number}} leftWord
+         * @param {{index: number}} rightWord
+         * @returns {boolean}
+         */
+        const canExtendAcrossGap = (leftWord, rightWord) => {
+            if (!leftWord || !rightWord) { return false; }
+            const separator = text.slice(leftWord.end, rightWord.index);
+            return separator.length > 0 && separator.trim().length === 0;
+        };
+
         for (const pattern of ENGLISH_AUXILIARY_PREFIX_VARIANTS) {
             const patternStart = hoveredWordIndex - pattern.length;
             if (patternStart < 0) { continue; }
@@ -579,8 +591,27 @@ export class TextScanner extends EventDispatcher {
             addVariant(words[patternStart].index, hoveredWord.end, true);
         }
 
+        let forwardEndWordIndex = hoveredWordIndex;
+        while (
+            forwardEndWordIndex + 1 < words.length &&
+            canExtendAcrossGap(words[forwardEndWordIndex], words[forwardEndWordIndex + 1])
+        ) {
+            forwardEndWordIndex += 1;
+        }
+        addVariant(hoveredWord.index, words[forwardEndWordIndex].end);
         addVariant(hoveredWord.index, hoveredWord.end);
         return variants;
+    }
+
+    /**
+     * @param {number} scanLength
+     * @returns {number}
+     */
+    _getEffectiveTermScanLength(scanLength) {
+        const normalizedScanLength = Number.isFinite(scanLength) && scanLength > 0 ? scanLength : 1;
+        return this._language === 'en' ?
+            Math.max(normalizedScanLength, ENGLISH_PHRASE_SCAN_LENGTH_MIN) :
+            normalizedScanLength;
     }
 
     /**
@@ -1542,7 +1573,7 @@ export class TextScanner extends EventDispatcher {
      * @returns {Promise<?import('text-scanner').TermSearchResults>}
      */
     async _findTermDictionaryEntries(textSource, optionsContext) {
-        const scanLength = this._scanLength;
+        const scanLength = this._getEffectiveTermScanLength(this._scanLength);
         const sentenceScanExtent = this._sentenceScanExtent;
         const sentenceTerminateAtNewlines = this._sentenceTerminateAtNewlines;
         const sentenceTerminatorMap = this._sentenceTerminatorMap;
