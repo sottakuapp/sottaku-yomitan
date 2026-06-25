@@ -31,6 +31,7 @@ const SOTTAKU_SCAN_CACHE_MAX_ENTRIES = 256;
 const HANZI_DISPLAY_MODES = new Set(['traditional', 'simplified', 'both']);
 const HANZI_DISPLAY_SEPARATOR = ' / ';
 const CHINESE_READING_MODES = new Set(['pinyin', 'bopomofo']);
+const JAPANESE_PITCH_ACCENT_DISPLAY_MODES = new Set(['off', 'number', 'contour']);
 const SOTTAKU_UPGRADE_URL = 'https://sottaku.app/upgrade';
 const JAPANESE_PROGRESSIVE_INFLECTION_DISPLAY_PRIORITY = new Map([
     ['causative-passive', 0],
@@ -129,8 +130,20 @@ function resolveToneColorsPreference(value) {
 }
 
 /**
+ * @param {unknown} value
+ * @returns {string}
+ */
+function normalizeJapanesePitchAccentDisplay(value) {
+    if (typeof value !== 'string') { return 'off'; }
+    const normalized = value.trim().toLowerCase().replace(/-/g, '_');
+    if (JAPANESE_PITCH_ACCENT_DISPLAY_MODES.has(normalized)) { return normalized; }
+    if (['hidden', 'hide', 'none', 'disabled'].includes(normalized)) { return 'off'; }
+    return 'off';
+}
+
+/**
  * @param {unknown} payload
- * @returns {?{hanziDisplay: string, chineseReadingDisplay: string, chineseToneColors: boolean}}
+ * @returns {?{hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean, japanesePitchAccentDisplay?: string}}
  */
 function normalizeDisplayPreferencesPayload(payload) {
     const normalizedPayload = (payload && typeof payload === 'object') ? payload : null;
@@ -154,17 +167,24 @@ function normalizeDisplayPreferencesPayload(payload) {
             ? settings.chinese_tone_colors
             : settings?.chineseToneColors
     );
+    const japanesePitchAccentRaw = typeof settings?.japanese_pitch_accent_display === 'string' ?
+        settings.japanese_pitch_accent_display :
+        (typeof settings?.japanesePitchAccentDisplay === 'string' ? settings.japanesePitchAccentDisplay : '');
     const hasHanziDisplay = typeof hanziDisplayRaw === 'string' && hanziDisplayRaw.trim().length > 0;
     const hasChineseReading = typeof chineseReadingRaw === 'string' && chineseReadingRaw.trim().length > 0;
     const hasToneColors = typeof toneColorsRaw !== 'undefined';
-    if (!hasHanziDisplay && !hasChineseReading && !hasToneColors) { return null; }
+    const hasJapanesePitchAccent = typeof japanesePitchAccentRaw === 'string' && japanesePitchAccentRaw.trim().length > 0;
+    if (!hasHanziDisplay && !hasChineseReading && !hasToneColors && !hasJapanesePitchAccent) { return null; }
 
     const hanziDisplayCandidate = hanziDisplayRaw ? hanziDisplayRaw.trim().toLowerCase() : '';
     const chineseReadingCandidate = chineseReadingRaw ? chineseReadingRaw.trim().toLowerCase() : '';
     const hanziDisplay = HANZI_DISPLAY_MODES.has(hanziDisplayCandidate) ? hanziDisplayCandidate : '';
     const chineseReadingDisplay = CHINESE_READING_MODES.has(chineseReadingCandidate) ? chineseReadingCandidate : '';
     const chineseToneColors = hasToneColors ? resolveToneColorsPreference(toneColorsRaw) : undefined;
-    return {hanziDisplay, chineseReadingDisplay, chineseToneColors};
+    const japanesePitchAccentDisplay = hasJapanesePitchAccent ?
+        normalizeJapanesePitchAccentDisplay(japanesePitchAccentRaw) :
+        undefined;
+    return {hanziDisplay, chineseReadingDisplay, chineseToneColors, japanesePitchAccentDisplay};
 }
 
 /**
@@ -364,6 +384,50 @@ function resolveDisplayedSourceText(sourceText, query, matchLength) {
 }
 
 /**
+ * @param {unknown} rawPitchAccent
+ * @param {string} fallbackReading
+ * @returns {?{position: number, reading: string}}
+ */
+function normalizeSottakuPitchAccent(rawPitchAccent, fallbackReading) {
+    if (!rawPitchAccent || typeof rawPitchAccent !== 'object') { return null; }
+    const pitchAccent = /** @type {Record<string, unknown>} */ (rawPitchAccent);
+    const rawPosition = pitchAccent.position ?? pitchAccent.positions;
+    const position = Number.parseInt(rawPosition, 10);
+    if (!Number.isFinite(position) || position < 0) { return null; }
+
+    const reading = typeof pitchAccent.reading === 'string' && pitchAccent.reading.trim() ?
+        pitchAccent.reading.trim() :
+        fallbackReading;
+    if (!reading || (fallbackReading && reading !== fallbackReading)) { return null; }
+    return {position, reading};
+}
+
+/**
+ * @param {?{position: number, reading: string}} pitchAccent
+ * @param {string} dictionaryAlias
+ * @returns {?import('dictionary').TermPronunciation}
+ */
+function createSottakuPitchAccentPronunciation(pitchAccent, dictionaryAlias) {
+    if (pitchAccent === null) { return null; }
+    return {
+        index: 0,
+        headwordIndex: 0,
+        dictionary: 'Sottaku',
+        dictionaryIndex: 0,
+        dictionaryAlias,
+        pronunciations: [
+            {
+                type: 'pitch-accent',
+                positions: pitchAccent.position,
+                nasalPositions: [],
+                devoicePositions: [],
+                tags: [],
+            },
+        ],
+    };
+}
+
+/**
  * @typedef {object} SottakuLanguageResult
  * @property {string} language
  * @property {import('dictionary').TermDictionaryEntry[]} entries
@@ -399,11 +463,11 @@ export class SottakuIntegration {
         this._automaticLocalePromise = null;
         /** @type {string} */
         this._automaticSettingsCacheKey = '';
-        /** @type {?{hanziDisplay: string, chineseReadingDisplay: string, chineseToneColors: boolean}} */
+        /** @type {?{hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean, japanesePitchAccentDisplay?: string}} */
         this._automaticSettings = null;
         /** @type {number} */
         this._automaticSettingsTimestamp = 0;
-        /** @type {Promise<?{hanziDisplay: string, chineseReadingDisplay: string, chineseToneColors: boolean}>|null} */
+        /** @type {Promise<?{hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean, japanesePitchAccentDisplay?: string}>|null} */
         this._automaticSettingsPromise = null;
     }
 
@@ -523,7 +587,7 @@ export class SottakuIntegration {
                     originalTextLength: query.length,
                     locale,
                     localeLang,
-                    displayPreferences: language.startsWith('zh') ? displayPreferences : null,
+                    displayPreferences: language.startsWith('zh') || language === 'ja' ? displayPreferences : null,
                     scanResult: scanResultForLanguage,
                 });
                 languageResults.push(languageResult);
@@ -539,7 +603,7 @@ export class SottakuIntegration {
                     originalTextLength: query.length,
                     locale,
                     localeLang,
-                    displayPreferences: language.startsWith('zh') ? displayPreferences : null,
+                    displayPreferences: language.startsWith('zh') || language === 'ja' ? displayPreferences : null,
                 });
                 languageResults.push(languageResult);
             }
@@ -558,7 +622,7 @@ export class SottakuIntegration {
     }
 
     /**
-     * @param {{apiOrigin: string, language: string, maxResults: number, query: string, sourceText?: string, originalTextLength?: number, locale: string, localeLang: string, displayPreferences?: {hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean} | null, scanResult?: {results: unknown[], originalTextLength: number, displayPreferences?: unknown | null}, scanCache?: Map<string, {results: unknown[], originalTextLength: number, displayPreferences?: unknown | null}>}} options
+     * @param {{apiOrigin: string, language: string, maxResults: number, query: string, sourceText?: string, originalTextLength?: number, locale: string, localeLang: string, displayPreferences?: {hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean, japanesePitchAccentDisplay?: string} | null, scanResult?: {results: unknown[], originalTextLength: number, displayPreferences?: unknown | null}, scanCache?: Map<string, {results: unknown[], originalTextLength: number, displayPreferences?: unknown | null}>}} options
      * @returns {Promise<SottakuLanguageResult>}
      */
     async _fetchLanguageEntries({apiOrigin, language, maxResults, query, sourceText, originalTextLength, locale, localeLang, displayPreferences, scanResult, scanCache}) {
@@ -756,7 +820,7 @@ export class SottakuIntegration {
      * @param {string|string[]} language
      * @param {number} maxResults
      * @param {string} locale
-     * @param {{hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean} | null | undefined} displayPreferences
+     * @param {{hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean, japanesePitchAccentDisplay?: string} | null | undefined} displayPreferences
      * @returns {string}
      */
     _getScanCacheKey(text, language, maxResults, locale, displayPreferences) {
@@ -773,6 +837,7 @@ export class SottakuIntegration {
             resolvedDisplayPreferences?.hanziDisplay || '',
             resolvedDisplayPreferences?.chineseReadingDisplay || '',
             resolvedDisplayPreferences?.chineseToneColors ? '1' : '0',
+            resolvedDisplayPreferences?.japanesePitchAccentDisplay || '',
         ].join('\u0000');
     }
 
@@ -815,7 +880,7 @@ export class SottakuIntegration {
      * @param {string|string[]} language
      * @param {number} maxResults
      * @param {string} locale
-     * @param {{hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean} | null | undefined} displayPreferences
+     * @param {{hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean, japanesePitchAccentDisplay?: string} | null | undefined} displayPreferences
      * @param {Map<string, {results: any[], originalTextLength: number, displayPreferences: unknown | null, languageResults?: {language: string, results: any[], originalTextLength: number}[] | null}> | undefined} perRequestCache
      * @returns {Promise<{results: any[], originalTextLength: number, displayPreferences: unknown | null, languageResults?: {language: string, results: any[], originalTextLength: number}[] | null}>}
      */
@@ -1147,7 +1212,7 @@ export class SottakuIntegration {
      * @param {string} [sourceText]
      * @param {number} [matchLengthOverride]
      * @param {string} localeLang
-     * @param {{hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean} | null | undefined} displayPreferences
+     * @param {{hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean, japanesePitchAccentDisplay?: string} | null | undefined} displayPreferences
      * @returns {import('dictionary').TermDictionaryEntry}
      */
     _createEntry(result, info, language, apiOrigin, query, index, sourceText, matchLengthOverride, localeLang, displayPreferences) {
@@ -1336,8 +1401,31 @@ export class SottakuIntegration {
             metadata.chineseReadingDisplay = displayPreferences.chineseReadingDisplay;
             metadata.toneColors = displayPreferences.chineseToneColors === true;
         }
+        const rawPitchAccent = (
+            normalizedInfo.pitch_accent ??
+            normalizedResult.pitch_accent ??
+            normalizedInfo.pitchAccent ??
+            normalizedResult.pitchAccent
+        );
+        const normalizedPitchAccent = normalizeSottakuPitchAccent(rawPitchAccent, reading);
+        const japanesePitchAccentDisplay = normalizeJapanesePitchAccentDisplay(displayPreferences?.japanesePitchAccentDisplay);
+        if (language === 'ja') {
+            metadata.japanesePitchAccentDisplay = japanesePitchAccentDisplay;
+            if (normalizedPitchAccent !== null) {
+                metadata.pitchAccent = {
+                    position: normalizedPitchAccent.position,
+                    reading: normalizedPitchAccent.reading,
+                };
+            }
+        }
 
         /** @type {any} */ (headwords[0]).sottaku = metadata;
+        const pitchAccentPronunciation = (
+            language === 'ja' && japanesePitchAccentDisplay !== 'off'
+                ? createSottakuPitchAccentPronunciation(normalizedPitchAccent, dictionaryAlias)
+                : null
+        );
+        const pronunciations = pitchAccentPronunciation !== null ? [pitchAccentPronunciation] : [];
 
         const entry = {
             type: 'term',
@@ -1357,7 +1445,7 @@ export class SottakuIntegration {
             ),
             headwords,
             definitions,
-            pronunciations: [],
+            pronunciations,
             frequencies: [],
         };
         /** @type {any} */ (entry).sottaku = metadata;
@@ -1448,8 +1536,8 @@ export class SottakuIntegration {
     }
 
     /**
-     * Resolve Chinese display preferences from the Sottaku account.
-     * @returns {Promise<?{hanziDisplay: string, chineseReadingDisplay: string, chineseToneColors: boolean}>}
+     * Resolve display preferences from the Sottaku account.
+     * @returns {Promise<?{hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean, japanesePitchAccentDisplay?: string}>}
      */
     async _resolveDisplayPreferences() {
         const now = Date.now();

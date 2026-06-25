@@ -1058,6 +1058,11 @@ export class DisplayGenerator {
         } else {
             this._setTextContent(headwordReading, reading);
         }
+        this._appendSottakuPitchAccent(
+            this._querySelector(node, '.headword-sottaku-pitch-accent'),
+            reading,
+            metadata,
+        );
 
         if (toneColorsEnabled && readingLanguage && readingLanguage.startsWith('zh')) {
             this._appendToneColoredFurigana(termContainer, term, reading, readingLanguage, modeHint, readingTokens, hanziDisplay);
@@ -1066,6 +1071,53 @@ export class DisplayGenerator {
         }
 
         return node;
+    }
+
+    /**
+     * @param {HTMLElement} container
+     * @param {string} reading
+     * @param {unknown} metadata
+     * @returns {boolean}
+     */
+    _appendSottakuPitchAccent(container, reading, metadata) {
+        const pitchAccent = this._getSottakuPitchAccent(reading, metadata);
+        if (pitchAccent === null) { return false; }
+
+        const morae = getKanaMorae(pitchAccent.reading);
+        if (morae.length === 0 || pitchAccent.position > morae.length) { return false; }
+
+        this._setElementLanguage(container, 'ja', pitchAccent.reading);
+        container.textContent = '';
+        container.hidden = false;
+        container.appendChild(this._pronunciationGenerator.createPronunciationText(morae, pitchAccent.position, [], []));
+        return true;
+    }
+
+    /**
+     * @param {string} reading
+     * @param {unknown} metadata
+     * @returns {?{position: number, reading: string}}
+     */
+    _getSottakuPitchAccent(reading, metadata) {
+        if (!metadata || typeof metadata !== 'object') { return null; }
+        const metadataObject = /** @type {Record<string, unknown>} */ (metadata);
+        const language = typeof metadataObject.language === 'string' ? metadataObject.language : '';
+        const displayMode = typeof metadataObject.japanesePitchAccentDisplay === 'string' ? metadataObject.japanesePitchAccentDisplay : '';
+        if (!language.startsWith('ja') || displayMode !== 'contour') { return null; }
+
+        const rawPitchAccent = metadataObject.pitchAccent ?? metadataObject.pitch_accent;
+        if (!rawPitchAccent || typeof rawPitchAccent !== 'object') { return null; }
+        const pitchAccent = /** @type {Record<string, unknown>} */ (rawPitchAccent);
+        const position = Number.parseInt(pitchAccent.position ?? pitchAccent.positions, 10);
+        if (!Number.isFinite(position) || position < 0) { return null; }
+
+        const fallbackReading = typeof reading === 'string' ? reading : '';
+        const pitchReading = typeof pitchAccent.reading === 'string' && pitchAccent.reading.trim() ?
+            pitchAccent.reading.trim() :
+            fallbackReading;
+        if (!pitchReading || (fallbackReading && pitchReading !== fallbackReading)) { return null; }
+
+        return {position, reading: pitchReading};
     }
 
     /**

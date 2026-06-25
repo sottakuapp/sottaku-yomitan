@@ -16,6 +16,7 @@
  */
 
 import {afterEach, describe, expect, test, vi} from 'vitest';
+import {parseJson} from '../ext/js/core/json.js';
 
 /**
  * @returns {Promise<typeof import('../ext/js/comm/sottaku-client.js')>}
@@ -180,6 +181,23 @@ describe('SottakuClient', () => {
         });
         expect(second).toStrictEqual(first);
         expect(third).toStrictEqual(first);
+    });
+
+    test('scan includes Japanese pitch accent display preferences in the request body', async () => {
+        const fetchMock = vi.fn().mockResolvedValue(buildJsonResponse({
+            results: [],
+            original_text_length: 1,
+        }));
+        vi.stubGlobal('fetch', fetchMock);
+
+        const {SottakuClient} = await importSottakuClientModule();
+        const client = new SottakuClient({apiBaseUrl: 'https://sottaku.app/api/v1', authToken: 'test-token'});
+
+        await client.scan('雨', 'ja', 8, 'en', {japanesePitchAccentDisplay: 'contour'});
+
+        expect(fetchMock).toHaveBeenCalledTimes(1);
+        const body = parseJson(fetchMock.mock.calls[0][1].body);
+        expect(body.japanese_pitch_accent_display).toBe('contour');
     });
 
     test('normalizes signed session tokens to their durable origin token', async () => {

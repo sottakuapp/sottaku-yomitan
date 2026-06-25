@@ -62,6 +62,53 @@ describe('DisplayGenerator', () => {
         expect([...rubies[1].querySelectorAll('rt .tone')].map((node) => node.textContent)).toStrictEqual(['lǚ', 'lì']);
     });
 
+    test('renders Sottaku Japanese pitch contour on its own headword line', () => {
+        const generator = new DisplayGenerator(null, null);
+        const container = window.document.createElement('div');
+
+        const rendered = Reflect.get(generator, '_appendSottakuPitchAccent').call(
+            generator,
+            container,
+            'あめ',
+            {
+                language: 'ja',
+                japanesePitchAccentDisplay: 'contour',
+                pitchAccent: {position: 1, reading: 'あめ'},
+            },
+        );
+
+        expect(rendered).toBe(true);
+        expect(container.hidden).toBe(false);
+        expect(container.lang).toBe('ja');
+        expect(container.querySelector('.pronunciation-text')).not.toBeNull();
+
+        const morae = [...container.querySelectorAll('.pronunciation-mora')];
+        expect(morae.map((node) => node.textContent)).toStrictEqual(['あ', 'め']);
+        expect(morae.map((node) => node.dataset.pitch)).toStrictEqual(['high', 'low']);
+        expect(morae.map((node) => node.dataset.pitchNext)).toStrictEqual(['low', 'low']);
+    });
+
+    test('does not render a Sottaku pitch line outside contour mode', () => {
+        const generator = new DisplayGenerator(null, null);
+        const container = window.document.createElement('div');
+        container.hidden = true;
+
+        const rendered = Reflect.get(generator, '_appendSottakuPitchAccent').call(
+            generator,
+            container,
+            'あめ',
+            {
+                language: 'ja',
+                japanesePitchAccentDisplay: 'number',
+                pitchAccent: {position: 1, reading: 'あめ'},
+            },
+        );
+
+        expect(rendered).toBe(false);
+        expect(container.hidden).toBe(true);
+        expect(container.textContent).toBe('');
+    });
+
     test('keeps tone-color rules specific enough for Hanzi links', () => {
         for (let tone = 1; tone <= 5; tone += 1) {
             expect(displayCss).toContain(`.headword-kanji-link.tone-${tone}`);

@@ -322,7 +322,7 @@ export class SottakuClient {
      * @param {string} language
      * @param {number} [maxResults]
      * @param {string} [locale]
-     * @param {{hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean}} [displayPreferences]
+     * @param {{hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean, japanesePitchAccentDisplay?: string}} [displayPreferences]
      * @returns {Promise<{results: any[], originalTextLength: number, displayPreferences: unknown | null, languageResults?: {language: string, results: any[], originalTextLength: number}[] | null}>}
      */
     async scan(text, language, maxResults, locale, displayPreferences) {
@@ -343,7 +343,7 @@ export class SottakuClient {
             }
         }
         if (displayPreferences && typeof displayPreferences === 'object') {
-            const {hanziDisplay, chineseReadingDisplay, chineseToneColors} = displayPreferences;
+            const {hanziDisplay, chineseReadingDisplay, chineseToneColors, japanesePitchAccentDisplay} = displayPreferences;
             if (typeof hanziDisplay === 'string' && hanziDisplay.trim()) {
                 body.hanzi_display = hanziDisplay.trim();
             }
@@ -352,6 +352,9 @@ export class SottakuClient {
             }
             if (typeof chineseToneColors === 'boolean') {
                 body.chinese_tone_colors = chineseToneColors;
+            }
+            if (typeof japanesePitchAccentDisplay === 'string' && japanesePitchAccentDisplay.trim()) {
+                body.japanese_pitch_accent_display = japanesePitchAccentDisplay.trim();
             }
         }
         const data = await this._request('/dictionary/yomitan-scan', {

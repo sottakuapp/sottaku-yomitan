@@ -1107,6 +1107,15 @@ button.action-button:active:not(:disabled) {
     color: var(--headword-current-reading-text-color);
     font-size: var(--headword-reading-font-size);
 }
+.headword-sottaku-pitch-accent {
+    color: var(--headword-current-reading-text-color);
+    font-size: var(--headword-reading-font-size);
+    line-height: 1.5;
+    margin-top: 0.1em;
+}
+.headword-sottaku-pitch-accent>.pronunciation-text {
+    display: inline-block;
+}
 .headword-list>.headword:not(:last-of-type)>.headword-text-container>.headword-term-outer::after {
     content: var(--headword-separator);
     font-size: var(--headword-font-size);
