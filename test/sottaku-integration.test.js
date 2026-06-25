@@ -472,6 +472,87 @@ describe('SottakuIntegration', () => {
         ]);
     });
 
+    test('sends Japanese pitch accent display preferences with scans', async () => {
+        const integration = new SottakuIntegration(null);
+        integration.configure({
+            general: {
+                language: 'ja',
+                maxResults: 32,
+            },
+            sottaku: {
+                enabled: true,
+                authToken: 'test-token',
+                apiBaseUrl: 'https://sottaku.app/api/v1',
+                cookieDomain: 'https://sottaku.app',
+                locale: 'en',
+                languageMode: 'ja',
+                preferredLanguages: [],
+            },
+        });
+
+        integration._client.getSettings = vi.fn(async () => ({
+            settings: {
+                japanese_pitch_accent_display: 'contour',
+            },
+        }));
+        const scanSpy = vi.fn(async () => ({
+            results: [
+                {
+                    id: 1,
+                    kanji_representation: '雨',
+                    reading: 'あめ',
+                    match_length: 1,
+                    has_definition: true,
+                    word_translation: 'rain',
+                    pitch_accent: {
+                        position: 1,
+                        reading: 'あめ',
+                    },
+                },
+            ],
+            originalTextLength: 1,
+            displayPreferences: {
+                japanese_pitch_accent_display: 'contour',
+            },
+        }));
+        integration._client.scan = scanSpy;
+
+        const {dictionaryEntries} = await integration.findTerms('雨');
+
+        expect(integration._client.getSettings).toHaveBeenCalledTimes(1);
+        expect(scanSpy).toHaveBeenCalledTimes(1);
+        expect(scanSpy.mock.calls[0][4]).toMatchObject({japanesePitchAccentDisplay: 'contour'});
+        expect(dictionaryEntries[0].sottaku.japanesePitchAccentDisplay).toBe('contour');
+    });
+
+    test('accepts kana-normalized Sottaku pitch accent readings', () => {
+        const integration = new SottakuIntegration(null);
+        const entry = integration._createEntry(
+            {
+                id: 1,
+                kanji_representation: '雨',
+                reading: 'あめ',
+                word_translation: 'rain',
+                pitch_accent: {
+                    position: 1,
+                    reading: 'アメ',
+                },
+            },
+            {},
+            'ja',
+            'https://sottaku.app',
+            '雨',
+            0,
+            '雨',
+            1,
+            'en',
+            {japanesePitchAccentDisplay: 'contour'},
+        );
+
+        expect(entry.sottaku.pitchAccent).toStrictEqual({position: 1, reading: 'あめ'});
+        expect(entry.pronunciations[0].pronunciations[0].positions).toBe(1);
+    });
+
     test('does not add Sottaku pitch accent pronunciations when disabled', () => {
         const integration = new SottakuIntegration(null);
         const entry = integration._createEntry(

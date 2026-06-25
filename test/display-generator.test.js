@@ -88,6 +88,25 @@ describe('DisplayGenerator', () => {
         expect(morae.map((node) => node.dataset.pitchNext)).toStrictEqual(['low', 'low']);
     });
 
+    test('renders Sottaku pitch contour when pitch reading only differs by kana script', () => {
+        const generator = new DisplayGenerator(null, null);
+        const container = window.document.createElement('div');
+
+        const rendered = Reflect.get(generator, '_appendSottakuPitchAccent').call(
+            generator,
+            container,
+            'あめ',
+            {
+                language: 'ja',
+                japanesePitchAccentDisplay: 'contour',
+                pitchAccent: {position: 1, reading: 'アメ'},
+            },
+        );
+
+        expect(rendered).toBe(true);
+        expect([...container.querySelectorAll('.pronunciation-mora')].map((node) => node.textContent)).toStrictEqual(['あ', 'め']);
+    });
+
     test('does not render a Sottaku pitch line outside contour mode', () => {
         const generator = new DisplayGenerator(null, null);
         const container = window.document.createElement('div');

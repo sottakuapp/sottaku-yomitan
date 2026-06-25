@@ -3,6 +3,7 @@
 import {SottakuClient} from '../comm/sottaku-client.js';
 import {ExtensionError} from '../core/extension-error.js';
 import {toError} from '../core/to-error.js';
+import {convertKatakanaToHiragana} from '../language/ja/japanese.js';
 import {getSottakuLanguageFlag, normalizeSottakuLanguages, SOTTAKU_SUPPORTED_LANGUAGES} from '../language/sottaku-languages.js';
 
 const HIRAGANA_RANGE = [0x3040, 0x309f];
@@ -139,6 +140,14 @@ function normalizeJapanesePitchAccentDisplay(value) {
     if (JAPANESE_PITCH_ACCENT_DISPLAY_MODES.has(normalized)) { return normalized; }
     if (['hidden', 'hide', 'none', 'disabled'].includes(normalized)) { return 'off'; }
     return 'off';
+}
+
+/**
+ * @param {string} reading
+ * @returns {string}
+ */
+function normalizeJapanesePitchReading(reading) {
+    return convertKatakanaToHiragana((reading || '').trim());
 }
 
 /**
@@ -398,8 +407,14 @@ function normalizeSottakuPitchAccent(rawPitchAccent, fallbackReading) {
     const reading = typeof pitchAccent.reading === 'string' && pitchAccent.reading.trim() ?
         pitchAccent.reading.trim() :
         fallbackReading;
-    if (!reading || (fallbackReading && reading !== fallbackReading)) { return null; }
-    return {position, reading};
+    if (!reading) { return null; }
+    if (
+        fallbackReading &&
+        normalizeJapanesePitchReading(reading) !== normalizeJapanesePitchReading(fallbackReading)
+    ) {
+        return null;
+    }
+    return {position, reading: fallbackReading || reading};
 }
 
 /**
@@ -525,7 +540,12 @@ export class SottakuIntegration {
 
         const {languages, autoPick, hintLanguage} = this._resolveLanguages(query, sottaku, general.language, details);
         const localePromise = this._resolveLocale();
-        const displayPreferencesPromise = Promise.resolve(null);
+        const shouldResolveDisplayPreferences = languages.some((language) => (
+            language === 'ja' || language.startsWith('zh')
+        ));
+        const displayPreferencesPromise = shouldResolveDisplayPreferences ?
+            this._resolveDisplayPreferences() :
+            Promise.resolve(null);
         const maxResults = Math.max(1, general.maxResults || 32);
         const apiOrigin = this._getOrigin(sottaku.apiBaseUrl);
         const [locale, displayPreferences] = await Promise.all([localePromise, displayPreferencesPromise]);
@@ -544,7 +564,7 @@ export class SottakuIntegration {
                     languages,
                     maxResults,
                     locale,
-                    null,
+                    displayPreferences,
                     scanCache,
                 );
             } catch (e) {
@@ -666,7 +686,7 @@ export class SottakuIntegration {
                     language,
                     maxResults,
                     locale,
-                    null,
+                    resolvedDisplayPreferences,
                     scanCache,
                 );
                 return response;

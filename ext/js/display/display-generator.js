@@ -21,7 +21,7 @@ import {safePerformance} from '../core/safe-performance.js';
 import {getDisambiguations, getGroupedPronunciations, getTermFrequency, groupKanjiFrequencies, groupTermFrequencies, groupTermTags, isNonNounVerbOrAdjective} from '../dictionary/dictionary-data-util.js';
 import {HtmlTemplateCollection} from '../dom/html-template-collection.js';
 import {getMessage} from '../dom/i18n.js';
-import {distributeFurigana, getKanaMorae, getPitchCategory, isCodePointKanji} from '../language/ja/japanese.js';
+import {convertKatakanaToHiragana, distributeFurigana, getKanaMorae, getPitchCategory, isCodePointKanji} from '../language/ja/japanese.js';
 import {getLanguageFromText} from '../language/text-utilities.js';
 import {PronunciationGenerator} from './pronunciation-generator.js';
 import {StructuredContentGenerator} from './structured-content-generator.js';
@@ -69,6 +69,15 @@ const PINYIN_TONE_MARKS = new Map([
     ['\u01f9', 4],
     ['\u1e3f', 2],
 ]);
+
+/**
+ * @param {string} reading
+ * @returns {string}
+ */
+function normalizeJapanesePitchReading(reading) {
+    return convertKatakanaToHiragana((reading || '').trim());
+}
+
 /** @type {Record<string, string[]>} */
 const PINYIN_TONE_MARKS_BY_BASE = {
     'a': ['\u0101', '\u00e1', '\u01ce', '\u00e0'],
@@ -1115,9 +1124,15 @@ export class DisplayGenerator {
         const pitchReading = typeof pitchAccent.reading === 'string' && pitchAccent.reading.trim() ?
             pitchAccent.reading.trim() :
             fallbackReading;
-        if (!pitchReading || (fallbackReading && pitchReading !== fallbackReading)) { return null; }
+        if (!pitchReading) { return null; }
+        if (
+            fallbackReading &&
+            normalizeJapanesePitchReading(pitchReading) !== normalizeJapanesePitchReading(fallbackReading)
+        ) {
+            return null;
+        }
 
-        return {position, reading: pitchReading};
+        return {position, reading: fallbackReading || pitchReading};
     }
 
     /**
