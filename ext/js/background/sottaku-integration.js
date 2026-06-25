@@ -1441,7 +1441,7 @@ export class SottakuIntegration {
 
         /** @type {any} */ (headwords[0]).sottaku = metadata;
         const pitchAccentPronunciation = (
-            language === 'ja' && japanesePitchAccentDisplay !== 'off'
+            language === 'ja' && japanesePitchAccentDisplay === 'number'
                 ? createSottakuPitchAccentPronunciation(normalizedPitchAccent, dictionaryAlias)
                 : null
         );

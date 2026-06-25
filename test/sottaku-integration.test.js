@@ -407,7 +407,7 @@ describe('SottakuIntegration', () => {
         expect(dictionaryEntries[0].sottaku.requested).toBe(true);
     });
 
-    test('adds Sottaku pitch accent as a native Yomitan pronunciation when enabled', async () => {
+    test('adds Sottaku pitch accent as a native Yomitan pronunciation in number mode', async () => {
         const integration = new SottakuIntegration(null);
         integration.configure({
             general: {
@@ -550,7 +550,36 @@ describe('SottakuIntegration', () => {
         );
 
         expect(entry.sottaku.pitchAccent).toStrictEqual({position: 1, reading: 'あめ'});
-        expect(entry.pronunciations[0].pronunciations[0].positions).toBe(1);
+        expect(entry.pronunciations).toStrictEqual([]);
+    });
+
+    test('does not add duplicate native pitch pronunciation in contour mode', () => {
+        const integration = new SottakuIntegration(null);
+        const entry = integration._createEntry(
+            {
+                id: 1,
+                kanji_representation: '持つ',
+                reading: 'もつ',
+                word_translation: 'to hold',
+                pitch_accent: {
+                    position: 1,
+                    reading: 'もつ',
+                },
+            },
+            {},
+            'ja',
+            'https://sottaku.app',
+            '持つ',
+            0,
+            '持つ',
+            2,
+            'en',
+            {japanesePitchAccentDisplay: 'contour'},
+        );
+
+        expect(entry.sottaku.pitchAccent).toStrictEqual({position: 1, reading: 'もつ'});
+        expect(entry.headwords[0].sottaku.pitchAccent).toStrictEqual({position: 1, reading: 'もつ'});
+        expect(entry.pronunciations).toStrictEqual([]);
     });
 
     test('does not add Sottaku pitch accent pronunciations when disabled', () => {
