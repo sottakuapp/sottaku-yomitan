@@ -60,6 +60,7 @@ import {koreanTransforms} from './ko/korean-transforms.js';
 import {processDiphtongs} from './la/latin-text-preprocessors.js';
 import {latinTransforms} from './la/latin-transforms.js';
 import {removeRussianDiacritics, yoToE} from './ru/russian-text-preprocessors.js';
+import {russianTransforms} from './ru/russian-transforms.js';
 import {oldIrishTransforms} from './sga/old-irish-transforms.js';
 import {addSerboCroatianDiacritics, removeSerboCroatianAccentMarks} from './sh/serbo-croatian-text-preprocessors.js';
 import {albanianTransforms} from './sq/albanian-transforms.js';
@@ -458,6 +459,7 @@ const languageDescriptors = [
             yoToE,
             removeRussianDiacritics,
         },
+        languageTransforms: russianTransforms,
     },
     {
         iso: 'sga',
