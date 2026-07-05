@@ -53,6 +53,18 @@ const tests = [
             {term: 'быть', source: 'были', rule: 'v', reasons: ['past tense']},
         ],
     },
+    {
+        category: 'pronouns',
+        valid: true,
+        tests: [
+            {term: 'я', source: 'меня', rule: 'pron', reasons: ['accusative pronoun']},
+            {term: 'я', source: 'мне', rule: 'pron', reasons: ['dative pronoun']},
+            {term: 'он', source: 'его', rule: 'pron', reasons: ['accusative pronoun']},
+            {term: 'мой', source: 'моего', rule: 'pron', reasons: ['genitive pronoun']},
+            {term: 'мой', source: 'моему', rule: 'pron', reasons: ['dative pronoun']},
+            {term: 'этот', source: 'эту', rule: 'pron', reasons: ['accusative pronoun']},
+        ],
+    },
 ];
 
 const languageTransformer = new LanguageTransformer();
