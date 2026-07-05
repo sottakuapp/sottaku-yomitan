@@ -22,13 +22,58 @@ export const removeRussianDiacritics = {
     process: (str) => [str, str.replace(/\u0301/g, '')],
 };
 
+const MAX_YO_VARIANTS = 64;
+/** @type {Map<string, string>} */
+const yoAlternates = new Map([
+    ['е', 'ё'],
+    ['ё', 'е'],
+    ['Е', 'Ё'],
+    ['Ё', 'Е'],
+]);
+
+/**
+ * @param {string} str
+ * @returns {string[]}
+ */
+function getYoVariants(str) {
+    /** @type {string[]} */
+    const variants = [];
+    /** @type {Set<string>} */
+    const seen = new Set();
+
+    /**
+     * @param {string} variant
+     */
+    const add = (variant) => {
+        if (variant.length === 0 || seen.has(variant) || variants.length >= MAX_YO_VARIANTS) {
+            return;
+        }
+        seen.add(variant);
+        variants.push(variant);
+    };
+
+    add(str);
+    const sourceChars = [...str];
+    for (let index = 0; index < sourceChars.length && variants.length < MAX_YO_VARIANTS; ++index) {
+        if (!yoAlternates.has(sourceChars[index])) { continue; }
+        const variantCount = variants.length;
+        for (let variantIndex = 0; variantIndex < variantCount; ++variantIndex) {
+            if (variants.length >= MAX_YO_VARIANTS) { break; }
+            const existing = variants[variantIndex];
+            const chars = [...existing];
+            const replacement = yoAlternates.get(chars[index]);
+            if (typeof replacement !== 'string') { continue; }
+            chars[index] = replacement;
+            add(chars.join(''));
+        }
+    }
+
+    return variants;
+}
+
 /** @type {import('language').TextProcessor} */
 export const yoToE = {
     name: 'Convert "ё" to "е"',
     description: 'ё → е, Ё → Е and vice versa',
-    process: (str) => [
-        str,
-        str.replace(/ё/g, 'е').replace(/Ё/g, 'Е'),
-        str.replace(/е/g, 'ё').replace(/Е/g, 'Ё'),
-    ],
+    process: getYoVariants,
 };
