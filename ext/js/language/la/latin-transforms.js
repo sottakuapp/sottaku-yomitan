@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {suffixInflection} from '../language-transforms.js';
+import {suffixInflection, wholeWordInflection} from '../language-transforms.js';
 
 // TODO: -ne suffix (estne, nonne)?
 
@@ -158,6 +158,53 @@ export const latinTransforms = {
             description: 'Ablative case',
             rules: [
                 suffixInflection('o', 'um', ['n2s'], ['n2s']),
+            ],
+        },
+        'present indicative': {
+            name: 'present indicative',
+            description: 'Irregular present forms of sum',
+            rules: [
+                wholeWordInflection('es', 'sum', ['v'], ['v']),
+                wholeWordInflection('est', 'sum', ['v'], ['v']),
+                wholeWordInflection('sumus', 'sum', ['v'], ['v']),
+                wholeWordInflection('estis', 'sum', ['v'], ['v']),
+                wholeWordInflection('sunt', 'sum', ['v'], ['v']),
+            ],
+        },
+        imperfect: {
+            name: 'imperfect',
+            description: 'Irregular imperfect forms of sum',
+            rules: [
+                wholeWordInflection('eram', 'sum', ['v'], ['v']),
+                wholeWordInflection('eras', 'sum', ['v'], ['v']),
+                wholeWordInflection('erat', 'sum', ['v'], ['v']),
+                wholeWordInflection('eramus', 'sum', ['v'], ['v']),
+                wholeWordInflection('eratis', 'sum', ['v'], ['v']),
+                wholeWordInflection('erant', 'sum', ['v'], ['v']),
+            ],
+        },
+        perfect: {
+            name: 'perfect',
+            description: 'Irregular perfect forms of sum',
+            rules: [
+                wholeWordInflection('fui', 'sum', ['v'], ['v']),
+                wholeWordInflection('fuisti', 'sum', ['v'], ['v']),
+                wholeWordInflection('fuit', 'sum', ['v'], ['v']),
+                wholeWordInflection('fuimus', 'sum', ['v'], ['v']),
+                wholeWordInflection('fuistis', 'sum', ['v'], ['v']),
+                wholeWordInflection('fuerunt', 'sum', ['v'], ['v']),
+            ],
+        },
+        pluperfect: {
+            name: 'pluperfect',
+            description: 'Irregular pluperfect forms of sum',
+            rules: [
+                wholeWordInflection('fueram', 'sum', ['v'], ['v']),
+                wholeWordInflection('fueras', 'sum', ['v'], ['v']),
+                wholeWordInflection('fuerat', 'sum', ['v'], ['v']),
+                wholeWordInflection('fueramus', 'sum', ['v'], ['v']),
+                wholeWordInflection('fueratis', 'sum', ['v'], ['v']),
+                wholeWordInflection('fuerant', 'sum', ['v'], ['v']),
             ],
         },
     },

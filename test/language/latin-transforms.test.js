@@ -47,6 +47,18 @@ const tests = [
             {term: 'vocabulum', source: 'vocabulo', rule: 'n',    reasons: ['ablative']},
         ],
     },
+    {
+        category: 'sum',
+        valid: true,
+        tests: [
+            {term: 'sum', source: 'est', rule: 'v', reasons: ['present indicative']},
+            {term: 'sum', source: 'sunt', rule: 'v', reasons: ['present indicative']},
+            {term: 'sum', source: 'erat', rule: 'v', reasons: ['imperfect']},
+            {term: 'sum', source: 'erant', rule: 'v', reasons: ['imperfect']},
+            {term: 'sum', source: 'fuit', rule: 'v', reasons: ['perfect']},
+            {term: 'sum', source: 'fuerant', rule: 'v', reasons: ['pluperfect']},
+        ],
+    },
 ];
 /* eslint-enable @stylistic/no-multi-spaces */
 

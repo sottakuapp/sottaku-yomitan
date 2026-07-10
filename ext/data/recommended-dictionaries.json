@@ -751,7 +751,14 @@
         ]
     },
     "la": {
-        "frequency": [],
+        "frequency": [
+            {
+                "name": "Leipzig Latin Wikipedia Rank",
+                "description": "Latin Wikipedia word-frequency ranks converted to Yomitan format.",
+                "homepage": "https://github.com/StefanVukovic99/leipzig-to-yomitan",
+                "downloadUrl": "https://github.com/StefanVukovic99/leipzig-to-yomitan/releases/latest/download/Leipzig.Latin.Wikipedia.Rank.zip"
+            }
+        ],
         "grammar": [],
         "kanji": [],
         "pronunciation": [],
