@@ -74,6 +74,8 @@ export class SottakuController {
         this._languageAddSelect = querySelectorNotNull(document, '#sottaku-language-add-select');
         /** @type {HTMLButtonElement} */
         this._languageAddButton = querySelectorNotNull(document, '#sottaku-language-add-button');
+        /** @type {HTMLOptionElement} */
+        this._vietnameseLanguageModeOption = querySelectorNotNull(document, '#sottaku-language-mode option[value="vi"]');
     }
 
     /** */
@@ -264,6 +266,7 @@ export class SottakuController {
             const nextKey = languages.join(',');
             if (currentKey === nextKey) { return; }
             this._supportedLanguages = languages;
+            this._updateLanguageModeOptions();
             const normalizedPreferred = normalizeSottakuLanguages(
                 this._preferredLanguages,
                 this._options.general.language,
@@ -403,6 +406,13 @@ export class SottakuController {
             this._languageList.appendChild(this._createLanguageRow(preferred[i], i, total));
         }
         this._refreshLanguageAddOptions(preferred);
+    }
+
+    /** */
+    _updateLanguageModeOptions() {
+        const vietnameseSupported = this._supportedLanguages.includes('vi');
+        this._vietnameseLanguageModeOption.hidden = !vietnameseSupported;
+        this._vietnameseLanguageModeOption.disabled = !vietnameseSupported;
     }
 
     /**

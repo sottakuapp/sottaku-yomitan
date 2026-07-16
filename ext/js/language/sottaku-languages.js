@@ -19,6 +19,8 @@ import {languageDescriptorMap} from './language-descriptors.js';
 
 export const SOTTAKU_SUPPORTED_LANGUAGES = ['ja', 'ko', 'zh', 'en', 'es', 'de', 'fr', 'it', 'ru', 'la'];
 
+export const SOTTAKU_KNOWN_LANGUAGES = [...SOTTAKU_SUPPORTED_LANGUAGES, 'vi'];
+
 /**
  * @param {unknown} supportedLanguages
  * @returns {string[]}
@@ -62,6 +64,7 @@ export function getSottakuLanguageFlag(language) {
         case 'it': return '\uD83C\uDDEE\uD83C\uDDF9'; // IT flag
         case 'ru': return '\uD83C\uDDF7\uD83C\uDDFA'; // RU flag
         case 'la': return '\uD83C\uDFDB\uFE0F'; // Classical building for Latin
+        case 'vi': return '\uD83C\uDDFB\uD83C\uDDF3'; // VN flag
         default: return '\uD83C\uDF10'; // Globe
     }
 }

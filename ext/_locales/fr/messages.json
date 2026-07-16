@@ -1652,6 +1652,9 @@
     "settings_sottaku_language_korean": {
         "message": "Coréen"
     },
+    "settings_sottaku_language_vietnamese": {
+        "message": "Vietnamien"
+    },
     "settings_sottaku_language_order_description": {
         "message": "Choisissez les langues Sottaku affichées dans la fenêtre contextuelle et leur ordre (utilisé pour le mode mixte et les solutions de secours)."
     },

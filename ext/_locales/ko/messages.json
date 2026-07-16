@@ -1652,6 +1652,9 @@
     "settings_sottaku_language_korean": {
         "message": "한국어"
     },
+    "settings_sottaku_language_vietnamese": {
+        "message": "베트남어"
+    },
     "settings_sottaku_language_order_description": {
         "message": "팝업에 표시할 Sottaku 언어와 순서를 선택합니다(혼합 모드 및 폴백에 사용)."
     },

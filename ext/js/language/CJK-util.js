@@ -24,34 +24,53 @@ const CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B_RANGE = [0x20000, 0x2a6df];
 /** @type {import('CJK-util').CodepointRange} */
 const CJK_UNIFIED_IDEOGRAPHS_EXTENSION_C_RANGE = [0x2a700, 0x2b73f];
 /** @type {import('CJK-util').CodepointRange} */
-const CJK_UNIFIED_IDEOGRAPHS_EXTENSION_D_RANGE = [0x2b740, 0x2b81f];
+const CJK_UNIFIED_IDEOGRAPHS_EXTENSION_D_RANGE = [0x2b740, 0x2b81d];
 /** @type {import('CJK-util').CodepointRange} */
-const CJK_UNIFIED_IDEOGRAPHS_EXTENSION_E_RANGE = [0x2b820, 0x2ceaf];
+const CJK_UNIFIED_IDEOGRAPHS_EXTENSION_E_RANGE = [0x2b820, 0x2cead];
 /** @type {import('CJK-util').CodepointRange} */
-const CJK_UNIFIED_IDEOGRAPHS_EXTENSION_F_RANGE = [0x2ceb0, 0x2ebef];
+const CJK_UNIFIED_IDEOGRAPHS_EXTENSION_F_RANGE = [0x2ceb0, 0x2ebe0];
 /** @type {import('CJK-util').CodepointRange} */
-const CJK_UNIFIED_IDEOGRAPHS_EXTENSION_G_RANGE = [0x30000, 0x3134f];
+const CJK_UNIFIED_IDEOGRAPHS_EXTENSION_G_RANGE = [0x30000, 0x3134a];
 /** @type {import('CJK-util').CodepointRange} */
 const CJK_UNIFIED_IDEOGRAPHS_EXTENSION_H_RANGE = [0x31350, 0x323af];
 /** @type {import('CJK-util').CodepointRange} */
-const CJK_UNIFIED_IDEOGRAPHS_EXTENSION_I_RANGE = [0x2ebf0, 0x2ee5f];
+const CJK_UNIFIED_IDEOGRAPHS_EXTENSION_I_RANGE = [0x2ebf0, 0x2ee5d];
+/** @type {import('CJK-util').CodepointRange} */
+const CJK_UNIFIED_IDEOGRAPHS_EXTENSION_J_RANGE = [0x323b0, 0x33479];
+/** @type {import('CJK-util').CodepointRange[]} */
+const CJK_UNIFIED_IDEOGRAPHS_COMPATIBILITY_RANGES = [
+    [0xfa0e, 0xfa0f],
+    [0xfa11, 0xfa11],
+    [0xfa13, 0xfa14],
+    [0xfa1f, 0xfa1f],
+    [0xfa21, 0xfa21],
+    [0xfa23, 0xfa24],
+    [0xfa27, 0xfa29],
+];
 /** @type {import('CJK-util').CodepointRange} */
 const CJK_COMPATIBILITY_IDEOGRAPHS_RANGE = [0xf900, 0xfaff];
 /** @type {import('CJK-util').CodepointRange} */
 const CJK_COMPATIBILITY_IDEOGRAPHS_SUPPLEMENT_RANGE = [0x2f800, 0x2fa1f];
 
-/** @type {import('CJK-util').CodepointRange[]} */
-export const CJK_IDEOGRAPH_RANGES = [
+/** Unicode 17 assigned Unified_Ideograph ranges. @type {import('CJK-util').CodepointRange[]} */
+export const CJK_UNIFIED_IDEOGRAPH_RANGES = [
     CJK_UNIFIED_IDEOGRAPHS_RANGE,
     CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A_RANGE,
+    ...CJK_UNIFIED_IDEOGRAPHS_COMPATIBILITY_RANGES,
     CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B_RANGE,
     CJK_UNIFIED_IDEOGRAPHS_EXTENSION_C_RANGE,
     CJK_UNIFIED_IDEOGRAPHS_EXTENSION_D_RANGE,
     CJK_UNIFIED_IDEOGRAPHS_EXTENSION_E_RANGE,
     CJK_UNIFIED_IDEOGRAPHS_EXTENSION_F_RANGE,
+    CJK_UNIFIED_IDEOGRAPHS_EXTENSION_I_RANGE,
     CJK_UNIFIED_IDEOGRAPHS_EXTENSION_G_RANGE,
     CJK_UNIFIED_IDEOGRAPHS_EXTENSION_H_RANGE,
-    CJK_UNIFIED_IDEOGRAPHS_EXTENSION_I_RANGE,
+    CJK_UNIFIED_IDEOGRAPHS_EXTENSION_J_RANGE,
+];
+
+/** @type {import('CJK-util').CodepointRange[]} */
+export const CJK_IDEOGRAPH_RANGES = [
+    ...CJK_UNIFIED_IDEOGRAPH_RANGES,
     CJK_COMPATIBILITY_IDEOGRAPHS_RANGE,
     CJK_COMPATIBILITY_IDEOGRAPHS_SUPPLEMENT_RANGE,
 ];

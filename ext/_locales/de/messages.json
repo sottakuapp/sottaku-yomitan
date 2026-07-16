@@ -1652,6 +1652,9 @@
     "settings_sottaku_language_korean": {
         "message": "Koreanisch"
     },
+    "settings_sottaku_language_vietnamese": {
+        "message": "Vietnamesisch"
+    },
     "settings_sottaku_language_order_description": {
         "message": "Wählen Sie, welche Sottaku-Sprachen im Popup erscheinen und in welcher Reihenfolge (für gemischten Modus und Fallbacks verwendet)."
     },

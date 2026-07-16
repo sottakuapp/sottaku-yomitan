@@ -1652,6 +1652,9 @@
     "settings_sottaku_language_korean": {
         "message": "Korea"
     },
+    "settings_sottaku_language_vietnamese": {
+        "message": "Bahasa Vietnam"
+    },
     "settings_sottaku_language_order_description": {
         "message": "Pilih bahasa Sottaku yang tampil di popup dan urutannya (digunakan untuk mode campuran dan fallback)."
     },

@@ -3,8 +3,14 @@
 import {SottakuClient} from '../comm/sottaku-client.js';
 import {ExtensionError} from '../core/extension-error.js';
 import {toError} from '../core/to-error.js';
+import {CJK_IDEOGRAPH_RANGES} from '../language/CJK-util.js';
 import {convertKatakanaToHiragana} from '../language/ja/japanese.js';
-import {getSottakuLanguageFlag, normalizeSottakuLanguages, SOTTAKU_SUPPORTED_LANGUAGES} from '../language/sottaku-languages.js';
+import {
+    getSottakuLanguageFlag,
+    normalizeSottakuLanguages,
+    normalizeSottakuSupportedLanguages,
+    SOTTAKU_SUPPORTED_LANGUAGES,
+} from '../language/sottaku-languages.js';
 
 const HIRAGANA_RANGE = [0x3040, 0x309f];
 const KATAKANA_RANGES = [
@@ -19,11 +25,7 @@ const HANGUL_RANGES = [
     [0xac00, 0xd7af],
     [0xd7b0, 0xd7ff],
 ];
-const HAN_RANGES = [
-    [0x3400, 0x4dbf],
-    [0x4e00, 0x9fff],
-    [0xf900, 0xfaff],
-];
+const HAN_RANGES = CJK_IDEOGRAPH_RANGES;
 const LANGUAGE_HINT_MIN_COUNT = 3;
 const LANGUAGE_HINT_MIN_RATIO = 0.02;
 const SOTTAKU_SETTINGS_TTL_MS = 5 * 60 * 1000;
@@ -464,6 +466,12 @@ export class SottakuIntegration {
         /** @type {string[]} */
         this._supportedLanguages = [...SOTTAKU_SUPPORTED_LANGUAGES];
         /** @type {string} */
+        this._supportedLanguagesCacheKey = '';
+        /** @type {number} */
+        this._supportedLanguagesTimestamp = 0;
+        /** @type {Promise<void>|null} */
+        this._supportedLanguagesPromise = null;
+        /** @type {string} */
         this._scanCacheConfigKey = '';
         /** @type {Map<string, {expiresAt: number, value: {results: any[], originalTextLength: number, displayPreferences: unknown | null, languageResults?: {language: string, results: any[], originalTextLength: number}[] | null}}>} */
         this._scanResponseCache = new Map();
@@ -503,6 +511,12 @@ export class SottakuIntegration {
             this._scanCacheConfigKey = automaticCacheKey;
             this._scanResponseCache.clear();
         }
+        if (automaticCacheKey !== this._supportedLanguagesCacheKey) {
+            this._supportedLanguagesCacheKey = automaticCacheKey;
+            this._supportedLanguages = [...SOTTAKU_SUPPORTED_LANGUAGES];
+            this._supportedLanguagesTimestamp = 0;
+            this._supportedLanguagesPromise = null;
+        }
         if (automaticCacheKey !== this._automaticLocaleCacheKey) {
             this._automaticLocaleCacheKey = automaticCacheKey;
             this._automaticLocale = null;
@@ -538,6 +552,9 @@ export class SottakuIntegration {
             return {dictionaryEntries: [], originalTextLength: 0};
         }
 
+        if (this._shouldResolveSupportedLanguages(sottaku, details)) {
+            await this._resolveSupportedLanguages();
+        }
         const {languages, autoPick, hintLanguage} = this._resolveLanguages(query, sottaku, general.language, details);
         const localePromise = this._resolveLocale();
         const shouldResolveDisplayPreferences = languages.some((language) => (
@@ -1104,6 +1121,12 @@ export class SottakuIntegration {
             case 'ko': return {languages: ['ko'], autoPick: false, hintLanguage: null};
             case 'zh': return {languages: ['zh'], autoPick: false, hintLanguage: null};
             case 'en': return {languages: ['en'], autoPick: false, hintLanguage: null};
+            case 'vi': {
+                if (supportedLanguages.includes('vi')) {
+                    return {languages: ['vi'], autoPick: false, hintLanguage: null};
+                }
+                break;
+            }
             case 'mixed': {
                 const preferredScanLanguage = this._resolvePreferredScanLanguage(details, preferredLanguages);
                 if (preferredScanLanguage !== null) {
@@ -1113,7 +1136,7 @@ export class SottakuIntegration {
             }
         }
         const detected = this._detectLanguageFromText(text, details);
-        if (detected?.language && detected.confidence === 'strong') {
+        if (detected?.language && detected.confidence === 'strong' && supportedLanguages.includes(detected.language)) {
             return {languages: [detected.language], autoPick: false, hintLanguage: null};
         }
 
@@ -1127,6 +1150,67 @@ export class SottakuIntegration {
 
         const fallbackLanguage = candidates[0] || defaultLanguage || 'ja';
         return {languages: [fallbackLanguage], autoPick: false, hintLanguage: null};
+    }
+
+    /**
+     * Dynamic server capabilities are only needed when an admin-preview
+     * language is actually in play. Public languages remain available from
+     * the bundled fallback even while the server cannot be reached.
+     * @param {import('settings').SottakuOptions} sottakuOptions
+     * @param {import('api').FindTermsDetails} [details]
+     * @returns {boolean}
+     */
+    _shouldResolveSupportedLanguages(sottakuOptions, details) {
+        if (sottakuOptions.languageMode === 'vi') { return true; }
+        if (Array.isArray(sottakuOptions.preferredLanguages) && sottakuOptions.preferredLanguages.includes('vi')) {
+            return true;
+        }
+        const hints = details?.languageHints;
+        if (!hints || typeof hints !== 'object') { return false; }
+        return Object.values(hints).some((value) => (
+            typeof value === 'string' && value.trim().toLowerCase().split(/[-_]/, 1)[0] === 'vi'
+        ));
+    }
+
+    /**
+     * Load the authenticated user's server-supported languages before routing
+     * a scan that may target an admin-preview language.
+     * @returns {Promise<void>}
+     */
+    async _resolveSupportedLanguages() {
+        const now = Date.now();
+        if (
+            this._supportedLanguagesTimestamp > 0 &&
+            now - this._supportedLanguagesTimestamp < SOTTAKU_SETTINGS_TTL_MS
+        ) {
+            return;
+        }
+        if (this._supportedLanguagesPromise !== null) {
+            return await this._supportedLanguagesPromise;
+        }
+
+        this._supportedLanguagesPromise = (async () => {
+            try {
+                const response = await this._client.getSupportedLanguages();
+                const data = (
+                    response !== null && typeof response === 'object' && !Array.isArray(response)
+                ) ? response : {};
+                const nested = (
+                    data.data !== null && typeof data.data === 'object' && !Array.isArray(data.data)
+                ) ? data.data : data;
+                const candidates = Array.isArray(nested.languages) ?
+                    nested.languages :
+                    (Array.isArray(nested.supported_languages) ? nested.supported_languages : []);
+                this._supportedLanguages = normalizeSottakuSupportedLanguages(candidates);
+            } catch (e) {
+                // Best-effort: keep the last safe capability set. The server
+                // remains authoritative for every subsequent dictionary call.
+            } finally {
+                this._supportedLanguagesTimestamp = Date.now();
+                this._supportedLanguagesPromise = null;
+            }
+        })();
+        return await this._supportedLanguagesPromise;
     }
 
     /**
@@ -1150,6 +1234,7 @@ export class SottakuIntegration {
     _detectLanguageFromText(text, details) {
         const trimmed = (text || '').trim();
         const counts = getCjkScriptCounts(trimmed);
+        const hintedLanguage = this._detectLanguageFromHints(details);
         if (counts.hiragana + counts.katakana > 0) {
             return {language: 'ja', confidence: 'strong'};
         }
@@ -1157,9 +1242,12 @@ export class SottakuIntegration {
             return {language: 'ko', confidence: 'strong'};
         }
         if (counts.han > 0) {
+            if (hintedLanguage?.language === 'vi' && hintedLanguage.confidence === 'strong') {
+                return hintedLanguage;
+            }
             return {language: 'zh', confidence: 'strong'};
         }
-        return this._detectLanguageFromHints(details);
+        return hintedLanguage;
     }
 
     /**
@@ -1173,6 +1261,7 @@ export class SottakuIntegration {
         if (documentLang.startsWith('ja')) { return {language: 'ja', confidence: 'strong'}; }
         if (documentLang.startsWith('ko')) { return {language: 'ko', confidence: 'strong'}; }
         if (documentLang.startsWith('zh')) { return {language: 'zh', confidence: 'strong'}; }
+        if (documentLang.startsWith('vi')) { return {language: 'vi', confidence: 'strong'}; }
         if (documentLang.startsWith('en')) { return {language: 'en', confidence: 'weak'}; }
 
         const counts = this._normalizeScriptCounts(languageHints.documentScriptCounts);

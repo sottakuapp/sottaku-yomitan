@@ -1652,6 +1652,9 @@
     "settings_sottaku_language_korean": {
         "message": "Tiếng Hàn"
     },
+    "settings_sottaku_language_vietnamese": {
+        "message": "Tiếng Việt"
+    },
     "settings_sottaku_language_order_description": {
         "message": "Chọn các ngôn ngữ Sottaku hiển thị trong cửa sổ bật lên và thứ tự của chúng (dùng cho chế độ kết hợp và dự phòng)."
     },

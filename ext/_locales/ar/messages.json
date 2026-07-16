@@ -1652,6 +1652,9 @@
     "settings_sottaku_language_korean": {
         "message": "الكورية"
     },
+    "settings_sottaku_language_vietnamese": {
+        "message": "الفيتنامية"
+    },
     "settings_sottaku_language_order_description": {
         "message": "اختر لغات Sottaku التي تظهر في النافذة المنبثقة وترتيبها (تُستخدم للوضع المختلط والبدائل)."
     },

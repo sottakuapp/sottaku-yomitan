@@ -24,6 +24,7 @@ import {safePerformance} from '../core/safe-performance.js';
 import {clone} from '../core/utilities.js';
 import {anyNodeMatchesSelector, everyNodeMatchesSelector, getActiveModifiers, getActiveModifiersAndButtons, isPointInSelection} from '../dom/document-util.js';
 import {TextSourceElement} from '../dom/text-source-element.js';
+import {CJK_IDEOGRAPH_RANGES} from './CJK-util.js';
 
 const SCAN_RESOLUTION_EXCLUDED_LANGUAGES = new Set(['ja', 'zh', 'yue', 'ko']);
 const DOCUMENT_LANGUAGE_HINT_TTL_MS = 5 * 60 * 1000;
@@ -49,11 +50,7 @@ const HANGUL_RANGES = [
     [0xac00, 0xd7af],
     [0xd7b0, 0xd7ff],
 ];
-const HAN_RANGES = [
-    [0x3400, 0x4dbf],
-    [0x4e00, 0x9fff],
-    [0xf900, 0xfaff],
-];
+const HAN_RANGES = CJK_IDEOGRAPH_RANGES;
 
 /**
  * @param {number} codePoint

@@ -25,6 +25,117 @@ import {describe, expect, test, vi} from 'vitest';
 import {SottakuIntegration} from '../ext/js/background/sottaku-integration.js';
 
 describe('SottakuIntegration', () => {
+    test('routes explicit Vietnamese mode to Vietnamese only', () => {
+        const integration = new SottakuIntegration(null);
+        integration._supportedLanguages = ['ja', 'vi'];
+        const resolved = integration._resolveLanguages(
+            'học sinh',
+            {languageMode: 'vi', preferredLanguages: ['ja', 'vi']},
+            'ja',
+        );
+
+        expect(resolved).toStrictEqual({languages: ['vi'], autoPick: false, hintLanguage: null});
+    });
+
+    test('does not route Vietnamese before the server grants preview access', () => {
+        const integration = new SottakuIntegration(null);
+        integration._supportedLanguages = ['ja', 'ko', 'zh', 'en'];
+        const resolved = integration._resolveLanguages(
+            'học sinh',
+            {languageMode: 'vi', preferredLanguages: ['vi', 'ja']},
+            'ja',
+            {languageHints: {documentLang: 'vi'}},
+        );
+
+        expect(resolved).toStrictEqual({languages: ['ja'], autoPick: false, hintLanguage: null});
+    });
+
+    test('loads authenticated server capabilities before an actual Vietnamese scan', async () => {
+        const integration = new SottakuIntegration(null);
+        integration.configure({
+            general: {
+                language: 'ja',
+                maxResults: 32,
+            },
+            sottaku: {
+                enabled: true,
+                authToken: 'admin-token',
+                apiBaseUrl: 'https://sottaku.app/api/v1',
+                cookieDomain: 'https://sottaku.app',
+                locale: 'en',
+                languageMode: 'vi',
+                preferredLanguages: ['vi', 'ja'],
+            },
+        });
+        integration._client.getSupportedLanguages = vi.fn(async () => ({
+            languages: ['ja', 'vi'],
+        }));
+        integration._client.scan = vi.fn(async (_text, language) => ({
+            results: [],
+            originalTextLength: 0,
+            language,
+        }));
+
+        await integration.findTerms('học sinh');
+        await integration.findTerms('học sinh');
+
+        expect(integration._client.getSupportedLanguages).toHaveBeenCalledTimes(1);
+        expect(integration._client.scan).toHaveBeenCalledTimes(1);
+        expect(integration._client.scan.mock.calls[0][1]).toBe('vi');
+    });
+
+    test('keeps Vietnamese scans disabled when the authenticated server omits it', async () => {
+        const integration = new SottakuIntegration(null);
+        integration.configure({
+            general: {
+                language: 'ja',
+                maxResults: 32,
+            },
+            sottaku: {
+                enabled: true,
+                authToken: 'regular-token',
+                apiBaseUrl: 'https://sottaku.app/api/v1',
+                cookieDomain: 'https://sottaku.app',
+                locale: 'en',
+                languageMode: 'vi',
+                preferredLanguages: ['vi', 'ja'],
+            },
+        });
+        integration._client.getSupportedLanguages = vi.fn(async () => ({
+            languages: ['ja'],
+        }));
+        integration._client.scan = vi.fn(async (_text, language) => ({
+            results: [],
+            originalTextLength: 0,
+            language,
+        }));
+
+        await integration.findTerms('học sinh');
+
+        expect(integration._client.scan).toHaveBeenCalledTimes(1);
+        expect(integration._client.scan.mock.calls[0][1]).toBe('ja');
+    });
+
+    test('uses a Vietnamese document hint for Han-only text', () => {
+        const integration = new SottakuIntegration(null);
+        integration._supportedLanguages = ['ja', 'vi'];
+        const detected = integration._detectLanguageFromText('學生', {
+            languageHints: {documentLang: 'vi'},
+        });
+
+        expect(detected).toStrictEqual({language: 'vi', confidence: 'strong'});
+    });
+
+    test('recognizes assigned Extension J as Han for Vietnamese hints', () => {
+        const integration = new SottakuIntegration(null);
+        integration._supportedLanguages = ['ja', 'vi'];
+        const detected = integration._detectLanguageFromText('\u{33479}', {
+            languageHints: {documentLang: 'vi'},
+        });
+
+        expect(detected).toStrictEqual({language: 'vi', confidence: 'strong'});
+    });
+
     test('single-language scans send the raw query once and trust backend deinflection', async () => {
         const getDeinflectionTextVariants = vi.fn(async () => [
             {originalText: 'Getting', deinflectedText: 'get'},

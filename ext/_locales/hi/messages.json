@@ -1652,6 +1652,9 @@
     "settings_sottaku_language_korean": {
         "message": "कोरियाई"
     },
+    "settings_sottaku_language_vietnamese": {
+        "message": "वियतनामी"
+    },
     "settings_sottaku_language_order_description": {
         "message": "चुनें कि पॉपअप में कौन-सी Sottaku भाषाएँ दिखें और उनका क्रम क्या हो (मिश्रित मोड और फॉलबैक के लिए उपयोग)।"
     },

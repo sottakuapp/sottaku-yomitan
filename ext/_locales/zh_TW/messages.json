@@ -1652,6 +1652,9 @@
     "settings_sottaku_language_korean": {
         "message": "韓文"
     },
+    "settings_sottaku_language_vietnamese": {
+        "message": "越南語"
+    },
     "settings_sottaku_language_order_description": {
         "message": "選擇哪些 Sottaku 語言在彈出視窗中顯示及其順序（用於混合模式與備援）。"
     },

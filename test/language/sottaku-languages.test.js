@@ -20,15 +20,19 @@ import {
     getSottakuLanguageFlag,
     normalizeSottakuLanguages,
     normalizeSottakuSupportedLanguages,
+    SOTTAKU_KNOWN_LANGUAGES,
 } from '../../ext/js/language/sottaku-languages.js';
 
 describe('sottaku-languages', () => {
     test('retains built-in language support when server languages omit it', () => {
-        expect(normalizeSottakuSupportedLanguages(['ja', 'ko', 'zh'])).toStrictEqual(['ja', 'ko', 'zh', 'en', 'es', 'de', 'fr', 'it', 'ru']);
+        expect(normalizeSottakuSupportedLanguages(['ja', 'ko', 'zh'])).toStrictEqual(['ja', 'ko', 'zh', 'en', 'es', 'de', 'fr', 'it', 'ru', 'la']);
     });
 
-    test('includes European and Russian study languages in the built-in language list', () => {
-        expect(normalizeSottakuSupportedLanguages([])).toStrictEqual(['ja', 'ko', 'zh', 'en', 'es', 'de', 'fr', 'it', 'ru']);
+    test('only exposes Vietnamese when the authenticated server supports it', () => {
+        expect(normalizeSottakuSupportedLanguages([])).toStrictEqual(['ja', 'ko', 'zh', 'en', 'es', 'de', 'fr', 'it', 'ru', 'la']);
+        expect(normalizeSottakuSupportedLanguages(['ja', 'vi'])).toStrictEqual(['ja', 'vi', 'ko', 'zh', 'en', 'es', 'de', 'fr', 'it', 'ru', 'la']);
+        expect(normalizeSottakuLanguages(['vi'], 'ja', ['ja', 'vi'])).toStrictEqual(['vi']);
+        expect(SOTTAKU_KNOWN_LANGUAGES).toContain('vi');
     });
 
     test('keeps English as a valid preferred language even when the server list is partial', () => {
@@ -45,5 +49,6 @@ describe('sottaku-languages', () => {
         expect(getSottakuLanguageFlag('fr')).toBe('\uD83C\uDDEB\uD83C\uDDF7');
         expect(getSottakuLanguageFlag('it')).toBe('\uD83C\uDDEE\uD83C\uDDF9');
         expect(getSottakuLanguageFlag('ru')).toBe('\uD83C\uDDF7\uD83C\uDDFA');
+        expect(getSottakuLanguageFlag('vi')).toBe('\uD83C\uDDFB\uD83C\uDDF3');
     });
 });

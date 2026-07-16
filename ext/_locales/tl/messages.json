@@ -1652,6 +1652,9 @@
     "settings_sottaku_language_korean": {
         "message": "Koreano"
     },
+    "settings_sottaku_language_vietnamese": {
+        "message": "Biyetnames"
+    },
     "settings_sottaku_language_order_description": {
         "message": "Piliin kung aling mga wikang Sottaku ang lalabas sa popup at ang kanilang ayos (ginagamit para sa mixed mode at fallback)."
     },
