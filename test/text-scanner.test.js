@@ -51,6 +51,65 @@ describe('TextScanner', () => {
     const {window, teardown} = textScannerTestEnv;
     afterAll(() => teardown(global));
 
+    test('keeps Arabic clitics and Devanagari combining sequences in one lookup variant', () => {
+        const scanner = createScanner();
+        const arabic = 'قال وبالمدرسة اليوم';
+        const arabicAnchor = arabic.indexOf('بالمدرسة') + 4;
+        const hindi = 'वह विद्यालय में है';
+        const hindiAnchor = hindi.indexOf('विद्यालय') + 5;
+
+        // eslint-disable-next-line no-underscore-dangle
+        expect(scanner._getComplexScriptSearchVariants(arabic, arabicAnchor)).toStrictEqual([{
+            text: 'وبالمدرسة',
+            startOffset: arabicAnchor - arabic.indexOf('وبالمدرسة'),
+            anchorOffset: arabicAnchor - arabic.indexOf('وبالمدرسة'),
+        }]);
+        // eslint-disable-next-line no-underscore-dangle
+        expect(scanner._getComplexScriptSearchVariants(hindi, hindiAnchor)).toStrictEqual([{
+            text: 'विद्यालय',
+            startOffset: hindiAnchor - hindi.indexOf('विद्यालय'),
+            anchorOffset: hindiAnchor - hindi.indexOf('विद्यालय'),
+        }]);
+    });
+
+    test('uses the whole Arabic word variant even when the primary scanner language is Japanese', () => {
+        const scanner = createScanner();
+        // eslint-disable-next-line no-underscore-dangle
+        scanner._language = 'ja';
+        vi.spyOn(scanner, 'getTextSourceContent').mockReturnValue('مدرسة');
+        // eslint-disable-next-line no-underscore-dangle
+        vi.spyOn(scanner, '_getBidirectionalTextSourceContent').mockReturnValue({
+            text: 'قال وبالمدرسة اليوم',
+            startOffset: 8,
+        });
+
+        // eslint-disable-next-line no-underscore-dangle
+        const variants = scanner._getTermSearchVariants({}, 10, false, 'mouse');
+
+        expect(variants[0]).toStrictEqual({text: 'وبالمدرسة', startOffset: 4, anchorOffset: 4});
+        expect(variants[1]).toStrictEqual({text: 'مدرسة', startOffset: 0, anchorOffset: 0});
+    });
+
+    test('reports Arabic and Devanagari document script counts to remote language routing', () => {
+        const scanner = createScanner();
+        const previousLang = window.document.documentElement.lang;
+        const previousBody = window.document.body.textContent;
+        window.document.documentElement.lang = 'ar';
+        window.document.body.textContent = 'هذه مدرسة। यह विद्यालय है';
+
+        // eslint-disable-next-line no-underscore-dangle
+        scanner._documentLanguageHintsTimestamp = 0;
+        // eslint-disable-next-line no-underscore-dangle
+        const hints = scanner._getDocumentLanguageHints();
+
+        expect(hints?.documentLang).toBe('ar');
+        expect(hints?.documentScriptCounts?.arabic).toBeGreaterThan(0);
+        expect(hints?.documentScriptCounts?.devanagari).toBeGreaterThan(0);
+
+        window.document.documentElement.lang = previousLang;
+        window.document.body.textContent = previousBody;
+    });
+
     test('builds English search variants from earlier word boundaries', () => {
         const scanner = createScanner();
 

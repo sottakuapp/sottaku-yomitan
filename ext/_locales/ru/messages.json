@@ -1655,6 +1655,15 @@
     "settings_sottaku_language_vietnamese": {
         "message": "Вьетнамский"
     },
+    "settings_sottaku_language_portuguese": {
+        "message": "Португальский"
+    },
+    "settings_sottaku_language_arabic": {
+        "message": "Арабский (современный литературный арабский)"
+    },
+    "settings_sottaku_language_hindi": {
+        "message": "Хинди"
+    },
     "settings_sottaku_language_order_description": {
         "message": "Выберите, какие языки Sottaku отображаются во всплывающем окне и их порядок (используется для смешанного режима и резервных вариантов)."
     },

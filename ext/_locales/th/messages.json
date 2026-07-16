@@ -1655,6 +1655,15 @@
     "settings_sottaku_language_vietnamese": {
         "message": "ภาษาเวียดนาม"
     },
+    "settings_sottaku_language_portuguese": {
+        "message": "ภาษาโปรตุเกส"
+    },
+    "settings_sottaku_language_arabic": {
+        "message": "ภาษาอาหรับ (ภาษาอาหรับมาตรฐานสมัยใหม่)"
+    },
+    "settings_sottaku_language_hindi": {
+        "message": "ภาษาฮินดี"
+    },
     "settings_sottaku_language_order_description": {
         "message": "เลือกว่าภาษา Sottaku ใดจะแสดงในป็อปอัปและลำดับของภาษา (ใช้สำหรับโหมดผสมและตัวสำรอง)"
     },

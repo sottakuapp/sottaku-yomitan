@@ -1655,6 +1655,15 @@
     "settings_sottaku_language_vietnamese": {
         "message": "Tiếng Việt"
     },
+    "settings_sottaku_language_portuguese": {
+        "message": "Tiếng Bồ Đào Nha"
+    },
+    "settings_sottaku_language_arabic": {
+        "message": "Tiếng Ả Rập (Ả Rập Hiện đại Chuẩn)"
+    },
+    "settings_sottaku_language_hindi": {
+        "message": "Tiếng Hindi"
+    },
     "settings_sottaku_language_order_description": {
         "message": "Chọn các ngôn ngữ Sottaku hiển thị trong cửa sổ bật lên và thứ tự của chúng (dùng cho chế độ kết hợp và dự phòng)."
     },

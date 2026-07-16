@@ -1655,6 +1655,15 @@
     "settings_sottaku_language_vietnamese": {
         "message": "베트남어"
     },
+    "settings_sottaku_language_portuguese": {
+        "message": "포르투갈어"
+    },
+    "settings_sottaku_language_arabic": {
+        "message": "아랍어(현대 표준 아랍어)"
+    },
+    "settings_sottaku_language_hindi": {
+        "message": "힌디어"
+    },
     "settings_sottaku_language_order_description": {
         "message": "팝업에 표시할 Sottaku 언어와 순서를 선택합니다(혼합 모드 및 폴백에 사용)."
     },

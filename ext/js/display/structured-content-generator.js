@@ -18,6 +18,7 @@
 
 import {DisplayContentManager} from '../display/display-content-manager.js';
 import {getMessage} from '../dom/i18n.js';
+import {setElementLanguageDirection} from '../language/text-direction.js';
 import {getLanguageFromText} from '../language/text-utilities.js';
 import {AnkiTemplateRendererContentManager} from '../templates/anki-template-renderer-content-manager.js';
 
@@ -207,7 +208,7 @@ export class StructuredContentGenerator {
                 if (language === null) {
                     const language2 = getLanguageFromText(content, language);
                     if (language2 !== null) {
-                        container.lang = language2;
+                        setElementLanguageDirection(container, language2);
                     }
                 }
             }
@@ -356,7 +357,7 @@ export class StructuredContentGenerator {
         const {data, lang} = content;
         if (typeof data === 'object' && data !== null) { this._setElementDataset(node, data); }
         if (typeof lang === 'string') {
-            node.lang = lang;
+            setElementLanguageDirection(node, lang);
             language = lang;
         }
         switch (type) {
@@ -490,7 +491,7 @@ export class StructuredContentGenerator {
 
         const {lang} = content;
         if (typeof lang === 'string') {
-            node.lang = lang;
+            setElementLanguageDirection(node, lang);
             language = lang;
         }
 

@@ -50,7 +50,24 @@ const HANGUL_RANGES = [
     [0xac00, 0xd7af],
     [0xd7b0, 0xd7ff],
 ];
+const ARABIC_RANGES = [
+    [0x0600, 0x06ff],
+    [0x0750, 0x077f],
+    [0x0870, 0x089f],
+    [0x08a0, 0x08ff],
+    [0xfb50, 0xfdff],
+    [0xfe70, 0xfeff],
+    [0x10ec0, 0x10eff],
+];
+const DEVANAGARI_RANGES = [
+    [0x0900, 0x097f],
+    [0xa8e0, 0xa8ff],
+    [0x11b00, 0x11b5f],
+];
 const HAN_RANGES = CJK_IDEOGRAPH_RANGES;
+const SCRIPT_LETTER_OR_MARK_PATTERN = /[\p{Letter}\p{Mark}]/u;
+const COMPLEX_SCRIPT_CHARACTER_PATTERN = /[\p{Script=Arabic}\p{Script=Devanagari}]/u;
+const COMPLEX_SCRIPT_WORD_PATTERN = /[\p{Script=Arabic}\p{Script=Devanagari}\p{Mark}\u200c\u200d]+/gu;
 
 /**
  * @param {number} codePoint
@@ -68,10 +85,10 @@ function isCodePointInRanges(codePoint, ranges) {
 
 /**
  * @param {string} text
- * @returns {{han: number, hiragana: number, katakana: number, hangul: number}}
+ * @returns {{han: number, hiragana: number, katakana: number, hangul: number, arabic: number, devanagari: number}}
  */
-function getCjkScriptCounts(text) {
-    const counts = {han: 0, hiragana: 0, katakana: 0, hangul: 0};
+function getScriptCounts(text) {
+    const counts = {han: 0, hiragana: 0, katakana: 0, hangul: 0, arabic: 0, devanagari: 0};
     if (typeof text !== 'string' || text.length === 0) { return counts; }
     for (const char of text) {
         const codePoint = char.codePointAt(0);
@@ -86,6 +103,14 @@ function getCjkScriptCounts(text) {
         }
         if (isCodePointInRanges(codePoint, HANGUL_RANGES)) {
             counts.hangul += 1;
+            continue;
+        }
+        if (isCodePointInRanges(codePoint, ARABIC_RANGES) && SCRIPT_LETTER_OR_MARK_PATTERN.test(char)) {
+            counts.arabic += 1;
+            continue;
+        }
+        if (isCodePointInRanges(codePoint, DEVANAGARI_RANGES) && SCRIPT_LETTER_OR_MARK_PATTERN.test(char)) {
+            counts.devanagari += 1;
             continue;
         }
         if (isCodePointInRanges(codePoint, HAN_RANGES)) {
@@ -293,7 +318,7 @@ export class TextScanner extends EventDispatcher {
         /** @type {boolean} */
         this._isMouseOverText = false;
 
-        /** @type {?{documentLang?: string, documentScriptCounts?: {han?: number, hiragana?: number, katakana?: number, hangul?: number}}} */
+        /** @type {?{documentLang?: string, documentScriptCounts?: {han?: number, hiragana?: number, katakana?: number, hangul?: number, arabic?: number, devanagari?: number}}} */
         this._documentLanguageHints = null;
         /** @type {number} */
         this._documentLanguageHintsTimestamp = 0;
@@ -601,6 +626,31 @@ export class TextScanner extends EventDispatcher {
     }
 
     /**
+     * Return the complete Arabic or Devanagari orthographic word around the
+     * hover point. This keeps Arabic clitics and Indic combining sequences in
+     * one lookup even when the profile's primary Yomitan language is CJK.
+     * @param {string} text
+     * @param {number} anchorOffset
+     * @returns {{text: string, startOffset: number, anchorOffset: number}[]}
+     */
+    _getComplexScriptSearchVariants(text, anchorOffset) {
+        if (typeof text !== 'string' || text.length === 0 || !Number.isFinite(anchorOffset)) { return []; }
+        COMPLEX_SCRIPT_WORD_PATTERN.lastIndex = 0;
+        for (const match of text.matchAll(COMPLEX_SCRIPT_WORD_PATTERN)) {
+            const value = match[0];
+            const start = match.index ?? 0;
+            const end = start + value.length;
+            if (anchorOffset < start || anchorOffset >= end) { continue; }
+            return [{
+                text: value,
+                startOffset: anchorOffset - start,
+                anchorOffset: anchorOffset - start,
+            }];
+        }
+        return [];
+    }
+
+    /**
      * @param {number} scanLength
      * @returns {number}
      */
@@ -622,6 +672,20 @@ export class TextScanner extends EventDispatcher {
         const baseText = this.getTextSourceContent(textSource, scanLength, layoutAwareScan, pointerType);
         if (baseText.length === 0) { return []; }
         const defaultVariant = {text: baseText, startOffset: 0, anchorOffset: 0};
+
+        if (COMPLEX_SCRIPT_CHARACTER_PATTERN.test(baseText)) {
+            const bidirectional = this._getBidirectionalTextSourceContent(
+                textSource,
+                scanLength,
+                layoutAwareScan,
+                pointerType,
+            );
+            const variants = this._getComplexScriptSearchVariants(bidirectional.text, bidirectional.startOffset);
+            if (variants.length > 0) {
+                const [{text}] = variants;
+                return text === baseText ? variants : [...variants, defaultVariant];
+            }
+        }
 
         if (typeof this._language === 'string' && SCAN_RESOLUTION_EXCLUDED_LANGUAGES.has(this._language)) {
             const bidirectional = this._getBidirectionalTextSourceContent(
@@ -1539,7 +1603,7 @@ export class TextScanner extends EventDispatcher {
     }
 
     /**
-     * @returns {?{documentLang?: string, documentScriptCounts?: {han?: number, hiragana?: number, katakana?: number, hangul?: number}}}
+     * @returns {?{documentLang?: string, documentScriptCounts?: {han?: number, hiragana?: number, katakana?: number, hangul?: number, arabic?: number, devanagari?: number}}}
      */
     _getDocumentLanguageHints() {
         const now = Date.now();
@@ -1549,8 +1613,8 @@ export class TextScanner extends EventDispatcher {
 
         const documentLang = getDocumentLanguageTag(document);
         const sampleText = collectDocumentTextSample(document, DOCUMENT_LANGUAGE_SAMPLE_MAX_CHARS);
-        const scriptCounts = getCjkScriptCounts(sampleText);
-        const hasCounts = scriptCounts.han > 0 || scriptCounts.hiragana > 0 || scriptCounts.katakana > 0 || scriptCounts.hangul > 0;
+        const scriptCounts = getScriptCounts(sampleText);
+        const hasCounts = Object.values(scriptCounts).some((count) => count > 0);
 
         const hints = (documentLang || hasCounts) ?
             {

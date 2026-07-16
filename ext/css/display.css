@@ -1424,6 +1424,14 @@ button.action-button:active:not(:disabled) {
     font-size: 0.95em;
     font-style: italic;
 }
+.definition-item[data-dictionary='Sottaku'] .gloss-content.structured-content [data-sc-sottaku-field][dir='rtl'] {
+    text-align: start;
+    unicode-bidi: isolate;
+}
+.definition-item[data-dictionary='Sottaku'] .gloss-content.structured-content [data-sc-sottaku-field='exampleGroup'][dir='rtl'] {
+    border-left: 0;
+    border-right: 0.25em solid var(--accent-color);
+}
 .definition-item[data-dictionary='Sottaku'] .gloss-content.structured-content [data-sc-sottaku-field='empty'] {
     color: var(--text-color-light3);
     font-style: italic;
@@ -2309,11 +2317,4 @@ button.footer-notification-close-button {
 :root[dir='rtl'] #query-parser-content[data-term-spacing=true] .query-parser-term {
     margin-right: 0;
     margin-left: 0.2em;
-}
-:root[dir='rtl'] .definition-item[data-dictionary='Sottaku'] .gloss-content.structured-content [data-sc-sottaku-field] {
-    text-align: right;
-}
-:root[dir='rtl'] .definition-item[data-dictionary='Sottaku'] .gloss-content.structured-content [data-sc-sottaku-field='exampleGroup'] {
-    border-left: 0;
-    border-right: 0.25em solid var(--accent-color);
 }

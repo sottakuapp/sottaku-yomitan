@@ -25,6 +25,7 @@ import {
     getSottakuLanguageName,
     normalizeSottakuLanguages,
     normalizeSottakuSupportedLanguages,
+    SOTTAKU_ADMIN_PREVIEW_LANGUAGES,
     SOTTAKU_SUPPORTED_LANGUAGES,
 } from '../../language/sottaku-languages.js';
 
@@ -74,8 +75,14 @@ export class SottakuController {
         this._languageAddSelect = querySelectorNotNull(document, '#sottaku-language-add-select');
         /** @type {HTMLButtonElement} */
         this._languageAddButton = querySelectorNotNull(document, '#sottaku-language-add-button');
-        /** @type {HTMLOptionElement} */
-        this._vietnameseLanguageModeOption = querySelectorNotNull(document, '#sottaku-language-mode option[value="vi"]');
+        /** @type {Map<string, HTMLOptionElement>} */
+        this._adminPreviewLanguageModeOptions = new Map();
+        for (const language of SOTTAKU_ADMIN_PREVIEW_LANGUAGES) {
+            const option = /** @type {HTMLOptionElement} */ (
+                querySelectorNotNull(document, `#sottaku-language-mode option[value="${language}"]`)
+            );
+            this._adminPreviewLanguageModeOptions.set(language, option);
+        }
     }
 
     /** */
@@ -410,9 +417,11 @@ export class SottakuController {
 
     /** */
     _updateLanguageModeOptions() {
-        const vietnameseSupported = this._supportedLanguages.includes('vi');
-        this._vietnameseLanguageModeOption.hidden = !vietnameseSupported;
-        this._vietnameseLanguageModeOption.disabled = !vietnameseSupported;
+        for (const [language, option] of this._adminPreviewLanguageModeOptions) {
+            const supported = this._supportedLanguages.includes(language);
+            option.hidden = !supported;
+            option.disabled = !supported;
+        }
     }
 
     /**

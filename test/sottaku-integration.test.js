@@ -25,6 +25,81 @@ import {describe, expect, test, vi} from 'vitest';
 import {SottakuIntegration} from '../ext/js/background/sottaku-integration.js';
 
 describe('SottakuIntegration', () => {
+    test.each([
+        ['pt', 'coração'],
+        ['ar', 'مَدْرَسَة'],
+        ['hi', 'विद्यालय'],
+    ])('routes explicit %s preview mode only after the server grants it', (language, query) => {
+        const integration = new SottakuIntegration(null);
+        integration._supportedLanguages = ['ja', language];
+        expect(integration._resolveLanguages(
+            query,
+            {languageMode: language, preferredLanguages: [language, 'ja']},
+            'ja',
+        )).toStrictEqual({languages: [language], autoPick: false, hintLanguage: null});
+
+        integration._supportedLanguages = ['ja', 'ko', 'zh', 'en'];
+        expect(integration._resolveLanguages(
+            query,
+            {languageMode: language, preferredLanguages: [language, 'ja']},
+            'ja',
+        )).toStrictEqual({languages: ['ja'], autoPick: false, hintLanguage: null});
+    });
+
+    test('detects Arabic and Devanagari query scripts without relying on the UI language', () => {
+        const integration = new SottakuIntegration(null);
+
+        expect(integration._detectLanguageFromText('وَبِالْمَدْرَسَةِ')).toStrictEqual({language: 'ar', confidence: 'strong'});
+        expect(integration._detectLanguageFromText('विद्यालय')).toStrictEqual({language: 'hi', confidence: 'strong'});
+        expect(integration._detectLanguageFromText('،')).toBeNull();
+        expect(integration._detectLanguageFromText('।')).toBeNull();
+    });
+
+    test('requests authenticated capabilities for preview scripts and language hints', () => {
+        const integration = new SottakuIntegration(null);
+        const autoOptions = {languageMode: 'auto', preferredLanguages: ['ja']};
+
+        expect(integration._shouldResolveSupportedLanguages('المدرسة', autoOptions)).toBe(true);
+        expect(integration._shouldResolveSupportedLanguages('विद्यालय', autoOptions)).toBe(true);
+        expect(integration._shouldResolveSupportedLanguages('coração', autoOptions, {
+            languageHints: {documentLang: 'pt-BR'},
+        })).toBe(true);
+        expect(integration._shouldResolveSupportedLanguages('school', autoOptions, {
+            languageHints: {documentLang: 'en'},
+        })).toBe(false);
+    });
+
+    test('auto-routes Arabic only after authenticated capabilities include it', async () => {
+        const integration = new SottakuIntegration(null);
+        integration.configure({
+            general: {
+                language: 'ja',
+                maxResults: 32,
+            },
+            sottaku: {
+                enabled: true,
+                authToken: 'admin-token',
+                apiBaseUrl: 'https://sottaku.app/api/v1',
+                cookieDomain: 'https://sottaku.app',
+                locale: 'en',
+                languageMode: 'auto',
+                preferredLanguages: ['ja'],
+            },
+        });
+        integration._client.getSupportedLanguages = vi.fn(async () => ({languages: ['ja', 'ar']}));
+        integration._client.scan = vi.fn(async (_text, language) => ({
+            results: [],
+            originalTextLength: 0,
+            language,
+        }));
+
+        await integration.findTerms('المدرسة');
+
+        expect(integration._client.getSupportedLanguages).toHaveBeenCalledTimes(1);
+        expect(integration._client.scan).toHaveBeenCalledTimes(1);
+        expect(integration._client.scan.mock.calls[0][1]).toBe('ar');
+    });
+
     test('routes explicit Vietnamese mode to Vietnamese only', () => {
         const integration = new SottakuIntegration(null);
         integration._supportedLanguages = ['ja', 'vi'];

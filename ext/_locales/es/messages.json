@@ -1655,6 +1655,15 @@
     "settings_sottaku_language_vietnamese": {
         "message": "Vietnamita"
     },
+    "settings_sottaku_language_portuguese": {
+        "message": "Portugués"
+    },
+    "settings_sottaku_language_arabic": {
+        "message": "Árabe (árabe estándar moderno)"
+    },
+    "settings_sottaku_language_hindi": {
+        "message": "Hindi"
+    },
     "settings_sottaku_language_order_description": {
         "message": "Elige qué idiomas de Sottaku aparecen en la ventana emergente y su orden (usado para el modo mixto y alternativas)."
     },

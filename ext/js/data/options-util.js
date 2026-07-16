@@ -1901,8 +1901,8 @@ export class OptionsUtil {
                 /** @type {unknown} */ (sottaku?.preferredLanguages),
                 general?.language,
             );
-            /** @type {'auto' | 'ja' | 'ko' | 'zh' | 'en' | 'es' | 'de' | 'fr' | 'it' | 'vi' | 'mixed'} */
-            const languageMode = (sottaku?.languageMode === 'ja' || sottaku?.languageMode === 'ko' || sottaku?.languageMode === 'zh' || sottaku?.languageMode === 'en' || sottaku?.languageMode === 'es' || sottaku?.languageMode === 'de' || sottaku?.languageMode === 'fr' || sottaku?.languageMode === 'it' || sottaku?.languageMode === 'vi' || sottaku?.languageMode === 'auto' || sottaku?.languageMode === 'mixed') ?
+            /** @type {'auto' | 'ja' | 'ko' | 'zh' | 'en' | 'es' | 'de' | 'fr' | 'it' | 'vi' | 'pt' | 'ar' | 'hi' | 'mixed'} */
+            const languageMode = (sottaku?.languageMode === 'ja' || sottaku?.languageMode === 'ko' || sottaku?.languageMode === 'zh' || sottaku?.languageMode === 'en' || sottaku?.languageMode === 'es' || sottaku?.languageMode === 'de' || sottaku?.languageMode === 'fr' || sottaku?.languageMode === 'it' || sottaku?.languageMode === 'vi' || sottaku?.languageMode === 'pt' || sottaku?.languageMode === 'ar' || sottaku?.languageMode === 'hi' || sottaku?.languageMode === 'auto' || sottaku?.languageMode === 'mixed') ?
                 sottaku.languageMode :
                 'mixed';
 

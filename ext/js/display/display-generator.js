@@ -22,6 +22,7 @@ import {getDisambiguations, getGroupedPronunciations, getTermFrequency, groupKan
 import {HtmlTemplateCollection} from '../dom/html-template-collection.js';
 import {getMessage} from '../dom/i18n.js';
 import {convertKatakanaToHiragana, distributeFurigana, getKanaMorae, getPitchCategory, isCodePointKanji} from '../language/ja/japanese.js';
+import {setElementLanguageDirection} from '../language/text-direction.js';
 import {getLanguageFromText} from '../language/text-utilities.js';
 import {PronunciationGenerator} from './pronunciation-generator.js';
 import {StructuredContentGenerator} from './structured-content-generator.js';
@@ -1040,6 +1041,11 @@ export class DisplayGenerator {
         const node = this._instantiate('headword');
 
         const termContainer = this._querySelector(node, '.headword-term');
+        const headwordLanguage = typeof metadata?.language === 'string' && metadata.language.length > 0 ? metadata.language : this._language;
+        const headwordTextContainer = this._querySelector(node, '.headword-text-container');
+        node.dataset.language = headwordLanguage;
+        setElementLanguageDirection(headwordTextContainer, headwordLanguage);
+        setElementLanguageDirection(termContainer, headwordLanguage);
 
         node.dataset.isPrimary = `${isPrimaryAny}`;
         node.dataset.readingIsSame = `${reading === term}`;
@@ -1057,6 +1063,7 @@ export class DisplayGenerator {
         }
 
         const headwordReading = this._querySelector(node, '.headword-reading');
+        setElementLanguageDirection(headwordReading, headwordLanguage);
         const toneColorsEnabled = metadata?.toneColors === true && typeof reading === 'string' && reading.length > 0;
         const readingLanguage = typeof metadata?.language === 'string' ? metadata.language : null;
         const modeHint = typeof metadata?.chineseReadingDisplay === 'string' ? metadata.chineseReadingDisplay : null;
@@ -1067,6 +1074,7 @@ export class DisplayGenerator {
         } else {
             this._setTextContent(headwordReading, reading);
         }
+        setElementLanguageDirection(headwordReading, headwordLanguage);
         this._appendSottakuPitchAccent(
             this._querySelector(node, '.headword-sottaku-pitch-accent'),
             reading,
@@ -1078,6 +1086,7 @@ export class DisplayGenerator {
         } else {
             this._appendFurigana(termContainer, term, reading, this._appendKanjiLinks.bind(this));
         }
+        setElementLanguageDirection(termContainer, headwordLanguage);
 
         return node;
     }

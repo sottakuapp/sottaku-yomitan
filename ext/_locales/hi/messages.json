@@ -1655,6 +1655,15 @@
     "settings_sottaku_language_vietnamese": {
         "message": "वियतनामी"
     },
+    "settings_sottaku_language_portuguese": {
+        "message": "पुर्तगाली"
+    },
+    "settings_sottaku_language_arabic": {
+        "message": "अरबी (आधुनिक मानक अरबी)"
+    },
+    "settings_sottaku_language_hindi": {
+        "message": "हिन्दी"
+    },
     "settings_sottaku_language_order_description": {
         "message": "चुनें कि पॉपअप में कौन-सी Sottaku भाषाएँ दिखें और उनका क्रम क्या हो (मिश्रित मोड और फॉलबैक के लिए उपयोग)।"
     },

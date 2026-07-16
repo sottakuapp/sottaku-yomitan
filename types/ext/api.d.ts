@@ -57,6 +57,8 @@ export type FindTermsDetails = {
             hiragana?: number;
             katakana?: number;
             hangul?: number;
+            arabic?: number;
+            devanagari?: number;
         };
     };
 };

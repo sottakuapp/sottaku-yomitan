@@ -20,6 +20,7 @@ import {
     getSottakuLanguageFlag,
     normalizeSottakuLanguages,
     normalizeSottakuSupportedLanguages,
+    SOTTAKU_ADMIN_PREVIEW_LANGUAGES,
     SOTTAKU_KNOWN_LANGUAGES,
 } from '../../ext/js/language/sottaku-languages.js';
 
@@ -28,11 +29,15 @@ describe('sottaku-languages', () => {
         expect(normalizeSottakuSupportedLanguages(['ja', 'ko', 'zh'])).toStrictEqual(['ja', 'ko', 'zh', 'en', 'es', 'de', 'fr', 'it', 'ru', 'la']);
     });
 
-    test('only exposes Vietnamese when the authenticated server supports it', () => {
+    test('only exposes admin-preview languages when the authenticated server supports them', () => {
         expect(normalizeSottakuSupportedLanguages([])).toStrictEqual(['ja', 'ko', 'zh', 'en', 'es', 'de', 'fr', 'it', 'ru', 'la']);
-        expect(normalizeSottakuSupportedLanguages(['ja', 'vi'])).toStrictEqual(['ja', 'vi', 'ko', 'zh', 'en', 'es', 'de', 'fr', 'it', 'ru', 'la']);
-        expect(normalizeSottakuLanguages(['vi'], 'ja', ['ja', 'vi'])).toStrictEqual(['vi']);
-        expect(SOTTAKU_KNOWN_LANGUAGES).toContain('vi');
+        expect(normalizeSottakuSupportedLanguages(['ja', 'vi', 'pt', 'ar', 'hi'])).toStrictEqual([
+            'ja', 'vi', 'pt', 'ar', 'hi', 'ko', 'zh', 'en', 'es', 'de', 'fr', 'it', 'ru', 'la',
+        ]);
+        for (const language of SOTTAKU_ADMIN_PREVIEW_LANGUAGES) {
+            expect(normalizeSottakuLanguages([language], 'ja', ['ja', language])).toStrictEqual([language]);
+            expect(SOTTAKU_KNOWN_LANGUAGES).toContain(language);
+        }
     });
 
     test('keeps English as a valid preferred language even when the server list is partial', () => {
@@ -50,5 +55,8 @@ describe('sottaku-languages', () => {
         expect(getSottakuLanguageFlag('it')).toBe('\uD83C\uDDEE\uD83C\uDDF9');
         expect(getSottakuLanguageFlag('ru')).toBe('\uD83C\uDDF7\uD83C\uDDFA');
         expect(getSottakuLanguageFlag('vi')).toBe('\uD83C\uDDFB\uD83C\uDDF3');
+        expect(getSottakuLanguageFlag('pt')).toBe('\uD83C\uDDE7\uD83C\uDDF7');
+        expect(getSottakuLanguageFlag('ar')).toBe('\uD83C\uDDF8\uD83C\uDDE6');
+        expect(getSottakuLanguageFlag('hi')).toBe('\uD83C\uDDEE\uD83C\uDDF3');
     });
 });

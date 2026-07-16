@@ -35,6 +35,7 @@ const optionalDiacritics = [
 ];
 
 const diacriticsRegex = new RegExp(`[${optionalDiacritics.join('')}]`, 'g');
+const bidiControlRegex = /[\u061c\u200e\u200f\u202a-\u202e\u2066-\u2069]/gu;
 
 /** @type {import('language').TextProcessor} */
 export const removeArabicScriptDiacritics = {
@@ -48,6 +49,13 @@ export const removeTatweel = {
     name: 'Remove tatweel characters',
     description: 'لـكن → لكن',
     process: (text) => [text, text.replaceAll('ـ', '')],
+};
+
+/** @type {import('language').TextProcessor} */
+export const removeBidiControlCharacters = {
+    name: 'Remove bidirectional control characters',
+    description: 'Remove invisible display controls before dictionary lookup',
+    process: (text) => [text, text.replace(bidiControlRegex, '')],
 };
 
 /** @type {import('language').TextProcessor} */

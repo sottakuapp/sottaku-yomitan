@@ -128,6 +128,54 @@ describe('DisplayGenerator', () => {
         expect(container.textContent).toBe('');
     });
 
+    test('renders Arabic Sottaku headwords RTL under an LTR extension UI', () => {
+        const contentManager = /** @type {import('../ext/js/display/display-content-manager.js').DisplayContentManager} */ ({});
+        const generator = new DisplayGenerator(contentManager, null);
+        generator.updateLanguage('en');
+        const templatesDocument = window.document.implementation.createHTMLDocument('templates');
+        templatesDocument.body.innerHTML = `
+            <template id="headword-template" data-remove-whitespace-text="true"><div class="headword">
+                <div class="headword-text-container">
+                    <span class="headword-term"></span>
+                    <span class="headword-reading"></span>
+                </div>
+                <div class="headword-sottaku-pitch-accent" hidden></div>
+            </div></template>
+        `;
+        Reflect.get(generator, '_templates').load(templatesDocument);
+
+        const headword = /** @type {import('dictionary').TermHeadword & {sottaku: {language: string}}} */ ({
+            index: 0,
+            headwordIndex: 0,
+            term: 'مدرسة',
+            reading: 'مَدْرَسَة',
+            sources: [{
+                originalText: 'مدرسة',
+                transformedText: 'مدرسة',
+                deinflectedText: 'مدرسة',
+                matchType: 'exact',
+                matchSource: 'term',
+                isPrimary: true,
+            }],
+            tags: [],
+            wordClasses: [],
+            sottaku: {language: 'ar'},
+        });
+        const node = Reflect.get(generator, '_createTermHeadword').call(generator, headword, 0, []);
+        const textContainer = /** @type {HTMLElement} */ (node.querySelector('.headword-text-container'));
+        const term = /** @type {HTMLElement} */ (node.querySelector('.headword-term'));
+        const reading = /** @type {HTMLElement} */ (node.querySelector('.headword-reading'));
+
+        expect(node.dataset.language).toBe('ar');
+        expect(textContainer.dir).toBe('rtl');
+        expect(term.lang).toBe('ar');
+        expect(term.dir).toBe('rtl');
+        expect(term.querySelectorAll('ruby')).toHaveLength(1);
+        expect(term.querySelector('ruby')?.firstChild?.textContent).toBe('مدرسة');
+        expect(reading.lang).toBe('ar');
+        expect(reading.dir).toBe('rtl');
+    });
+
     test('keeps tone-color rules specific enough for Hanzi links', () => {
         for (let tone = 1; tone <= 5; tone += 1) {
             expect(displayCss).toContain(`.headword-kanji-link.tone-${tone}`);

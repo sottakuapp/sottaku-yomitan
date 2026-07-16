@@ -1655,6 +1655,15 @@
     "settings_sottaku_language_vietnamese": {
         "message": "Bahasa Vietnam"
     },
+    "settings_sottaku_language_portuguese": {
+        "message": "Bahasa Portugis"
+    },
+    "settings_sottaku_language_arabic": {
+        "message": "Bahasa Arab (Arab Standar Modern)"
+    },
+    "settings_sottaku_language_hindi": {
+        "message": "Bahasa Hindi"
+    },
     "settings_sottaku_language_order_description": {
         "message": "Pilih bahasa Sottaku yang tampil di popup dan urutannya (digunakan untuk mode campuran dan fallback)."
     },

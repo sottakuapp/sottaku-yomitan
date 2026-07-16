@@ -9,6 +9,8 @@ import {
     getSottakuLanguageFlag,
     normalizeSottakuLanguages,
     normalizeSottakuSupportedLanguages,
+    SOTTAKU_ADMIN_PREVIEW_LANGUAGES,
+    SOTTAKU_KNOWN_LANGUAGES,
     SOTTAKU_SUPPORTED_LANGUAGES,
 } from '../language/sottaku-languages.js';
 
@@ -25,7 +27,22 @@ const HANGUL_RANGES = [
     [0xac00, 0xd7af],
     [0xd7b0, 0xd7ff],
 ];
+const ARABIC_RANGES = [
+    [0x0600, 0x06ff],
+    [0x0750, 0x077f],
+    [0x0870, 0x089f],
+    [0x08a0, 0x08ff],
+    [0xfb50, 0xfdff],
+    [0xfe70, 0xfeff],
+    [0x10ec0, 0x10eff],
+];
+const DEVANAGARI_RANGES = [
+    [0x0900, 0x097f],
+    [0xa8e0, 0xa8ff],
+    [0x11b00, 0x11b5f],
+];
 const HAN_RANGES = CJK_IDEOGRAPH_RANGES;
+const SCRIPT_LETTER_OR_MARK_PATTERN = /[\p{Letter}\p{Mark}]/u;
 const LANGUAGE_HINT_MIN_COUNT = 3;
 const LANGUAGE_HINT_MIN_RATIO = 0.02;
 const SOTTAKU_SETTINGS_TTL_MS = 5 * 60 * 1000;
@@ -63,10 +80,10 @@ function isCodePointInRanges(codePoint, ranges) {
 
 /**
  * @param {string} text
- * @returns {{han: number, hiragana: number, katakana: number, hangul: number}}
+ * @returns {{han: number, hiragana: number, katakana: number, hangul: number, arabic: number, devanagari: number}}
  */
-function getCjkScriptCounts(text) {
-    const counts = {han: 0, hiragana: 0, katakana: 0, hangul: 0};
+function getScriptCounts(text) {
+    const counts = {han: 0, hiragana: 0, katakana: 0, hangul: 0, arabic: 0, devanagari: 0};
     if (typeof text !== 'string' || text.length === 0) { return counts; }
     for (const char of text) {
         const codePoint = char.codePointAt(0);
@@ -81,6 +98,14 @@ function getCjkScriptCounts(text) {
         }
         if (isCodePointInRanges(codePoint, HANGUL_RANGES)) {
             counts.hangul += 1;
+            continue;
+        }
+        if (isCodePointInRanges(codePoint, ARABIC_RANGES) && SCRIPT_LETTER_OR_MARK_PATTERN.test(char)) {
+            counts.arabic += 1;
+            continue;
+        }
+        if (isCodePointInRanges(codePoint, DEVANAGARI_RANGES) && SCRIPT_LETTER_OR_MARK_PATTERN.test(char)) {
+            counts.devanagari += 1;
             continue;
         }
         if (isCodePointInRanges(codePoint, HAN_RANGES)) {
@@ -552,7 +577,7 @@ export class SottakuIntegration {
             return {dictionaryEntries: [], originalTextLength: 0};
         }
 
-        if (this._shouldResolveSupportedLanguages(sottaku, details)) {
+        if (this._shouldResolveSupportedLanguages(query, sottaku, details)) {
             await this._resolveSupportedLanguages();
         }
         const {languages, autoPick, hintLanguage} = this._resolveLanguages(query, sottaku, general.language, details);
@@ -1116,17 +1141,17 @@ export class SottakuIntegration {
             defaultLanguage,
             supportedLanguages,
         );
-        switch (sottakuOptions.languageMode) {
-            case 'ja': return {languages: ['ja'], autoPick: false, hintLanguage: null};
-            case 'ko': return {languages: ['ko'], autoPick: false, hintLanguage: null};
-            case 'zh': return {languages: ['zh'], autoPick: false, hintLanguage: null};
-            case 'en': return {languages: ['en'], autoPick: false, hintLanguage: null};
-            case 'vi': {
-                if (supportedLanguages.includes('vi')) {
-                    return {languages: ['vi'], autoPick: false, hintLanguage: null};
-                }
-                break;
-            }
+        const languageMode = sottakuOptions.languageMode;
+        if (
+            typeof languageMode === 'string' &&
+            languageMode !== 'auto' &&
+            languageMode !== 'mixed' &&
+            SOTTAKU_KNOWN_LANGUAGES.includes(languageMode) &&
+            supportedLanguages.includes(languageMode)
+        ) {
+            return {languages: [languageMode], autoPick: false, hintLanguage: null};
+        }
+        switch (languageMode) {
             case 'mixed': {
                 const preferredScanLanguage = this._resolvePreferredScanLanguage(details, preferredLanguages);
                 if (preferredScanLanguage !== null) {
@@ -1141,7 +1166,7 @@ export class SottakuIntegration {
         }
 
         const candidates = preferredLanguages.length > 0 ? preferredLanguages : supportedLanguages;
-        const queryCounts = getCjkScriptCounts(text || '');
+        const queryCounts = getScriptCounts(text || '');
         const hasHanOnly = queryCounts.han > 0 && (queryCounts.hiragana + queryCounts.katakana + queryCounts.hangul) === 0;
         const shouldProbe = candidates.length > 1 && (hasHanOnly || detected?.confidence === 'weak');
         if (shouldProbe) {
@@ -1156,19 +1181,26 @@ export class SottakuIntegration {
      * Dynamic server capabilities are only needed when an admin-preview
      * language is actually in play. Public languages remain available from
      * the bundled fallback even while the server cannot be reached.
+     * @param {string} text
      * @param {import('settings').SottakuOptions} sottakuOptions
      * @param {import('api').FindTermsDetails} [details]
      * @returns {boolean}
      */
-    _shouldResolveSupportedLanguages(sottakuOptions, details) {
-        if (sottakuOptions.languageMode === 'vi') { return true; }
-        if (Array.isArray(sottakuOptions.preferredLanguages) && sottakuOptions.preferredLanguages.includes('vi')) {
+    _shouldResolveSupportedLanguages(text, sottakuOptions, details) {
+        if (SOTTAKU_ADMIN_PREVIEW_LANGUAGES.includes(sottakuOptions.languageMode)) { return true; }
+        if (
+            Array.isArray(sottakuOptions.preferredLanguages) &&
+            sottakuOptions.preferredLanguages.some((language) => SOTTAKU_ADMIN_PREVIEW_LANGUAGES.includes(language))
+        ) {
             return true;
         }
+        const queryCounts = getScriptCounts(text || '');
+        if (queryCounts.arabic > 0 || queryCounts.devanagari > 0) { return true; }
         const hints = details?.languageHints;
         if (!hints || typeof hints !== 'object') { return false; }
         return Object.values(hints).some((value) => (
-            typeof value === 'string' && value.trim().toLowerCase().split(/[-_]/, 1)[0] === 'vi'
+            typeof value === 'string' &&
+            SOTTAKU_ADMIN_PREVIEW_LANGUAGES.includes(value.trim().toLowerCase().split(/[-_]/, 1)[0])
         ));
     }
 
@@ -1233,8 +1265,14 @@ export class SottakuIntegration {
      */
     _detectLanguageFromText(text, details) {
         const trimmed = (text || '').trim();
-        const counts = getCjkScriptCounts(trimmed);
+        const counts = getScriptCounts(trimmed);
         const hintedLanguage = this._detectLanguageFromHints(details);
+        if (counts.arabic > 0) {
+            return {language: 'ar', confidence: 'strong'};
+        }
+        if (counts.devanagari > 0) {
+            return {language: 'hi', confidence: 'strong'};
+        }
         if (counts.hiragana + counts.katakana > 0) {
             return {language: 'ja', confidence: 'strong'};
         }
@@ -1262,6 +1300,9 @@ export class SottakuIntegration {
         if (documentLang.startsWith('ko')) { return {language: 'ko', confidence: 'strong'}; }
         if (documentLang.startsWith('zh')) { return {language: 'zh', confidence: 'strong'}; }
         if (documentLang.startsWith('vi')) { return {language: 'vi', confidence: 'strong'}; }
+        if (documentLang.startsWith('pt')) { return {language: 'pt', confidence: 'strong'}; }
+        if (documentLang.startsWith('ar')) { return {language: 'ar', confidence: 'strong'}; }
+        if (documentLang.startsWith('hi')) { return {language: 'hi', confidence: 'strong'}; }
         if (documentLang.startsWith('en')) { return {language: 'en', confidence: 'weak'}; }
 
         const counts = this._normalizeScriptCounts(languageHints.documentScriptCounts);
@@ -1270,7 +1311,7 @@ export class SottakuIntegration {
 
     /**
      * @param {unknown} value
-     * @returns {{han: number, hiragana: number, katakana: number, hangul: number} | null}
+     * @returns {{han: number, hiragana: number, katakana: number, hangul: number, arabic: number, devanagari: number} | null}
      */
     _normalizeScriptCounts(value) {
         if (!value || typeof value !== 'object') { return null; }
@@ -1284,15 +1325,19 @@ export class SottakuIntegration {
             hiragana: parseCount(raw.hiragana),
             katakana: parseCount(raw.katakana),
             hangul: parseCount(raw.hangul),
+            arabic: parseCount(raw.arabic),
+            devanagari: parseCount(raw.devanagari),
         };
     }
 
     /**
-     * @param {{han: number, hiragana: number, katakana: number, hangul: number} | null} counts
+     * @param {{han: number, hiragana: number, katakana: number, hangul: number, arabic: number, devanagari: number} | null} counts
      * @returns {{language: string, confidence: 'strong' | 'weak'} | null}
      */
     _resolveLanguageFromScriptCounts(counts) {
         if (!counts) { return null; }
+        if (counts.arabic > 0) { return {language: 'ar', confidence: 'strong'}; }
+        if (counts.devanagari > 0) { return {language: 'hi', confidence: 'strong'}; }
         const kana = counts.hiragana + counts.katakana;
         const total = counts.han + counts.hangul + kana;
         if (total <= 0) { return null; }
@@ -1582,6 +1627,7 @@ export class SottakuIntegration {
                 (sentence || sentenceTranslation) ? {
                     tag: 'div',
                     data: {sottakuField: 'exampleGroup'},
+                    lang: language,
                     content: [
                         sentence ? {tag: 'div', data: {sottakuField: 'example'}, lang: language, content: sentence} : null,
                         sentenceTranslation ? {tag: 'div', data: {sottakuField: 'exampleTranslation'}, lang: localeLang, content: sentenceTranslation} : null,

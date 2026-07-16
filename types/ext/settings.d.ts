@@ -163,7 +163,7 @@ export type SottakuOptions = {
     apiBaseUrl: string;
     authToken: string;
     locale: string;
-    languageMode: 'auto' | 'ja' | 'ko' | 'zh' | 'en' | 'es' | 'de' | 'fr' | 'it' | 'vi' | 'mixed';
+    languageMode: 'auto' | 'ja' | 'ko' | 'zh' | 'en' | 'es' | 'de' | 'fr' | 'it' | 'vi' | 'pt' | 'ar' | 'hi' | 'mixed';
     preferredLanguages: string[];
     user: SottakuUser | null;
     cookieDomain: string;

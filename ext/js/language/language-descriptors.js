@@ -22,6 +22,7 @@ import {
     convertAlifMaqsuraToYaa,
     convertHaToTaMarbuta,
     normalizeUnicode,
+    removeBidiControlCharacters,
     removeArabicScriptDiacritics,
     removeTatweel,
 } from './ar/arabic-text-preprocessors.js';
@@ -40,6 +41,7 @@ import {frenchTransforms} from './fr/french-transforms.js';
 import {irishTransforms} from './ga/irish-transforms.js';
 import {convertLatinToGreek} from './grc/ancient-greek-processors.js';
 import {ancientGreekTransforms} from './grc/ancient-greek-transforms.js';
+import {normalizeDevanagariUnicode, removeIndicFormatControlCharacters} from './hi/hindi-text-preprocessors.js';
 import {removeApostrophedWords} from './it/italian-processors.js';
 import {
     alphabeticToHiragana,
@@ -102,6 +104,7 @@ const languageDescriptors = [
         textPreprocessors: {
             removeArabicScriptDiacritics,
             removeTatweel,
+            removeBidiControlCharacters,
             normalizeUnicode,
             addHamzaTop,
             addHamzaBottom,
@@ -289,6 +292,10 @@ const languageDescriptors = [
         iso639_3: 'hin',
         name: 'Hindi',
         exampleText: 'पढ़ने के लिए',
+        textPreprocessors: {
+            normalizeDevanagariUnicode,
+            removeIndicFormatControlCharacters,
+        },
     },
     {
         iso: 'hu',

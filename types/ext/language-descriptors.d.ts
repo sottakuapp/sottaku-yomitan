@@ -80,6 +80,7 @@ type AllTextProcessors = {
         pre: {
             removeArabicScriptDiacritics: TextProcessor;
             removeTatweel: TextProcessor;
+            removeBidiControlCharacters: TextProcessor;
             normalizeUnicode: TextProcessor;
             addHamzaTop: TextProcessor;
             addHamzaBottom: TextProcessor;
@@ -162,7 +163,12 @@ type AllTextProcessors = {
         pre: CapitalizationPreprocessors;
     };
     he: Record<string, never>;
-    hi: Record<string, never>;
+    hi: {
+        pre: {
+            normalizeDevanagariUnicode: TextProcessor;
+            removeIndicFormatControlCharacters: TextProcessor;
+        };
+    };
     hu: {
         pre: CapitalizationPreprocessors;
     };
