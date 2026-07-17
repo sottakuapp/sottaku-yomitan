@@ -372,6 +372,13 @@ const tests = [
         ],
     },
     {
+        category: 'weak-final perfect verb',
+        valid: true,
+        tests: [
+            {term: 'أعطى', source: 'أعطيناك', rule: 'pv', reasons: ['PVWeakFinal-Y', 'PVSuff-n']},
+        ],
+    },
+    {
         category: 'perfect verb with assimilated ت',
         valid: true,
         tests: [

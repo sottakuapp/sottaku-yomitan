@@ -678,6 +678,13 @@ export const arabicTransforms = {
                 ...directObjectPronouns.map((p) => suffixInflection(`و${p}`, '', ['pv_s'], ['pv'])),
             ],
         },
+        'PVWeakFinal-Y': {
+            name: 'Weak-final perfect verb',
+            description: 'Restore final alif maqsura after a ي-bearing perfect suffix stem',
+            rules: [
+                suffixInflection('ي', 'ى', ['pv'], ['pv']),
+            ],
+        },
 
         // Imperfect Verb
         'IVPref-hw': {
