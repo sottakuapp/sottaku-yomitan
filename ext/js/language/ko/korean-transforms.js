@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {suffixInflection} from '../language-transforms.js';
+import {suffixInflection, wholeWordInflection} from '../language-transforms.js';
 
 const conditions = {
     v: {
@@ -713,6 +713,14 @@ export const koreanTransforms = {
                 suffixInflection('ㄴㅔ', 'ㄷㅏ', [], ['v', 'adj', 'ida']),
                 suffixInflection('ㄴㅔ', 'ㄹㄷㅏ', [], ['v', 'adj']),
                 suffixInflection('ㄴㅔ', '', [], ['p', 'f', 'eusi']),
+            ],
+        },
+        '-네요': {
+            name: '-네요',
+            rules: [
+                suffixInflection('ㄴㅔㅇㅛ', 'ㄷㅏ', [], ['v', 'adj', 'ida']),
+                suffixInflection('ㄴㅔㅇㅛ', 'ㄹㄷㅏ', [], ['v', 'adj']),
+                suffixInflection('ㄴㅔㅇㅛ', '', [], ['p', 'f', 'eusi']),
             ],
         },
         '-노니': {
@@ -3737,6 +3745,10 @@ export const koreanTransforms = {
         '-았/었': {
             name: '-았/었',
             rules: [
+                // 바라다 is commonly (though nonstandardly) conjugated as
+                // 바랬어 in colloquial writing. Keep this whole-word rule
+                // narrow so it does not obscure the distinct verb 바래다.
+                wholeWordInflection('ㅂㅏㄹㅐㅆ', 'ㅂㅏㄹㅏㄷㅏ', ['p'], ['v']),
                 suffixInflection('ㅆ', 'ㄷㅏ', ['p'], ['v', 'adj']),
                 suffixInflection('ㅏㅆ', 'ㄷㅏ', ['p'], ['v', 'adj']),
                 suffixInflection('ㅇㅏㅆ', 'ㄷㅏ', ['p'], ['v', 'adj']),
