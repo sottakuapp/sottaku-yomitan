@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {prefixInflection, suffixInflection} from '../language-transforms.js';
+import {prefixInflection, suffixInflection, wholeWordInflection} from '../language-transforms.js';
 
 const arabicLetters = '[\u0620-\u065F\u066E-\u06D3\u06D5\u06EE\u06EF\u06FA-\u06FC\u06FF]';
 const directObjectPronouns1st = ['ني', 'نا'];
@@ -571,6 +571,20 @@ export const arabicTransforms = {
                 ...nonAssimilatingPossessivePronouns.map((p) => suffixInflection(`ي${p}`, '', ['n_s'], ['n_indef', 'n'])),
             ],
         },
+        'NBrokenPlural-Sahib': {
+            name: 'broken plural',
+            description: 'Reviewed broken plural أصحاب of صاحب',
+            rules: [
+                wholeWordInflection('أصحاب', 'صاحب', ['n'], ['n']),
+            ],
+        },
+        'NBrokenPlural-Hajar': {
+            name: 'broken plural',
+            description: 'Reviewed broken plural حجارة of حجر',
+            rules: [
+                wholeWordInflection('حجارة', 'حجر', ['n'], ['n']),
+            ],
+        },
 
         // Perfect Verb
         'PVPref-Wa': {
@@ -730,6 +744,13 @@ export const arabicTransforms = {
                 // Subjunctive
                 ...getImperfectRules('ي', '', 'وا', '', {attachedSuffix: 'و'}),
             ],
+        },
+        'IVWeakFormIII-RaAa': {
+            name: 'Imperfect Tense',
+            description: 'Reviewed weak Form III imperfect of راءى',
+            rules: getImperfectPrefixes('ي', false).map((prefix) => (
+                wholeWordInflection(`${prefix}راءون`, 'راءى', ['iv_p'], ['iv'])
+            )),
         },
         'IVPref-hn': {
             name: 'Imperfect Tense',

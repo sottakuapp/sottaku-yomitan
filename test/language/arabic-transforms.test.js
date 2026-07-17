@@ -344,6 +344,25 @@ const tests = [
         ],
     },
     {
+        category: 'reviewed broken plurals',
+        valid: true,
+        tests: [
+            {term: 'صاحب', source: 'أصحاب', rule: 'n', reasons: ['NBrokenPlural-Sahib']},
+            {term: 'صاحب', source: 'وأصحاب', rule: 'n', reasons: ['NBrokenPlural-Sahib', 'NPref-Wa']},
+            {term: 'صاحب', source: 'أصحابهم', rule: 'n', reasons: ['NBrokenPlural-Sahib', 'NSuff-h']},
+            {term: 'حجر', source: 'حجارة', rule: 'n', reasons: ['NBrokenPlural-Hajar']},
+            {term: 'حجر', source: 'بحجارة', rule: 'n', reasons: ['NBrokenPlural-Hajar', 'NPref-Bi']},
+        ],
+    },
+    {
+        category: 'reviewed broken plural near-misses',
+        valid: false,
+        tests: [
+            {term: 'صاحب', source: 'أحباب', rule: 'n', reasons: null},
+            {term: 'حجر', source: 'تجارة', rule: 'n', reasons: null},
+        ],
+    },
+    {
         category: 'perfect verb conjunction (and)',
         valid: true,
         tests: [
@@ -495,6 +514,23 @@ const tests = [
             {term: 'جلس', source: 'تجلسا', rule: 'iv', reasons: ['IVPref-hmA-ta']},
             {term: 'جلس', source: 'تجلسوا', rule: 'iv', reasons: ['IVPref-Antm']},
             {term: 'جلس', source: 'يجلسوا', rule: 'iv', reasons: ['IVPref-hm']},
+        ],
+    },
+    {
+        category: 'reviewed weak Form III imperfect verb',
+        valid: true,
+        tests: [
+            {term: 'راءى', source: 'يراءون', rule: 'iv', reasons: ['IVWeakFormIII-RaAa']},
+            {term: 'راءى', source: 'ويراءون', rule: 'iv', reasons: ['IVWeakFormIII-RaAa']},
+            {term: 'راءى', source: 'سيراءون', rule: 'iv', reasons: ['IVWeakFormIII-RaAa']},
+        ],
+    },
+    {
+        category: 'reviewed weak Form III imperfect near-misses',
+        valid: false,
+        tests: [
+            {term: 'راءى', source: 'يرون', rule: 'iv', reasons: null},
+            {term: 'راءى', source: 'يقرؤون', rule: 'iv', reasons: null},
         ],
     },
     {
