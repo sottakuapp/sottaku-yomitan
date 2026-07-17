@@ -585,6 +585,21 @@ export const arabicTransforms = {
                 wholeWordInflection('حجارة', 'حجر', ['n'], ['n']),
             ],
         },
+        'NBrokenPlural-Maqbara': {
+            name: 'broken plural',
+            description: 'Reviewed broken plural مقابر of مقبرة',
+            rules: [
+                wholeWordInflection('مقابر', 'مقبرة', ['n'], ['n']),
+            ],
+        },
+        'QPassiveParticiple-Awsada': {
+            name: 'passive participle',
+            description: 'Reviewed passive participles مؤصد and موصد of أوصد',
+            rules: [
+                wholeWordInflection('مؤصد', 'أوصد', ['n'], ['v']),
+                wholeWordInflection('موصد', 'أوصد', ['n'], ['v']),
+            ],
+        },
 
         // Perfect Verb
         'PVPref-Wa': {

@@ -352,6 +352,9 @@ const tests = [
             {term: 'صاحب', source: 'أصحابهم', rule: 'n', reasons: ['NBrokenPlural-Sahib', 'NSuff-h']},
             {term: 'حجر', source: 'حجارة', rule: 'n', reasons: ['NBrokenPlural-Hajar']},
             {term: 'حجر', source: 'بحجارة', rule: 'n', reasons: ['NBrokenPlural-Hajar', 'NPref-Bi']},
+            {term: 'مقبرة', source: 'مقابر', rule: 'n', reasons: ['NBrokenPlural-Maqbara']},
+            {term: 'مقبرة', source: 'بمقابر', rule: 'n', reasons: ['NBrokenPlural-Maqbara', 'NPref-Bi']},
+            {term: 'مقبرة', source: 'مقابرهم', rule: 'n', reasons: ['NBrokenPlural-Maqbara', 'NSuff-h']},
         ],
     },
     {
@@ -360,6 +363,27 @@ const tests = [
         tests: [
             {term: 'صاحب', source: 'أحباب', rule: 'n', reasons: null},
             {term: 'حجر', source: 'تجارة', rule: 'n', reasons: null},
+            {term: 'مقبرة', source: 'مخابر', rule: 'n', reasons: null},
+            {term: 'مقبرة', source: 'مقابير', rule: 'n', reasons: null},
+        ],
+    },
+    {
+        category: 'reviewed Form IV passive participle',
+        valid: true,
+        tests: [
+            {term: 'أوصد', source: 'مؤصد', rule: 'v', reasons: ['QPassiveParticiple-Awsada']},
+            {term: 'أوصد', source: 'موصد', rule: 'v', reasons: ['QPassiveParticiple-Awsada']},
+            {term: 'أوصد', source: 'مؤصدة', rule: 'v', reasons: ['QPassiveParticiple-Awsada', 'NSuff-ap']},
+            {term: 'أوصد', source: 'موصدة', rule: 'v', reasons: ['QPassiveParticiple-Awsada', 'NSuff-ap']},
+        ],
+    },
+    {
+        category: 'reviewed Form IV passive participle near-misses',
+        valid: false,
+        tests: [
+            {term: 'أوصد', source: 'مؤبد', rule: 'v', reasons: null},
+            {term: 'أوصد', source: 'مؤكدة', rule: 'v', reasons: null},
+            {term: 'أوصد', source: 'موصوفة', rule: 'v', reasons: null},
         ],
     },
     {
