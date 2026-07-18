@@ -43,6 +43,34 @@ function attachedPrefixInflection(prefix) {
         deinflect: (text) => text.replace(prefixPattern, ''),
         conditionsIn: ['surface'],
         conditionsOut: ['lemma'],
+        sottakuExport: {
+            rule_type: 'custom',
+            custom_kind: 'regex_substitution',
+            custom_data: {
+                match_pattern: isInflected.source,
+                replace_pattern: prefixPattern.source,
+                replacement: '',
+            },
+        },
+    };
+}
+
+/**
+ * Build an exact reviewed mapping for a Hebrew surface whose spelling cannot
+ * be recovered safely with a productive suffix rule. Inflection rules also
+ * accept the `lemma` state so one attached prefix can be removed first.
+ * @param {string} inflected
+ * @param {string} deinflected
+ * @returns {import('language-transformer').Rule<Condition>}
+ */
+function wholeWordInflection(inflected, deinflected) {
+    const escapedInflected = inflected.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return {
+        type: 'wholeWord',
+        isInflected: new RegExp(`^${escapedInflected}$`, 'u'),
+        deinflect: () => deinflected,
+        conditionsIn: ['surface', 'lemma'],
+        conditionsOut: ['lemma'],
     };
 }
 
@@ -141,6 +169,76 @@ export const hebrewTransforms = {
             name: 'Attached relativizer',
             description: 'Remove the attached relativizer or complementizer ש־',
             rules: [attachedPrefixInflection('ש')],
+        },
+        'Hebrew plural': {
+            name: 'Plural',
+            description: 'Recover a singular Hebrew noun from a reviewed plural surface',
+            rules: [
+                wholeWordInflection('אחים', 'אח'),
+                wholeWordInflection('בכורים', 'בכור'),
+            ],
+        },
+        'Hebrew possessive suffix': {
+            name: 'Possessive suffix',
+            description: 'Remove a reviewed Hebrew possessive suffix and restore its lemma spelling',
+            rules: [
+                wholeWordInflection('אלהיהם', 'אלוהים'),
+                wholeWordInflection('בכוריהם', 'בכורים'),
+                wholeWordInflection('ממונם', 'ממון'),
+                wholeWordInflection('צרכנו', 'צורך'),
+                wholeWordInflection('צרנו', 'צר'),
+            ],
+        },
+        'Hebrew pronominal suffix': {
+            name: 'Pronominal suffix',
+            description: 'Remove a reviewed pronoun suffix from a Hebrew function word',
+            rules: [
+                wholeWordInflection('בתוכו', 'בתוך'),
+                wholeWordInflection('דיינו', 'די'),
+            ],
+        },
+        'Hebrew object pronoun suffix': {
+            name: 'Object pronoun suffix',
+            description: 'Remove a contextually reviewed Hebrew object-pronoun suffix',
+            rules: [
+                wholeWordInflection('האכילנו', 'האכיל'),
+                wholeWordInflection('הוציאנו', 'הוציא'),
+                wholeWordInflection('הכניסנו', 'הכניס'),
+                wholeWordInflection('העבירנו', 'העביר'),
+                wholeWordInflection('קרבנו', 'קירב'),
+            ],
+        },
+        'Hebrew cohortative': {
+            name: 'Cohortative',
+            description: 'Recover a Hebrew verb lemma from a reviewed cohortative surface',
+            rules: [
+                wholeWordInflection('נגילה', 'גל'),
+                wholeWordInflection('נרננה', 'רינן'),
+                wholeWordInflection('נשמחה', 'שמח'),
+            ],
+        },
+        'Hebrew imperative': {
+            name: 'Imperative',
+            description: 'Recover a Hebrew verb lemma from a reviewed imperative surface',
+            rules: [wholeWordInflection('עורו', 'ער')],
+        },
+        'Hebrew infinitive construct': {
+            name: 'Infinitive construct',
+            description: 'Recover a Hebrew verb lemma from a reviewed infinitive-construct surface',
+            rules: [wholeWordInflection('שבת', 'ישב')],
+        },
+        'Hebrew contracted min prefix': {
+            name: 'Contracted preposition',
+            description: 'Restore מן from its attached מ־ form',
+            rules: [wholeWordInflection('מ', 'מן')],
+        },
+        'Hebrew defective spelling': {
+            name: 'Defective spelling',
+            description: 'Restore the reviewed full Modern Hebrew spelling of a media surface',
+            rules: [
+                wholeWordInflection('ספק', 'סיפק'),
+                wholeWordInflection('שקע', 'שיקע'),
+            ],
         },
     },
 };

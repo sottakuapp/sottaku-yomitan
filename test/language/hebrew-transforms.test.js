@@ -47,6 +47,26 @@ const tests = [
         ],
     },
     {
+        category: 'reviewed media inflections',
+        valid: true,
+        tests: [
+            {term: 'אח', source: 'אחים', rule: 'noun', reasons: ['Hebrew plural']},
+            {term: 'בכור', source: 'בכוריהם', rule: 'noun', reasons: ['Hebrew plural', 'Hebrew possessive suffix']},
+            {term: 'בתוך', source: 'בתוכו', rule: 'preposition', reasons: ['Hebrew pronominal suffix']},
+            {term: 'די', source: 'דיינו', rule: 'adverb', reasons: ['Hebrew pronominal suffix']},
+            {term: 'הוציא', source: 'הוציאנו', rule: 'verb', reasons: ['Hebrew object pronoun suffix']},
+            {term: 'גל', source: 'נגילה', rule: 'verb', reasons: ['Hebrew cohortative']},
+            {term: 'רינן', source: 'נרננה', rule: 'verb', reasons: ['Hebrew cohortative']},
+            {term: 'שמח', source: 'ונשמחה', rule: 'verb', reasons: ['Hebrew cohortative', 'Hebrew prefix conjunction']},
+            {term: 'ער', source: 'עורו', rule: 'verb', reasons: ['Hebrew imperative']},
+            {term: 'ישב', source: 'שבת', rule: 'verb', reasons: ['Hebrew infinitive construct']},
+            {term: 'מן', source: 'מ', rule: 'preposition', reasons: ['Hebrew contracted min prefix']},
+            {term: 'סיפק', source: 'ספק', rule: 'verb', reasons: ['Hebrew defective spelling']},
+            {term: 'שיקע', source: 'שקע', rule: 'verb', reasons: ['Hebrew defective spelling']},
+            {term: 'אלוהים', source: 'באלהיהם', rule: 'noun', reasons: ['Hebrew possessive suffix', 'Hebrew prefix bet']},
+        ],
+    },
+    {
         category: 'minimum stem and script guards',
         valid: false,
         tests: [
