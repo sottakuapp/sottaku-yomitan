@@ -162,7 +162,14 @@ type AllTextProcessors = {
     haw: {
         pre: CapitalizationPreprocessors;
     };
-    he: Record<string, never>;
+    he: {
+        pre: {
+            normalizeHebrewUnicode: TextProcessor;
+            removeHebrewBidiControlCharacters: TextProcessor;
+            removeHebrewCantillation: TextProcessor;
+            removeHebrewPoints: TextProcessor;
+        };
+    };
     hi: {
         pre: {
             normalizeDevanagariUnicode: TextProcessor;

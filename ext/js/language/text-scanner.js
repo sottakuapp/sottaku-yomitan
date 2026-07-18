@@ -64,10 +64,14 @@ const DEVANAGARI_RANGES = [
     [0xa8e0, 0xa8ff],
     [0x11b00, 0x11b5f],
 ];
+const HEBREW_RANGES = [
+    [0x0590, 0x05ff],
+    [0xfb1d, 0xfb4f],
+];
 const HAN_RANGES = CJK_IDEOGRAPH_RANGES;
 const SCRIPT_LETTER_OR_MARK_PATTERN = /[\p{Letter}\p{Mark}]/u;
-const COMPLEX_SCRIPT_CHARACTER_PATTERN = /[\p{Script=Arabic}\p{Script=Devanagari}]/u;
-const COMPLEX_SCRIPT_WORD_PATTERN = /[\p{Script=Arabic}\p{Script=Devanagari}\p{Mark}\u200c\u200d]+/gu;
+const COMPLEX_SCRIPT_CHARACTER_PATTERN = /[\p{Script=Arabic}\p{Script=Devanagari}\p{Script=Hebrew}]/u;
+const COMPLEX_SCRIPT_WORD_PATTERN = /[\p{Script=Arabic}\p{Script=Devanagari}\p{Script=Hebrew}\p{Mark}\u05be\u05f3\u05f4\u200c\u200d]+/gu;
 
 /**
  * @param {number} codePoint
@@ -85,10 +89,10 @@ function isCodePointInRanges(codePoint, ranges) {
 
 /**
  * @param {string} text
- * @returns {{han: number, hiragana: number, katakana: number, hangul: number, arabic: number, devanagari: number}}
+ * @returns {{han: number, hiragana: number, katakana: number, hangul: number, arabic: number, devanagari: number, hebrew: number}}
  */
 function getScriptCounts(text) {
-    const counts = {han: 0, hiragana: 0, katakana: 0, hangul: 0, arabic: 0, devanagari: 0};
+    const counts = {han: 0, hiragana: 0, katakana: 0, hangul: 0, arabic: 0, devanagari: 0, hebrew: 0};
     if (typeof text !== 'string' || text.length === 0) { return counts; }
     for (const char of text) {
         const codePoint = char.codePointAt(0);
@@ -111,6 +115,10 @@ function getScriptCounts(text) {
         }
         if (isCodePointInRanges(codePoint, DEVANAGARI_RANGES) && SCRIPT_LETTER_OR_MARK_PATTERN.test(char)) {
             counts.devanagari += 1;
+            continue;
+        }
+        if (isCodePointInRanges(codePoint, HEBREW_RANGES) && SCRIPT_LETTER_OR_MARK_PATTERN.test(char)) {
+            counts.hebrew += 1;
             continue;
         }
         if (isCodePointInRanges(codePoint, HAN_RANGES)) {
@@ -318,7 +326,7 @@ export class TextScanner extends EventDispatcher {
         /** @type {boolean} */
         this._isMouseOverText = false;
 
-        /** @type {?{documentLang?: string, documentScriptCounts?: {han?: number, hiragana?: number, katakana?: number, hangul?: number, arabic?: number, devanagari?: number}}} */
+        /** @type {?{documentLang?: string, documentScriptCounts?: {han?: number, hiragana?: number, katakana?: number, hangul?: number, arabic?: number, devanagari?: number, hebrew?: number}}} */
         this._documentLanguageHints = null;
         /** @type {number} */
         this._documentLanguageHintsTimestamp = 0;
@@ -1603,7 +1611,7 @@ export class TextScanner extends EventDispatcher {
     }
 
     /**
-     * @returns {?{documentLang?: string, documentScriptCounts?: {han?: number, hiragana?: number, katakana?: number, hangul?: number, arabic?: number, devanagari?: number}}}
+     * @returns {?{documentLang?: string, documentScriptCounts?: {han?: number, hiragana?: number, katakana?: number, hangul?: number, arabic?: number, devanagari?: number, hebrew?: number}}}
      */
     _getDocumentLanguageHints() {
         const now = Date.now();

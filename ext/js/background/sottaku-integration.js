@@ -41,6 +41,10 @@ const DEVANAGARI_RANGES = [
     [0xa8e0, 0xa8ff],
     [0x11b00, 0x11b5f],
 ];
+const HEBREW_RANGES = [
+    [0x0590, 0x05ff],
+    [0xfb1d, 0xfb4f],
+];
 const HAN_RANGES = CJK_IDEOGRAPH_RANGES;
 const SCRIPT_LETTER_OR_MARK_PATTERN = /[\p{Letter}\p{Mark}]/u;
 const LANGUAGE_HINT_MIN_COUNT = 3;
@@ -80,10 +84,10 @@ function isCodePointInRanges(codePoint, ranges) {
 
 /**
  * @param {string} text
- * @returns {{han: number, hiragana: number, katakana: number, hangul: number, arabic: number, devanagari: number}}
+ * @returns {{han: number, hiragana: number, katakana: number, hangul: number, arabic: number, devanagari: number, hebrew: number}}
  */
 function getScriptCounts(text) {
-    const counts = {han: 0, hiragana: 0, katakana: 0, hangul: 0, arabic: 0, devanagari: 0};
+    const counts = {han: 0, hiragana: 0, katakana: 0, hangul: 0, arabic: 0, devanagari: 0, hebrew: 0};
     if (typeof text !== 'string' || text.length === 0) { return counts; }
     for (const char of text) {
         const codePoint = char.codePointAt(0);
@@ -106,6 +110,10 @@ function getScriptCounts(text) {
         }
         if (isCodePointInRanges(codePoint, DEVANAGARI_RANGES) && SCRIPT_LETTER_OR_MARK_PATTERN.test(char)) {
             counts.devanagari += 1;
+            continue;
+        }
+        if (isCodePointInRanges(codePoint, HEBREW_RANGES) && SCRIPT_LETTER_OR_MARK_PATTERN.test(char)) {
+            counts.hebrew += 1;
             continue;
         }
         if (isCodePointInRanges(codePoint, HAN_RANGES)) {
@@ -1195,7 +1203,7 @@ export class SottakuIntegration {
             return true;
         }
         const queryCounts = getScriptCounts(text || '');
-        if (queryCounts.arabic > 0 || queryCounts.devanagari > 0) { return true; }
+        if (queryCounts.arabic > 0 || queryCounts.devanagari > 0 || queryCounts.hebrew > 0) { return true; }
         const hints = details?.languageHints;
         if (!hints || typeof hints !== 'object') { return false; }
         return Object.values(hints).some((value) => (
@@ -1273,6 +1281,9 @@ export class SottakuIntegration {
         if (counts.devanagari > 0) {
             return {language: 'hi', confidence: 'strong'};
         }
+        if (counts.hebrew > 0) {
+            return {language: 'he', confidence: 'strong'};
+        }
         if (counts.hiragana + counts.katakana > 0) {
             return {language: 'ja', confidence: 'strong'};
         }
@@ -1303,6 +1314,7 @@ export class SottakuIntegration {
         if (documentLang.startsWith('pt')) { return {language: 'pt', confidence: 'strong'}; }
         if (documentLang.startsWith('ar')) { return {language: 'ar', confidence: 'strong'}; }
         if (documentLang.startsWith('hi')) { return {language: 'hi', confidence: 'strong'}; }
+        if (documentLang.startsWith('he') || documentLang.startsWith('iw')) { return {language: 'he', confidence: 'strong'}; }
         if (documentLang.startsWith('en')) { return {language: 'en', confidence: 'weak'}; }
 
         const counts = this._normalizeScriptCounts(languageHints.documentScriptCounts);
@@ -1311,7 +1323,7 @@ export class SottakuIntegration {
 
     /**
      * @param {unknown} value
-     * @returns {{han: number, hiragana: number, katakana: number, hangul: number, arabic: number, devanagari: number} | null}
+     * @returns {{han: number, hiragana: number, katakana: number, hangul: number, arabic: number, devanagari: number, hebrew: number} | null}
      */
     _normalizeScriptCounts(value) {
         if (!value || typeof value !== 'object') { return null; }
@@ -1327,17 +1339,19 @@ export class SottakuIntegration {
             hangul: parseCount(raw.hangul),
             arabic: parseCount(raw.arabic),
             devanagari: parseCount(raw.devanagari),
+            hebrew: parseCount(raw.hebrew),
         };
     }
 
     /**
-     * @param {{han: number, hiragana: number, katakana: number, hangul: number, arabic: number, devanagari: number} | null} counts
+     * @param {{han: number, hiragana: number, katakana: number, hangul: number, arabic: number, devanagari: number, hebrew: number} | null} counts
      * @returns {{language: string, confidence: 'strong' | 'weak'} | null}
      */
     _resolveLanguageFromScriptCounts(counts) {
         if (!counts) { return null; }
         if (counts.arabic > 0) { return {language: 'ar', confidence: 'strong'}; }
         if (counts.devanagari > 0) { return {language: 'hi', confidence: 'strong'}; }
+        if (counts.hebrew > 0) { return {language: 'he', confidence: 'strong'}; }
         const kana = counts.hiragana + counts.katakana;
         const total = counts.han + counts.hangul + kana;
         if (total <= 0) { return null; }

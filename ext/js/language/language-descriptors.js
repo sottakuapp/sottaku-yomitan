@@ -57,6 +57,13 @@ import {italianTransforms} from './it/italian-transforms.js';
 import {japaneseTransforms} from './ja/japanese-transforms.js';
 import {isStringPartiallyJapanese} from './ja/japanese.js';
 import {georgianTransforms} from './ka/georgian-transforms.js';
+import {
+    normalizeHebrewUnicode,
+    removeHebrewBidiControlCharacters,
+    removeHebrewCantillation,
+    removeHebrewPoints,
+} from './he/hebrew-text-preprocessors.js';
+import {hebrewTransforms} from './he/hebrew-transforms.js';
 import {disassembleHangul, reassembleHangul} from './ko/korean-text-processors.js';
 import {koreanTransforms} from './ko/korean-transforms.js';
 import {processDiphtongs} from './la/latin-text-preprocessors.js';
@@ -284,8 +291,15 @@ const languageDescriptors = [
     {
         iso: 'he',
         iso639_3: 'heb',
-        name: 'Hebrew',
-        exampleText: 'קריאה',
+        name: 'Hebrew (Modern Israeli)',
+        exampleText: 'קְרִיאָה',
+        textPreprocessors: {
+            normalizeHebrewUnicode,
+            removeHebrewBidiControlCharacters,
+            removeHebrewCantillation,
+            removeHebrewPoints,
+        },
+        languageTransforms: hebrewTransforms,
     },
     {
         iso: 'hi',

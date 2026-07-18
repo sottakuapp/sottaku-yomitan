@@ -19,7 +19,7 @@ import {languageDescriptorMap} from './language-descriptors.js';
 
 export const SOTTAKU_SUPPORTED_LANGUAGES = ['ja', 'ko', 'zh', 'en', 'es', 'de', 'fr', 'it', 'ru', 'la'];
 
-export const SOTTAKU_ADMIN_PREVIEW_LANGUAGES = ['vi', 'pt', 'ar', 'hi'];
+export const SOTTAKU_ADMIN_PREVIEW_LANGUAGES = ['vi', 'pt', 'ar', 'hi', 'he'];
 
 export const SOTTAKU_KNOWN_LANGUAGES = [...SOTTAKU_SUPPORTED_LANGUAGES, ...SOTTAKU_ADMIN_PREVIEW_LANGUAGES];
 
@@ -70,6 +70,7 @@ export function getSottakuLanguageFlag(language) {
         case 'pt': return '\uD83C\uDDE7\uD83C\uDDF7'; // BR flag (Brazilian Portuguese course default)
         case 'ar': return '\uD83C\uDDF8\uD83C\uDDE6'; // SA flag (Modern Standard Arabic)
         case 'hi': return '\uD83C\uDDEE\uD83C\uDDF3'; // IN flag
+        case 'he': return '\uD83C\uDDEE\uD83C\uDDF1'; // IL flag (Modern Israeli Hebrew)
         default: return '\uD83C\uDF10'; // Globe
     }
 }

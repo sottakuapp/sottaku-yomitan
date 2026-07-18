@@ -51,12 +51,15 @@ describe('TextScanner', () => {
     const {window, teardown} = textScannerTestEnv;
     afterAll(() => teardown(global));
 
-    test('keeps Arabic clitics and Devanagari combining sequences in one lookup variant', () => {
+    test('keeps Arabic, Devanagari, and Hebrew orthographic sequences in one lookup variant', () => {
         const scanner = createScanner();
         const arabic = 'قال وبالمدرسة اليوم';
         const arabicAnchor = arabic.indexOf('بالمدرسة') + 4;
         const hindi = 'वह विद्यालय में है';
         const hindiAnchor = hindi.indexOf('विद्यालय') + 5;
+        const hebrew = 'אני קורא בַּבַּיִת היום';
+        const hebrewWord = 'בַּבַּיִת';
+        const hebrewAnchor = hebrew.indexOf(hebrewWord) + 4;
 
         // eslint-disable-next-line no-underscore-dangle
         expect(scanner._getComplexScriptSearchVariants(arabic, arabicAnchor)).toStrictEqual([{
@@ -69,6 +72,12 @@ describe('TextScanner', () => {
             text: 'विद्यालय',
             startOffset: hindiAnchor - hindi.indexOf('विद्यालय'),
             anchorOffset: hindiAnchor - hindi.indexOf('विद्यालय'),
+        }]);
+        // eslint-disable-next-line no-underscore-dangle
+        expect(scanner._getComplexScriptSearchVariants(hebrew, hebrewAnchor)).toStrictEqual([{
+            text: hebrewWord,
+            startOffset: hebrewAnchor - hebrew.indexOf(hebrewWord),
+            anchorOffset: hebrewAnchor - hebrew.indexOf(hebrewWord),
         }]);
     });
 
@@ -90,12 +99,12 @@ describe('TextScanner', () => {
         expect(variants[1]).toStrictEqual({text: 'مدرسة', startOffset: 0, anchorOffset: 0});
     });
 
-    test('reports Arabic and Devanagari document script counts to remote language routing', () => {
+    test('reports Arabic, Devanagari, and Hebrew document script counts to remote language routing', () => {
         const scanner = createScanner();
         const previousLang = window.document.documentElement.lang;
         const previousBody = window.document.body.textContent;
         window.document.documentElement.lang = 'ar';
-        window.document.body.textContent = 'هذه مدرسة। यह विद्यालय है';
+        window.document.body.textContent = 'هذه مدرسة। यह विद्यालय है. זה בית';
 
         // eslint-disable-next-line no-underscore-dangle
         scanner._documentLanguageHintsTimestamp = 0;
@@ -105,6 +114,7 @@ describe('TextScanner', () => {
         expect(hints?.documentLang).toBe('ar');
         expect(hints?.documentScriptCounts?.arabic).toBeGreaterThan(0);
         expect(hints?.documentScriptCounts?.devanagari).toBeGreaterThan(0);
+        expect(hints?.documentScriptCounts?.hebrew).toBeGreaterThan(0);
 
         window.document.documentElement.lang = previousLang;
         window.document.body.textContent = previousBody;

@@ -28,6 +28,7 @@ describe('SottakuIntegration', () => {
     test.each([
         ['pt', 'coração'],
         ['ar', 'مَدْرَسَة'],
+        ['he', 'מִלָּה'],
         ['hi', 'विद्यालय'],
     ])('routes explicit %s preview mode only after the server grants it', (language, query) => {
         const integration = new SottakuIntegration(null);
@@ -46,13 +47,15 @@ describe('SottakuIntegration', () => {
         )).toStrictEqual({languages: ['ja'], autoPick: false, hintLanguage: null});
     });
 
-    test('detects Arabic and Devanagari query scripts without relying on the UI language', () => {
+    test('detects Arabic, Devanagari, and Hebrew query scripts without relying on the UI language', () => {
         const integration = new SottakuIntegration(null);
 
         expect(integration._detectLanguageFromText('وَبِالْمَدْرَسَةِ')).toStrictEqual({language: 'ar', confidence: 'strong'});
         expect(integration._detectLanguageFromText('विद्यालय')).toStrictEqual({language: 'hi', confidence: 'strong'});
+        expect(integration._detectLanguageFromText('מִלָּה')).toStrictEqual({language: 'he', confidence: 'strong'});
         expect(integration._detectLanguageFromText('،')).toBeNull();
         expect(integration._detectLanguageFromText('।')).toBeNull();
+        expect(integration._detectLanguageFromText('־')).toBeNull();
     });
 
     test('requests authenticated capabilities for preview scripts and language hints', () => {
@@ -61,6 +64,7 @@ describe('SottakuIntegration', () => {
 
         expect(integration._shouldResolveSupportedLanguages('المدرسة', autoOptions)).toBe(true);
         expect(integration._shouldResolveSupportedLanguages('विद्यालय', autoOptions)).toBe(true);
+        expect(integration._shouldResolveSupportedLanguages('מילה', autoOptions)).toBe(true);
         expect(integration._shouldResolveSupportedLanguages('coração', autoOptions, {
             languageHints: {documentLang: 'pt-BR'},
         })).toBe(true);
