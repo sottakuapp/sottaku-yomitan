@@ -1594,6 +1594,8 @@ export const japaneseTransforms = {
         },
         'imperative negative slang': {
             name: 'imperative negative slang',
+            description: 'Colloquial negative imperative used to tell someone not to do something. ' +
+            'Attach んな to the dictionary form of a verb; for example, 食べる becomes 食べんな.',
             i18n: [
                 {
                     language: 'ja',
