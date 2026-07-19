@@ -21,7 +21,7 @@ import {parseJson} from '../core/json.js';
 import {isObjectNotArray} from '../core/object-utilities.js';
 import {escapeRegExp} from '../core/utilities.js';
 import {TemplatePatcher} from '../templates/template-patcher.js';
-import {normalizeSottakuLanguages} from '../language/sottaku-languages.js';
+import {normalizeSottakuLanguages, SOTTAKU_KNOWN_LANGUAGES} from '../language/sottaku-languages.js';
 import {JsonSchema} from './json-schema.js';
 
 // Some type safety rules are disabled for this file since it deals with upgrading an older format
@@ -1901,8 +1901,8 @@ export class OptionsUtil {
                 /** @type {unknown} */ (sottaku?.preferredLanguages),
                 general?.language,
             );
-            /** @type {'auto' | 'ja' | 'ko' | 'zh' | 'en' | 'es' | 'de' | 'fr' | 'it' | 'vi' | 'pt' | 'ar' | 'hi' | 'mixed'} */
-            const languageMode = (sottaku?.languageMode === 'ja' || sottaku?.languageMode === 'ko' || sottaku?.languageMode === 'zh' || sottaku?.languageMode === 'en' || sottaku?.languageMode === 'es' || sottaku?.languageMode === 'de' || sottaku?.languageMode === 'fr' || sottaku?.languageMode === 'it' || sottaku?.languageMode === 'vi' || sottaku?.languageMode === 'pt' || sottaku?.languageMode === 'ar' || sottaku?.languageMode === 'hi' || sottaku?.languageMode === 'auto' || sottaku?.languageMode === 'mixed') ?
+            /** @type {string} */
+            const languageMode = (sottaku?.languageMode === 'auto' || sottaku?.languageMode === 'mixed' || SOTTAKU_KNOWN_LANGUAGES.includes(sottaku?.languageMode)) ?
                 sottaku.languageMode :
                 'mixed';
 
@@ -1927,7 +1927,7 @@ export class OptionsUtil {
 
     /**
      * @param {string} url
-     * @returns {Promise<chrome.tabs.Tab>}
+     * @returns {Promise<object>}
      */
     _createTab(url) {
         return new Promise((resolve, reject) => {

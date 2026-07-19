@@ -1126,7 +1126,10 @@ export class DisplayGenerator {
         const rawPitchAccent = metadataObject.pitchAccent ?? metadataObject.pitch_accent;
         if (!rawPitchAccent || typeof rawPitchAccent !== 'object') { return null; }
         const pitchAccent = /** @type {Record<string, unknown>} */ (rawPitchAccent);
-        const position = Number.parseInt(pitchAccent.position ?? pitchAccent.positions, 10);
+        const rawPosition = pitchAccent.position ?? pitchAccent.positions;
+        const position = typeof rawPosition === 'string' || typeof rawPosition === 'number' ?
+            Number.parseInt(String(rawPosition), 10) :
+            Number.NaN;
         if (!Number.isFinite(position) || position < 0) { return null; }
 
         const fallbackReading = typeof reading === 'string' ? reading : '';

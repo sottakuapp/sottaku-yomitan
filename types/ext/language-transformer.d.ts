@@ -68,6 +68,7 @@ export type Rule<TCondition = string> = {
     conditionsIn: TCondition[];
     conditionsOut: TCondition[];
     excludedDeinflectedSuffixes?: string[];
+    sottakuExport?: Record<string, unknown>;
 };
 
 export type SuffixRule<TCondition = string> = {

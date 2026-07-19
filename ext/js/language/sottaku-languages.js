@@ -16,12 +16,16 @@
  */
 
 import {languageDescriptorMap} from './language-descriptors.js';
+import {
+    SOTTAKU_LANGUAGE_FLAGS,
+    SOTTAKU_SUPPORTED_LANGUAGES,
+} from './sottaku-language-manifest.js';
 
-export const SOTTAKU_SUPPORTED_LANGUAGES = ['ja', 'ko', 'zh', 'en', 'es', 'de', 'fr', 'it', 'ru', 'la'];
-
-export const SOTTAKU_ADMIN_PREVIEW_LANGUAGES = ['vi', 'pt', 'ar', 'hi', 'he'];
-
-export const SOTTAKU_KNOWN_LANGUAGES = [...SOTTAKU_SUPPORTED_LANGUAGES, ...SOTTAKU_ADMIN_PREVIEW_LANGUAGES];
+export {
+    SOTTAKU_ADMIN_PREVIEW_LANGUAGES,
+    SOTTAKU_KNOWN_LANGUAGES,
+    SOTTAKU_SUPPORTED_LANGUAGES,
+} from './sottaku-language-manifest.js';
 
 /**
  * @param {unknown} supportedLanguages
@@ -55,24 +59,7 @@ export function normalizeSottakuSupportedLanguages(supportedLanguages) {
  * @returns {string}
  */
 export function getSottakuLanguageFlag(language) {
-    switch (language) {
-        case 'ja': return '\uD83C\uDDEF\uD83C\uDDF5'; // JP flag
-        case 'ko': return '\uD83C\uDDF0\uD83C\uDDF7'; // KR flag
-        case 'zh': return '\uD83C\uDDE8\uD83C\uDDF3'; // CN flag
-        case 'en': return '\uD83C\uDDFA\uD83C\uDDF8'; // US flag
-        case 'es': return '\uD83C\uDDEA\uD83C\uDDF8'; // ES flag
-        case 'de': return '\uD83C\uDDE9\uD83C\uDDEA'; // DE flag
-        case 'fr': return '\uD83C\uDDEB\uD83C\uDDF7'; // FR flag
-        case 'it': return '\uD83C\uDDEE\uD83C\uDDF9'; // IT flag
-        case 'ru': return '\uD83C\uDDF7\uD83C\uDDFA'; // RU flag
-        case 'la': return '\uD83C\uDFDB\uFE0F'; // Classical building for Latin
-        case 'vi': return '\uD83C\uDDFB\uD83C\uDDF3'; // VN flag
-        case 'pt': return '\uD83C\uDDE7\uD83C\uDDF7'; // BR flag (Brazilian Portuguese course default)
-        case 'ar': return '\uD83C\uDDF8\uD83C\uDDE6'; // SA flag (Modern Standard Arabic)
-        case 'hi': return '\uD83C\uDDEE\uD83C\uDDF3'; // IN flag
-        case 'he': return '\uD83C\uDDEE\uD83C\uDDF1'; // IL flag (Modern Israeli Hebrew)
-        default: return '\uD83C\uDF10'; // Globe
-    }
+    return SOTTAKU_LANGUAGE_FLAGS[language] ?? '🌐';
 }
 
 /**
