@@ -536,7 +536,7 @@ export class SottakuIntegration {
         this._client.setConfig({
             apiBaseUrl: sottaku.apiBaseUrl,
             authToken: sottaku.authToken,
-            cookieDomain: sottaku.cookieDomain,
+            refreshToken: sottaku.refreshToken,
         });
 
         const automaticCacheKey = `${sottaku.apiBaseUrl}|${sottaku.authToken}`;

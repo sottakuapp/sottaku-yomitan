@@ -45,21 +45,6 @@ function buildJsonResponse(data, init = {}) {
     );
 }
 
-/**
- * @param {Record<string, unknown>} data
- * @param {number} [status]
- * @returns {Response}
- */
-function buildErrorResponse(data, status = 401) {
-    return new Response(
-        JSON.stringify({success: false, ...data}),
-        {
-            status,
-            headers: {'Content-Type': 'application/json'},
-        },
-    );
-}
-
 const SIGNED_TOKEN_WITH_ORIGIN =
     'st1.eyJ0Ijoib3JpZ2luLXNlc3Npb24tdG9rZW4iLCJ1IjoxMDQxOCwiYyI6MTc4MDQ4MzQyNCwidiI6MTc4MDQ4MzQyNCwiZSI6MTc4MDQ4MzQ1NH0.signature';
 
@@ -77,47 +62,6 @@ function createDeferredResponse() {
         reject = /** @type {(reason?: unknown) => void} */ (rejectPromise);
     });
     return {promise, resolve, reject};
-}
-
-/**
- * @param {Record<string, string>} [cookies]
- * @returns {{setCalls: Array<Record<string, unknown>>}}
- */
-function stubChromeCookies(cookies = {}) {
-    /** @type {Array<Record<string, unknown>>} */
-    const setCalls = [];
-    /**
-     * @param {{name: string}} details
-     * @param {(cookie: {value: string}|null) => void} callback
-     */
-    const getCookie = (details, callback) => {
-        const {name} = details;
-        const value = cookies[name];
-        callback(typeof value === 'string' ? {value} : null);
-    };
-    /**
-     * @param {Record<string, unknown>} details
-     * @param {() => void} callback
-     */
-    const setCookie = (details, callback) => {
-        setCalls.push(details);
-        const name = typeof details.name === 'string' ? details.name : '';
-        const value = typeof details.value === 'string' ? details.value : '';
-        if (name) {
-            cookies[name] = value;
-        }
-        callback();
-    };
-    vi.stubGlobal('chrome', {
-        cookies: {
-            get: vi.fn(getCookie),
-            set: vi.fn(setCookie),
-        },
-        runtime: {
-            lastError: null,
-        },
-    });
-    return {setCalls};
 }
 
 describe('SottakuClient', () => {
@@ -210,8 +154,7 @@ describe('SottakuClient', () => {
         expect(client.authToken).toBe(SIGNED_TOKEN_WITH_ORIGIN);
     });
 
-    test('stores only the opaque wrapper when the server rotates a signed token', async () => {
-        const {setCalls} = stubChromeCookies();
+    test('rotates only the in-memory opaque wrapper without sending browser cookies', async () => {
         const fetchMock = vi.fn().mockResolvedValue(buildJsonResponse(
             {user: {id: 1, username: 'akira'}},
             {headers: {'X-New-Token': SIGNED_TOKEN_WITH_ORIGIN}},
@@ -223,7 +166,6 @@ describe('SottakuClient', () => {
         const client = new SottakuClient({
             apiBaseUrl: 'https://sottaku.app/api/v1',
             authToken: 'old-token',
-            cookieDomain: 'https://sottaku.app',
             onAuthTokenUpdated,
         });
 
@@ -235,58 +177,126 @@ describe('SottakuClient', () => {
             oldToken: 'old-token',
             newToken: SIGNED_TOKEN_WITH_ORIGIN,
         });
-        expect(setCalls[0]).toMatchObject({
-            url: 'https://sottaku.app',
-            name: 'api_token',
-            value: SIGNED_TOKEN_WITH_ORIGIN,
-            path: '/',
-            secure: true,
-        });
+        expect(fetchMock.mock.calls[0][1].credentials).toBe('omit');
     });
 
-    test('never imports the durable HttpOnly session cookie as an access token', async () => {
-        stubChromeCookies({session_id: 'durable-origin-secret'});
+    test('creates a 256-bit one-time browser approval without reading cookies', async () => {
+        const {SottakuClient} = await importSottakuClientModule();
+        const client = new SottakuClient({apiBaseUrl: 'https://sottaku.app/api/v1'});
+
+        const {linkToken, url} = client.createBrowserLink();
+
+        expect(linkToken).toMatch(/^[A-Za-z0-9_-]{43}$/u);
+        expect(url).toBe(`https://sottaku.app/extension/link?token=${linkToken}`);
+    });
+
+    test('exchanges browser approval for a scoped token and never sends cookies', async () => {
+        const fetchMock = vi.fn()
+            .mockResolvedValueOnce(buildJsonResponse({status: 'pending'}))
+            .mockResolvedValueOnce(buildJsonResponse({
+                status: 'linked',
+                token: SIGNED_TOKEN_WITH_ORIGIN,
+                refresh_token: 'extension-refresh-secret',
+                user: {id: 1, username: 'akira'},
+            }));
+        vi.stubGlobal('fetch', fetchMock);
 
         const {SottakuClient} = await importSottakuClientModule();
         const client = new SottakuClient({
             apiBaseUrl: 'https://sottaku.app/api/v1',
-            cookieDomain: 'https://sottaku.app',
         });
 
-        expect(await client.syncTokenFromCookies()).toBeNull();
-        expect(client.authToken).toBe('');
+        const pending = await client.exchangeBrowserLink('a'.repeat(43));
+        const linked = await client.exchangeBrowserLink('a'.repeat(43));
+
+        expect(pending.status).toBe('pending');
+        expect(linked.status).toBe('linked');
+        expect(linked.refreshToken).toBe('extension-refresh-secret');
+        expect(fetchMock).toHaveBeenCalledTimes(2);
+        expect(fetchMock.mock.calls[0][1].credentials).toBe('omit');
+        expect(fetchMock.mock.calls[0][1].headers.Authorization).toBeUndefined();
+        expect(client.authToken).toBe(SIGNED_TOKEN_WITH_ORIGIN);
     });
 
-    test('retries a 401 with a newer browser-session cookie before invalidating auth', async () => {
-        stubChromeCookies({api_token: 'cookie-token'});
+    test('refreshes an expired wrapper without browser cookies and retries once', async () => {
         const fetchMock = vi.fn()
-            .mockResolvedValueOnce(buildErrorResponse({error: 'Unauthorized'}))
+            .mockResolvedValueOnce(new Response(
+                JSON.stringify({success: false, error: 'Invalid or expired token', code: 'TOKEN_EXPIRED'}),
+                {status: 401, headers: {'Content-Type': 'application/json'}},
+            ))
+            .mockResolvedValueOnce(buildJsonResponse({token: 'fresh-access-wrapper'}))
             .mockResolvedValueOnce(buildJsonResponse({user: {id: 1, username: 'akira'}}));
         vi.stubGlobal('fetch', fetchMock);
         const onAuthTokenUpdated = vi.fn();
-        const onAuthTokenInvalidated = vi.fn();
 
         const {SottakuClient} = await importSottakuClientModule();
         const client = new SottakuClient({
             apiBaseUrl: 'https://sottaku.app/api/v1',
-            authToken: 'old-token',
-            cookieDomain: 'https://sottaku.app',
+            authToken: 'expired-access-wrapper',
+            refreshToken: 'extension-refresh-secret',
             onAuthTokenUpdated,
-            onAuthTokenInvalidated,
         });
 
-        const response = await client.getProfile();
+        const profile = await client.getProfile();
 
-        expect(response).toStrictEqual({user: {id: 1, username: 'akira'}});
-        expect(fetchMock).toHaveBeenCalledTimes(2);
-        expect(fetchMock.mock.calls[0][1].headers.Authorization).toBe('Bearer old-token');
-        expect(fetchMock.mock.calls[1][1].headers.Authorization).toBe('Bearer cookie-token');
-        expect(client.authToken).toBe('cookie-token');
+        expect(profile).toStrictEqual({user: {id: 1, username: 'akira'}});
+        expect(fetchMock).toHaveBeenCalledTimes(3);
+        expect(fetchMock.mock.calls[0][0]).toBe('https://sottaku.app/api/v1/profile/data');
+        expect(fetchMock.mock.calls[0][1].headers.Authorization).toBe('Bearer expired-access-wrapper');
+        expect(fetchMock.mock.calls[1][0]).toBe('https://sottaku.app/api/v1/auth/extension-refresh');
+        expect(fetchMock.mock.calls[1][1].credentials).toBe('omit');
+        expect(parseJson(String(fetchMock.mock.calls[1][1].body))).toStrictEqual({
+            refresh_token: 'extension-refresh-secret',
+        });
+        expect(fetchMock.mock.calls[2][1].headers.Authorization).toBe('Bearer fresh-access-wrapper');
         expect(onAuthTokenUpdated).toHaveBeenCalledWith({
             apiBaseUrl: 'https://sottaku.app/api/v1',
-            oldToken: 'old-token',
-            newToken: 'cookie-token',
+            oldToken: 'expired-access-wrapper',
+            newToken: 'fresh-access-wrapper',
         });
-        expect(onAuthTokenInvalidated).not.toHaveBeenCalled();
+    });
+
+    test('revokes the durable session on extension sign-out', async () => {
+        const fetchMock = vi.fn().mockResolvedValue(buildJsonResponse(null));
+        vi.stubGlobal('fetch', fetchMock);
+
+        const {SottakuClient} = await importSottakuClientModule();
+        const client = new SottakuClient({
+            apiBaseUrl: 'https://sottaku.app/api/v1',
+            authToken: 'scoped-access-wrapper',
+            refreshToken: 'extension-refresh-secret',
+        });
+
+        await client.logout();
+
+        expect(fetchMock).toHaveBeenCalledTimes(1);
+        expect(fetchMock.mock.calls[0][0]).toBe('https://sottaku.app/api/v1/logout');
+        expect(fetchMock.mock.calls[0][1].headers.Authorization).toBe('Bearer scoped-access-wrapper');
+        expect(fetchMock.mock.calls[0][1].credentials).toBe('omit');
+        expect(client.authToken).toBe('');
+    });
+
+    test('rejects API origins outside Sottaku and local development', async () => {
+        const {SottakuClient} = await importSottakuClientModule();
+
+        expect(() => new SottakuClient({apiBaseUrl: 'https://attacker.example/api'})).toThrow('Untrusted Sottaku API origin');
+        expect(() => new SottakuClient({apiBaseUrl: 'http://localhost:8080/api/v1'})).not.toThrow();
+    });
+
+    test('does not send the Sottaku bearer token to third-party audio URLs', async () => {
+        const fetchMock = vi.fn().mockResolvedValue(new Response(new Blob(['audio']), {status: 200}));
+        vi.stubGlobal('fetch', fetchMock);
+        const createObjectUrl = vi.spyOn(URL, 'createObjectURL').mockReturnValue('blob:test');
+
+        const {SottakuClient} = await importSottakuClientModule();
+        const client = new SottakuClient({
+            apiBaseUrl: 'https://sottaku.app/api/v1',
+            authToken: 'scoped-token',
+        });
+
+        expect(await client.fetchAudioAsObjectUrl('https://media.example/audio.mp3', 'ja')).toBe('blob:test');
+        expect(fetchMock.mock.calls[0][1].headers.Authorization).toBeUndefined();
+        expect(fetchMock.mock.calls[0][1].credentials).toBe('omit');
+        createObjectUrl.mockRestore();
     });
 });

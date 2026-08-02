@@ -692,16 +692,16 @@ export class DisplayAudio {
         const metadata = /** @type {any} */ (headword).sottaku;
         const options = this._display.getOptions();
         if (!metadata || !options || !options.sottaku?.enabled) { return {word: null, sentence: null}; }
-        const {authToken, apiBaseUrl, cookieDomain} = options.sottaku;
+        const {authToken, refreshToken, apiBaseUrl} = options.sottaku;
         if (!authToken) { return {word: null, sentence: null}; }
         const existingAudio = metadata.audio || {};
         const existingUrl = existingAudio.word || existingAudio.sentence;
         const language = metadata.language || options.general.language;
         const apiOrigin = this._getOrigin(apiBaseUrl);
         if (this._sottakuClient === null) {
-            this._sottakuClient = new SottakuClient({apiBaseUrl, authToken, cookieDomain});
+            this._sottakuClient = new SottakuClient({apiBaseUrl, authToken, refreshToken});
         } else {
-            this._sottakuClient.setConfig({apiBaseUrl, authToken, cookieDomain});
+            this._sottakuClient.setConfig({apiBaseUrl, authToken, refreshToken});
         }
         if (existingUrl) {
             metadata.audio = {

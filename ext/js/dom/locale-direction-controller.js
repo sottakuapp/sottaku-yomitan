@@ -31,7 +31,7 @@ export class LocaleDirectionController {
         /** @type {string} */
         this._authToken = '';
         /** @type {string} */
-        this._cookieDomain = '';
+        this._refreshToken = '';
         /** @type {string|null} */
         this._automaticLocale = null;
         /** @type {number} */
@@ -58,19 +58,19 @@ export class LocaleDirectionController {
         const {sottaku} = options;
         const apiBaseUrl = typeof sottaku?.apiBaseUrl === 'string' ? sottaku.apiBaseUrl : null;
         const authToken = typeof sottaku?.authToken === 'string' ? sottaku.authToken : '';
-        const cookieDomain = typeof sottaku?.cookieDomain === 'string' ? sottaku.cookieDomain : '';
+        const refreshToken = typeof sottaku?.refreshToken === 'string' ? sottaku.refreshToken : '';
 
-        if (apiBaseUrl === this._apiBaseUrl && authToken === this._authToken && cookieDomain === this._cookieDomain) { return; }
+        if (apiBaseUrl === this._apiBaseUrl && authToken === this._authToken && refreshToken === this._refreshToken) { return; }
 
         this._apiBaseUrl = apiBaseUrl;
         this._authToken = authToken;
-        this._cookieDomain = cookieDomain;
+        this._refreshToken = refreshToken;
         this._automaticLocale = null;
         this._automaticLocaleTimestamp = 0;
         this._client.setConfig({
             apiBaseUrl: this._apiBaseUrl || undefined,
             authToken: this._authToken,
-            cookieDomain: this._cookieDomain,
+            refreshToken: this._refreshToken,
         });
     }
 

@@ -44,8 +44,6 @@ export class SottakuController {
         this._busy = false;
         /** @type {boolean} */
         this._loadingUser = false;
-        /** @type {boolean} */
-        this._skipAutoSync = false;
         /** @type {string[]} */
         this._preferredLanguages = [];
         /** @type {string[]} */
@@ -60,9 +58,7 @@ export class SottakuController {
         /** @type {HTMLButtonElement} */
         this._loginButton = querySelectorNotNull(document, '#sottaku-login-button');
         /** @type {HTMLButtonElement} */
-        this._googleButton = querySelectorNotNull(document, '#sottaku-google-button');
-        /** @type {HTMLButtonElement} */
-        this._syncCookieButton = querySelectorNotNull(document, '#sottaku-sync-cookie-button');
+        this._browserLinkButton = querySelectorNotNull(document, '#sottaku-browser-link-button');
         /** @type {HTMLButtonElement} */
         this._logoutButton = querySelectorNotNull(document, '#sottaku-logout-button');
         /** @type {HTMLElement} */
@@ -89,16 +85,11 @@ export class SottakuController {
     async prepare() {
         this._settingsController.on('optionsChanged', this._onOptionsChanged.bind(this));
         this._loginButton.addEventListener('click', this._onLoginClick.bind(this), false);
-        this._googleButton.addEventListener('click', this._onGoogleClick.bind(this), false);
-        this._syncCookieButton.addEventListener('click', this._onSyncCookieClick.bind(this), false);
+        this._browserLinkButton.addEventListener('click', this._onBrowserLinkClick.bind(this), false);
         this._logoutButton.addEventListener('click', this._onLogoutClick.bind(this), false);
         this._languageAddButton.addEventListener('click', this._onLanguageAdd.bind(this), false);
-        this._skipAutoSync = await this._loadSkipAutoSync();
         const options = await this._settingsController.getOptions();
         this._onOptionsChanged({options, optionsContext: this._settingsController.getOptionsContext()});
-        if (!options.sottaku.authToken && !this._skipAutoSync) {
-            void this._syncFromBrowserSession(true);
-        }
     }
 
     // Private
@@ -121,7 +112,7 @@ export class SottakuController {
         this._client.setConfig({
             apiBaseUrl: options.sottaku.apiBaseUrl,
             authToken: options.sottaku.authToken,
-            cookieDomain: options.sottaku.cookieDomain,
+            refreshToken: options.sottaku.refreshToken,
         });
         this._updateStatus();
         void this._ensureUserDetails();
@@ -142,7 +133,11 @@ export class SottakuController {
             this._busy = true;
             this._setStatus('Signing in...', false);
             const data = await this._client.loginWithPassword(username, password);
-            await this._applyAuthUpdate(data?.token ?? this._client.authToken, isObjectNotArray(data?.user) ? data.user : null);
+            await this._applyAuthUpdate(
+                data.token || this._client.authToken,
+                isObjectNotArray(data.user) ? data.user : null,
+                data.refreshToken,
+            );
         } catch (error) {
             this._setStatus(toError(error).message || 'Unable to sign in', true);
         } finally {
@@ -153,24 +148,40 @@ export class SottakuController {
     /**
      * @param {Event} e
      */
-    async _onGoogleClick(e) {
+    async _onBrowserLinkClick(e) {
         e.preventDefault();
-        const origin = this._getOriginFromApiUrl();
-        const url = `${origin}/login?source=extension`;
+        if (this._busy) { return; }
+        /** @type {chrome.tabs.Tab|null} */
+        let tab = null;
         try {
-            await this._openTab(url);
-            this._setStatus('Complete Google sign-in in the opened tab, then click "Use browser session".', false);
+            this._busy = true;
+            this._setStatus(getMessage('settings_sottaku_use_browser_session_title') || 'Use your signed-in browser session', false);
+            const {linkToken, url} = this._client.createBrowserLink();
+            tab = await this._openTab(url);
+            for (let attempt = 0; attempt < 300; ++attempt) {
+                const data = await this._client.exchangeBrowserLink(linkToken);
+                if (data?.status === 'linked' && typeof data.token === 'string') {
+                    await this._applyAuthUpdate(
+                        data.token,
+                        isObjectNotArray(data.user) ? data.user : null,
+                        data.refreshToken,
+                    );
+                    if (typeof tab.id === 'number') {
+                        await this._closeTab(tab.id);
+                    }
+                    return;
+                }
+                await this._delay(1000);
+            }
+            this._setStatus(
+                getMessage('settings_sottaku_status_sign_in_required') || 'Browser approval timed out',
+                true,
+            );
         } catch (error) {
             this._setStatus(toError(error).message, true);
+        } finally {
+            this._busy = false;
         }
-    }
-
-    /**
-     * @param {Event} e
-     */
-    async _onSyncCookieClick(e) {
-        e.preventDefault();
-        await this._syncFromBrowserSession(false);
     }
 
     /**
@@ -181,12 +192,17 @@ export class SottakuController {
         if (this._busy) { return; }
         try {
             this._busy = true;
+            try {
+                await this._client.logout();
+            } catch (error) {
+                // Local sign-out still succeeds if the server is unreachable.
+            }
             await this._settingsController.modifyProfileSettings([
                 {action: 'set', path: 'sottaku.authToken', value: ''},
+                {action: 'set', path: 'sottaku.refreshToken', value: ''},
                 {action: 'set', path: 'sottaku.user', value: null},
             ]);
-            await this._setSkipAutoSync(true);
-            this._client.setConfig({authToken: ''});
+            this._client.setConfig({authToken: '', refreshToken: ''});
             this._updateStatus({authToken: '', user: null, enabled: false});
             await this._settingsController.refresh();
             this._setStatus(getMessage('settings_sottaku_status_signed_out') || 'Signed out of Sottaku', false);
@@ -200,20 +216,19 @@ export class SottakuController {
     /**
      * @param {string} token
      * @param {unknown} user
+     * @param {string|undefined} refreshToken
      */
-    async _applyAuthUpdate(token, user) {
-        const origin = this._getOriginFromApiUrl();
+    async _applyAuthUpdate(token, user, refreshToken) {
         const normalizedUser = this._normalizeUser(user);
         /** @type {import('settings-modifications').Modification[]} */
         const updates = [
             {action: 'set', path: 'sottaku.authToken', value: token},
-            {action: 'set', path: 'sottaku.cookieDomain', value: origin},
+            {action: 'set', path: 'sottaku.refreshToken', value: refreshToken || ''},
             {action: 'set', path: 'sottaku.enabled', value: true},
             {action: 'set', path: 'sottaku.user', value: normalizedUser},
         ];
         await this._settingsController.modifyProfileSettings(updates);
-        await this._setSkipAutoSync(false);
-        this._client.setConfig({authToken: token, cookieDomain: origin});
+        this._client.setConfig({authToken: token, refreshToken: refreshToken || ''});
         this._updateStatus({authToken: token, user: normalizedUser, enabled: true});
         await this._settingsController.refresh();
     }
@@ -321,34 +336,6 @@ export class SottakuController {
             return getMessage('settings_sottaku_status_signed_in_as', [name]) || `Signed in as ${name}`;
         }
         return getMessage('settings_sottaku_status_signed_in') || 'Signed in';
-    }
-
-    /**
-     * @returns {Promise<boolean>}
-     */
-    _loadSkipAutoSync() {
-        return new Promise((resolve) => {
-            chrome.storage.local.get(['sottakuSkipAutoSync'], (result) => {
-                const error = chrome.runtime.lastError;
-                if (error) {
-                    resolve(false);
-                    return;
-                }
-                const value = result?.sottakuSkipAutoSync === true;
-                resolve(value);
-            });
-        });
-    }
-
-    /**
-     * @param {boolean} value
-     * @returns {Promise<void>}
-     */
-    async _setSkipAutoSync(value) {
-        this._skipAutoSync = value;
-        await /** @type {Promise<void>} */ (new Promise((resolve) => {
-            chrome.storage.local.set({sottakuSkipAutoSync: value}, () => { resolve(void 0); });
-        }));
     }
 
     /**
@@ -534,6 +521,43 @@ export class SottakuController {
     }
 
     /**
+     * @param {string} url
+     * @returns {Promise<chrome.tabs.Tab>}
+     */
+    _openTab(url) {
+        return new Promise((resolve, reject) => {
+            chrome.tabs.create({url}, (tab) => {
+                const error = chrome.runtime.lastError;
+                if (error) {
+                    reject(new Error(error.message));
+                } else {
+                    resolve(tab);
+                }
+            });
+        });
+    }
+
+    /**
+     * @param {number} tabId
+     * @returns {Promise<void>}
+     */
+    _closeTab(tabId) {
+        return new Promise((resolve) => {
+            chrome.tabs.remove(tabId, () => { resolve(void 0); });
+        });
+    }
+
+    /**
+     * @param {number} milliseconds
+     * @returns {Promise<void>}
+     */
+    _delay(milliseconds) {
+        return new Promise((resolve) => {
+            setTimeout(resolve, milliseconds);
+        });
+    }
+
+    /**
      * @param {string} language
      * @returns {string}
      */
@@ -552,101 +576,5 @@ export class SottakuController {
             data.languages :
             (Array.isArray(data.supported_languages) ? data.supported_languages : []);
         return normalizeSottakuSupportedLanguages(candidates);
-    }
-
-    /**
-     * @returns {string}
-     */
-    _getOriginFromApiUrl() {
-        try {
-            return new URL(this._client.apiBaseUrl).origin;
-        } catch (e) {
-            return 'https://sottaku.app';
-        }
-    }
-
-    /**
-     * @param {boolean} silent
-     */
-    async _syncFromBrowserSession(silent) {
-        if (this._busy) { return; }
-        const origin = this._getOriginFromApiUrl();
-        try {
-            this._busy = true;
-            if (!silent) { this._setStatus('Checking browser session...', false); }
-            const token = await this._client.syncTokenFromCookies();
-            if (!token) {
-                if (!silent) {
-                    const loginUrl = `${origin}/login`;
-                    try {
-                        await this._openTab(loginUrl);
-                    } catch (error) {
-                        // NOP
-                    }
-                    this._setStatus(getMessage('settings_sottaku_status_sign_in_required') || 'Sign in required. Complete login in the opened tab, then click "Use browser session".', true);
-                }
-                return;
-            }
-            /** @type {unknown} */
-            let user = null;
-            try {
-                const profile = /** @type {Record<string, unknown>} */ (await this._client.getProfile());
-                if (profile && typeof profile === 'object' && isObjectNotArray(profile.user)) {
-                    user = profile.user;
-                }
-            } catch (error) {
-                if (!silent) { this._setStatus('Session detected; unable to load profile details (continuing)', false); }
-            }
-            await this._applyAuthUpdate(token, user);
-
-            const proFlag = (
-                isObjectNotArray(user) && (
-                    (typeof /** @type {{isPro?: unknown}} */ (user).isPro === 'boolean') ||
-                    (typeof /** @type {{is_pro?: unknown}} */ (user).is_pro === 'boolean')
-                )
-            ) ?
-                (
-                    typeof /** @type {{isPro?: unknown}} */ (user).isPro === 'boolean' ?
-                        /** @type {{isPro: boolean}} */ (user).isPro :
-                        /** @type {{is_pro: boolean}} */ (user).is_pro
-                ) :
-                null;
-
-            if (proFlag === false) {
-                if (!silent) {
-                    const upgradeUrl = `${origin}/upgrade`;
-                    try {
-                        await this._openTab(upgradeUrl);
-                    } catch (error) {
-                        // NOP
-                    }
-                    this._setStatus(`Pro required. Upgrade at ${upgradeUrl}`, true);
-                }
-                return;
-            }
-
-            if (!silent) { this._setStatus(this._getSignedInStatusText(user), false); }
-        } catch (error) {
-            this._setStatus(toError(error).message, true);
-        } finally {
-            this._busy = false;
-        }
-    }
-
-    /**
-     * @param {string} url
-     * @returns {Promise<chrome.tabs.Tab>}
-     */
-    _openTab(url) {
-        return new Promise((resolve, reject) => {
-            chrome.tabs.create({url}, (tab) => {
-                const error = chrome.runtime.lastError;
-                if (error) {
-                    reject(new Error(error.message));
-                } else {
-                    resolve(tab);
-                }
-            });
-        });
     }
 }

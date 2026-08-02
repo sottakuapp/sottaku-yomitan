@@ -136,6 +136,7 @@ export class BackupController {
             if (options.anki.fieldTemplates === fieldTemplatesDefault || !options.anki.fieldTemplates) {
                 options.anki.fieldTemplates = null;
             }
+            this._clearSottakuCredentials(options);
         }
 
         return {
@@ -227,7 +228,22 @@ export class BackupController {
      * @param {import('settings').Options} optionsFull
      */
     async _settingsImportSetOptionsFull(optionsFull) {
+        for (const {options} of optionsFull.profiles) {
+            this._clearSottakuCredentials(options);
+        }
         await this._settingsController.setAllSettings(optionsFull);
+    }
+
+    /**
+     * Authentication state is device-local and must never enter portable backups.
+     * @param {import('settings').ProfileOptions} options
+     */
+    _clearSottakuCredentials(options) {
+        const {sottaku} = options;
+        if (!sottaku || typeof sottaku !== 'object') { return; }
+        sottaku.authToken = '';
+        sottaku.refreshToken = '';
+        sottaku.user = null;
     }
 
     /**

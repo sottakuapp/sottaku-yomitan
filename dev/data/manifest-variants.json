@@ -41,21 +41,6 @@
                 "id": "sottaku-yomitan@sottaku.app"
             }
         },
-        "content_scripts": [
-            {
-                "run_at": "document_idle",
-                "matches": [
-                    "http://*/*",
-                    "https://*/*",
-                    "file://*/*"
-                ],
-                "match_about_blank": true,
-                "all_frames": true,
-                "js": [
-                    "js/app/content-script-wrapper.js"
-                ]
-            }
-        ],
         "minimum_chrome_version": "102.0.0.0",
         "options_ui": {
             "page": "settings.html",
@@ -72,14 +57,17 @@
             "declarativeNetRequest",
             "scripting",
             "offscreen",
-            "contextMenus",
-            "cookies"
+            "contextMenus"
         ],
         "optional_permissions": [
             "clipboardRead",
             "nativeMessaging"
         ],
         "host_permissions": [
+            "https://sottaku.app/*",
+            "https://*.sottaku.app/*"
+        ],
+        "optional_host_permissions": [
             "<all_urls>"
         ],
         "externally_connectable": {
@@ -130,7 +118,7 @@
             }
         ],
         "content_security_policy": {
-            "extension_pages": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; img-src blob: 'self'; style-src 'self' 'unsafe-inline'; media-src *; connect-src *",
+            "extension_pages": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; img-src blob: 'self'; style-src 'self' 'unsafe-inline'; media-src 'self' blob: http: https:; connect-src 'self' http: https:",
             "sandbox": "sandbox allow-scripts; default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'unsafe-inline'"
         }
     },
@@ -254,7 +242,7 @@
                         "content_security_policy",
                         "extension_pages"
                     ],
-                    "value": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; img-src blob: 'self'; style-src 'self' 'unsafe-inline'; media-src *; connect-src *"
+                    "value": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; img-src blob: 'self'; style-src 'self' 'unsafe-inline'; media-src 'self' blob: http: https:; connect-src 'self' http: https:"
                 },
                 {
                     "action": "set",
@@ -360,14 +348,6 @@
                 {
                     "action": "delete",
                     "path": [
-                        "content_scripts",
-                        0,
-                        "match_about_blank"
-                    ]
-                },
-                {
-                    "action": "delete",
-                    "path": [
                         "sandbox"
                     ]
                 },
@@ -376,7 +356,7 @@
                     "path": [
                         "content_security_policy"
                     ],
-                    "value": "default-src 'self'; script-src 'self' 'unsafe-eval'; img-src blob: 'self'; style-src 'self' 'unsafe-inline'; media-src *; connect-src *"
+                    "value": "default-src 'self'; script-src 'self' 'unsafe-eval'; img-src blob: 'self'; style-src 'self' 'unsafe-inline'; media-src 'self' blob: http: https:; connect-src 'self' http: https:"
                 }
             ],
             "excludeFiles": [

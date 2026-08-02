@@ -46,8 +46,14 @@ import {getFileExtensionFromAudioMediaType, getFileExtensionFromImageMediaType} 
 import {ClipboardReaderProxy, DictionaryDatabaseProxy, OffscreenProxy, TranslatorProxy} from './offscreen-proxy.js';
 import {createSchema, normalizeContext} from './profile-conditions-util.js';
 import {RequestBuilder} from './request-builder.js';
-import {injectStylesheet} from './script-manager.js';
+import {injectStylesheet, isContentScriptRegistered, registerContentScript, unregisterContentScript} from './script-manager.js';
 import {SottakuIntegration} from './sottaku-integration.js';
+
+const MAIN_CONTENT_SCRIPT_REGISTRATION_ID = 'sottakuMainContentScript';
+const REQUIRED_SOTTAKU_HOST_PERMISSIONS = new Set([
+    'https://sottaku.app/*',
+    'https://*.sottaku.app/*',
+]);
 
 /**
  * This class controls the core logic of the extension, including API calls
@@ -305,6 +311,7 @@ export class Backend {
             this._prepareInternalSync();
 
             this._permissions = await getAllPermissions();
+            await this._syncMainContentScriptRegistration();
             this._defaultBrowserActionTitle = this._getBrowserIconTitle();
             this._badgePrepareDelayTimer = setTimeout(() => {
                 this._badgePrepareDelayTimer = null;
@@ -508,10 +515,6 @@ export class Backend {
     _onInstalled({reason}) {
         if (reason !== 'install') { return; }
         void this._requestPersistentStorage();
-        this._prepareCompletePromise.then(
-            () => { void this._autoLinkSottakuFromBrowserSession(); },
-            () => {}, // NOP
-        );
     }
 
     // Message handlers
@@ -1021,7 +1024,10 @@ export class Backend {
         if (!(typeof newToken === 'string' && newToken.length > 0)) { return; }
         if (oldToken === newToken) { return; }
 
-        /** @param {string} value */
+        /**
+         * @param {string} value
+         * @returns {string}
+         */
         const normalizeBaseUrl = (value) => value.replace(/\/+$/, '');
         const apiBaseUrlNormalized = normalizeBaseUrl(apiBaseUrl);
 
@@ -1065,7 +1071,10 @@ export class Backend {
         if (!(typeof apiBaseUrl === 'string' && apiBaseUrl.length > 0)) { return; }
         if (!(typeof oldToken === 'string' && oldToken.length > 0)) { return; }
 
-        /** @param {string} value */
+        /**
+         * @param {string} value
+         * @returns {string}
+         */
         const normalizeBaseUrl = (value) => value.replace(/\/+$/, '');
         const apiBaseUrlNormalized = normalizeBaseUrl(apiBaseUrl);
 
@@ -1093,6 +1102,13 @@ export class Backend {
                     scope: 'profile',
                     optionsContext: {index},
                     path: 'sottaku.authToken',
+                    value: '',
+                },
+                {
+                    action: 'set',
+                    scope: 'profile',
+                    optionsContext: {index},
+                    path: 'sottaku.refreshToken',
                     value: '',
                 },
                 {
@@ -1345,20 +1361,11 @@ export class Backend {
             const apiBaseUrl = typeof sottaku.apiBaseUrl === 'string' && sottaku.apiBaseUrl.length > 0 ?
                 sottaku.apiBaseUrl :
                 'https://sottaku.app/api/v1';
-            const cookieDomain = typeof sottaku.cookieDomain === 'string' && sottaku.cookieDomain.length > 0 ?
-                sottaku.cookieDomain :
-                (() => {
-                    try {
-                        return new URL(apiBaseUrl).origin;
-                    } catch (e) {
-                        return 'https://sottaku.app';
-                    }
-                })();
 
             const client = new SottakuClient({
                 apiBaseUrl,
                 authToken: sottaku.authToken,
-                cookieDomain,
+                refreshToken: sottaku.refreshToken,
                 onAuthTokenUpdated: ({apiBaseUrl: updatedBaseUrl, oldToken, newToken}) => this._handleSottakuAuthTokenUpdate(updatedBaseUrl, oldToken, newToken),
                 onAuthTokenInvalidated: ({apiBaseUrl: invalidatedBaseUrl, oldToken}) => this._handleSottakuAuthTokenInvalidate(invalidatedBaseUrl, oldToken),
             });
@@ -2231,95 +2238,6 @@ export class Backend {
         if (typeof defaultTitle === 'undefined') { throw new Error('Failed to find default_title'); }
 
         return defaultTitle;
-    }
-
-    /**
-     * Best-effort: link Sottaku from existing browser session when the extension is installed.
-     * @returns {Promise<void>}
-     */
-    async _autoLinkSottakuFromBrowserSession() {
-        /** @type {import('settings').OptionsContext} */
-        const optionsContext = {current: true};
-        let options;
-        try {
-            options = this._getProfileOptions(optionsContext, false);
-        } catch (e) {
-            return;
-        }
-
-        const {sottaku} = options;
-        if (typeof sottaku?.authToken === 'string' && sottaku.authToken.length > 0) { return; }
-
-        const apiBaseUrl = typeof sottaku?.apiBaseUrl === 'string' && sottaku.apiBaseUrl.length > 0 ?
-            sottaku.apiBaseUrl :
-            'https://sottaku.app/api/v1';
-
-        let origin = 'https://sottaku.app';
-        try {
-            origin = new URL(apiBaseUrl).origin;
-        } catch (e) {
-            // NOP
-        }
-
-        const client = new SottakuClient({
-            apiBaseUrl,
-            cookieDomain: origin,
-        });
-
-        let token = null;
-        try {
-            token = await client.syncTokenFromCookies();
-        } catch (e) {
-            return;
-        }
-        if (!token) { return; }
-
-        /** @type {unknown} */
-        let user = null;
-        try {
-            const profile = await client.getProfile();
-            const profileObject = profile && typeof profile === 'object' ? /** @type {Record<string, unknown>} */ (profile) : null;
-            if (profileObject !== null && isObjectNotArray(profileObject.user)) {
-                user = profileObject.user;
-            }
-        } catch (e) {
-            // NOP
-        }
-
-        const proFlag = (
-            isObjectNotArray(user) && (
-                (typeof /** @type {{isPro?: unknown}} */ (user).isPro === 'boolean') ||
-                (typeof /** @type {{is_pro?: unknown}} */ (user).is_pro === 'boolean')
-            )
-        ) ?
-            (
-                typeof /** @type {{isPro?: unknown}} */ (user).isPro === 'boolean' ?
-                    /** @type {{isPro: boolean}} */ (user).isPro :
-                    /** @type {{is_pro: boolean}} */ (user).is_pro
-            ) :
-            null;
-
-        const normalizedUser = this._normalizeSottakuUser(user);
-        /** @type {import('settings-modifications').ScopedModificationSet[]} */
-        const updates = [
-            {action: 'set', scope: 'profile', optionsContext, path: 'sottaku.authToken', value: token},
-            {action: 'set', scope: 'profile', optionsContext, path: 'sottaku.cookieDomain', value: origin},
-            {action: 'set', scope: 'profile', optionsContext, path: 'sottaku.enabled', value: true},
-            {action: 'set', scope: 'profile', optionsContext, path: 'sottaku.user', value: normalizedUser},
-        ];
-        try {
-            await this._modifySettings(updates, 'backend');
-        } catch (e) {
-            return;
-        }
-
-        if (proFlag === false) {
-            try {
-                await this._createTab(`${origin}/upgrade`);
-            } catch (e) {
-                // NOP
-            }
-        }
     }
 
     /**
@@ -3356,7 +3274,33 @@ export class Backend {
      */
     async _checkPermissions() {
         this._permissions = await getAllPermissions();
+        await this._syncMainContentScriptRegistration();
         this._updateBadge();
+    }
+
+    /**
+     * Register page scanning only for origins the user granted at runtime.
+     * @returns {Promise<void>}
+     */
+    async _syncMainContentScriptRegistration() {
+        try {
+            if (await isContentScriptRegistered(MAIN_CONTENT_SCRIPT_REGISTRATION_ID)) {
+                await unregisterContentScript(MAIN_CONTENT_SCRIPT_REGISTRATION_ID);
+            }
+
+            const grantedOrigins = Array.isArray(this._permissions?.origins) ? this._permissions.origins : [];
+            const matches = grantedOrigins.filter((origin) => !REQUIRED_SOTTAKU_HOST_PERMISSIONS.has(origin));
+            if (matches.length === 0) { return; }
+
+            await registerContentScript(MAIN_CONTENT_SCRIPT_REGISTRATION_ID, {
+                runAt: 'document_idle',
+                matches,
+                allFrames: true,
+                js: ['js/app/content-script-wrapper.js'],
+            });
+        } catch (e) {
+            log.error(e);
+        }
     }
 
     /**

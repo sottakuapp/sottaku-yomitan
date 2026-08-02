@@ -705,6 +705,7 @@ export class Frontend {
         /** @type {Record<string, unknown>} */
         const sottaku = {...options.sottaku};
         delete sottaku.authToken;
+        delete sottaku.refreshToken;
         delete sottaku.cookieDomain;
         delete sottaku.user;
         snapshot.sottaku = sottaku;

@@ -593,6 +593,7 @@ export class OptionsUtil {
             this._updateVersion78,
             this._updateVersion79,
             this._updateVersion80,
+            this._updateVersion81,
         ];
         /* eslint-enable @typescript-eslint/unbound-method */
         if (typeof targetVersion === 'number' && targetVersion < result.length) {
@@ -1881,6 +1882,7 @@ export class OptionsUtil {
                 enabled: true,
                 apiBaseUrl: typeof current?.apiBaseUrl === 'string' && current.apiBaseUrl.length > 0 ? current.apiBaseUrl : 'https://sottaku.app/api/v1',
                 authToken: typeof current?.authToken === 'string' ? current.authToken : '',
+                refreshToken: typeof current?.refreshToken === 'string' ? current.refreshToken : '',
                 locale: typeof current?.locale === 'string' ? current.locale : '',
                 languageMode,
                 preferredLanguages,
@@ -1921,6 +1923,20 @@ export class OptionsUtil {
             if (!sottaku || typeof sottaku !== 'object') { continue; }
             if (typeof sottaku.locale !== 'string') {
                 sottaku.locale = '';
+            }
+        }
+    }
+
+    /**
+     * - Added scoped Sottaku extension refresh credentials.
+     * @type {import('options-util').UpdateFunction}
+     */
+    async _updateVersion81(options) {
+        for (const profile of options.profiles) {
+            const sottaku = profile.options?.sottaku;
+            if (!sottaku || typeof sottaku !== 'object') { continue; }
+            if (typeof sottaku.refreshToken !== 'string') {
+                sottaku.refreshToken = '';
             }
         }
     }

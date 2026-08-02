@@ -65,7 +65,7 @@ export class DisplaySottaku {
         this._client.setConfig({
             apiBaseUrl: sottaku?.apiBaseUrl,
             authToken: sottaku?.authToken,
-            cookieDomain: sottaku?.cookieDomain,
+            refreshToken: sottaku?.refreshToken,
         });
         if (!this._enabled) {
             this._clearButtons();

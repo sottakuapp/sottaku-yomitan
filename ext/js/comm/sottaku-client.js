@@ -35,7 +35,6 @@ const REQUEST_CACHE_TTLS = new Map([
     ['GET /dictionary/supported-languages', STATIC_SETTINGS_CACHE_TTL_MS],
     ['POST /dictionary/yomitan-scan', SHARED_SCAN_CACHE_TTL_MS],
 ]);
-const AUTH_COOKIE_MAX_AGE_SECONDS = 90 * 24 * 60 * 60;
 /**
  * @param {unknown} message
  * @returns {Promise<unknown>}
@@ -61,7 +60,7 @@ function sendRuntimeMessagePromise(message) {
 }
 
 /**
- * @param {string} value
+ * @param {unknown} token
  * @returns {string}
  */
 function normalizeAuthTokenForStorage(token) {
@@ -122,15 +121,15 @@ function setSharedCachedValue(requestKey, value, ttlMs) {
 
 export class SottakuClient {
     /**
-     * @param {{apiBaseUrl?: string, authToken?: string, cookieDomain?: string, onAuthTokenUpdated?: ((details: {apiBaseUrl: string, oldToken: string, newToken: string}) => (void|Promise<void>))|null, onAuthTokenInvalidated?: ((details: {apiBaseUrl: string, oldToken: string}) => (void|Promise<void>))|null}} [options]
+     * @param {{apiBaseUrl?: string, authToken?: string, refreshToken?: string, onAuthTokenUpdated?: ((details: {apiBaseUrl: string, oldToken: string, newToken: string}) => (void|Promise<void>))|null, onAuthTokenInvalidated?: ((details: {apiBaseUrl: string, oldToken: string}) => (void|Promise<void>))|null}} [options]
      */
     constructor(options = {}) {
         /** @type {string} */
-        this._apiBaseUrl = options.apiBaseUrl || 'https://sottaku.app/api/v1';
+        this._apiBaseUrl = this._normalizeApiBaseUrl(options.apiBaseUrl);
         /** @type {string} */
         this._authToken = normalizeAuthTokenForStorage(options.authToken);
         /** @type {string} */
-        this._cookieDomain = options.cookieDomain || this._getOrigin(this._apiBaseUrl);
+        this._refreshToken = normalizeAuthTokenForStorage(options.refreshToken);
         /** @type {((details: {apiBaseUrl: string, oldToken: string, newToken: string}) => (void|Promise<void>))|null} */
         this._onAuthTokenUpdated = typeof options.onAuthTokenUpdated === 'function' ? options.onAuthTokenUpdated : null;
         /** @type {((details: {apiBaseUrl: string, oldToken: string}) => (void|Promise<void>))|null} */
@@ -148,17 +147,17 @@ export class SottakuClient {
     }
 
     /**
-     * @param {{apiBaseUrl?: string, authToken?: string, cookieDomain?: string, onAuthTokenUpdated?: ((details: {apiBaseUrl: string, oldToken: string, newToken: string}) => (void|Promise<void>))|null, onAuthTokenInvalidated?: ((details: {apiBaseUrl: string, oldToken: string}) => (void|Promise<void>))|null}} options
+     * @param {{apiBaseUrl?: string, authToken?: string, refreshToken?: string, onAuthTokenUpdated?: ((details: {apiBaseUrl: string, oldToken: string, newToken: string}) => (void|Promise<void>))|null, onAuthTokenInvalidated?: ((details: {apiBaseUrl: string, oldToken: string}) => (void|Promise<void>))|null}} options
      */
     setConfig(options) {
         if (typeof options.apiBaseUrl === 'string' && options.apiBaseUrl.length > 0) {
-            this._apiBaseUrl = options.apiBaseUrl;
+            this._apiBaseUrl = this._normalizeApiBaseUrl(options.apiBaseUrl);
         }
         if (typeof options.authToken === 'string') {
             this._authToken = normalizeAuthTokenForStorage(options.authToken);
         }
-        if (typeof options.cookieDomain === 'string' && options.cookieDomain.length > 0) {
-            this._cookieDomain = options.cookieDomain;
+        if (typeof options.refreshToken === 'string') {
+            this._refreshToken = normalizeAuthTokenForStorage(options.refreshToken);
         }
         if ('onAuthTokenUpdated' in options) {
             this._onAuthTokenUpdated = typeof options.onAuthTokenUpdated === 'function' ? options.onAuthTokenUpdated : null;
@@ -171,43 +170,142 @@ export class SottakuClient {
     /**
      * @param {string} username
      * @param {string} password
-     * @returns {Promise<{token: string, user: unknown}>}
+     * @returns {Promise<{token: string, refreshToken: string, user?: unknown}>}
      */
     async loginWithPassword(username, password) {
-        const data = await this._request('/login', {
+        const response = /** @type {unknown} */ (await this._request('/login', {
             method: 'POST',
             body: {username, email: username, password},
             auth: false,
-        });
-        if (typeof data?.token === 'string') {
+        }));
+        const data = response && typeof response === 'object' ?
+            /** @type {{token?: unknown, refresh_token?: unknown, user?: unknown}} */ (response) :
+            {};
+        const refreshToken = normalizeAuthTokenForStorage(data.refresh_token);
+        this._refreshToken = refreshToken;
+        if (typeof data.token === 'string') {
             const token = normalizeAuthTokenForStorage(data.token);
             this._authToken = token;
-            await this._persistAuthTokenCookie(token);
-            if (token !== data.token && data && typeof data === 'object') {
-                return {...data, token};
-            }
+            return {token, refreshToken, user: data.user};
         }
-        return data;
+        return {token: '', refreshToken, user: data.user};
     }
 
     /**
-     * Uses an existing browser session (for example, after completing OAuth in a tab)
-     * to pull the api_token cookie from the Sottaku origin.
-     * @returns {Promise<string|null>}
+     * Create a one-time browser approval URL without exposing browser cookies.
+     * @throws {Error} If secure random generation is unavailable.
+     * @returns {{linkToken: string, url: string}}
      */
-    async syncTokenFromCookies() {
-        try {
-            const tokens = await this._getCookieAuthTokenCandidates();
-            const token = tokens[0] || null;
-            if (token) {
-                this._authToken = token;
-                await this._persistAuthTokenCookie(token);
-                return token;
-            }
-        } catch (e) {
-            throw toError(e);
+    createBrowserLink() {
+        if (!(globalThis.crypto && typeof globalThis.crypto.getRandomValues === 'function')) {
+            throw new Error('Secure random number generation is unavailable');
         }
-        return null;
+        const bytes = new Uint8Array(32);
+        globalThis.crypto.getRandomValues(bytes);
+        let binary = '';
+        for (const value of bytes) {
+            binary += String.fromCharCode(value);
+        }
+        const linkToken = btoa(binary)
+            .replace(/\+/g, '-')
+            .replace(/\//g, '_')
+            .replace(/=+$/u, '');
+        const origin = new URL(this._apiBaseUrl).origin;
+        const url = new URL('/extension/link', origin);
+        url.searchParams.set('token', linkToken);
+        return {linkToken, url: url.href};
+    }
+
+    /**
+     * Poll a one-time browser approval and retain only the scoped result.
+     * @param {string} linkToken
+     * @returns {Promise<{status: string, token?: string, refreshToken?: string, user?: unknown}>}
+     */
+    async exchangeBrowserLink(linkToken) {
+        const response = /** @type {unknown} */ (await this._request('/auth/extension-link/exchange', {
+            method: 'POST',
+            body: {link_token: linkToken},
+            auth: false,
+        }));
+        const data = response && typeof response === 'object' ?
+            /** @type {{status: string, token?: string, refresh_token?: string, user?: unknown}} */ (response) :
+            {status: 'pending'};
+        if (data?.status === 'linked' && typeof data.token === 'string') {
+            this._authToken = normalizeAuthTokenForStorage(data.token);
+            this._refreshToken = normalizeAuthTokenForStorage(data.refresh_token);
+        }
+        return {
+            status: data.status,
+            token: data.token,
+            refreshToken: data.refresh_token,
+            user: data.user,
+        };
+    }
+
+    /**
+     * Revoke the extension session before clearing local credentials.
+     * @returns {Promise<void>}
+     */
+    async logout() {
+        try {
+            if (this._authToken) {
+                await this._request('/logout', {method: 'POST'});
+            }
+        } finally {
+            this._authToken = '';
+            this._refreshToken = '';
+        }
+    }
+
+    /**
+     * @returns {Promise<'refreshed'|'invalid'|'unavailable'>}
+     */
+    async _refreshAccessToken() {
+        if (!this._refreshToken) { return 'invalid'; }
+        const url = this._buildUrl('/auth/extension-refresh', null, null);
+        /** @type {Response} */
+        let response;
+        try {
+            response = await fetch(url, {
+                method: 'POST',
+                credentials: 'omit',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'X-Client-Platform': 'browser_extension',
+                },
+                body: JSON.stringify({refresh_token: this._refreshToken}),
+            });
+        } catch (e) {
+            return 'unavailable';
+        }
+        /** @type {unknown} */
+        let rawData = null;
+        try {
+            rawData = await readResponseJson(response);
+        } catch (e) {
+            // NOP
+        }
+        const envelope = rawData && typeof rawData === 'object' ?
+            /** @type {{data?: unknown}} */ (rawData) :
+            {};
+        const data = envelope.data && typeof envelope.data === 'object' ?
+            /** @type {{token?: unknown}} */ (envelope.data) :
+            envelope;
+        const newToken = normalizeAuthTokenForStorage(
+            /** @type {{token?: unknown}} */ (data).token,
+        );
+        if (!response.ok || !newToken) {
+            if (response.status === 401) {
+                this._refreshToken = '';
+                return 'invalid';
+            }
+            return 'unavailable';
+        }
+        const oldToken = this._authToken;
+        this._authToken = newToken;
+        await this._notifyAuthTokenUpdated(oldToken, newToken);
+        return 'refreshed';
     }
 
     /**
@@ -271,7 +369,7 @@ export class SottakuClient {
     /**
      * Optimized scan endpoint tailored for Sottaku-Yomitan lookups.
      * @param {string} text
-     * @param {string} language
+     * @param {string|string[]} language
      * @param {number} [maxResults]
      * @param {string} [locale]
      * @param {{hanziDisplay?: string, chineseReadingDisplay?: string, chineseToneColors?: boolean, japanesePitchAccentDisplay?: string}} [displayPreferences]
@@ -385,31 +483,30 @@ export class SottakuClient {
     /**
      * Fetch audio (with auth) and return an object URL.
      * @param {string} path
-     * @param {string} language
+     * @param {string} _language
      * @returns {Promise<string|null>}
      */
-    async fetchAudioAsObjectUrl(path, language) {
+    async fetchAudioAsObjectUrl(path, _language) {
         const url = this._resolveUrl(path);
         let retriedAuth = false;
         while (true) {
-            const tokenUsed = this._authToken;
+            const tokenUsed = this._isTrustedApiUrl(url) ? this._authToken : '';
             /** @type {RequestInit} */
             const options = {
                 method: 'GET',
-                credentials: 'include',
+                credentials: 'omit',
                 headers: {'X-Client-Platform': 'browser_extension'},
             };
             if (tokenUsed) {
                 options.headers = {
                     ...options.headers,
-                    'Authorization': `Bearer ${tokenUsed}`,
+                    Authorization: `Bearer ${tokenUsed}`,
                 };
             }
             const response = await fetch(url, options);
             const rotatedToken = normalizeAuthTokenForStorage(response.headers.get('X-New-Token'));
             if (tokenUsed && rotatedToken && rotatedToken !== tokenUsed) {
                 this._authToken = rotatedToken;
-                await this._persistAuthTokenCookie(rotatedToken);
                 await this._notifyAuthTokenUpdated(tokenUsed, rotatedToken);
             }
             if (response.status === 401 && tokenUsed && !retriedAuth) {
@@ -417,18 +514,14 @@ export class SottakuClient {
                 if (rotatedToken && rotatedToken !== tokenUsed) {
                     continue;
                 }
-                let cookieToken = null;
-                try {
-                    cookieToken = await this._recoverAuthTokenFromCookies(tokenUsed);
-                } catch (e) {
-                    cookieToken = null;
-                }
-                if (cookieToken) {
-                    await this._notifyAuthTokenUpdated(tokenUsed, cookieToken);
+                const refreshResult = await this._refreshAccessToken();
+                if (refreshResult === 'refreshed') {
                     continue;
                 }
-                this._authToken = '';
-                await this._notifyAuthTokenInvalidated(tokenUsed);
+                if (refreshResult === 'invalid') {
+                    this._authToken = '';
+                    await this._notifyAuthTokenInvalidated(tokenUsed);
+                }
                 return null;
             }
             if (!response.ok) {
@@ -448,7 +541,7 @@ export class SottakuClient {
         try {
             return new URL(path).href;
         } catch (e) {
-            const origin = this._getOrigin(this._apiBaseUrl);
+            const origin = new URL(this._apiBaseUrl).origin;
             const trimmedPath = path.startsWith('/') ? path : `/${path}`;
             return `${origin}${trimmedPath}`;
         }
@@ -548,10 +641,10 @@ export class SottakuClient {
         const fetchOptions = {
             method: normalizedMethod,
             headers: {
-                Accept: 'application/json',
+                'Accept': 'application/json',
                 'X-Client-Platform': 'browser_extension',
             },
-            credentials: 'include',
+            credentials: 'omit',
         };
         if (auth && tokenUsed) {
             fetchOptions.headers = {
@@ -573,7 +666,6 @@ export class SottakuClient {
             if (auth && rotatedToken && rotatedToken !== this._authToken) {
                 const oldToken = this._authToken || tokenUsed;
                 this._authToken = rotatedToken;
-                await this._persistAuthTokenCookie(rotatedToken);
                 await this._notifyAuthTokenUpdated(oldToken, rotatedToken);
             }
             /** @type {any} */
@@ -587,18 +679,18 @@ export class SottakuClient {
             const message = (json && (json.error || json.message)) || response.statusText;
 
             const isAuthError = response.status === 401 && auth && tokenUsed;
+            if (
+                isAuthError &&
+                !_retryAuth &&
+                this._authToken &&
+                this._authToken !== tokenUsed
+            ) {
+                return await this._request(path, {...options, _retryAuth: true});
+            }
+            let refreshResult = null;
             if (isAuthError && !_retryAuth) {
-                if (this._authToken && this._authToken !== tokenUsed) {
-                    return await this._request(path, {...options, _retryAuth: true});
-                }
-                let cookieToken = null;
-                try {
-                    cookieToken = await this._recoverAuthTokenFromCookies(tokenUsed);
-                } catch (e) {
-                    cookieToken = null;
-                }
-                if (cookieToken) {
-                    await this._notifyAuthTokenUpdated(tokenUsed, cookieToken);
+                refreshResult = await this._refreshAccessToken();
+                if (refreshResult === 'refreshed') {
                     return await this._request(path, {...options, _retryAuth: true});
                 }
             }
@@ -612,7 +704,7 @@ export class SottakuClient {
                     (typeof message === 'string' && message.includes('Invalid or expired token'))
                 )
             );
-            if (isTokenExpired) {
+            if (isTokenExpired && refreshResult !== 'unavailable') {
                 if (this._authToken === tokenUsed) {
                     this._authToken = '';
                 }
@@ -675,98 +767,42 @@ export class SottakuClient {
     }
 
     /**
-     * @param {string} name
-     * @returns {Promise<string|null>}
-     */
-    _getCookieValue(name) {
-        if (!(typeof chrome === 'object' && chrome !== null && chrome.cookies)) {
-            return Promise.resolve(null);
-        }
-        return new Promise((resolve, reject) => {
-            chrome.cookies.get({url: this._cookieDomain, name}, (cookie) => {
-                const error = chrome.runtime.lastError;
-                if (error) {
-                    reject(new Error(error.message));
-                    return;
-                }
-                resolve(cookie?.value ?? null);
-            });
-        });
-    }
-
-    /**
-     * @returns {Promise<string[]>}
-     */
-    async _getCookieAuthTokenCandidates() {
-        const tokens = [];
-        const seen = new Set();
-        for (const name of ['api_token']) {
-            const token = normalizeAuthTokenForStorage(await this._getCookieValue(name));
-            if (!token || seen.has(token)) { continue; }
-            seen.add(token);
-            tokens.push(token);
-        }
-        return tokens;
-    }
-
-    /**
-     * @param {string} oldToken
-     * @returns {Promise<string|null>}
-     */
-    async _recoverAuthTokenFromCookies(oldToken) {
-        const normalizedOldToken = normalizeAuthTokenForStorage(oldToken);
-        const tokens = await this._getCookieAuthTokenCandidates();
-        const token = tokens.find((value) => value !== normalizedOldToken) || null;
-        if (!token) { return null; }
-        this._authToken = token;
-        await this._persistAuthTokenCookie(token);
-        return token;
-    }
-
-    /**
-     * @param {string} token
-     * @returns {Promise<void>}
-     */
-    async _persistAuthTokenCookie(token) {
-        const normalizedToken = normalizeAuthTokenForStorage(token);
-        if (!normalizedToken) { return; }
-        if (!(typeof chrome === 'object' && chrome !== null && chrome.cookies && typeof chrome.cookies.set === 'function')) {
-            return;
-        }
-        try {
-            const details = {
-                url: this._cookieDomain,
-                name: 'api_token',
-                value: normalizedToken,
-                path: '/',
-                expirationDate: Math.floor(Date.now() / 1000) + AUTH_COOKIE_MAX_AGE_SECONDS,
-                sameSite: /** @type {chrome.cookies.SameSiteStatus} */ ('lax'),
-                secure: this._cookieDomain.startsWith('https://'),
-            };
-            await new Promise((resolve, reject) => {
-                void chrome.cookies.set(details, () => {
-                    const error = chrome.runtime.lastError;
-                    if (error) {
-                        reject(new Error(error.message));
-                    } else {
-                        resolve(void 0);
-                    }
-                });
-            });
-        } catch (e) {
-            // Best-effort; storage still keeps the token even when cookies are unavailable.
-        }
-    }
-
-    /**
-     * @param {string} url
+     * @param {unknown} value
+     * @throws {Error} If the configured API origin is not trusted.
      * @returns {string}
      */
-    _getOrigin(url) {
+    _normalizeApiBaseUrl(value) {
+        const fallback = 'https://sottaku.app/api/v1';
+        const candidate = typeof value === 'string' && value.trim() ? value.trim() : fallback;
         try {
-            return new URL(url).origin;
+            const url = new URL(candidate);
+            if (!this._isTrustedApiUrl(url.href)) {
+                throw new Error('Untrusted Sottaku API origin');
+            }
+            return url.href.replace(/\/+$/, '');
         } catch (e) {
-            return 'https://sottaku.app';
+            throw new Error('Untrusted Sottaku API origin');
+        }
+    }
+
+    /**
+     * @param {string} value
+     * @returns {boolean}
+     */
+    _isTrustedApiUrl(value) {
+        try {
+            const url = new URL(value);
+            const hostname = url.hostname.toLowerCase();
+            return (
+                url.protocol === 'https:' && (
+                    hostname === 'sottaku.app' || hostname.endsWith('.sottaku.app')
+                )
+            ) || (
+                (url.protocol === 'http:' || url.protocol === 'https:') &&
+                (hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '::1')
+            );
+        } catch (e) {
+            return false;
         }
     }
 }

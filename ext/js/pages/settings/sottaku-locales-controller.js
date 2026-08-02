@@ -46,7 +46,7 @@ export class SottakuLocalesController {
         this._client.setConfig({
             apiBaseUrl: this._apiBaseUrl || undefined,
             authToken: typeof sottaku?.authToken === 'string' ? sottaku.authToken : '',
-            cookieDomain: typeof sottaku?.cookieDomain === 'string' ? sottaku.cookieDomain : '',
+            refreshToken: typeof sottaku?.refreshToken === 'string' ? sottaku.refreshToken : '',
         });
     }
 

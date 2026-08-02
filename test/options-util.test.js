@@ -476,6 +476,7 @@ function createProfileOptionsUpdatedTestData1() {
             enabled: true,
             apiBaseUrl: 'https://sottaku.app/api/v1',
             authToken: '',
+            refreshToken: '',
             locale: '',
             languageMode: 'mixed',
             preferredLanguages: ['ja', 'ko', 'zh', 'en', 'es', 'de', 'fr', 'it'],
@@ -717,7 +718,7 @@ function createOptionsUpdatedTestData1() {
             },
         ],
         profileCurrent: 0,
-        version: 80,
+        version: 81,
         global: {
             database: {
                 prefixWildcardsSupported: false,
