@@ -108,17 +108,54 @@
             {
                 "resources": [
                     "popup.html",
-                    "template-renderer.html",
-                    "js/*",
-                    "lib/resvg.wasm"
+                    "js/app/content-script-main.js",
+                    "js/app/frontend.js",
+                    "js/app/popup-factory.js",
+                    "js/app/popup-proxy.js",
+                    "js/app/popup-window.js",
+                    "js/app/popup.js",
+                    "js/app/theme-controller.js",
+                    "js/application.js",
+                    "js/comm/api.js",
+                    "js/comm/cross-frame-api.js",
+                    "js/comm/frame-ancestry-handler.js",
+                    "js/comm/frame-client.js",
+                    "js/comm/frame-offset-forwarder.js",
+                    "js/core/api-map.js",
+                    "js/core/dynamic-property.js",
+                    "js/core/event-dispatcher.js",
+                    "js/core/event-listener-collection.js",
+                    "js/core/extension-error.js",
+                    "js/core/json.js",
+                    "js/core/log.js",
+                    "js/core/object-utilities.js",
+                    "js/core/promise-animation-frame.js",
+                    "js/core/safe-performance.js",
+                    "js/core/to-error.js",
+                    "js/core/utilities.js",
+                    "js/data/profiles-util.js",
+                    "js/data/string-util.js",
+                    "js/dom/document-util.js",
+                    "js/dom/dom-text-scanner.js",
+                    "js/dom/query-selector.js",
+                    "js/dom/style-util.js",
+                    "js/dom/text-source-element.js",
+                    "js/dom/text-source-generator.js",
+                    "js/dom/text-source-range.js",
+                    "js/extension/web-extension.js",
+                    "js/input/hotkey-handler.js",
+                    "js/language/CJK-util.js",
+                    "js/language/text-scanner.js",
+                    "js/pages/settings/popup-preview-controller.js"
                 ],
                 "matches": [
                     "<all_urls>"
-                ]
+                ],
+                "use_dynamic_url": true
             }
         ],
         "content_security_policy": {
-            "extension_pages": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; img-src blob: 'self'; style-src 'self' 'unsafe-inline'; media-src 'self' blob: http: https:; connect-src 'self' http: https:",
+            "extension_pages": "default-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; script-src 'self' 'wasm-unsafe-eval'; img-src 'self' blob: data: https://sottaku.app https://*.sottaku.app; style-src 'self' 'unsafe-inline'; media-src 'self' blob: https://sottaku.app https://*.sottaku.app; connect-src 'self' https://sottaku.app https://*.sottaku.app http://127.0.0.1:* http://localhost:*",
             "sandbox": "sandbox allow-scripts; default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'unsafe-inline'"
         }
     },
@@ -215,15 +252,6 @@
                     "value": "background.html"
                 },
                 {
-                    "action": "remove",
-                    "path": [
-                        "web_accessible_resources",
-                        0,
-                        "resources"
-                    ],
-                    "item": "template-renderer.html"
-                },
-                {
                     "action": "delete",
                     "path": [
                         "sandbox"
@@ -242,7 +270,7 @@
                         "content_security_policy",
                         "extension_pages"
                     ],
-                    "value": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; img-src blob: 'self'; style-src 'self' 'unsafe-inline'; media-src 'self' blob: http: https:; connect-src 'self' http: https:"
+                    "value": "default-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; script-src 'self' 'wasm-unsafe-eval'; img-src 'self' blob: data: https://sottaku.app https://*.sottaku.app; style-src 'self' 'unsafe-inline'; media-src 'self' blob: https://sottaku.app https://*.sottaku.app; connect-src 'self' https://sottaku.app https://*.sottaku.app http://127.0.0.1:* http://localhost:*"
                 },
                 {
                     "action": "set",
@@ -356,7 +384,7 @@
                     "path": [
                         "content_security_policy"
                     ],
-                    "value": "default-src 'self'; script-src 'self' 'unsafe-eval'; img-src blob: 'self'; style-src 'self' 'unsafe-inline'; media-src 'self' blob: http: https:; connect-src 'self' http: https:"
+                    "value": "default-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; script-src 'self' 'unsafe-eval'; img-src 'self' blob: data: https://sottaku.app https://*.sottaku.app; style-src 'self' 'unsafe-inline'; media-src 'self' blob: https://sottaku.app https://*.sottaku.app; connect-src 'self' https://sottaku.app https://*.sottaku.app http://127.0.0.1:* http://localhost:*"
                 }
             ],
             "excludeFiles": [
