@@ -200,17 +200,17 @@ describe('SottakuClient', () => {
         expect(body.japanese_pitch_accent_display).toBe('contour');
     });
 
-    test('normalizes signed session tokens to their durable origin token', async () => {
+    test('keeps signed session wrappers opaque', async () => {
         const {SottakuClient} = await importSottakuClientModule();
         const client = new SottakuClient({
             apiBaseUrl: 'https://sottaku.app/api/v1',
             authToken: SIGNED_TOKEN_WITH_ORIGIN,
         });
 
-        expect(client.authToken).toBe('origin-session-token');
+        expect(client.authToken).toBe(SIGNED_TOKEN_WITH_ORIGIN);
     });
 
-    test('stores the origin token and refreshes the Sottaku cookie when the server rotates a signed token', async () => {
+    test('stores only the opaque wrapper when the server rotates a signed token', async () => {
         const {setCalls} = stubChromeCookies();
         const fetchMock = vi.fn().mockResolvedValue(buildJsonResponse(
             {user: {id: 1, username: 'akira'}},
@@ -229,19 +229,32 @@ describe('SottakuClient', () => {
 
         await client.getProfile();
 
-        expect(client.authToken).toBe('origin-session-token');
+        expect(client.authToken).toBe(SIGNED_TOKEN_WITH_ORIGIN);
         expect(onAuthTokenUpdated).toHaveBeenCalledWith({
             apiBaseUrl: 'https://sottaku.app/api/v1',
             oldToken: 'old-token',
-            newToken: 'origin-session-token',
+            newToken: SIGNED_TOKEN_WITH_ORIGIN,
         });
         expect(setCalls[0]).toMatchObject({
             url: 'https://sottaku.app',
             name: 'api_token',
-            value: 'origin-session-token',
+            value: SIGNED_TOKEN_WITH_ORIGIN,
             path: '/',
             secure: true,
         });
+    });
+
+    test('never imports the durable HttpOnly session cookie as an access token', async () => {
+        stubChromeCookies({session_id: 'durable-origin-secret'});
+
+        const {SottakuClient} = await importSottakuClientModule();
+        const client = new SottakuClient({
+            apiBaseUrl: 'https://sottaku.app/api/v1',
+            cookieDomain: 'https://sottaku.app',
+        });
+
+        expect(await client.syncTokenFromCookies()).toBeNull();
+        expect(client.authToken).toBe('');
     });
 
     test('retries a 401 with a newer browser-session cookie before invalidating auth', async () => {

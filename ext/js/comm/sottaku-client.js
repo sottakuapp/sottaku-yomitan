@@ -36,8 +36,6 @@ const REQUEST_CACHE_TTLS = new Map([
     ['POST /dictionary/yomitan-scan', SHARED_SCAN_CACHE_TTL_MS],
 ]);
 const AUTH_COOKIE_MAX_AGE_SECONDS = 90 * 24 * 60 * 60;
-const SIGNED_SESSION_TOKEN_PREFIX = 'st1.';
-
 /**
  * @param {unknown} message
  * @returns {Promise<unknown>}
@@ -66,56 +64,10 @@ function sendRuntimeMessagePromise(message) {
  * @param {string} value
  * @returns {string}
  */
-function decodeBase64Url(value) {
-    try {
-        const base64 = value.replace(/-/g, '+').replace(/_/g, '/');
-        const padded = base64 + '='.repeat((4 - (base64.length % 4)) % 4);
-        const binary = globalThis.atob(padded);
-        const bytes = new Uint8Array(binary.length);
-        for (let i = 0; i < binary.length; ++i) {
-            bytes[i] = binary.charCodeAt(i);
-        }
-        return new TextDecoder().decode(bytes);
-    } catch (e) {
-        return '';
-    }
-}
-
-/**
- * Signed session tokens are intentionally short-lived; store the durable origin
- * token embedded by the server so extension storage and cookies do not expire
- * every signed-token TTL.
- * @param {string} token
- * @returns {string}
- */
-function extractOriginTokenFromSignedSessionToken(token) {
-    if (!token.startsWith(SIGNED_SESSION_TOKEN_PREFIX)) { return ''; }
-    const parts = token.split('.');
-    if (parts.length !== 3) { return ''; }
-    try {
-        const payloadRaw = parseJson(decodeBase64Url(parts[1]));
-        const payload = (
-            payloadRaw !== null &&
-            typeof payloadRaw === 'object' &&
-            !Array.isArray(payloadRaw)
-        ) ?
-            /** @type {{t?: unknown}} */ (payloadRaw) :
-            null;
-        const originToken = typeof payload?.t === 'string' ? payload.t.trim() : '';
-        return originToken || '';
-    } catch (e) {
-        return '';
-    }
-}
-
-/**
- * @param {unknown} token
- * @returns {string}
- */
 function normalizeAuthTokenForStorage(token) {
     const value = typeof token === 'string' ? token.trim() : '';
     if (!value) { return ''; }
-    return extractOriginTokenFromSignedSessionToken(value) || value;
+    return value;
 }
 
 /**
@@ -445,7 +397,7 @@ export class SottakuClient {
             const options = {
                 method: 'GET',
                 credentials: 'include',
-                headers: {},
+                headers: {'X-Client-Platform': 'browser_extension'},
             };
             if (tokenUsed) {
                 options.headers = {
@@ -597,6 +549,7 @@ export class SottakuClient {
             method: normalizedMethod,
             headers: {
                 Accept: 'application/json',
+                'X-Client-Platform': 'browser_extension',
             },
             credentials: 'include',
         };
@@ -747,7 +700,7 @@ export class SottakuClient {
     async _getCookieAuthTokenCandidates() {
         const tokens = [];
         const seen = new Set();
-        for (const name of ['api_token', 'session_id', 'auth_token']) {
+        for (const name of ['api_token']) {
             const token = normalizeAuthTokenForStorage(await this._getCookieValue(name));
             if (!token || seen.has(token)) { continue; }
             seen.add(token);
