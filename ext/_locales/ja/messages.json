@@ -1685,6 +1685,24 @@
     "settings_sottaku_password_placeholder": {
         "message": "パスワード"
     },
+    "settings_sottaku_step_up_code_placeholder": {
+        "message": "8桁のコード"
+    },
+    "settings_sottaku_step_up_verify_button": {
+        "message": "コードを確認"
+    },
+    "settings_sottaku_step_up_resend_button": {
+        "message": "コードを再送信"
+    },
+    "settings_sottaku_step_up_code_sent": {
+        "message": "メールに送信された8桁のコードを入力してください"
+    },
+    "settings_sottaku_step_up_reenter_password": {
+        "message": "コードを確認しました。ログインするにはパスワードをもう一度入力してください。"
+    },
+    "settings_sottaku_step_up_invalid_code": {
+        "message": "コードが無効か、有効期限が切れています"
+    },
     "settings_sottaku_sign_in_button": {
         "message": "サインイン"
     },

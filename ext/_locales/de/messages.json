@@ -1685,6 +1685,24 @@
     "settings_sottaku_password_placeholder": {
         "message": "Passwort"
     },
+    "settings_sottaku_step_up_code_placeholder": {
+        "message": "Achtstelliger Code"
+    },
+    "settings_sottaku_step_up_verify_button": {
+        "message": "Code bestätigen"
+    },
+    "settings_sottaku_step_up_resend_button": {
+        "message": "Code erneut senden"
+    },
+    "settings_sottaku_step_up_code_sent": {
+        "message": "Gib den achtstelligen Code aus deiner E-Mail ein"
+    },
+    "settings_sottaku_step_up_reenter_password": {
+        "message": "Code bestätigt. Gib dein Passwort erneut ein, um dich anzumelden."
+    },
+    "settings_sottaku_step_up_invalid_code": {
+        "message": "Der Code ist ungültig oder abgelaufen"
+    },
     "settings_sottaku_sign_in_button": {
         "message": "Anmelden"
     },

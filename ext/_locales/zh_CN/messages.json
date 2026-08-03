@@ -1685,6 +1685,24 @@
     "settings_sottaku_password_placeholder": {
         "message": "密码"
     },
+    "settings_sottaku_step_up_code_placeholder": {
+        "message": "八位验证码"
+    },
+    "settings_sottaku_step_up_verify_button": {
+        "message": "验证代码"
+    },
+    "settings_sottaku_step_up_resend_button": {
+        "message": "重新发送代码"
+    },
+    "settings_sottaku_step_up_code_sent": {
+        "message": "请输入发送到你电子邮箱的八位验证码"
+    },
+    "settings_sottaku_step_up_reenter_password": {
+        "message": "验证码已通过。请重新输入密码以登录。"
+    },
+    "settings_sottaku_step_up_invalid_code": {
+        "message": "验证码无效或已过期"
+    },
     "settings_sottaku_sign_in_button": {
         "message": "登录"
     },

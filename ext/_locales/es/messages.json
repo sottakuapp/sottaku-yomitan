@@ -1685,6 +1685,24 @@
     "settings_sottaku_password_placeholder": {
         "message": "Contraseña"
     },
+    "settings_sottaku_step_up_code_placeholder": {
+        "message": "Código de ocho dígitos"
+    },
+    "settings_sottaku_step_up_verify_button": {
+        "message": "Verificar código"
+    },
+    "settings_sottaku_step_up_resend_button": {
+        "message": "Reenviar código"
+    },
+    "settings_sottaku_step_up_code_sent": {
+        "message": "Introduce el código de ocho dígitos enviado a tu correo"
+    },
+    "settings_sottaku_step_up_reenter_password": {
+        "message": "Código verificado. Vuelve a introducir tu contraseña para iniciar sesión."
+    },
+    "settings_sottaku_step_up_invalid_code": {
+        "message": "El código no es válido o ha caducado"
+    },
     "settings_sottaku_sign_in_button": {
         "message": "Iniciar sesión"
     },

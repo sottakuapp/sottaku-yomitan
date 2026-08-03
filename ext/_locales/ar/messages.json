@@ -1685,6 +1685,24 @@
     "settings_sottaku_password_placeholder": {
         "message": "كلمة المرور"
     },
+    "settings_sottaku_step_up_code_placeholder": {
+        "message": "الرمز المكوّن من 8 أرقام"
+    },
+    "settings_sottaku_step_up_verify_button": {
+        "message": "تحقق من الرمز"
+    },
+    "settings_sottaku_step_up_resend_button": {
+        "message": "إعادة إرسال الرمز"
+    },
+    "settings_sottaku_step_up_code_sent": {
+        "message": "أدخل الرمز المكوّن من 8 أرقام الذي أرسلناه إلى بريدك الإلكتروني"
+    },
+    "settings_sottaku_step_up_reenter_password": {
+        "message": "تم التحقق من الرمز. أدخل كلمة المرور مرة أخرى لتسجيل الدخول."
+    },
+    "settings_sottaku_step_up_invalid_code": {
+        "message": "الرمز غير صالح أو منتهي الصلاحية"
+    },
     "settings_sottaku_sign_in_button": {
         "message": "تسجيل الدخول"
     },

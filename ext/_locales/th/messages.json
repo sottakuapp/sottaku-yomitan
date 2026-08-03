@@ -1685,6 +1685,24 @@
     "settings_sottaku_password_placeholder": {
         "message": "รหัสผ่าน"
     },
+    "settings_sottaku_step_up_code_placeholder": {
+        "message": "รหัส 8 หลัก"
+    },
+    "settings_sottaku_step_up_verify_button": {
+        "message": "ยืนยันรหัส"
+    },
+    "settings_sottaku_step_up_resend_button": {
+        "message": "ส่งรหัสอีกครั้ง"
+    },
+    "settings_sottaku_step_up_code_sent": {
+        "message": "ป้อนรหัส 8 หลักที่ส่งไปยังอีเมลของคุณ"
+    },
+    "settings_sottaku_step_up_reenter_password": {
+        "message": "ยืนยันรหัสแล้ว ป้อนรหัสผ่านอีกครั้งเพื่อเข้าสู่ระบบ"
+    },
+    "settings_sottaku_step_up_invalid_code": {
+        "message": "รหัสไม่ถูกต้องหรือหมดอายุแล้ว"
+    },
     "settings_sottaku_sign_in_button": {
         "message": "ลงชื่อเข้าใช้"
     },

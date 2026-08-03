@@ -1685,6 +1685,24 @@
     "settings_sottaku_password_placeholder": {
         "message": "पासवर्ड"
     },
+    "settings_sottaku_step_up_code_placeholder": {
+        "message": "आठ अंकों का कोड"
+    },
+    "settings_sottaku_step_up_verify_button": {
+        "message": "कोड सत्यापित करें"
+    },
+    "settings_sottaku_step_up_resend_button": {
+        "message": "कोड फिर भेजें"
+    },
+    "settings_sottaku_step_up_code_sent": {
+        "message": "अपने ईमेल पर भेजा गया आठ अंकों का कोड दर्ज करें"
+    },
+    "settings_sottaku_step_up_reenter_password": {
+        "message": "कोड सत्यापित हो गया। साइन इन करने के लिए अपना पासवर्ड फिर से दर्ज करें।"
+    },
+    "settings_sottaku_step_up_invalid_code": {
+        "message": "कोड अमान्य है या समाप्त हो चुका है"
+    },
     "settings_sottaku_sign_in_button": {
         "message": "साइन इन करें"
     },

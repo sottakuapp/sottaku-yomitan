@@ -1685,6 +1685,24 @@
     "settings_sottaku_password_placeholder": {
         "message": "비밀번호"
     },
+    "settings_sottaku_step_up_code_placeholder": {
+        "message": "8자리 코드"
+    },
+    "settings_sottaku_step_up_verify_button": {
+        "message": "코드 확인"
+    },
+    "settings_sottaku_step_up_resend_button": {
+        "message": "코드 다시 보내기"
+    },
+    "settings_sottaku_step_up_code_sent": {
+        "message": "이메일로 전송된 8자리 코드를 입력하세요"
+    },
+    "settings_sottaku_step_up_reenter_password": {
+        "message": "코드가 확인되었습니다. 로그인하려면 비밀번호를 다시 입력하세요."
+    },
+    "settings_sottaku_step_up_invalid_code": {
+        "message": "코드가 올바르지 않거나 만료되었습니다"
+    },
     "settings_sottaku_sign_in_button": {
         "message": "로그인"
     },

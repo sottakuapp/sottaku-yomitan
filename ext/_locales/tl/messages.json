@@ -1685,6 +1685,24 @@
     "settings_sottaku_password_placeholder": {
         "message": "Password"
     },
+    "settings_sottaku_step_up_code_placeholder": {
+        "message": "Walong-digit na code"
+    },
+    "settings_sottaku_step_up_verify_button": {
+        "message": "I-verify ang code"
+    },
+    "settings_sottaku_step_up_resend_button": {
+        "message": "Ipadala ulit ang code"
+    },
+    "settings_sottaku_step_up_code_sent": {
+        "message": "Ilagay ang walong-digit na code na ipinadala sa email mo"
+    },
+    "settings_sottaku_step_up_reenter_password": {
+        "message": "Na-verify ang code. Ilagay ulit ang password mo para mag-sign in."
+    },
+    "settings_sottaku_step_up_invalid_code": {
+        "message": "Hindi wasto o nag-expire na ang code"
+    },
     "settings_sottaku_sign_in_button": {
         "message": "Mag-sign in"
     },

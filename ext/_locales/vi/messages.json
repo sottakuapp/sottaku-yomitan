@@ -1685,6 +1685,24 @@
     "settings_sottaku_password_placeholder": {
         "message": "Mật khẩu"
     },
+    "settings_sottaku_step_up_code_placeholder": {
+        "message": "Mã gồm tám chữ số"
+    },
+    "settings_sottaku_step_up_verify_button": {
+        "message": "Xác minh mã"
+    },
+    "settings_sottaku_step_up_resend_button": {
+        "message": "Gửi lại mã"
+    },
+    "settings_sottaku_step_up_code_sent": {
+        "message": "Nhập mã gồm tám chữ số đã gửi đến email của bạn"
+    },
+    "settings_sottaku_step_up_reenter_password": {
+        "message": "Đã xác minh mã. Hãy nhập lại mật khẩu để đăng nhập."
+    },
+    "settings_sottaku_step_up_invalid_code": {
+        "message": "Mã không hợp lệ hoặc đã hết hạn"
+    },
     "settings_sottaku_sign_in_button": {
         "message": "Đăng nhập"
     },

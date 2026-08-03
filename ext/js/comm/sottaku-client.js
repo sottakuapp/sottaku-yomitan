@@ -26,6 +26,19 @@ import {toError} from '../core/to-error.js';
 const SHARED_REQUEST_CACHE = new Map();
 const SHARED_INFLIGHT_REQUESTS = new Map();
 
+class SottakuRequestError extends Error {
+    /**
+     * @param {string} message
+     * @param {number} status
+     * @param {unknown} data
+     */
+    constructor(message, status, data) {
+        super(message);
+        this.status = status;
+        this.data = data;
+    }
+}
+
 const STATIC_SETTINGS_CACHE_TTL_MS = 5 * 60 * 1000;
 const SHARED_SCAN_CACHE_TTL_MS = 10 * 1000;
 
@@ -170,12 +183,18 @@ export class SottakuClient {
     /**
      * @param {string} username
      * @param {string} password
+     * @param {string|null} passwordStepUpToken
      * @returns {Promise<{token: string, refreshToken: string, user?: unknown}>}
      */
-    async loginWithPassword(username, password) {
+    async loginWithPassword(username, password, passwordStepUpToken = null) {
         const response = /** @type {unknown} */ (await this._request('/login', {
             method: 'POST',
-            body: {username, email: username, password},
+            body: {
+                username,
+                email: username,
+                password,
+                ...(passwordStepUpToken ? {password_step_up_token: passwordStepUpToken} : {}),
+            },
             auth: false,
         }));
         const data = response && typeof response === 'object' ?
@@ -189,6 +208,31 @@ export class SottakuClient {
             return {token, refreshToken, user: data.user};
         }
         return {token: '', refreshToken, user: data.user};
+    }
+
+    /**
+     * @param {string} stepUpTransaction
+     * @returns {Promise<{challenge_id: string, expires_in: number}>}
+     */
+    async requestPasswordStepUp(stepUpTransaction) {
+        return await this._request('/auth/password-step-up/request', {
+            method: 'POST',
+            body: {step_up_transaction: stepUpTransaction},
+            auth: false,
+        });
+    }
+
+    /**
+     * @param {string} challengeId
+     * @param {string} code
+     * @returns {Promise<{password_step_up_token: string, expires_in: number}>}
+     */
+    async verifyPasswordStepUp(challengeId, code) {
+        return await this._request('/auth/password-step-up/verify', {
+            method: 'POST',
+            body: {challenge_id: challengeId, code},
+            auth: false,
+        });
     }
 
     /**
@@ -712,7 +756,11 @@ export class SottakuClient {
             }
 
             if (!response.ok || (json && json.success === false)) {
-                throw new Error(message || 'Request failed');
+                const errorMessage = typeof message === 'string' && message ? message : 'Request failed';
+                const errorData = json && typeof json === 'object' ?
+                    /** @type {{data?: unknown}} */ (json).data :
+                    null;
+                throw new SottakuRequestError(errorMessage, response.status, errorData);
             }
 
             return (json && Object.prototype.hasOwnProperty.call(json, 'data')) ? json.data : json;

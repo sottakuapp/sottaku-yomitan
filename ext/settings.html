@@ -344,6 +344,13 @@
                             <div class="settings-item-button-group-item"><button type="button" class="button" id="sottaku-login-button" data-i18n="settings_sottaku_sign_in_button">Sign in</button></div>
                         </div>
                     </div>
+                    <div class="sottaku-input-row" id="sottaku-password-step-up-form" hidden>
+                        <input type="text" id="sottaku-password-step-up-code" inputmode="numeric" pattern="[0-9]{8}" maxlength="8" autocomplete="one-time-code" placeholder="8-digit code" data-i18n-attr="placeholder:settings_sottaku_step_up_code_placeholder">
+                        <div class="settings-item-button-group">
+                            <div class="settings-item-button-group-item"><button type="button" class="button" id="sottaku-password-step-up-verify" data-i18n="settings_sottaku_step_up_verify_button">Verify code</button></div>
+                            <div class="settings-item-button-group-item"><button type="button" class="button" id="sottaku-password-step-up-resend" data-i18n="settings_sottaku_step_up_resend_button">Resend code</button></div>
+                        </div>
+                    </div>
                     <div class="settings-item-button-group" id="sottaku-linked-actions" hidden>
                         <div class="settings-item-button-group-item"><button type="button" class="button" id="sottaku-logout-button" data-i18n="settings_sottaku_unlink_button">Unlink account</button></div>
                     </div>

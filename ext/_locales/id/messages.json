@@ -1685,6 +1685,24 @@
     "settings_sottaku_password_placeholder": {
         "message": "Kata sandi"
     },
+    "settings_sottaku_step_up_code_placeholder": {
+        "message": "Kode delapan digit"
+    },
+    "settings_sottaku_step_up_verify_button": {
+        "message": "Verifikasi kode"
+    },
+    "settings_sottaku_step_up_resend_button": {
+        "message": "Kirim ulang kode"
+    },
+    "settings_sottaku_step_up_code_sent": {
+        "message": "Masukkan kode delapan digit yang dikirim ke email Anda"
+    },
+    "settings_sottaku_step_up_reenter_password": {
+        "message": "Kode terverifikasi. Masukkan kembali kata sandi untuk masuk."
+    },
+    "settings_sottaku_step_up_invalid_code": {
+        "message": "Kode tidak valid atau sudah kedaluwarsa"
+    },
     "settings_sottaku_sign_in_button": {
         "message": "Masuk"
     },

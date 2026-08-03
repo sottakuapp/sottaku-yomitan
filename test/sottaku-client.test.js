@@ -190,6 +190,62 @@ describe('SottakuClient', () => {
         expect(url).toBe(`https://sottaku.app/extension/link?token=${linkToken}`);
     });
 
+    test('completes password step-up without persisting its code or proof', async () => {
+        const fetchMock = vi.fn()
+            .mockResolvedValueOnce(buildJsonResponse({challenge_id: 'challenge-1', expires_in: 600}))
+            .mockResolvedValueOnce(buildJsonResponse({password_step_up_token: 'one-use-proof', expires_in: 600}))
+            .mockResolvedValueOnce(buildJsonResponse({
+                token: 'access-token',
+                refresh_token: 'refresh-token',
+                user: {id: 1},
+            }));
+        vi.stubGlobal('fetch', fetchMock);
+        const {SottakuClient} = await importSottakuClientModule();
+        const client = new SottakuClient({apiBaseUrl: 'https://sottaku.app/api/v1'});
+
+        await client.requestPasswordStepUp('opaque-login-transaction');
+        await client.verifyPasswordStepUp('challenge-1', '12345678');
+        await client.loginWithPassword('user', 'password', 'one-use-proof');
+
+        expect(parseJson(String(fetchMock.mock.calls[0][1].body))).toStrictEqual({
+            step_up_transaction: 'opaque-login-transaction',
+        });
+        expect(parseJson(String(fetchMock.mock.calls[1][1].body))).toStrictEqual({
+            challenge_id: 'challenge-1',
+            code: '12345678',
+        });
+        expect(parseJson(String(fetchMock.mock.calls[2][1].body))).toStrictEqual({
+            username: 'user',
+            email: 'user',
+            password: 'password',
+            password_step_up_token: 'one-use-proof',
+        });
+    });
+
+    test('exposes only the opaque step-up transaction from an auth error', async () => {
+        vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(
+            JSON.stringify({
+                success: false,
+                error: 'Additional verification is required',
+                data: {
+                    error_code: 'PASSWORD_STEP_UP_REQUIRED',
+                    step_up_transaction: 'opaque-login-transaction',
+                },
+            }),
+            {status: 403, headers: {'Content-Type': 'application/json'}},
+        )));
+        const {SottakuClient} = await importSottakuClientModule();
+        const client = new SottakuClient({apiBaseUrl: 'https://sottaku.app/api/v1'});
+
+        await expect(client.loginWithPassword('user', 'password')).rejects.toMatchObject({
+            status: 403,
+            data: {
+                error_code: 'PASSWORD_STEP_UP_REQUIRED',
+                step_up_transaction: 'opaque-login-transaction',
+            },
+        });
+    });
+
     test('exchanges browser approval for a scoped token and never sends cookies', async () => {
         const fetchMock = vi.fn()
             .mockResolvedValueOnce(buildJsonResponse({status: 'pending'}))

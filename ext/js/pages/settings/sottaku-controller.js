@@ -48,6 +48,12 @@ export class SottakuController {
         this._preferredLanguages = [];
         /** @type {string[]} */
         this._supportedLanguages = [...SOTTAKU_SUPPORTED_LANGUAGES];
+        /** @type {string|null} */
+        this._passwordStepUpTransaction = null;
+        /** @type {string|null} */
+        this._passwordStepUpChallengeId = null;
+        /** @type {string|null} */
+        this._passwordStepUpProof = null;
 
         /** @type {HTMLElement} */
         this._statusNode = querySelectorNotNull(document, '#sottaku-connection-status');
@@ -57,6 +63,14 @@ export class SottakuController {
         this._passwordInput = querySelectorNotNull(document, '#sottaku-password');
         /** @type {HTMLButtonElement} */
         this._loginButton = querySelectorNotNull(document, '#sottaku-login-button');
+        /** @type {HTMLElement} */
+        this._passwordStepUpForm = querySelectorNotNull(document, '#sottaku-password-step-up-form');
+        /** @type {HTMLInputElement} */
+        this._passwordStepUpCodeInput = querySelectorNotNull(document, '#sottaku-password-step-up-code');
+        /** @type {HTMLButtonElement} */
+        this._passwordStepUpVerifyButton = querySelectorNotNull(document, '#sottaku-password-step-up-verify');
+        /** @type {HTMLButtonElement} */
+        this._passwordStepUpResendButton = querySelectorNotNull(document, '#sottaku-password-step-up-resend');
         /** @type {HTMLButtonElement} */
         this._browserLinkButton = querySelectorNotNull(document, '#sottaku-browser-link-button');
         /** @type {HTMLButtonElement} */
@@ -85,6 +99,9 @@ export class SottakuController {
     async prepare() {
         this._settingsController.on('optionsChanged', this._onOptionsChanged.bind(this));
         this._loginButton.addEventListener('click', this._onLoginClick.bind(this), false);
+        this._passwordStepUpVerifyButton.addEventListener('click', this._onPasswordStepUpVerify.bind(this), false);
+        this._passwordStepUpResendButton.addEventListener('click', this._onPasswordStepUpResend.bind(this), false);
+        globalThis.addEventListener('pagehide', this._clearPasswordStepUpSecrets.bind(this), {once: true});
         this._browserLinkButton.addEventListener('click', this._onBrowserLinkClick.bind(this), false);
         this._logoutButton.addEventListener('click', this._onLogoutClick.bind(this), false);
         this._languageAddButton.addEventListener('click', this._onLanguageAdd.bind(this), false);
@@ -129,20 +146,120 @@ export class SottakuController {
         const password = this._passwordInput.value;
         if (!username || !password || this._busy) { return; }
         this._passwordInput.value = '';
+        const proof = this._passwordStepUpProof;
+        this._passwordStepUpProof = null;
         try {
             this._busy = true;
             this._setStatus('Signing in...', false);
-            const data = await this._client.loginWithPassword(username, password);
+            const data = await this._client.loginWithPassword(username, password, proof);
+            this._clearPasswordStepUpSecrets();
             await this._applyAuthUpdate(
                 data.token || this._client.authToken,
                 isObjectNotArray(data.user) ? data.user : null,
                 data.refreshToken,
             );
         } catch (error) {
-            this._setStatus(toError(error).message || 'Unable to sign in', true);
+            const transaction = this._getPasswordStepUpTransaction(error);
+            if (transaction) {
+                try {
+                    await this._beginPasswordStepUp(transaction);
+                } catch (stepUpError) {
+                    this._clearPasswordStepUpSecrets();
+                    this._setStatus(toError(stepUpError).message || 'Unable to send verification code', true);
+                }
+            } else {
+                this._clearPasswordStepUpSecrets();
+                this._setStatus(toError(error).message || 'Unable to sign in', true);
+            }
         } finally {
             this._busy = false;
         }
+    }
+
+    /**
+     * @param {unknown} error
+     * @returns {string|null}
+     */
+    _getPasswordStepUpTransaction(error) {
+        if (!(error instanceof Error)) { return null; }
+        const errorData = /** @type {{data?: unknown}} */ (error).data;
+        const data = isObjectNotArray(errorData) ? errorData : null;
+        return data?.error_code === 'PASSWORD_STEP_UP_REQUIRED' && typeof data.step_up_transaction === 'string' ?
+            data.step_up_transaction :
+            null;
+    }
+
+    /** @param {string} transaction */
+    async _beginPasswordStepUp(transaction) {
+        const response = await this._client.requestPasswordStepUp(transaction);
+        if (!response || typeof response.challenge_id !== 'string') {
+            throw new Error('Unable to create verification challenge');
+        }
+        this._passwordInput.value = '';
+        this._passwordStepUpCodeInput.value = '';
+        this._passwordStepUpTransaction = transaction;
+        this._passwordStepUpChallengeId = response.challenge_id;
+        this._passwordStepUpProof = null;
+        this._authForm.hidden = true;
+        this._passwordStepUpForm.hidden = false;
+        this._setStatus(
+            getMessage('settings_sottaku_step_up_code_sent') || 'Enter the eight-digit code sent to your email',
+            false,
+        );
+    }
+
+    /** @param {Event} e */
+    async _onPasswordStepUpVerify(e) {
+        e.preventDefault();
+        const code = this._passwordStepUpCodeInput.value.replace(/\D/gu, '').slice(0, 8);
+        if (this._busy || !this._passwordStepUpChallengeId || code.length !== 8) { return; }
+        try {
+            this._busy = true;
+            const response = await this._client.verifyPasswordStepUp(this._passwordStepUpChallengeId, code);
+            if (!response || typeof response.password_step_up_token !== 'string') {
+                throw new Error('Unable to verify code');
+            }
+            this._passwordStepUpCodeInput.value = '';
+            this._passwordStepUpProof = response.password_step_up_token;
+            this._passwordStepUpForm.hidden = true;
+            this._authForm.hidden = false;
+            this._setStatus(
+                getMessage('settings_sottaku_step_up_reenter_password') || 'Code verified. Re-enter your password to sign in.',
+                false,
+            );
+        } catch (error) {
+            this._passwordStepUpCodeInput.value = '';
+            this._setStatus(
+                getMessage('settings_sottaku_step_up_invalid_code') || 'That code is invalid or expired',
+                true,
+            );
+        } finally {
+            this._busy = false;
+        }
+    }
+
+    /** @param {Event} e */
+    async _onPasswordStepUpResend(e) {
+        e.preventDefault();
+        if (this._busy || !this._passwordStepUpTransaction) { return; }
+        try {
+            this._busy = true;
+            await this._beginPasswordStepUp(this._passwordStepUpTransaction);
+        } catch (error) {
+            this._setStatus(toError(error).message || 'Unable to resend code', true);
+        } finally {
+            this._busy = false;
+        }
+    }
+
+    /** */
+    _clearPasswordStepUpSecrets() {
+        this._passwordInput.value = '';
+        this._passwordStepUpCodeInput.value = '';
+        this._passwordStepUpTransaction = null;
+        this._passwordStepUpChallengeId = null;
+        this._passwordStepUpProof = null;
+        this._passwordStepUpForm.hidden = true;
     }
 
     /**

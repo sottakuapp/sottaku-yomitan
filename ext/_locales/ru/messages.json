@@ -1685,6 +1685,24 @@
     "settings_sottaku_password_placeholder": {
         "message": "Пароль"
     },
+    "settings_sottaku_step_up_code_placeholder": {
+        "message": "Восьмизначный код"
+    },
+    "settings_sottaku_step_up_verify_button": {
+        "message": "Подтвердить код"
+    },
+    "settings_sottaku_step_up_resend_button": {
+        "message": "Отправить код повторно"
+    },
+    "settings_sottaku_step_up_code_sent": {
+        "message": "Введите восьмизначный код, отправленный на вашу электронную почту"
+    },
+    "settings_sottaku_step_up_reenter_password": {
+        "message": "Код подтвержден. Введите пароль еще раз, чтобы войти."
+    },
+    "settings_sottaku_step_up_invalid_code": {
+        "message": "Код недействителен или срок его действия истек"
+    },
     "settings_sottaku_sign_in_button": {
         "message": "Войти"
     },

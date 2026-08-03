@@ -1685,6 +1685,24 @@
     "settings_sottaku_password_placeholder": {
         "message": "Password"
     },
+    "settings_sottaku_step_up_code_placeholder": {
+        "message": "Eight-digit code"
+    },
+    "settings_sottaku_step_up_verify_button": {
+        "message": "Verify code"
+    },
+    "settings_sottaku_step_up_resend_button": {
+        "message": "Resend code"
+    },
+    "settings_sottaku_step_up_code_sent": {
+        "message": "Enter the eight-digit code sent to your email"
+    },
+    "settings_sottaku_step_up_reenter_password": {
+        "message": "Code verified. Re-enter your password to sign in."
+    },
+    "settings_sottaku_step_up_invalid_code": {
+        "message": "That code is invalid or expired"
+    },
     "settings_sottaku_sign_in_button": {
         "message": "Sign in"
     },
