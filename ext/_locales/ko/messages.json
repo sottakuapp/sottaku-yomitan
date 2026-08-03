@@ -1703,6 +1703,9 @@
     "settings_sottaku_step_up_invalid_code": {
         "message": "코드가 올바르지 않거나 만료되었습니다"
     },
+    "settings_sottaku_step_up_resend_unavailable": {
+        "message": "지금은 코드를 다시 보낼 수 없습니다. 다시 시도해 주세요."
+    },
     "settings_sottaku_sign_in_button": {
         "message": "로그인"
     },

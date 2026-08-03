@@ -1703,6 +1703,9 @@
     "settings_sottaku_step_up_invalid_code": {
         "message": "Hindi wasto o nag-expire na ang code"
     },
+    "settings_sottaku_step_up_resend_unavailable": {
+        "message": "Hindi maipadala ulit ang code ngayon. Subukan ulit."
+    },
     "settings_sottaku_sign_in_button": {
         "message": "Mag-sign in"
     },

@@ -1703,6 +1703,9 @@
     "settings_sottaku_step_up_invalid_code": {
         "message": "Код недействителен или срок его действия истек"
     },
+    "settings_sottaku_step_up_resend_unavailable": {
+        "message": "Сейчас не удается отправить код повторно. Попробуйте еще раз."
+    },
     "settings_sottaku_sign_in_button": {
         "message": "Войти"
     },

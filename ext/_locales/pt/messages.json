@@ -1703,6 +1703,9 @@
     "settings_sottaku_step_up_invalid_code": {
         "message": "Esse código é inválido ou expirou"
     },
+    "settings_sottaku_step_up_resend_unavailable": {
+        "message": "Não foi possível reenviar o código agora. Tente novamente."
+    },
     "settings_sottaku_sign_in_button": {
         "message": "Entrar"
     },

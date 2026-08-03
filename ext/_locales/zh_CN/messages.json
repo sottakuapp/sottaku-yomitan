@@ -1703,6 +1703,9 @@
     "settings_sottaku_step_up_invalid_code": {
         "message": "验证码无效或已过期"
     },
+    "settings_sottaku_step_up_resend_unavailable": {
+        "message": "目前无法重新发送验证码。请重试。"
+    },
     "settings_sottaku_sign_in_button": {
         "message": "登录"
     },

@@ -193,6 +193,7 @@ describe('SottakuClient', () => {
     test('completes password step-up without persisting its code or proof', async () => {
         const fetchMock = vi.fn()
             .mockResolvedValueOnce(buildJsonResponse({challenge_id: 'challenge-1', expires_in: 600}))
+            .mockResolvedValueOnce(buildJsonResponse({resent: true, challenge_id: 'challenge-1', retry_after: 60}))
             .mockResolvedValueOnce(buildJsonResponse({password_step_up_token: 'one-use-proof', expires_in: 600}))
             .mockResolvedValueOnce(buildJsonResponse({
                 token: 'access-token',
@@ -204,6 +205,7 @@ describe('SottakuClient', () => {
         const client = new SottakuClient({apiBaseUrl: 'https://sottaku.app/api/v1'});
 
         await client.requestPasswordStepUp('opaque-login-transaction');
+        await client.resendPasswordStepUp('opaque-login-transaction', 'challenge-1');
         await client.verifyPasswordStepUp('challenge-1', '12345678');
         await client.loginWithPassword('user', 'password', 'one-use-proof');
 
@@ -211,10 +213,14 @@ describe('SottakuClient', () => {
             step_up_transaction: 'opaque-login-transaction',
         });
         expect(parseJson(String(fetchMock.mock.calls[1][1].body))).toStrictEqual({
+            step_up_transaction: 'opaque-login-transaction',
+            challenge_id: 'challenge-1',
+        });
+        expect(parseJson(String(fetchMock.mock.calls[2][1].body))).toStrictEqual({
             challenge_id: 'challenge-1',
             code: '12345678',
         });
-        expect(parseJson(String(fetchMock.mock.calls[2][1].body))).toStrictEqual({
+        expect(parseJson(String(fetchMock.mock.calls[3][1].body))).toStrictEqual({
             username: 'user',
             email: 'user',
             password: 'password',

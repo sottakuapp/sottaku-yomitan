@@ -1703,6 +1703,9 @@
     "settings_sottaku_step_up_invalid_code": {
         "message": "コードが無効か、有効期限が切れています"
     },
+    "settings_sottaku_step_up_resend_unavailable": {
+        "message": "現在コードを再送できません。もう一度お試しください。"
+    },
     "settings_sottaku_sign_in_button": {
         "message": "サインイン"
     },

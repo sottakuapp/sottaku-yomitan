@@ -1703,6 +1703,9 @@
     "settings_sottaku_step_up_invalid_code": {
         "message": "รหัสไม่ถูกต้องหรือหมดอายุแล้ว"
     },
+    "settings_sottaku_step_up_resend_unavailable": {
+        "message": "ไม่สามารถส่งรหัสอีกครั้งได้ในขณะนี้ โปรดลองอีกครั้ง"
+    },
     "settings_sottaku_sign_in_button": {
         "message": "ลงชื่อเข้าใช้"
     },

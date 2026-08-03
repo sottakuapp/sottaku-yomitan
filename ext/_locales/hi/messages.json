@@ -1703,6 +1703,9 @@
     "settings_sottaku_step_up_invalid_code": {
         "message": "कोड अमान्य है या समाप्त हो चुका है"
     },
+    "settings_sottaku_step_up_resend_unavailable": {
+        "message": "अभी कोड दोबारा नहीं भेजा जा सकता। फिर से कोशिश करें।"
+    },
     "settings_sottaku_sign_in_button": {
         "message": "साइन इन करें"
     },

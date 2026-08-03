@@ -1703,6 +1703,9 @@
     "settings_sottaku_step_up_invalid_code": {
         "message": "Der Code ist ungültig oder abgelaufen"
     },
+    "settings_sottaku_step_up_resend_unavailable": {
+        "message": "Der Code kann derzeit nicht erneut gesendet werden. Versuche es noch einmal."
+    },
     "settings_sottaku_sign_in_button": {
         "message": "Anmelden"
     },

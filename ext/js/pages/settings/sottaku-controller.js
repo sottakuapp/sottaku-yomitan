@@ -241,12 +241,29 @@ export class SottakuController {
     /** @param {Event} e */
     async _onPasswordStepUpResend(e) {
         e.preventDefault();
-        if (this._busy || !this._passwordStepUpTransaction) { return; }
+        if (this._busy || !this._passwordStepUpTransaction || !this._passwordStepUpChallengeId) { return; }
         try {
             this._busy = true;
-            await this._beginPasswordStepUp(this._passwordStepUpTransaction);
-        } catch (error) {
-            this._setStatus(toError(error).message || 'Unable to resend code', true);
+            const response = await this._client.resendPasswordStepUp(
+                this._passwordStepUpTransaction,
+                this._passwordStepUpChallengeId,
+            );
+            if (!response?.resent) {
+                throw new Error(
+                    getMessage('settings_sottaku_step_up_resend_unavailable') ||
+                    getMessage('settings_sottaku_step_up_invalid_code'),
+                );
+            }
+            this._passwordStepUpCodeInput.value = '';
+            this._setStatus(
+                getMessage('settings_sottaku_step_up_code_sent') || 'Enter the eight-digit code sent to your email',
+                false,
+            );
+        } catch {
+            this._setStatus(
+                getMessage('settings_sottaku_step_up_resend_unavailable'),
+                true,
+            );
         } finally {
             this._busy = false;
         }

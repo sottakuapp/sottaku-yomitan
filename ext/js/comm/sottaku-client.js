@@ -223,6 +223,22 @@ export class SottakuClient {
     }
 
     /**
+     * @param {string} stepUpTransaction
+     * @param {string} challengeId
+     * @returns {Promise<{resent: boolean, challenge_id: string, retry_after: number}>}
+     */
+    async resendPasswordStepUp(stepUpTransaction, challengeId) {
+        return await this._request('/auth/password-step-up/resend', {
+            method: 'POST',
+            body: {
+                step_up_transaction: stepUpTransaction,
+                challenge_id: challengeId,
+            },
+            auth: false,
+        });
+    }
+
+    /**
      * @param {string} challengeId
      * @param {string} code
      * @returns {Promise<{password_step_up_token: string, expires_in: number}>}

@@ -1703,6 +1703,9 @@
     "settings_sottaku_step_up_invalid_code": {
         "message": "Mã không hợp lệ hoặc đã hết hạn"
     },
+    "settings_sottaku_step_up_resend_unavailable": {
+        "message": "Hiện chưa thể gửi lại mã. Hãy thử lại."
+    },
     "settings_sottaku_sign_in_button": {
         "message": "Đăng nhập"
     },

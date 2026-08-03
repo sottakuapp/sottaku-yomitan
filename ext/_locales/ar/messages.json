@@ -1703,6 +1703,9 @@
     "settings_sottaku_step_up_invalid_code": {
         "message": "الرمز غير صالح أو منتهي الصلاحية"
     },
+    "settings_sottaku_step_up_resend_unavailable": {
+        "message": "يتعذر إعادة إرسال الرمز الآن. حاول مرة أخرى."
+    },
     "settings_sottaku_sign_in_button": {
         "message": "تسجيل الدخول"
     },

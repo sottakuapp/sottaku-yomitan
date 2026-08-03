@@ -1703,6 +1703,9 @@
     "settings_sottaku_step_up_invalid_code": {
         "message": "Il codice non è valido o è scaduto"
     },
+    "settings_sottaku_step_up_resend_unavailable": {
+        "message": "Al momento non è possibile inviare di nuovo il codice. Riprova."
+    },
     "settings_sottaku_sign_in_button": {
         "message": "Accedi"
     },
