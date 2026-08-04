@@ -1685,6 +1685,15 @@
     "settings_sottaku_password_placeholder": {
         "message": "密碼"
     },
+    "settings_sottaku_human_verification_button": {
+        "message": "完成安全驗證"
+    },
+    "settings_sottaku_human_verification_instruction": {
+        "message": "請完成下方的安全驗證以繼續。"
+    },
+    "settings_sottaku_password_recovery_support_required": {
+        "message": "無法連結此登入帳號。請再試一次或聯絡支援團隊。"
+    },
     "settings_sottaku_step_up_code_placeholder": {
         "message": "八位數驗證碼"
     },

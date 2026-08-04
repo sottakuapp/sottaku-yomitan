@@ -1685,6 +1685,15 @@
     "settings_sottaku_password_placeholder": {
         "message": "Mật khẩu"
     },
+    "settings_sottaku_human_verification_button": {
+        "message": "Hoàn tất kiểm tra bảo mật"
+    },
+    "settings_sottaku_human_verification_instruction": {
+        "message": "Hoàn tất bước kiểm tra bảo mật bên dưới để tiếp tục."
+    },
+    "settings_sottaku_password_recovery_support_required": {
+        "message": "Không thể liên kết tài khoản đăng nhập này. Hãy thử lại hoặc liên hệ hỗ trợ."
+    },
     "settings_sottaku_step_up_code_placeholder": {
         "message": "Mã gồm tám chữ số"
     },

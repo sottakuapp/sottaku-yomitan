@@ -1685,6 +1685,15 @@
     "settings_sottaku_password_placeholder": {
         "message": "비밀번호"
     },
+    "settings_sottaku_human_verification_button": {
+        "message": "보안 확인 완료"
+    },
+    "settings_sottaku_human_verification_instruction": {
+        "message": "계속하려면 아래 보안 확인을 완료하세요."
+    },
+    "settings_sottaku_password_recovery_support_required": {
+        "message": "이 로그인 계정을 연결할 수 없습니다. 다시 시도하거나 지원팀에 문의하세요."
+    },
     "settings_sottaku_step_up_code_placeholder": {
         "message": "8자리 코드"
     },

@@ -1685,6 +1685,15 @@
     "settings_sottaku_password_placeholder": {
         "message": "Password"
     },
+    "settings_sottaku_human_verification_button": {
+        "message": "Complete security check"
+    },
+    "settings_sottaku_human_verification_instruction": {
+        "message": "Complete the security check below to continue."
+    },
+    "settings_sottaku_password_recovery_support_required": {
+        "message": "This sign-in account could not be linked. Please try again or contact support."
+    },
     "settings_sottaku_step_up_code_placeholder": {
         "message": "Eight-digit code"
     },

@@ -1685,6 +1685,15 @@
     "settings_sottaku_password_placeholder": {
         "message": "Password"
     },
+    "settings_sottaku_human_verification_button": {
+        "message": "Completa il controllo di sicurezza"
+    },
+    "settings_sottaku_human_verification_instruction": {
+        "message": "Completa il controllo di sicurezza qui sotto per continuare."
+    },
+    "settings_sottaku_password_recovery_support_required": {
+        "message": "Non è stato possibile collegare questo account di accesso. Riprova o contatta l’assistenza."
+    },
     "settings_sottaku_step_up_code_placeholder": {
         "message": "Codice di otto cifre"
     },

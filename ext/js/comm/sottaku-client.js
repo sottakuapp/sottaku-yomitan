@@ -225,7 +225,7 @@ export class SottakuClient {
     /**
      * @param {string} stepUpTransaction
      * @param {string} challengeId
-     * @returns {Promise<{resent: boolean, challenge_id: string, retry_after: number}>}
+     * @returns {Promise<{accepted: boolean, challenge_id: string, retry_after: number}>}
      */
     async resendPasswordStepUp(stepUpTransaction, challengeId) {
         return await this._request('/auth/password-step-up/resend', {
@@ -241,14 +241,49 @@ export class SottakuClient {
     /**
      * @param {string} challengeId
      * @param {string} code
+     * @param {string|null} humanVerificationToken
      * @returns {Promise<{password_step_up_token: string, expires_in: number}>}
      */
-    async verifyPasswordStepUp(challengeId, code) {
+    async verifyPasswordStepUp(challengeId, code, humanVerificationToken = null) {
         return await this._request('/auth/password-step-up/verify', {
             method: 'POST',
-            body: {challenge_id: challengeId, code},
+            body: {
+                challenge_id: challengeId,
+                code,
+                ...(humanVerificationToken ? {human_verification_token: humanVerificationToken} : {}),
+            },
             auth: false,
         });
+    }
+
+    /**
+     * @param {string} stepUpTransaction
+     * @param {string} humanVerificationToken
+     * @returns {Promise<{password_step_up_token: string, expires_in: number}>}
+     */
+    async verifyPasswordRecoveryHuman(stepUpTransaction, humanVerificationToken) {
+        return await this._request('/auth/password-recovery/human-verify', {
+            method: 'POST',
+            body: {
+                step_up_transaction: stepUpTransaction,
+                human_verification_token: humanVerificationToken,
+            },
+            auth: false,
+        });
+    }
+
+    /**
+     * @param {'password_recovery'|'password_step_up_code'} action
+     * @throws {TypeError} If the action is not one of the reviewed recovery actions.
+     * @returns {string}
+     */
+    createPasswordHumanVerificationUrl(action) {
+        if (action !== 'password_recovery' && action !== 'password_step_up_code') {
+            throw new TypeError('Invalid password human-verification action');
+        }
+        const url = new URL('/auth/password-recovery/human-challenge', 'https://sottaku.app');
+        url.searchParams.set('action', action);
+        return url.href;
     }
 
     /**

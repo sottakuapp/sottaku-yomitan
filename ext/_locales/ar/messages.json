@@ -1685,6 +1685,15 @@
     "settings_sottaku_password_placeholder": {
         "message": "كلمة المرور"
     },
+    "settings_sottaku_human_verification_button": {
+        "message": "إكمال فحص الأمان"
+    },
+    "settings_sottaku_human_verification_instruction": {
+        "message": "أكمل فحص الأمان أدناه للمتابعة."
+    },
+    "settings_sottaku_password_recovery_support_required": {
+        "message": "تعذر ربط حساب تسجيل الدخول هذا. حاول مرة أخرى أو تواصل مع الدعم."
+    },
     "settings_sottaku_step_up_code_placeholder": {
         "message": "الرمز المكوّن من 8 أرقام"
     },

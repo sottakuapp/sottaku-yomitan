@@ -1685,6 +1685,15 @@
     "settings_sottaku_password_placeholder": {
         "message": "Password"
     },
+    "settings_sottaku_human_verification_button": {
+        "message": "Kumpletuhin ang security check"
+    },
+    "settings_sottaku_human_verification_instruction": {
+        "message": "Kumpletuhin ang security check sa ibaba para magpatuloy."
+    },
+    "settings_sottaku_password_recovery_support_required": {
+        "message": "Hindi ma-link ang sign-in account na ito. Subukan muli o makipag-ugnayan sa suporta."
+    },
     "settings_sottaku_step_up_code_placeholder": {
         "message": "Walong-digit na code"
     },

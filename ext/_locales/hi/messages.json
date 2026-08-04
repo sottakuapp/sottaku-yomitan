@@ -1685,6 +1685,15 @@
     "settings_sottaku_password_placeholder": {
         "message": "पासवर्ड"
     },
+    "settings_sottaku_human_verification_button": {
+        "message": "सुरक्षा जाँच पूरी करें"
+    },
+    "settings_sottaku_human_verification_instruction": {
+        "message": "जारी रखने के लिए नीचे दी गई सुरक्षा जाँच पूरी करें।"
+    },
+    "settings_sottaku_password_recovery_support_required": {
+        "message": "इस साइन-इन खाते को लिंक नहीं किया जा सका। फिर कोशिश करें या सहायता से संपर्क करें।"
+    },
     "settings_sottaku_step_up_code_placeholder": {
         "message": "आठ अंकों का कोड"
     },

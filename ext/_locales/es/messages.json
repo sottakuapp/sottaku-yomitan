@@ -1685,6 +1685,15 @@
     "settings_sottaku_password_placeholder": {
         "message": "Contraseña"
     },
+    "settings_sottaku_human_verification_button": {
+        "message": "Completar la comprobación de seguridad"
+    },
+    "settings_sottaku_human_verification_instruction": {
+        "message": "Completa la comprobación de seguridad para continuar."
+    },
+    "settings_sottaku_password_recovery_support_required": {
+        "message": "No se pudo vincular esta cuenta de inicio de sesión. Inténtalo de nuevo o contacta con soporte."
+    },
     "settings_sottaku_step_up_code_placeholder": {
         "message": "Código de ocho dígitos"
     },

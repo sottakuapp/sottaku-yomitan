@@ -29,6 +29,9 @@ import {
     SOTTAKU_SUPPORTED_LANGUAGES,
 } from '../../language/sottaku-languages.js';
 
+const PASSWORD_HUMAN_VERIFICATION_ORIGIN = 'https://sottaku.app';
+const PASSWORD_HUMAN_VERIFICATION_MESSAGE = 'sottaku-password-human-verification';
+
 export class SottakuController {
     /**
      * @param {import('./settings-controller.js').SettingsController} settingsController
@@ -54,6 +57,14 @@ export class SottakuController {
         this._passwordStepUpChallengeId = null;
         /** @type {string|null} */
         this._passwordStepUpProof = null;
+        /** @type {'password_recovery'|'password_step_up_code'|null} */
+        this._passwordHumanVerificationAction = null;
+        /** @type {Window|null} */
+        this._passwordHumanVerificationPopup = null;
+        /** @type {boolean} */
+        this._passwordHumanRecoveryAvailable = false;
+        /** @type {string|null} */
+        this._passwordStepUpHumanVerificationToken = null;
 
         /** @type {HTMLElement} */
         this._statusNode = querySelectorNotNull(document, '#sottaku-connection-status');
@@ -71,6 +82,10 @@ export class SottakuController {
         this._passwordStepUpVerifyButton = querySelectorNotNull(document, '#sottaku-password-step-up-verify');
         /** @type {HTMLButtonElement} */
         this._passwordStepUpResendButton = querySelectorNotNull(document, '#sottaku-password-step-up-resend');
+        /** @type {HTMLElement} */
+        this._passwordHumanVerificationForm = querySelectorNotNull(document, '#sottaku-password-human-verification-form');
+        /** @type {HTMLButtonElement} */
+        this._passwordHumanVerificationButton = querySelectorNotNull(document, '#sottaku-password-human-verification-button');
         /** @type {HTMLButtonElement} */
         this._browserLinkButton = querySelectorNotNull(document, '#sottaku-browser-link-button');
         /** @type {HTMLButtonElement} */
@@ -101,6 +116,8 @@ export class SottakuController {
         this._loginButton.addEventListener('click', this._onLoginClick.bind(this), false);
         this._passwordStepUpVerifyButton.addEventListener('click', this._onPasswordStepUpVerify.bind(this), false);
         this._passwordStepUpResendButton.addEventListener('click', this._onPasswordStepUpResend.bind(this), false);
+        this._passwordHumanVerificationButton.addEventListener('click', this._onPasswordHumanVerificationClick.bind(this), false);
+        globalThis.addEventListener('message', this._onPasswordHumanVerificationMessage.bind(this), false);
         globalThis.addEventListener('pagehide', this._clearPasswordStepUpSecrets.bind(this), {once: true});
         this._browserLinkButton.addEventListener('click', this._onBrowserLinkClick.bind(this), false);
         this._logoutButton.addEventListener('click', this._onLogoutClick.bind(this), false);
@@ -147,7 +164,6 @@ export class SottakuController {
         if (!username || !password || this._busy) { return; }
         this._passwordInput.value = '';
         const proof = this._passwordStepUpProof;
-        this._passwordStepUpProof = null;
         try {
             this._busy = true;
             this._setStatus('Signing in...', false);
@@ -159,14 +175,57 @@ export class SottakuController {
                 data.refreshToken,
             );
         } catch (error) {
-            const transaction = this._getPasswordStepUpTransaction(error);
-            if (transaction) {
+            const alternateRecovery = this._getPasswordAlternateRecovery(error);
+            const stepUpRequirement = this._getPasswordStepUpRequirement(error);
+            if (alternateRecovery) {
+                if (
+                    alternateRecovery.method === 'human_verification' &&
+                    alternateRecovery.transaction
+                ) {
+                    this._beginPasswordHumanVerification(
+                        'password_recovery',
+                        alternateRecovery.transaction,
+                    );
+                } else if (
+                    alternateRecovery.method === 'linked_google' ||
+                    alternateRecovery.method === 'linked_apple'
+                ) {
+                    this._clearPasswordStepUpSecrets();
+                    this._authForm.hidden = false;
+                    this._setStatus(
+                        getMessage('settings_sottaku_use_browser_session_title') ||
+                        'Use your signed-in browser session',
+                        false,
+                    );
+                } else {
+                    this._clearPasswordStepUpSecrets();
+                    this._authForm.hidden = false;
+                    this._setStatus(
+                        getMessage('settings_sottaku_password_recovery_support_required') ||
+                        'Please contact Sottaku support to recover access.',
+                        true,
+                    );
+                }
+            } else if (stepUpRequirement) {
                 try {
-                    await this._beginPasswordStepUp(transaction);
+                    await this._beginPasswordStepUp(
+                        stepUpRequirement.transaction,
+                        stepUpRequirement.humanVerificationAvailable,
+                    );
                 } catch (stepUpError) {
                     this._clearPasswordStepUpSecrets();
                     this._setStatus(toError(stepUpError).message || 'Unable to send verification code', true);
                 }
+            } else if (
+                proof &&
+                this._passwordStepUpProof === proof &&
+                this._isRetryablePasswordStepUpAuthError(error)
+            ) {
+                // A transport failure or a retryable guard response does not
+                // prove that the server consumed this one-use proof. Retain it
+                // in controller memory and require the password to be typed
+                // again; pagehide still clears the complete flow.
+                this._setStatus(toError(error).message || 'Unable to sign in', true);
             } else {
                 this._clearPasswordStepUpSecrets();
                 this._setStatus(toError(error).message || 'Unable to sign in', true);
@@ -178,19 +237,89 @@ export class SottakuController {
 
     /**
      * @param {unknown} error
-     * @returns {string|null}
+     * @returns {{transaction: string, humanVerificationAvailable: boolean}|null}
      */
-    _getPasswordStepUpTransaction(error) {
+    _getPasswordStepUpRequirement(error) {
         if (!(error instanceof Error)) { return null; }
         const errorData = /** @type {{data?: unknown}} */ (error).data;
         const data = isObjectNotArray(errorData) ? errorData : null;
-        return data?.error_code === 'PASSWORD_STEP_UP_REQUIRED' && typeof data.step_up_transaction === 'string' ?
-            data.step_up_transaction :
-            null;
+        if (data?.error_code !== 'PASSWORD_STEP_UP_REQUIRED' || typeof data.step_up_transaction !== 'string') {
+            return null;
+        }
+        return {
+            transaction: data.step_up_transaction,
+            humanVerificationAvailable: (
+                data.human_verification_available === true &&
+                data.turnstile_action === 'password_recovery'
+            ),
+        };
     }
 
-    /** @param {string} transaction */
-    async _beginPasswordStepUp(transaction) {
+    /**
+     * @param {unknown} error
+     * @returns {{method: 'human_verification'|'linked_google'|'linked_apple'|'support', transaction: string|null}|null}
+     */
+    _getPasswordAlternateRecovery(error) {
+        if (!(error instanceof Error)) { return null; }
+        const errorData = /** @type {{data?: unknown}} */ (error).data;
+        const data = isObjectNotArray(errorData) ? errorData : null;
+        if (data?.error_code !== 'PASSWORD_ALTERNATE_RECOVERY_REQUIRED') { return null; }
+        const method = data.method;
+        if (
+            method !== 'human_verification' &&
+            method !== 'linked_google' &&
+            method !== 'linked_apple' &&
+            method !== 'support'
+        ) {
+            return null;
+        }
+        return {
+            method,
+            transaction: typeof data.step_up_transaction === 'string' ? data.step_up_transaction : null,
+        };
+    }
+
+    /**
+     * @param {unknown} error
+     * @returns {boolean}
+     */
+    _isPasswordStepUpHumanVerificationRequired(error) {
+        if (!(error instanceof Error)) { return false; }
+        const errorData = /** @type {{data?: unknown}} */ (error).data;
+        const data = isObjectNotArray(errorData) ? errorData : null;
+        return (
+            (
+                data?.error_code === 'PASSWORD_STEP_UP_INVALID' ||
+                data?.error_code === 'PASSWORD_STEP_UP_HUMAN_VERIFICATION_REQUIRED'
+            ) &&
+            data?.human_verification_available !== false &&
+            data.turnstile_action === 'password_step_up_code'
+        );
+    }
+
+    /**
+     * @param {unknown} error
+     * @returns {boolean}
+     */
+    _isRetryablePasswordStepUpAuthError(error) {
+        if (!(error instanceof Error)) { return true; }
+        const statusValue = /** @type {{status?: unknown}} */ (error).status;
+        if (typeof statusValue !== 'number' || !Number.isFinite(statusValue)) {
+            return true;
+        }
+        return (
+            statusValue === 408 ||
+            statusValue === 425 ||
+            statusValue === 429 ||
+            statusValue >= 500
+        );
+    }
+
+    /**
+     * @param {string} transaction
+     * @param {boolean} humanVerificationAvailable
+     */
+    async _beginPasswordStepUp(transaction, humanVerificationAvailable = false) {
         const response = await this._client.requestPasswordStepUp(transaction);
         if (!response || typeof response.challenge_id !== 'string') {
             throw new Error('Unable to create verification challenge');
@@ -200,8 +329,12 @@ export class SottakuController {
         this._passwordStepUpTransaction = transaction;
         this._passwordStepUpChallengeId = response.challenge_id;
         this._passwordStepUpProof = null;
+        this._passwordStepUpHumanVerificationToken = null;
+        this._passwordHumanRecoveryAvailable = humanVerificationAvailable;
+        this._passwordHumanVerificationAction = humanVerificationAvailable ? 'password_recovery' : null;
         this._authForm.hidden = true;
         this._passwordStepUpForm.hidden = false;
+        this._passwordHumanVerificationForm.hidden = !humanVerificationAvailable;
         this._setStatus(
             getMessage('settings_sottaku_step_up_code_sent') || 'Enter the eight-digit code sent to your email',
             false,
@@ -211,28 +344,181 @@ export class SottakuController {
     /** @param {Event} e */
     async _onPasswordStepUpVerify(e) {
         e.preventDefault();
+        await this._verifyPasswordStepUp(this._passwordStepUpHumanVerificationToken);
+    }
+
+    /** @param {string|null} humanVerificationToken */
+    async _verifyPasswordStepUp(humanVerificationToken) {
         const code = this._passwordStepUpCodeInput.value.replace(/\D/gu, '').slice(0, 8);
         if (this._busy || !this._passwordStepUpChallengeId || code.length !== 8) { return; }
         try {
             this._busy = true;
-            const response = await this._client.verifyPasswordStepUp(this._passwordStepUpChallengeId, code);
+            const response = await this._client.verifyPasswordStepUp(
+                this._passwordStepUpChallengeId,
+                code,
+                humanVerificationToken,
+            );
             if (!response || typeof response.password_step_up_token !== 'string') {
                 throw new Error('Unable to verify code');
             }
             this._passwordStepUpCodeInput.value = '';
             this._passwordStepUpProof = response.password_step_up_token;
+            this._passwordStepUpHumanVerificationToken = null;
+            this._passwordHumanVerificationAction = null;
+            this._passwordHumanRecoveryAvailable = false;
             this._passwordStepUpForm.hidden = true;
+            this._passwordHumanVerificationForm.hidden = true;
             this._authForm.hidden = false;
             this._setStatus(
                 getMessage('settings_sottaku_step_up_reenter_password') || 'Code verified. Re-enter your password to sign in.',
                 false,
             );
         } catch (error) {
+            if (this._isPasswordStepUpHumanVerificationRequired(error)) {
+                this._passwordStepUpCodeInput.value = '';
+                this._passwordStepUpHumanVerificationToken = null;
+                this._beginPasswordHumanVerification('password_step_up_code', null);
+            } else if (this._isRetryablePasswordStepUpAuthError(error)) {
+                this._setStatus(toError(error).message || 'Unable to verify code', true);
+            } else {
+                this._passwordStepUpCodeInput.value = '';
+                this._setStatus(
+                    getMessage('settings_sottaku_step_up_invalid_code') || 'That code is invalid or expired',
+                    true,
+                );
+            }
+        } finally {
+            this._busy = false;
+        }
+    }
+
+    /**
+     * @param {'password_recovery'|'password_step_up_code'} action
+     * @param {string|null} transaction
+     */
+    _beginPasswordHumanVerification(action, transaction) {
+        if (action === 'password_recovery') {
+            if (!transaction) { return; }
+            this._passwordStepUpTransaction = transaction;
+            this._passwordStepUpChallengeId = null;
+            this._passwordStepUpProof = null;
             this._passwordStepUpCodeInput.value = '';
-            this._setStatus(
-                getMessage('settings_sottaku_step_up_invalid_code') || 'That code is invalid or expired',
-                true,
+        }
+        this._passwordInput.value = '';
+        this._passwordHumanVerificationAction = action;
+        this._authForm.hidden = true;
+        this._passwordStepUpForm.hidden = true;
+        this._passwordHumanVerificationForm.hidden = false;
+        this._setStatus(
+            getMessage('settings_sottaku_human_verification_instruction') ||
+            'Complete the human-verification check to continue.',
+            false,
+        );
+    }
+
+    /** @param {Event} e */
+    _onPasswordHumanVerificationClick(e) {
+        e.preventDefault();
+        if (this._busy || !this._passwordHumanVerificationAction) { return; }
+        try {
+            const url = this._client.createPasswordHumanVerificationUrl(
+                this._passwordHumanVerificationAction,
             );
+            const popup = globalThis.open(
+                url,
+                'sottaku-password-human-verification',
+                'popup,width=520,height=680',
+            );
+            if (!popup) {
+                throw new Error('Unable to open human verification');
+            }
+            this._passwordHumanVerificationPopup = popup;
+            this._setStatus(
+                getMessage('settings_sottaku_human_verification_instruction') ||
+                'Complete the human-verification check to continue.',
+                false,
+            );
+        } catch (error) {
+            this._setStatus(toError(error).message, true);
+        }
+    }
+
+    /** @param {MessageEvent} event */
+    async _onPasswordHumanVerificationMessage(event) {
+        const popup = this._passwordHumanVerificationPopup;
+        const action = this._passwordHumanVerificationAction;
+        let message = event.data;
+        if (typeof message === 'string') {
+            try {
+                message = JSON.parse(message);
+            } catch (e) {
+                return;
+            }
+        }
+        if (
+            !popup ||
+            !action ||
+            event.origin !== PASSWORD_HUMAN_VERIFICATION_ORIGIN ||
+            event.source !== popup ||
+            !isObjectNotArray(message) ||
+            message.type !== PASSWORD_HUMAN_VERIFICATION_MESSAGE ||
+            message.action !== action ||
+            typeof message.token !== 'string'
+        ) {
+            return;
+        }
+        const token = message.token.trim();
+        if (!token || token.length > 2048) { return; }
+
+        try { popup.close(); } catch (e) { /* NOP */ }
+        this._passwordHumanVerificationPopup = null;
+        this._passwordHumanVerificationAction = null;
+
+        if (action === 'password_step_up_code') {
+            this._passwordStepUpHumanVerificationToken = token;
+            this._passwordHumanVerificationForm.hidden = true;
+            this._passwordStepUpForm.hidden = false;
+            this._setStatus(
+                getMessage('settings_sottaku_step_up_code_sent') ||
+                'Security check complete. Enter the eight-digit code.',
+                false,
+            );
+            return;
+        }
+
+        if (this._busy || !this._passwordStepUpTransaction) { return; }
+        try {
+            this._busy = true;
+            const response = await this._client.verifyPasswordRecoveryHuman(
+                this._passwordStepUpTransaction,
+                token,
+            );
+            if (!response || typeof response.password_step_up_token !== 'string') {
+                throw new Error('Unable to verify human challenge');
+            }
+            this._passwordStepUpProof = response.password_step_up_token;
+            this._passwordHumanRecoveryAvailable = false;
+            this._passwordHumanVerificationForm.hidden = true;
+            this._passwordStepUpForm.hidden = true;
+            this._authForm.hidden = false;
+            this._setStatus(
+                getMessage('settings_sottaku_step_up_reenter_password') ||
+                'Verification complete. Re-enter your password to sign in.',
+                false,
+            );
+        } catch (error) {
+            if (this._isRetryablePasswordStepUpAuthError(error)) {
+                this._passwordHumanVerificationAction = 'password_recovery';
+                this._setStatus(toError(error).message || 'Unable to verify human challenge', true);
+            } else {
+                this._clearPasswordStepUpSecrets();
+                this._authForm.hidden = false;
+                this._setStatus(
+                    getMessage('settings_sottaku_password_recovery_support_required') ||
+                    'Please contact Sottaku support to recover access.',
+                    true,
+                );
+            }
         } finally {
             this._busy = false;
         }
@@ -248,7 +534,7 @@ export class SottakuController {
                 this._passwordStepUpTransaction,
                 this._passwordStepUpChallengeId,
             );
-            if (!response?.resent) {
+            if (!response?.accepted) {
                 throw new Error(
                     getMessage('settings_sottaku_step_up_resend_unavailable') ||
                     getMessage('settings_sottaku_step_up_invalid_code'),
@@ -276,7 +562,15 @@ export class SottakuController {
         this._passwordStepUpTransaction = null;
         this._passwordStepUpChallengeId = null;
         this._passwordStepUpProof = null;
+        this._passwordStepUpHumanVerificationToken = null;
+        this._passwordHumanVerificationAction = null;
+        this._passwordHumanRecoveryAvailable = false;
+        if (this._passwordHumanVerificationPopup) {
+            try { this._passwordHumanVerificationPopup.close(); } catch (e) { /* NOP */ }
+            this._passwordHumanVerificationPopup = null;
+        }
         this._passwordStepUpForm.hidden = true;
+        this._passwordHumanVerificationForm.hidden = true;
     }
 
     /**

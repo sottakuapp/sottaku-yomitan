@@ -1685,6 +1685,15 @@
     "settings_sottaku_password_placeholder": {
         "message": "Passwort"
     },
+    "settings_sottaku_human_verification_button": {
+        "message": "Sicherheitsprüfung abschließen"
+    },
+    "settings_sottaku_human_verification_instruction": {
+        "message": "Schließe die Sicherheitsprüfung unten ab, um fortzufahren."
+    },
+    "settings_sottaku_password_recovery_support_required": {
+        "message": "Dieses Anmeldekonto konnte nicht verknüpft werden. Versuche es erneut oder kontaktiere den Support."
+    },
     "settings_sottaku_step_up_code_placeholder": {
         "message": "Achtstelliger Code"
     },

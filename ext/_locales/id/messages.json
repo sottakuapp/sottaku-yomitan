@@ -1685,6 +1685,15 @@
     "settings_sottaku_password_placeholder": {
         "message": "Kata sandi"
     },
+    "settings_sottaku_human_verification_button": {
+        "message": "Selesaikan pemeriksaan keamanan"
+    },
+    "settings_sottaku_human_verification_instruction": {
+        "message": "Selesaikan pemeriksaan keamanan di bawah untuk melanjutkan."
+    },
+    "settings_sottaku_password_recovery_support_required": {
+        "message": "Akun masuk ini tidak dapat ditautkan. Coba lagi atau hubungi dukungan."
+    },
     "settings_sottaku_step_up_code_placeholder": {
         "message": "Kode delapan digit"
     },

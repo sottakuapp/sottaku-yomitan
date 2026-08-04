@@ -1685,6 +1685,15 @@
     "settings_sottaku_password_placeholder": {
         "message": "パスワード"
     },
+    "settings_sottaku_human_verification_button": {
+        "message": "セキュリティチェックを完了"
+    },
+    "settings_sottaku_human_verification_instruction": {
+        "message": "続行するには、以下のセキュリティチェックを完了してください。"
+    },
+    "settings_sottaku_password_recovery_support_required": {
+        "message": "このサインインアカウントを連携できませんでした。もう一度試すか、サポートにお問い合わせください。"
+    },
     "settings_sottaku_step_up_code_placeholder": {
         "message": "8桁のコード"
     },
