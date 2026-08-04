@@ -29,8 +29,23 @@ import {
     SOTTAKU_SUPPORTED_LANGUAGES,
 } from '../../language/sottaku-languages.js';
 
-const PASSWORD_HUMAN_VERIFICATION_ORIGIN = 'https://sottaku.app';
 const PASSWORD_HUMAN_VERIFICATION_MESSAGE = 'sottaku-password-human-verification';
+
+/**
+ * Compare two fixed-format popup states without exiting on the first mismatch.
+ * @param {string} first
+ * @param {string} second
+ * @returns {boolean}
+ */
+function passwordHumanVerificationStatesMatch(first, second) {
+    if (typeof first !== 'string' || typeof second !== 'string') { return false; }
+    let difference = first.length ^ second.length;
+    const length = Math.max(first.length, second.length);
+    for (let index = 0; index < length; ++index) {
+        difference |= (first.charCodeAt(index) || 0) ^ (second.charCodeAt(index) || 0);
+    }
+    return difference === 0;
+}
 
 export class SottakuController {
     /**
@@ -59,12 +74,14 @@ export class SottakuController {
         this._passwordStepUpProof = null;
         /** @type {'password_recovery'|'password_step_up_code'|null} */
         this._passwordHumanVerificationAction = null;
-        /** @type {Window|null} */
-        this._passwordHumanVerificationPopup = null;
+        /** @type {{popup: Window, expectedOrigin: string, state: string, action: 'password_recovery'|'password_step_up_code', transaction: string}|null} */
+        this._passwordHumanVerificationRequest = null;
         /** @type {boolean} */
         this._passwordHumanRecoveryAvailable = false;
         /** @type {string|null} */
         this._passwordStepUpHumanVerificationToken = null;
+        /** @type {string|null} */
+        this._passwordStepUpHumanVerificationContext = null;
 
         /** @type {HTMLElement} */
         this._statusNode = querySelectorNotNull(document, '#sottaku-connection-status');
@@ -330,6 +347,7 @@ export class SottakuController {
         this._passwordStepUpChallengeId = response.challenge_id;
         this._passwordStepUpProof = null;
         this._passwordStepUpHumanVerificationToken = null;
+        this._passwordStepUpHumanVerificationContext = null;
         this._passwordHumanRecoveryAvailable = humanVerificationAvailable;
         this._passwordHumanVerificationAction = humanVerificationAvailable ? 'password_recovery' : null;
         this._authForm.hidden = true;
@@ -347,8 +365,14 @@ export class SottakuController {
         await this._verifyPasswordStepUp(this._passwordStepUpHumanVerificationToken);
     }
 
-    /** @param {string|null} humanVerificationToken */
-    async _verifyPasswordStepUp(humanVerificationToken) {
+    /**
+     * @param {string|null} humanVerificationToken
+     * @param {string|null} humanVerificationContext
+     */
+    async _verifyPasswordStepUp(
+        humanVerificationToken,
+        humanVerificationContext = this._passwordStepUpHumanVerificationContext,
+    ) {
         const code = this._passwordStepUpCodeInput.value.replace(/\D/gu, '').slice(0, 8);
         if (this._busy || !this._passwordStepUpChallengeId || code.length !== 8) { return; }
         try {
@@ -357,6 +381,7 @@ export class SottakuController {
                 this._passwordStepUpChallengeId,
                 code,
                 humanVerificationToken,
+                humanVerificationContext,
             );
             if (!response || typeof response.password_step_up_token !== 'string') {
                 throw new Error('Unable to verify code');
@@ -364,6 +389,7 @@ export class SottakuController {
             this._passwordStepUpCodeInput.value = '';
             this._passwordStepUpProof = response.password_step_up_token;
             this._passwordStepUpHumanVerificationToken = null;
+            this._passwordStepUpHumanVerificationContext = null;
             this._passwordHumanVerificationAction = null;
             this._passwordHumanRecoveryAvailable = false;
             this._passwordStepUpForm.hidden = true;
@@ -377,11 +403,14 @@ export class SottakuController {
             if (this._isPasswordStepUpHumanVerificationRequired(error)) {
                 this._passwordStepUpCodeInput.value = '';
                 this._passwordStepUpHumanVerificationToken = null;
+                this._passwordStepUpHumanVerificationContext = null;
                 this._beginPasswordHumanVerification('password_step_up_code', null);
             } else if (this._isRetryablePasswordStepUpAuthError(error)) {
                 this._setStatus(toError(error).message || 'Unable to verify code', true);
             } else {
                 this._passwordStepUpCodeInput.value = '';
+                this._passwordStepUpHumanVerificationToken = null;
+                this._passwordStepUpHumanVerificationContext = null;
                 this._setStatus(
                     getMessage('settings_sottaku_step_up_invalid_code') || 'That code is invalid or expired',
                     true,
@@ -397,6 +426,9 @@ export class SottakuController {
      * @param {string|null} transaction
      */
     _beginPasswordHumanVerification(action, transaction) {
+        this._closePasswordHumanVerificationPopup();
+        this._passwordStepUpHumanVerificationToken = null;
+        this._passwordStepUpHumanVerificationContext = null;
         if (action === 'password_recovery') {
             if (!transaction) { return; }
             this._passwordStepUpTransaction = transaction;
@@ -419,20 +451,30 @@ export class SottakuController {
     /** @param {Event} e */
     _onPasswordHumanVerificationClick(e) {
         e.preventDefault();
-        if (this._busy || !this._passwordHumanVerificationAction) { return; }
+        const action = this._passwordHumanVerificationAction;
+        const transaction = this._passwordStepUpTransaction;
+        if (this._busy || !action || !transaction) { return; }
         try {
-            const url = this._client.createPasswordHumanVerificationUrl(
-                this._passwordHumanVerificationAction,
+            const request = this._client.createPasswordHumanVerificationRequest(
+                action,
+                transaction,
             );
+            this._closePasswordHumanVerificationPopup();
             const popup = globalThis.open(
-                url,
+                request.url,
                 'sottaku-password-human-verification',
                 'popup,width=520,height=680',
             );
             if (!popup) {
                 throw new Error('Unable to open human verification');
             }
-            this._passwordHumanVerificationPopup = popup;
+            this._passwordHumanVerificationRequest = {
+                popup,
+                expectedOrigin: request.expectedOrigin,
+                state: request.state,
+                action: request.action,
+                transaction: request.stepUpTransaction,
+            };
             this._setStatus(
                 getMessage('settings_sottaku_human_verification_instruction') ||
                 'Complete the human-verification check to continue.',
@@ -445,8 +487,9 @@ export class SottakuController {
 
     /** @param {MessageEvent} event */
     async _onPasswordHumanVerificationMessage(event) {
-        const popup = this._passwordHumanVerificationPopup;
+        const request = this._passwordHumanVerificationRequest;
         const action = this._passwordHumanVerificationAction;
+        const transaction = this._passwordStepUpTransaction;
         let message = event.data;
         if (typeof message === 'string') {
             try {
@@ -456,26 +499,39 @@ export class SottakuController {
             }
         }
         if (
-            !popup ||
+            !request ||
             !action ||
-            event.origin !== PASSWORD_HUMAN_VERIFICATION_ORIGIN ||
-            event.source !== popup ||
+            !transaction ||
+            request.action !== action ||
+            request.transaction !== transaction ||
+            event.origin !== request.expectedOrigin ||
+            event.source !== request.popup ||
             !isObjectNotArray(message) ||
             message.type !== PASSWORD_HUMAN_VERIFICATION_MESSAGE ||
             message.action !== action ||
+            message.step_up_transaction !== transaction ||
+            typeof message.state !== 'string' ||
+            !/^[A-Za-z0-9_-]{43}$/u.test(message.state) ||
+            !passwordHumanVerificationStatesMatch(message.state, request.state) ||
+            typeof message.human_verification_context !== 'string' ||
             typeof message.token !== 'string'
         ) {
             return;
         }
         const token = message.token.trim();
-        if (!token || token.length > 2048) { return; }
+        const humanVerificationContext = message.human_verification_context.trim();
+        if (
+            !token ||
+            token.length > 2048 ||
+            !/^[A-Za-z0-9_-]{40,96}$/u.test(humanVerificationContext)
+        ) { return; }
 
-        try { popup.close(); } catch (e) { /* NOP */ }
-        this._passwordHumanVerificationPopup = null;
+        this._closePasswordHumanVerificationPopup();
         this._passwordHumanVerificationAction = null;
 
         if (action === 'password_step_up_code') {
             this._passwordStepUpHumanVerificationToken = token;
+            this._passwordStepUpHumanVerificationContext = humanVerificationContext;
             this._passwordHumanVerificationForm.hidden = true;
             this._passwordStepUpForm.hidden = false;
             this._setStatus(
@@ -490,8 +546,9 @@ export class SottakuController {
         try {
             this._busy = true;
             const response = await this._client.verifyPasswordRecoveryHuman(
-                this._passwordStepUpTransaction,
+                transaction,
                 token,
+                humanVerificationContext,
             );
             if (!response || typeof response.password_step_up_token !== 'string') {
                 throw new Error('Unable to verify human challenge');
@@ -563,14 +620,21 @@ export class SottakuController {
         this._passwordStepUpChallengeId = null;
         this._passwordStepUpProof = null;
         this._passwordStepUpHumanVerificationToken = null;
+        this._passwordStepUpHumanVerificationContext = null;
         this._passwordHumanVerificationAction = null;
         this._passwordHumanRecoveryAvailable = false;
-        if (this._passwordHumanVerificationPopup) {
-            try { this._passwordHumanVerificationPopup.close(); } catch (e) { /* NOP */ }
-            this._passwordHumanVerificationPopup = null;
-        }
+        this._closePasswordHumanVerificationPopup();
         this._passwordStepUpForm.hidden = true;
         this._passwordHumanVerificationForm.hidden = true;
+    }
+
+    /** */
+    _closePasswordHumanVerificationPopup() {
+        const request = this._passwordHumanVerificationRequest;
+        this._passwordHumanVerificationRequest = null;
+        if (request) {
+            try { request.popup.close(); } catch (e) { /* NOP */ }
+        }
     }
 
     /**

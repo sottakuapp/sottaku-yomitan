@@ -83,6 +83,51 @@ function normalizeAuthTokenForStorage(token) {
 }
 
 /**
+ * @returns {string}
+ */
+function createPasswordHumanVerificationState() {
+    if (!(globalThis.crypto && typeof globalThis.crypto.getRandomValues === 'function')) {
+        throw new Error('Secure random number generation is unavailable');
+    }
+    const bytes = new Uint8Array(32);
+    globalThis.crypto.getRandomValues(bytes);
+    let binary = '';
+    for (const value of bytes) {
+        binary += String.fromCharCode(value);
+    }
+    return btoa(binary)
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=+$/u, '');
+}
+
+/**
+ * @returns {string}
+ */
+function getExtensionOrigin() {
+    if (!(typeof chrome === 'object' && chrome !== null && chrome.runtime && typeof chrome.runtime.getURL === 'function')) {
+        throw new Error('Extension origin is unavailable');
+    }
+    const url = new URL(chrome.runtime.getURL('/'));
+    if (
+        (
+            url.protocol !== 'chrome-extension:' &&
+            url.protocol !== 'moz-extension:' &&
+            url.protocol !== 'ms-browser-extension:'
+        ) ||
+        !url.host ||
+        url.username ||
+        url.password ||
+        url.pathname !== '/' ||
+        url.search ||
+        url.hash
+    ) {
+        throw new Error('Untrusted extension origin');
+    }
+    return `${url.protocol}//${url.host}`;
+}
+
+/**
  * @param {string} method
  * @param {string} path
  * @returns {number}
@@ -157,6 +202,11 @@ export class SottakuClient {
     /** @returns {string} */
     get authToken() {
         return this._authToken;
+    }
+
+    /** @returns {string} */
+    get passwordHumanVerificationOrigin() {
+        return new URL(this._apiBaseUrl).origin;
     }
 
     /**
@@ -242,15 +292,22 @@ export class SottakuClient {
      * @param {string} challengeId
      * @param {string} code
      * @param {string|null} humanVerificationToken
+     * @param {string|null} humanVerificationContext
      * @returns {Promise<{password_step_up_token: string, expires_in: number}>}
      */
-    async verifyPasswordStepUp(challengeId, code, humanVerificationToken = null) {
+    async verifyPasswordStepUp(
+        challengeId,
+        code,
+        humanVerificationToken = null,
+        humanVerificationContext = null,
+    ) {
         return await this._request('/auth/password-step-up/verify', {
             method: 'POST',
             body: {
                 challenge_id: challengeId,
                 code,
                 ...(humanVerificationToken ? {human_verification_token: humanVerificationToken} : {}),
+                ...(humanVerificationContext ? {human_verification_context: humanVerificationContext} : {}),
             },
             auth: false,
         });
@@ -259,14 +316,20 @@ export class SottakuClient {
     /**
      * @param {string} stepUpTransaction
      * @param {string} humanVerificationToken
+     * @param {string} humanVerificationContext
      * @returns {Promise<{password_step_up_token: string, expires_in: number}>}
      */
-    async verifyPasswordRecoveryHuman(stepUpTransaction, humanVerificationToken) {
+    async verifyPasswordRecoveryHuman(
+        stepUpTransaction,
+        humanVerificationToken,
+        humanVerificationContext,
+    ) {
         return await this._request('/auth/password-recovery/human-verify', {
             method: 'POST',
             body: {
                 step_up_transaction: stepUpTransaction,
                 human_verification_token: humanVerificationToken,
+                human_verification_context: humanVerificationContext,
             },
             auth: false,
         });
@@ -274,16 +337,33 @@ export class SottakuClient {
 
     /**
      * @param {'password_recovery'|'password_step_up_code'} action
-     * @throws {TypeError} If the action is not one of the reviewed recovery actions.
-     * @returns {string}
+     * @param {string} stepUpTransaction
+     * @throws {TypeError} If the request is not bound to a reviewed action and opaque transaction.
+     * @returns {{url: string, expectedOrigin: string, state: string, action: 'password_recovery'|'password_step_up_code', stepUpTransaction: string}}
      */
-    createPasswordHumanVerificationUrl(action) {
+    createPasswordHumanVerificationRequest(action, stepUpTransaction) {
         if (action !== 'password_recovery' && action !== 'password_step_up_code') {
             throw new TypeError('Invalid password human-verification action');
         }
-        const url = new URL('/auth/password-recovery/human-challenge', 'https://sottaku.app');
+        const transaction = typeof stepUpTransaction === 'string' ? stepUpTransaction.trim() : '';
+        if (!/^[A-Za-z0-9_-]{40,96}$/u.test(transaction)) {
+            throw new TypeError('Invalid password step-up transaction');
+        }
+        const expectedOrigin = this.passwordHumanVerificationOrigin;
+        const state = createPasswordHumanVerificationState();
+        const url = new URL('/auth/password-recovery/human-challenge', expectedOrigin);
+        url.searchParams.set('client', 'extension');
         url.searchParams.set('action', action);
-        return url.href;
+        url.searchParams.set('state', state);
+        url.searchParams.set('step_up_transaction', transaction);
+        url.searchParams.set('return_origin', getExtensionOrigin());
+        return {
+            url: url.href,
+            expectedOrigin,
+            state,
+            action,
+            stepUpTransaction: transaction,
+        };
     }
 
     /**
