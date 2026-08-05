@@ -22,6 +22,7 @@ import {parseJson} from '../ext/js/core/json.js';
 import {ObjectPropertyAccessor} from '../ext/js/general/object-property-accessor.js';
 import {
     getSottakuCredentialResetPathsForApiBaseUrlMutation,
+    getUntrustedSettingPathArray,
     isSottakuCredentialDestinationSettingPath,
     isSottakuCredentialSettingPath,
     isTrustedExtensionPageSender,
@@ -52,6 +53,21 @@ const escapedSettingPathCases = [
     {scope: 'global', property: 'sottaku', kind: 'block', path: String.raw`profiles[0].options["sott\aku"]`},
     {scope: 'global', property: 'sottaku', kind: 'block', path: String.raw`profiles[0].options['sott\aku']`},
 ];
+
+const dangerousSettingPathCases = [
+    {segment: '__proto__', escapedSegment: String.raw`__pro\to__`},
+    {segment: 'prototype', escapedSegment: String.raw`proto\type`},
+    {segment: 'constructor', escapedSegment: String.raw`construc\tor`},
+].flatMap(({segment, escapedSegment}) => [
+    {syntax: 'dot', segment, suffix: `.${segment}`},
+    {syntax: 'double-quoted', segment, suffix: `["${segment}"]`},
+    {syntax: 'single-quoted', segment, suffix: `['${segment}']`},
+    {syntax: 'escaped-double-quoted', segment, suffix: `["${escapedSegment}"]`},
+    {syntax: 'escaped-single-quoted', segment, suffix: `['${escapedSegment}']`},
+]).flatMap(({syntax, segment, suffix}) => [
+    {scope: /** @type {const} */ ('profile'), syntax, segment, path: `sottaku${suffix}`},
+    {scope: /** @type {const} */ ('global'), syntax, segment, path: `profiles[0].options.sottaku${suffix}`},
+]);
 
 /**
  * @returns {{general: {language: string}, sottaku: {enabled: boolean, apiBaseUrl: string, authToken: string, refreshToken: string, user: {id: number}}}}
@@ -200,6 +216,66 @@ describe('extension option credential boundaries', () => {
         expect(profile.sottaku.refreshToken).toBe('refresh-secret');
     });
 
+    test('rejects canonical and escaped prototype path segments after parsing', () => {
+        expect(getUntrustedSettingPathArray('profiles[0].name')).toStrictEqual(['profiles', 0, 'name']);
+        for (const {segment, path} of dangerousSettingPathCases) {
+            expect(ObjectPropertyAccessor.getPathArray(path)).toContain(segment);
+            expect(() => getUntrustedSettingPathArray(path)).toThrow('Dangerous setting path');
+        }
+    });
+
+    test('keeps the credential-bearing Sottaku settings object schema-closed', () => {
+        const schema = /** @type {{properties: {profiles: {items: {properties: {options: {properties: {sottaku: {additionalProperties?: boolean}}}}}}}}} */ (parseJson(readFileSync(
+            new URL('../ext/data/schemas/options-schema.json', import.meta.url),
+            'utf8',
+        )));
+
+        expect(schema.properties.profiles.items.properties.options.properties.sottaku.additionalProperties).toBe(false);
+    });
+
+    test('blocks dangerous prototype paths from untrusted profile and global reads', async () => {
+        const profile = profileOptions();
+        const fullOptions = {profiles: [{name: 'Default', options: profile}]};
+        const context = {
+            _senderCanReadPersistedCredentials: (/** @type {{url?: string}|undefined} */ sender) => isTrustedExtensionPageSender(sender, extensionRoot),
+            // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/unbound-method
+            _getSetting: Backend.prototype._getSetting,
+            _getModifySettingObject: (/** @type {{scope: string}} */ target) => (target.scope === 'profile' ? profile : fullOptions),
+        };
+        // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/unbound-method
+        const getSettings = Backend.prototype._onApiGetSettings;
+        const targets = dangerousSettingPathCases.map(({scope, path}) => ({scope, path}));
+
+        const results = await getSettings.call(context, {targets}, {url: 'https://attacker.example/article'});
+
+        expect(results).toHaveLength(targets.length);
+        expect(results.every((result) => typeof result.error !== 'undefined')).toBe(true);
+        expect(Object.getPrototypeOf(profile.sottaku)).toBe(Object.prototype);
+    });
+
+    test('fails closed on malformed untrusted read paths before accessing settings', async () => {
+        const profile = profileOptions();
+        const context = {
+            _senderCanReadPersistedCredentials: (/** @type {{url?: string}|undefined} */ sender) => isTrustedExtensionPageSender(sender, extensionRoot),
+            // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/unbound-method
+            _getSetting: Backend.prototype._getSetting,
+            _getModifySettingObject: vi.fn(() => profile),
+        };
+        // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/unbound-method
+        const getSettings = Backend.prototype._onApiGetSettings;
+        const targets = /** @type {import('settings-modifications').ScopedRead[]} */ ([
+            {scope: 'profile', optionsContext: {current: true}, path: 'sottaku["__proto__"'},
+            {scope: 'profile', optionsContext: {current: true}, path: 'sottaku.'},
+            {scope: 'profile', optionsContext: {current: true}, path: 'sottaku["constructor"]x'},
+            {scope: 'profile', optionsContext: {current: true}, path: 1},
+        ]);
+
+        const results = await getSettings.call(context, {targets}, {url: 'https://attacker.example/article'});
+
+        expect(results).toHaveLength(targets.length);
+        expect(results.every((result) => typeof result.error !== 'undefined')).toBe(true);
+    });
+
     test('blocks direct, nested, and whole-block credential mutations from untrusted contexts', () => {
         expect(isSottakuCredentialSettingPath('sottaku.authToken')).toBe(true);
         expect(isSottakuCredentialSettingPath('profiles[0].options.sottaku.refreshToken')).toBe(true);
@@ -270,6 +346,132 @@ describe('extension option credential boundaries', () => {
             }
         }
         expect(modifySettings).not.toHaveBeenCalled();
+    });
+
+    test('blocks every dangerous prototype path through every untrusted mutation action', async () => {
+        const modifySettings = vi.fn(async () => []);
+        const context = {
+            _senderCanReadPersistedCredentials: (/** @type {{url?: string}|undefined} */ sender) => isTrustedExtensionPageSender(sender, extensionRoot),
+            _modifySettings: modifySettings,
+        };
+        // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/unbound-method
+        const modify = Backend.prototype._onApiModifySettings;
+
+        for (const {scope, path} of dangerousSettingPathCases) {
+            const scopeTarget = scope === 'profile' ?
+                {scope: /** @type {const} */ ('profile'), optionsContext: {current: true}} :
+                {scope: /** @type {const} */ ('global')};
+            const safePath = scope === 'profile' ? 'general.language' : 'profiles[0].name';
+            const mutations = /** @type {import('settings-modifications').ScopedModification[]} */ ([
+                {...scopeTarget, action: 'set', path, value: {polluted: true}},
+                {...scopeTarget, action: 'delete', path},
+                {...scopeTarget, action: 'swap', path1: path, path2: safePath},
+                {...scopeTarget, action: 'splice', path, start: 0, deleteCount: 0, items: []},
+                {...scopeTarget, action: 'push', path, items: []},
+            ]);
+
+            for (const target of mutations) {
+                expect(settingMutationTouchesSottakuCredentials(target)).toBe(true);
+                await expect(modify.call(context, {targets: [target], source: 'test'}, {
+                    url: 'https://attacker.example/article',
+                })).rejects.toThrow('Untrusted extension context');
+            }
+        }
+        expect(modifySettings).not.toHaveBeenCalled();
+    });
+
+    test('blocks dangerous object keys embedded in untrusted setting values', async () => {
+        const modifySettings = vi.fn(async () => []);
+        const context = {
+            _senderCanReadPersistedCredentials: (/** @type {{url?: string}|undefined} */ sender) => isTrustedExtensionPageSender(sender, extensionRoot),
+            _modifySettings: modifySettings,
+        };
+        // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/unbound-method
+        const modify = Backend.prototype._onApiModifySettings;
+        const dangerousNested = {};
+        Object.defineProperty(dangerousNested, '__proto__', {
+            configurable: true,
+            enumerable: true,
+            value: {polluted: true},
+            writable: true,
+        });
+        const value = {nested: dangerousNested};
+        const target = {
+            action: /** @type {const} */ ('set'),
+            scope: /** @type {const} */ ('profile'),
+            optionsContext: {current: true},
+            path: 'general.customPopupCss',
+            value,
+        };
+
+        expect(settingMutationTouchesSottakuCredentials(target)).toBe(true);
+        await expect(modify.call(context, {targets: [target], source: 'test'}, {
+            url: 'https://attacker.example/article',
+        })).rejects.toThrow('Untrusted extension context');
+        expect(modifySettings).not.toHaveBeenCalled();
+    });
+
+    test('applies legitimate untrusted writes through strict own-path validation', async () => {
+        const profile = profileOptions();
+        const saveOptions = vi.fn(async () => {});
+        const context = {
+            _senderCanReadPersistedCredentials: (/** @type {{url?: string}|undefined} */ sender) => isTrustedExtensionPageSender(sender, extensionRoot),
+            // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/unbound-method
+            _modifySettings: Backend.prototype._modifySettings,
+            // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/unbound-method
+            _modifySetting: Backend.prototype._modifySetting,
+            _getModifySettingObject: () => profile,
+            _saveOptions: saveOptions,
+        };
+        // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/unbound-method
+        const modify = Backend.prototype._onApiModifySettings;
+
+        const result = await modify.call(context, {
+            targets: [{
+                action: 'set',
+                scope: 'profile',
+                optionsContext: {current: true},
+                path: 'general.language',
+                value: 'ko',
+            }],
+            source: 'test',
+        }, {url: 'https://example.com/article'});
+
+        expect(result).toStrictEqual([{result: 'ko'}]);
+        expect(profile.general.language).toBe('ko');
+        expect(saveOptions).toHaveBeenCalledOnce();
+    });
+
+    test('requires untrusted mutation destinations to be existing own settings paths', () => {
+        const inheritedSottaku = {inheritedSetting: 'inherited'};
+        const sottaku = {
+            enabled: true,
+            values: ['first'],
+        };
+        Object.setPrototypeOf(sottaku, inheritedSottaku);
+        const profile = {general: {language: 'ja'}, sottaku};
+        const context = {_getModifySettingObject: () => profile};
+        // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/unbound-method
+        const modifySetting = Backend.prototype._modifySetting;
+
+        expect(modifySetting.call(context, {
+            action: 'set', scope: 'profile', optionsContext: {current: true}, path: 'sottaku.enabled', value: false,
+        }, true)).toBe(false);
+        expect(sottaku.enabled).toBe(false);
+
+        expect(() => modifySetting.call(context, {
+            action: 'set', scope: 'profile', optionsContext: {current: true}, path: 'sottaku.newSetting', value: true,
+        }, true)).toThrow('Invalid path');
+        expect(() => modifySetting.call(context, {
+            action: 'set', scope: 'profile', optionsContext: {current: true}, path: 'sottaku.inheritedSetting', value: 'shadowed',
+        }, true)).toThrow('Invalid path');
+        expect(() => modifySetting.call(context, {
+            action: 'set', scope: 'profile', optionsContext: {current: true}, path: 'sottaku.__proto__', value: {polluted: true},
+        }, true)).toThrow('Dangerous setting path');
+
+        expect(Object.prototype.hasOwnProperty.call(sottaku, 'newSetting')).toBe(false);
+        expect(Object.prototype.hasOwnProperty.call(sottaku, 'inheritedSetting')).toBe(false);
+        expect(Object.getPrototypeOf(sottaku)).toBe(inheritedSottaku);
     });
 
     test('fails closed on malformed untrusted mutation paths', async () => {

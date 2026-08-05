@@ -17,6 +17,12 @@
 
 import {ObjectPropertyAccessor} from '../general/object-property-accessor.js';
 
+const DANGEROUS_SETTING_PATH_SEGMENTS = new Set([
+    '__proto__',
+    'prototype',
+    'constructor',
+]);
+
 /**
  * Returns true only for an extension-owned page. Content scripts have the
  * extension ID as their sender ID too, but their sender URL is the website
@@ -101,6 +107,24 @@ export function redactSottakuCredentialsFromOptions(options) {
 function parseSettingPath(path) {
     if (typeof path !== 'string') { throw new Error('Invalid path'); }
     return ObjectPropertyAccessor.getPathArray(path);
+}
+
+/**
+ * Parses and validates a path supplied by an untrusted extension context.
+ * Validation intentionally happens after canonical parsing so escaped quoted
+ * properties cannot disguise a dangerous segment.
+ * @param {string} path
+ * @returns {(string|number)[]}
+ * @throws {Error}
+ */
+export function getUntrustedSettingPathArray(path) {
+    const parts = parseSettingPath(path);
+    for (const part of parts) {
+        if (typeof part === 'string' && DANGEROUS_SETTING_PATH_SEGMENTS.has(part)) {
+            throw new Error('Dangerous setting path');
+        }
+    }
+    return parts;
 }
 
 /**
@@ -236,10 +260,11 @@ export function settingMutationTouchesSottakuCredentials(target) {
         if (typeof pathValue !== 'string') { return true; }
         let parts;
         try {
-            parts = parseSettingPath(pathValue);
+            parts = getUntrustedSettingPathArray(pathValue);
         } catch (e) {
             // Mutations from untrusted contexts must fail closed whenever the
-            // canonical settings parser cannot understand a supplied path.
+            // canonical settings parser cannot understand a supplied path or
+            // it contains a prototype-manipulation segment.
             return true;
         }
         if (
@@ -271,15 +296,19 @@ export function settingMutationTouchesSottakuCredentials(target) {
         }
     }
 
+    /** @type {Set<unknown>} */
+    const visited = new Set();
     /**
      * @param {unknown} value
      * @returns {boolean}
      */
-    const containsCredentialObject = (value) => {
-        if (Array.isArray(value)) { return value.some(containsCredentialObject); }
+    const containsProtectedObject = (value) => {
         if (typeof value !== 'object' || value === null) { return false; }
+        if (visited.has(value)) { return true; }
+        visited.add(value);
         const objectValue = /** @type {Record<string, unknown>} */ (value);
         for (const [key, nestedValue] of Object.entries(objectValue)) {
+            if (DANGEROUS_SETTING_PATH_SEGMENTS.has(key)) { return true; }
             if (
                 key === 'sottaku' &&
                 typeof nestedValue === 'object' &&
@@ -291,9 +320,10 @@ export function settingMutationTouchesSottakuCredentials(target) {
             ) {
                 return true;
             }
-            if (containsCredentialObject(nestedValue)) { return true; }
+            if (containsProtectedObject(nestedValue)) { return true; }
         }
+        visited.delete(value);
         return false;
     };
-    return containsCredentialObject(target?.value) || containsCredentialObject(target?.items);
+    return containsProtectedObject(target?.value) || containsProtectedObject(target?.items);
 }

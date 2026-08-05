@@ -145,6 +145,30 @@ describe('ObjectPropertyAccessor', () => {
         }
     });
 
+    test('SetOwnDataProperty', () => {
+        let setterCalled = false;
+        const inherited = {
+            inherited: 1,
+        };
+        const object = {existing: 1};
+        Object.setPrototypeOf(object, inherited);
+        Object.defineProperty(object, 'accessor', {
+            configurable: true,
+            get: () => 0,
+            set: () => { setterCalled = true; },
+        });
+        const accessor = new ObjectPropertyAccessor(object);
+
+        accessor.set(['existing'], 2, true);
+        expect(object.existing).toBe(2);
+        expect(() => accessor.set(['missing'], 2, true)).toThrow('Invalid path');
+        expect(() => accessor.set(['inherited'], 2, true)).toThrow('Invalid path');
+        expect(() => accessor.set(['accessor'], 2, true)).toThrow('Invalid path');
+        expect(setterCalled).toBe(false);
+        expect(Object.prototype.hasOwnProperty.call(object, 'missing')).toBe(false);
+        expect(Object.prototype.hasOwnProperty.call(object, 'inherited')).toBe(false);
+    });
+
     test('Delete1', () => {
         /**
          * @param {unknown} object
@@ -373,6 +397,7 @@ describe('ObjectPropertyAccessor', () => {
             [[], 'invalid', false],
             [[], 0, false],
             [[0], 0, true],
+            [new Array(1), 0, false],
             [[0], null, false],
             ['string', 0, false],
             ['string', 'length', false],

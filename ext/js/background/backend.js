@@ -44,7 +44,7 @@ import {Translator} from '../language/translator.js';
 import {AudioDownloader} from '../media/audio-downloader.js';
 import {getFileExtensionFromAudioMediaType, getFileExtensionFromImageMediaType} from '../media/media-util.js';
 import {ClipboardReaderProxy, DictionaryDatabaseProxy, OffscreenProxy, TranslatorProxy} from './offscreen-proxy.js';
-import {getSottakuCredentialResetPathsForApiBaseUrlMutation, isTrustedExtensionPageSender, redactSottakuCredentialsForSettingResult, redactSottakuCredentialsFromOptions, redactSottakuCredentialsFromProfileOptions, settingMutationTouchesSottakuCredentials} from './options-security.js';
+import {getSottakuCredentialResetPathsForApiBaseUrlMutation, getUntrustedSettingPathArray, isTrustedExtensionPageSender, redactSottakuCredentialsForSettingResult, redactSottakuCredentialsFromOptions, redactSottakuCredentialsFromProfileOptions, settingMutationTouchesSottakuCredentials} from './options-security.js';
 import {createSchema, normalizeContext} from './profile-conditions-util.js';
 import {RequestBuilder} from './request-builder.js';
 import {injectStylesheet, isContentScriptRegistered, registerContentScript, unregisterContentScript} from './script-manager.js';
@@ -1032,7 +1032,7 @@ export class Backend {
             !canManageCredentials &&
             targets.some((target) => settingMutationTouchesSottakuCredentials(target))
         ) {
-            throw new Error('Untrusted extension context cannot modify Sottaku credentials');
+            throw new Error('Untrusted extension context cannot modify protected settings');
         }
 
         /** @type {import('settings-modifications').ScopedModificationSet[]} */
@@ -1055,7 +1055,11 @@ export class Backend {
             }
         }
 
-        const results = await this._modifySettings([...targets, ...credentialResets], source);
+        const results = await this._modifySettings(
+            [...targets, ...credentialResets],
+            source,
+            !canManageCredentials,
+        );
         return results.slice(0, targets.length);
     }
 
@@ -1196,7 +1200,7 @@ export class Backend {
         const results = [];
         for (const target of targets) {
             try {
-                const result = this._getSetting(target);
+                const result = this._getSetting(target, !canReadCredentials);
                 const safeResult = canReadCredentials ?
                     result :
                     redactSottakuCredentialsForSettingResult(target.path, result);
@@ -1585,14 +1589,15 @@ export class Backend {
     /**
      * @param {import('settings-modifications').ScopedModification[]} targets
      * @param {string} source
+     * @param {boolean} [validateUntrustedPaths]
      * @returns {Promise<import('core').Response<import('settings-modifications').ModificationResult>[]>}
      */
-    async _modifySettings(targets, source) {
+    async _modifySettings(targets, source, validateUntrustedPaths = false) {
         /** @type {import('core').Response<import('settings-modifications').ModificationResult>[]} */
         const results = [];
         for (const target of targets) {
             try {
-                const result = this._modifySetting(target);
+                const result = this._modifySetting(target, validateUntrustedPaths);
                 results.push({result: clone(result)});
             } catch (e) {
                 results.push({error: ExtensionError.serialize(e)});
@@ -2226,40 +2231,63 @@ export class Backend {
 
     /**
      * @param {import('settings-modifications').OptionsScope&import('settings-modifications').Read} target
+     * @param {boolean} [validateUntrustedPath]
      * @returns {unknown}
      * @throws {Error}
      */
-    _getSetting(target) {
+    _getSetting(target, validateUntrustedPath = false) {
         const options = this._getModifySettingObject(target);
         const accessor = new ObjectPropertyAccessor(options);
         const {path} = target;
         if (typeof path !== 'string') { throw new Error('Invalid path'); }
-        return accessor.get(ObjectPropertyAccessor.getPathArray(path));
+        const pathArray = validateUntrustedPath ?
+            getUntrustedSettingPathArray(path) :
+            ObjectPropertyAccessor.getPathArray(path);
+        return accessor.get(pathArray);
     }
 
     /**
      * @param {import('settings-modifications').ScopedModification} target
+     * @param {boolean} [validateUntrustedPaths]
      * @returns {import('settings-modifications').ModificationResult}
      * @throws {Error}
      */
-    _modifySetting(target) {
+    _modifySetting(target, validateUntrustedPaths = false) {
         const options = this._getModifySettingObject(target);
         const accessor = new ObjectPropertyAccessor(options);
+        /**
+         * @param {string} path
+         * @param {boolean} [requireExisting]
+         * @returns {(string|number)[]}
+         */
+        const getPathArray = (path, requireExisting = false) => {
+            const pathArray = validateUntrustedPaths ?
+                getUntrustedSettingPathArray(path) :
+                ObjectPropertyAccessor.getPathArray(path);
+            if (validateUntrustedPaths && requireExisting) {
+                // The options object is a schema-validating proxy. Requiring the
+                // complete destination to already be an own path prevents an
+                // untrusted set/delete/swap from creating arbitrary properties
+                // or reading and shadowing inherited ones.
+                accessor.get(pathArray);
+            }
+            return pathArray;
+        };
         const action = target.action;
         switch (action) {
             case 'set':
             {
                 const {path, value} = target;
                 if (typeof path !== 'string') { throw new Error('Invalid path'); }
-                const pathArray = ObjectPropertyAccessor.getPathArray(path);
-                accessor.set(pathArray, value);
+                const pathArray = getPathArray(path, true);
+                accessor.set(pathArray, value, validateUntrustedPaths);
                 return accessor.get(pathArray);
             }
             case 'delete':
             {
                 const {path} = target;
                 if (typeof path !== 'string') { throw new Error('Invalid path'); }
-                accessor.delete(ObjectPropertyAccessor.getPathArray(path));
+                accessor.delete(getPathArray(path, true));
                 return true;
             }
             case 'swap':
@@ -2267,7 +2295,11 @@ export class Backend {
                 const {path1, path2} = target;
                 if (typeof path1 !== 'string') { throw new Error('Invalid path1'); }
                 if (typeof path2 !== 'string') { throw new Error('Invalid path2'); }
-                accessor.swap(ObjectPropertyAccessor.getPathArray(path1), ObjectPropertyAccessor.getPathArray(path2));
+                accessor.swap(
+                    getPathArray(path1, true),
+                    getPathArray(path2, true),
+                    validateUntrustedPaths,
+                );
                 return true;
             }
             case 'splice':
@@ -2277,7 +2309,7 @@ export class Backend {
                 if (typeof start !== 'number' || Math.floor(start) !== start) { throw new Error('Invalid start'); }
                 if (typeof deleteCount !== 'number' || Math.floor(deleteCount) !== deleteCount) { throw new Error('Invalid deleteCount'); }
                 if (!Array.isArray(items)) { throw new Error('Invalid items'); }
-                const array = accessor.get(ObjectPropertyAccessor.getPathArray(path));
+                const array = accessor.get(getPathArray(path));
                 if (!Array.isArray(array)) { throw new Error('Invalid target type'); }
                 return array.splice(start, deleteCount, ...items);
             }
@@ -2286,7 +2318,7 @@ export class Backend {
                 const {path, items} = target;
                 if (typeof path !== 'string') { throw new Error('Invalid path'); }
                 if (!Array.isArray(items)) { throw new Error('Invalid items'); }
-                const array = accessor.get(ObjectPropertyAccessor.getPathArray(path));
+                const array = accessor.get(getPathArray(path));
                 if (!Array.isArray(array)) { throw new Error('Invalid target type'); }
                 const start = array.length;
                 array.push(...items);

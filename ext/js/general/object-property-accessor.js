@@ -54,9 +54,10 @@ export class ObjectPropertyAccessor {
      * Sets the value at the specified path.
      * @param {(string|number)[]} pathArray The path to the property on the target object.
      * @param {unknown} value The value to assign to the property.
+     * @param {boolean} [requireOwnDataProperty] Whether the destination must be an existing own data property.
      * @throws {Error} An error is thrown if pathArray is not valid for the target object.
      */
-    set(pathArray, value) {
+    set(pathArray, value, requireOwnDataProperty = false) {
         const ii = pathArray.length - 1;
         if (ii < 0) { throw new Error('Invalid path'); }
 
@@ -66,7 +67,9 @@ export class ObjectPropertyAccessor {
             throw new Error(`Invalid path: ${ObjectPropertyAccessor.getPathString(pathArray)}`);
         }
 
-        /** @type {import('core').SerializableObject} */ (target)[key] = value;
+        if (!ObjectPropertyAccessor.setProperty(target, key, value, requireOwnDataProperty)) {
+            throw new Error(`Invalid path: ${ObjectPropertyAccessor.getPathString(pathArray)}`);
+        }
     }
 
     /**
@@ -95,10 +98,11 @@ export class ObjectPropertyAccessor {
      * Swaps two properties of an object or array.
      * @param {(string|number)[]} pathArray1 The path to the first property on the target object.
      * @param {(string|number)[]} pathArray2 The path to the second property on the target object.
+     * @param {boolean} [requireOwnDataProperties] Whether both destinations must be existing own data properties.
      * @throws An error is thrown if pathArray1 or pathArray2 is not valid for the target object,
      *   or if the swap cannot be performed.
      */
-    swap(pathArray1, pathArray2) {
+    swap(pathArray1, pathArray2, requireOwnDataProperties = false) {
         const ii1 = pathArray1.length - 1;
         if (ii1 < 0) { throw new Error('Invalid path 1'); }
         const target1 = this.get(pathArray1, ii1);
@@ -114,13 +118,17 @@ export class ObjectPropertyAccessor {
         const value1 = /** @type {import('core').SerializableObject} */ (target1)[key1];
         const value2 = /** @type {import('core').SerializableObject} */ (target2)[key2];
 
-        /** @type {import('core').SerializableObject} */ (target1)[key1] = value2;
+        if (!ObjectPropertyAccessor.setProperty(target1, key1, value2, requireOwnDataProperties)) {
+            throw new Error(`Invalid path 1: ${ObjectPropertyAccessor.getPathString(pathArray1)}`);
+        }
         try {
-            /** @type {import('core').SerializableObject} */ (target2)[key2] = value1;
+            if (!ObjectPropertyAccessor.setProperty(target2, key2, value1, requireOwnDataProperties)) {
+                throw new Error(`Invalid path 2: ${ObjectPropertyAccessor.getPathString(pathArray2)}`);
+            }
         } catch (error) {
             // Revert
             try {
-                /** @type {import('core').SerializableObject} */ (target1)[key1] = value1;
+                ObjectPropertyAccessor.setProperty(target1, key1, value1, requireOwnDataProperties);
             } catch (error2) {
                 // NOP
             }
@@ -319,7 +327,8 @@ export class ObjectPropertyAccessor {
                     Array.isArray(object) &&
                     property >= 0 &&
                     property < object.length &&
-                    property === Math.floor(property)
+                    property === Math.floor(property) &&
+                    Object.prototype.hasOwnProperty.call(object, property)
                 );
             default:
                 return false;
@@ -351,5 +360,29 @@ export class ObjectPropertyAccessor {
             default:
                 return false;
         }
+    }
+
+    /**
+     * Assigns a property, optionally requiring a writable own data property so
+     * an attacker-controlled key cannot invoke an inherited or accessor setter.
+     * @param {unknown} object
+     * @param {string|number} property
+     * @param {unknown} value
+     * @param {boolean} requireOwnDataProperty
+     * @returns {boolean}
+     */
+    static setProperty(object, property, value, requireOwnDataProperty) {
+        if (requireOwnDataProperty) {
+            if (typeof object !== 'object' || object === null) { return false; }
+            const descriptor = Object.getOwnPropertyDescriptor(object, property);
+            if (
+                typeof descriptor === 'undefined' ||
+                !Object.prototype.hasOwnProperty.call(descriptor, 'value') ||
+                descriptor.writable !== true
+            ) {
+                return false;
+            }
+        }
+        return Reflect.set(/** @type {object} */ (object), property, value);
     }
 }
