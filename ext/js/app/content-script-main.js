@@ -22,13 +22,12 @@ import {Frontend} from './frontend.js';
 import {PopupFactory} from './popup-factory.js';
 
 const host = typeof window !== 'undefined' && window.location ? window.location.hostname : '';
-const isSottakuHost = Boolean(host)
-    && (
-        host === 'sottaku.app'
-        || host.endsWith('.sottaku.app')
-        || host === 'localhost'
-        || host === '127.0.0.1'
-    );
+const isSottakuHost = Boolean(host) && (
+    host === 'sottaku.app' ||
+    host === 'staging.sottaku.app' ||
+    host === 'localhost' ||
+    host === '127.0.0.1'
+);
 
 if (isSottakuHost && document.documentElement) {
     document.documentElement.dataset.sottakuYomitanInstalled = 'true';

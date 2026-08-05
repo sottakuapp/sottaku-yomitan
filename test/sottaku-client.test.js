@@ -74,6 +74,19 @@ describe('SottakuClient', () => {
         vi.resetModules();
     });
 
+    test('rejects credentialed API configuration on sibling subdomains', async () => {
+        const {SottakuClient} = await importSottakuClientModule();
+
+        expect(() => new SottakuClient({
+            apiBaseUrl: 'https://api.sottaku.app/api/v1',
+            authToken: 'durable-secret',
+        })).toThrow('Untrusted Sottaku API origin');
+        expect(() => new SottakuClient({
+            apiBaseUrl: 'https://sottaku.app/api/v1',
+            authToken: 'durable-secret',
+        })).not.toThrow();
+    });
+
     test('dedupes concurrent language settings requests across client instances and reuses the shared cache', async () => {
         const fetchDeferred = createDeferredResponse();
         const fetchMock = vi.fn().mockReturnValue(fetchDeferred.promise);
@@ -316,6 +329,22 @@ describe('SottakuClient', () => {
         );
     });
 
+    test.each([
+        'https://evil.sottaku.app/api/v1',
+        'https://cdn.sottaku.app/api/v1',
+        'https://sottaku.app.attacker.example/api/v1',
+        'https://sottaku.app:8443/api/v1',
+        'https://user@sottaku.app/api/v1',
+        'http://sottaku.app/api/v1',
+    ])('rejects non-allowlisted credential destinations: %s', async (apiBaseUrl) => {
+        const {SottakuClient} = await importSottakuClientModule();
+        expect(() => new SottakuClient({
+            apiBaseUrl,
+            authToken: 'access-token',
+            refreshToken: 'refresh-token',
+        })).toThrow('Untrusted Sottaku API origin');
+    });
+
     test('exposes only the opaque step-up transaction from an auth error', async () => {
         vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(
             JSON.stringify({
@@ -421,8 +450,52 @@ describe('SottakuClient', () => {
 
         expect(fetchMock).toHaveBeenCalledTimes(1);
         expect(fetchMock.mock.calls[0][0]).toBe('https://sottaku.app/api/v1/logout');
-        expect(fetchMock.mock.calls[0][1].headers.Authorization).toBe('Bearer scoped-access-wrapper');
+        expect(fetchMock.mock.calls[0][1].headers.Authorization).toBeUndefined();
         expect(fetchMock.mock.calls[0][1].credentials).toBe('omit');
+        expect(parseJson(String(fetchMock.mock.calls[0][1].body))).toStrictEqual({
+            refresh_token: 'extension-refresh-secret',
+        });
+        expect(client.authToken).toBe('');
+    });
+
+    test('retains credentials until revocation is attempted and clears them after failure', async () => {
+        /** @type {InstanceType<typeof import('../ext/js/comm/sottaku-client.js').SottakuClient>|null} */
+        let client = null;
+        const fetchMock = vi.fn(async () => {
+            expect(client?.authToken).toBe('scoped-access-wrapper');
+            throw new Error('network unavailable');
+        });
+        vi.stubGlobal('fetch', fetchMock);
+
+        const {SottakuClient} = await importSottakuClientModule();
+        client = new SottakuClient({
+            apiBaseUrl: 'https://sottaku.app/api/v1',
+            authToken: 'scoped-access-wrapper',
+            refreshToken: 'extension-refresh-secret',
+        });
+
+        await expect(client.logout()).rejects.toThrow('network unavailable');
+        expect(client.authToken).toBe('');
+
+        // A second logout has no remaining credential to send.
+        await client.logout();
+        expect(fetchMock).toHaveBeenCalledTimes(1);
+    });
+
+    test('falls back to access-token revocation for legacy sessions without a refresh credential', async () => {
+        const fetchMock = vi.fn().mockResolvedValue(buildJsonResponse(null));
+        vi.stubGlobal('fetch', fetchMock);
+
+        const {SottakuClient} = await importSottakuClientModule();
+        const client = new SottakuClient({
+            apiBaseUrl: 'https://sottaku.app/api/v1',
+            authToken: 'legacy-access-wrapper',
+        });
+
+        await client.logout();
+
+        expect(fetchMock.mock.calls[0][1].headers.Authorization).toBe('Bearer legacy-access-wrapper');
+        expect(fetchMock.mock.calls[0][1].body).toBeUndefined();
         expect(client.authToken).toBe('');
     });
 
@@ -431,9 +504,13 @@ describe('SottakuClient', () => {
 
         expect(() => new SottakuClient({apiBaseUrl: 'https://attacker.example/api'})).toThrow('Untrusted Sottaku API origin');
         expect(() => new SottakuClient({apiBaseUrl: 'http://localhost:8080/api/v1'})).not.toThrow();
+        expect(() => new SottakuClient({apiBaseUrl: 'http://[::1]:8080/api/v1'})).not.toThrow();
     });
 
-    test('does not send the Sottaku bearer token to third-party audio URLs', async () => {
+    test.each([
+        'https://media.example/audio.mp3',
+        'https://cdn.sottaku.app/audio/example.mp3',
+    ])('does not send the Sottaku bearer token to non-API audio URL %s', async (audioUrl) => {
         const fetchMock = vi.fn().mockResolvedValue(new Response(new Blob(['audio']), {status: 200}));
         vi.stubGlobal('fetch', fetchMock);
         const createObjectUrl = vi.spyOn(URL, 'createObjectURL').mockReturnValue('blob:test');
@@ -444,7 +521,7 @@ describe('SottakuClient', () => {
             authToken: 'scoped-token',
         });
 
-        expect(await client.fetchAudioAsObjectUrl('https://media.example/audio.mp3', 'ja')).toBe('blob:test');
+        expect(await client.fetchAudioAsObjectUrl(audioUrl, 'ja')).toBe('blob:test');
         expect(fetchMock.mock.calls[0][1].headers.Authorization).toBeUndefined();
         expect(fetchMock.mock.calls[0][1].credentials).toBe('omit');
         createObjectUrl.mockRestore();

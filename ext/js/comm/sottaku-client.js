@@ -422,8 +422,18 @@ export class SottakuClient {
      * @returns {Promise<void>}
      */
     async logout() {
+        const refreshToken = this._refreshToken;
+        const authToken = this._authToken;
         try {
-            if (this._authToken) {
+            if (refreshToken) {
+                await this._request('/logout', {
+                    method: 'POST',
+                    body: {refresh_token: refreshToken},
+                    auth: false,
+                });
+            } else if (authToken) {
+                // Compatibility fallback for sessions created before extension
+                // refresh credentials were issued.
                 await this._request('/logout', {method: 'POST'});
             }
         } finally {
@@ -973,12 +983,15 @@ export class SottakuClient {
             const url = new URL(value);
             const hostname = url.hostname.toLowerCase();
             return (
-                url.protocol === 'https:' && (
-                    hostname === 'sottaku.app' || hostname.endsWith('.sottaku.app')
+                url.protocol === 'https:' &&
+                url.port === '' &&
+                url.username === '' &&
+                url.password === '' && (
+                    hostname === 'sottaku.app' || hostname === 'staging.sottaku.app'
                 )
             ) || (
                 (url.protocol === 'http:' || url.protocol === 'https:') &&
-                (hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '::1')
+                (hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '[::1]')
             );
         } catch (e) {
             return false;

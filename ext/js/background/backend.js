@@ -44,6 +44,7 @@ import {Translator} from '../language/translator.js';
 import {AudioDownloader} from '../media/audio-downloader.js';
 import {getFileExtensionFromAudioMediaType, getFileExtensionFromImageMediaType} from '../media/media-util.js';
 import {ClipboardReaderProxy, DictionaryDatabaseProxy, OffscreenProxy, TranslatorProxy} from './offscreen-proxy.js';
+import {getSottakuCredentialResetPathsForApiBaseUrlMutation, isTrustedExtensionPageSender, redactSottakuCredentialsForSettingResult, redactSottakuCredentialsFromOptions, redactSottakuCredentialsFromProfileOptions, settingMutationTouchesSottakuCredentials} from './options-security.js';
 import {createSchema, normalizeContext} from './profile-conditions-util.js';
 import {RequestBuilder} from './request-builder.js';
 import {injectStylesheet, isContentScriptRegistered, registerContentScript, unregisterContentScript} from './script-manager.js';
@@ -52,7 +53,8 @@ import {SottakuIntegration} from './sottaku-integration.js';
 const MAIN_CONTENT_SCRIPT_REGISTRATION_ID = 'sottakuMainContentScript';
 const REQUIRED_SOTTAKU_HOST_PERMISSIONS = new Set([
     'https://sottaku.app/*',
-    'https://*.sottaku.app/*',
+    'https://staging.sottaku.app/*',
+    'https://cdn.sottaku.app/*',
 ]);
 
 /**
@@ -309,6 +311,7 @@ export class Backend {
     async _prepareInternal() {
         try {
             this._prepareInternalSync();
+            await this._restrictLocalStorageToTrustedContexts();
 
             this._permissions = await getAllPermissions();
             await this._syncMainContentScriptRegistration();
@@ -372,6 +375,23 @@ export class Backend {
                 clearTimeout(this._badgePrepareDelayTimer);
                 this._badgePrepareDelayTimer = null;
             }
+        }
+    }
+
+    /**
+     * Prevent content scripts and web-page contexts from reading long-lived
+     * authentication credentials directly from chrome.storage.local. Firefox
+     * versions that do not implement setAccessLevel still retain the runtime
+     * message and exact-origin defenses.
+     * @returns {Promise<void>}
+     */
+    async _restrictLocalStorageToTrustedContexts() {
+        const storage = chrome.storage?.local;
+        if (!storage || typeof storage.setAccessLevel !== 'function') { return; }
+        try {
+            await storage.setAccessLevel({accessLevel: 'TRUSTED_CONTEXTS'});
+        } catch (e) {
+            log.warn(new Error(`Unable to restrict extension local storage: ${String(e)}`));
         }
     }
 
@@ -552,13 +572,23 @@ export class Backend {
     }
 
     /** @type {import('api').ApiHandler<'optionsGet'>} */
-    _onApiOptionsGet({optionsContext}) {
-        return this._getProfileOptions(optionsContext, false);
+    _onApiOptionsGet({optionsContext}, sender) {
+        const options = this._getProfileOptions(optionsContext, false);
+        return this._senderCanReadPersistedCredentials(sender) ? options : redactSottakuCredentialsFromProfileOptions(options);
     }
 
     /** @type {import('api').ApiHandler<'optionsGetFull'>} */
-    _onApiOptionsGetFull() {
-        return this._getOptionsFull(false);
+    _onApiOptionsGetFull(_params, sender) {
+        const options = this._getOptionsFull(false);
+        return this._senderCanReadPersistedCredentials(sender) ? options : redactSottakuCredentialsFromOptions(options);
+    }
+
+    /**
+     * @param {chrome.runtime.MessageSender|undefined} sender
+     * @returns {boolean}
+     */
+    _senderCanReadPersistedCredentials(sender) {
+        return isTrustedExtensionPageSender(sender, chrome.runtime.getURL('/'));
     }
 
     /** @type {import('api').ApiHandler<'kanjiFind'>} */
@@ -996,18 +1026,53 @@ export class Backend {
     }
 
     /** @type {import('api').ApiHandler<'modifySettings'>} */
-    _onApiModifySettings({targets, source}) {
-        return this._modifySettings(targets, source);
+    async _onApiModifySettings({targets, source}, sender) {
+        const canManageCredentials = this._senderCanReadPersistedCredentials(sender);
+        if (
+            !canManageCredentials &&
+            targets.some((target) => settingMutationTouchesSottakuCredentials(target))
+        ) {
+            throw new Error('Untrusted extension context cannot modify Sottaku credentials');
+        }
+
+        /** @type {import('settings-modifications').ScopedModificationSet[]} */
+        const credentialResets = [];
+        if (canManageCredentials) {
+            const seen = new Set();
+            for (const target of targets) {
+                for (const path of getSottakuCredentialResetPathsForApiBaseUrlMutation(target)) {
+                    const key = JSON.stringify([target.scope, target.optionsContext || null, path]);
+                    if (seen.has(key)) { continue; }
+                    seen.add(key);
+                    credentialResets.push({
+                        action: 'set',
+                        scope: target.scope,
+                        optionsContext: target.optionsContext,
+                        path,
+                        value: path.endsWith('.user') ? null : '',
+                    });
+                }
+            }
+        }
+
+        const results = await this._modifySettings([...targets, ...credentialResets], source);
+        return results.slice(0, targets.length);
     }
 
     /** @type {import('api').ApiHandler<'sottakuAuthTokenUpdate'>} */
-    async _onApiSottakuAuthTokenUpdate({apiBaseUrl, oldToken, newToken}) {
+    async _onApiSottakuAuthTokenUpdate({apiBaseUrl, oldToken, newToken}, sender) {
+        if (!this._senderCanReadPersistedCredentials(sender)) {
+            throw new Error('Untrusted extension context cannot update Sottaku credentials');
+        }
         await this._handleSottakuAuthTokenUpdate(apiBaseUrl, oldToken, newToken);
         return void 0;
     }
 
     /** @type {import('api').ApiHandler<'sottakuAuthTokenInvalidate'>} */
-    async _onApiSottakuAuthTokenInvalidate({apiBaseUrl, oldToken}) {
+    async _onApiSottakuAuthTokenInvalidate({apiBaseUrl, oldToken}, sender) {
+        if (!this._senderCanReadPersistedCredentials(sender)) {
+            throw new Error('Untrusted extension context cannot invalidate Sottaku credentials');
+        }
         await this._handleSottakuAuthTokenInvalidate(apiBaseUrl, oldToken);
         return void 0;
     }
@@ -1126,12 +1191,16 @@ export class Backend {
     }
 
     /** @type {import('api').ApiHandler<'getSettings'>} */
-    _onApiGetSettings({targets}) {
+    _onApiGetSettings({targets}, sender) {
+        const canReadCredentials = this._senderCanReadPersistedCredentials(sender);
         const results = [];
         for (const target of targets) {
             try {
                 const result = this._getSetting(target);
-                results.push({result: clone(result)});
+                const safeResult = canReadCredentials ?
+                    result :
+                    redactSottakuCredentialsForSettingResult(target.path, result);
+                results.push({result: clone(safeResult)});
             } catch (e) {
                 results.push({error: ExtensionError.serialize(e)});
             }
@@ -1140,7 +1209,10 @@ export class Backend {
     }
 
     /** @type {import('api').ApiHandler<'setAllSettings'>} */
-    async _onApiSetAllSettings({value, source}) {
+    async _onApiSetAllSettings({value, source}, sender) {
+        if (!this._senderCanReadPersistedCredentials(sender)) {
+            throw new Error('Untrusted extension context cannot replace all settings');
+        }
         this._optionsUtil.validate(value);
         this._options = clone(value);
         await this._saveOptions(source);
