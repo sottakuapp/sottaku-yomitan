@@ -19,6 +19,7 @@ import {readFileSync} from 'node:fs';
 import {describe, expect, test, vi} from 'vitest';
 import {Backend} from '../ext/js/background/backend.js';
 import {parseJson} from '../ext/js/core/json.js';
+import {ObjectPropertyAccessor} from '../ext/js/general/object-property-accessor.js';
 import {
     getSottakuCredentialResetPathsForApiBaseUrlMutation,
     isSottakuCredentialDestinationSettingPath,
@@ -32,6 +33,25 @@ import {
 } from '../ext/js/background/options-security.js';
 
 const extensionRoot = 'chrome-extension://abcdefghijklmnop/';
+
+const escapedSettingPathCases = [
+    {scope: 'profile', property: 'authToken', kind: 'credential', path: String.raw`sottaku["auth\Token"]`},
+    {scope: 'profile', property: 'authToken', kind: 'credential', path: String.raw`sottaku['auth\Token']`},
+    {scope: 'global', property: 'authToken', kind: 'credential', path: String.raw`profiles[0].options.sottaku["auth\Token"]`},
+    {scope: 'global', property: 'authToken', kind: 'credential', path: String.raw`profiles[0].options.sottaku['auth\Token']`},
+    {scope: 'profile', property: 'refreshToken', kind: 'credential', path: String.raw`sottaku["refresh\Token"]`},
+    {scope: 'profile', property: 'refreshToken', kind: 'credential', path: String.raw`sottaku['refresh\Token']`},
+    {scope: 'global', property: 'refreshToken', kind: 'credential', path: String.raw`profiles[0].options.sottaku["refresh\Token"]`},
+    {scope: 'global', property: 'refreshToken', kind: 'credential', path: String.raw`profiles[0].options.sottaku['refresh\Token']`},
+    {scope: 'profile', property: 'apiBaseUrl', kind: 'destination', path: String.raw`sottaku["apiBase\Url"]`},
+    {scope: 'profile', property: 'apiBaseUrl', kind: 'destination', path: String.raw`sottaku['apiBase\Url']`},
+    {scope: 'global', property: 'apiBaseUrl', kind: 'destination', path: String.raw`profiles[0].options.sottaku["apiBase\Url"]`},
+    {scope: 'global', property: 'apiBaseUrl', kind: 'destination', path: String.raw`profiles[0].options.sottaku['apiBase\Url']`},
+    {scope: 'profile', property: 'sottaku', kind: 'block', path: String.raw`["sott\aku"]`},
+    {scope: 'profile', property: 'sottaku', kind: 'block', path: String.raw`['sott\aku']`},
+    {scope: 'global', property: 'sottaku', kind: 'block', path: String.raw`profiles[0].options["sott\aku"]`},
+    {scope: 'global', property: 'sottaku', kind: 'block', path: String.raw`profiles[0].options['sott\aku']`},
+];
 
 /**
  * @returns {{general: {language: string}, sottaku: {enabled: boolean, apiBaseUrl: string, authToken: string, refreshToken: string, user: {id: number}}}}
@@ -148,6 +168,38 @@ describe('extension option credential boundaries', () => {
         expect(block.authToken).toBe('access-secret');
     });
 
+    test('uses canonical escaped paths for profile and global reads and redaction', () => {
+        const profile = profileOptions();
+        const fullOptions = {profiles: [{name: 'Default', options: profile}]};
+
+        for (const {scope, property, kind, path} of escapedSettingPathCases) {
+            const source = scope === 'profile' ? profile : fullOptions;
+            const accessor = new ObjectPropertyAccessor(source);
+            const result = accessor.get(ObjectPropertyAccessor.getPathArray(path));
+            const redacted = redactSottakuCredentialsForSettingResult(path, result);
+
+            expect(isSottakuCredentialSettingPath(path)).toBe(kind === 'credential');
+            expect(isSottakuCredentialDestinationSettingPath(path)).toBe(kind === 'destination');
+            expect(settingMutationTouchesSottakuCredentials({action: 'set', path, value: null})).toBe(true);
+
+            if (kind === 'credential') {
+                expect(result).toBe(profile.sottaku[/** @type {'authToken'|'refreshToken'} */ (property)]);
+                expect(redacted).toBe('');
+            } else if (kind === 'destination') {
+                expect(result).toBe(profile.sottaku.apiBaseUrl);
+                expect(redacted).toBe(profile.sottaku.apiBaseUrl);
+            } else {
+                const redactedBlock = /** @type {{authToken: string, refreshToken: string}} */ (redacted);
+                expect(result).toBe(profile.sottaku);
+                expect(redactedBlock.authToken).toBe('');
+                expect(redactedBlock.refreshToken).toBe('');
+            }
+        }
+
+        expect(profile.sottaku.authToken).toBe('access-secret');
+        expect(profile.sottaku.refreshToken).toBe('refresh-secret');
+    });
+
     test('blocks direct, nested, and whole-block credential mutations from untrusted contexts', () => {
         expect(isSottakuCredentialSettingPath('sottaku.authToken')).toBe(true);
         expect(isSottakuCredentialSettingPath('profiles[0].options.sottaku.refreshToken')).toBe(true);
@@ -188,6 +240,67 @@ describe('extension option credential boundaries', () => {
         })).toBe(true);
     });
 
+    test('blocks every escaped path through every mutation action from untrusted contexts', async () => {
+        const modifySettings = vi.fn(async () => []);
+        const context = {
+            _senderCanReadPersistedCredentials: (/** @type {{url?: string}|undefined} */ sender) => isTrustedExtensionPageSender(sender, extensionRoot),
+            _modifySettings: modifySettings,
+        };
+        // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/unbound-method
+        const modify = Backend.prototype._onApiModifySettings;
+
+        for (const {scope, path} of escapedSettingPathCases) {
+            const scopeTarget = scope === 'profile' ?
+                {scope: /** @type {const} */ ('profile'), optionsContext: {current: true}} :
+                {scope: /** @type {const} */ ('global')};
+            const safePath = scope === 'profile' ? 'general.language' : 'profiles[0].name';
+            const mutations = /** @type {import('settings-modifications').ScopedModification[]} */ ([
+                {...scopeTarget, action: 'set', path, value: 'replacement'},
+                {...scopeTarget, action: 'delete', path},
+                {...scopeTarget, action: 'swap', path1: path, path2: safePath},
+                {...scopeTarget, action: 'splice', path, start: 0, deleteCount: 0, items: []},
+                {...scopeTarget, action: 'push', path, items: []},
+            ]);
+
+            for (const target of mutations) {
+                expect(settingMutationTouchesSottakuCredentials(target)).toBe(true);
+                await expect(modify.call(context, {targets: [target], source: 'test'}, {
+                    url: 'https://attacker.example/article',
+                })).rejects.toThrow('Untrusted extension context');
+            }
+        }
+        expect(modifySettings).not.toHaveBeenCalled();
+    });
+
+    test('fails closed on malformed untrusted mutation paths', async () => {
+        const malformedTargets = [
+            {action: 'set', path: 'sottaku["authToken"', value: 'replacement'},
+            {action: 'delete', path: 'sottaku.'},
+            {action: 'swap', path1: 'profiles[0].name', path2: 'profiles[0].options["sottaku"]x'},
+            {action: 'splice', path: '[', start: 0, deleteCount: 0, items: []},
+            {action: 'push', path: 1, items: []},
+        ];
+        const modifySettings = vi.fn(async () => []);
+        const context = {
+            _senderCanReadPersistedCredentials: (/** @type {{url?: string}|undefined} */ sender) => isTrustedExtensionPageSender(sender, extensionRoot),
+            _modifySettings: modifySettings,
+        };
+        // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/unbound-method
+        const modify = Backend.prototype._onApiModifySettings;
+
+        for (const target of malformedTargets) {
+            expect(settingMutationTouchesSottakuCredentials(target)).toBe(true);
+            const scopedTarget = /** @type {import('settings-modifications').ScopedModification} */ ({scope: 'global', ...target});
+            await expect(modify.call(context, {
+                targets: [scopedTarget],
+                source: 'test',
+            }, {
+                url: 'https://attacker.example/article',
+            })).rejects.toThrow('Untrusted extension context');
+        }
+        expect(modifySettings).not.toHaveBeenCalled();
+    });
+
     test('derives credential cleanup paths for profile and global API destination changes', () => {
         expect(getSottakuCredentialResetPathsForApiBaseUrlMutation({
             path: 'sottaku.apiBaseUrl',
@@ -203,6 +316,19 @@ describe('extension option credential boundaries', () => {
             'profiles[2].options.sottaku.refreshToken',
             'profiles[2].options.sottaku.user',
         ]);
+
+        for (const {scope, kind, path} of escapedSettingPathCases) {
+            if (kind !== 'destination') { continue; }
+            expect(getSottakuCredentialResetPathsForApiBaseUrlMutation({path})).toStrictEqual(
+                scope === 'profile' ?
+                    ['sottaku.authToken', 'sottaku.refreshToken', 'sottaku.user'] :
+                    [
+                        'profiles[0].options.sottaku.authToken',
+                        'profiles[0].options.sottaku.refreshToken',
+                        'profiles[0].options.sottaku.user',
+                    ],
+            );
+        }
     });
 
     test('rejects untrusted token rotation messages and permits extension-owned rotation', async () => {
@@ -265,7 +391,7 @@ describe('extension option credential boundaries', () => {
             action: 'set',
             scope: 'profile',
             optionsContext: {index: 0},
-            path: 'sottaku.apiBaseUrl',
+            path: String.raw`sottaku["apiBase\Url"]`,
             value: 'https://staging.sottaku.app/api/v1',
         });
 
@@ -281,7 +407,7 @@ describe('extension option credential boundaries', () => {
         expect(appliedTargets).not.toBeNull();
         if (appliedTargets === null) { throw new Error('Expected settings mutations'); }
         expect(appliedTargets.map(({path}) => path)).toStrictEqual([
-            'sottaku.apiBaseUrl',
+            String.raw`sottaku["apiBase\Url"]`,
             'sottaku.authToken',
             'sottaku.refreshToken',
             'sottaku.user',
@@ -292,7 +418,7 @@ describe('extension option credential boundaries', () => {
             '',
             null,
         ]);
-        expect(results).toStrictEqual([{result: 'sottaku.apiBaseUrl'}]);
+        expect(results).toStrictEqual([{result: String.raw`sottaku["apiBase\Url"]`}]);
     });
 
     test('keeps the production audio CDN in media CSP without granting it API access', () => {

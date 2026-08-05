@@ -15,6 +15,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import {ObjectPropertyAccessor} from '../general/object-property-accessor.js';
+
 /**
  * Returns true only for an extension-owned page. Content scripts have the
  * extension ID as their sender ID too, but their sender URL is the website
@@ -88,36 +90,34 @@ export function redactSottakuCredentialsFromOptions(options) {
 }
 
 /**
+ * Parses settings paths with the same parser used to read and mutate the
+ * settings object. Keeping a single parser is security-sensitive: quoted
+ * bracket properties can contain escapes which must resolve identically at
+ * the authorization and access layers.
  * @param {string} path
- * @returns {string[]}
+ * @returns {(string|number)[]}
+ * @throws {Error}
  */
-function normalizeSettingPath(path) {
-    return String(path || '')
-        .replace(/\[(?:"|')?([^\]"']+)(?:"|')?\]/gu, '.$1')
-        .split('.')
-        .map((part) => part.trim())
-        .filter((part) => part.length > 0);
+function parseSettingPath(path) {
+    if (typeof path !== 'string') { throw new Error('Invalid path'); }
+    return ObjectPropertyAccessor.getPathArray(path);
 }
 
 /**
- * @param {string} path
+ * @param {(string|number)[]} parts
  * @returns {boolean}
  */
-export function isSottakuCredentialSettingPath(path) {
-    const parts = normalizeSettingPath(path);
+function isSottakuCredentialSettingPathArray(parts) {
     const sottakuIndex = parts.lastIndexOf('sottaku');
     if (sottakuIndex < 0) { return false; }
     return parts.slice(sottakuIndex + 1).some((part) => part === 'authToken' || part === 'refreshToken');
 }
 
 /**
- * The API base URL is part of the credential boundary: changing it while
- * credentials remain stored changes where those credentials will be sent.
- * @param {string} path
+ * @param {(string|number)[]} parts
  * @returns {boolean}
  */
-export function isSottakuCredentialDestinationSettingPath(path) {
-    const parts = normalizeSettingPath(path);
+function isSottakuCredentialDestinationSettingPathArray(parts) {
     const sottakuIndex = parts.lastIndexOf('sottaku');
     return (
         sottakuIndex >= 0 &&
@@ -127,22 +127,21 @@ export function isSottakuCredentialDestinationSettingPath(path) {
 }
 
 /**
- * @param {string[]} parts
- * @returns {string}
+ * @param {string} path
+ * @returns {boolean}
  */
-function createSettingPath(parts) {
-    let result = '';
-    for (const part of parts) {
-        if (/^(?:0|[1-9][0-9]*)$/u.test(part)) {
-            result += `[${part}]`;
-        } else if (/^[A-Za-z_][A-Za-z0-9_]*$/u.test(part)) {
-            result += result.length === 0 ? part : `.${part}`;
-        } else {
-            const escaped = part.replace(/["\\]/gu, '\\$&');
-            result += `["${escaped}"]`;
-        }
-    }
-    return result;
+export function isSottakuCredentialSettingPath(path) {
+    return isSottakuCredentialSettingPathArray(parseSettingPath(path));
+}
+
+/**
+ * The API base URL is part of the credential boundary: changing it while
+ * credentials remain stored changes where those credentials will be sent.
+ * @param {string} path
+ * @returns {boolean}
+ */
+export function isSottakuCredentialDestinationSettingPath(path) {
+    return isSottakuCredentialDestinationSettingPathArray(parseSettingPath(path));
 }
 
 /**
@@ -154,11 +153,18 @@ function createSettingPath(parts) {
 export function getSottakuCredentialResetPathsForApiBaseUrlMutation(target) {
     const result = new Set();
     for (const pathValue of [target?.path, target?.path1, target?.path2]) {
-        if (typeof pathValue !== 'string' || !isSottakuCredentialDestinationSettingPath(pathValue)) { continue; }
-        const parts = normalizeSettingPath(pathValue);
+        if (typeof pathValue !== 'string') { continue; }
+        let parts;
+        try {
+            parts = parseSettingPath(pathValue);
+        } catch (e) {
+            // The actual mutation layer will report malformed trusted paths.
+            continue;
+        }
+        if (!isSottakuCredentialDestinationSettingPathArray(parts)) { continue; }
         const parentParts = parts.slice(0, -1);
         for (const field of ['authToken', 'refreshToken', 'user']) {
-            result.add(createSettingPath([...parentParts, field]));
+            result.add(ObjectPropertyAccessor.getPathString([...parentParts, field]));
         }
     }
     return [...result];
@@ -204,8 +210,8 @@ export function redactSottakuCredentialsDeep(value) {
  * @returns {unknown}
  */
 export function redactSottakuCredentialsForSettingResult(path, value) {
-    if (isSottakuCredentialSettingPath(path)) { return ''; }
-    const parts = normalizeSettingPath(path);
+    const parts = parseSettingPath(path);
+    if (isSottakuCredentialSettingPathArray(parts)) { return ''; }
     if (parts.at(-1) === 'sottaku' && typeof value === 'object' && value !== null) {
         const sottaku = /** @type {Record<string, unknown>} */ (value);
         return {
@@ -223,14 +229,22 @@ export function redactSottakuCredentialsForSettingResult(path, value) {
  */
 export function settingMutationTouchesSottakuCredentials(target) {
     const pathValues = [target?.path, target?.path1, target?.path2]
-        .filter((value) => typeof value === 'string');
+        .filter((value) => typeof value !== 'undefined');
     if (pathValues.length === 0) { return true; }
 
-    for (const path of pathValues) {
-        const parts = normalizeSettingPath(path);
+    for (const pathValue of pathValues) {
+        if (typeof pathValue !== 'string') { return true; }
+        let parts;
+        try {
+            parts = parseSettingPath(pathValue);
+        } catch (e) {
+            // Mutations from untrusted contexts must fail closed whenever the
+            // canonical settings parser cannot understand a supplied path.
+            return true;
+        }
         if (
-            isSottakuCredentialSettingPath(path) ||
-            isSottakuCredentialDestinationSettingPath(path)
+            isSottakuCredentialSettingPathArray(parts) ||
+            isSottakuCredentialDestinationSettingPathArray(parts)
         ) {
             return true;
         }
