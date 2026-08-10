@@ -1530,7 +1530,10 @@ export class Display extends EventDispatcher {
             if (this._setContentToken !== token) { return; }
         }
 
-        const hasEnabledDictionaries = this._options !== null && this._options.dictionaries.some(({enabled}) => enabled);
+        const hasEnabledDictionaries = this._options !== null && (
+            this._options.sottaku?.enabled === true ||
+            this._options.dictionaries.some(({enabled}) => enabled)
+        );
 
         let {dictionaryEntries} = content;
         if (!Array.isArray(dictionaryEntries)) {
