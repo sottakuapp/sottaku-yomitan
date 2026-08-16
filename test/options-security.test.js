@@ -20,6 +20,7 @@ import {describe, expect, test, vi} from 'vitest';
 import {Backend} from '../ext/js/background/backend.js';
 import {parseJson} from '../ext/js/core/json.js';
 import {ObjectPropertyAccessor} from '../ext/js/general/object-property-accessor.js';
+import {ManifestUtil} from '../dev/manifest-util.js';
 import {
     getSottakuCredentialResetPathsForApiBaseUrlMutation,
     getUntrustedSettingPathArray,
@@ -641,5 +642,21 @@ describe('extension option credential boundaries', () => {
         expect(manifest.content_security_policy.extension_pages).toContain(
             'connect-src \'self\' https://sottaku.app https://staging.sottaku.app https://cdn.sottaku.app',
         );
+    });
+
+    test('allows same-extension popup previews without allowing web origins to frame extension pages', () => {
+        const manifestUtil = new ManifestUtil();
+
+        for (const {name} of manifestUtil.getVariants()) {
+            const {content_security_policy: contentSecurityPolicy} = /** @type {{content_security_policy: string | {extension_pages: string}}} */ (manifestUtil.getManifest(name));
+            const extensionPages = (
+                typeof contentSecurityPolicy === 'string' ?
+                contentSecurityPolicy :
+                contentSecurityPolicy.extension_pages
+            );
+
+            expect(extensionPages).toContain("frame-ancestors 'self'");
+            expect(extensionPages).not.toContain("frame-ancestors 'none'");
+        }
     });
 });

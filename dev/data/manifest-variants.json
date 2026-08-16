@@ -156,7 +156,7 @@
             }
         ],
         "content_security_policy": {
-            "extension_pages": "default-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; script-src 'self' 'wasm-unsafe-eval'; img-src 'self' blob: data: https://sottaku.app https://staging.sottaku.app; style-src 'self' 'unsafe-inline'; media-src 'self' blob: https://sottaku.app https://staging.sottaku.app https://cdn.sottaku.app; connect-src 'self' https://sottaku.app https://staging.sottaku.app https://cdn.sottaku.app http://127.0.0.1:* http://localhost:*",
+            "extension_pages": "default-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'self'; script-src 'self' 'wasm-unsafe-eval'; img-src 'self' blob: data: https://sottaku.app https://staging.sottaku.app; style-src 'self' 'unsafe-inline'; media-src 'self' blob: https://sottaku.app https://staging.sottaku.app https://cdn.sottaku.app; connect-src 'self' https://sottaku.app https://staging.sottaku.app https://cdn.sottaku.app http://127.0.0.1:* http://localhost:*",
             "sandbox": "sandbox allow-scripts; default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'unsafe-inline'"
         }
     },
@@ -271,7 +271,7 @@
                         "content_security_policy",
                         "extension_pages"
                     ],
-                    "value": "default-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; script-src 'self' 'wasm-unsafe-eval'; img-src 'self' blob: data: https://sottaku.app https://staging.sottaku.app; style-src 'self' 'unsafe-inline'; media-src 'self' blob: https://sottaku.app https://staging.sottaku.app https://cdn.sottaku.app; connect-src 'self' https://sottaku.app https://staging.sottaku.app https://cdn.sottaku.app http://127.0.0.1:* http://localhost:*"
+                    "value": "default-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'self'; script-src 'self' 'wasm-unsafe-eval'; img-src 'self' blob: data: https://sottaku.app https://staging.sottaku.app; style-src 'self' 'unsafe-inline'; media-src 'self' blob: https://sottaku.app https://staging.sottaku.app https://cdn.sottaku.app; connect-src 'self' https://sottaku.app https://staging.sottaku.app https://cdn.sottaku.app http://127.0.0.1:* http://localhost:*"
                 },
                 {
                     "action": "set",
@@ -385,7 +385,7 @@
                     "path": [
                         "content_security_policy"
                     ],
-                    "value": "default-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; script-src 'self' 'unsafe-eval'; img-src 'self' blob: data: https://sottaku.app https://staging.sottaku.app; style-src 'self' 'unsafe-inline'; media-src 'self' blob: https://sottaku.app https://staging.sottaku.app https://cdn.sottaku.app; connect-src 'self' https://sottaku.app https://staging.sottaku.app https://cdn.sottaku.app http://127.0.0.1:* http://localhost:*"
+                    "value": "default-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'self'; script-src 'self' 'unsafe-eval'; img-src 'self' blob: data: https://sottaku.app https://staging.sottaku.app; style-src 'self' 'unsafe-inline'; media-src 'self' blob: https://sottaku.app https://staging.sottaku.app https://cdn.sottaku.app; connect-src 'self' https://sottaku.app https://staging.sottaku.app https://cdn.sottaku.app http://127.0.0.1:* http://localhost:*"
                 }
             ],
             "excludeFiles": [
