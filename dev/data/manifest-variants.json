@@ -109,6 +109,7 @@
             {
                 "resources": [
                     "popup.html",
+                    "js/accessibility/google-docs-util.js",
                     "js/app/content-script-main.js",
                     "js/app/frontend.js",
                     "js/app/popup-factory.js",
@@ -151,8 +152,7 @@
                 ],
                 "matches": [
                     "<all_urls>"
-                ],
-                "use_dynamic_url": true
+                ]
             }
         ],
         "content_security_policy": {

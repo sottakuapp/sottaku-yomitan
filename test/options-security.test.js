@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {readFileSync} from 'node:fs';
+import {existsSync, readFileSync} from 'node:fs';
 import {describe, expect, test, vi} from 'vitest';
 import {Backend} from '../ext/js/background/backend.js';
 import {parseJson} from '../ext/js/core/json.js';
@@ -35,6 +35,37 @@ import {
 } from '../ext/js/background/options-security.js';
 
 const extensionRoot = 'chrome-extension://abcdefghijklmnop/';
+
+/**
+ * Returns every runtime JavaScript module reachable from an extension entry point.
+ * @param {string} entryPoint
+ * @returns {Set<string>}
+ */
+function getExtensionModuleGraph(entryPoint) {
+    const extensionRootUrl = new URL('../ext/', import.meta.url);
+    const pending = [entryPoint];
+    const modules = new Set();
+    const importPattern = /(?:import|export)\s+(?:[^"'()]*?\s+from\s+)?["']([^"']+)["']|import\(\s*["']([^"']+)["']\s*\)/g;
+
+    while (pending.length > 0) {
+        const modulePath = pending.pop();
+        if (typeof modulePath === 'undefined' || modules.has(modulePath)) { continue; }
+        modules.add(modulePath);
+
+        const moduleUrl = new URL(modulePath, extensionRootUrl);
+        const source = readFileSync(moduleUrl, 'utf8').replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
+        for (const match of source.matchAll(importPattern)) {
+            const specifier = match[1] ?? match[2];
+            if (!specifier.startsWith('.') || !specifier.endsWith('.js')) { continue; }
+
+            const dependencyUrl = new URL(specifier, moduleUrl);
+            if (!dependencyUrl.href.startsWith(extensionRootUrl.href) || !existsSync(dependencyUrl)) { continue; }
+            pending.push(dependencyUrl.href.slice(extensionRootUrl.href.length));
+        }
+    }
+
+    return modules;
+}
 
 const escapedSettingPathCases = [
     {scope: 'profile', property: 'authToken', kind: 'credential', path: String.raw`sottaku["auth\Token"]`},
@@ -657,6 +688,21 @@ describe('extension option credential boundaries', () => {
 
             expect(extensionPages).toContain("frame-ancestors 'self'");
             expect(extensionPages).not.toContain("frame-ancestors 'none'");
+        }
+    });
+
+    test('exposes the complete content-script module graph through stable extension URLs', () => {
+        const manifestUtil = new ManifestUtil();
+        const requiredResources = getExtensionModuleGraph('js/app/content-script-main.js');
+
+        for (const {name} of manifestUtil.getVariants()) {
+            const {web_accessible_resources: webAccessibleResources} = /** @type {{web_accessible_resources: Array<{resources: string[], use_dynamic_url?: boolean}>}} */ (manifestUtil.getManifest(name));
+            const resourceEntry = webAccessibleResources[0];
+            const exposedResources = new Set(resourceEntry.resources);
+            const missingResources = [...requiredResources].filter((resource) => !exposedResources.has(resource));
+
+            expect(missingResources).toStrictEqual([]);
+            expect(resourceEntry.use_dynamic_url).not.toBe(true);
         }
     });
 });
