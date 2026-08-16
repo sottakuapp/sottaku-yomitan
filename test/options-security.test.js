@@ -675,19 +675,23 @@ describe('extension option credential boundaries', () => {
         );
     });
 
-    test('allows same-extension popup previews without allowing web origins to frame extension pages', () => {
+    test('allows web content to frame only the web-accessible popup page', () => {
         const manifestUtil = new ManifestUtil();
 
         for (const {name} of manifestUtil.getVariants()) {
-            const {content_security_policy: contentSecurityPolicy} = /** @type {{content_security_policy: string | {extension_pages: string}}} */ (manifestUtil.getManifest(name));
+            const {
+                content_security_policy: contentSecurityPolicy,
+                web_accessible_resources: webAccessibleResources,
+            } = /** @type {{content_security_policy: string | {extension_pages: string}, web_accessible_resources: Array<{resources: string[]}>}} */ (manifestUtil.getManifest(name));
             const extensionPages = (
                 typeof contentSecurityPolicy === 'string' ?
                 contentSecurityPolicy :
                 contentSecurityPolicy.extension_pages
             );
+            const webAccessibleHtml = webAccessibleResources.flatMap(({resources}) => resources).filter((resource) => resource.endsWith('.html'));
 
-            expect(extensionPages).toContain("frame-ancestors 'self'");
-            expect(extensionPages).not.toContain("frame-ancestors 'none'");
+            expect(extensionPages).not.toContain('frame-ancestors');
+            expect(webAccessibleHtml).toStrictEqual(['popup.html']);
         }
     });
 
