@@ -18,6 +18,7 @@
 // Generated from asgi_app/data/study_languages.json. Do not edit by hand.
 export const SOTTAKU_SUPPORTED_LANGUAGES = ['ja', 'ko', 'zh', 'en', 'es', 'de', 'fr', 'it', 'ru', 'la', 'vi', 'pt', 'ar', 'he', 'hi'];
 
+/** @type {string[]} */
 export const SOTTAKU_ADMIN_PREVIEW_LANGUAGES = [];
 
 export const SOTTAKU_KNOWN_LANGUAGES = [...SOTTAKU_SUPPORTED_LANGUAGES, ...SOTTAKU_ADMIN_PREVIEW_LANGUAGES];

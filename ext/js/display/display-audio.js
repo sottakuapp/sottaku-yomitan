@@ -35,7 +35,7 @@ export class DisplayAudio {
         /** @type {?import('display-audio').GenericAudio} */
         this._audioPlaying = null;
         /** @type {AudioSystem} */
-        this._audioSystem = new AudioSystem();
+        this._audioSystem = new AudioSystem(this._display.application.api);
         /** @type {number} */
         this._playbackVolume = 1;
         /** @type {boolean} */
@@ -748,6 +748,7 @@ export class DisplayAudio {
 
     /**
      * @param {string[]} urls
+     * @returns {Promise<boolean>}
      */
     async _playSottakuAudioSequence(urls) {
         this.stopAudio();
@@ -759,15 +760,24 @@ export class DisplayAudio {
                 audio.currentTime = 0;
                 audio.volume = this._playbackVolume;
                 this._audioPlaying = audio;
+                /** @type {EventListener} */
+                let onEnded = () => {};
+                /** @type {Promise<void>} */
+                const endedPromise = new Promise((resolve) => {
+                    onEnded = () => resolve();
+                    audio.addEventListener('ended', onEnded, {once: true});
+                });
                 try {
                     const playPromise = audio.play();
                     if (typeof playPromise !== 'undefined') {
                         await playPromise;
                     }
                     playedSomething = true;
-                    await new Promise((resolve) => audio.addEventListener('ended', resolve, {once: true}));
+                    await endedPromise;
                 } catch (e) {
                     log.log('Sottaku audio play failed: ' + toError(e).message);
+                } finally {
+                    audio.removeEventListener('ended', onEnded);
                 }
             } catch (e) {
                 log.log('Sottaku audio create failed: ' + toError(e).message + ' url=' + url);

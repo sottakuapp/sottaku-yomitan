@@ -165,13 +165,17 @@ const thirdPersonSgPresentWholeWordInflections = [
 ];
 
 export const englishPhrasalVerbParticles = ['aboard', 'about', 'above', 'across', 'ahead', 'alongside', 'apart', 'around', 'aside', 'astray', 'away', 'back', 'before', 'behind', 'below', 'beneath', 'besides', 'between', 'beyond', 'by', 'close', 'down', 'east', 'west', 'north', 'south', 'eastward', 'westward', 'northward', 'southward', 'forward', 'backward', 'backwards', 'forwards', 'home', 'in', 'inside', 'instead', 'near', 'off', 'on', 'opposite', 'out', 'outside', 'over', 'overhead', 'past', 'round', 'since', 'through', 'throughout', 'together', 'under', 'underneath', 'up', 'within', 'without'];
+
 export const englishPhrasalVerbPrepositions = ['aback', 'about', 'above', 'across', 'after', 'against', 'ahead', 'along', 'among', 'apart', 'around', 'as', 'aside', 'at', 'away', 'back', 'before', 'behind', 'below', 'between', 'beyond', 'by', 'down', 'even', 'for', 'forth', 'forward', 'from', 'in', 'into', 'of', 'off', 'on', 'onto', 'open', 'out', 'over', 'past', 'round', 'through', 'to', 'together', 'toward', 'towards', 'under', 'up', 'upon', 'way', 'with', 'without'];
 
 const particlesDisjunction = englishPhrasalVerbParticles.join('|');
 const phrasalVerbWordSet = new Set([...englishPhrasalVerbParticles, ...englishPhrasalVerbPrepositions]);
 const phrasalVerbWordDisjunction = [...phrasalVerbWordSet].join('|');
+
 export const englishPhrasalVerbWords = [...phrasalVerbWordSet];
+
 export const englishPhrasalSuffixTransformIds = ['past', 'ing', '3rd pers. sing. pres'];
+
 /**
  * @type {import('language-transformer').Rule<Condition>}
  */
@@ -411,10 +415,10 @@ export const englishTransforms = {
             name: '-able',
             description: 'Adjective formed from a verb',
             rules: [
-                suffixInflection('able', '', ['v'], ['adj']),
-                suffixInflection('able', 'e', ['v'], ['adj']),
-                suffixInflection('iable', 'y', ['v'], ['adj']),
-                ...doubledConsonantInflection('bdgklmnprstz', 'able', ['v'], ['adj']),
+                suffixInflection('able', '', ['adj'], ['v']),
+                suffixInflection('able', 'e', ['adj'], ['v']),
+                suffixInflection('iable', 'y', ['adj'], ['v']),
+                ...doubledConsonantInflection('bdgklmnprstz', 'able', ['adj'], ['v']),
             ],
         },
     },

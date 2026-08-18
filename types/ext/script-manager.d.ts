@@ -25,6 +25,8 @@ export type RegistrationDetails = {
     runAt: RunAt;
     /** Same as `all_frames` in the `content_scripts` manifest key. */
     allFrames: boolean;
+    /** Same as `match_origin_as_fallback` in the `content_scripts` manifest key. */
+    matchOriginAsFallback?: boolean;
     /** List of CSS paths. */
     css?: string[];
     /** List of script paths. */

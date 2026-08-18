@@ -120,11 +120,12 @@ export async function unregisterContentScript(id) {
  * @returns {chrome.scripting.RegisteredContentScript}
  */
 function createContentScriptRegistrationOptions(details, id) {
-    const {css, js, allFrames, matches, runAt, world} = details;
+    const {css, js, allFrames, matchOriginAsFallback, matches, runAt, world} = details;
     /** @type {chrome.scripting.RegisteredContentScript} */
     const options = {
         id: id,
         persistAcrossSessions: true,
+        js: [],
     };
     if (Array.isArray(css)) {
         options.css = [...css];
@@ -134,6 +135,9 @@ function createContentScriptRegistrationOptions(details, id) {
     }
     if (typeof allFrames !== 'undefined') {
         options.allFrames = allFrames;
+    }
+    if (typeof matchOriginAsFallback !== 'undefined') {
+        options.matchOriginAsFallback = matchOriginAsFallback;
     }
     if (Array.isArray(matches)) {
         options.matches = [...matches];

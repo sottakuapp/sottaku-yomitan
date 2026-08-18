@@ -211,6 +211,7 @@ export class Backend {
             ['getLanguageSummaries',         this._onApiGetLanguageSummaries.bind(this)],
             ['heartbeat',                    this._onApiHeartbeat.bind(this)],
             ['forceSync',                    this._onApiForceSync.bind(this)],
+            ['fetchLocalAudioData',          this._onApiFetchLocalAudioData.bind(this)],
         ]);
 
         /** @type {import('api').PmApiMap} */
@@ -516,7 +517,7 @@ export class Backend {
 
 
     /**
-     * @param {chrome.tabs.ZoomChangeInfo} event
+     * @param {chrome.tabs.OnZoomChangeInfo} event
      */
     _onZoomChange({tabId, oldZoomFactor, newZoomFactor}) {
         this._sendMessageTabIgnoreResponse(tabId, {action: 'applicationZoomChanged', params: {oldZoomFactor, newZoomFactor}}, {});
@@ -1454,6 +1455,29 @@ export class Backend {
         }
     }
 
+    /** @type {import('api').ApiHandler<'fetchLocalAudioData'>} */
+    async _onApiFetchLocalAudioData({url}) {
+        const response = await fetch(url);
+        if (!response.ok) {
+            log.error(`Local server responded with HTTP status code ${response.status}`);
+            return null;
+        }
+
+        const contentType = response.headers.get('content-type') || 'audio/mpeg';
+        const arrayBuffer = await response.arrayBuffer();
+
+        let binary = '';
+        const bytes = new Uint8Array(arrayBuffer);
+        for (let i = 0; i < bytes.byteLength; i++) {
+            binary += String.fromCharCode(bytes[i]);
+        }
+
+        return {
+            data: btoa(binary),
+            contentType: contentType,
+        };
+    }
+
     // Command handlers
 
     /**
@@ -2105,7 +2129,8 @@ export class Backend {
             const codePoint = /** @type {number} */ (text.codePointAt(i));
             const character = String.fromCodePoint(codePoint);
             const substring = text.substring(i, i + scanLength);
-            const cacheKey = `${optionsContext.index}:${substring}`;
+            const metadataMode = useAllFrequencyDictionaries === true ? 1 : 0;
+            const cacheKey = `${optionsContext.index}:${metadataMode}:${substring}`;
             let cached = this._textParseCache.get(cacheKey);
             if (typeof cached === 'undefined') {
                 const {dictionaryEntries, originalTextLength} = await this._translator.findTerms(
@@ -2137,7 +2162,15 @@ export class Backend {
                                     if (src.matchType !== 'exact') { continue; }
                                     validSources.push(src);
                                 }
-                                if (validSources.length > 0) { validHeadwords.push({term: headword.term, reading: headword.reading, sources: validSources, frequencies: dictionaryEntry.frequencies.filter((f) => f.headwordIndex === headword.headwordIndex)}); }
+                                if (validSources.length > 0) {
+                                    validHeadwords.push({
+                                        term: headword.term,
+                                        reading: headword.reading,
+                                        sources: validSources,
+                                        frequencies: dictionaryEntry.frequencies.filter((f) => f.headwordIndex === headword.headwordIndex),
+                                        pronunciations: dictionaryEntry.pronunciations.filter((p) => p.headwordIndex === headword.headwordIndex),
+                                    });
+                                }
                             }
                             if (validHeadwords.length > 0) { trimmedHeadwords.push(validHeadwords); }
                         }
@@ -3396,12 +3429,27 @@ export class Backend {
             const matches = grantedOrigins.filter((origin) => !REQUIRED_SOTTAKU_HOST_PERMISSIONS.has(origin));
             if (matches.length === 0) { return; }
 
-            await registerContentScript(MAIN_CONTENT_SCRIPT_REGISTRATION_ID, {
+            /** @type {import('script-manager').RegistrationDetails} */
+            const registration = {
                 runAt: 'document_idle',
                 matches,
                 allFrames: true,
                 js: ['js/app/content-script-wrapper.js'],
-            });
+            };
+            try {
+                await registerContentScript(MAIN_CONTENT_SCRIPT_REGISTRATION_ID, {
+                    ...registration,
+                    matchOriginAsFallback: true,
+                });
+            } catch (e) {
+                // Chrome <119 and Firefox <128 do not recognize this option.
+                // Keep ordinary page scanning working on those supported
+                // versions, while newer browsers also cover blob/data frames.
+                if (await isContentScriptRegistered(MAIN_CONTENT_SCRIPT_REGISTRATION_ID)) {
+                    throw e;
+                }
+                await registerContentScript(MAIN_CONTENT_SCRIPT_REGISTRATION_ID, registration);
+            }
         } catch (e) {
             log.error(e);
         }

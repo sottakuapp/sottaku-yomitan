@@ -75,6 +75,8 @@ import {addSerboCroatianDiacritics, removeSerboCroatianAccentMarks} from './sh/s
 import {albanianTransforms} from './sq/albanian-transforms.js';
 import {capitalizeFirstLetter, decapitalize, removeAlphabeticDiacritics} from './text-processors.js';
 import {tagalogTransforms} from './tl/tagalog-transforms.js';
+import {removeUkrainianDiacritics, ukrainianApostropheVariants} from './uk/ukrainian-text-preprocessors.js';
+import {ukrainianTransforms} from './uk/ukrainian-transforms.js';
 import {normalizeDiacritics} from './vi/viet-text-preprocessors.js';
 import {convertFinalLetters, convertYiddishLigatures} from './yi/yiddish-text-postprocessors.js';
 import {combineYiddishLigatures, removeYiddishDiacritics} from './yi/yiddish-text-preprocessors.js';
@@ -147,6 +149,13 @@ const languageDescriptors = [
         iso639_3: 'bul',
         name: 'Bulgarian',
         exampleText: 'чета',
+        textPreprocessors: capitalizationPreprocessors,
+    },
+    {
+        iso: 'br',
+        iso639_3: 'bre',
+        name: 'Breton',
+        exampleText: 'lenn',
         textPreprocessors: capitalizationPreprocessors,
     },
     {
@@ -279,6 +288,13 @@ const languageDescriptors = [
             convertLatinToGreek,
         },
         languageTransforms: ancientGreekTransforms,
+    },
+    {
+        iso: 'gv',
+        iso639_3: 'glv',
+        name: 'Manx',
+        exampleText: 'lhaih',
+        textPreprocessors: capitalizationPreprocessors,
     },
     {
         // no 2 letter iso for hawaiian
@@ -415,6 +431,13 @@ const languageDescriptors = [
             reassembleHangul,
         },
         languageTransforms: koreanTransforms,
+    },
+    {
+        iso: 'kw',
+        iso639_3: 'cor',
+        name: 'Cornish',
+        exampleText: 'lenna',
+        textPreprocessors: capitalizationPreprocessors,
     },
     {
         iso: 'mn',
@@ -555,7 +578,12 @@ const languageDescriptors = [
         iso639_3: 'ukr',
         name: 'Ukrainian',
         exampleText: 'читати',
-        textPreprocessors: capitalizationPreprocessors,
+        textPreprocessors: {
+            ...capitalizationPreprocessors,
+            removeUkrainianDiacritics,
+            ukrainianApostropheVariants,
+        },
+        languageTransforms: ukrainianTransforms,
     },
     {
         iso: 'vi',

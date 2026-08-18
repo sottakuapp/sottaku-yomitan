@@ -104,6 +104,9 @@ type AllTextProcessors = {
     bg: {
         pre: CapitalizationPreprocessors;
     };
+    br: {
+        pre: CapitalizationPreprocessors;
+    };
     cs: {
         pre: CapitalizationPreprocessors;
     };
@@ -158,6 +161,9 @@ type AllTextProcessors = {
         pre: CapitalizationPreprocessors & AlphabeticDiacriticsProcessor & {
             convertLatinToGreek: TextProcessor;
         };
+    };
+    gv: {
+        pre: CapitalizationPreprocessors;
     };
     haw: {
         pre: CapitalizationPreprocessors;
@@ -220,6 +226,9 @@ type AllTextProcessors = {
     };
     km: Record<string, never>;
     kn: Record<string, never>;
+    kw: {
+        pre: CapitalizationPreprocessors;
+    };
     mn: {
         pre: CapitalizationPreprocessors;
     };
@@ -273,7 +282,10 @@ type AllTextProcessors = {
         pre: CapitalizationPreprocessors;
     };
     uk: {
-        pre: CapitalizationPreprocessors;
+        pre: CapitalizationPreprocessors & {
+            removeUkrainianDiacritics: TextProcessor;
+            ukrainianApostropheVariants: TextProcessor;
+        };
     };
     vi: {
         pre: CapitalizationPreprocessors & {
