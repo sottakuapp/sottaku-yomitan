@@ -73,6 +73,152 @@ function historicalKanaSuffixInflection(inflectedSuffix, deinflectedSuffix, cond
 }
 
 /**
+ * Build a recognition-only substitution which can be chained before ordinary
+ * deinflection. Keeping these as alternatives (rather than normalizing the
+ * source destructively) lets dictionary matching discard accidental modern
+ * lookalikes.
+ * @param {string} matchPattern
+ * @param {string} replacement
+ * @returns {import('language-transformer').Rule<Condition>}
+ */
+function historicalSpellingSubstitution(matchPattern, replacement) {
+    const isInflected = new RegExp(matchPattern, 'u');
+    return {
+        type: 'other',
+        isInflected,
+        deinflect: (text) => text.replace(isInflected, replacement),
+        conditionsIn: [],
+        conditionsOut: [],
+        sottakuExport: {
+            rule_type: 'custom',
+            custom_kind: 'regex_substitution',
+            custom_data: {
+                match_pattern: isInflected.source,
+                replace_pattern: isInflected.source,
+                replacement,
+            },
+            deinflection_only: true,
+        },
+    };
+}
+
+/**
+ * Expand one hiragana/katakana iteration mark. Voiced marks add dakuten to
+ * the repeated kana (つゞ -> つづ); unvoiced marks repeat it unchanged.
+ * @returns {import('language-transformer').Rule<Condition>}
+ */
+function historicalKanaIterationMarkInflection() {
+    const isInflected = /([ぁ-ゖァ-ヺ])([ゝゞヽヾ])/u;
+    return {
+        type: 'other',
+        isInflected,
+        deinflect: (text) => {
+            const match = isInflected.exec(text);
+            if (match === null) { return text; }
+            const previous = match[1];
+            const mark = match[2];
+            const repeat = mark === 'ゞ' || mark === 'ヾ' ? `${previous}\u3099`.normalize('NFC') : previous;
+            return `${text.slice(0, match.index)}${previous}${repeat}${text.slice(match.index + match[0].length)}`;
+        },
+        conditionsIn: [],
+        conditionsOut: [],
+        sottakuExport: {
+            rule_type: 'custom',
+            custom_kind: 'japanese_kana_iteration_mark',
+            custom_data: {match_pattern: isInflected.source},
+            deinflection_only: true,
+        },
+    };
+}
+
+/**
+ * Guard a classical suffix with at least one preceding Japanese character.
+ * This prevents forms such as bare きて (来て) from also yielding く while
+ * still recognizing forms such as 就きて (就く + classical connective て).
+ * @param {string} inflectedSuffix
+ * @param {string} deinflectedSuffix
+ * @param {Condition[]} conditionsIn
+ * @param {Condition[]} conditionsOut
+ * @returns {import('language-transformer').Rule<Condition>}
+ */
+function guardedClassicalSuffixInflection(inflectedSuffix, deinflectedSuffix, conditionsIn, conditionsOut) {
+    const isInflected = new RegExp(`[ぁ-ゖァ-ヺ一-龯]${inflectedSuffix}$`, 'u');
+    const replacePattern = new RegExp(`${inflectedSuffix}$`, 'u');
+    return {
+        type: 'other',
+        isInflected,
+        deinflect: (text) => text.replace(replacePattern, deinflectedSuffix),
+        conditionsIn,
+        conditionsOut,
+        sottakuExport: {
+            rule_type: 'custom',
+            custom_kind: 'regex_substitution',
+            custom_data: {
+                match_pattern: isInflected.source,
+                replace_pattern: replacePattern.source,
+                replacement: deinflectedSuffix,
+            },
+        },
+    };
+}
+
+/** @returns {import('language-transformer').Rule<Condition>[]} */
+function historicalSpellingInflections() {
+    const rules = [
+        historicalKanaIterationMarkInflection(),
+        historicalSpellingSubstitution('ゐ', 'い'),
+        historicalSpellingSubstitution('ゑ', 'え'),
+        historicalSpellingSubstitution('ヰ', 'イ'),
+        historicalSpellingSubstitution('ヱ', 'エ'),
+        historicalSpellingSubstitution('つ(?=[かきくけこがぎぐげござじずぜぞさしすせそたちてとだぢづでどぱぴぷぺぽ])', 'っ'),
+        historicalSpellingSubstitution('ツ(?=[カキクケコガギグゲゴサシスセソザジズゼゾタダチヂヅテデトドパピプペポ])', 'ッ'),
+        historicalSpellingSubstitution('へ$', 'え'),
+    ];
+
+    const japaneseCharacter = '[ぁ-ゖァ-ヺ一-龯]';
+    for (const [historical, modern] of [
+        ['は', 'わ'],
+        ['ひ', 'い'],
+        ['ふ', 'う'],
+        ['へ', 'え'],
+        ['ほ', 'お'],
+    ]) {
+        rules.push(historicalSpellingSubstitution(`(?<=${japaneseCharacter})${historical}(?=${japaneseCharacter})`, modern));
+    }
+
+    for (const [historical, modern] of [
+        ['かう', 'こう'],
+        ['がう', 'ごう'],
+        ['さう', 'そう'],
+        ['ざう', 'ぞう'],
+        ['たう', 'とう'],
+        ['だう', 'どう'],
+        ['なう', 'のう'],
+        ['はう', 'ほう'],
+        ['ばう', 'ぼう'],
+        ['ぱう', 'ぽう'],
+        ['まう', 'もう'],
+        ['やう', 'よう'],
+        ['らう', 'ろう'],
+        ['わう', 'おう'],
+    ]) {
+        rules.push(historicalSpellingSubstitution(historical, modern));
+    }
+
+    for (const base of 'きぎしじちぢにひびぴみり') {
+        for (const [large, small] of [['や', 'ゃ'], ['ゆ', 'ゅ'], ['よ', 'ょ']]) {
+            rules.push(historicalSpellingSubstitution(`${base}${large}`, `${base}${small}`));
+        }
+    }
+    for (const base of 'キギシジチヂニヒビピミリ') {
+        for (const [large, small] of [['ヤ', 'ャ'], ['ユ', 'ュ'], ['ヨ', 'ョ']]) {
+            rules.push(historicalSpellingSubstitution(`${base}${large}`, `${base}${small}`));
+        }
+    }
+    return rules;
+}
+
+/**
  * @param {'て' | 'た' | 'たら' | 'たり'} suffix
  * @param {Condition[]} conditionsIn
  * @param {Condition[]} conditionsOut
@@ -709,6 +855,17 @@ export const japaneseTransforms = {
                 suffixInflection('きて', 'くる', ['-て'], ['vk']),
                 suffixInflection('来て', '来る', ['-て'], ['vk']),
                 suffixInflection('來て', '來る', ['-て'], ['vk']),
+                wholeWordInflection('きたりて', 'くる', ['-て'], ['vk']),
+                wholeWordInflection('来りて', '来る', ['-て'], ['vk']),
+                wholeWordInflection('來りて', '來る', ['-て'], ['vk']),
+                guardedClassicalSuffixInflection('きて', 'く', ['-て'], ['v5']),
+                guardedClassicalSuffixInflection('ぎて', 'ぐ', ['-て'], ['v5']),
+                guardedClassicalSuffixInflection('ちて', 'つ', ['-て'], ['v5']),
+                guardedClassicalSuffixInflection('にて', 'ぬ', ['-て'], ['v5']),
+                guardedClassicalSuffixInflection('びて', 'ぶ', ['-て'], ['v5']),
+                guardedClassicalSuffixInflection('みて', 'む', ['-て'], ['v5']),
+                guardedClassicalSuffixInflection('りて', 'る', ['-て'], ['v5']),
+                guardedClassicalSuffixInflection('ひて', 'う', ['-て'], ['v5']),
                 ...irregularVerbSuffixInflections('て', ['-て'], ['v5']),
                 suffixInflection('まして', 'ます', [], ['-ます']),
             ],
@@ -1222,6 +1379,18 @@ export const japaneseTransforms = {
                 suffixInflection('こられる', 'くる', ['v1'], ['vk']),
                 suffixInflection('来られる', '来る', ['v1'], ['vk']),
                 suffixInflection('來られる', '來る', ['v1'], ['vk']),
+                guardedClassicalSuffixInflection('かるる', 'く', ['v1'], ['v5']),
+                guardedClassicalSuffixInflection('がるる', 'ぐ', ['v1'], ['v5']),
+                guardedClassicalSuffixInflection('さるる', 'す', ['v1'], ['v5']),
+                guardedClassicalSuffixInflection('たるる', 'つ', ['v1'], ['v5']),
+                guardedClassicalSuffixInflection('なるる', 'ぬ', ['v1'], ['v5']),
+                guardedClassicalSuffixInflection('ばるる', 'ぶ', ['v1'], ['v5']),
+                guardedClassicalSuffixInflection('まるる', 'む', ['v1'], ['v5']),
+                guardedClassicalSuffixInflection('はるる', 'う', ['v1'], ['v5']),
+                guardedClassicalSuffixInflection('らるる', 'る', ['v1'], ['v5']),
+                wholeWordInflection('こらるる', 'くる', ['v1'], ['vk']),
+                wholeWordInflection('来らるる', '来る', ['v1'], ['vk']),
+                wholeWordInflection('來らるる', '來る', ['v1'], ['vk']),
             ],
         },
         '-た': {
@@ -1525,6 +1694,67 @@ export const japaneseTransforms = {
             ],
             rules: [
                 suffixInflection('ふ', 'う', [], ['v5']),
+            ],
+        },
+        'historical spelling': {
+            name: 'historical spelling',
+            description: 'Recognition of historical kana orthography and older print conventions, including iteration marks and formerly full-sized small kana.',
+            i18n: [
+                {
+                    language: 'ja',
+                    name: '歴史的仮名遣い・旧字体組版',
+                    description: '踊り字や、現代では小書きにする「っ・ゃ・ゅ・ょ」などを含む旧来の表記。',
+                },
+            ],
+            rules: historicalSpellingInflections(),
+        },
+        'classical perfective': {
+            name: 'classical perfective',
+            description: 'Classical perfect/result auxiliaries り and たり, including their attributive forms.',
+            i18n: [
+                {
+                    language: 'ja',
+                    name: '完了・存続（り・たり）',
+                    description: '古典語の完了・存続を表す助動詞「り」「たり」。',
+                },
+            ],
+            rules: [
+                wholeWordInflection('来れり', '来る', [], ['vk']),
+                wholeWordInflection('來れり', '來る', [], ['vk']),
+                guardedClassicalSuffixInflection('えり', 'う', [], ['v5']),
+                guardedClassicalSuffixInflection('けり', 'く', [], ['v5']),
+                guardedClassicalSuffixInflection('げり', 'ぐ', [], ['v5']),
+                guardedClassicalSuffixInflection('せり', 'す', [], ['v5']),
+                guardedClassicalSuffixInflection('てり', 'つ', [], ['v5']),
+                guardedClassicalSuffixInflection('ねり', 'ぬ', [], ['v5']),
+                guardedClassicalSuffixInflection('べり', 'ぶ', [], ['v5']),
+                guardedClassicalSuffixInflection('めり', 'む', [], ['v5']),
+                guardedClassicalSuffixInflection('れり', 'る', [], ['v5']),
+                guardedClassicalSuffixInflection('たる', 'る', [], ['v1']),
+                guardedClassicalSuffixInflection('きたる', 'く', [], ['v5']),
+                guardedClassicalSuffixInflection('ぎたる', 'ぐ', [], ['v5']),
+                guardedClassicalSuffixInflection('したる', 'す', [], ['v5']),
+                guardedClassicalSuffixInflection('ちたる', 'つ', [], ['v5']),
+                guardedClassicalSuffixInflection('にたる', 'ぬ', [], ['v5']),
+                guardedClassicalSuffixInflection('びたる', 'ぶ', [], ['v5']),
+                guardedClassicalSuffixInflection('みたる', 'む', [], ['v5']),
+                guardedClassicalSuffixInflection('りたる', 'る', [], ['v5']),
+                guardedClassicalSuffixInflection('ひたる', 'う', [], ['v5']),
+            ],
+        },
+        'classical nidan attributive': {
+            name: 'classical nidan attributive',
+            description: 'Attributive form of common classical nidan verbs whose modern dictionary form is ichidan.',
+            i18n: [
+                {
+                    language: 'ja',
+                    name: '二段活用の連体形',
+                    description: '現代語では一段活用になる古典語の二段活用連体形。',
+                },
+            ],
+            rules: [
+                guardedClassicalSuffixInflection('ふる', 'える', [], ['v1']),
+                guardedClassicalSuffixInflection('ゆる', 'える', [], ['v1']),
             ],
         },
         '-き': {
