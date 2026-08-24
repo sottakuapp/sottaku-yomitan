@@ -99,6 +99,38 @@ describe('TextScanner', () => {
         expect(variants[1]).toStrictEqual({text: 'مدرسة', startOffset: 0, anchorOffset: 0});
     });
 
+    test.each([
+        ['Hebrew', 'חסד', 'חסד של אמת.'],
+        ['Arabic', 'مدرسة', 'مدرسة جميلة.'],
+    ])('keeps the preceding %s word when RTL hit testing returns its end boundary', async (_language, word, phrase) => {
+        const definitionEntry = {id: word};
+        const termsFind = vi.fn(async (text) => (
+            text === word ?
+                {dictionaryEntries: [definitionEntry], originalTextLength: word.length} :
+                {dictionaryEntries: [], originalTextLength: 0}
+        ));
+        const scanner = createScanner({termsFind});
+        // Sottaku auto-detection can scan RTL text while the primary Yomitan
+        // profile language remains Japanese.
+        // eslint-disable-next-line no-underscore-dangle
+        scanner._language = 'ja';
+        // eslint-disable-next-line no-underscore-dangle
+        scanner._scanLength = 20;
+
+        const textSource = new TextSourceElement(
+            window.document.createElement('div'),
+            phrase,
+            word.length,
+            word.length,
+        );
+        // eslint-disable-next-line no-underscore-dangle
+        const result = await scanner._findTermDictionaryEntries(textSource, {pointerType: 'mouse'});
+
+        expect(result?.dictionaryEntries).toEqual([definitionEntry]);
+        expect(textSource.text()).toBe(word);
+        expect(termsFind.mock.calls[0][0]).toBe(word);
+    });
+
     test('reports Arabic, Devanagari, and Hebrew document script counts to remote language routing', () => {
         const scanner = createScanner();
         const previousLang = window.document.documentElement.lang;

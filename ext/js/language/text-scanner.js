@@ -634,9 +634,9 @@ export class TextScanner extends EventDispatcher {
     }
 
     /**
-     * Return the complete Arabic or Devanagari orthographic word around the
-     * hover point. This keeps Arabic clitics and Indic combining sequences in
-     * one lookup even when the profile's primary Yomitan language is CJK.
+     * Return the complete complex-script orthographic word around the hover
+     * point. This keeps Arabic clitics, Indic combining sequences, and Hebrew
+     * words in one lookup even when the profile's primary language is CJK.
      * @param {string} text
      * @param {number} anchorOffset
      * @returns {{text: string, startOffset: number, anchorOffset: number}[]}
@@ -648,11 +648,15 @@ export class TextScanner extends EventDispatcher {
             const value = match[0];
             const start = match.index ?? 0;
             const end = start + value.length;
-            if (anchorOffset < start || anchorOffset >= end) { continue; }
+            if (anchorOffset < start || anchorOffset > end) { continue; }
+            const relativeAnchorOffset = anchorOffset - start;
             return [{
                 text: value,
-                startOffset: anchorOffset - start,
-                anchorOffset: anchorOffset - start,
+                startOffset: relativeAnchorOffset,
+                // RTL browser hit testing can place the caret immediately after
+                // the final glyph. Preserve that source offset while treating
+                // the lookup anchor as covering the preceding character.
+                anchorOffset: Math.min(relativeAnchorOffset, value.length - 1),
             }];
         }
         return [];
