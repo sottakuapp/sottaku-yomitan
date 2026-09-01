@@ -37,14 +37,14 @@ const tests = [
         tests: [
             {term: 'magnus',    source: 'magna',    rule: 'adj',  reasons: ['feminine']},
             {term: 'Graecus',   source: 'Graecum',  rule: 'adj',  reasons: ['neuter']},
-            {term: 'primus',    source: 'prima',    rule: 'adj',  reasons: ['neuter', 'plural']},
+            {term: 'primus',    source: 'prima',    rule: 'adj',  reasons: ['feminine']},
         ],
     },
     {
         category: 'ablative',
         valid: true,
         tests: [
-            {term: 'vocabulum', source: 'vocabulo', rule: 'n',    reasons: ['ablative']},
+            {term: 'vocabulum', source: 'vocabulo', rule: 'n',    reasons: ['ablative singular']},
         ],
     },
     {
@@ -57,6 +57,38 @@ const tests = [
             {term: 'sum', source: 'erant', rule: 'v', reasons: ['imperfect']},
             {term: 'sum', source: 'fuit', rule: 'v', reasons: ['perfect']},
             {term: 'sum', source: 'fuerant', rule: 'v', reasons: ['pluperfect']},
+        ],
+    },
+    {
+        category: 'regular verbs',
+        valid: true,
+        tests: [
+            {term: 'amo',     source: 'amant',      rule: 'v', reasons: ['present indicative']},
+            {term: 'maneo',   source: 'manet',      rule: 'v', reasons: ['present indicative']},
+            {term: 'cerno',   source: 'cernunt',    rule: 'v', reasons: ['present indicative']},
+            {term: 'audio',   source: 'audiunt',    rule: 'v', reasons: ['present indicative']},
+            {term: 'cerno',   source: 'cernitur',   rule: 'v', reasons: ['present passive indicative']},
+            {term: 'cerno',   source: 'cernere',    rule: 'v', reasons: ['present infinitive']},
+            {term: 'amo',     source: 'amaverunt',  rule: 'v', reasons: ['perfect']},
+        ],
+    },
+    {
+        category: 'corpus regressions',
+        valid: true,
+        tests: [
+            {term: 'cetus',   source: 'cetos',      rule: 'n',    reasons: ['accusative plural']},
+            {term: 'iudex',   source: 'iudicem',    rule: 'n',    reasons: ['accusative singular']},
+            {term: 'pulcher', source: 'pulchra',    rule: 'adj',  reasons: ['feminine']},
+            {term: 'asper',   source: 'aspera',     rule: 'adj',  reasons: ['feminine']},
+            {term: 'asper',   source: 'asperum',    rule: 'adj',  reasons: ['neuter']},
+            {term: 'ego',     source: 'me',         rule: 'pron', reasons: ['accusative singular']},
+            {term: 'adsum',   source: 'adest',      rule: 'v',    reasons: ['present indicative']},
+            {term: 'alter',   source: 'alterum',    rule: 'pron', reasons: ['accusative singular']},
+            {term: 'alius',   source: 'aliud',      rule: 'adj',  reasons: ['neuter']},
+            {term: 'semen',   source: 'semine',     rule: 'n',    reasons: ['ablative singular']},
+            {term: 'conor',   source: 'conatus',    rule: 'v',    reasons: ['perfect participle']},
+            {term: 'vulnero', source: 'vulneratus', rule: 'v',    reasons: ['perfect participle']},
+            {term: 'magnus',  source: 'maius',      rule: 'adj',  reasons: ['comparative']},
         ],
     },
 ];
