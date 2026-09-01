@@ -355,6 +355,17 @@ const tests = [
             {term: 'مقبرة', source: 'مقابر', rule: 'n', reasons: ['NBrokenPlural-Maqbara']},
             {term: 'مقبرة', source: 'بمقابر', rule: 'n', reasons: ['NBrokenPlural-Maqbara', 'NPref-Bi']},
             {term: 'مقبرة', source: 'مقابرهم', rule: 'n', reasons: ['NBrokenPlural-Maqbara', 'NSuff-h']},
+            {term: 'طفل', source: 'الأطفال', rule: 'n', reasons: ['NBrokenPlural-Reviewed']},
+            {term: 'مدينة', source: 'المدن', rule: 'n', reasons: ['NBrokenPlural-Reviewed']},
+        ],
+    },
+    {
+        category: 'reviewed irregular imperfect surfaces',
+        valid: true,
+        tests: [
+            {term: 'احتاج', source: 'يحتاج', rule: 'v', reasons: ['IVPref-hw']},
+            {term: 'حمى', source: 'تحمي', rule: 'v', reasons: ['IVPref-hy']},
+            {term: 'قاس', source: 'يقيس', rule: 'v', reasons: ['IVPref-hw']},
         ],
     },
     {

@@ -42,6 +42,7 @@ import {irishTransforms} from './ga/irish-transforms.js';
 import {convertLatinToGreek} from './grc/ancient-greek-processors.js';
 import {ancientGreekTransforms} from './grc/ancient-greek-transforms.js';
 import {normalizeDevanagariUnicode, removeIndicFormatControlCharacters} from './hi/hindi-text-preprocessors.js';
+import {hindiTransforms} from './hi/hindi-transforms.js';
 import {removeApostrophedWords} from './it/italian-processors.js';
 import {
     alphabeticToHiragana,
@@ -71,6 +72,7 @@ import {latinTransforms} from './la/latin-transforms.js';
 import {removeRussianDiacritics, yoToE} from './ru/russian-text-preprocessors.js';
 import {russianTransforms} from './ru/russian-transforms.js';
 import {oldIrishTransforms} from './sga/old-irish-transforms.js';
+import {portugueseTransforms} from './pt/portuguese-transforms.js';
 import {addSerboCroatianDiacritics, removeSerboCroatianAccentMarks} from './sh/serbo-croatian-text-preprocessors.js';
 import {albanianTransforms} from './sq/albanian-transforms.js';
 import {capitalizeFirstLetter, decapitalize, removeAlphabeticDiacritics} from './text-processors.js';
@@ -326,6 +328,7 @@ const languageDescriptors = [
             normalizeDevanagariUnicode,
             removeIndicFormatControlCharacters,
         },
+        languageTransforms: hindiTransforms,
     },
     {
         iso: 'hu',
@@ -482,6 +485,7 @@ const languageDescriptors = [
         name: 'Portuguese',
         exampleText: 'ler',
         textPreprocessors: capitalizationPreprocessors,
+        languageTransforms: portugueseTransforms,
     },
     {
         iso: 'ro',

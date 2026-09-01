@@ -195,6 +195,9 @@ export const hebrewTransforms = {
                 wholeWordInflection('ימי', 'יום'),
                 wholeWordInflection('משכנות', 'משכן'),
                 wholeWordInflection('מעונות', 'מעון'),
+                wholeWordInflection('מתכות', 'מתכת'),
+                wholeWordInflection('עקרונות', 'עיקרון'),
+                wholeWordInflection('פריטים', 'פריט'),
             ],
         },
         'Hebrew adjective agreement': {
@@ -203,7 +206,14 @@ export const hebrewTransforms = {
             rules: [
                 wholeWordInflection('גדולה', 'גדול'),
                 wholeWordInflection('קשים', 'קשה'),
+                wholeWordInflection('קטנה', 'קטן'),
+                wholeWordInflection('נפוצה', 'נפוץ'),
             ],
+        },
+        'Hebrew pronoun agreement': {
+            name: 'Pronoun agreement',
+            description: 'Recover a Hebrew pronoun lemma from a reviewed gender form',
+            rules: [wholeWordInflection('היא', 'הוא')],
         },
         'Hebrew possessive suffix': {
             name: 'Possessive suffix',
@@ -254,6 +264,7 @@ export const hebrewTransforms = {
                 wholeWordInflection('קלותי', 'קל'),
                 wholeWordInflection('ריחפתי', 'ריחף'),
                 wholeWordInflection('אבדה', 'אבד'),
+                wholeWordInflection('קיבלה', 'קיבל'),
             ],
         },
         'Hebrew future': {
@@ -274,7 +285,11 @@ export const hebrewTransforms = {
         'Hebrew present participle': {
             name: 'Present participle',
             description: 'Recover a Hebrew verb lemma from a reviewed present-participle surface',
-            rules: [wholeWordInflection('צופיה', 'צפה')],
+            rules: [
+                wholeWordInflection('צופיה', 'צפה'),
+                wholeWordInflection('עוזרת', 'עזר'),
+                wholeWordInflection('פועלת', 'פעל'),
+            ],
         },
         'Hebrew cohortative': {
             name: 'Cohortative',
