@@ -1408,6 +1408,10 @@ button.action-button:active:not(:disabled) {
 .definition-item[data-dictionary='Sottaku'] .gloss-content.structured-content [data-sc-sottaku-field='definition'] {
     font-weight: 600;
 }
+.definition-item[data-dictionary='Sottaku'] .gloss-content.structured-content [data-sc-sottaku-field='grammarDetails'] {
+    color: var(--text-color-light3);
+    font-size: 0.95em;
+}
 .definition-item[data-dictionary='Sottaku'] .gloss-content.structured-content [data-sc-sottaku-field='exampleGroup'] {
     padding: 0.5em 0.75em;
     border-left: 0.25em solid var(--accent-color);

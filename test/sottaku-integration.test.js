@@ -25,6 +25,95 @@ import {describe, expect, test, vi} from 'vitest';
 import {SottakuIntegration} from '../ext/js/background/sottaku-integration.js';
 
 describe('SottakuIntegration', () => {
+    test('renders only localized gender and declension from the scan response', async () => {
+        const integration = new SottakuIntegration(null);
+        const grammarDetails = [
+            {key: 'gender', label: 'Género', value: 'Masculino'},
+            {key: 'declension_class', label: 'Declinación', value: 'Débil'},
+        ];
+        const result = await integration._fetchLanguageEntries({
+            apiOrigin: 'https://sottaku.app',
+            language: 'de',
+            maxResults: 32,
+            query: 'Junge',
+            locale: 'es',
+            localeLang: 'es',
+            scanResult: {
+                originalTextLength: 5,
+                results: [{
+                    id: 1,
+                    kanji_representation: 'Junge',
+                    word_translation: 'chico',
+                    grammar_details: [
+                        ...grammarDetails,
+                        {key: 'gender', label: 'Duplicate', value: 'Ignored'},
+                        {key: 'animacy', label: 'Animacy', value: 'Animate'},
+                        {key: 'conjugation_class', label: 'Conjugation', value: 'Strong'},
+                    ],
+                }],
+            },
+        });
+
+        const entry = result.entries[0];
+        expect(entry.sottaku.grammarDetails).toStrictEqual(grammarDetails);
+        expect(entry.headwords[0].sottaku.grammarDetails).toStrictEqual(grammarDetails);
+        const glossary = /** @type {import('dictionary-data').TermGlossaryStructuredContent} */ (entry.definitions[0].entries[0]);
+        expect(glossary.content.content[0]).toStrictEqual({
+            tag: 'div',
+            data: {sottakuField: 'grammarDetails'},
+            lang: 'es',
+            content: 'Género: Masculino · Declinación: Débil',
+        });
+        expect(glossary.content.content[1].content).toBe('chico');
+    });
+
+    test.each([
+        {grammarDetails: void 0},
+        {grammarDetails: null},
+        {grammarDetails: {}},
+        {grammarDetails: 'masculine'},
+        {grammarDetails: [null, 'gender', {key: 'gender', label: 'Gender', value: ''}]},
+        {grammarDetails: [{key: 'declension_class', label: '', value: 'weak'}]},
+        {grammarDetails: [{key: 'gender', label: 'Gender', value: {name: 'masculine'}}]},
+        {grammarDetails: [{key: 'animacy', label: 'Animacy', value: 'animate'}]},
+    ])('omits missing or unsupported grammar details: %j', ({grammarDetails}) => {
+        const integration = new SottakuIntegration(null);
+        const entry = integration._createEntry(
+            {id: 1, grammar_details: grammarDetails},
+            {},
+            'en',
+            'https://sottaku.app',
+            'cat',
+            0,
+            'cat',
+            3,
+            'en',
+            null,
+        );
+        expect(entry.sottaku.grammarDetails).toStrictEqual([]);
+        expect(entry.definitions[0].entries[0].content.content.filter(Boolean)
+            .some(({data}) => data.sottakuField === 'grammarDetails')).toBe(false);
+    });
+
+    test('preserves grammar details for undefined nouns without enabling save actions', () => {
+        const integration = new SottakuIntegration(null);
+        const entry = integration._createEntry(
+            {id: 1},
+            {grammar_details: [{key: 'gender', label: ' Gender ', value: ' Masculine '}]},
+            'de',
+            'https://sottaku.app',
+            'Junge',
+            0,
+            'Junge',
+            5,
+            'en',
+            null,
+        );
+        expect(entry.sottaku.hasDefinition).toBe(false);
+        expect(entry.sottaku.grammarDetails).toStrictEqual([{key: 'gender', label: 'Gender', value: 'Masculine'}]);
+        expect(entry.definitions[0].entries[0].content.content[0].content).toBe('Gender: Masculine');
+    });
+
     test.each([
         ['pt', 'coração'],
         ['ar', 'مَدْرَسَة'],

@@ -178,6 +178,29 @@ function normalizeJapanesePitchAccentDisplay(value) {
 }
 
 /**
+ * @param {unknown} value
+ * @returns {{key: string, label: string, value: string}[]}
+ */
+function normalizeSottakuGrammarDetails(value) {
+    if (!Array.isArray(value)) { return []; }
+    /** @type {{key: string, label: string, value: string}[]} */
+    const details = [];
+    const seen = new Set();
+    for (const detail of value) {
+        if (!detail || typeof detail !== 'object') { continue; }
+        const key = getObjectStringProperty(detail, ['key']);
+        if (key !== 'gender' && key !== 'declension_class') { continue; }
+        if (seen.has(key)) { continue; }
+        const label = getObjectStringProperty(detail, ['label']).trim();
+        const text = getObjectStringProperty(detail, ['value']).trim();
+        if (!label || !text) { continue; }
+        details.push({key, label, value: text});
+        seen.add(key);
+    }
+    return details;
+}
+
+/**
  * @param {string} reading
  * @returns {string}
  */
@@ -1430,6 +1453,9 @@ export class SottakuIntegration {
             ''
         ).toString();
         const usageNotes = (normalizedInfo.usage_notes || '').toString();
+        const grammarDetails = normalizeSottakuGrammarDetails(
+            normalizedInfo.grammar_details ?? normalizedResult.grammar_details,
+        );
         const hasDefinition = Boolean(
             (normalizedResult.has_definition ?? normalizedInfo.has_definition ?? null) ||
             translation ||
@@ -1530,7 +1556,7 @@ export class SottakuIntegration {
                 sequences: [Number.isFinite(questionId) ? questionId : -1],
                 isPrimary: true,
                 tags: [],
-                entries: this._createGlossaryEntries(translation, sentence, sentenceTranslation, usageNotes, language, localeLang),
+                entries: this._createGlossaryEntries(translation, sentence, sentenceTranslation, usageNotes, language, localeLang, grammarDetails),
             },
         ];
 
@@ -1559,6 +1585,7 @@ export class SottakuIntegration {
             sentence,
             sentenceTranslation,
             usageNotes,
+            grammarDetails,
             reading,
             term,
             readingTokens,
@@ -1627,9 +1654,10 @@ export class SottakuIntegration {
      * @param {string} usageNotes
      * @param {string} language
      * @param {string} localeLang
+     * @param {{key: string, label: string, value: string}[]} [grammarDetails]
      * @returns {import('dictionary-data').TermGlossaryContent[]}
      */
-    _createGlossaryEntries(translation, sentence, sentenceTranslation, usageNotes, language, localeLang) {
+    _createGlossaryEntries(translation, sentence, sentenceTranslation, usageNotes, language, localeLang, grammarDetails = []) {
         const hasAnyContent = Boolean(translation || sentence || sentenceTranslation || usageNotes);
 
         /** @type {import('structured-content').Content} */
@@ -1637,6 +1665,14 @@ export class SottakuIntegration {
             tag: 'div',
             data: {sottakuLayout: 'glossary'},
             content: [
+                ...grammarDetails.length > 0 ?
+                    [{
+                        tag: 'div',
+                        data: {sottakuField: 'grammarDetails'},
+                        lang: localeLang,
+                        content: grammarDetails.map(({label, value}) => `${label}: ${value}`).join(' · '),
+                    }] :
+                    [],
                 translation ? {tag: 'div', data: {sottakuField: 'definition'}, lang: localeLang, content: translation} : null,
                 (sentence || sentenceTranslation) ? {
                     tag: 'div',

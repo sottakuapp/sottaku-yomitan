@@ -19,12 +19,46 @@
 
 import {afterAll, describe, expect, test, vi} from 'vitest';
 import {DisplaySottaku} from '../ext/js/display/display-sottaku.js';
+import {SottakuIntegration} from '../ext/js/background/sottaku-integration.js';
+import {StructuredContentGenerator} from '../ext/js/display/structured-content-generator.js';
 import {setupDomTest} from './fixtures/dom-test.js';
 
 const {window, teardown} = await setupDomTest();
 
 describe('DisplaySottaku', () => {
     afterAll(() => teardown(global));
+
+    test('renders localized grammar as text with the interface locale direction', () => {
+        const integration = new SottakuIntegration(null);
+        const entry = Reflect.get(integration, '_createEntry').call(
+            integration,
+            {id: 1},
+            {
+                word_translation: 'صبي',
+                grammar_details: [
+                    {key: 'gender', label: 'الجنس', value: 'مذكر <img src=x>'},
+                    {key: 'declension_class', label: 'التصريف', value: 'ضعيف'},
+                ],
+            },
+            'de',
+            'https://sottaku.app',
+            'Junge',
+            0,
+            'Junge',
+            5,
+            'ar',
+            null,
+        );
+        const generator = new StructuredContentGenerator(null, window.document, window);
+        const glossary = /** @type {import('dictionary-data').TermGlossaryStructuredContent} */ (entry.definitions[0].entries[0]);
+        const node = generator.createStructuredContent(glossary.content, 'Sottaku');
+        const grammar = node.querySelector('[data-sc-sottaku-field="grammarDetails"]');
+        expect(grammar.textContent).toBe('الجنس: مذكر <img src=x> · التصريف: ضعيف');
+        expect(grammar.lang).toBe('ar');
+        expect(grammar.dir).toBe('rtl');
+        expect(grammar.querySelector('img')).toBeNull();
+        expect(grammar.nextElementSibling.dataset.scSottakuField).toBe('definition');
+    });
 
     test('locks request button dimensions before changing the label', async () => {
         const display = {
