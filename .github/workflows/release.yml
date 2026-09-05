@@ -5,6 +5,7 @@ on:
 permissions: {}
 jobs:
   build:
+    if: vars.ENABLE_EXTENSION_STORE_PUBLISH == 'true'
     runs-on: ubuntu-latest
     permissions:
       actions: write
@@ -13,6 +14,7 @@ jobs:
         uses: aurelien-baudet/workflow-dispatch@3133c5d135c7dbe4be4f9793872b6ef331b53bc7 # pin@v2
         with:
           workflow: publish-chrome
+          ref: ${{ github.event.release.tag_name }}
           token: ${{ secrets.GITHUB_TOKEN }}
           wait-for-completion: false
 
@@ -20,12 +22,14 @@ jobs:
         uses: aurelien-baudet/workflow-dispatch@3133c5d135c7dbe4be4f9793872b6ef331b53bc7 # pin@v2
         with:
           workflow: publish-firefox
+          ref: ${{ github.event.release.tag_name }}
           token: ${{ secrets.GITHUB_TOKEN }}
           wait-for-completion: false
 
-      - name: Dispatch publish-edge
-        uses: aurelien-baudet/workflow-dispatch@3133c5d135c7dbe4be4f9793872b6ef331b53bc7 # pin@v2
-        with:
-          workflow: publish-edge
-          token: ${{ secrets.GITHUB_TOKEN }}
-          wait-for-completion: false
+  manual-upload:
+    if: vars.ENABLE_EXTENSION_STORE_PUBLISH != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Explain manual store delivery
+        run: |
+          echo 'Automatic store publishing is disabled. Use the reviewed ZIP assets and docs/operations/deployments.md for manual Chrome and Firefox updates.' >> "$GITHUB_STEP_SUMMARY"

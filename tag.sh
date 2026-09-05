@@ -1,61 +1,53 @@
 #!/usr/bin/env bash
-# bash script which tags the current commit with a calver version
-# and pushes the tag to the remote repository
+# Create a signed YYYY.M.D.N tag. Pushing builds a GitHub prerelease only.
+set -euo pipefail
 
-# Define color codes
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
-
-if [[ $(git branch --show-current) != "master" ]]; then
-	echo -e "${RED}Please only tag commits on master branch.${NC}"
-	exit 1
+dry_run=false
+if [[ $# -eq 1 && ${1:-} == --dry-run ]]; then
+    dry_run=true
+elif [[ $# -ne 0 ]]; then
+    echo 'Usage: ./tag.sh [--dry-run]' >&2
+    exit 2
 fi
 
-echo -e "${YELLOW}Checking if branch is up to date...${NC}"
-
-changed=0
-git remote update origin && git status -uno | grep -q 'Your branch is behind' && changed=1
-if [ $changed = 1 ]; then
-	echo -e "${RED}Please git pull before tagging.${NC}"
-	exit 1
+if [[ $(git branch --show-current) != master ]]; then
+    echo 'Tag releases from master.' >&2
+    exit 1
 fi
 
-# Ask user to confirm the commit and the tag name
-echo -e "${YELLOW}Current HEAD of master branch:${NC}"
-git log -1 --decorate
-echo
+if ! $dry_run; then
+    if [[ -n $(git --no-optional-locks status --porcelain --untracked-files=normal) ]]; then
+        echo 'Commit the release source and tests before tagging.' >&2
+        exit 1
+    fi
+    git fetch origin master --tags
+    if [[ $(git rev-parse HEAD) != "$(git rev-parse origin/master)" ]]; then
+        echo 'Local master and origin/master must identify the same release commit.' >&2
+        exit 1
+    fi
+fi
 
-# get the current date in the format YY.MM.DD
-DATE=$(date +%y.%-m.%-d)
-
-# Check if the tag already exists and increment if necessary
-COUNTER=0
-TAG=$DATE.$COUNTER
-while git rev-parse "$TAG" >/dev/null 2>&1; do
-	# Increment the counter and recreate TAG with DATE
-	echo -e "${YELLOW}Tag $TAG already exists, incrementing.${NC}"
-	COUNTER=$((COUNTER + 1))
-	TAG="$DATE.$COUNTER"
+release_date=$(date +%Y.%-m.%-d)
+counter=0
+tag="$release_date.$counter"
+while git show-ref --verify --quiet "refs/tags/$tag"; do
+    counter=$((counter + 1))
+    if ((counter > 65535)); then
+        echo 'The daily version counter exceeds the extension manifest limit.' >&2
+        exit 1
+    fi
+    tag="$release_date.$counter"
 done
-echo
-echo -e -n "${YELLOW}Tagging current HEAD of master with tag ${TAG}. Are you sure? (y/n): ${NC}"
-read -p "" -n 1 -r
-echo
-if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-	echo -e "${RED}Tagging aborted.${NC}"
-	exit 1
+
+if $dry_run; then
+    echo "$tag (local tags only; no fetch, tag creation, or push)"
+    exit 0
 fi
 
-git tag -s $TAG
-
-echo -e -n "${YELLOW}Do you want to push the tag ${TAG} to the remote repository (which will cause a pre-release to get created)? (y/n): ${NC}"
-read -p "" -n 1 -r
-echo
-if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-	echo -e "${RED}Push aborted.${NC}"
-	exit 1
-fi
-
-git push origin $TAG
+git log -1 --oneline
+read -r -p "Create signed tag $tag? [y/N] " answer
+[[ $answer == y || $answer == Y ]] || exit 0
+git tag -s "$tag" -m "Sottaku-Yomitan $tag"
+read -r -p "Push $tag to build prerelease artifacts? [y/N] " answer
+[[ $answer == y || $answer == Y ]] || exit 0
+git push origin "refs/tags/$tag"

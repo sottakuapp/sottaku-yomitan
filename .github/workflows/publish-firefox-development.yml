@@ -20,11 +20,50 @@ jobs:
     outputs:
       hashes: ${{ steps.hash.outputs.hashes }}
     steps:
+      - name: Check release configuration
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+          REF_TYPE: ${{ github.ref_type }}
+          FF_OFFLINE_EXT_ID: ${{ secrets.FF_OFFLINE_EXT_ID }}
+          FF_JWT_ISSUER: ${{ secrets.FF_JWT_ISSUER }}
+          FF_JWT_SECRET: ${{ secrets.FF_JWT_SECRET }}
+        run: |
+          if [[ "$REF_TYPE" != tag || ! "$RELEASE_TAG" =~ ^[0-9]{4}\.([1-9]|1[0-2])\.([1-9]|[12][0-9]|3[01])\.(0|[1-9][0-9]{0,4})$ ]]; then
+            echo 'Use an existing YYYY.M.D.N release tag.' >&2
+            exit 1
+          fi
+          counter=${RELEASE_TAG##*.}
+          if ((counter > 65535)); then
+            echo 'Release counter exceeds the extension manifest limit.' >&2
+            exit 1
+          fi
+          missing=0
+          for name in FF_OFFLINE_EXT_ID FF_JWT_ISSUER FF_JWT_SECRET; do
+            if [[ -z "${!name}" ]]; then
+              echo "::error::Missing release secret: $name. Configure it or use the documented manual store upload."
+              missing=1
+            fi
+          done
+          exit "$missing"
+
       - uses: robinraju/release-downloader@28fc21f50d76778e7023361aa1f863e717d3d56f # pin@v1.13
         with:
           tag: ${{ github.ref_name }}
-          zipBall: true
           fileName: "*"
+
+      - name: Verify release artifacts
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+          ARTIFACT: sottaku-yomitan-firefox-dev.zip
+        run: |
+          sha256sum --check SHA256SUMS
+          python3 - <<'PYTHON'
+          import json, os, zipfile
+          with zipfile.ZipFile(os.environ["ARTIFACT"]) as archive:
+              manifest = json.loads(archive.read("manifest.json"))
+          if manifest["version"] != os.environ["RELEASE_TAG"]:
+              raise SystemExit("Artifact version does not match the release tag")
+          PYTHON
 
       - name: Sign Firefox xpi for offline distribution
         id: ffSignXpi
@@ -34,9 +73,9 @@ jobs:
           approvalTimeoutMs: 1200000
           validationTimeoutMs: 3600000
           extensionId: ${{ secrets.FF_OFFLINE_EXT_ID }}
-          zipFilePath: yomitan-firefox-dev.zip
-          sourcesZipFilePath: yomitan-${{ github.ref_name }}.zip
-          xpiFilePath: yomitan-firefox-dev.xpi
+          zipFilePath: sottaku-yomitan-firefox-dev.zip
+          sourcesZipFilePath: sottaku-yomitan-source-${{ github.ref_name }}.zip
+          xpiFilePath: sottaku-yomitan-firefox-dev.xpi
           jwtIssuer: ${{ secrets.FF_JWT_ISSUER }}
           jwtSecret: ${{ secrets.FF_JWT_SECRET }}
 
@@ -47,9 +86,10 @@ jobs:
         run: exit 1
 
       - name: Generate hashes
+        if: steps.ffSignXpi.outcome == 'success'
         id: hash
         run: |
-          echo "hashes=$(sha256sum yomitan-firefox-dev.xpi | base64 -w0)" >> "$GITHUB_OUTPUT"
+          echo "hashes=$(sha256sum sottaku-yomitan-firefox-dev.xpi | base64 -w0)" >> "$GITHUB_OUTPUT"
 
       - name: Upload offline xpi release asset
         id: uploadReleaseAsset
@@ -59,34 +99,34 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ inputs.upload_url }}
-          asset_path: yomitan-firefox-dev.xpi
-          asset_name: yomitan-firefox-dev.xpi
+          asset_path: sottaku-yomitan-firefox-dev.xpi
+          asset_name: sottaku-yomitan-firefox-dev.xpi
           asset_content_type: application/x-xpinstall
 
       # update updates.json so that all people who have the dev version installed get the new update
 
       - uses: actions/checkout@v6
+        if: steps.ffSignXpi.outcome == 'success'
         with:
           ref: metadata
 
       - name: Recreate updates.json
+        if: steps.ffSignXpi.outcome == 'success'
+        env:
+          ADDON_ID: ${{ secrets.FF_OFFLINE_EXT_ID }}
+          RELEASE_TAG: ${{ github.ref_name }}
+          UPDATE_URL: ${{ steps.uploadReleaseAsset.outputs.browser_download_url }}
         run: |
-          cat > updates.json << EOF
-          {
-              "addons": {
-                  "{2d13e145-294e-4ead-9bce-b4644b203a00}": {
-                      "updates": [
-                          {
-                              "version": "${{ github.ref_name }}",
-                              "update_link": "${{ steps.uploadReleaseAsset.outputs.browser_download_url }}"
-                          }
-                      ]
-                  }
-              }
-          }
-          EOF
+          python3 - <<'PYTHON'
+          import json, os
+          update = {"version": os.environ["RELEASE_TAG"], "update_link": os.environ["UPDATE_URL"]}
+          with open("updates.json", "w") as handle:
+              json.dump({"addons": {os.environ["ADDON_ID"]: {"updates": [update]}}}, handle, indent=2)
+              handle.write("\n")
+          PYTHON
 
       - name: Commit files
+        if: steps.ffSignXpi.outcome == 'success'
         continue-on-error: true
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
@@ -94,12 +134,14 @@ jobs:
           git commit -a -m "${{ github.ref_name }}"
 
       - name: Push changes
+        if: steps.ffSignXpi.outcome == 'success'
         uses: ad-m/github-push-action@d91a481090679876dfc4178fef17f286781251df # pin@master
         with:
           branch: metadata
 
   provenance:
     needs: [build]
+    if: needs.build.outputs.hashes != ''
     permissions:
       actions: read # To read the workflow path.
       id-token: write # To sign the provenance.

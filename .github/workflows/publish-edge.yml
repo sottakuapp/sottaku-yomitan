@@ -9,16 +9,56 @@ jobs:
     outputs:
       result: ${{ steps.webStorePublish.outcome }}
     steps:
+      - name: Check release configuration
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+          REF_TYPE: ${{ github.ref_type }}
+          EDGE_PRODUCT_ID: ${{ secrets.EDGE_PRODUCT_ID }}
+          EDGE_CLIENT_ID: ${{ secrets.EDGE_CLIENT_ID }}
+          EDGE_API_KEY: ${{ secrets.EDGE_API_KEY }}
+        run: |
+          if [[ "$REF_TYPE" != tag || ! "$RELEASE_TAG" =~ ^[0-9]{4}\.([1-9]|1[0-2])\.([1-9]|[12][0-9]|3[01])\.(0|[1-9][0-9]{0,4})$ ]]; then
+            echo 'Use an existing YYYY.M.D.N release tag.' >&2
+            exit 1
+          fi
+          counter=${RELEASE_TAG##*.}
+          if ((counter > 65535)); then
+            echo 'Release counter exceeds the extension manifest limit.' >&2
+            exit 1
+          fi
+          missing=0
+          for name in EDGE_PRODUCT_ID EDGE_CLIENT_ID EDGE_API_KEY; do
+            if [[ -z "${!name}" ]]; then
+              echo "::error::Missing release secret: $name. Configure it or use the documented manual store upload."
+              missing=1
+            fi
+          done
+          exit "$missing"
+
       - uses: robinraju/release-downloader@28fc21f50d76778e7023361aa1f863e717d3d56f # pin@v1.13
         with:
           tag: ${{ github.ref_name }}
           fileName: "*"
 
+      - name: Verify release artifacts
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+          ARTIFACT: sottaku-yomitan-edge.zip
+        run: |
+          sha256sum --check SHA256SUMS
+          python3 - <<'PYTHON'
+          import json, os, zipfile
+          with zipfile.ZipFile(os.environ["ARTIFACT"]) as archive:
+              manifest = json.loads(archive.read("manifest.json"))
+          if manifest["version"] != os.environ["RELEASE_TAG"]:
+              raise SystemExit("Artifact version does not match the release tag")
+          PYTHON
+
       - name: Publish on Microsoft Edge Addons
         uses: wdzeng/edge-addon@v2
         id: webStorePublish
         with:
-          product-id: 18e6c4cd-6383-4f38-95e9-92a629f60817
-          zip-path: yomitan-edge.zip
+          product-id: ${{ secrets.EDGE_PRODUCT_ID }}
+          zip-path: sottaku-yomitan-edge.zip
           client-id: ${{ secrets.EDGE_CLIENT_ID }}
           api-key: ${{ secrets.EDGE_API_KEY }}

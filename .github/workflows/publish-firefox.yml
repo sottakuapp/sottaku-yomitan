@@ -8,19 +8,58 @@ jobs:
     runs-on: ubuntu-latest
     environment: cd
     steps:
+      - name: Check release configuration
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+          REF_TYPE: ${{ github.ref_type }}
+          FF_EXTENSION_ID: ${{ secrets.FF_EXTENSION_ID }}
+          FF_JWT_ISSUER: ${{ secrets.FF_JWT_ISSUER }}
+          FF_JWT_SECRET: ${{ secrets.FF_JWT_SECRET }}
+        run: |
+          if [[ "$REF_TYPE" != tag || ! "$RELEASE_TAG" =~ ^[0-9]{4}\.([1-9]|1[0-2])\.([1-9]|[12][0-9]|3[01])\.(0|[1-9][0-9]{0,4})$ ]]; then
+            echo 'Use an existing YYYY.M.D.N release tag.' >&2
+            exit 1
+          fi
+          counter=${RELEASE_TAG##*.}
+          if ((counter > 65535)); then
+            echo 'Release counter exceeds the extension manifest limit.' >&2
+            exit 1
+          fi
+          missing=0
+          for name in FF_EXTENSION_ID FF_JWT_ISSUER FF_JWT_SECRET; do
+            if [[ -z "${!name}" ]]; then
+              echo "::error::Missing release secret: $name. Configure it or use the documented manual store upload."
+              missing=1
+            fi
+          done
+          exit "$missing"
+
       - uses: robinraju/release-downloader@28fc21f50d76778e7023361aa1f863e717d3d56f # pin@v1.13
         with:
           tag: ${{ github.ref_name }}
-          zipBall: true
           fileName: "*"
+
+      - name: Verify release artifacts
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+          ARTIFACT: sottaku-yomitan-firefox.zip
+        run: |
+          sha256sum --check SHA256SUMS
+          python3 - <<'PYTHON'
+          import json, os, zipfile
+          with zipfile.ZipFile(os.environ["ARTIFACT"]) as archive:
+              manifest = json.loads(archive.read("manifest.json"))
+          if manifest["version"] != os.environ["RELEASE_TAG"]:
+              raise SystemExit("Artifact version does not match the release tag")
+          PYTHON
 
       - name: Deploy to Firefox Addons
         id: addonsDeploy
         uses: cardinalby/webext-buildtools-firefox-addons-action@987e338100095280ec8daf942e5640aeb55d3647 # pin@v1.0.10
         continue-on-error: true
         with:
-          zipFilePath: yomitan-firefox.zip
-          sourcesZipFilePath: yomitan-${{ github.ref_name }}.zip
+          zipFilePath: sottaku-yomitan-firefox.zip
+          sourcesZipFilePath: sottaku-yomitan-source-${{ github.ref_name }}.zip
           extensionId: ${{ secrets.FF_EXTENSION_ID }}
           jwtIssuer: ${{ secrets.FF_JWT_ISSUER }}
           jwtSecret: ${{ secrets.FF_JWT_SECRET }}

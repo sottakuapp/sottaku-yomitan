@@ -9,6 +9,21 @@ jobs:
     runs-on: ubuntu-latest
     environment: cd
     steps:
+      - name: Check release configuration
+        env:
+          G_CLIENT_ID: ${{ secrets.G_CLIENT_ID }}
+          G_CLIENT_SECRET: ${{ secrets.G_CLIENT_SECRET }}
+          G_REFRESH_TOKEN: ${{ secrets.G_REFRESH_TOKEN }}
+        run: |
+          missing=0
+          for name in G_CLIENT_ID G_CLIENT_SECRET G_REFRESH_TOKEN; do
+            if [[ -z "${!name}" ]]; then
+              echo "::error::Missing release secret: $name. Configure it or use the documented manual store upload."
+              missing=1
+            fi
+          done
+          exit "$missing"
+
       - uses: cardinalby/google-api-fetch-token-action@f455422472a558d48d939e77a65cdcec38e707b5 # pin@v1.0.4
         with:
           clientId: ${{ secrets.G_CLIENT_ID }}
