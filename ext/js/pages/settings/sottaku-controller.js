@@ -697,7 +697,11 @@ export class SottakuController {
             this._client.setConfig({authToken: '', refreshToken: ''});
             this._updateStatus({authToken: '', user: null, enabled: false});
             await this._settingsController.refresh();
-            this._setStatus(getMessage('settings_sottaku_status_signed_out') || 'Signed out of Sottaku', false);
+            this._setStatus(
+                getMessage('settings_sottaku_status_signed_out') || 'Signed out of Sottaku',
+                false,
+                'settings_sottaku_status_signed_out',
+            );
         } catch (error) {
             this._setStatus(toError(error).message, true);
         } finally {
@@ -736,13 +740,17 @@ export class SottakuController {
         const user = override && 'user' in override ? override.user : sottaku.user;
         const enabled = override && 'enabled' in override ? override.enabled : sottaku.enabled;
         const isLinked = Boolean(enabled && authToken);
-        let message = getMessage('settings_sottaku_status_not_connected') || 'Not connected';
+        let messageKey = 'settings_sottaku_status_not_connected';
+        let fallback = 'Not connected';
+        const name = isLinked ? this._getUserDisplayName(user) : '';
         if (isLinked) {
-            message = this._getSignedInStatusText(user);
+            messageKey = name ? 'settings_sottaku_status_signed_in_as' : 'settings_sottaku_status_signed_in';
+            fallback = name ? `Signed in as ${name}` : 'Signed in';
         }
+        const substitutions = name ? [name] : [];
         this._authForm.hidden = isLinked;
         this._linkedActions.hidden = !isLinked;
-        this._setStatus(message, !isLinked && !authToken);
+        this._setStatus(getMessage(messageKey, substitutions) || fallback, !isLinked && !authToken, messageKey, substitutions);
     }
 
     /** */
@@ -820,18 +828,6 @@ export class SottakuController {
 
     /**
      * @param {unknown} user
-     * @returns {string}
-     */
-    _getSignedInStatusText(user) {
-        const name = this._getUserDisplayName(user);
-        if (name) {
-            return getMessage('settings_sottaku_status_signed_in_as', [name]) || `Signed in as ${name}`;
-        }
-        return getMessage('settings_sottaku_status_signed_in') || 'Signed in';
-    }
-
-    /**
-     * @param {unknown} user
      * @returns {import('settings').SottakuUser|null}
      */
     _normalizeUser(user) {
@@ -876,11 +872,22 @@ export class SottakuController {
     /**
      * @param {string} text
      * @param {boolean} isError
+     * @param {string} [messageKey]
+     * @param {string[]} [substitutions]
      */
-    _setStatus(text, isError) {
-        // The account locale may finish loading after this dynamic status.
-        // Do not let that pass restore the static "Not connected" placeholder.
-        delete this._statusNode.dataset.i18n;
+    _setStatus(text, isError, messageKey = '', substitutions = []) {
+        // Account locale loading is asynchronous. Keep the current status key
+        // for that localization pass, and clear it for raw server messages.
+        if (messageKey) {
+            this._statusNode.dataset.i18n = messageKey;
+        } else {
+            delete this._statusNode.dataset.i18n;
+        }
+        if (substitutions.length > 0) {
+            this._statusNode.dataset.i18nArgs = JSON.stringify(substitutions);
+        } else {
+            delete this._statusNode.dataset.i18nArgs;
+        }
         this._statusNode.textContent = text;
         this._statusNode.classList.toggle('danger-text', !!isError);
     }
