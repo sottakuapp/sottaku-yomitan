@@ -486,14 +486,12 @@ export class API {
      * @param {Transferable[]} transferables
      */
     _pmInvoke(action, params, transferables) {
-        // on firefox, there is no service worker, so we instead use a MessageChannel which is established
-        // via a handshake via a SharedWorker
-        if (!('serviceWorker' in navigator)) {
-            if (this._backendPort === null) {
-                log.error('no backend port available');
-                return;
-            }
+        // Background pages provide a SharedWorker bridge, even in browsers
+        // which also expose service workers. Use the configured transport.
+        if (this._backendPort !== null) {
             this._backendPort.postMessage({action, params}, transferables);
+        } else if (!('serviceWorker' in navigator)) {
+            log.error('no backend port available');
         } else {
             void navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
                 if (serviceWorkerRegistration.active !== null) {
