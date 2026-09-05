@@ -19,6 +19,19 @@
 import fs from 'fs';
 import path from 'path';
 
+// 7-Zip's recursive exclusions and the in-process builders share these patterns.
+export const EXTENSION_METADATA_PATTERNS = Object.freeze(['.DS_Store', '._*', '__MACOSX']);
+
+/**
+ * @param {string} relativePath
+ * @returns {boolean}
+ */
+export function isExtensionMetadataPath(relativePath) {
+    return relativePath.split(/[\\/]/).some((part) => EXTENSION_METADATA_PATTERNS.some((pattern) => (
+        pattern.endsWith('*') ? part.startsWith(pattern.slice(0, -1)) : part === pattern
+    )));
+}
+
 /**
  * Rebuild an unpacked extension from source with the same exclusions as ZIP builds.
  * @param {string} sourceDirectory
@@ -36,6 +49,6 @@ export function copyExtensionDirectory(sourceDirectory, outputDirectory, exclude
     const excludedPaths = new Set(excludeFiles.map((file) => path.resolve(source, file)));
     fs.cpSync(source, output, {
         recursive: true,
-        filter: (file) => !excludedPaths.has(path.resolve(file)),
+        filter: (file) => !excludedPaths.has(path.resolve(file)) && !isExtensionMetadataPath(path.relative(source, file)),
     });
 }

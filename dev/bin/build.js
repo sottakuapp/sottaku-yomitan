@@ -26,7 +26,7 @@ import path from 'path';
 import readline from 'readline';
 import {parseArgs} from 'util';
 import {buildLibs} from '../build-libs.js';
-import {copyExtensionDirectory} from '../extension-build-util.js';
+import {copyExtensionDirectory, EXTENSION_METADATA_PATTERNS, isExtensionMetadataPath} from '../extension-build-util.js';
 import {ManifestUtil} from '../manifest-util.js';
 import {getAllFiles} from '../util.js';
 
@@ -48,7 +48,7 @@ function getDefaultVersion(date = new Date()) {
  * @param {?import('jszip').OnUpdateCallback} onUpdate
  * @param {boolean} dryRun
  */
-async function createZip(directory, excludeFiles, outputFileName, sevenZipExes, onUpdate, dryRun) {
+export async function createZip(directory, excludeFiles, outputFileName, sevenZipExes, onUpdate, dryRun) {
     try {
         fs.unlinkSync(outputFileName);
     } catch (e) {
@@ -58,7 +58,10 @@ async function createZip(directory, excludeFiles, outputFileName, sevenZipExes, 
     if (!dryRun) {
         for (const exe of sevenZipExes) {
             try {
-                const excludeArguments = excludeFiles.map((excludeFilePath) => `-x!${excludeFilePath}`);
+                const excludeArguments = [
+                    ...excludeFiles.map((excludeFilePath) => `-x!${excludeFilePath}`),
+                    ...EXTENSION_METADATA_PATTERNS.map((pattern) => `-xr!${pattern}`),
+                ];
                 childProcess.execFileSync(
                     exe,
                     [
@@ -88,7 +91,7 @@ async function createZip(directory, excludeFiles, outputFileName, sevenZipExes, 
  * @param {boolean} dryRun
  */
 async function createJSZip(directory, excludeFiles, outputFileName, onUpdate, dryRun) {
-    const files = getAllFiles(directory);
+    const files = getAllFiles(directory, (fileName) => !isExtensionMetadataPath(fileName));
     removeItemsFromArray(files, excludeFiles);
     const zip = new JSZip();
     for (const fileName of files) {
@@ -300,4 +303,6 @@ export async function main() {
     }
 }
 
-await main();
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+    await main();
+}

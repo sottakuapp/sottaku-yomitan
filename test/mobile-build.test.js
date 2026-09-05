@@ -15,11 +15,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import childProcess from 'child_process';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
-import {afterEach, describe, expect, test} from 'vitest';
-import {copyExtensionDirectory} from '../dev/extension-build-util.js';
+import JSZip from 'jszip';
+import {afterEach, describe, expect, test, vi} from 'vitest';
+import {createZip} from '../dev/bin/build.js';
+import {copyExtensionDirectory, isExtensionMetadataPath} from '../dev/extension-build-util.js';
 import {ManifestUtil} from '../dev/manifest-util.js';
 
 const util = new ManifestUtil();
@@ -28,6 +31,7 @@ const sourceDirectory = path.resolve(import.meta.dirname, '../ext');
 const temporaryDirectories = [];
 
 afterEach(() => {
+    vi.restoreAllMocks();
     for (const directory of temporaryDirectories.splice(0)) {
         fs.rmSync(directory, {recursive: true, force: true});
     }
@@ -79,5 +83,46 @@ describe('mobile extension packaging', () => {
         expect(() => copyExtensionDirectory(source, source, [])).toThrow('outside the source');
         expect(() => copyExtensionDirectory(source, directory, [])).toThrow('outside the source');
         expect(fs.existsSync(path.join(source, 'background.html'))).toBe(true);
+    });
+
+    test.each(['.DS_Store', 'js/.DS_Store', '._manifest.json', 'js/._content.js', '__MACOSX/js/content.js', 'js/__MACOSX/content.js', 'js\\nested\\._content.js'])('recognizes metadata at any depth: %s', (fileName) => {
+        expect(isExtensionMetadataPath(fileName)).toBe(true);
+    });
+
+    test.each([
+        {name: 'JSZip', executables: []},
+        ...(process.env.SOTTAKU_TEST_7ZIP ? [{name: '7-Zip', executables: [process.env.SOTTAKU_TEST_7ZIP]}] : []),
+    ])('$name and directory builds preserve runtime files while removing nested Finder metadata', async ({executables}) => {
+        const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'sottaku-extension-metadata-'));
+        temporaryDirectories.push(directory);
+        const source = path.join(directory, 'source');
+        const output = path.join(directory, 'output');
+        const zipPath = path.join(directory, 'extension.zip');
+        const runtimeFiles = ['manifest.json', 'background.html', 'js/content.js', 'js/.runtime-config', 'images/DS_Store.png', 'js/__MACOSX-helper.js'];
+        const metadataFiles = ['.DS_Store', 'js/.DS_Store', '._manifest.json', 'js/nested/._content.js', '__MACOSX/js/content.js', 'js/__MACOSX/content.js'];
+        for (const fileName of [...runtimeFiles, ...metadataFiles, 'js/offscreen.js']) {
+            const file = path.join(source, fileName);
+            fs.mkdirSync(path.dirname(file), {recursive: true});
+            fs.writeFileSync(file, `contents:${fileName}`);
+        }
+        copyExtensionDirectory(source, output, ['js/offscreen.js']);
+        // Exercise only this fixture, selecting JSZip or an optional real 7-Zip executable.
+        const archiveTool = vi.spyOn(childProcess, 'execFileSync');
+        await createZip(source, ['js/offscreen.js'], zipPath, executables, null, false);
+        if (executables.length > 0) {
+            expect(archiveTool).toHaveBeenCalledOnce();
+            expect(archiveTool.mock.results[0].type).toBe('return');
+        }
+        const archive = await JSZip.loadAsync(fs.readFileSync(zipPath));
+        expect(Object.keys(archive.files).filter((fileName) => !archive.files[fileName].dir).sort()).toEqual([...runtimeFiles].sort());
+        for (const fileName of runtimeFiles) {
+            expect(fs.readFileSync(path.join(output, fileName), 'utf8')).toBe(`contents:${fileName}`);
+            expect(await archive.file(fileName)?.async('string')).toBe(`contents:${fileName}`);
+        }
+        for (const fileName of [...metadataFiles, 'js/offscreen.js']) {
+            expect(fs.existsSync(path.join(output, fileName))).toBe(false);
+            expect(archive.file(fileName)).toBeNull();
+            expect(fs.existsSync(path.join(source, fileName))).toBe(true);
+        }
     });
 });
