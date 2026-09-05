@@ -37,7 +37,7 @@
                 <label class="toggle"><input type="checkbox" id="recommended-permissions-toggle" data-origin="&lt;all_urls&gt;"><span class="toggle-body"><span class="toggle-track"></span><span class="toggle-knob"></span></span></label>
             </div>
         </div></div>
-        <div class="settings-item"><div class="settings-item-inner">
+        <div class="settings-item" data-hide-for-browser="safari"><div class="settings-item-inner">
             <div class="settings-item-left">
                 <div class="settings-item-label" data-i18n="welcome_permissions_enable_optional_label">Enable optional permissions</div>
                 <div class="settings-item-description" data-i18n="welcome_permissions_enable_optional_description">This allows Sottaku-Yomitan to read the clipboard and communicate with external programs.</div>
@@ -48,8 +48,8 @@
         </div></div>
         <div class="settings-item"><div class="settings-item-inner">
             <div class="settings-item-left">
-                <div class="settings-item-description" data-hide-for-browser="firefox firefox-mobile" data-i18n-html="welcome_permissions_more_info_chrome">Further configuration is available on the <a href="/permissions.html" rel="noopener">Permissions page</a> and the web browser's <a tabindex="0" class="extension-settings-link" data-special-url="chrome://extensions/?id={id}">extension settings page</a>.</div>
-                <div class="settings-item-description" data-show-for-browser="firefox firefox-mobile" data-i18n-html="welcome_permissions_more_info_firefox">Further configuration is available on the <a href="/permissions.html" rel="noopener">Permissions page</a> and the web browser's extension settings page.</div>
+                <div class="settings-item-description" data-hide-for-browser="firefox firefox-mobile safari" data-i18n-html="welcome_permissions_more_info_chrome">Further configuration is available on the <a href="/permissions.html" rel="noopener">Permissions page</a> and the web browser's <a tabindex="0" class="extension-settings-link" data-special-url="chrome://extensions/?id={id}">extension settings page</a>.</div>
+                <div class="settings-item-description" data-show-for-browser="firefox firefox-mobile safari" data-i18n-html="welcome_permissions_more_info_firefox">Further configuration is available on the <a href="/permissions.html" rel="noopener">Permissions page</a> and the web browser's extension settings page.</div>
                 <div class="danger-text margin-above" id="permissions-disabled" hidden><strong data-i18n="welcome_permissions_disabled_warning">Sottaku-Yomitan features will be limited if the recommended permissions are not enabled.</strong></div>
                 <div class="success-text margin-above" id="recommended-permissions-enabled" hidden><strong data-i18n="welcome_permissions_recommended_enabled">Essential Sottaku-Yomitan features are available.</strong></div>
                 <div class="success-text margin-above" id="full-permissions-enabled" hidden><strong data-i18n="welcome_permissions_full_enabled">All Sottaku-Yomitan features are available.</strong></div>

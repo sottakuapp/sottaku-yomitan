@@ -878,6 +878,9 @@ export class SottakuController {
      * @param {boolean} isError
      */
     _setStatus(text, isError) {
+        // The account locale may finish loading after this dynamic status.
+        // Do not let that pass restore the static "Not connected" placeholder.
+        delete this._statusNode.dataset.i18n;
         this._statusNode.textContent = text;
         this._statusNode.classList.toggle('danger-text', !!isError);
     }

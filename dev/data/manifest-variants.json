@@ -348,44 +348,62 @@
         {
             "name": "firefox-android",
             "inherit": "firefox",
-            "fileName": "sottaku-yomitan-firefox-android"
+            "fileName": "sottaku-yomitan-firefox-android",
+            "excludeFiles": [
+                "sw.js",
+                "offscreen.html",
+                "js/background/offscreen.js",
+                "js/background/offscreen-main.js"
+            ]
         },
         {
             "name": "safari",
             "modifications": [
                 {
-                    "action": "set",
+                    "action": "delete",
                     "path": [
-                        "author"
-                    ],
-                    "value": "Sottaku"
+                        "browser_specific_settings"
+                    ]
                 },
                 {
-                    "action": "remove",
+                    "action": "delete",
+                    "path": [
+                        "minimum_chrome_version"
+                    ]
+                },
+                {
+                    "action": "delete",
+                    "path": [
+                        "omnibox"
+                    ]
+                },
+                {
+                    "action": "delete",
                     "path": [
                         "optional_permissions"
-                    ],
-                    "item": "clipboardRead"
+                    ]
                 },
                 {
                     "action": "remove",
                     "path": [
                         "permissions"
                     ],
-                    "item": "offscreen"
+                    "item": "contextMenus"
                 },
                 {
                     "action": "delete",
                     "path": [
-                        "sandbox"
+                        "options_ui",
+                        "open_in_tab"
                     ]
                 },
                 {
                     "action": "set",
                     "path": [
-                        "content_security_policy"
+                        "background",
+                        "persistent"
                     ],
-                    "value": "default-src 'self'; object-src 'none'; base-uri 'none'; script-src 'self' 'unsafe-eval'; img-src 'self' blob: data: https://sottaku.app https://staging.sottaku.app; style-src 'self' 'unsafe-inline'; media-src 'self' blob: https://sottaku.app https://staging.sottaku.app https://cdn.sottaku.app; connect-src 'self' https://sottaku.app https://staging.sottaku.app https://cdn.sottaku.app http://127.0.0.1:* http://localhost:*"
+                    "value": false
                 }
             ],
             "excludeFiles": [
@@ -393,7 +411,9 @@
                 "offscreen.html",
                 "js/background/offscreen.js",
                 "js/background/offscreen-main.js"
-            ]
+            ],
+            "inherit": "firefox",
+            "fileName": "sottaku-yomitan-safari"
         },
         {
             "name": "edge",

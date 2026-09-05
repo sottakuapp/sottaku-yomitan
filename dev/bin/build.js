@@ -26,6 +26,7 @@ import path from 'path';
 import readline from 'readline';
 import {parseArgs} from 'util';
 import {buildLibs} from '../build-libs.js';
+import {copyExtensionDirectory} from '../extension-build-util.js';
 import {ManifestUtil} from '../manifest-util.js';
 import {getAllFiles} from '../util.js';
 
@@ -213,7 +214,7 @@ async function build(buildDir, extDir, manifestUtil, variantNames, manifestPath,
                 }
             } else {
                 if (!dryRun) {
-                    fs.cpSync(extDir, fullFileName, {recursive: true});
+                    copyExtensionDirectory(extDir, fullFileName, excludeFiles);
                 }
             }
         }

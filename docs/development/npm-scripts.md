@@ -20,6 +20,9 @@ Scripts can be executed by running `npm run <name>`.
 - `build:libs`
   Rebuilds all of the third-party dependencies that the extension uses.
 
+- `build:safari`
+  Builds unpacked Safari resources without changing the desktop manifest. The existing iOS app's Safari extension target invokes this entry point during its native build. See [mobile delivery](mobile-delivery.md) for packaging and validation requirements.
+
 - `build:serve:firefox-android`
 
   > `adb` and `web-ext` are required to be installed on your computer for this command to work!
