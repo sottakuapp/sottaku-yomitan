@@ -197,11 +197,16 @@ production extension resources:
    settings. Settings must offer **Use browser session** with no direct password
    controls. Approve the intended account on the website and verify the connected
    account; signing in alone must not approve the extension.
-2. Tap a supported-language word near the viewport edges, scroll the popup and
-   page naturally, and dismiss it with Close. Save once, confirm the card belongs
-   to the same account and verify its disabled saved state on reopening.
+2. Tap a supported-language word near the viewport edges, confirm the popup
+   contents are reachable, and dismiss it with Close. Save once, confirm the card
+   belongs to the same account and verify its disabled saved state on reopening.
 3. Background and resume Safari, then repeat a lookup and dismissal with the
    account and site permission preserved.
+
+Record the actual scrolling input and result. If automation cannot deliver a
+natural swipe and the same failure occurs without extension access, retain
+natural swipe scrolling as unverified. Keyboard scrolling does not establish a
+physical-touch pass; this limitation remains explicit in the release evidence.
 
 Check these shared flows once per release candidate, on either device:
 
@@ -219,8 +224,9 @@ Check these shared flows once per release candidate, on either device:
    window on each device are not required for this extension release. The
    automated tests below retain approval, timeout and stale-flow coverage.
 4. Confirm an extension-saved card appears in the same account's card interface,
-   open its normal review flow and complete one review. A preview or merely
-   opening review does not establish review completion.
+   preview and reveal it, and open the normal review flow. This verifies saved-card
+   access and review handoff without grading unrelated account cards. Do not
+   describe a preview or queue entry as a completed review.
 
 Retain dated evidence for the tested source revision. Repeat a completed check
 when a relevant code, packaging or environment change invalidates that evidence.
