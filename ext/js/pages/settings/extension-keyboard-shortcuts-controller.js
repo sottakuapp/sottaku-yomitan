@@ -19,6 +19,7 @@
 import {EventListenerCollection} from '../../core/event-listener-collection.js';
 import {isObjectNotArray} from '../../core/object-utilities.js';
 import {querySelectorNotNull} from '../../dom/query-selector.js';
+import {supportsExtensionCommands} from '../../extension/command-support.js';
 import {HotkeyUtil} from '../../input/hotkey-util.js';
 import {KeyboardMouseInputField} from './keyboard-mouse-input-field.js';
 
@@ -41,6 +42,8 @@ export class ExtensionKeyboardShortcutController {
         this._os = null;
         /** @type {ExtensionKeyboardShortcutHotkeyEntry[]} */
         this._entries = [];
+        /** @type {boolean} */
+        this._supportsCommands = false;
     }
 
     /** @type {HotkeyUtil} */
@@ -50,6 +53,15 @@ export class ExtensionKeyboardShortcutController {
 
     /** */
     async prepare() {
+        const environment = await this._settingsController.application.api.getEnvironmentInfo();
+        const {platform: {os}} = environment;
+        this._os = os;
+        this._hotkeyUtil.os = os;
+        this._supportsCommands = supportsExtensionCommands(environment);
+        for (const node of document.querySelectorAll('[data-modal-action="show,extension-keyboard-shortcuts"]')) {
+            /** @type {HTMLElement} */ (node).hidden = !this._supportsCommands;
+        }
+
         const canResetCommands = this.canResetCommands();
         const canModifyCommands = this.canModifyCommands();
         this._resetButton.hidden = !canResetCommands;
@@ -61,10 +73,6 @@ export class ExtensionKeyboardShortcutController {
         if (canModifyCommands) {
             this._clearButton.addEventListener('click', this._onClearClick.bind(this));
         }
-
-        const {platform: {os}} = await this._settingsController.application.api.getEnvironmentInfo();
-        this._os = os;
-        this._hotkeyUtil.os = os;
 
         const commands = await this._getCommands();
         this._setupCommands(commands);
@@ -99,6 +107,7 @@ export class ExtensionKeyboardShortcutController {
      * @param {import('input').Modifier[]} modifiers
      */
     async updateCommand(name, key, modifiers) {
+        if (!this.canModifyCommands()) { return; }
         // Firefox-only; uses Promise API
         const shortcut = this._hotkeyUtil.convertInputToCommand(key, modifiers);
         await browser.commands.update({name, shortcut});
@@ -109,6 +118,7 @@ export class ExtensionKeyboardShortcutController {
      */
     canResetCommands() {
         return (
+            this._supportsCommands &&
             typeof browser === 'object' && browser !== null &&
             typeof browser.commands === 'object' && browser.commands !== null &&
             typeof browser.commands.reset === 'function'
@@ -120,6 +130,7 @@ export class ExtensionKeyboardShortcutController {
      */
     canModifyCommands() {
         return (
+            this._supportsCommands &&
             typeof browser === 'object' && browser !== null &&
             typeof browser.commands === 'object' && browser.commands !== null &&
             typeof browser.commands.update === 'function'
@@ -149,7 +160,7 @@ export class ExtensionKeyboardShortcutController {
      */
     _getCommands() {
         return new Promise((resolve, reject) => {
-            if (!(isObjectNotArray(chrome.commands) && typeof chrome.commands.getAll === 'function')) {
+            if (!this._supportsCommands || !(isObjectNotArray(chrome.commands) && typeof chrome.commands.getAll === 'function')) {
                 resolve([]);
                 return;
             }
@@ -196,7 +207,7 @@ export class ExtensionKeyboardShortcutController {
 
     /** */
     async _resetAllCommands() {
-        if (!this.canModifyCommands()) { return; }
+        if (!this.canResetCommands()) { return; }
 
         let commands = await this._getCommands();
         const promises = [];
@@ -234,6 +245,7 @@ export class ExtensionKeyboardShortcutController {
      * @param {string} name
      */
     async _resetCommand(name) {
+        if (!this.canResetCommands()) { return; }
         // Firefox-only; uses Promise API
         await browser.commands.reset(name);
     }

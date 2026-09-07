@@ -19,6 +19,7 @@
 import {parseJson} from '../core/json.js';
 import {isObjectNotArray} from '../core/object-utilities.js';
 import {getMessage} from '../dom/i18n.js';
+import {supportsExtensionCommands} from '../extension/command-support.js';
 import {HotkeyUtil} from './hotkey-util.js';
 
 export class HotkeyHelpController {
@@ -31,14 +32,18 @@ export class HotkeyHelpController {
         this._globalActionHotkeys = new Map();
         /** @type {RegExp} */
         this._replacementPattern = /\{0\}/g;
+        /** @type {boolean} */
+        this._supportsCommands = false;
     }
 
     /**
      * @param {import('../comm/api.js').API} api
      */
     async prepare(api) {
-        const {platform: {os}} = await api.getEnvironmentInfo();
+        const environment = await api.getEnvironmentInfo();
+        const {platform: {os}} = environment;
         this._hotkeyUtil.os = os;
+        this._supportsCommands = supportsExtensionCommands(environment);
         await this._setupGlobalCommands(this._globalActionHotkeys);
     }
 
@@ -121,7 +126,7 @@ export class HotkeyHelpController {
      */
     _getAllCommands() {
         return new Promise((resolve, reject) => {
-            if (!(isObjectNotArray(chrome.commands) && typeof chrome.commands.getAll === 'function')) {
+            if (!this._supportsCommands || !(isObjectNotArray(chrome.commands) && typeof chrome.commands.getAll === 'function')) {
                 resolve([]);
                 return;
             }
