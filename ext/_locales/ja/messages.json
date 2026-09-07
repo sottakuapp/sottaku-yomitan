@@ -1625,6 +1625,12 @@
     "settings_sottaku_account_description": {
         "message": "「ブラウザセッションを使用」をクリックして sottaku.app にサインインしているアカウントを連携します（Pro が必要）。"
     },
+    "settings_sottaku_safari_permission_required": {
+        "message": "Safariの拡張機能設定でSottaku-Yomitanに$1へのアクセスを許可してから、もう一度連携してください。"
+    },
+    "settings_sottaku_safari_link_failed": {
+        "message": "Sottakuに接続できませんでした。インターネット接続を確認し、Safariの拡張機能設定でSottaku-Yomitanに$1へのアクセスを許可してから、もう一度連携してください。"
+    },
     "settings_sottaku_safari_sign_in_description": {
         "message": "Sottakuのウェブサイトでサインインし、必要なパスワードの再設定やセキュリティ確認を済ませてから、連携を承認してください。Proへの登録が必要です。"
     },

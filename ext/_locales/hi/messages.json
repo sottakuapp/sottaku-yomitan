@@ -1625,6 +1625,12 @@
     "settings_sottaku_account_description": {
         "message": "sottaku.app पर जिस खाते से आप साइन इन हैं, उसे लिंक करने के लिए \"ब्राउज़र सत्र का उपयोग करें\" पर क्लिक करें (Pro आवश्यक)।"
     },
+    "settings_sottaku_safari_permission_required": {
+        "message": "Safari की एक्सटेंशन सेटिंग में Sottaku-Yomitan को $1 का ऐक्सेस दें, फिर खाता दोबारा लिंक करें।"
+    },
+    "settings_sottaku_safari_link_failed": {
+        "message": "Sottaku से कनेक्ट नहीं हो सका। अपना इंटरनेट कनेक्शन जाँचें और Safari की एक्सटेंशन सेटिंग में Sottaku-Yomitan को $1 का ऐक्सेस दें, फिर खाता दोबारा लिंक करें।"
+    },
     "settings_sottaku_safari_sign_in_description": {
         "message": "Sottaku की वेबसाइट पर साइन इन करें, ज़रूरत हो तो वहीं पासवर्ड की रिकवरी या सुरक्षा जाँच पूरी करें, फिर कनेक्शन को मंज़ूरी दें। Pro ज़रूरी है।"
     },

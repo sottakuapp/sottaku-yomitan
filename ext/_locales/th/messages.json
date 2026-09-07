@@ -1625,6 +1625,12 @@
     "settings_sottaku_account_description": {
         "message": "คลิก \"ใช้เซสชันเบราว์เซอร์\" เพื่อเชื่อมโยงบัญชีที่คุณลงชื่อเข้าใช้ที่ sottaku.app (ต้องมี Pro)"
     },
+    "settings_sottaku_safari_permission_required": {
+        "message": "อนุญาตให้ Sottaku-Yomitan เข้าถึง $1 ในการตั้งค่าส่วนขยายของ Safari แล้วลองเชื่อมโยงบัญชีอีกครั้ง"
+    },
+    "settings_sottaku_safari_link_failed": {
+        "message": "เชื่อมต่อกับ Sottaku ไม่ได้ โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ตและอนุญาตให้ Sottaku-Yomitan เข้าถึง $1 ในการตั้งค่าส่วนขยายของ Safari แล้วลองเชื่อมโยงบัญชีอีกครั้ง"
+    },
     "settings_sottaku_safari_sign_in_description": {
         "message": "เข้าสู่ระบบบนเว็บไซต์ Sottaku กู้คืนรหัสผ่านหรือตรวจสอบความปลอดภัยให้เสร็จหากจำเป็น จากนั้นอนุมัติการเชื่อมต่อ ต้องสมัคร Pro"
     },

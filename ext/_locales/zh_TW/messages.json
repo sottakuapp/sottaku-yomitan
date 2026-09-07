@@ -1625,6 +1625,12 @@
     "settings_sottaku_account_description": {
         "message": "點擊「使用瀏覽器工作階段」以連結你在 sottaku.app 登入的帳戶（需要 Pro）。"
     },
+    "settings_sottaku_safari_permission_required": {
+        "message": "請在 Safari 延伸功能設定中允許 Sottaku-Yomitan 存取 $1，然後重新連結帳號。"
+    },
+    "settings_sottaku_safari_link_failed": {
+        "message": "無法連線至 Sottaku。請檢查網路連線，並在 Safari 延伸功能設定中允許 Sottaku-Yomitan 存取 $1，然後重新連結帳號。"
+    },
     "settings_sottaku_safari_sign_in_description": {
         "message": "請在 Sottaku 網站上登入，完成所需的密碼重設或安全驗證，再核准連結。需要訂閱 Pro。"
     },

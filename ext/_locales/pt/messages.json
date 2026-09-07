@@ -1625,6 +1625,12 @@
     "settings_sottaku_account_description": {
         "message": "Clique em \"Usar sessão do navegador\" para vincular a conta em que você está conectado no sottaku.app (Pro necessário)."
     },
+    "settings_sottaku_safari_permission_required": {
+        "message": "Permita que o Sottaku-Yomitan acesse $1 nos ajustes de extensões do Safari e tente vincular sua conta novamente."
+    },
+    "settings_sottaku_safari_link_failed": {
+        "message": "Não foi possível conectar ao Sottaku. Confira sua conexão com a internet e permita que o Sottaku-Yomitan acesse $1 nos ajustes de extensões do Safari. Depois, tente vincular sua conta novamente."
+    },
     "settings_sottaku_safari_sign_in_description": {
         "message": "Entre no site do Sottaku, recupere a senha ou conclua as verificações de segurança necessárias e depois autorize a conexão. É necessário ter Pro."
     },

@@ -1625,6 +1625,12 @@
     "settings_sottaku_account_description": {
         "message": "Click \"Use browser session\" to link the account you are signed into at sottaku.app (Pro required)."
     },
+    "settings_sottaku_safari_permission_required": {
+        "message": "Allow Sottaku-Yomitan to access $1 in Safari’s extension settings, then try linking again."
+    },
+    "settings_sottaku_safari_link_failed": {
+        "message": "Couldn’t connect to Sottaku. Check your internet connection and allow Sottaku-Yomitan to access $1 in Safari’s extension settings, then try linking again."
+    },
     "settings_sottaku_safari_sign_in_description": {
         "message": "Sign in on the Sottaku website, complete any password recovery or security checks there, then approve the connection. Pro is required."
     },

@@ -1625,6 +1625,12 @@
     "settings_sottaku_account_description": {
         "message": "Нажмите «Использовать сеанс браузера», чтобы связать аккаунт, в который вы вошли на sottaku.app (требуется Pro)."
     },
+    "settings_sottaku_safari_permission_required": {
+        "message": "Разрешите Sottaku-Yomitan доступ к $1 в настройках расширений Safari, затем попробуйте привязать аккаунт ещё раз."
+    },
+    "settings_sottaku_safari_link_failed": {
+        "message": "Не удалось подключиться к Sottaku. Проверьте подключение к интернету и разрешите Sottaku-Yomitan доступ к $1 в настройках расширений Safari, затем попробуйте привязать аккаунт ещё раз."
+    },
     "settings_sottaku_safari_sign_in_description": {
         "message": "Войдите на сайте Sottaku, при необходимости восстановите пароль или пройдите проверку безопасности, затем подтвердите подключение. Требуется подписка Pro."
     },

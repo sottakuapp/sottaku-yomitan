@@ -1625,6 +1625,12 @@
     "settings_sottaku_account_description": {
         "message": "I-click ang \"Gamitin ang session ng browser\" para i-link ang account na naka-sign in ka sa sottaku.app (kailangan ng Pro)."
     },
+    "settings_sottaku_safari_permission_required": {
+        "message": "Payagan ang Sottaku-Yomitan na i-access ang $1 sa mga setting ng extension ng Safari, pagkatapos ay subukang i-link muli ang account."
+    },
+    "settings_sottaku_safari_link_failed": {
+        "message": "Hindi makakonekta sa Sottaku. Tingnan ang koneksyon sa internet at payagan ang Sottaku-Yomitan na i-access ang $1 sa mga setting ng extension ng Safari, pagkatapos ay subukang i-link muli ang account."
+    },
     "settings_sottaku_safari_sign_in_description": {
         "message": "Mag-sign in sa website ng Sottaku, kumpletuhin doon ang pagbawi ng password o mga pagsusuri sa seguridad kung kailangan, at pagkatapos ay aprubahan ang koneksyon. Kailangan ang Pro."
     },

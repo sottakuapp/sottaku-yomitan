@@ -19,6 +19,7 @@ import {parseJson} from '../../core/json.js';
 import {isObjectNotArray} from '../../core/object-utilities.js';
 import {toError} from '../../core/to-error.js';
 import {SottakuClient} from '../../comm/sottaku-client.js';
+import {setPermissionsGranted} from '../../data/permissions-util.js';
 import {getMessage} from '../../dom/i18n.js';
 import {querySelectorNotNull} from '../../dom/query-selector.js';
 import {
@@ -681,11 +682,24 @@ export class SottakuController {
         e.preventDefault();
         if (this._busy) { return; }
         this._clearPasswordStepUpSecrets();
+        const isSafari = this._usesBrowserSessionSignIn();
+        const apiUrl = new URL(this._client.apiBaseUrl);
+        let safariErrorKey = 'settings_sottaku_safari_permission_required';
         /** @type {chrome.tabs.Tab|null} */
         let tab = null;
         try {
             this._busy = true;
             this._setStatus(getMessage('settings_sottaku_use_browser_session_title') || 'Use your signed-in browser session', false);
+            if (isSafari) {
+                // Request synchronously from the click gesture, before opening approval or polling.
+                // Safari can withhold site access even for a declared host permission.
+                const granted = await setPermissionsGranted({origins: [`${apiUrl.origin}/*`]}, true);
+                if (!granted) {
+                    this._setStatus(getMessage(safariErrorKey, [apiUrl.host]), true, safariErrorKey, [apiUrl.host]);
+                    return;
+                }
+                safariErrorKey = 'settings_sottaku_safari_link_failed';
+            }
             const {linkToken, url} = this._client.createBrowserLink();
             tab = await this._openTab(url);
             for (let attempt = 0; attempt < 300; ++attempt) {
@@ -709,7 +723,11 @@ export class SottakuController {
                 'settings_sottaku_status_sign_in_required',
             );
         } catch (error) {
-            this._setStatus(toError(error).message, true);
+            if (isSafari) {
+                this._setStatus(getMessage(safariErrorKey, [apiUrl.host]), true, safariErrorKey, [apiUrl.host]);
+            } else {
+                this._setStatus(toError(error).message, true);
+            }
         } finally {
             this._busy = false;
         }

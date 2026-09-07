@@ -1625,6 +1625,12 @@
     "settings_sottaku_account_description": {
         "message": "Klicken Sie auf „Browsersitzung verwenden“, um das Konto zu verknüpfen, bei dem Sie auf sottaku.app angemeldet sind (Pro erforderlich)."
     },
+    "settings_sottaku_safari_permission_required": {
+        "message": "Erlaube Sottaku-Yomitan in den Erweiterungseinstellungen von Safari den Zugriff auf $1 und versuche dann erneut, dein Konto zu verknüpfen."
+    },
+    "settings_sottaku_safari_link_failed": {
+        "message": "Die Verbindung zu Sottaku ist fehlgeschlagen. Prüfe deine Internetverbindung und erlaube Sottaku-Yomitan in den Erweiterungseinstellungen von Safari den Zugriff auf $1. Versuche dann erneut, dein Konto zu verknüpfen."
+    },
     "settings_sottaku_safari_sign_in_description": {
         "message": "Melde dich auf der Sottaku-Website an, setze dort bei Bedarf dein Passwort zurück oder schließe Sicherheitsprüfungen ab und bestätige dann die Verbindung. Pro ist erforderlich."
     },

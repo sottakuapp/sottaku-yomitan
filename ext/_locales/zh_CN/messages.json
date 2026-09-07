@@ -1625,6 +1625,12 @@
     "settings_sottaku_account_description": {
         "message": "点击“使用浏览器会话”以关联你在 sottaku.app 登录的账户（需要 Pro）。"
     },
+    "settings_sottaku_safari_permission_required": {
+        "message": "请在 Safari 扩展设置中允许 Sottaku-Yomitan 访问 $1，然后重新关联账号。"
+    },
+    "settings_sottaku_safari_link_failed": {
+        "message": "无法连接到 Sottaku。请检查网络连接，并在 Safari 扩展设置中允许 Sottaku-Yomitan 访问 $1，然后重新关联账号。"
+    },
     "settings_sottaku_safari_sign_in_description": {
         "message": "请在 Sottaku 网站上登录，完成所需的密码找回或安全验证，然后批准关联。需要订阅 Pro。"
     },

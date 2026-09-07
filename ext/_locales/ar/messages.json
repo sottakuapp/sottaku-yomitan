@@ -1625,6 +1625,12 @@
     "settings_sottaku_account_description": {
         "message": "انقر على \"استخدام جلسة المتصفح\" لربط الحساب الذي سجّلت الدخول به في sottaku.app (يتطلب Pro)."
     },
+    "settings_sottaku_safari_permission_required": {
+        "message": "اسمح لـ Sottaku-Yomitan بالوصول إلى $1 في إعدادات ملحقات Safari، ثم حاول ربط الحساب مجددًا."
+    },
+    "settings_sottaku_safari_link_failed": {
+        "message": "تعذر الاتصال بـ Sottaku. تحقق من اتصالك بالإنترنت واسمح لـ Sottaku-Yomitan بالوصول إلى $1 في إعدادات ملحقات Safari، ثم حاول ربط الحساب مجددًا."
+    },
     "settings_sottaku_safari_sign_in_description": {
         "message": "سجّل الدخول على موقع Sottaku، وأكمل استعادة كلمة المرور أو فحوصات الأمان هناك عند الحاجة، ثم وافق على الربط. يلزم اشتراك Pro."
     },
