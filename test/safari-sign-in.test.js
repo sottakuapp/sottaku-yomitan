@@ -309,6 +309,26 @@ test.each(['chrome-extension:', 'moz-extension:'])('browser linking in %s retain
     expect(applyAuth).toHaveBeenCalledOnce();
 });
 
+test.each([permissionKey, connectionKey])('the native locale fallback receives the hostname for %s before an account locale loads', async (key) => {
+    createController();
+    vi.resetModules();
+    const {getMessage: freshGetMessage, localizeElement: freshLocalizeElement} = await import('../ext/js/dom/i18n.js');
+    const catalog = /** @type {Record<string, {message: string}>} */ (parseJson(fs.readFileSync(new URL('ja/messages.json', localeDirectory), 'utf8')));
+    const expected = catalog[key].message.replace('$1', 'sottaku.app');
+    const nativeGetMessage = vi.fn().mockReturnValue(expected);
+    Reflect.set(chrome, 'i18n', {getMessage: nativeGetMessage});
+
+    expect(freshGetMessage(key, ['sottaku.app'])).toBe(expected);
+    expect(nativeGetMessage).toHaveBeenCalledExactlyOnceWith(key, ['sottaku.app']);
+    const status = document.createElement('div');
+    status.dataset.i18n = key;
+    status.dataset.i18nArgs = '["sottaku.app"]';
+    nativeGetMessage.mockClear();
+    freshLocalizeElement(status);
+    expect(nativeGetMessage).toHaveBeenCalledExactlyOnceWith(key, ['sottaku.app']);
+    expect(status.textContent).toContain('Sottaku-Yomitanにsottaku.appへの');
+});
+
 test.each(locales)('Safari website instructions localize in %s without English fallback', async (locale) => {
     const controller = createController();
     vi.stubGlobal('fetch', vi.fn(async (/** @type {string} */ url) => {
