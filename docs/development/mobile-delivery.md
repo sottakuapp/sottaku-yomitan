@@ -177,47 +177,47 @@ Simulator with Xcode 26.5. An isolated converter host also compiled and installe
 on an iPad simulator. These are packaging checks; they do not establish that
 Safari lookups work.
 
-Before describing Safari as available or releasing it, verify all of these on
-Safari on an iPhone and iPad:
+Before release, run the core flow on Safari on an iPhone and iPad using the
+production extension resources:
 
-1. Enable the extension in Settings → Apps → Safari → Extensions (the path varies
-   by OS version), and grant the selected site's access.
-2. Open Settings from Safari's extension menu; complete **Use browser session**
-   with the intended test account, including logged-out sign-in and cancellation.
-3. Tap a real supported-language word, scroll naturally, dismiss the popup,
-   and repeat near the viewport edges and inside a frame.
-4. Save a flashcard; verify it appears exactly once on the same Sottaku account.
-   Check the signed-out and non-Pro cases as well.
-5. Reopen Safari after background suspension and confirm linking, scanning,
-   permissions, and token refresh still behave correctly.
-6. Confirm denying site access prevents scanning and page content cannot read
-   credentials or invoke privileged save/account APIs.
-7. Archive the existing app with the extension and verify both bundle IDs,
-   matching release/build versions, signing, and App Store validation.
+1. Enable the extension, grant access to the selected site and open extension
+   settings. Settings must offer **Use browser session** with no direct password
+   controls. Approve the intended account on the website and verify the connected
+   account; signing in alone must not approve the extension.
+2. Tap a supported-language word near the viewport edges, scroll the popup and
+   page naturally, and dismiss it with Close. Save once, confirm the card belongs
+   to the same account and verify its disabled saved state on reopening.
+3. Background and resume Safari, then repeat a lookup and dismissal with the
+   account and site permission preserved.
 
-For the sign-in and recovery gate on each device:
+Check these shared flows once per release candidate, on either device:
 
-1. Start with the extension disconnected and the website signed out. Settings
-   must show **Use browser session**, localized website instructions and no
-   username/password fields. Open the action and confirm the website login page
-   appears; the extension must remain disconnected before explicit approval.
-2. Close the website tab before approving. The extension must remain
-   disconnected and, after the polling window ends, allow another attempt.
-   Repeat with sign-in followed by closing the approval page without confirming.
-3. With an authorized test account that requires a security check, finish that
-   check on the website, sign in and approve the displayed account. Verify the
-   extension connects to that account exactly once. Use a controlled test
-   environment to induce recovery requirements; do not intentionally exhaust
-   production password-attempt limits.
-4. Open **Forgot password** from website login and verify the ordinary website
-   recovery path is available. Complete recovery only with an authorized test
-   mailbox. If recovery or cancellation outlasts the polling window, return to
-   extension settings and start a fresh browser link after website sign-in.
-5. Check the automated stale-flow cases below: every former password/code/human
-   recovery entry point must restore the browser action without opening an
-   extension-origin challenge. An already connected account must stay connected.
+1. Verify a lookup inside a short frame displays its popup in the root page.
+   Deny access to a separate test origin, confirm scanning stops there, and
+   restore the previous permission.
+2. Verify a non-Pro account receives the connected-lookup restriction. Ordinary
+   flashcard access remains free. Unlink while a save popup is open: saving must
+   fail visibly without creating a card. Relink with explicit approval and
+   confirm that retry succeeds exactly once for the intended account.
+3. Start browser linking from the logged-out website and verify the login and
+   **Forgot password** entry points. Close approval without confirming and check
+   that the extension stays disconnected; then approve a fresh link. Full
+   password resets, induced security challenges and waiting out the polling
+   window on each device are not required for this extension release. The
+   automated tests below retain approval, timeout and stale-flow coverage.
+4. Confirm an extension-saved card appears in the same account's card interface,
+   open its normal review flow and complete one review. A preview or merely
+   opening review does not establish review completion.
 
-Automated checks:
+Retain dated evidence for the tested source revision. Repeat a completed check
+when a relevant code, packaging or environment change invalidates that evidence.
+Signing preparation can proceed alongside device checks. Before submission,
+archive the existing app with the extension and verify the embedded production
+resources, both bundle IDs, matching release/build versions, signing and App
+Store validation. Describe Safari as available only after the containing app is
+available, with installation, site-access and explicit account-link instructions.
+
+Run the automated security, authentication, lifecycle and packaging checks:
 
 ```sh
 npx vitest run test/mobile-build.test.js test/safari-popup-build.test.js \
@@ -236,6 +236,13 @@ tests cover Safari/Firefox/Chrome background transport selection, validated read
 acknowledgements, retry boundaries, and media worker port transfer. Command tests
 verify that mobile Safari never accesses the commands API, including on an iPad
 reporting macOS, while local hotkeys and desktop behavior remain intact. Existing
-auth and save tests cover token exchange and privileged API boundaries. Safari sign-in
+auth and save tests cover token refresh/retry, invalidation, account binding and
+privileged API boundaries; there is no need to wait for a production token to
+expire. Safari sign-in
 tests cover stale password flows, unchanged desktop controls, existing account
 credentials, explicit approval, timeout/retry and every shipped locale catalog.
+These security checks remain required: page content must not receive credentials
+or invoke privileged save/account actions, and stale password/recovery flows must
+restore browser linking without an extension-origin challenge or loss of an
+existing connection. Website recovery keeps its existing security controls and
+callback-origin restrictions.
