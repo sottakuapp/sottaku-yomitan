@@ -79,6 +79,15 @@ entries. Each source module's `import.meta.url` keeps its original extension URL
 so SharedWorker and media worker resources remain at their existing packaged
 paths. The build fails if popup imports cannot be included in the bundle.
 
+On September 7, 2026, command enumeration from the iPad Safari popup caused a
+rejected WebKit native IPC message and terminated its web process, despite the
+exposed `commands.getAll` method. iOS/iPadOS Safari now avoids the commands API
+and hides global shortcut configuration, including when an iPad reports a
+desktop identity. Local popup hotkeys remain available. Desktop Safari, Chrome
+and Firefox retain their existing global shortcut behavior. This guards the
+observed popup failure; it does not assume that every Safari context lacks the
+commands API.
+
 The native handler does not expose or log credentials, share the native app's
 keychain, or echo native messages. Link the extension to the same Sottaku account
 through **Use browser session** in Safari. Signing in to the native app does not
@@ -176,14 +185,19 @@ For the sign-in and recovery gate on each device:
 Automated checks:
 
 ```sh
-npx vitest run test/mobile-build.test.js test/application.test.js \
+npx vitest run test/mobile-build.test.js test/safari-popup-build.test.js \
+  test/application.test.js test/api.test.js test/extension-commands.test.js \
   test/sottaku-controller.test.js test/safari-sign-in.test.js test/options-security.test.js \
   test/sottaku-client.test.js test/display-sottaku.test.js
 ```
 
 The packaging tests cover real output exclusions/stale-file removal, the Safari
-background/security configuration, and Firefox Android output. Application tests
-cover Safari/Firefox/Chrome background transport selection. Existing auth and
-save tests cover token exchange and privileged API boundaries. Safari sign-in
+background/security configuration, Firefox Android output, and popup bundling
+with preserved worker resource URLs. Application and API tests cover
+Safari/Firefox/Chrome background transport selection, validated readiness
+acknowledgements, retry boundaries, and media worker port transfer. Command tests
+verify that mobile Safari never accesses the commands API, including on an iPad
+reporting macOS, while local hotkeys and desktop behavior remain intact. Existing
+auth and save tests cover token exchange and privileged API boundaries. Safari sign-in
 tests cover stale password flows, unchanged desktop controls, existing account
 credentials, explicit approval, timeout/retry and every shipped locale catalog.
