@@ -24,6 +24,7 @@ import {buildLibs} from '../build-libs.js';
 import {copyExtensionDirectory} from '../extension-build-util.js';
 import {parseJson} from '../json.js';
 import {ManifestUtil} from '../manifest-util.js';
+import {bundleSafariPopup} from '../safari-popup-build.js';
 
 // Xcode invokes this entry point directly. It never rewrites the desktop manifest.
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -40,6 +41,7 @@ const variant = util.getVariant('safari');
 if (!variant) { throw new Error('Safari manifest variant is missing'); }
 await buildLibs();
 copyExtensionDirectory(source, output, variant.excludeFiles || []);
+await bundleSafariPopup(output);
 const manifest = util.getManifest('safari');
 manifest.version = version;
 fs.writeFileSync(path.join(output, 'manifest.json'), ManifestUtil.createManifestString(manifest));

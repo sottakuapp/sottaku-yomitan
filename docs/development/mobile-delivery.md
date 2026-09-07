@@ -72,6 +72,13 @@ or iOS-unsupported context-menu permission. Background communication follows
 the manifest's actual background type, so Safari's support for service workers
 does not incorrectly select Chrome's transport.
 
+Both Safari build commands bundle the dictionary popup's module graph into one
+ES module to avoid iframe module-loader stalls. The build replaces only the
+copied popup's entry script; Chrome and Firefox retain their original module
+entries. Each source module's `import.meta.url` keeps its original extension URL,
+so SharedWorker and media worker resources remain at their existing packaged
+paths. The build fails if popup imports cannot be included in the bundle.
+
 The native handler does not expose or log credentials, share the native app's
 keychain, or echo native messages. Link the extension to the same Sottaku account
 through **Use browser session** in Safari. Signing in to the native app does not

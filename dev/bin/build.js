@@ -27,6 +27,7 @@ import readline from 'readline';
 import {parseArgs} from 'util';
 import {buildLibs} from '../build-libs.js';
 import {copyExtensionDirectory, EXTENSION_METADATA_PATTERNS, isExtensionMetadataPath} from '../extension-build-util.js';
+import {bundleSafariPopup} from '../safari-popup-build.js';
 import {ManifestUtil} from '../manifest-util.js';
 import {getAllFiles} from '../util.js';
 
@@ -218,6 +219,9 @@ async function build(buildDir, extDir, manifestUtil, variantNames, manifestPath,
             } else {
                 if (!dryRun) {
                     copyExtensionDirectory(extDir, fullFileName, excludeFiles);
+                    if (name === 'safari') {
+                        await bundleSafariPopup(fullFileName);
+                    }
                 }
             }
         }
