@@ -73,11 +73,20 @@ the manifest's actual background type, so Safari's support for service workers
 does not incorrectly select Chrome's transport.
 
 Both Safari build commands bundle the dictionary popup's module graph into one
-ES module to avoid iframe module-loader stalls. The build replaces only the
-copied popup's entry script; Chrome and Firefox retain their original module
-entries. Each source module's `import.meta.url` keeps its original extension URL,
-so SharedWorker and media worker resources remain at their existing packaged
-paths. The build fails if popup imports cannot be included in the bundle.
+ES module to avoid iframe module-loader stalls. For this bundle, the build
+replaces the copied popup's entry script; Chrome and Firefox retain their
+original module entries. Each source module's `import.meta.url` keeps its original
+extension URL, so SharedWorker and media worker resources remain at their existing
+packaged paths. The build fails if popup imports cannot be included in the bundle.
+
+Safari's content script also uses a bundle at the existing registered wrapper
+path. It runs as a classic script to avoid a separate module-loader stall during
+page lookup. A guard around the complete bundle preserves one initialization
+per content-script world, including while startup is pending or after it fails.
+The entry's asynchronous completion and original module URLs are preserved.
+The build rejects unresolved imports and top-level await in dependencies instead
+of silently changing their evaluation order. Background and worker entry scripts
+remain unchanged, as do Chrome and Firefox content scripts.
 
 On September 7, 2026, command enumeration from the iPad Safari popup caused a
 rejected WebKit native IPC message and terminated its web process, despite the
@@ -186,15 +195,17 @@ Automated checks:
 
 ```sh
 npx vitest run test/mobile-build.test.js test/safari-popup-build.test.js \
+  test/safari-content-build.test.js \
   test/application.test.js test/api.test.js test/extension-commands.test.js \
   test/sottaku-controller.test.js test/safari-sign-in.test.js test/options-security.test.js \
   test/sottaku-client.test.js test/display-sottaku.test.js
 ```
 
 The packaging tests cover real output exclusions/stale-file removal, the Safari
-background/security configuration, Firefox Android output, and popup bundling
-with preserved worker resource URLs. Application and API tests cover
-Safari/Firefox/Chrome background transport selection, validated readiness
+background/security configuration, Firefox Android output, and popup/content
+bundling with preserved worker resource URLs. Content tests also cover duplicate
+injection during pending, successful and failed startup. Application and API
+tests cover Safari/Firefox/Chrome background transport selection, validated readiness
 acknowledgements, retry boundaries, and media worker port transfer. Command tests
 verify that mobile Safari never accesses the commands API, including on an iPad
 reporting macOS, while local hotkeys and desktop behavior remain intact. Existing

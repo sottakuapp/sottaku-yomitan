@@ -25,7 +25,7 @@ const popupEntry = '/js/display/popup-main.js';
 const popupBundle = '/js/display/popup-main.bundle.js';
 
 /**
- * Preserve worker URL bases when modules move into the Safari popup bundle.
+ * Preserve worker URL bases when modules move into a Safari bundle.
  * AST ranges deliberately leave strings, comments, and template text untouched.
  * @param {string} source
  * @param {string} modulePath
@@ -52,7 +52,7 @@ export function preserveSafariModuleUrls(source, modulePath) {
             }
         }
         if (ts.isMetaProperty(node) && node.keywordToken === ts.SyntaxKind.ImportKeyword) {
-            throw new Error(`Unsupported import.meta use in Safari popup module: ${modulePath}`);
+            throw new Error(`Unsupported import.meta use in Safari module: ${modulePath}`);
         }
         ts.forEachChild(node, visit);
     }
