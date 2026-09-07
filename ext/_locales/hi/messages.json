@@ -659,6 +659,9 @@
     "popup_pro_required_link": {
         "message": "sottaku.app/upgrade पर अपग्रेड करें"
     },
+    "popup_open_sottaku": {
+        "message": "Sottaku खोलें"
+    },
     "popup_pro_required_title": {
         "message": "Sottaku Pro आवश्यक है"
     },

@@ -659,6 +659,9 @@
     "popup_pro_required_link": {
         "message": "الترقية على sottaku.app/upgrade"
     },
+    "popup_open_sottaku": {
+        "message": "فتح Sottaku"
+    },
     "popup_pro_required_title": {
         "message": "مطلوب Sottaku Pro"
     },

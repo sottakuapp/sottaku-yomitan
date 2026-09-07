@@ -15,16 +15,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {isMobileSafari} from './safari-platform.js';
-
 /**
- * Command enumeration in our iOS Safari popup triggers rejected native IPC and
- * terminates its web process despite the exposed API. Avoid that call rather
- * than relying on method presence or catching a JavaScript exception.
- * iPad desktop mode may report macOS, so include its touch-capable Mac identity.
+ * Includes iPad desktop mode, which can report macOS to the extension API.
  * @param {{browser: import('environment').Browser, platform: {os: string}}} environment
  * @returns {boolean}
  */
-export function supportsExtensionCommands(environment) {
-    return !isMobileSafari(environment);
+export function isMobileSafari(environment) {
+    const isSafari = (
+        environment.browser === 'safari' ||
+        (typeof location !== 'undefined' && location.protocol === 'safari-web-extension:')
+    );
+    if (!isSafari) { return false; }
+    const os = environment.platform.os.toLowerCase();
+    if (os === 'ios' || os === 'ipados') { return true; }
+    if (typeof navigator === 'undefined') { return false; }
+    const {userAgent, platform, maxTouchPoints} = navigator;
+    if (typeof userAgent === 'string' && /\b(?:iPad|iPhone|iPod)\b/u.test(userAgent)) { return true; }
+    return platform === 'MacIntel' && maxTouchPoints > 1;
 }

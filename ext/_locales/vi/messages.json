@@ -659,6 +659,9 @@
     "popup_pro_required_link": {
         "message": "Nâng cấp tại sottaku.app/upgrade"
     },
+    "popup_open_sottaku": {
+        "message": "Mở Sottaku"
+    },
     "popup_pro_required_title": {
         "message": "Cần Sottaku Pro"
     },

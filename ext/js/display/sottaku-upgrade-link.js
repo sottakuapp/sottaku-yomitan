@@ -15,16 +15,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {isMobileSafari} from './safari-platform.js';
+import {localizeElement} from '../dom/i18n.js';
+import {isMobileSafari} from '../extension/safari-platform.js';
 
 /**
- * Command enumeration in our iOS Safari popup triggers rejected native IPC and
- * terminates its web process despite the exposed API. Avoid that call rather
- * than relying on method presence or catching a JavaScript exception.
- * iPad desktop mode may report macOS, so include its touch-capable Mac identity.
+ * iPhone/iPad Safari opens the containing app's existing StoreKit screen.
+ * The link carries only a navigation intent; it never starts a purchase.
+ * @param {Document} document
  * @param {{browser: import('environment').Browser, platform: {os: string}}} environment
- * @returns {boolean}
  */
-export function supportsExtensionCommands(environment) {
-    return !isMobileSafari(environment);
+export function configureSottakuUpgradeLink(document, environment) {
+    if (!isMobileSafari(environment)) { return; }
+    const link = document.querySelector('#sottaku-upgrade-required a');
+    if (!(link instanceof HTMLAnchorElement)) { return; }
+    link.href = 'sottaku://upgrade';
+    link.dataset.i18n = 'popup_open_sottaku';
+    localizeElement(link);
 }

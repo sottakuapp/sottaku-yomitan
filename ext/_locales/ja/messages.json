@@ -659,6 +659,9 @@
     "popup_pro_required_link": {
         "message": "sottaku.app/upgrade でアップグレード"
     },
+    "popup_open_sottaku": {
+        "message": "Sottakuを開く"
+    },
     "popup_pro_required_title": {
         "message": "Sottaku Pro が必要"
     },

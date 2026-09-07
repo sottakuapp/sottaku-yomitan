@@ -43,6 +43,7 @@ import {DisplayNotification} from './display-notification.js';
 import {ElementOverflowController} from './element-overflow-controller.js';
 import {OptionToggleHotkeyHandler} from './option-toggle-hotkey-handler.js';
 import {QueryParser} from './query-parser.js';
+import {configureSottakuUpgradeLink} from './sottaku-upgrade-link.js';
 
 /**
  * @augments EventDispatcher<import('display').Events>
@@ -328,6 +329,7 @@ export class Display extends EventDispatcher {
         const {browser, platform} = await this._application.api.getEnvironmentInfo();
         this._browser = browser;
         this._platform = platform.os;
+        configureSottakuUpgradeLink(document, {browser, platform});
 
         if (documentElement !== null) {
             documentElement.dataset.browser = browser;
@@ -1248,7 +1250,7 @@ export class Display extends EventDispatcher {
         const grammarLanguage = node.dataset.grammarLanguage;
         if (grammarUrl || (reasonKey && grammarLanguage)) {
             const resolvedUrl = grammarUrl ||
-                `https://sottaku.app/dictionary/grammar/${grammarLanguage}/${encodeURIComponent(reasonKey || '')}`;
+            `https://sottaku.app/dictionary/grammar/${grammarLanguage}/${encodeURIComponent(reasonKey || '')}`;
             window.open(resolvedUrl, '_blank')?.focus();
             return;
         }

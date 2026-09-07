@@ -659,6 +659,9 @@
     "popup_pro_required_link": {
         "message": "在 sottaku.app/upgrade 升級"
     },
+    "popup_open_sottaku": {
+        "message": "開啟 Sottaku"
+    },
     "popup_pro_required_title": {
         "message": "需要 Sottaku Pro"
     },

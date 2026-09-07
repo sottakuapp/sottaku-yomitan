@@ -659,6 +659,9 @@
     "popup_pro_required_link": {
         "message": "Mag-upgrade sa sottaku.app/upgrade"
     },
+    "popup_open_sottaku": {
+        "message": "Buksan ang Sottaku"
+    },
     "popup_pro_required_title": {
         "message": "Kailangan ang Sottaku Pro"
     },
