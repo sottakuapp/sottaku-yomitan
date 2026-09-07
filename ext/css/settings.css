@@ -643,6 +643,9 @@ a.heading-link-light {
     gap: 8px;
     width: 100%;
 }
+.sottaku-account-panel>[hidden] {
+    display: none;
+}
 .sottaku-account-panel input[type=text],
 .sottaku-account-panel input[type=password] {
     min-width: 220px;

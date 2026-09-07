@@ -219,8 +219,9 @@ export class Application extends EventDispatcher {
     /**
      * @param {boolean} waitForDom
      * @param {(application: Application) => (Promise<void>)} mainFunction
+     * @param {'content'|'extension'} [frameRole]
      */
-    static async main(waitForDom, mainFunction) {
+    static async main(waitForDom, mainFunction, frameRole = 'extension') {
         const inExtensionContext = window.location.protocol === new URL(import.meta.url).protocol; // This code runs both in content script as well as in the iframe, so we need to differentiate the situation
         // Firefox and Safari use a background page, even when the browser supports service workers.
         // Temporarily create a SharedWorker in order to establish a MessageChannel
@@ -280,7 +281,7 @@ export class Application extends EventDispatcher {
             }
             return;
         }
-        const crossFrameApi = new CrossFrameAPI(api, tabId, frameId);
+        const crossFrameApi = new CrossFrameAPI(api, tabId, frameId, frameRole);
         crossFrameApi.prepare();
         const application = new Application(api, crossFrameApi);
         application.prepare();

@@ -120,6 +120,7 @@
                     "js/application.js",
                     "js/comm/api.js",
                     "js/comm/cross-frame-api.js",
+                    "js/comm/safari-cross-frame-client.js",
                     "js/comm/frame-ancestry-handler.js",
                     "js/comm/frame-client.js",
                     "js/comm/frame-offset-forwarder.js",

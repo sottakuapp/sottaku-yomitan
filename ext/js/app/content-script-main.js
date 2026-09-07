@@ -58,4 +58,4 @@ await Application.main(false, async (application) => {
         browser: browser,
     });
     await frontend.prepare();
-});
+}, 'content');

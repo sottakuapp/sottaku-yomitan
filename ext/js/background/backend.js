@@ -36,6 +36,7 @@ import {OptionsUtil} from '../data/options-util.js';
 import {getAllPermissions, hasPermissions, hasRequiredPermissionsForOptions} from '../data/permissions-util.js';
 import {DictionaryDatabase} from '../dictionary/dictionary-database.js';
 import {Environment} from '../extension/environment.js';
+import {SafariCrossFrameRouter} from './safari-cross-frame-router.js';
 import {CacheMap} from '../general/cache-map.js';
 import {ObjectPropertyAccessor} from '../general/object-property-accessor.js';
 import {distributeFuriganaInflected, isCodePointJapanese, convertKatakanaToHiragana as jpConvertKatakanaToHiragana} from '../language/ja/japanese.js';
@@ -70,6 +71,8 @@ export class Backend {
         this._webExtension = webExtension;
         /** @type {Environment} */
         this._environment = new Environment();
+        /** @type {SafariCrossFrameRouter|null} */
+        this._safariCrossFrameRouter = null;
         /** @type {AnkiConnect} */
         this._anki = new AnkiConnect();
         /** @type {Mecab} */
@@ -312,6 +315,10 @@ export class Backend {
     async _prepareInternal() {
         try {
             this._prepareInternalSync();
+            if (chrome.runtime.getURL('/').startsWith('safari-web-extension:')) {
+                this._safariCrossFrameRouter = new SafariCrossFrameRouter();
+                this._safariCrossFrameRouter.prepare();
+            }
             await this._restrictLocalStorageToTrustedContexts();
 
             this._permissions = await getAllPermissions();
@@ -1339,6 +1346,9 @@ export class Backend {
 
     /** @type {import('api').ApiHandler<'openCrossFramePort'>} */
     _onApiOpenCrossFramePort({targetTabId, targetFrameId}, sender) {
+        if (this._safariCrossFrameRouter !== null) {
+            return this._safariCrossFrameRouter.open(sender, targetTabId, targetFrameId);
+        }
         const sourceTabId = (sender && sender.tab ? sender.tab.id : null);
         if (typeof sourceTabId !== 'number') {
             throw new Error('Port does not have an associated tab ID');

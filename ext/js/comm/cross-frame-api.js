@@ -23,6 +23,7 @@ import {ExtensionError} from '../core/extension-error.js';
 import {parseJson} from '../core/json.js';
 import {log} from '../core/log.js';
 import {safePerformance} from '../core/safe-performance.js';
+import {SafariCrossFrameClient} from './safari-cross-frame-client.js';
 
 /**
  * @augments EventDispatcher<import('cross-frame-api').CrossFrameAPIPortEvents>
@@ -31,7 +32,7 @@ export class CrossFrameAPIPort extends EventDispatcher {
     /**
      * @param {number} otherTabId
      * @param {number} otherFrameId
-     * @param {chrome.runtime.Port} port
+     * @param {import('./safari-cross-frame-client.js').NativePort} port
      * @param {import('cross-frame-api').ApiMap} apiMap
      */
     constructor(otherTabId, otherFrameId, port, apiMap) {
@@ -40,7 +41,7 @@ export class CrossFrameAPIPort extends EventDispatcher {
         this._otherTabId = otherTabId;
         /** @type {number} */
         this._otherFrameId = otherFrameId;
-        /** @type {?chrome.runtime.Port} */
+        /** @type {?import('./safari-cross-frame-client.js').NativePort} */
         this._port = port;
         /** @type {import('cross-frame-api').ApiMap} */
         this._apiMap = apiMap;
@@ -148,8 +149,10 @@ export class CrossFrameAPIPort extends EventDispatcher {
     /** */
     _onDisconnect() {
         if (this._port === null) { return; }
+        const port = this._port;
         this._eventListeners.removeAllEventListeners();
         this._port = null;
+        try { port.disconnect(); } catch (error) { /* Already disconnected. */ }
         for (const id of this._activeInvocations.keys()) {
             this._onError(id, 'Disconnected');
         }
@@ -316,8 +319,9 @@ export class CrossFrameAPI {
      * @param {import('../comm/api.js').API} api
      * @param {?number} tabId
      * @param {?number} frameId
+     * @param {'content'|'extension'} [role]
      */
-    constructor(api, tabId, frameId) {
+    constructor(api, tabId, frameId, role = 'extension') {
         /** @type {import('../comm/api.js').API} */
         this._api = api;
         /** @type {number} */
@@ -334,6 +338,12 @@ export class CrossFrameAPI {
         this._tabId = tabId;
         /** @type {?number} */
         this._frameId = frameId;
+        /** @type {'content'|'extension'} */
+        this._role = role;
+        /** @type {SafariCrossFrameClient|null} */
+        this._safariTransport = null;
+        /** @type {Map<string, Promise<CrossFrameAPIPort>>} */
+        this._pendingCommPorts = new Map();
     }
 
     /**
@@ -352,6 +362,16 @@ export class CrossFrameAPI {
 
     /** */
     prepare() {
+        if (globalThis.chrome?.runtime?.getURL?.('/').startsWith('safari-web-extension:')) {
+            if (this._tabId === null || this._frameId === null) { return; }
+            this._safariTransport = new SafariCrossFrameClient(this._setupCommPort.bind(this), {role: this._role});
+            this._safariTransport.prepare();
+            window.addEventListener('pagehide', () => this._safariTransport?.suspend());
+            window.addEventListener('pageshow', (event) => {
+                if (event.persisted) { this._safariTransport?.resume(); }
+            });
+            return;
+        }
         chrome.runtime.onConnect.addListener(this._onConnect.bind(this));
     }
 
@@ -395,7 +415,7 @@ export class CrossFrameAPI {
     // Private
 
     /**
-     * @param {chrome.runtime.Port} port
+     * @param {import('./safari-cross-frame-client.js').NativePort} port
      */
     _onConnect(port) {
         try {
@@ -424,7 +444,7 @@ export class CrossFrameAPI {
         commPort.off('disconnect', this._onDisconnectBind);
         const {otherTabId, otherFrameId} = commPort;
         const tabPorts = this._commPorts.get(otherTabId);
-        if (typeof tabPorts !== 'undefined') {
+        if (typeof tabPorts !== 'undefined' && tabPorts.get(otherFrameId) === commPort) {
             tabPorts.delete(otherFrameId);
             if (tabPorts.size === 0) {
                 this._commPorts.delete(otherTabId);
@@ -445,7 +465,15 @@ export class CrossFrameAPI {
                 return commPort;
             }
         }
-        return await this._createCommPort(otherTabId, otherFrameId);
+        const key = JSON.stringify([otherTabId, otherFrameId]);
+        let pending = this._pendingCommPorts.get(key);
+        if (!pending) {
+            pending = this._createCommPort(otherTabId, otherFrameId);
+            this._pendingCommPorts.set(key, pending);
+        }
+        try { return await pending; } finally {
+            if (this._pendingCommPorts.get(key) === pending) { this._pendingCommPorts.delete(key); }
+        }
     }
 
     /**
@@ -454,7 +482,20 @@ export class CrossFrameAPI {
      * @returns {Promise<CrossFrameAPIPort>}
      */
     async _createCommPort(otherTabId, otherFrameId) {
-        await this._api.openCrossFramePort(otherTabId, otherFrameId);
+        const transport = this._safariTransport;
+        const connection = transport?.waitForConnection(otherTabId, otherFrameId);
+        // Observe timeout/disconnect rejection even if starting the API throws.
+        void connection?.catch(() => {});
+        try {
+            const request = this._api.openCrossFramePort(otherTabId, otherFrameId);
+            // Native activation proves the authenticated route is ready even if
+            // Safari loses the separate API callback. An early API error still
+            // rejects setup; a late one cannot cancel a newer connection attempt.
+            await (connection ? Promise.race([connection, request.then(() => connection)]) : request);
+        } catch (error) {
+            transport?.cancelConnection(otherTabId, otherFrameId, error);
+            throw error;
+        }
 
         const tabPorts = this._commPorts.get(otherTabId);
         if (typeof tabPorts !== 'undefined') {
@@ -469,7 +510,7 @@ export class CrossFrameAPI {
     /**
      * @param {number} otherTabId
      * @param {number} otherFrameId
-     * @param {chrome.runtime.Port} port
+     * @param {import('./safari-cross-frame-client.js').NativePort} port
      * @returns {CrossFrameAPIPort}
      */
     _setupCommPort(otherTabId, otherFrameId, port) {
@@ -479,6 +520,10 @@ export class CrossFrameAPI {
             tabPorts = new Map();
             this._commPorts.set(otherTabId, tabPorts);
         }
+        const previous = tabPorts.get(otherFrameId);
+        if (this._safariTransport !== null) { previous?.disconnect(); }
+        // Disconnecting the previous entry may remove the outer map.
+        this._commPorts.set(otherTabId, tabPorts);
         tabPorts.set(otherFrameId, commPort);
         commPort.prepare();
         commPort.on('disconnect', this._onDisconnectBind);

@@ -88,6 +88,23 @@ The build rejects unresolved imports and top-level await in dependencies instead
 of silently changing their evaluation order. Background and worker entry scripts
 remain unchanged, as do Chrome and Firefox content scripts.
 
+Safari cross-frame calls use outgoing native `runtime.connect` ports from both
+endpoints. This avoids Safari delivering `tabs.connect` to a popup frame's
+content-script world while its popup listener runs in the extension page world.
+The background router binds ports to browser-supplied extension, tab, frame and
+document identities. An extension page registration must have this extension's
+scheme and host and takes priority over an older content-script registration in
+the same frame. Dedicated route ports preserve the existing invoke/ack/result
+protocol and activate only after both endpoints are ready.
+
+Pending routes have one five-second deadline. Disconnects reject pending calls;
+reconnection never repeats them. Page navigation releases the old registration,
+and restoring a cached page establishes a fresh registration. Background restart
+retries are bounded, with another attempt available on the next lookup. Native
+document IDs allow same-document URL changes. When Safari omits document IDs,
+the conservative URL fallback ignores fragments but a path/query change requires
+reloading the page. Chrome and Firefox keep their existing native transport.
+
 On September 7, 2026, command enumeration from the iPad Safari popup caused a
 rejected WebKit native IPC message and terminated its web process, despite the
 exposed `commands.getAll` method. iOS/iPadOS Safari now avoids the commands API
@@ -195,7 +212,7 @@ Automated checks:
 
 ```sh
 npx vitest run test/mobile-build.test.js test/safari-popup-build.test.js \
-  test/safari-content-build.test.js \
+  test/safari-content-build.test.js test/safari-cross-frame-router.test.js \
   test/application.test.js test/api.test.js test/extension-commands.test.js \
   test/sottaku-controller.test.js test/safari-sign-in.test.js test/options-security.test.js \
   test/sottaku-client.test.js test/display-sottaku.test.js
