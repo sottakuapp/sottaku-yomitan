@@ -22,7 +22,7 @@ import {createApiMap, invokeApiMapHandler} from './core/api-map.js';
 import {EventDispatcher} from './core/event-dispatcher.js';
 import {ExtensionError} from './core/extension-error.js';
 import {log} from './core/log.js';
-import {deferPromise, promiseTimeout} from './core/utilities.js';
+import {promiseTimeout} from './core/utilities.js';
 import {isMessageConnectionError, WebExtension} from './extension/web-extension.js';
 
 const backendReadySignalRetryDelay = 100;
@@ -57,12 +57,12 @@ if (checkChromeNotAvailable()) {
  * @param {WebExtension} webExtension
  * @returns {Promise<void>}
  */
-async function requestBackendReadySignal(webExtension) {
+async function waitForBackendReady(webExtension) {
     const startTime = Date.now();
     while (true) {
+        let response;
         try {
-            await webExtension.sendMessagePromise({action: 'requestBackendReadySignal'});
-            return;
+            response = await webExtension.sendMessagePromise({action: 'requestBackendReadySignal'});
         } catch (error) {
             const shouldRetry = (
                 isMessageConnectionError(error) &&
@@ -71,26 +71,23 @@ async function requestBackendReadySignal(webExtension) {
             if (!shouldRetry) {
                 throw error;
             }
+            await promiseTimeout(backendReadySignalRetryDelay);
+            continue;
         }
-        await promiseTimeout(backendReadySignalRetryDelay);
-    }
-}
-
-/**
- * @param {WebExtension} webExtension
- */
-async function waitForBackendReady(webExtension) {
-    const {promise, resolve} = /** @type {import('core').DeferredPromiseDetails<void>} */ (deferPromise());
-    /** @type {import('application').ApiMap} */
-    const apiMap = createApiMap([['applicationBackendReady', () => { resolve(); }]]);
-    /** @type {import('extension').ChromeRuntimeOnMessageCallback<import('application').ApiMessageAny>} */
-    const onMessage = ({action, params}, _sender, callback) => invokeApiMapHandler(apiMap, action, params, [], callback);
-    chrome.runtime.onMessage.addListener(onMessage);
-    try {
-        await requestBackendReadySignal(webExtension);
-        await promise;
-    } finally {
-        chrome.runtime.onMessage.removeListener(onMessage);
+        // The backend dispatches this handler only after preparation completes. Its boolean
+        // result selects the broadcast route; either value acknowledges readiness. Safari
+        // popups can receive this reply without receiving the separate runtime broadcast.
+        if (response !== null && typeof response === 'object') {
+            if ('error' in response) {
+                const {error} = response;
+                if (error !== null && typeof error === 'object') {
+                    throw ExtensionError.deserialize(/** @type {import('core').SerializedError} */ (error));
+                }
+            } else if ('result' in response && typeof response.result === 'boolean') {
+                return;
+            }
+        }
+        throw new Error('Invalid backend readiness acknowledgement');
     }
 }
 
