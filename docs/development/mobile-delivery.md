@@ -148,9 +148,12 @@ When incrementing an iOS release, update both targets' `MARKETING_VERSION` and
 `CURRENT_PROJECT_VERSION` together, including the mobile package and Android
 version fields required by the existing upload guard. On September 7, 2026, the
 extension's App ID and App Store profile were registered using the existing
-distribution certificate. The active main-app profile was reused, with no
-certificate rotation or existing capability changes. Both Release targets use
+distribution certificate. Xcode rejected the active Xcode-managed main-app profile
+with manual Release signing, so a separate manual App Store profile was created
+using that same certificate. Existing profiles, certificates and capabilities were
+preserved. Both Release targets use
 manual signing mappings in the native project and `ios/exportOptions-safari.plist`.
+The release preflight rejects profiles explicitly marked `IsXcodeManaged`.
 The profiles/certificate must be revalidated before their December 2026 expiration.
 
 From `SottakuMobile`, `npm run ios:release:plan` reports the candidate and paths
