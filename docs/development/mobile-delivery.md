@@ -162,6 +162,8 @@ release helper: two jobs, no running simulators, distinct build-number artifact
 directories, 8 GiB free before archiving and 2 GiB before export, with a 1.5 GiB abort
 floor. Both artifacts are checked for native device platform/signing/versions and
 the exact freshly generated Safari resource set. These commands never upload.
+Library bundling anchors esbuild's working directory to the extension root, so
+standalone and Xcode-invoked builds produce the same module labels and bytes.
 
 Build the independent native target with `xcodebuild -project
 SottakuMobile/ios/SottakuMobile.xcodeproj -target SottakuSafariExtension

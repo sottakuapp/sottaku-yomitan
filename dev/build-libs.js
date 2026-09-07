@@ -46,6 +46,8 @@ async function copyWasm(out) {
  */
 async function buildLib(scriptPath) {
     await esbuild.build({
+        // Keep module labels identical when Xcode invokes us outside the repo.
+        absWorkingDir: path.resolve(dirname, '..'),
         entryPoints: [scriptPath],
         bundle: true,
         minify: false,
