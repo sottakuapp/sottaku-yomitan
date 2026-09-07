@@ -45,12 +45,11 @@ Android settings page verify that the signed-in state remains visible.
 
 ## Safari in the existing iOS app
 
-`SottakuMobile.xcodeproj` contains the independent `SottakuSafariExtension` target.
-The default app target does not depend on or embed it, so ordinary app releases
-do not ship an unverified Safari extension. Once the runtime release gate below
-passes, add a dependency from `SottakuMobile` to `SottakuSafariExtension` and an
-Embed App Extensions copy phase targeting `PlugIns` with Remove Headers on Copy.
-This will bundle it in the existing app without a second customer-facing container.
+`SottakuMobile.xcodeproj` contains the `SottakuSafariExtension` target, which the
+containing app depends on and embeds in its `PlugIns` directory. This prepares
+Safari delivery inside the existing app without a second customer-facing container.
+The candidate native release must pass the runtime and signed-artifact gates below
+before upload or release; source integration does not establish public availability.
 The extension's bundle ID is `com.sottaku.sottakumobile.SafariExtension`.
 Its minimum OS is iOS/iPadOS 16.4, matching its use of `storage.session`.
 The existing app retains its own deployment target.
@@ -146,9 +145,20 @@ allowlist unchanged; never substitute a wildcard or fabricate a website recovery
 session from an extension transaction.
 
 When incrementing an iOS release, update both targets' `MARKETING_VERSION` and
-`CURRENT_PROJECT_VERSION` together. A signed release needs an App ID and
-provisioning profile for the extension as well as the existing app. This work
-has not registered or changed remote signing resources.
+`CURRENT_PROJECT_VERSION` together, including the mobile package and Android
+version fields required by the existing upload guard. On September 7, 2026, the
+extension's App ID and App Store profile were registered using the existing
+distribution certificate. The active main-app profile was reused, with no
+certificate rotation or existing capability changes. Both Release targets use
+manual signing mappings in the native project and `ios/exportOptions-safari.plist`.
+The profiles/certificate must be revalidated before their December 2026 expiration.
+
+From `SottakuMobile`, `npm run ios:release:plan` reports the candidate and paths
+without building. `npm run ios:archive` and `npm run ios:ipa` use the guarded
+release helper: two jobs, no running simulators, distinct build-number artifact
+directories, 8 GiB free before archiving and 2 GiB before export, with a 1.5 GiB abort
+floor. Both artifacts are checked for native device platform/signing/versions and
+the exact freshly generated Safari resource set. These commands never upload.
 
 Build the independent native target with `xcodebuild -project
 SottakuMobile/ios/SottakuMobile.xcodeproj -target SottakuSafariExtension
