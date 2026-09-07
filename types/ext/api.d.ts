@@ -150,6 +150,24 @@ type ApiSurface = {
         params: void;
         return: Settings.Options;
     };
+    sottakuAddFlashcard: {
+        params: {
+            questionId: number;
+            language: string;
+            optionsContext: Settings.OptionsContext;
+            expectedUserId: number;
+        };
+        return: void;
+    };
+    sottakuSubmitWordRequest: {
+        params: {
+            questionId: number;
+            language: string;
+            optionsContext: Settings.OptionsContext;
+            expectedUserId: number;
+        };
+        return: void;
+    };
     termsFind: {
         params: {
             text: string;

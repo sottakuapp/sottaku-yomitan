@@ -1847,6 +1847,9 @@
     "sottaku_request_button_title_submitted": {
         "message": "Permintaan dikirim ke Sottaku"
     },
+    "sottaku_request_error": {
+        "message": "Permintaanmu tidak dapat dikirim. Coba lagi."
+    },
     "sottaku_save_button": {
         "message": "Simpan ke Sottaku"
     },
@@ -1861,6 +1864,9 @@
     },
     "sottaku_save_button_title_saved": {
         "message": "Ditambahkan ke kartu flash Sottaku Anda"
+    },
+    "sottaku_save_error": {
+        "message": "Kata ini tidak dapat disimpan. Coba lagi."
     },
     "status_footer_close": {
         "message": "Tutup"

@@ -1847,6 +1847,9 @@
     "sottaku_request_button_title_submitted": {
         "message": "請求已提交至 Sottaku"
     },
+    "sottaku_request_error": {
+        "message": "無法傳送請求，請再試一次。"
+    },
     "sottaku_save_button": {
         "message": "儲存到 Sottaku"
     },
@@ -1861,6 +1864,9 @@
     },
     "sottaku_save_button_title_saved": {
         "message": "已新增到你的 Sottaku 記憶卡"
+    },
+    "sottaku_save_error": {
+        "message": "無法儲存這個單字，請再試一次。"
     },
     "status_footer_close": {
         "message": "關閉"

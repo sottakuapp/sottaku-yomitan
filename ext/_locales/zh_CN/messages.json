@@ -1847,6 +1847,9 @@
     "sottaku_request_button_title_submitted": {
         "message": "请求已提交到 Sottaku"
     },
+    "sottaku_request_error": {
+        "message": "无法发送请求，请重试。"
+    },
     "sottaku_save_button": {
         "message": "保存到 Sottaku"
     },
@@ -1861,6 +1864,9 @@
     },
     "sottaku_save_button_title_saved": {
         "message": "已添加到你的 Sottaku 闪卡"
+    },
+    "sottaku_save_error": {
+        "message": "无法保存这个单词，请重试。"
     },
     "status_footer_close": {
         "message": "关闭"

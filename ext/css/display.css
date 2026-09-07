@@ -508,6 +508,11 @@ a:has(rt) {
 :root[data-profile-panel-visible=true] .content-sidebar {
     display: block;
 }
+@media (any-pointer: coarse) {
+    :root[data-page-type=popup][data-popup-action-bar-visibility=auto] .content-sidebar {
+        display: block;
+    }
+}
 .content-sidebar-inner {
     display: flex;
     flex-flow: column nowrap;
@@ -821,6 +826,18 @@ button.action-button:active:not(:disabled) {
 }
 .note-actions-container .sottaku-request-only {
     margin-left: auto;
+}
+.note-actions-container:has(>.sottaku-action-error) {
+    flex-wrap: wrap;
+}
+.note-actions-container .sottaku-action-error {
+    flex: 1 0 100%;
+    max-width: 20em;
+    margin-top: 0.35em;
+    color: var(--danger-color);
+    font-size: 0.85em;
+    white-space: normal;
+    overflow-wrap: anywhere;
 }
 .note-actions-container button.sottaku-action:hover,
 .note-actions-container button.sottaku-action:focus {

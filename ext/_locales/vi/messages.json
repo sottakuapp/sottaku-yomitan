@@ -1847,6 +1847,9 @@
     "sottaku_request_button_title_submitted": {
         "message": "Yêu cầu đã gửi đến Sottaku"
     },
+    "sottaku_request_error": {
+        "message": "Không thể gửi yêu cầu của bạn. Hãy thử lại."
+    },
     "sottaku_save_button": {
         "message": "Lưu vào Sottaku"
     },
@@ -1861,6 +1864,9 @@
     },
     "sottaku_save_button_title_saved": {
         "message": "Đã thêm vào thẻ ghi nhớ Sottaku của bạn"
+    },
+    "sottaku_save_error": {
+        "message": "Không thể lưu từ này. Hãy thử lại."
     },
     "status_footer_close": {
         "message": "Đóng"

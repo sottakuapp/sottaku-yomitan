@@ -1847,6 +1847,9 @@
     "sottaku_request_button_title_submitted": {
         "message": "Solicitação enviada para Sottaku"
     },
+    "sottaku_request_error": {
+        "message": "Não foi possível enviar seu pedido. Tente novamente."
+    },
     "sottaku_save_button": {
         "message": "Salvar no Sottaku"
     },
@@ -1861,6 +1864,9 @@
     },
     "sottaku_save_button_title_saved": {
         "message": "Adicionado aos seus cartões de estudo Sottaku"
+    },
+    "sottaku_save_error": {
+        "message": "Não foi possível salvar esta palavra. Tente novamente."
     },
     "status_footer_close": {
         "message": "Fechar"

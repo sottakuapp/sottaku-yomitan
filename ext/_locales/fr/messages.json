@@ -1847,6 +1847,9 @@
     "sottaku_request_button_title_submitted": {
         "message": "Demande envoyée à Sottaku"
     },
+    "sottaku_request_error": {
+        "message": "Impossible d’envoyer votre demande. Veuillez réessayer."
+    },
     "sottaku_save_button": {
         "message": "Enregistrer dans Sottaku"
     },
@@ -1861,6 +1864,9 @@
     },
     "sottaku_save_button_title_saved": {
         "message": "Ajouté à vos cartes Sottaku"
+    },
+    "sottaku_save_error": {
+        "message": "Impossible d’enregistrer ce mot. Veuillez réessayer."
     },
     "status_footer_close": {
         "message": "Fermer"

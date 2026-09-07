@@ -1847,6 +1847,9 @@
     "sottaku_request_button_title_submitted": {
         "message": "リクエストを Sottaku に送信しました"
     },
+    "sottaku_request_error": {
+        "message": "リクエストを送信できませんでした。もう一度お試しください。"
+    },
     "sottaku_save_button": {
         "message": "Sottaku に保存"
     },
@@ -1861,6 +1864,9 @@
     },
     "sottaku_save_button_title_saved": {
         "message": "Sottaku のフラッシュカードに追加されました"
+    },
+    "sottaku_save_error": {
+        "message": "この単語を保存できませんでした。もう一度お試しください。"
     },
     "status_footer_close": {
         "message": "閉じる"

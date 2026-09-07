@@ -1847,6 +1847,9 @@
     "sottaku_request_button_title_submitted": {
         "message": "Request submitted to Sottaku"
     },
+    "sottaku_request_error": {
+        "message": "Couldn’t send your request. Try again."
+    },
     "sottaku_save_button": {
         "message": "Save to Sottaku"
     },
@@ -1861,6 +1864,9 @@
     },
     "sottaku_save_button_title_saved": {
         "message": "Added to your Sottaku flashcards"
+    },
+    "sottaku_save_error": {
+        "message": "Couldn’t save this word. Try again."
     },
     "status_footer_close": {
         "message": "Close"

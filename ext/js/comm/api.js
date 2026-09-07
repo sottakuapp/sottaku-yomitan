@@ -52,6 +52,28 @@ export class API {
     }
 
     /**
+     * @param {number} questionId
+     * @param {string} language
+     * @param {import('settings').OptionsContext} optionsContext
+     * @param {number} expectedUserId
+     * @returns {Promise<void>}
+     */
+    sottakuAddFlashcard(questionId, language, optionsContext, expectedUserId) {
+        return this._invoke('sottakuAddFlashcard', {questionId, language, optionsContext, expectedUserId});
+    }
+
+    /**
+     * @param {number} questionId
+     * @param {string} language
+     * @param {import('settings').OptionsContext} optionsContext
+     * @param {number} expectedUserId
+     * @returns {Promise<void>}
+     */
+    sottakuSubmitWordRequest(questionId, language, optionsContext, expectedUserId) {
+        return this._invoke('sottakuSubmitWordRequest', {questionId, language, optionsContext, expectedUserId});
+    }
+
+    /**
      * @param {import('api').ApiParam<'termsFind', 'text'>} text
      * @param {import('api').ApiParam<'termsFind', 'details'>} details
      * @param {import('api').ApiParam<'termsFind', 'optionsContext'>} optionsContext

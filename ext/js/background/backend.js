@@ -41,6 +41,7 @@ import {CacheMap} from '../general/cache-map.js';
 import {ObjectPropertyAccessor} from '../general/object-property-accessor.js';
 import {distributeFuriganaInflected, isCodePointJapanese, convertKatakanaToHiragana as jpConvertKatakanaToHiragana} from '../language/ja/japanese.js';
 import {getLanguageSummaries, isTextLookupWorthy} from '../language/languages.js';
+import {SOTTAKU_KNOWN_LANGUAGES} from '../language/sottaku-language-manifest.js';
 import {Translator} from '../language/translator.js';
 import {AudioDownloader} from '../media/audio-downloader.js';
 import {getFileExtensionFromAudioMediaType, getFileExtensionFromImageMediaType} from '../media/media-util.js';
@@ -170,6 +171,8 @@ export class Backend {
             ['requestBackendReadySignal',    this._onApiRequestBackendReadySignal.bind(this)],
             ['optionsGet',                   this._onApiOptionsGet.bind(this)],
             ['optionsGetFull',               this._onApiOptionsGetFull.bind(this)],
+            ['sottakuAddFlashcard',          this._onApiSottakuAddFlashcard.bind(this)],
+            ['sottakuSubmitWordRequest',     this._onApiSottakuSubmitWordRequest.bind(this)],
             ['kanjiFind',                    this._onApiKanjiFind.bind(this)],
             ['termsFind',                    this._onApiTermsFind.bind(this)],
             ['parseText',                    this._onApiParseText.bind(this)],
@@ -597,6 +600,80 @@ export class Backend {
      */
     _senderCanReadPersistedCredentials(sender) {
         return isTrustedExtensionPageSender(sender, chrome.runtime.getURL('/'));
+    }
+
+    /** @type {import('api').ApiHandler<'sottakuAddFlashcard'>} */
+    async _onApiSottakuAddFlashcard(params, sender) {
+        const client = this._createSottakuActionClient(params, sender);
+        await client.addFlashcard(params.questionId, params.language);
+    }
+
+    /** @type {import('api').ApiHandler<'sottakuSubmitWordRequest'>} */
+    async _onApiSottakuSubmitWordRequest(params, sender) {
+        const client = this._createSottakuActionClient(params, sender);
+        await client.submitWordRequest(params.questionId, params.language);
+    }
+
+    /**
+     * Only extension pages may perform these fixed mutations. Credentials and
+     * endpoints come from the currently selected stored profile, never the caller.
+     * @param {import('api').ApiParams<'sottakuAddFlashcard'>} params
+     * @param {chrome.runtime.MessageSender} sender
+     * @returns {SottakuClient}
+     * @throws {Error}
+     */
+    _createSottakuActionClient(params, sender) {
+        if (sender?.id !== chrome.runtime.id || !this._senderCanReadPersistedCredentials(sender)) {
+            throw new Error('Untrusted extension context cannot change Sottaku study data');
+        }
+        if (!isObjectNotArray(params) || Object.keys(params).some((key) => !['questionId', 'language', 'optionsContext', 'expectedUserId'].includes(key))) {
+            throw new Error('Invalid Sottaku action parameters');
+        }
+        const {questionId, language, optionsContext, expectedUserId} = params;
+        if (!Number.isSafeInteger(questionId) || questionId <= 0 || typeof language !== 'string' || !SOTTAKU_KNOWN_LANGUAGES.includes(language) ||
+        !Number.isSafeInteger(expectedUserId) || expectedUserId <= 0) {
+            throw new Error('Invalid Sottaku entry or account');
+        }
+        this._validateSottakuActionContext(optionsContext);
+        const {sottaku} = this._getProfileOptions(optionsContext, false);
+        if (!sottaku?.enabled || typeof sottaku.authToken !== 'string' || sottaku.authToken.length === 0 || sottaku.user?.id !== expectedUserId) {
+            throw new Error('Sottaku account changed or disconnected');
+        }
+        // A separate client keeps refresh/retry bound to this account even if a
+        // different profile is selected while its network request is pending.
+        return new SottakuClient({
+            apiBaseUrl: sottaku.apiBaseUrl,
+            authToken: sottaku.authToken,
+            refreshToken: sottaku.refreshToken,
+            onAuthTokenUpdated: ({apiBaseUrl, oldToken, newToken}) => this._handleSottakuAuthTokenUpdate(apiBaseUrl, oldToken, newToken),
+            onAuthTokenInvalidated: ({apiBaseUrl, oldToken}) => this._handleSottakuAuthTokenInvalidate(apiBaseUrl, oldToken),
+        });
+    }
+
+    /**
+     * @param {import('settings').OptionsContext} context
+     * @throws {Error}
+     */
+    _validateSottakuActionContext(context) {
+        const fields = new Set(['current', 'index', 'url', 'depth', 'flags', 'modifiers', 'modifierKeys', 'pointerType']);
+        if (!isObjectNotArray(context) || Object.keys(context).some((key) => !fields.has(key))) {
+            throw new Error('Invalid Sottaku options context');
+        }
+        const {current, index, url, depth, flags, modifiers, modifierKeys, pointerType} = context;
+        const selectedCurrent = current === true && typeof index === 'undefined' && typeof url === 'undefined' && typeof depth === 'undefined';
+        const selectedIndex = typeof current === 'undefined' && Number.isSafeInteger(index) && typeof index === 'number' && index >= 0 && typeof url === 'undefined' && typeof depth === 'undefined';
+        const selectedUrl = typeof current === 'undefined' && typeof index === 'undefined' && typeof url === 'string' && url.length > 0 && url.length <= 16384 &&
+        typeof depth === 'number' && Number.isSafeInteger(depth) && depth >= 0;
+        if (!selectedCurrent && !selectedIndex && !selectedUrl) { throw new Error('Invalid Sottaku profile selection'); }
+        if (selectedUrl) { void new URL(/** @type {string} */ (url)); }
+        const keys = ['alt', 'ctrl', 'meta', 'shift'];
+        const modifierValues = new Set([...keys, 'mouse0', 'mouse1', 'mouse2', 'mouse3', 'mouse4', 'mouse5']);
+        if ((typeof flags !== 'undefined' && (!Array.isArray(flags) || flags.some((value) => value !== 'clipboard'))) ||
+        (typeof modifiers !== 'undefined' && (!Array.isArray(modifiers) || modifiers.some((value) => !modifierValues.has(value)))) ||
+        (typeof modifierKeys !== 'undefined' && (!Array.isArray(modifierKeys) || modifierKeys.some((value) => !keys.includes(value)))) ||
+        (typeof pointerType !== 'undefined' && !['pen', 'mouse', 'touch', 'script'].includes(pointerType))) {
+            throw new Error('Invalid Sottaku profile conditions');
+        }
     }
 
     /** @type {import('api').ApiHandler<'kanjiFind'>} */

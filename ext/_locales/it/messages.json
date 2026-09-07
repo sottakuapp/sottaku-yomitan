@@ -1847,6 +1847,9 @@
     "sottaku_request_button_title_submitted": {
         "message": "Richiesta inviata a Sottaku"
     },
+    "sottaku_request_error": {
+        "message": "Impossibile inviare la richiesta. Riprova."
+    },
     "sottaku_save_button": {
         "message": "Salva in Sottaku"
     },
@@ -1861,6 +1864,9 @@
     },
     "sottaku_save_button_title_saved": {
         "message": "Aggiunto alle tue flashcard Sottaku"
+    },
+    "sottaku_save_error": {
+        "message": "Impossibile salvare questa parola. Riprova."
     },
     "status_footer_close": {
         "message": "Chiudi"

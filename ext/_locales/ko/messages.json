@@ -1847,6 +1847,9 @@
     "sottaku_request_button_title_submitted": {
         "message": "요청이 Sottaku에 제출되었습니다"
     },
+    "sottaku_request_error": {
+        "message": "요청을 보내지 못했어요. 다시 시도해 주세요."
+    },
     "sottaku_save_button": {
         "message": "Sottaku에 저장"
     },
@@ -1861,6 +1864,9 @@
     },
     "sottaku_save_button_title_saved": {
         "message": "Sottaku 플래시카드에 추가됨"
+    },
+    "sottaku_save_error": {
+        "message": "이 단어를 저장하지 못했어요. 다시 시도해 주세요."
     },
     "status_footer_close": {
         "message": "닫기"

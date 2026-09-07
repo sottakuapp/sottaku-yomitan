@@ -1847,6 +1847,9 @@
     "sottaku_request_button_title_submitted": {
         "message": "ส่งคำขอไปยัง Sottaku แล้ว"
     },
+    "sottaku_request_error": {
+        "message": "ส่งคำขอไม่สำเร็จ โปรดลองอีกครั้ง"
+    },
     "sottaku_save_button": {
         "message": "บันทึกไปยัง Sottaku"
     },
@@ -1861,6 +1864,9 @@
     },
     "sottaku_save_button_title_saved": {
         "message": "เพิ่มไปยังแฟลชการ์ด Sottaku ของคุณแล้ว"
+    },
+    "sottaku_save_error": {
+        "message": "บันทึกคำนี้ไม่สำเร็จ โปรดลองอีกครั้ง"
     },
     "status_footer_close": {
         "message": "ปิด"

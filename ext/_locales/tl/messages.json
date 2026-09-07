@@ -1847,6 +1847,9 @@
     "sottaku_request_button_title_submitted": {
         "message": "Naipadala ang request sa Sottaku"
     },
+    "sottaku_request_error": {
+        "message": "Hindi naipadala ang kahilingan mo. Subukan muli."
+    },
     "sottaku_save_button": {
         "message": "I-save sa Sottaku"
     },
@@ -1861,6 +1864,9 @@
     },
     "sottaku_save_button_title_saved": {
         "message": "Idinagdag sa iyong Sottaku flashcards"
+    },
+    "sottaku_save_error": {
+        "message": "Hindi na-save ang salitang ito. Subukan muli."
     },
     "status_footer_close": {
         "message": "Isara"

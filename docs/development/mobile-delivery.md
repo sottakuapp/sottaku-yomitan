@@ -105,6 +105,15 @@ document IDs allow same-document URL changes. When Safari omits document IDs,
 the conservative URL fallback ignores fragments but a path/query change requires
 reloading the page. Chrome and Firefox keep their existing native transport.
 
+Safari saves and dictionary-entry requests also run through the background page:
+embedded extension pages can have different fetch restrictions from extension
+tabs. These are two named operations with fixed API endpoints, not a general
+network proxy. Only this extension's own pages may call them. Each validates the
+entry, language, profile context and expected account ID, then uses a separate
+client configured from the current stored profile. Relinking an account rejects
+a stale popup's mutation. Results do not expose server payloads or credentials.
+Failed saves and requests show localized text beside the button and allow retry.
+
 On September 7, 2026, command enumeration from the iPad Safari popup caused a
 rejected WebKit native IPC message and terminated its web process, despite the
 exposed `commands.getAll` method. iOS/iPadOS Safari now avoids the commands API
@@ -213,6 +222,7 @@ Automated checks:
 ```sh
 npx vitest run test/mobile-build.test.js test/safari-popup-build.test.js \
   test/safari-content-build.test.js test/safari-cross-frame-router.test.js \
+  test/safari-sottaku-actions.test.js \
   test/application.test.js test/api.test.js test/extension-commands.test.js \
   test/sottaku-controller.test.js test/safari-sign-in.test.js test/options-security.test.js \
   test/sottaku-client.test.js test/display-sottaku.test.js

@@ -1847,6 +1847,9 @@
     "sottaku_request_button_title_submitted": {
         "message": "Anfrage an Sottaku gesendet"
     },
+    "sottaku_request_error": {
+        "message": "Deine Anfrage konnte nicht gesendet werden. Versuch es noch einmal."
+    },
     "sottaku_save_button": {
         "message": "In Sottaku speichern"
     },
@@ -1861,6 +1864,9 @@
     },
     "sottaku_save_button_title_saved": {
         "message": "Zu deinen Sottaku-Karteikarten hinzugefügt"
+    },
+    "sottaku_save_error": {
+        "message": "Dieses Wort konnte nicht gespeichert werden. Versuch es noch einmal."
     },
     "status_footer_close": {
         "message": "Schließen"

@@ -17,7 +17,6 @@
 
 import {SottakuClient} from '../comm/sottaku-client.js';
 import {EventListenerCollection} from '../core/event-listener-collection.js';
-import {toError} from '../core/to-error.js';
 import {getMessage} from '../dom/i18n.js';
 
 /**
@@ -141,7 +140,7 @@ export class DisplaySottaku {
      * @param {Element} container
      */
     _removeOldButtons(container) {
-        for (const button of container.querySelectorAll('.sottaku-action')) {
+        for (const button of container.querySelectorAll('.sottaku-action, .sottaku-action-error')) {
             button.remove();
         }
     }
@@ -149,7 +148,7 @@ export class DisplaySottaku {
     /** */
     _clearButtons() {
         for (const node of this._display.dictionaryEntryNodes) {
-            for (const button of node.querySelectorAll('.sottaku-action')) {
+            for (const button of node.querySelectorAll('.sottaku-action, .sottaku-action-error')) {
                 button.remove();
             }
         }
@@ -160,27 +159,41 @@ export class DisplaySottaku {
      * @param {HTMLButtonElement} button
      */
     async _addFlashcard(entry, button) {
+        if (button.disabled) { return; }
+        this._clearActionError(button);
         if (!this._options || !this._enabled) {
             this._setButtonTitle(button, 'sottaku_action_title_sign_in', 'Sign in to Sottaku first');
+            this._setActionError(button, 'sottaku_action_title_sign_in', 'Sign in to Sottaku first');
             return;
         }
         const metadata = this._getMetadata(entry);
         if (!metadata?.questionId) {
             this._setButtonTitle(button, 'sottaku_action_title_missing_id', 'Missing Sottaku question id');
+            this._setActionError(button, 'sottaku_action_title_missing_id', 'Missing Sottaku question id');
             return;
         }
         this._lockButtonSize(button);
         button.disabled = true;
         this._setButtonText(button, 'sottaku_save_button_saving', 'Saving...');
         try {
-            await this._client.addFlashcard(metadata.questionId, metadata.language || this._options.general.language);
+            const language = metadata.language || this._options.general.language;
+            await (this._usesSafariBackground() ?
+                this._display.application.api.sottakuAddFlashcard(
+                    metadata.questionId,
+                    language,
+                    this._display.getOptionsContext(),
+                    this._options.sottaku?.user?.id ?? 0,
+                ) :
+                this._client.addFlashcard(metadata.questionId, language));
             metadata.inFlashcards = true;
+            this._clearActionError(button);
             this._setButtonText(button, 'sottaku_save_button_saved', 'Saved');
             this._setButtonTitle(button, 'sottaku_save_button_title_saved', 'Added to your Sottaku flashcards');
         } catch (e) {
             button.disabled = false;
             this._setButtonText(button, 'sottaku_save_button', 'Save to Sottaku');
-            this._setButtonTitle(button, '', toError(e).message);
+            this._setButtonTitle(button, 'sottaku_save_error', 'Couldn’t save this word. Try again.');
+            this._setActionError(button, 'sottaku_save_error', 'Couldn’t save this word. Try again.');
         }
     }
 
@@ -189,27 +202,67 @@ export class DisplaySottaku {
      * @param {HTMLButtonElement} button
      */
     async _requestWord(entry, button) {
+        if (button.disabled) { return; }
+        this._clearActionError(button);
         if (!this._options || !this._enabled) {
             this._setButtonTitle(button, 'sottaku_action_title_sign_in', 'Sign in to Sottaku first');
+            this._setActionError(button, 'sottaku_action_title_sign_in', 'Sign in to Sottaku first');
             return;
         }
         const metadata = this._getMetadata(entry);
         if (!metadata?.questionId) {
             this._setButtonTitle(button, 'sottaku_action_title_missing_id', 'Missing Sottaku question id');
+            this._setActionError(button, 'sottaku_action_title_missing_id', 'Missing Sottaku question id');
             return;
         }
         this._lockButtonSize(button);
         button.disabled = true;
         this._setButtonText(button, 'sottaku_request_button_requesting', 'Requesting...');
         try {
-            await this._client.submitWordRequest(metadata.questionId, metadata.language || this._options.general.language);
+            const language = metadata.language || this._options.general.language;
+            await (this._usesSafariBackground() ?
+                this._display.application.api.sottakuSubmitWordRequest(
+                    metadata.questionId,
+                    language,
+                    this._display.getOptionsContext(),
+                    this._options.sottaku?.user?.id ?? 0,
+                ) :
+                this._client.submitWordRequest(metadata.questionId, language));
             metadata.requested = true;
+            this._clearActionError(button);
             this._setRequestButtonRequestedState(button);
         } catch (e) {
             button.disabled = false;
             this._setButtonText(button, 'sottaku_request_button_retry', 'Request translation');
-            this._setButtonTitle(button, '', toError(e).message);
+            this._setButtonTitle(button, 'sottaku_request_error', 'Couldn’t send your request. Try again.');
+            this._setActionError(button, 'sottaku_request_error', 'Couldn’t send your request. Try again.');
         }
+    }
+
+    /** @returns {boolean} */
+    _usesSafariBackground() {
+        return globalThis.chrome?.runtime?.getURL?.('/').startsWith('safari-web-extension:') === true;
+    }
+
+    /** @param {HTMLButtonElement} button */
+    _clearActionError(button) {
+        const error = button.nextElementSibling;
+        if (error?.classList.contains('sottaku-action-error')) { error.remove(); }
+    }
+
+    /**
+     * @param {HTMLButtonElement} button
+     * @param {string} key
+     * @param {string} fallback
+     */
+    _setActionError(button, key, fallback) {
+        this._clearActionError(button);
+        const error = document.createElement('div');
+        error.className = 'sottaku-action-error';
+        error.setAttribute('role', 'alert');
+        error.dataset.i18n = key;
+        error.textContent = getMessage(key) || fallback;
+        button.after(error);
     }
 
     /**

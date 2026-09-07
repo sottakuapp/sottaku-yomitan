@@ -1847,6 +1847,9 @@
     "sottaku_request_button_title_submitted": {
         "message": "अनुरोध Sottaku को भेजा गया"
     },
+    "sottaku_request_error": {
+        "message": "आपका अनुरोध नहीं भेजा जा सका। फिर से कोशिश करें।"
+    },
     "sottaku_save_button": {
         "message": "Sottaku में सहेजें"
     },
@@ -1861,6 +1864,9 @@
     },
     "sottaku_save_button_title_saved": {
         "message": "आपकी Sottaku फ्लैशकार्ड में जोड़ा गया"
+    },
+    "sottaku_save_error": {
+        "message": "यह शब्द सेव नहीं हो सका। फिर से कोशिश करें।"
     },
     "status_footer_close": {
         "message": "बंद करें"

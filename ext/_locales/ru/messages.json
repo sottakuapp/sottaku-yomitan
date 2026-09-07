@@ -1847,6 +1847,9 @@
     "sottaku_request_button_title_submitted": {
         "message": "Запрос отправлен в Sottaku"
     },
+    "sottaku_request_error": {
+        "message": "Не удалось отправить ваш запрос. Попробуйте ещё раз."
+    },
     "sottaku_save_button": {
         "message": "Сохранить в Sottaku"
     },
@@ -1861,6 +1864,9 @@
     },
     "sottaku_save_button_title_saved": {
         "message": "Добавлено в ваши карточки Sottaku"
+    },
+    "sottaku_save_error": {
+        "message": "Не удалось сохранить это слово. Попробуйте ещё раз."
     },
     "status_footer_close": {
         "message": "Закрыть"

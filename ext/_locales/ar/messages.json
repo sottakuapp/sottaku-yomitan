@@ -1847,6 +1847,9 @@
     "sottaku_request_button_title_submitted": {
         "message": "تم إرسال الطلب إلى Sottaku"
     },
+    "sottaku_request_error": {
+        "message": "تعذّر إرسال طلبك. حاول مرة أخرى."
+    },
     "sottaku_save_button": {
         "message": "حفظ في Sottaku"
     },
@@ -1861,6 +1864,9 @@
     },
     "sottaku_save_button_title_saved": {
         "message": "أُضيفت إلى بطاقات Sottaku التعليمية الخاصة بك"
+    },
+    "sottaku_save_error": {
+        "message": "تعذّر حفظ هذه الكلمة. حاول مرة أخرى."
     },
     "status_footer_close": {
         "message": "إغلاق"
