@@ -15,6 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import {parseJson} from '../../core/json.js';
 import {isObjectNotArray} from '../../core/object-utilities.js';
 import {toError} from '../../core/to-error.js';
 import {SottakuClient} from '../../comm/sottaku-client.js';
@@ -145,6 +146,30 @@ export class SottakuController {
 
     // Private
 
+    /** @returns {boolean} */
+    _usesBrowserSessionSignIn() {
+        const extensionUrl = globalThis.chrome?.runtime?.getURL?.('/');
+        return typeof extensionUrl === 'string' && new URL(extensionUrl).protocol === 'safari-web-extension:';
+    }
+
+    /**
+     * Safari has no stable, allowlisted origin for password security callbacks.
+     * Keep those checks on the website and use the existing approval handoff.
+     * @returns {boolean}
+     */
+    _redirectPasswordSignInToBrowser() {
+        if (!this._usesBrowserSessionSignIn()) { return false; }
+        this._clearPasswordStepUpSecrets();
+        this._authForm.hidden = false;
+        this._updateStatus();
+        if (!this._authForm.hidden) {
+            const messageKey = 'settings_sottaku_safari_sign_in_description';
+            this._setStatus(getMessage(messageKey), false, messageKey);
+            this._browserLinkButton.focus();
+        }
+        return true;
+    }
+
     /**
      * @param {import('settings-controller').EventArgument<'optionsChanged'>} details
      */
@@ -176,6 +201,7 @@ export class SottakuController {
      */
     async _onLoginClick(e) {
         e.preventDefault();
+        if (this._redirectPasswordSignInToBrowser()) { return; }
         const username = this._usernameInput.value.trim();
         const password = this._passwordInput.value;
         if (!username || !password || this._busy) { return; }
@@ -337,6 +363,7 @@ export class SottakuController {
      * @param {boolean} humanVerificationAvailable
      */
     async _beginPasswordStepUp(transaction, humanVerificationAvailable = false) {
+        if (this._redirectPasswordSignInToBrowser()) { return; }
         const response = await this._client.requestPasswordStepUp(transaction);
         if (!response || typeof response.challenge_id !== 'string') {
             throw new Error('Unable to create verification challenge');
@@ -373,6 +400,7 @@ export class SottakuController {
         humanVerificationToken,
         humanVerificationContext = this._passwordStepUpHumanVerificationContext,
     ) {
+        if (this._redirectPasswordSignInToBrowser()) { return; }
         const code = this._passwordStepUpCodeInput.value.replace(/\D/gu, '').slice(0, 8);
         if (this._busy || !this._passwordStepUpChallengeId || code.length !== 8) { return; }
         try {
@@ -426,6 +454,7 @@ export class SottakuController {
      * @param {string|null} transaction
      */
     _beginPasswordHumanVerification(action, transaction) {
+        if (this._redirectPasswordSignInToBrowser()) { return; }
         this._closePasswordHumanVerificationPopup();
         this._passwordStepUpHumanVerificationToken = null;
         this._passwordStepUpHumanVerificationContext = null;
@@ -451,6 +480,7 @@ export class SottakuController {
     /** @param {Event} e */
     _onPasswordHumanVerificationClick(e) {
         e.preventDefault();
+        if (this._redirectPasswordSignInToBrowser()) { return; }
         const action = this._passwordHumanVerificationAction;
         const transaction = this._passwordStepUpTransaction;
         if (this._busy || !action || !transaction) { return; }
@@ -485,15 +515,21 @@ export class SottakuController {
         }
     }
 
-    /** @param {MessageEvent} event */
+    /** @param {MessageEvent<unknown>} event */
     async _onPasswordHumanVerificationMessage(event) {
+        if (this._usesBrowserSessionSignIn()) {
+            if (this._passwordHumanVerificationRequest || this._passwordHumanVerificationAction) {
+                this._redirectPasswordSignInToBrowser();
+            }
+            return;
+        }
         const request = this._passwordHumanVerificationRequest;
         const action = this._passwordHumanVerificationAction;
         const transaction = this._passwordStepUpTransaction;
         let message = event.data;
         if (typeof message === 'string') {
             try {
-                message = JSON.parse(message);
+                message = parseJson(message);
             } catch (e) {
                 return;
             }
@@ -584,6 +620,7 @@ export class SottakuController {
     /** @param {Event} e */
     async _onPasswordStepUpResend(e) {
         e.preventDefault();
+        if (this._redirectPasswordSignInToBrowser()) { return; }
         if (this._busy || !this._passwordStepUpTransaction || !this._passwordStepUpChallengeId) { return; }
         try {
             this._busy = true;
@@ -643,6 +680,7 @@ export class SottakuController {
     async _onBrowserLinkClick(e) {
         e.preventDefault();
         if (this._busy) { return; }
+        this._clearPasswordStepUpSecrets();
         /** @type {chrome.tabs.Tab|null} */
         let tab = null;
         try {
@@ -668,6 +706,7 @@ export class SottakuController {
             this._setStatus(
                 getMessage('settings_sottaku_status_sign_in_required') || 'Browser approval timed out',
                 true,
+                'settings_sottaku_status_sign_in_required',
             );
         } catch (error) {
             this._setStatus(toError(error).message, true);
@@ -735,6 +774,12 @@ export class SottakuController {
     _updateStatus(override = null) {
         const options = this._options;
         if (!options) { return; }
+        if (this._usesBrowserSessionSignIn()) {
+            this._clearPasswordStepUpSecrets();
+            this._usernameInput.hidden = true;
+            this._passwordInput.hidden = true;
+            this._loginButton.hidden = true;
+        }
         const {sottaku} = options;
         const authToken = override && 'authToken' in override ? override.authToken : sottaku.authToken;
         const user = override && 'user' in override ? override.user : sottaku.user;

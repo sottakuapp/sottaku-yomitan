@@ -1625,6 +1625,9 @@
     "settings_sottaku_account_description": {
         "message": "Fai clic su \"Usa sessione del browser\" per collegare l'account con cui hai effettuato l'accesso su sottaku.app (richiede Pro)."
     },
+    "settings_sottaku_safari_sign_in_description": {
+        "message": "Accedi al sito di Sottaku, completa l’eventuale recupero della password o le verifiche di sicurezza, quindi autorizza il collegamento. È richiesto Pro."
+    },
     "settings_sottaku_account_label": {
         "message": "Account"
     },

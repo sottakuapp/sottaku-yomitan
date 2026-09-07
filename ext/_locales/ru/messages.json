@@ -1625,6 +1625,9 @@
     "settings_sottaku_account_description": {
         "message": "Нажмите «Использовать сеанс браузера», чтобы связать аккаунт, в который вы вошли на sottaku.app (требуется Pro)."
     },
+    "settings_sottaku_safari_sign_in_description": {
+        "message": "Войдите на сайте Sottaku, при необходимости восстановите пароль или пройдите проверку безопасности, затем подтвердите подключение. Требуется подписка Pro."
+    },
     "settings_sottaku_account_label": {
         "message": "Аккаунт"
     },

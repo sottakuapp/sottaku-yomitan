@@ -1625,6 +1625,9 @@
     "settings_sottaku_account_description": {
         "message": "คลิก \"ใช้เซสชันเบราว์เซอร์\" เพื่อเชื่อมโยงบัญชีที่คุณลงชื่อเข้าใช้ที่ sottaku.app (ต้องมี Pro)"
     },
+    "settings_sottaku_safari_sign_in_description": {
+        "message": "เข้าสู่ระบบบนเว็บไซต์ Sottaku กู้คืนรหัสผ่านหรือตรวจสอบความปลอดภัยให้เสร็จหากจำเป็น จากนั้นอนุมัติการเชื่อมต่อ ต้องสมัคร Pro"
+    },
     "settings_sottaku_account_label": {
         "message": "บัญชี"
     },

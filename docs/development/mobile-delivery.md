@@ -84,12 +84,22 @@ keychain, or echo native messages. Link the extension to the same Sottaku accoun
 through **Use browser session** in Safari. Signing in to the native app does not
 automatically sign in the extension.
 
-The password recovery human-check callback is a separate unresolved Safari gate:
-its client origin validator and server `PASSWORD_RECOVERY_EXTENSION_ORIGINS`
-parser currently accept Chrome/Firefox origins. Keep the browser-session flow
-as the planned Safari connection path. Before enabling password recovery, verify
-Safari's actual callback origin and add it consistently to the exact-origin
-validation and tests; do not allow arbitrary origins or weaken the callback checks.
+Safari uses **Use browser session** for sign-in, password recovery and security
+checks. Its settings hide the direct password controls. Password recovery and
+human checks run in the normal Sottaku website session, then the user explicitly
+approves the extension connection. The website's login page includes **Forgot
+password**; `/extension/link` preserves the approval destination through login.
+If recovery takes longer than the extension's five-minute polling window, finish
+website sign-in and click **Use browser session** again to start a fresh approval.
+
+The Safari runtime scheme also guards every direct password/code/recovery entry
+point. A stale password flow clears its transient secrets and restores the
+browser-session action; existing connected credentials remain usable. Chrome and
+Firefox retain their existing direct password flows. Safari does not send a
+password security callback to its installation-specific extension origin. Keep
+the client origin validator and server `PASSWORD_RECOVERY_EXTENSION_ORIGINS`
+allowlist unchanged; never substitute a wildcard or fabricate a website recovery
+session from an extension transaction.
 
 When incrementing an iOS release, update both targets' `MARKETING_VERSION` and
 `CURRENT_PROJECT_VERSION` together. A signed release needs an App ID and
@@ -141,15 +151,39 @@ Safari on an iPhone and iPad:
 7. Archive the existing app with the extension and verify both bundle IDs,
    matching release/build versions, signing, and App Store validation.
 
+For the sign-in and recovery gate on each device:
+
+1. Start with the extension disconnected and the website signed out. Settings
+   must show **Use browser session**, localized website instructions and no
+   username/password fields. Open the action and confirm the website login page
+   appears; the extension must remain disconnected before explicit approval.
+2. Close the website tab before approving. The extension must remain
+   disconnected and, after the polling window ends, allow another attempt.
+   Repeat with sign-in followed by closing the approval page without confirming.
+3. With an authorized test account that requires a security check, finish that
+   check on the website, sign in and approve the displayed account. Verify the
+   extension connects to that account exactly once. Use a controlled test
+   environment to induce recovery requirements; do not intentionally exhaust
+   production password-attempt limits.
+4. Open **Forgot password** from website login and verify the ordinary website
+   recovery path is available. Complete recovery only with an authorized test
+   mailbox. If recovery or cancellation outlasts the polling window, return to
+   extension settings and start a fresh browser link after website sign-in.
+5. Check the automated stale-flow cases below: every former password/code/human
+   recovery entry point must restore the browser action without opening an
+   extension-origin challenge. An already connected account must stay connected.
+
 Automated checks:
 
 ```sh
 npx vitest run test/mobile-build.test.js test/application.test.js \
-  test/sottaku-controller.test.js test/options-security.test.js \
+  test/sottaku-controller.test.js test/safari-sign-in.test.js test/options-security.test.js \
   test/sottaku-client.test.js test/display-sottaku.test.js
 ```
 
 The packaging tests cover real output exclusions/stale-file removal, the Safari
 background/security configuration, and Firefox Android output. Application tests
 cover Safari/Firefox/Chrome background transport selection. Existing auth and
-save tests cover token exchange and privileged API boundaries.
+save tests cover token exchange and privileged API boundaries. Safari sign-in
+tests cover stale password flows, unchanged desktop controls, existing account
+credentials, explicit approval, timeout/retry and every shipped locale catalog.

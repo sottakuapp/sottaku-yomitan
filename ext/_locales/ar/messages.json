@@ -1625,6 +1625,9 @@
     "settings_sottaku_account_description": {
         "message": "انقر على \"استخدام جلسة المتصفح\" لربط الحساب الذي سجّلت الدخول به في sottaku.app (يتطلب Pro)."
     },
+    "settings_sottaku_safari_sign_in_description": {
+        "message": "سجّل الدخول على موقع Sottaku، وأكمل استعادة كلمة المرور أو فحوصات الأمان هناك عند الحاجة، ثم وافق على الربط. يلزم اشتراك Pro."
+    },
     "settings_sottaku_account_label": {
         "message": "الحساب"
     },

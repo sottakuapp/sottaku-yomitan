@@ -1625,6 +1625,9 @@
     "settings_sottaku_account_description": {
         "message": "點擊「使用瀏覽器工作階段」以連結你在 sottaku.app 登入的帳戶（需要 Pro）。"
     },
+    "settings_sottaku_safari_sign_in_description": {
+        "message": "請在 Sottaku 網站上登入，完成所需的密碼重設或安全驗證，再核准連結。需要訂閱 Pro。"
+    },
     "settings_sottaku_account_label": {
         "message": "帳戶"
     },

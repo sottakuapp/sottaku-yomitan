@@ -1625,6 +1625,9 @@
     "settings_sottaku_account_description": {
         "message": "点击“使用浏览器会话”以关联你在 sottaku.app 登录的账户（需要 Pro）。"
     },
+    "settings_sottaku_safari_sign_in_description": {
+        "message": "请在 Sottaku 网站上登录，完成所需的密码找回或安全验证，然后批准关联。需要订阅 Pro。"
+    },
     "settings_sottaku_account_label": {
         "message": "账户"
     },

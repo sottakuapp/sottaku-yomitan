@@ -1625,6 +1625,9 @@
     "settings_sottaku_account_description": {
         "message": "sottaku.app에 로그인한 계정을 연결하려면 \"브라우저 세션 사용\"을 클릭하세요(Pro 필요)."
     },
+    "settings_sottaku_safari_sign_in_description": {
+        "message": "Sottaku 웹사이트에서 로그인하고 필요한 비밀번호 재설정이나 보안 확인을 완료한 후 연결을 승인해 주세요. Pro 구독이 필요합니다."
+    },
     "settings_sottaku_account_label": {
         "message": "계정"
     },

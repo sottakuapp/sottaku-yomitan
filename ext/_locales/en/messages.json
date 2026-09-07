@@ -1625,6 +1625,9 @@
     "settings_sottaku_account_description": {
         "message": "Click \"Use browser session\" to link the account you are signed into at sottaku.app (Pro required)."
     },
+    "settings_sottaku_safari_sign_in_description": {
+        "message": "Sign in on the Sottaku website, complete any password recovery or security checks there, then approve the connection. Pro is required."
+    },
     "settings_sottaku_account_label": {
         "message": "Account"
     },

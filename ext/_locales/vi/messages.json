@@ -1625,6 +1625,9 @@
     "settings_sottaku_account_description": {
         "message": "Nhấp \"Dùng phiên trình duyệt\" để liên kết tài khoản bạn đã đăng nhập tại sottaku.app (cần Pro)."
     },
+    "settings_sottaku_safari_sign_in_description": {
+        "message": "Đăng nhập trên trang web Sottaku, hoàn tất việc khôi phục mật khẩu hoặc kiểm tra bảo mật nếu cần, rồi chấp thuận kết nối. Cần có gói Pro."
+    },
     "settings_sottaku_account_label": {
         "message": "Tài khoản"
     },

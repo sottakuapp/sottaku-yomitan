@@ -1625,6 +1625,9 @@
     "settings_sottaku_account_description": {
         "message": "Clique em \"Usar sessão do navegador\" para vincular a conta em que você está conectado no sottaku.app (Pro necessário)."
     },
+    "settings_sottaku_safari_sign_in_description": {
+        "message": "Entre no site do Sottaku, recupere a senha ou conclua as verificações de segurança necessárias e depois autorize a conexão. É necessário ter Pro."
+    },
     "settings_sottaku_account_label": {
         "message": "Conta"
     },

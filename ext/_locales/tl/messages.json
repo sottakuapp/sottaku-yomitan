@@ -1625,6 +1625,9 @@
     "settings_sottaku_account_description": {
         "message": "I-click ang \"Gamitin ang session ng browser\" para i-link ang account na naka-sign in ka sa sottaku.app (kailangan ng Pro)."
     },
+    "settings_sottaku_safari_sign_in_description": {
+        "message": "Mag-sign in sa website ng Sottaku, kumpletuhin doon ang pagbawi ng password o mga pagsusuri sa seguridad kung kailangan, at pagkatapos ay aprubahan ang koneksyon. Kailangan ang Pro."
+    },
     "settings_sottaku_account_label": {
         "message": "Account"
     },

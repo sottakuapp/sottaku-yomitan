@@ -1625,6 +1625,9 @@
     "settings_sottaku_account_description": {
         "message": "Klicken Sie auf „Browsersitzung verwenden“, um das Konto zu verknüpfen, bei dem Sie auf sottaku.app angemeldet sind (Pro erforderlich)."
     },
+    "settings_sottaku_safari_sign_in_description": {
+        "message": "Melde dich auf der Sottaku-Website an, setze dort bei Bedarf dein Passwort zurück oder schließe Sicherheitsprüfungen ab und bestätige dann die Verbindung. Pro ist erforderlich."
+    },
     "settings_sottaku_account_label": {
         "message": "Konto"
     },

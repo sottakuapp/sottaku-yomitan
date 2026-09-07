@@ -1625,6 +1625,9 @@
     "settings_sottaku_account_description": {
         "message": "Klik \"Gunakan sesi browser\" untuk menautkan akun yang Anda masuki di sottaku.app (memerlukan Pro)."
     },
+    "settings_sottaku_safari_sign_in_description": {
+        "message": "Masuk di situs Sottaku, selesaikan pemulihan kata sandi atau pemeriksaan keamanan yang diperlukan, lalu setujui koneksi. Memerlukan Pro."
+    },
     "settings_sottaku_account_label": {
         "message": "Akun"
     },
