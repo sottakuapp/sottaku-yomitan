@@ -208,6 +208,7 @@ export type AudioSourceOptions = {
 };
 
 export type ScanningOptions = {
+    mobileSelection: boolean;
     inputs: ScanningInput[];
     preventMiddleMouse: ScanningPreventSecondaryMouseOptions;
     preventBackForward: ScanningPreventSecondaryMouseOptions;

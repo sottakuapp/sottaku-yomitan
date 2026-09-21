@@ -2056,5 +2056,17 @@
     },
     "welcome_theme_label": {
         "message": "السمة"
+    },
+    "mobile_selection_lookup": {
+        "message": "البحث في Sottaku"
+    },
+    "settings_mobile_selection_label": {
+        "message": "تحديد النص للبحث على الهاتف"
+    },
+    "settings_mobile_selection_description": {
+        "message": "حدد كلمة، ثم اضغط على البحث في Sottaku. لن تفتح النقرات العادية والتمرير القاموس. أوقف هذا الخيار للبحث بالنقر على الكلمات."
+    },
+    "mobile_selection_error": {
+        "message": "تعذر البحث عن هذا النص. اضغط للمحاولة مجددًا."
     }
 }

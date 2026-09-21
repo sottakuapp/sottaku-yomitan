@@ -2056,5 +2056,17 @@
     },
     "welcome_theme_label": {
         "message": "Тема"
+    },
+    "mobile_selection_lookup": {
+        "message": "Найти в Sottaku"
+    },
+    "settings_mobile_selection_label": {
+        "message": "Поиск по выделенному тексту на мобильных устройствах"
+    },
+    "settings_mobile_selection_description": {
+        "message": "Выделите слово и нажмите «Найти в Sottaku». Обычные нажатия и прокрутка не открывают словарь. Отключите эту настройку для поиска нажатием на слово."
+    },
+    "mobile_selection_error": {
+        "message": "Не удалось найти текст. Нажмите, чтобы повторить."
     }
 }

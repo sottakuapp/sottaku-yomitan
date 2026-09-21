@@ -116,6 +116,8 @@ export type InputInfo = {
 export type InputInfoDetail = {
     focus: boolean;
     restoreSelection: boolean;
+    selectionToken?: number;
+    signal?: AbortSignal;
 };
 
 export type Events = {

@@ -2056,5 +2056,17 @@
     },
     "welcome_theme_label": {
         "message": "थीम"
+    },
+    "mobile_selection_lookup": {
+        "message": "Sottaku में खोजें"
+    },
+    "settings_mobile_selection_label": {
+        "message": "मोबाइल पर टेक्स्ट चुनकर खोजें"
+    },
+    "settings_mobile_selection_description": {
+        "message": "कोई शब्द चुनें, फिर Sottaku में खोजें पर टैप करें। सामान्य टैप और स्क्रॉल करने से शब्दकोश नहीं खुलेगा। शब्दों पर टैप करके खोजने के लिए इसे बंद करें।"
+    },
+    "mobile_selection_error": {
+        "message": "इस टेक्स्ट को खोजा नहीं जा सका। फिर से कोशिश करने के लिए टैप करें।"
     }
 }

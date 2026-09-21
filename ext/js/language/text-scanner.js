@@ -896,6 +896,8 @@ export class TextScanner extends EventDispatcher {
                 sentence = {text: '', offset: 0};
             }
 
+            if (inputInfo.detail?.signal?.aborted) { return; }
+
             if (dictionaryEntries !== null && sentence !== null) {
                 this._inputInfoCurrent = inputInfo;
                 this.setCurrentTextSource(textSource);
@@ -921,6 +923,7 @@ export class TextScanner extends EventDispatcher {
             safePerformance.mark('scanner:_search:end');
             safePerformance.measure('scanner:_search', 'scanner:_search:start', 'scanner:_search:end');
         } catch (error) {
+            if (inputInfo.detail?.signal?.aborted) { return; }
             this.trigger('searchError', {
                 error: error instanceof Error ? error : new Error(`A search error occurred: ${error}`),
                 textSource,

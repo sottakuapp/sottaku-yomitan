@@ -384,6 +384,7 @@ function createProfileOptionsUpdatedTestData1() {
             },
             scanWithoutMousemove: true,
             scanResolution: 'character',
+            mobileSelection: true,
             inputs: [
                 {
                     include: 'shift',
@@ -774,6 +775,21 @@ describe('OptionsUtil', () => {
     });
 
     describe('Default', () => {
+        test('existing profiles adopt mobile selection without changing saved tap inputs or an explicit opt-out', async () => {
+            const optionsUtil = new OptionsUtil();
+            await optionsUtil.prepare();
+            const options = optionsUtil.getDefault();
+            const scanning = options.profiles[0].options.scanning;
+            const inputs = structuredClone(scanning.inputs);
+            Reflect.deleteProperty(scanning, 'mobileSelection');
+            const upgraded = await optionsUtil.update(options);
+            expect(upgraded.profiles[0].options.scanning.mobileSelection).toBe(true);
+            expect(upgraded.profiles[0].options.scanning.inputs).toStrictEqual(inputs);
+            upgraded.profiles[0].options.scanning.mobileSelection = false;
+            const optedOut = await optionsUtil.update(upgraded);
+            expect(optedOut.profiles[0].options.scanning.mobileSelection).toBe(false);
+        });
+
         /** @type {((options: import('options-util').IntermediateOptions) => void)[]} */
         const data = [
             (options) => options,

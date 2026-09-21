@@ -13,7 +13,23 @@ the account link. Sottaku Pro is required for connected lookups. The confirmatio
 uses a one-time browser link; it does not copy browser cookies into the extension.
 Enable the recommended website permission when prompted. Clipboard and native
 messaging permissions are not required for Sottaku lookups or saving flashcards.
-The default touch input scans on a tap, with no hold delay.
+Mobile webpages default to **Highlight to look up on mobile**. Long-press anywhere
+in a word, adjust the native selection handles if needed, and tap **Look up in
+Sottaku**. The action previews the selected text and looks up only that selection;
+ordinary taps, links, scrolling, and selection alone never start a lookup. Its
+position moves to the opposite edge when the selection is near the bottom, leaving
+room for selection handles. Close dismisses the action without removing the highlight.
+
+This applies to Android and iOS/iPadOS, including Safari's desktop identity on iPad.
+The browser's native Copy/Share menu remains available; the lookup action is a
+separate webpage control because these browsers do not support extension context
+menu items. Editing fields are excluded, and the action supports words and short
+phrases up to 200 characters. Loading and retry feedback appear in the same control.
+Dismissal or continued browsing invalidates a pending lookup.
+
+Settings → Scanning → **Highlight to look up on mobile** can be turned off to restore
+the configured tap scanning inputs. The setting defaults on for both new and existing
+profiles without replacing their saved inputs; desktop scanning is unchanged.
 
 For a temporary development install, follow Mozilla's
 [Android extension development instructions](https://extensionworkshop.com/documentation/develop/developing-extensions-for-firefox-for-android/):
@@ -199,7 +215,7 @@ production extension resources:
    settings. Settings must offer **Use browser session** with no direct password
    controls. Approve the intended account on the website and verify the connected
    account; signing in alone must not approve the extension.
-2. Tap a supported-language word near the viewport edges, confirm the popup
+2. Highlight a supported-language word near the viewport edges, tap **Look up in Sottaku**, and confirm the popup
    contents are reachable, and dismiss it with Close. Save once, confirm the card
    belongs to the same account and verify its disabled saved state on reopening.
 3. Background and resume Safari, then repeat a lookup and dismissal with the
@@ -241,7 +257,7 @@ available, with installation, site-access and explicit account-link instructions
 Run the automated security, authentication, lifecycle and packaging checks:
 
 ```sh
-npx vitest run test/mobile-build.test.js test/safari-popup-build.test.js \
+npx vitest run test/mobile-selection.test.js test/mobile-build.test.js test/safari-popup-build.test.js \
   test/safari-content-build.test.js test/safari-cross-frame-router.test.js \
   test/safari-sottaku-actions.test.js \
   test/application.test.js test/api.test.js test/extension-commands.test.js \
@@ -267,3 +283,13 @@ or invoke privileged save/account actions, and stale password/recovery flows mus
 restore browser linking without an extension-origin challenge or loss of an
 existing connection. Website recovery keeps its existing security controls and
 callback-origin restrictions.
+
+### Mobile selection verification
+
+`test/mobile-selection.test.js` covers deliberate activation, normal browsing,
+selection changes, preserved ranges, loading/retry, cancellation, disabled profiles,
+and desktop/tap-mode behavior. Real-device release checks must also exercise native
+long-press selection, selection handles, Copy/Share, links, pinch zoom, page scrolling,
+keyboard visibility, and selecting a new word while a request is pending on both
+Firefox for Android and Safari on iPhone/iPad. Browser engine emulation does not
+reproduce the operating system's native selection menu.

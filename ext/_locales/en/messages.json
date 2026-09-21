@@ -2056,5 +2056,17 @@
     },
     "welcome_theme_label": {
         "message": "Theme"
+    },
+    "mobile_selection_lookup": {
+        "message": "Look up in Sottaku"
+    },
+    "settings_mobile_selection_label": {
+        "message": "Highlight to look up on mobile"
+    },
+    "settings_mobile_selection_description": {
+        "message": "Highlight a word, then tap Look up in Sottaku. Normal taps and scrolling do not open the dictionary. Turn off to use tap scanning."
+    },
+    "mobile_selection_error": {
+        "message": "Could not look up this text. Tap to retry."
     }
 }

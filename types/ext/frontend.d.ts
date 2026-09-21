@@ -46,6 +46,8 @@ export type ConstructorDetails = {
     hotkeyHandler: HotkeyHandler;
     /** The detected browser */
     browser: Environment.Browser | null;
+    /** Whether the browser runs on Android or iOS (including iPad desktop mode). */
+    mobile?: boolean;
 };
 
 export type PageType = 'web' | 'popup' | 'search';

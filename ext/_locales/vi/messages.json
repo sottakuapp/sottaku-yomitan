@@ -2056,5 +2056,17 @@
     },
     "welcome_theme_label": {
         "message": "Giao diện"
+    },
+    "mobile_selection_lookup": {
+        "message": "Tra trong Sottaku"
+    },
+    "settings_mobile_selection_label": {
+        "message": "Chọn văn bản để tra trên thiết bị di động"
+    },
+    "settings_mobile_selection_description": {
+        "message": "Chọn một từ, rồi nhấn Tra trong Sottaku. Thao tác chạm và cuộn thông thường sẽ không mở từ điển. Tắt tùy chọn này để tra bằng cách chạm vào từ."
+    },
+    "mobile_selection_error": {
+        "message": "Không thể tra văn bản này. Nhấn để thử lại."
     }
 }

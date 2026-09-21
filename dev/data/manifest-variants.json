@@ -149,7 +149,11 @@
                     "js/input/hotkey-handler.js",
                     "js/language/CJK-util.js",
                     "js/language/text-scanner.js",
-                    "js/pages/settings/popup-preview-controller.js"
+                    "js/pages/settings/popup-preview-controller.js",
+                    "js/app/mobile-selection-controller.js",
+                    "js/dom/i18n.js",
+                    "js/extension/safari-platform.js",
+                    "_locales/*/messages.json"
                 ],
                 "matches": [
                     "<all_urls>"

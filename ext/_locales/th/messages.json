@@ -2056,5 +2056,17 @@
     },
     "welcome_theme_label": {
         "message": "ธีม"
+    },
+    "mobile_selection_lookup": {
+        "message": "ค้นหาใน Sottaku"
+    },
+    "settings_mobile_selection_label": {
+        "message": "เลือกข้อความเพื่อค้นหาบนมือถือ"
+    },
+    "settings_mobile_selection_description": {
+        "message": "เลือกคำ แล้วแตะค้นหาใน Sottaku การแตะและเลื่อนตามปกติจะไม่เปิดพจนานุกรม ปิดตัวเลือกนี้เพื่อค้นหาด้วยการแตะคำ"
+    },
+    "mobile_selection_error": {
+        "message": "ค้นหาข้อความนี้ไม่สำเร็จ แตะเพื่อลองอีกครั้ง"
     }
 }

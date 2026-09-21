@@ -27,7 +27,9 @@ import {addFullscreenChangeEventListener, getFullscreenElement} from '../dom/doc
 import {TextSourceElement} from '../dom/text-source-element.js';
 import {TextSourceGenerator} from '../dom/text-source-generator.js';
 import {TextSourceRange} from '../dom/text-source-range.js';
+import {setLocale} from '../dom/i18n.js';
 import {TextScanner} from '../language/text-scanner.js';
+import {MobileSelectionController} from './mobile-selection-controller.js';
 import {ThemeController} from './theme-controller.js';
 
 const POPUP_INTERACTION_BRIDGE_DURATION_MS = 1500;
@@ -54,6 +56,7 @@ export class Frontend {
         childrenSupported = true,
         hotkeyHandler,
         browser,
+        mobile = false,
     }) {
         /** @type {import('../application.js').Application} */
         this._application = application;
@@ -119,6 +122,18 @@ export class Frontend {
         this._optionsContextOverride = null;
         /** @type {number} */
         this._popupInteractionBridgeUntil = 0;
+        /** @type {boolean} */
+        this._mobile = mobile;
+        /** @type {number} */
+        this._mobileLookupToken = 0;
+        /** @type {?AbortController} */
+        this._mobileLookupAbort = null;
+        /** @type {MobileSelectionController} */
+        this._mobileSelection = new MobileSelectionController(
+            this._lookupMobileSelection.bind(this),
+            () => { this._cancelMobileLookup(); this._clearSelection(false); },
+            (target) => target instanceof Node && Boolean(this._popup?.container?.contains(target)),
+        );
 
         /* eslint-disable @stylistic/no-multi-spaces */
         /** @type {import('application').ApiMap} */
@@ -299,6 +314,7 @@ export class Frontend {
 
     /** @type {import('cross-frame-api').ApiHandler<'frontendClosePopup'>} */
     _onApiClosePopup() {
+        this._cancelMobileLookup();
         this._clearSelection(false);
     }
 
@@ -369,6 +385,7 @@ export class Frontend {
      * @returns {void}
      */
     _onClosePopups() {
+        this._cancelMobileLookup();
         this._clearSelection(true);
         this._clearMousePosition();
     }
@@ -398,6 +415,7 @@ export class Frontend {
      * @param {import('text-scanner').EventArgument<'searchSuccess'>} details
      */
     _onSearchSuccess({type, dictionaryEntries, sentence, inputInfo: {eventType, detail: inputInfoDetail}, textSource, optionsContext, detail, pageTheme}) {
+        if (this._isStaleMobileLookup(inputInfoDetail)) { return; }
         this._stopClearSelectionDelayed();
         let focus = (eventType === 'mouseMove');
         if (typeof inputInfoDetail === 'object' && inputInfoDetail !== null) {
@@ -420,6 +438,7 @@ export class Frontend {
      */
     _onSearchError({error, textSource, inputInfo}) {
         const {passive, eventType, detail: inputInfoDetail} = inputInfo;
+        if (this._isStaleMobileLookup(inputInfoDetail)) { return; }
         if (this._application.webExtension.unloaded) {
             if (textSource !== null && !passive) {
                 this._showExtensionUnloaded(textSource);
@@ -485,6 +504,7 @@ export class Frontend {
             return;
         }
 
+        if (typeof inputInfoDetail?.selectionToken === 'number') { this._mobileSelection.showLookupError(); }
         log.error(error);
     }
 
@@ -633,6 +653,8 @@ export class Frontend {
         const shouldRefreshSearch = this._shouldRefreshSearchAfterOptionsUpdate(previousOptions, options);
         const {scanning: scanningOptions, sentenceParsing: sentenceParsingOptions} = options;
         this._options = options;
+        const mobileSelection = this._usesMobileSelection();
+        if (mobileSelection) { await setLocale(options.sottaku.locale); }
 
         this._hotkeyHandler.setHotkeys('web', options.inputs.hotkeys);
 
@@ -649,7 +671,7 @@ export class Frontend {
             inputs: scanningOptions.inputs,
             deepContentScan: scanningOptions.deepDomScan,
             normalizeCssZoom: scanningOptions.normalizeCssZoom,
-            selectText: scanningOptions.selectText,
+            selectText: scanningOptions.selectText && !mobileSelection,
             delay: scanningOptions.delay,
             scanLength: scanningOptions.length,
             layoutAwareScan: scanningOptions.layoutAwareScan,
@@ -1087,13 +1109,64 @@ export class Frontend {
      */
     _updateTextScannerEnabled() {
         const enabled = (this._options !== null && this._options.general.enable && !this._disabledOverride);
-        if (enabled === this._textScanner.isEnabled()) { return; }
-        this._textScanner.setEnabled(enabled);
+        const mobileSelection = enabled && this._usesMobileSelection();
+        if (this._mobileSelection.enabled !== mobileSelection) {
+            this._cancelMobileLookup();
+            this._mobileSelection.setEnabled(mobileSelection);
+            this._clearSelection(true);
+        }
+        const scannerEnabled = enabled && !mobileSelection;
+        if (scannerEnabled === this._textScanner.isEnabled()) { return; }
+        this._textScanner.setEnabled(scannerEnabled);
         if (this._textScannerHasBeenEnabled) {
             this._clearSelection(true);
         }
         if (enabled) {
             this._textScannerHasBeenEnabled = true;
+        }
+    }
+
+    /** */
+    _cancelMobileLookup() {
+        ++this._mobileLookupToken;
+        this._mobileLookupAbort?.abort();
+        this._mobileLookupAbort = null;
+    }
+
+    /** @returns {boolean} */
+    _usesMobileSelection() {
+        return this._mobile && this._pageType === 'web' && this._options?.scanning.mobileSelection !== false;
+    }
+
+    /**
+     * @param {import('text-scanner').InputInfoDetail|null|undefined} detail
+     * @returns {boolean}
+     */
+    _isStaleMobileLookup(detail) {
+        return typeof detail?.selectionToken === 'number' &&
+        (detail.selectionToken !== this._mobileLookupToken || !this._mobileSelection.enabled);
+    }
+
+    /**
+     * @param {Range} range
+     * @returns {Promise<void>}
+     */
+    async _lookupMobileSelection(range) {
+        if (!this._mobileSelection.enabled) { return; }
+        const selectionToken = ++this._mobileLookupToken;
+        const abort = new AbortController();
+        this._mobileLookupAbort = abort;
+        // A changed end handle must rerun lookup even if the start stays the same.
+        this._textScanner.setCurrentTextSource(null);
+        await this._textScanner.search(
+            TextSourceRange.createLazy(range),
+            {focus: false, restoreSelection: false, selectionToken, signal: abort.signal},
+            true,
+            true,
+        );
+        await this.showContentCompleted();
+        if (selectionToken !== this._mobileLookupToken && this._textScanner.getCurrentTextSource()?.type === 'range') {
+            this._clearSelection(true);
         }
     }
 

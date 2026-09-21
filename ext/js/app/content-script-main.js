@@ -18,6 +18,7 @@
 
 import {Application} from '../application.js';
 import {HotkeyHandler} from '../input/hotkey-handler.js';
+import {isMobileSafari} from '../extension/safari-platform.js';
 import {Frontend} from './frontend.js';
 import {PopupFactory} from './popup-factory.js';
 
@@ -41,7 +42,8 @@ await Application.main(false, async (application) => {
     const popupFactory = new PopupFactory(application);
     popupFactory.prepare();
 
-    const {browser} = await application.api.getEnvironmentInfo();
+    const environment = await application.api.getEnvironmentInfo();
+    const {browser} = environment;
 
     const frontend = new Frontend({
         application,
@@ -56,6 +58,7 @@ await Application.main(false, async (application) => {
         childrenSupported: true,
         hotkeyHandler,
         browser: browser,
+        mobile: environment.platform.os === 'android' || isMobileSafari(environment),
     });
     await frontend.prepare();
 }, 'content');

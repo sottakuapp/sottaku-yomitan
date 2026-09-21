@@ -2056,5 +2056,17 @@
     },
     "welcome_theme_label": {
         "message": "Thème"
+    },
+    "mobile_selection_lookup": {
+        "message": "Rechercher dans Sottaku"
+    },
+    "settings_mobile_selection_label": {
+        "message": "Sélectionner le texte pour rechercher sur mobile"
+    },
+    "settings_mobile_selection_description": {
+        "message": "Sélectionnez un mot, puis touchez Rechercher dans Sottaku. Les gestes habituels et le défilement n’ouvrent pas le dictionnaire. Désactivez cette option pour rechercher en touchant les mots."
+    },
+    "mobile_selection_error": {
+        "message": "La recherche a échoué. Touchez pour réessayer."
     }
 }

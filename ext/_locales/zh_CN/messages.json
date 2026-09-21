@@ -2056,5 +2056,17 @@
     },
     "welcome_theme_label": {
         "message": "主题"
+    },
+    "mobile_selection_lookup": {
+        "message": "在Sottaku中查词"
+    },
+    "settings_mobile_selection_label": {
+        "message": "在移动设备上选词查询"
+    },
+    "settings_mobile_selection_description": {
+        "message": "选中单词，再点按“在Sottaku中查词”。普通点按和滚动不会打开词典。关闭此选项即可通过点按查词。"
+    },
+    "mobile_selection_error": {
+        "message": "查询失败。点按重试。"
     }
 }

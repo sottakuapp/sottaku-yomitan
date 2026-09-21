@@ -598,7 +598,8 @@
                                     "reducedMotionScrollingSwipeThreshold",
                                     "normalizeCssZoom",
                                     "scanWithoutMousemove",
-                                    "scanResolution"
+                                    "scanResolution",
+                                    "mobileSelection"
                                 ],
                                 "properties": {
                                     "inputs": {
@@ -924,6 +925,10 @@
                                         "default": true
                                     },
                                     "scanWithoutMousemove": {
+                                        "type": "boolean",
+                                        "default": true
+                                    },
+                                    "mobileSelection": {
                                         "type": "boolean",
                                         "default": true
                                     },

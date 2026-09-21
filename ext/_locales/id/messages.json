@@ -2056,5 +2056,17 @@
     },
     "welcome_theme_label": {
         "message": "Tema"
+    },
+    "mobile_selection_lookup": {
+        "message": "Cari di Sottaku"
+    },
+    "settings_mobile_selection_label": {
+        "message": "Pilih teks untuk mencari di ponsel"
+    },
+    "settings_mobile_selection_description": {
+        "message": "Pilih sebuah kata, lalu ketuk Cari di Sottaku. Ketukan biasa dan menggulir tidak membuka kamus. Nonaktifkan untuk mencari dengan mengetuk kata."
+    },
+    "mobile_selection_error": {
+        "message": "Teks ini tidak dapat dicari. Ketuk untuk mencoba lagi."
     }
 }

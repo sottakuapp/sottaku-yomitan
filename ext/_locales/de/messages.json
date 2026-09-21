@@ -2056,5 +2056,17 @@
     },
     "welcome_theme_label": {
         "message": "Thema"
+    },
+    "mobile_selection_lookup": {
+        "message": "In Sottaku nachschlagen"
+    },
+    "settings_mobile_selection_label": {
+        "message": "Auf Mobilgeräten Text zum Nachschlagen markieren"
+    },
+    "settings_mobile_selection_description": {
+        "message": "Markiere ein Wort und tippe auf In Sottaku nachschlagen. Normales Tippen und Scrollen öffnen das Wörterbuch nicht. Schalte diese Option aus, um Wörter durch Antippen nachzuschlagen."
+    },
+    "mobile_selection_error": {
+        "message": "Der Text konnte nicht nachgeschlagen werden. Tippe, um es erneut zu versuchen."
     }
 }

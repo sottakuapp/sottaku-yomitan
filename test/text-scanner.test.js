@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023-2025  Yomitan Authors
+ * Copyright (C) 2023-2026  Yomitan Authors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,9 +15,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+// These scanner fixtures intentionally use partial API and text-source objects.
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
 import {afterAll, describe, expect, test, vi} from 'vitest';
+import {TextSourceRange} from '../ext/js/dom/text-source-range.js';
 import {TextSourceElement} from '../ext/js/dom/text-source-element.js';
 import {TextScanner} from '../ext/js/language/text-scanner.js';
 import {setupDomTest} from './fixtures/dom-test.js';
@@ -50,6 +53,28 @@ function createScanner(apiOverrides = {}) {
 describe('TextScanner', () => {
     const {window, teardown} = textScannerTestEnv;
     afterAll(() => teardown(global));
+
+    test('a cancelled explicit selection never changes the highlight or emits a late result', async () => {
+        const scanner = createScanner();
+        const abort = new AbortController();
+        let finish;
+
+        vi.spyOn(scanner, '_findDictionaryEntries').mockImplementation(() => new Promise((resolve) => { finish = resolve; }));
+        const selected = vi.spyOn(scanner, 'setCurrentTextSource');
+        const events = vi.spyOn(scanner, 'trigger');
+        const element = document.createElement('p');
+        element.textContent = '日本語';
+        document.body.append(element);
+        const range = document.createRange();
+        range.selectNodeContents(element);
+        const pending = scanner.search(TextSourceRange.createLazy(range), {focus: false, restoreSelection: false, signal: abort.signal}, true, true);
+        abort.abort();
+        finish({dictionaryEntries: [], sentence: {text: '', offset: 0}, type: 'terms'});
+        await pending;
+        expect(selected).not.toHaveBeenCalled();
+        expect(events).not.toHaveBeenCalled();
+        element.remove();
+    });
 
     test('keeps Arabic, Devanagari, and Hebrew orthographic sequences in one lookup variant', () => {
         const scanner = createScanner();
@@ -86,7 +111,7 @@ describe('TextScanner', () => {
         // eslint-disable-next-line no-underscore-dangle
         scanner._language = 'ja';
         vi.spyOn(scanner, 'getTextSourceContent').mockReturnValue('مدرسة');
-        // eslint-disable-next-line no-underscore-dangle
+
         vi.spyOn(scanner, '_getBidirectionalTextSourceContent').mockReturnValue({
             text: 'قال وبالمدرسة اليوم',
             startOffset: 8,
@@ -394,7 +419,7 @@ describe('TextScanner', () => {
         scanner._language = 'ja';
         // eslint-disable-next-line no-underscore-dangle
         scanner._scanLength = 10;
-        // eslint-disable-next-line no-underscore-dangle
+
         vi.spyOn(scanner, '_getBidirectionalTextSourceContent').mockReturnValue({text: '', startOffset: 0});
 
         const textSource = new TextSourceElement(

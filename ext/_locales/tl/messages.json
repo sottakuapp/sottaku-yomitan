@@ -2056,5 +2056,17 @@
     },
     "welcome_theme_label": {
         "message": "Tema"
+    },
+    "mobile_selection_lookup": {
+        "message": "Hanapin sa Sottaku"
+    },
+    "settings_mobile_selection_label": {
+        "message": "Pumili ng teksto para maghanap sa mobile"
+    },
+    "settings_mobile_selection_description": {
+        "message": "Pumili ng salita, saka i-tap ang Hanapin sa Sottaku. Hindi bubukas ang diksyunaryo sa karaniwang pag-tap at pag-scroll. I-off ito para maghanap sa pamamagitan ng pag-tap sa salita."
+    },
+    "mobile_selection_error": {
+        "message": "Hindi mahanap ang tekstong ito. I-tap para subukang muli."
     }
 }

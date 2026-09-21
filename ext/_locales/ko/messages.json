@@ -2056,5 +2056,17 @@
     },
     "welcome_theme_label": {
         "message": "테마"
+    },
+    "mobile_selection_lookup": {
+        "message": "Sottaku에서 찾기"
+    },
+    "settings_mobile_selection_label": {
+        "message": "모바일에서 텍스트를 선택해 검색"
+    },
+    "settings_mobile_selection_description": {
+        "message": "단어를 선택한 뒤 Sottaku에서 찾기를 누르세요. 일반적인 터치나 스크롤로는 사전이 열리지 않습니다. 끄면 터치로 검색할 수 있습니다."
+    },
+    "mobile_selection_error": {
+        "message": "검색하지 못했습니다. 눌러서 다시 시도하세요."
     }
 }

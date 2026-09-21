@@ -2056,5 +2056,17 @@
     },
     "welcome_theme_label": {
         "message": "テーマ"
+    },
+    "mobile_selection_lookup": {
+        "message": "Sottakuで調べる"
+    },
+    "settings_mobile_selection_label": {
+        "message": "モバイルでは選択して調べる"
+    },
+    "settings_mobile_selection_description": {
+        "message": "単語を選択し、「Sottakuで調べる」をタップします。通常のタップやスクロールでは辞書は開きません。オフにすると、タップで検索できます。"
+    },
+    "mobile_selection_error": {
+        "message": "検索できませんでした。タップして再試行してください。"
     }
 }
